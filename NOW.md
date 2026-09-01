@@ -4,6 +4,19 @@ Handoff notes for the next session. Updated 2026-09-01.
 
 ## Just done
 
+- **Password-gated the whole site.** `src/proxy.ts` (Next 16's renamed `middleware.ts` —
+  one per project, so the site gate and the pre-existing `/admin` gate share it) now bounces
+  any cookie-less browser to `/login`, and returns 401 on browser-facing API routes.
+  `/api/webhooks/*` is deliberately exempt: providers carry no cookie and authenticate with
+  `VOICE_WEBHOOK_SECRET`. Password reads from `SITE_PASSWORD`, default `bubs2026`.
+- The gate cookie is an HMAC over its own expiry (7 days), signed with the password itself,
+  so rotating `SITE_PASSWORD` signs everyone out. `src/lib/auth.ts` grew reusable
+  `createToken`/`verifyToken` helpers; `src/lib/site-gate.ts` builds the site gate on them.
+- Staff sign-in is unchanged and still separate: unlocking the site does not get you
+  into `/admin`.
+
+### Earlier
+
 - Built the whole app from scratch: Next.js 16 + React 19 + Tailwind v4, booking site,
   admin dashboard, voice-agent dispatch, webhooks, email. Production build is clean.
 - Data layer (`src/lib/db.ts`) runs on Supabase when keys are present and an in-memory demo

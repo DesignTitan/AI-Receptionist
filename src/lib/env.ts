@@ -21,6 +21,9 @@ export const env = {
   get supabaseServiceKey() {
     return read("SUPABASE_SERVICE_ROLE_KEY");
   },
+  get sitePassword() {
+    return read("SITE_PASSWORD") ?? "bubs2026";
+  },
   get adminPassword() {
     return read("ADMIN_PASSWORD") ?? "demo1234";
   },

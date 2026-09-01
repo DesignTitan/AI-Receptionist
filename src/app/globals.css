@@ -1,0 +1,285 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ──────────────────────────────────────────────────────────────
+   Tokens
+   A clinical palette: deep teal for care, indigo for anything the
+   AI does, and a very quiet neutral ramp so status colours carry
+   all the signal.
+   ────────────────────────────────────────────────────────────── */
+:root {
+  --bg: #f7f9fa;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f1f5f7;
+  --surface-3: #e8eef1;
+  --border: #dde5e9;
+  --border-strong: #c7d4da;
+
+  --fg: #0a1c24;
+  --fg-muted: #55707c;
+  --fg-subtle: #7d949e;
+
+  --primary: #0e7c72;
+  --primary-hover: #0a655d;
+  --primary-soft: #e2f3f1;
+  --primary-ring: #0e7c7233;
+  --on-primary: #ffffff;
+
+  --accent: #5257e8;
+  --accent-soft: #ebecfe;
+
+  --success: #10794f;
+  --success-soft: #e2f5ec;
+  --warning: #a86412;
+  --warning-soft: #fdf1de;
+  --danger: #b5372c;
+  --danger-soft: #fdeceb;
+  --info: #1668a8;
+  --info-soft: #e5f1fa;
+
+  --shadow-sm: 0 1px 2px rgb(10 28 36 / 0.05);
+  --shadow-md: 0 4px 16px -4px rgb(10 28 36 / 0.09), 0 1px 3px rgb(10 28 36 / 0.05);
+  --shadow-lg: 0 24px 48px -20px rgb(10 28 36 / 0.22), 0 2px 8px rgb(10 28 36 / 0.05);
+
+  --grid-line: #0a1c240a;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #060d11;
+  --bg-elevated: #0c161c;
+  --surface: #0d181e;
+  --surface-2: #12222a;
+  --surface-3: #182e38;
+  --border: #1d3038;
+  --border-strong: #2a444f;
+
+  --fg: #e8f2f5;
+  --fg-muted: #93aeb8;
+  --fg-subtle: #6c8994;
+
+  --primary: #2ecfbe;
+  --primary-hover: #56ded0;
+  --primary-soft: #0c2d2b;
+  --primary-ring: #2ecfbe33;
+  --on-primary: #04211f;
+
+  --accent: #9aa0ff;
+  --accent-soft: #1a1d3d;
+
+  --success: #46d29a;
+  --success-soft: #0b2a1f;
+  --warning: #e8ab52;
+  --warning-soft: #2c2010;
+  --danger: #ff8478;
+  --danger-soft: #2e1512;
+  --info: #6ab5ee;
+  --info-soft: #0d2436;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 18px -4px rgb(0 0 0 / 0.55);
+  --shadow-lg: 0 28px 56px -24px rgb(0 0 0 / 0.7);
+
+  --grid-line: #ffffff0a;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+
+  --color-ink: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-subtle: var(--fg-subtle);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-on-primary: var(--on-primary);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-display: var(--font-display), Georgia, "Times New Roman", serif;
+
+  --shadow-card: var(--shadow-md);
+  --shadow-float: var(--shadow-lg);
+
+  --radius-card: 16px;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Base
+   ────────────────────────────────────────────────────────────── */
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Keep long transcripts and tables from forcing the page sideways. */
+.scroll-x {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Components
+   ────────────────────────────────────────────────────────────── */
+@utility card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+}
+
+@utility surface-blur {
+  background: color-mix(in srgb, var(--bg-elevated) 82%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* Faint graph-paper grid used behind hero and section headers. */
+.grid-backdrop {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+.aurora {
+  background:
+    radial-gradient(45rem 26rem at 12% -8%, color-mix(in srgb, var(--primary) 22%, transparent), transparent 60%),
+    radial-gradient(38rem 22rem at 88% 4%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 62%);
+}
+
+/* Pulsing ring used on the live-call indicator. */
+@keyframes pulse-ring {
+  0% { transform: scale(0.85); opacity: 0.7; }
+  70% { transform: scale(1.9); opacity: 0; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+.pulse-ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: pulse-ring 2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+}
+
+@keyframes equalize {
+  0%, 100% { transform: scaleY(0.28); }
+  50% { transform: scaleY(1); }
+}
+.equalizer span {
+  display: block;
+  width: 3px;
+  height: 22px;
+  border-radius: 2px;
+  background: currentColor;
+  transform-origin: center;
+  animation: equalize 1.05s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--fg) 6%, transparent),
+    transparent
+  );
+  animation: shimmer 1.6s infinite;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.rise {
+  animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Scroll-linked entrance, only where the browser supports it — so
+   unsupported browsers simply get the content, never a blank block. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 22%;
+    }
+  }
+}
+
+/* Scroll-driven animations never "enter" during printing, so opt out entirely. */
+@media print {
+  .reveal,
+  .rise {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

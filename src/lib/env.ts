@@ -1,0 +1,100 @@
+/**
+ * Central, lazily-read environment access.
+ *
+ * Nothing here throws at import time: the app is designed to boot with an
+ * empty environment and fall back to demo mode, so a missing key degrades a
+ * feature rather than breaking the build.
+ */
+
+const read = (key: string) => {
+  const value = process.env[key];
+  return value && value.trim().length > 0 ? value.trim() : undefined;
+};
+
+export const env = {
+  get supabaseUrl() {
+    return read("NEXT_PUBLIC_SUPABASE_URL");
+  },
+  get supabaseAnonKey() {
+    return read("NEXT_PUBLIC_SUPABASE_ANON_KEY");
+  },
+  get supabaseServiceKey() {
+    return read("SUPABASE_SERVICE_ROLE_KEY");
+  },
+  get adminPassword() {
+    return read("ADMIN_PASSWORD") ?? "demo1234";
+  },
+  get adminSessionSecret() {
+    return read("ADMIN_SESSION_SECRET") ?? "insecure-dev-secret-change-me";
+  },
+  get voiceProvider() {
+    return (read("VOICE_PROVIDER") ?? "demo").toLowerCase();
+  },
+  get voiceWebhookSecret() {
+    return read("VOICE_WEBHOOK_SECRET");
+  },
+  get vapi() {
+    return {
+      apiKey: read("VAPI_API_KEY"),
+      assistantId: read("VAPI_ASSISTANT_ID"),
+      phoneNumberId: read("VAPI_PHONE_NUMBER_ID"),
+    };
+  },
+  get bland() {
+    return {
+      apiKey: read("BLAND_API_KEY"),
+      voiceId: read("BLAND_VOICE_ID"),
+      pathwayId: read("BLAND_PATHWAY_ID"),
+    };
+  },
+  get omnidimension() {
+    return {
+      apiKey: read("OMNIDIMENSION_API_KEY"),
+      agentId: read("OMNIDIMENSION_AGENT_ID"),
+    };
+  },
+  get resendApiKey() {
+    return read("RESEND_API_KEY");
+  },
+  get emailFrom() {
+    return read("EMAIL_FROM") ?? "AI Receptionist <onboarding@resend.dev>";
+  },
+  get ownerEmail() {
+    return read("CLINIC_OWNER_EMAIL");
+  },
+  get clinicName() {
+    return read("CLINIC_NAME") ?? "Northlake Family Health";
+  },
+  get timezone() {
+    return read("CLINIC_TIMEZONE") ?? "America/New_York";
+  },
+  get siteUrl() {
+    const explicit = read("NEXT_PUBLIC_SITE_URL");
+    if (explicit) return explicit.replace(/\/$/, "");
+    const vercel =
+      read("VERCEL_PROJECT_PRODUCTION_URL") ?? read("VERCEL_URL");
+    if (vercel) return `https://${vercel}`;
+    return "http://localhost:3000";
+  },
+};
+
+/** True when Supabase credentials are present; otherwise the in-memory store is used. */
+export const isSupabaseConfigured = () =>
+  Boolean(env.supabaseUrl && env.supabaseServiceKey);
+
+/** True when a real voice provider is wired up (as opposed to the simulator). */
+export const isVoiceProviderConfigured = () => {
+  switch (env.voiceProvider) {
+    case "vapi":
+      return Boolean(env.vapi.apiKey && env.vapi.assistantId);
+    case "bland":
+      return Boolean(env.bland.apiKey);
+    case "omnidimension":
+      return Boolean(env.omnidimension.apiKey && env.omnidimension.agentId);
+    default:
+      return false;
+  }
+};
+
+export const isEmailConfigured = () =>
+  Boolean(env.resendApiKey && env.ownerEmail);

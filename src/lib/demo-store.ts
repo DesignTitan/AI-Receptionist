@@ -1,12 +1,12 @@
 import { env } from "./env";
-import { SEED_DOCTORS } from "./seed-doctors";
+import { SEED_PROVIDERS } from "./seed-providers";
 import { addDaysToKey, dayOfWeek, parseDateKey, toDateKey, zonedTimeToUtc } from "./time";
 import type {
   Appointment,
   CallLog,
-  Doctor,
+  Provider,
   NotificationLog,
-  Patient,
+  Client,
 } from "./types";
 
 /**
@@ -18,8 +18,8 @@ import type {
  * per-instance and ephemeral, which is exactly why it is a demo mode.
  */
 export type DemoStore = {
-  doctors: Doctor[];
-  patients: Patient[];
+  providers: Provider[];
+  clients: Client[];
   appointments: Appointment[];
   calls: CallLog[];
   notifications: NotificationLog[];
@@ -35,20 +35,20 @@ const iso = (ms: number) => new Date(ms).toISOString();
  * time inside their clinic hours — so the demo dashboard never shows a
  * cardiologist booked for 7pm on a Saturday.
  */
-function slotFor(doctor: Doctor, minDaysAhead: number, hour: number, minute = 0) {
+function slotFor(provider: Provider, minDaysAhead: number, hour: number, minute = 0) {
   let key = addDaysToKey(toDateKey(new Date(), env.timezone), minDaysAhead);
-  for (let i = 0; i < 7 && !doctor.working_days.includes(dayOfWeek(key)); i++) {
+  for (let i = 0; i < 7 && !provider.working_days.includes(dayOfWeek(key)); i++) {
     key = addDaysToKey(key, 1);
   }
   const { year, month, day } = parseDateKey(key);
   const start = zonedTimeToUtc(year, month, day, hour, minute, env.timezone);
-  const end = new Date(start.getTime() + doctor.slot_minutes * 60_000);
+  const end = new Date(start.getTime() + provider.slot_minutes * 60_000);
   return { starts_at: start.toISOString(), ends_at: end.toISOString() };
 }
 
 function buildSeed(): DemoStore {
   const now = Date.now();
-  const patients: Patient[] = [
+  const clients: Client[] = [
     {
       id: "22222222-2222-4222-8222-222222222201",
       full_name: "Maya Thompson",
@@ -87,49 +87,49 @@ function buildSeed(): DemoStore {
     {
       id: "33333333-3333-4333-8333-333333333301",
       reference: "NL-7QK4M2",
-      doctor_id: SEED_DOCTORS[0].id,
-      patient_id: patients[0].id,
-      ...slotFor(SEED_DOCTORS[0], 2, 10, 30),
+      provider_id: SEED_PROVIDERS[0].id,
+      client_id: clients[0].id,
+      ...slotFor(SEED_PROVIDERS[0], 2, 10, 30),
       reason: "Annual physical and a follow-up on iron levels.",
       status: "confirmed",
-      is_new_patient: false,
+      is_new_client: false,
       created_at: iso(now - 6 * DAY),
       updated_at: iso(now - 6 * DAY + 90_000),
     },
     {
       id: "33333333-3333-4333-8333-333333333302",
       reference: "NL-3JD8P1",
-      doctor_id: SEED_DOCTORS[1].id,
-      patient_id: patients[1].id,
-      ...slotFor(SEED_DOCTORS[1], 4, 9, 30),
+      provider_id: SEED_PROVIDERS[1].id,
+      client_id: clients[1].id,
+      ...slotFor(SEED_PROVIDERS[1], 4, 9, 30),
       reason: "Chest tightness when climbing stairs. Referred by Dr. Vasquez.",
       status: "confirmed",
-      is_new_patient: true,
+      is_new_client: true,
       created_at: iso(now - 3 * DAY),
       updated_at: iso(now - 3 * DAY + 120_000),
     },
     {
       id: "33333333-3333-4333-8333-333333333303",
       reference: "NL-9WX2R7",
-      doctor_id: SEED_DOCTORS[3].id,
-      patient_id: patients[2].id,
-      ...slotFor(SEED_DOCTORS[3], 1, 9, 10),
+      provider_id: SEED_PROVIDERS[3].id,
+      client_id: clients[2].id,
+      ...slotFor(SEED_PROVIDERS[3], 1, 9, 10),
       reason: "Six-year-old with a persistent night cough.",
       status: "rescheduled",
-      is_new_patient: false,
+      is_new_client: false,
       created_at: iso(now - 2 * DAY),
       updated_at: iso(now - 2 * DAY + 200_000),
     },
     {
       id: "33333333-3333-4333-8333-333333333304",
       reference: "NL-5BT6H3",
-      doctor_id: SEED_DOCTORS[2].id,
-      patient_id: patients[3].id,
-      ...slotFor(SEED_DOCTORS[2], 3, 8, 0),
+      provider_id: SEED_PROVIDERS[2].id,
+      client_id: clients[3].id,
+      ...slotFor(SEED_PROVIDERS[2], 3, 8, 0),
       reason: "Right knee pain after a half marathon.",
       // Matches its call log: the assistant rang and nobody picked up.
       status: "no_answer",
-      is_new_patient: true,
+      is_new_client: true,
       created_at: iso(now - 1 * DAY),
       updated_at: iso(now - 1 * DAY),
     },
@@ -139,7 +139,7 @@ function buildSeed(): DemoStore {
     {
       id: "44444444-4444-4444-8444-444444444401",
       appointment_id: appointments[0].id,
-      patient_id: patients[0].id,
+      client_id: clients[0].id,
       provider: "demo",
       provider_call_id: "demo_call_7QK4M2",
       direction: "outbound",
@@ -156,7 +156,7 @@ function buildSeed(): DemoStore {
         "Agent: Have a lovely day, Maya.",
       ].join("\n"),
       summary:
-        "Patient confirmed the appointment. No changes requested. Reminded to arrive 10 minutes early with a medication list.",
+        "Client confirmed the appointment. No changes requested. Reminded to arrive 10 minutes early with a medication list.",
       duration_seconds: 47,
       cost: 0.11,
       error: null,
@@ -167,7 +167,7 @@ function buildSeed(): DemoStore {
     {
       id: "44444444-4444-4444-8444-444444444402",
       appointment_id: appointments[1].id,
-      patient_id: patients[1].id,
+      client_id: clients[1].id,
       provider: "demo",
       provider_call_id: "demo_call_3JD8P1",
       direction: "outbound",
@@ -195,7 +195,7 @@ function buildSeed(): DemoStore {
     {
       id: "44444444-4444-4444-8444-444444444403",
       appointment_id: appointments[2].id,
-      patient_id: patients[2].id,
+      client_id: clients[2].id,
       provider: "demo",
       provider_call_id: "demo_call_9WX2R7",
       direction: "outbound",
@@ -211,7 +211,7 @@ function buildSeed(): DemoStore {
         "Priya: Perfect, thank you.",
       ].join("\n"),
       summary:
-        "Patient cannot attend the booked slot. Requested the following morning. Flagged for front-desk rebooking.",
+        "Client cannot attend the booked slot. Requested the following morning. Flagged for front-desk rebooking.",
       duration_seconds: 52,
       cost: 0.12,
       error: null,
@@ -222,7 +222,7 @@ function buildSeed(): DemoStore {
     {
       id: "44444444-4444-4444-8444-444444444404",
       appointment_id: appointments[3].id,
-      patient_id: patients[3].id,
+      client_id: clients[3].id,
       provider: "demo",
       provider_call_id: "demo_call_5BT6H3",
       direction: "outbound",
@@ -241,8 +241,8 @@ function buildSeed(): DemoStore {
   ];
 
   return {
-    doctors: SEED_DOCTORS.map((d) => ({ ...d })),
-    patients,
+    providers: SEED_PROVIDERS.map((d) => ({ ...d })),
+    clients,
     appointments,
     calls,
     notifications: [],

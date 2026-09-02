@@ -6,7 +6,7 @@
 create extension if not exists "pgcrypto";
 
 -- ── Doctors ────────────────────────────────────────────────────────────────
-create table if not exists public.doctors (
+create table if not exists public.providers (
   id                uuid primary key default gen_random_uuid(),
   slug              text not null unique,
   name              text not null,
@@ -31,7 +31,7 @@ create table if not exists public.doctors (
 );
 
 -- ── Patients ───────────────────────────────────────────────────────────────
-create table if not exists public.patients (
+create table if not exists public.clients (
   id          uuid primary key default gen_random_uuid(),
   full_name   text not null,
   -- Normalised to digits + leading '+' by the app, so it can act as the identity key.
@@ -45,32 +45,32 @@ create table if not exists public.patients (
 create table if not exists public.appointments (
   id              uuid primary key default gen_random_uuid(),
   reference       text not null unique,
-  doctor_id       uuid not null references public.doctors(id) on delete restrict,
-  patient_id      uuid not null references public.patients(id) on delete cascade,
+  provider_id       uuid not null references public.providers(id) on delete restrict,
+  client_id      uuid not null references public.clients(id) on delete cascade,
   starts_at       timestamptz not null,
   ends_at         timestamptz not null,
   reason          text,
   status          text not null default 'pending'
                   check (status in ('pending','confirmed','rescheduled','cancelled','completed','no_answer')),
-  is_new_patient  boolean not null default false,
+  is_new_client  boolean not null default false,
   created_at      timestamptz not null default now(),
   updated_at      timestamptz not null default now()
 );
 
-create index if not exists appointments_doctor_time_idx on public.appointments (doctor_id, starts_at);
+create index if not exists appointments_provider_time_idx on public.appointments (provider_id, starts_at);
 create index if not exists appointments_status_idx      on public.appointments (status);
 create index if not exists appointments_created_idx     on public.appointments (created_at desc);
 
 -- Stops two patients holding the same slot with the same doctor.
 create unique index if not exists appointments_no_double_booking_idx
-  on public.appointments (doctor_id, starts_at)
+  on public.appointments (provider_id, starts_at)
   where status <> 'cancelled';
 
 -- ── Call logs ──────────────────────────────────────────────────────────────
 create table if not exists public.call_logs (
   id                uuid primary key default gen_random_uuid(),
   appointment_id    uuid not null references public.appointments(id) on delete cascade,
-  patient_id        uuid not null references public.patients(id) on delete cascade,
+  client_id        uuid not null references public.clients(id) on delete cascade,
   provider          text not null default 'demo',
   provider_call_id  text,
   direction         text not null default 'outbound' check (direction in ('outbound','inbound')),
@@ -122,15 +122,15 @@ create trigger appointments_touch_updated_at
 -- key, which bypasses RLS. The only thing the anon key may see is the public
 -- doctor roster; patient records, appointments and recordings are never
 -- readable from the browser.
-alter table public.doctors           enable row level security;
-alter table public.patients          enable row level security;
+alter table public.providers           enable row level security;
+alter table public.clients          enable row level security;
 alter table public.appointments      enable row level security;
 alter table public.call_logs         enable row level security;
 alter table public.notification_logs enable row level security;
 
-drop policy if exists "public can read active doctors" on public.doctors;
-create policy "public can read active doctors"
-  on public.doctors for select
+drop policy if exists "public can read active providers" on public.providers;
+create policy "public can read active providers"
+  on public.providers for select
   to anon, authenticated
   using (is_active = true);
 

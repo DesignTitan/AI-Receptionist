@@ -1,30 +1,30 @@
 import { NextResponse } from "next/server";
-import { getAvailability, getAvailabilityCalendar, getDoctorBySlug } from "@/lib/db";
+import { getAvailability, getAvailabilityCalendar, getProviderBySlug } from "@/lib/db";
 import { env } from "@/lib/env";
 import { timezoneLabel } from "@/lib/time";
 
 export const dynamic = "force-dynamic";
 
 /**
- * GET /api/availability?doctor=<slug>&date=YYYY-MM-DD  → slots for that day
- * GET /api/availability?doctor=<slug>&calendar=1       → open-slot counts for 21 days
+ * GET /api/availability?provider=<slug>&date=YYYY-MM-DD  → slots for that day
+ * GET /api/availability?provider=<slug>&calendar=1       → open-slot counts for 21 days
  */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const slug = searchParams.get("doctor");
+  const slug = searchParams.get("provider");
   if (!slug) {
     return NextResponse.json({ error: "doctor is required" }, { status: 400 });
   }
 
-  const doctor = await getDoctorBySlug(slug);
-  if (!doctor) {
-    return NextResponse.json({ error: "Doctor not found" }, { status: 404 });
+  const provider = await getProviderBySlug(slug);
+  if (!provider) {
+    return NextResponse.json({ error: "Provider not found" }, { status: 404 });
   }
 
   if (searchParams.get("calendar")) {
     return NextResponse.json({
       timezone: env.timezone,
-      days: await getAvailabilityCalendar(doctor),
+      days: await getAvailabilityCalendar(provider),
     });
   }
 
@@ -40,7 +40,7 @@ export async function GET(request: Request) {
     date,
     timezone: env.timezone,
     timezoneLabel: timezoneLabel(env.timezone),
-    slotMinutes: doctor.slot_minutes,
-    slots: await getAvailability(doctor, date),
+    slotMinutes: provider.slot_minutes,
+    slots: await getAvailability(provider, date),
   });
 }

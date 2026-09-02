@@ -1,4 +1,5 @@
 import { env, isVoiceProviderConfigured } from "./env";
+import { providerLabel } from "@/lib/format";
 import {
   createCall,
   getAppointment,
@@ -36,25 +37,25 @@ export function voiceWebhookUrl() {
 /** The instructions the voice agent follows on the call. */
 export function buildAgentScript(detail: AppointmentDetail) {
   const tz = env.timezone;
-  const patient = detail.patient?.full_name ?? "the patient";
-  const first = patient.split(" ")[0];
-  const doctor = detail.doctor ? `Dr. ${detail.doctor.name}` : "the doctor";
+  const client = detail.client?.full_name ?? "the patient";
+  const first = client.split(" ")[0];
+  const provider = detail.provider ? `${providerLabel(detail.provider)}` : "the doctor";
 
   return `You are Ava, the phone receptionist for ${env.clinicName}. You are making a short, warm outbound call to confirm an appointment that was just booked online. Keep it under sixty seconds.
 
 Appointment details:
-- Patient: ${patient}
-- Doctor: ${doctor} (${detail.doctor?.specialty ?? "General practice"})
+- Client: ${client}
+- Provider: ${provider} (${detail.provider?.specialty ?? "General practice"})
 - Date and time: ${formatDate(detail.starts_at, tz)} at ${formatTime(detail.starts_at, tz)} ${timezoneLabel(tz)}
-- Location: ${detail.doctor?.location ?? env.clinicName}
+- Location: ${detail.provider?.location ?? env.clinicName}
 - Reference: ${detail.reference}
 - Reason given: ${detail.reason || "not specified"}
-- Patient type: ${detail.is_new_patient ? "new patient" : "returning patient"}
+- Client type: ${detail.is_new_client ? "new patient" : "returning patient"}
 
 How to run the call:
 1. Greet by name and confirm you are speaking with ${first}. If it is someone else, politely ask when ${first} is available and end the call.
 2. State the doctor, day and time, and ask whether that still works.
-3. If yes: confirm, then ask them to arrive ten minutes early with photo ID and insurance card.${detail.is_new_patient ? " Mention that a new-patient intake form will be texted to them." : ""}
+3. If yes: confirm, then ask them to arrive ten minutes early with photo ID and insurance card.${detail.is_new_client ? " Mention that a new-patient intake form will be texted to them." : ""}
 4. If they want a different time: do not attempt to rebook on the call. Say the front desk will text options within the hour, and note the times that suit them.
 5. If they want to cancel: acknowledge without pressure and confirm the cancellation.
 6. Close politely and end the call.
@@ -65,7 +66,7 @@ At the end, classify the outcome as exactly one of: confirmed, rescheduled, canc
 }
 
 const firstMessage = (detail: AppointmentDetail) =>
-  `Hi, this is Ava calling from ${env.clinicName}. Am I speaking with ${detail.patient?.full_name ?? "the patient"}?`;
+  `Hi, this is Ava calling from ${env.clinicName}. Am I speaking with ${detail.client?.full_name ?? "the patient"}?`;
 
 const cleanPhone = (phone: string) => {
   const digits = phone.replace(/[^\d+]/g, "");
@@ -102,8 +103,8 @@ async function dispatchVapi(detail: AppointmentDetail, call: CallLog): Promise<P
     assistantId,
     phoneNumberId,
     customer: {
-      number: cleanPhone(detail.patient!.phone),
-      name: detail.patient!.full_name,
+      number: cleanPhone(detail.client!.phone),
+      name: detail.client!.full_name,
     },
     assistantOverrides: {
       firstMessage: firstMessage(detail),
@@ -123,7 +124,7 @@ async function dispatchVapi(detail: AppointmentDetail, call: CallLog): Promise<P
 async function dispatchBland(detail: AppointmentDetail, call: CallLog): Promise<ProviderResponse> {
   const { apiKey, voiceId, pathwayId } = env.bland;
   const json = await postJson("https://api.bland.ai/v1/calls", apiKey!, {
-    phone_number: cleanPhone(detail.patient!.phone),
+    phone_number: cleanPhone(detail.client!.phone),
     task: pathwayId ? undefined : buildAgentScript(detail),
     pathway_id: pathwayId,
     first_sentence: firstMessage(detail),
@@ -147,7 +148,7 @@ async function dispatchOmniDimension(
     apiKey!,
     {
       agent_id: agentId,
-      to_number: cleanPhone(detail.patient!.phone),
+      to_number: cleanPhone(detail.client!.phone),
       call_context: callMetadata(detail, call),
       webhook_url: voiceWebhookUrl(),
     },
@@ -161,14 +162,14 @@ function callMetadata(detail: AppointmentDetail, call: CallLog) {
     call_log_id: call.id,
     appointment_id: detail.id,
     reference: detail.reference,
-    patient_name: detail.patient?.full_name ?? "",
-    patient_first_name: (detail.patient?.full_name ?? "").split(" ")[0],
-    doctor_name: detail.doctor ? `Dr. ${detail.doctor.name}` : "",
-    specialty: detail.doctor?.specialty ?? "",
+    patient_name: detail.client?.full_name ?? "",
+    patient_first_name: (detail.client?.full_name ?? "").split(" ")[0],
+    doctor_name: detail.provider ? `${providerLabel(detail.provider)}` : "",
+    specialty: detail.provider?.specialty ?? "",
     appointment_date: formatDate(detail.starts_at, env.timezone),
     appointment_time: `${formatTime(detail.starts_at, env.timezone)} ${timezoneLabel(env.timezone)}`,
-    location: detail.doctor?.location ?? "",
-    is_new_patient: detail.is_new_patient,
+    location: detail.provider?.location ?? "",
+    is_new_patient: detail.is_new_client,
     clinic_name: env.clinicName,
   };
 }
@@ -185,7 +186,7 @@ export async function dispatchConfirmationCall(
   options: { forceNew?: boolean } = {},
 ): Promise<DispatchResult> {
   const detail = await getAppointment(appointmentId);
-  if (!detail || !detail.patient) {
+  if (!detail || !detail.client) {
     return {
       ok: false,
       provider: env.voiceProvider,
@@ -198,7 +199,7 @@ export async function dispatchConfirmationCall(
   const existing = await getLatestCallForAppointment(appointmentId);
   const reusable =
     !options.forceNew && existing && existing.status === "queued" && !existing.provider_call_id;
-  const call = reusable ? existing : await createCall(appointmentId, detail.patient.id);
+  const call = reusable ? existing : await createCall(appointmentId, detail.client.id);
 
   if (!isVoiceProviderConfigured()) {
     // Demo mode: the simulator in db.ts walks this call through its lifecycle.

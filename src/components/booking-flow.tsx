@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { providerLabel } from "@/lib/format";
 import { useRouter } from "next/navigation";
-import type { Doctor, Slot } from "@/lib/types";
+import type { Provider, Slot } from "@/lib/types";
 import {
   AlertTriangle,
   ArrowRight,
@@ -30,7 +31,7 @@ const dayLabel = (key: string) => {
   };
 };
 
-export function BookingFlow({ doctor }: { doctor: Doctor }) {
+export function BookingFlow({ provider }: { provider: Provider }) {
   const router = useRouter();
   const [step, setStep] = useState<Step>(0);
 
@@ -57,7 +58,7 @@ export function BookingFlow({ doctor }: { doctor: Doctor }) {
   // Load the availability calendar once per doctor.
   useEffect(() => {
     let cancelled = false;
-    fetch(`/api/availability?doctor=${doctor.slug}&calendar=1`)
+    fetch(`/api/availability?provider=${provider.slug}&calendar=1`)
       .then((r) => r.json())
       .then((data: { days?: CalendarDay[] }) => {
         if (cancelled || !data.days) return;
@@ -72,7 +73,7 @@ export function BookingFlow({ doctor }: { doctor: Doctor }) {
     return () => {
       cancelled = true;
     };
-  }, [doctor.slug]);
+  }, [provider.slug]);
 
   // Load slots whenever the selected day changes.
   useEffect(() => {
@@ -80,7 +81,7 @@ export function BookingFlow({ doctor }: { doctor: Doctor }) {
     let cancelled = false;
     setSlotsLoading(true);
     setSelectedSlot(null);
-    fetch(`/api/availability?doctor=${doctor.slug}&date=${selectedDate}`)
+    fetch(`/api/availability?provider=${provider.slug}&date=${selectedDate}`)
       .then((r) => r.json())
       .then((data: { slots?: Slot[]; timezoneLabel?: string; timezone?: string }) => {
         if (cancelled) return;
@@ -97,7 +98,7 @@ export function BookingFlow({ doctor }: { doctor: Doctor }) {
     return () => {
       cancelled = true;
     };
-  }, [doctor.slug, selectedDate]);
+  }, [provider.slug, selectedDate]);
 
   const pageDays = useMemo(
     () => calendar.slice(page * DAYS_PER_PAGE, page * DAYS_PER_PAGE + DAYS_PER_PAGE),
@@ -131,7 +132,7 @@ export function BookingFlow({ doctor }: { doctor: Doctor }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          doctorId: doctor.id,
+          providerId: provider.id,
           startsAt: selectedSlot.start,
           fullName: form.fullName,
           phone: form.phone,
@@ -150,7 +151,7 @@ export function BookingFlow({ doctor }: { doctor: Doctor }) {
           setSelectedSlot(null);
           if (selectedDate) {
             const refreshed = await fetch(
-              `/api/availability?doctor=${doctor.slug}&date=${selectedDate}`,
+              `/api/availability?provider=${provider.slug}&date=${selectedDate}`,
             ).then((r) => r.json());
             setSlots(refreshed.slots ?? []);
           }
@@ -443,7 +444,7 @@ export function BookingFlow({ doctor }: { doctor: Doctor }) {
           <div>
             <h2 className="text-[15px] font-semibold text-ink">Check everything over</h2>
             <dl className="mt-4 divide-y divide-line rounded-xl border border-line">
-              <Row label="Doctor" value={`Dr. ${doctor.name} · ${doctor.specialty}`} />
+              <Row label="Provider" value={`${providerLabel(provider)} · ${provider.specialty}`} />
               <Row
                 label="When"
                 value={`${new Date(selectedSlot.start).toLocaleDateString("en-US", {
@@ -453,13 +454,13 @@ export function BookingFlow({ doctor }: { doctor: Doctor }) {
                   timeZone: tz,
                 })} at ${selectedSlot.label}${tzLabel ? ` ${tzLabel}` : ""}`}
               />
-              <Row label="Where" value={doctor.location} />
+              <Row label="Where" value={provider.location} />
               <Row label="Name" value={form.fullName} />
               <Row label="Phone" value={form.phone} />
               {form.email && <Row label="Email" value={form.email} />}
               {form.reason && <Row label="Reason" value={form.reason} />}
               <Row
-                label="Patient"
+                label="Client"
                 value={form.isNewPatient ? "New patient" : "Returning patient"}
               />
             </dl>

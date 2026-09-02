@@ -1,4 +1,5 @@
 import { env, isEmailConfigured } from "./env";
+import { providerLabel } from "@/lib/format";
 import { getAppointment, getCall, logNotification } from "./db";
 import { formatDate, formatDuration, formatTime, timezoneLabel } from "./time";
 import type { AppointmentDetail, CallLog } from "./types";
@@ -109,12 +110,12 @@ function appointmentTable(detail: AppointmentDetail) {
   const tz = env.timezone;
   return `<table role="presentation" width="100%" style="border-collapse:collapse">
     ${row("Reference", escape(detail.reference))}
-    ${row("Patient", escape(detail.patient?.full_name ?? "—"))}
-    ${row("Phone", `<a href="tel:${escape(detail.patient?.phone ?? "")}" style="color:#0f766e">${escape(detail.patient?.phone ?? "—")}</a>`)}
-    ${row("Email", detail.patient?.email ? `<a href="mailto:${escape(detail.patient.email)}" style="color:#0f766e">${escape(detail.patient.email)}</a>` : "—")}
-    ${row("Doctor", escape(`Dr. ${detail.doctor?.name ?? "—"} · ${detail.doctor?.specialty ?? ""}`))}
+    ${row("Client", escape(detail.client?.full_name ?? "—"))}
+    ${row("Phone", `<a href="tel:${escape(detail.client?.phone ?? "")}" style="color:#0f766e">${escape(detail.client?.phone ?? "—")}</a>`)}
+    ${row("Email", detail.client?.email ? `<a href="mailto:${escape(detail.client.email)}" style="color:#0f766e">${escape(detail.client.email)}</a>` : "—")}
+    ${row("Provider", escape(`${providerLabel(detail.provider)} · ${detail.provider?.specialty ?? ""}`))}
     ${row("When", escape(`${formatDate(detail.starts_at, tz)} at ${formatTime(detail.starts_at, tz)} ${timezoneLabel(tz)}`))}
-    ${row("Patient type", detail.is_new_patient ? "New patient" : "Returning patient")}
+    ${row("Client type", detail.is_new_client ? "New patient" : "Returning patient")}
     ${row("Reason", escape(detail.reason || "Not provided"))}
   </table>`;
 }
@@ -137,25 +138,25 @@ export async function sendBookingReceivedEmail(appointmentId: string) {
       </p>`;
     await send({
       to: env.ownerEmail ?? "owner@example.com",
-      subject: `New booking · ${detail.patient?.full_name ?? "Patient"} with Dr. ${detail.doctor?.name ?? ""} (${detail.reference})`,
+      subject: `New booking · ${detail.client?.full_name ?? "Client"} with ${providerLabel(detail.provider)} (${detail.reference})`,
       html: shell("New appointment booked", "Booking received", body),
       appointmentId: detail.id,
     });
   }
 
-  if (detail.patient?.email) {
+  if (detail.client?.email) {
     const tz = env.timezone;
     const body = `
       <p style="margin:0 0 18px;font-size:15px;line-height:1.6;color:#334155">
-        Hi ${escape(detail.patient.full_name.split(" ")[0])}, we've reserved your appointment. Our automated assistant will ring you in the next minute to confirm the details — it only takes about thirty seconds.
+        Hi ${escape(detail.client.full_name.split(" ")[0])}, we've reserved your appointment. Our automated assistant will ring you in the next minute to confirm the details — it only takes about thirty seconds.
       </p>
       ${appointmentTable(detail)}
       <p style="margin:22px 0 0;font-size:13px;color:#64748b">
         Keep reference <strong>${escape(detail.reference)}</strong> handy. Need to change something? Just tell the assistant when it calls, or reply to this email.
       </p>`;
     await send({
-      to: detail.patient.email,
-      subject: `Your appointment with Dr. ${detail.doctor?.name ?? ""} · ${formatDate(detail.starts_at, tz)}`,
+      to: detail.client.email,
+      subject: `Your appointment with ${providerLabel(detail.provider)} · ${formatDate(detail.starts_at, tz)}`,
       html: shell("We've got you booked", "Appointment reserved", body),
       appointmentId: detail.id,
     });
@@ -215,7 +216,7 @@ export async function sendCallCompletedEmail(callId: string) {
 
   await send({
     to: env.ownerEmail ?? "owner@example.com",
-    subject: `${attention ? "⚠ Action needed" : "✓ Confirmed"} · ${detail.patient?.full_name ?? "Patient"} (${detail.reference})`,
+    subject: `${attention ? "⚠ Action needed" : "✓ Confirmed"} · ${detail.client?.full_name ?? "Client"} (${detail.reference})`,
     html: shell(
       attention ? "Confirmation call needs follow-up" : "Appointment confirmed by phone",
       "Call completed",

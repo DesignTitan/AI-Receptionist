@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { providerLabel } from "@/lib/format";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CallStatusLive } from "@/components/call-status-live";
-import { DoctorAvatar } from "@/components/doctor-avatar";
+import { ProviderAvatar } from "@/components/provider-avatar";
 import { Calendar, Check, Clock, MapPin, Phone, User } from "@/components/icons";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
 import { getAppointment } from "@/lib/db";
@@ -31,7 +32,7 @@ export default async function BookingConfirmationPage({
   if (!appointment || !ref || appointment.reference !== ref.toUpperCase()) notFound();
 
   const tz = env.timezone;
-  const { doctor, patient } = appointment;
+  const { provider, client } = appointment;
 
   return (
     <div className="min-h-dvh">
@@ -45,7 +46,7 @@ export default async function BookingConfirmationPage({
           <div>
             <h1 className="text-3xl font-semibold tracking-[-0.02em] text-ink">
               You&apos;re booked
-              {patient?.full_name ? `, ${patient.full_name.split(" ")[0]}` : ""}.
+              {client?.full_name ? `, ${client.full_name.split(" ")[0]}` : ""}.
             </h1>
             <p className="mt-1.5 text-[15px] text-muted">
               Reference{" "}
@@ -76,16 +77,16 @@ export default async function BookingConfirmationPage({
           <section className="card overflow-hidden">
             <div className="flex items-center gap-4 border-b border-line p-5">
               <span className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-surface-2">
-                {doctor && (
-                  <DoctorAvatar name={doctor.name} src={doctor.photo_url} sizes="56px" />
+                {provider && (
+                  <ProviderAvatar name={provider.name} src={provider.photo_url} sizes="56px" />
                 )}
               </span>
               <div className="min-w-0">
                 <p className="truncate text-[16px] font-semibold text-ink">
-                  Dr. {doctor?.name}
+                  {providerLabel(provider)}
                 </p>
                 <p className="truncate text-[13px] text-muted">
-                  {doctor?.specialty} · {doctor?.credentials}
+                  {provider?.specialty} · {provider?.credentials}
                 </p>
               </div>
             </div>
@@ -99,18 +100,18 @@ export default async function BookingConfirmationPage({
                 {timezoneLabel(tz)}
               </Item>
               <Item icon={MapPin} label="Location">
-                {doctor?.location}
+                {provider?.location}
               </Item>
-              <Item icon={User} label="Patient">
-                {patient?.full_name}
-                {appointment.is_new_patient && (
+              <Item icon={User} label="Client">
+                {client?.full_name}
+                {appointment.is_new_client && (
                   <span className="ml-2 rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-semibold text-accent">
                     New
                   </span>
                 )}
               </Item>
               <Item icon={Phone} label="We'll call">
-                {patient?.phone}
+                {client?.phone}
               </Item>
               {appointment.reason && (
                 <Item icon={Check} label="Reason">

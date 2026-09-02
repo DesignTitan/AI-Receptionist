@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { providerLabel } from "@/lib/format";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Refresh, Search, XMark } from "@/components/icons";
 import { formatDateTime, formatDuration, relativeTime } from "@/lib/time";
@@ -155,8 +156,8 @@ export function Dashboard({ initial, timezone }: { initial: Feed; timezone: stri
               <table className="w-full min-w-[820px] border-collapse text-left">
                 <thead>
                   <tr className="border-b border-line bg-surface-2/60 text-[11.5px] uppercase tracking-[0.08em] text-subtle">
-                    <Th>Patient</Th>
-                    <Th>Doctor</Th>
+                    <Th>Client</Th>
+                    <Th>Provider</Th>
                     <Th>Appointment</Th>
                     <Th>Call</Th>
                     <Th>Status</Th>
@@ -175,11 +176,11 @@ export function Dashboard({ initial, timezone }: { initial: Feed; timezone: stri
                           className="block"
                         >
                           <span className="block text-[14px] font-medium text-ink">
-                            {appointment.patient?.full_name ?? "—"}
+                            {appointment.client?.full_name ?? "—"}
                           </span>
                           <span className="block text-[12.5px] text-muted">
-                            {appointment.patient?.phone}
-                            {appointment.is_new_patient && (
+                            {appointment.client?.phone}
+                            {appointment.is_new_client && (
                               <span className="ml-2 rounded bg-accent-soft px-1.5 py-0.5 text-[10.5px] font-semibold text-accent">
                                 NEW
                               </span>
@@ -188,9 +189,9 @@ export function Dashboard({ initial, timezone }: { initial: Feed; timezone: stri
                         </Link>
                       </td>
                       <td className="px-4 py-3.5 text-[13.5px] text-muted">
-                        <span className="block text-ink">Dr. {appointment.doctor?.name}</span>
+                        <span className="block text-ink">{providerLabel(appointment.provider)}</span>
                         <span className="block text-[12.5px]">
-                          {appointment.doctor?.specialty}
+                          {appointment.provider?.specialty}
                         </span>
                       </td>
                       <td className="px-4 py-3.5 text-[13.5px] text-ink">
@@ -238,10 +239,10 @@ export function Dashboard({ initial, timezone }: { initial: Feed; timezone: stri
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
                         <p className="truncate text-[14.5px] font-medium text-ink">
-                          {appointment.patient?.full_name}
+                          {appointment.client?.full_name}
                         </p>
                         <p className="truncate text-[12.5px] text-muted">
-                          Dr. {appointment.doctor?.name} ·{" "}
+                          {providerLabel(appointment.provider)} ·{" "}
                           {formatDateTime(appointment.starts_at, timezone)}
                         </p>
                       </div>

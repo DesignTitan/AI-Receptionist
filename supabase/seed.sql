@@ -3,7 +3,7 @@
 -- Run after schema.sql. Safe to re-run: rows are upserted by slug.
 -- ============================================================================
 
-insert into public.doctors (
+insert into public.providers (
   id, slug, name, credentials, specialty, bio, photo_url, years_experience,
   rating, reviews_count, languages, education, consultation_fee, location,
   working_days, start_time, end_time, slot_minutes, is_active

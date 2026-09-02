@@ -1,4 +1,4 @@
-import type { Doctor } from "./types";
+import type { Provider } from "./types";
 
 const photo = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&crop=faces&w=640&h=640&q=80`;
@@ -7,7 +7,7 @@ const photo = (id: string) =>
  * Roster used to seed Supabase (`supabase/seed.sql`) and to serve the app in
  * demo mode. Swap `photo_url` for your own headshots in production.
  */
-export const SEED_DOCTORS: Doctor[] = [
+export const SEED_PROVIDERS: Provider[] = [
   {
     id: "11111111-1111-4111-8111-111111111101",
     slug: "elena-vasquez",

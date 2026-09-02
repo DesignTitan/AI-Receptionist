@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CallPreview } from "@/components/call-preview";
-import { DoctorDirectory } from "@/components/doctor-directory";
+import { ProviderDirectory } from "@/components/provider-directory";
 import {
   ArrowRight,
   Calendar,
@@ -12,7 +12,7 @@ import {
   Stethoscope,
 } from "@/components/icons";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
-import { listDoctors } from "@/lib/db";
+import { listProviders } from "@/lib/db";
 import { env } from "@/lib/env";
 
 export const dynamic = "force-dynamic";
@@ -55,8 +55,8 @@ const FAQ = [
 ];
 
 export default async function HomePage() {
-  const doctors = await listDoctors();
-  const nextAvailable = doctors.length;
+  const providers = await listProviders();
+  const nextAvailable = providers.length;
 
   return (
     <div className="min-h-dvh">
@@ -174,7 +174,7 @@ export default async function HomePage() {
         </section>
 
         {/* ── Doctors ──────────────────────────────────────────── */}
-        <section id="doctors" className="scroll-mt-16 border-t border-line bg-surface-2/60 py-20">
+        <section id="providers" className="scroll-mt-16 border-t border-line bg-surface-2/60 py-20">
           <div className="mx-auto max-w-6xl px-5">
             <header className="mb-10 flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-2xl">
@@ -194,7 +194,7 @@ export default async function HomePage() {
               </p>
             </header>
 
-            <DoctorDirectory doctors={doctors} />
+            <ProviderDirectory providers={providers} />
           </div>
         </section>
 
@@ -233,7 +233,7 @@ export default async function HomePage() {
                   {
                     icon: Mail,
                     title: "Owner notifications",
-                    body: "Patient details, outcome and a link to the recording, by email.",
+                    body: "Client details, outcome and a link to the recording, by email.",
                   },
                   {
                     icon: Shield,

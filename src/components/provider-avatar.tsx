@@ -18,10 +18,10 @@ const initials = (name: string) =>
     .join("");
 
 /**
- * Doctor headshot with a graceful fallback: if the remote photo fails, the card
+ * Provider headshot with a graceful fallback: if the remote photo fails, the card
  * shows a tinted monogram instead of a broken image.
  */
-export function DoctorAvatar({
+export function ProviderAvatar({
   name,
   src,
   sizes,

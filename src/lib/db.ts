@@ -16,9 +16,9 @@ import type {
   CallLog,
   CallOutcome,
   CallStatus,
-  Doctor,
+  Provider,
   NotificationLog,
-  Patient,
+  Client,
   Slot,
 } from "./types";
 
@@ -43,45 +43,45 @@ export function newReference(): string {
 
 /* ── Doctors ─────────────────────────────────────────────────────────── */
 
-export async function listDoctors(): Promise<Doctor[]> {
+export async function listProviders(): Promise<Provider[]> {
   if (!useSupabase()) {
     return demoStore()
-      .doctors.filter((d) => d.is_active)
+      .providers.filter((d) => d.is_active)
       .sort((a, b) => a.name.localeCompare(b.name));
   }
   const { data, error } = await serviceClient()
-    .from("doctors")
+    .from("providers")
     .select("*")
     .eq("is_active", true)
     .order("name");
-  if (error) throw new Error(`listDoctors: ${error.message}`);
-  return (data ?? []) as Doctor[];
+  if (error) throw new Error(`listProviders: ${error.message}`);
+  return (data ?? []) as Provider[];
 }
 
-export async function getDoctorBySlug(slug: string): Promise<Doctor | null> {
+export async function getProviderBySlug(slug: string): Promise<Provider | null> {
   if (!useSupabase()) {
-    return demoStore().doctors.find((d) => d.slug === slug) ?? null;
+    return demoStore().providers.find((d) => d.slug === slug) ?? null;
   }
   const { data, error } = await serviceClient()
-    .from("doctors")
+    .from("providers")
     .select("*")
     .eq("slug", slug)
     .maybeSingle();
-  if (error) throw new Error(`getDoctorBySlug: ${error.message}`);
-  return (data as Doctor) ?? null;
+  if (error) throw new Error(`getProviderBySlug: ${error.message}`);
+  return (data as Provider) ?? null;
 }
 
-export async function getDoctorById(id: string): Promise<Doctor | null> {
+export async function getProviderById(id: string): Promise<Provider | null> {
   if (!useSupabase()) {
-    return demoStore().doctors.find((d) => d.id === id) ?? null;
+    return demoStore().providers.find((d) => d.id === id) ?? null;
   }
   const { data, error } = await serviceClient()
-    .from("doctors")
+    .from("providers")
     .select("*")
     .eq("id", id)
     .maybeSingle();
-  if (error) throw new Error(`getDoctorById: ${error.message}`);
-  return (data as Doctor) ?? null;
+  if (error) throw new Error(`getProviderById: ${error.message}`);
+  return (data as Provider) ?? null;
 }
 
 /* ── Availability ────────────────────────────────────────────────────── */
@@ -92,12 +92,12 @@ const LUNCH_END_MIN = 13 * 60;
 /** Bookings must be at least this far out, so the confirmation call has time to land. */
 const MIN_LEAD_MINUTES = 90;
 
-async function bookedRanges(doctorId: string, from: Date, to: Date) {
+async function bookedRanges(providerId: string, from: Date, to: Date) {
   if (!useSupabase()) {
     return demoStore()
       .appointments.filter(
         (a) =>
-          a.doctor_id === doctorId &&
+          a.provider_id === providerId &&
           a.status !== "cancelled" &&
           new Date(a.starts_at) < to &&
           new Date(a.ends_at) > from,
@@ -107,7 +107,7 @@ async function bookedRanges(doctorId: string, from: Date, to: Date) {
   const { data, error } = await serviceClient()
     .from("appointments")
     .select("starts_at, ends_at")
-    .eq("doctor_id", doctorId)
+    .eq("provider_id", providerId)
     .neq("status", "cancelled")
     .lt("starts_at", to.toISOString())
     .gt("ends_at", from.toISOString());
@@ -119,26 +119,26 @@ async function bookedRanges(doctorId: string, from: Date, to: Date) {
 }
 
 export async function getAvailability(
-  doctor: Doctor,
+  provider: Provider,
   dateKey: string,
 ): Promise<Slot[]> {
   const tz = env.timezone;
-  if (!doctor.working_days.includes(dayOfWeek(dateKey))) return [];
+  if (!provider.working_days.includes(dayOfWeek(dateKey))) return [];
 
   const [year, month, day] = dateKey.split("-").map(Number);
-  const open = parseTimeOfDay(doctor.start_time);
-  const close = parseTimeOfDay(doctor.end_time);
+  const open = parseTimeOfDay(provider.start_time);
+  const close = parseTimeOfDay(provider.end_time);
   const openMin = open.hour * 60 + open.minute;
   const closeMin = close.hour * 60 + close.minute;
 
   const dayStart = zonedTimeToUtc(year, month, day, 0, 0, tz);
   const dayEnd = zonedTimeToUtc(year, month, day + 1, 0, 0, tz);
-  const taken = await bookedRanges(doctor.id, dayStart, dayEnd);
+  const taken = await bookedRanges(provider.id, dayStart, dayEnd);
   const earliest = Date.now() + MIN_LEAD_MINUTES * 60_000;
 
   const slots: Slot[] = [];
-  for (let minute = openMin; minute + doctor.slot_minutes <= closeMin; minute += doctor.slot_minutes) {
-    const endMinute = minute + doctor.slot_minutes;
+  for (let minute = openMin; minute + provider.slot_minutes <= closeMin; minute += provider.slot_minutes) {
+    const endMinute = minute + provider.slot_minutes;
     if (minute < LUNCH_END_MIN && endMinute > LUNCH_START_MIN) continue;
 
     const start = zonedTimeToUtc(
@@ -149,7 +149,7 @@ export async function getAvailability(
       minute % 60,
       tz,
     );
-    const end = new Date(start.getTime() + doctor.slot_minutes * 60_000);
+    const end = new Date(start.getTime() + provider.slot_minutes * 60_000);
     const clashes = taken.some((range) => start < range.end && end > range.start);
     slots.push({
       start: start.toISOString(),
@@ -166,16 +166,16 @@ export async function getAvailability(
  * `closed` distinguishes a day the doctor doesn't work from one that is simply
  * fully booked — the picker words those differently.
  */
-export async function getAvailabilityCalendar(doctor: Doctor, days = 21) {
+export async function getAvailabilityCalendar(provider: Provider, days = 21) {
   const today = toDateKey(new Date(), env.timezone);
   const out: { date: string; openSlots: number; closed: boolean }[] = [];
   for (let i = 0; i < days; i++) {
     const key = addDaysToKey(today, i);
-    const slots = await getAvailability(doctor, key);
+    const slots = await getAvailability(provider, key);
     out.push({
       date: key,
       openSlots: slots.filter((s) => s.available).length,
-      closed: !doctor.working_days.includes(dayOfWeek(key)),
+      closed: !provider.working_days.includes(dayOfWeek(key)),
     });
   }
   return out;
@@ -185,21 +185,21 @@ export async function getAvailabilityCalendar(doctor: Doctor, days = 21) {
 
 const normalizePhone = (phone: string) => phone.replace(/[^\d+]/g, "");
 
-async function upsertPatient(input: {
+async function upsertClient(input: {
   full_name: string;
   phone: string;
   email: string | null;
-}): Promise<Patient> {
+}): Promise<Client> {
   const phone = normalizePhone(input.phone);
   if (!useSupabase()) {
     const store = demoStore();
-    const existing = store.patients.find((p) => normalizePhone(p.phone) === phone);
+    const existing = store.clients.find((p) => normalizePhone(p.phone) === phone);
     if (existing) {
       existing.full_name = input.full_name;
       existing.email = input.email ?? existing.email;
       return existing;
     }
-    const patient: Patient = {
+    const client: Client = {
       id: uuid(),
       full_name: input.full_name,
       phone: input.phone,
@@ -207,12 +207,12 @@ async function upsertPatient(input: {
       notes: null,
       created_at: nowIso(),
     };
-    store.patients.unshift(patient);
-    return patient;
+    store.clients.unshift(client);
+    return client;
   }
   const supabase = serviceClient();
   const { data, error } = await supabase
-    .from("patients")
+    .from("clients")
     .upsert(
       {
         full_name: input.full_name,
@@ -223,14 +223,14 @@ async function upsertPatient(input: {
     )
     .select("*")
     .single();
-  if (error) throw new Error(`upsertPatient: ${error.message}`);
-  return data as Patient;
+  if (error) throw new Error(`upsertClient: ${error.message}`);
+  return data as Client;
 }
 
 /* ── Bookings ────────────────────────────────────────────────────────── */
 
 export type BookingInput = {
-  doctorId: string;
+  providerId: string;
   startsAt: string;
   fullName: string;
   phone: string;
@@ -241,27 +241,27 @@ export type BookingInput = {
 
 export type BookingResult = {
   appointment: Appointment;
-  patient: Patient;
-  doctor: Doctor;
+  client: Client;
+  provider: Provider;
   call: CallLog;
 };
 
 export async function createBooking(input: BookingInput): Promise<BookingResult> {
-  const doctor = await getDoctorById(input.doctorId);
-  if (!doctor) throw new BookingError("That doctor is no longer accepting bookings.");
+  const provider = await getProviderById(input.providerId);
+  if (!provider) throw new BookingError("That doctor is no longer accepting bookings.");
 
   const start = new Date(input.startsAt);
   if (Number.isNaN(start.getTime())) throw new BookingError("Invalid appointment time.");
-  const end = new Date(start.getTime() + doctor.slot_minutes * 60_000);
+  const end = new Date(start.getTime() + provider.slot_minutes * 60_000);
 
   const dateKey = toDateKey(start, env.timezone);
-  const slots = await getAvailability(doctor, dateKey);
+  const slots = await getAvailability(provider, dateKey);
   const slot = slots.find((s) => s.start === start.toISOString());
   if (!slot || !slot.available) {
     throw new BookingError("That time was just taken. Please pick another slot.");
   }
 
-  const patient = await upsertPatient({
+  const client = await upsertClient({
     full_name: input.fullName,
     phone: input.phone,
     email: input.email,
@@ -270,13 +270,13 @@ export async function createBooking(input: BookingInput): Promise<BookingResult>
   const appointmentRow = {
     id: uuid(),
     reference: newReference(),
-    doctor_id: doctor.id,
-    patient_id: patient.id,
+    provider_id: provider.id,
+    client_id: client.id,
     starts_at: start.toISOString(),
     ends_at: end.toISOString(),
     reason: input.reason,
     status: "pending" as AppointmentStatus,
-    is_new_patient: input.isNewPatient,
+    is_new_client: input.isNewPatient,
     created_at: nowIso(),
     updated_at: nowIso(),
   };
@@ -284,7 +284,7 @@ export async function createBooking(input: BookingInput): Promise<BookingResult>
   const callRow: CallLog = {
     id: uuid(),
     appointment_id: appointmentRow.id,
-    patient_id: patient.id,
+    client_id: client.id,
     provider: env.voiceProvider,
     provider_call_id: null,
     direction: "outbound",
@@ -305,7 +305,7 @@ export async function createBooking(input: BookingInput): Promise<BookingResult>
     const store = demoStore();
     store.appointments.unshift(appointmentRow);
     store.calls.unshift(callRow);
-    return { appointment: appointmentRow, patient, doctor, call: callRow };
+    return { appointment: appointmentRow, client, provider, call: callRow };
   }
 
   const supabase = serviceClient();
@@ -325,8 +325,8 @@ export async function createBooking(input: BookingInput): Promise<BookingResult>
 
   return {
     appointment: appointment as Appointment,
-    patient,
-    doctor,
+    client,
+    provider,
     call: call as CallLog,
   };
 }
@@ -342,18 +342,18 @@ function hydrateDemoAppointment(appointment: Appointment): AppointmentDetail {
     .sort((a, b) => b.created_at.localeCompare(a.created_at));
   return {
     ...appointment,
-    doctor: store.doctors.find((d) => d.id === appointment.doctor_id) ?? null,
-    patient: store.patients.find((p) => p.id === appointment.patient_id) ?? null,
+    provider: store.providers.find((d) => d.id === appointment.provider_id) ?? null,
+    client: store.clients.find((p) => p.id === appointment.client_id) ?? null,
     call: calls[0] ?? null,
   };
 }
 
 const SELECT_DETAIL =
-  "*, doctor:doctors(*), patient:patients(*), calls:call_logs(*)";
+  "*, provider:providers(*), client:clients(*), calls:call_logs(*)";
 
 type JoinedRow = Appointment & {
-  doctor: Doctor | null;
-  patient: Patient | null;
+  provider: Provider | null;
+  client: Client | null;
   calls: CallLog[] | null;
 };
 
@@ -416,7 +416,7 @@ export async function listAppointments(
   const search = filter.search?.trim().toLowerCase();
   if (search) {
     rows = rows.filter((r) =>
-      [r.reference, r.patient?.full_name, r.patient?.phone, r.patient?.email, r.doctor?.name]
+      [r.reference, r.client?.full_name, r.client?.phone, r.client?.email, r.provider?.name]
         .filter(Boolean)
         .some((value) => String(value).toLowerCase().includes(search)),
     );
@@ -511,12 +511,12 @@ export async function getLatestCallForAppointment(
 
 export async function createCall(
   appointmentId: string,
-  patientId: string,
+  clientId: string,
 ): Promise<CallLog> {
   const row: CallLog = {
     id: uuid(),
     appointment_id: appointmentId,
-    patient_id: patientId,
+    client_id: clientId,
     provider: env.voiceProvider,
     provider_call_id: null,
     direction: "outbound",
@@ -612,14 +612,14 @@ const SIM_RINGING_AT = 6_000;
 const SIM_IN_PROGRESS_AT = 18_000;
 const SIM_COMPLETED_AT = 52_000;
 
-const SIM_TRANSCRIPT = (patient: string, doctor: string, when: string) =>
+const SIM_TRANSCRIPT = (client: string, provider: string, when: string) =>
   [
-    `Agent: Hello, this is Ava calling from ${env.clinicName}. Am I speaking with ${patient}?`,
-    `${patient.split(" ")[0]}: Yes, speaking.`,
-    `Agent: Great — I'm calling to confirm the appointment you just booked with Dr. ${doctor}, ${when}. Does that still work for you?`,
-    `${patient.split(" ")[0]}: Yes, that works.`,
+    `Agent: Hello, this is Ava calling from ${env.clinicName}. Am I speaking with ${client}?`,
+    `${client.split(" ")[0]}: Yes, speaking.`,
+    `Agent: Great — I'm calling to confirm the appointment you just booked with Dr. ${provider}, ${when}. Does that still work for you?`,
+    `${client.split(" ")[0]}: Yes, that works.`,
     "Agent: Perfect. Please arrive ten minutes early with a photo ID and your insurance card. If anything changes, you can reply to the text I'm sending now.",
-    `${patient.split(" ")[0]}: Will do, thank you.`,
+    `${client.split(" ")[0]}: Will do, thank you.`,
     "Agent: Thank you, and take care.",
   ].join("\n");
 
@@ -641,8 +641,8 @@ export async function advanceSimulatedCalls(): Promise<void> {
 
     if (age >= SIM_COMPLETED_AT && call.status !== "completed") {
       const appointment = await getAppointmentRaw(call.appointment_id);
-      const doctor = appointment ? await getDoctorById(appointment.doctor_id) : null;
-      const patient = await getPatient(call.patient_id);
+      const provider = appointment ? await getProviderById(appointment.provider_id) : null;
+      const client = await getClient(call.client_id);
       const when = appointment
         ? new Date(appointment.starts_at).toLocaleString("en-US", {
             timeZone: env.timezone,
@@ -661,9 +661,9 @@ export async function advanceSimulatedCalls(): Promise<void> {
         cost: 0.11,
         started_at: new Date(new Date(call.created_at).getTime() + SIM_RINGING_AT).toISOString(),
         ended_at: new Date(new Date(call.created_at).getTime() + SIM_COMPLETED_AT).toISOString(),
-        transcript: SIM_TRANSCRIPT(patient?.full_name ?? "there", doctor?.name ?? "your doctor", when),
+        transcript: SIM_TRANSCRIPT(client?.full_name ?? "there", provider?.name ?? "your doctor", when),
         summary:
-          "Patient confirmed the appointment on the first attempt. Reminded to arrive ten minutes early with photo ID and insurance card. No changes requested.",
+          "Client confirmed the appointment on the first attempt. Reminded to arrive ten minutes early with photo ID and insurance card. No changes requested.",
       };
     } else if (age >= SIM_IN_PROGRESS_AT && call.status !== "in_progress") {
       next = {
@@ -717,17 +717,17 @@ async function getAppointmentRaw(id: string): Promise<Appointment | null> {
   return (data as Appointment) ?? null;
 }
 
-export async function getPatient(id: string): Promise<Patient | null> {
+export async function getClient(id: string): Promise<Client | null> {
   if (!useSupabase()) {
-    return demoStore().patients.find((p) => p.id === id) ?? null;
+    return demoStore().clients.find((p) => p.id === id) ?? null;
   }
   const { data, error } = await serviceClient()
-    .from("patients")
+    .from("clients")
     .select("*")
     .eq("id", id)
     .maybeSingle();
-  if (error) throw new Error(`getPatient: ${error.message}`);
-  return (data as Patient) ?? null;
+  if (error) throw new Error(`getClient: ${error.message}`);
+  return (data as Client) ?? null;
 }
 
 /** Imported lazily to avoid a cycle between the data layer and the mailer. */

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { providerLabel } from "@/lib/format";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookingFlow } from "@/components/booking-flow";
-import { DoctorAvatar } from "@/components/doctor-avatar";
+import { ProviderAvatar } from "@/components/provider-avatar";
 import {
   ChevronLeft,
   Clock,
@@ -13,7 +14,7 @@ import {
   Stethoscope,
 } from "@/components/icons";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
-import { getDoctorBySlug, listDoctors } from "@/lib/db";
+import { getProviderBySlug, listProviders } from "@/lib/db";
 import { env } from "@/lib/env";
 
 export const dynamic = "force-dynamic";
@@ -26,24 +27,24 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const doctor = await getDoctorBySlug(slug);
-  if (!doctor) return { title: "Doctor not found" };
+  const provider = await getProviderBySlug(slug);
+  if (!provider) return { title: "Provider not found" };
   return {
-    title: `Book Dr. ${doctor.name} · ${doctor.specialty}`,
-    description: doctor.bio.slice(0, 160),
+    title: `Book ${providerLabel(provider)} · ${provider.specialty}`,
+    description: provider.bio.slice(0, 160),
   };
 }
 
-export default async function DoctorPage({
+export default async function ProviderPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const doctor = await getDoctorBySlug(slug);
-  if (!doctor || !doctor.is_active) notFound();
+  const provider = await getProviderBySlug(slug);
+  if (!provider || !provider.is_active) notFound();
 
-  const others = (await listDoctors()).filter((d) => d.id !== doctor.id).slice(0, 3);
+  const others = (await listProviders()).filter((d) => d.id !== provider.id).slice(0, 3);
 
   return (
     <div className="min-h-dvh">
@@ -63,9 +64,9 @@ export default async function DoctorPage({
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <div className="card overflow-hidden">
               <div className="relative aspect-[4/3] bg-surface-2">
-                <DoctorAvatar
-                  name={doctor.name}
-                  src={doctor.photo_url}
+                <ProviderAvatar
+                  name={provider.name}
+                  src={provider.photo_url}
                   priority
                   sizes="(min-width: 1024px) 460px, 100vw"
                 />
@@ -75,46 +76,46 @@ export default async function DoctorPage({
                 <div>
                   <div className="flex items-start justify-between gap-3">
                     <h1 className="text-2xl font-semibold tracking-[-0.02em] text-ink">
-                      Dr. {doctor.name}
+                      {providerLabel(provider)}
                     </h1>
                     <span className="mt-1 inline-flex shrink-0 items-center gap-1 rounded-full bg-surface-2 px-2.5 py-1 text-[12px] font-semibold text-ink">
                       <Star width={12} height={12} className="text-amber-500" />
-                      {doctor.rating.toFixed(1)}
+                      {provider.rating.toFixed(1)}
                     </span>
                   </div>
-                  <p className="mt-1 text-[13.5px] text-muted">{doctor.credentials}</p>
+                  <p className="mt-1 text-[13.5px] text-muted">{provider.credentials}</p>
                   <span className="mt-3 inline-flex rounded-full bg-primary-soft px-3 py-1 text-[12.5px] font-semibold text-primary">
-                    {doctor.specialty}
+                    {provider.specialty}
                   </span>
                 </div>
 
-                <p className="text-[14px] leading-relaxed text-muted">{doctor.bio}</p>
+                <p className="text-[14px] leading-relaxed text-muted">{provider.bio}</p>
 
                 <dl className="space-y-3 border-t border-line pt-5 text-[13.5px]">
                   <Detail icon={Stethoscope} label="Experience">
-                    {doctor.years_experience} years · {doctor.reviews_count} patient reviews
+                    {provider.years_experience} years · {provider.reviews_count} patient reviews
                   </Detail>
                   <Detail icon={Globe} label="Speaks">
-                    {doctor.languages.join(", ")}
+                    {provider.languages.join(", ")}
                   </Detail>
                   <Detail icon={MapPin} label="Location">
-                    {doctor.location}
+                    {provider.location}
                   </Detail>
                   <Detail icon={Clock} label="Clinic hours">
-                    {doctor.start_time}–{doctor.end_time} ·{" "}
-                    {doctor.working_days.map((d) => WEEKDAYS[d]).join(", ")}
+                    {provider.start_time}–{provider.end_time} ·{" "}
+                    {provider.working_days.map((d) => WEEKDAYS[d]).join(", ")}
                   </Detail>
                   <Detail icon={Shield} label="Training">
-                    {doctor.education}
+                    {provider.education}
                   </Detail>
                 </dl>
 
                 <div className="flex items-center justify-between rounded-xl bg-surface-2 px-4 py-3">
                   <span className="text-[13px] text-muted">Consultation</span>
                   <span className="text-[15px] font-semibold text-ink">
-                    ${doctor.consultation_fee}
+                    ${provider.consultation_fee}
                     <span className="ml-1 text-[12.5px] font-normal text-muted">
-                      / {doctor.slot_minutes} min
+                      / {provider.slot_minutes} min
                     </span>
                   </span>
                 </div>
@@ -134,7 +135,7 @@ export default async function DoctorPage({
               </p>
             </header>
 
-            <BookingFlow doctor={doctor} />
+            <BookingFlow provider={provider} />
           </div>
         </div>
 
@@ -150,11 +151,11 @@ export default async function DoctorPage({
                   className="card flex items-center gap-3.5 p-3.5 transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]"
                 >
                   <span className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-surface-2">
-                    <DoctorAvatar name={other.name} src={other.photo_url} sizes="56px" />
+                    <ProviderAvatar name={other.name} src={other.photo_url} sizes="56px" />
                   </span>
                   <span className="min-w-0">
                     <span className="block truncate text-[14px] font-semibold text-ink">
-                      Dr. {other.name}
+                      {providerLabel(other)}
                     </span>
                     <span className="block truncate text-[12.5px] text-muted">
                       {other.specialty}

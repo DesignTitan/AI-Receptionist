@@ -22,7 +22,7 @@ export type CallOutcome =
   | "failed"
   | null;
 
-export type Doctor = {
+export type Provider = {
   id: string;
   slug: string;
   name: string;
@@ -46,7 +46,7 @@ export type Doctor = {
   is_active: boolean;
 };
 
-export type Patient = {
+export type Client = {
   id: string;
   full_name: string;
   phone: string;
@@ -58,13 +58,13 @@ export type Patient = {
 export type Appointment = {
   id: string;
   reference: string;
-  doctor_id: string;
-  patient_id: string;
+  provider_id: string;
+  client_id: string;
   starts_at: string;
   ends_at: string;
   reason: string | null;
   status: AppointmentStatus;
-  is_new_patient: boolean;
+  is_new_client: boolean;
   created_at: string;
   updated_at: string;
 };
@@ -72,7 +72,7 @@ export type Appointment = {
 export type CallLog = {
   id: string;
   appointment_id: string;
-  patient_id: string;
+  client_id: string;
   provider: string;
   provider_call_id: string | null;
   direction: "outbound" | "inbound";
@@ -102,8 +102,8 @@ export type NotificationLog = {
 
 /** An appointment joined with its doctor, patient and most recent call. */
 export type AppointmentDetail = Appointment & {
-  doctor: Doctor | null;
-  patient: Patient | null;
+  provider: Provider | null;
+  client: Client | null;
   call: CallLog | null;
 };
 

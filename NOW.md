@@ -4,6 +4,13 @@ Handoff notes for the next session. Updated 2026-09-01.
 
 ## Just done
 
+- **Multi-vertical restructure underway** — plan at
+  `~/.claude/plans/so-you-want-to-keen-nest.md`. Chunks 0–1 of 10 landed: `/demo/` asset
+  collision resolved (`public/demo` → `public/audio`), and the full `Doctor→Provider` /
+  `Patient→Client` rename across TS + SQL. `callMetadata` keys in `voice.ts` are frozen
+  (external Vapi/Bland contract) — only their values changed. Verified end-to-end locally.
+  Prose copy still says doctor/patient on purpose; chunk 2 extracts it into `src/verticals/`.
+
 - **Password-gated the whole site.** `src/proxy.ts` (Next 16's renamed `middleware.ts` —
   one per project, so the site gate and the pre-existing `/admin` gate share it) now bounces
   any cookie-less browser to `/login`, and returns 401 on browser-facing API routes.

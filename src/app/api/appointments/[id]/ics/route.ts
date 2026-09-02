@@ -1,4 +1,5 @@
 import { getAppointment } from "@/lib/db";
+import { providerLabel } from "@/lib/format";
 import { env } from "@/lib/env";
 
 export const dynamic = "force-dynamic";
@@ -22,10 +23,10 @@ export async function GET(
     return new Response("Not found", { status: 404 });
   }
 
-  const title = `Appointment with Dr. ${appointment.doctor?.name ?? ""} · ${env.clinicName}`;
+  const title = `Appointment with ${providerLabel(appointment.provider)} · ${env.clinicName}`;
   const description = [
     `Reference: ${appointment.reference}`,
-    appointment.doctor ? `${appointment.doctor.specialty} · ${appointment.doctor.credentials}` : "",
+    appointment.provider ? `${appointment.provider.specialty} · ${appointment.provider.credentials}` : "",
     appointment.reason ? `Reason: ${appointment.reason}` : "",
     "Please arrive ten minutes early with photo ID and your insurance card.",
   ]
@@ -45,7 +46,7 @@ export async function GET(
     `DTEND:${stamp(appointment.ends_at)}`,
     `SUMMARY:${escape(title)}`,
     `DESCRIPTION:${escape(description)}`,
-    `LOCATION:${escape(appointment.doctor?.location ?? env.clinicName)}`,
+    `LOCATION:${escape(appointment.provider?.location ?? env.clinicName)}`,
     "BEGIN:VALARM",
     "TRIGGER:-PT2H",
     "ACTION:DISPLAY",

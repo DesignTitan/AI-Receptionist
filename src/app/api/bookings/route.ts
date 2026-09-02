@@ -5,7 +5,7 @@ import { env } from "@/lib/env";
 export const dynamic = "force-dynamic";
 
 type Payload = {
-  doctorId?: string;
+  providerId?: string;
   startsAt?: string;
   fullName?: string;
   phone?: string;
@@ -30,7 +30,7 @@ function validate(body: Payload) {
   }
   if (email && !EMAIL_RE.test(email)) errors.email = "That email doesn't look right.";
   if (reason.length > 600) errors.reason = "Please keep this under 600 characters.";
-  if (!body.doctorId) errors.doctorId = "Choose a doctor.";
+  if (!body.providerId) errors.providerId = "Choose a doctor.";
   if (!body.startsAt || Number.isNaN(Date.parse(body.startsAt))) {
     errors.startsAt = "Choose an appointment time.";
   }
@@ -55,7 +55,7 @@ export async function POST(request: Request) {
 
   try {
     const result = await createBooking({
-      doctorId: body.doctorId!,
+      providerId: body.providerId!,
       startsAt: new Date(body.startsAt!).toISOString(),
       fullName: values.fullName,
       phone: values.phone,
@@ -95,7 +95,7 @@ export async function POST(request: Request) {
         appointmentId: result.appointment.id,
         reference: result.appointment.reference,
         startsAt: result.appointment.starts_at,
-        doctor: { name: result.doctor.name, specialty: result.doctor.specialty },
+        provider: { name: result.provider.name, specialty: result.provider.specialty },
       },
       { status: 201 },
     );

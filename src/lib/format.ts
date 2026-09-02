@@ -1,4 +1,4 @@
-import type { Doctor } from "./types";
+import type { Provider } from "./types";
 
 /**
  * Display helpers that every surface shares, so a provider is written the
@@ -6,7 +6,7 @@ import type { Doctor } from "./types";
  * and the voice script. Today that means "Dr. Name"; once the vertical
  * config lands this is where a stylist stops getting a title.
  */
-export function providerLabel(provider: Pick<Doctor, "name"> | null | undefined): string {
+export function providerLabel(provider: Pick<Provider, "name"> | null | undefined): string {
   if (!provider) return "";
   return `Dr. ${provider.name}`;
 }

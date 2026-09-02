@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { providerLabel } from "@/lib/format";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AppointmentActions } from "@/components/admin/appointment-actions";
 import { AdminHeader } from "@/components/admin/shell";
 import { AppointmentBadge, CallBadge } from "@/components/admin/status-badge";
-import { DoctorAvatar } from "@/components/doctor-avatar";
+import { ProviderAvatar } from "@/components/provider-avatar";
 import { ChevronLeft, Mail, Phone, Sparkle, Waveform } from "@/components/icons";
 import { getAppointment } from "@/lib/db";
 import { env } from "@/lib/env";
@@ -33,7 +34,7 @@ export default async function AdminAppointmentPage({
   const appointment = await getAppointment(id);
   if (!appointment) notFound();
 
-  const { doctor, patient, call } = appointment;
+  const { provider, client, call } = appointment;
   const tz = env.timezone;
 
   const timeline = [
@@ -65,7 +66,7 @@ export default async function AdminAppointmentPage({
               {appointment.reference}
             </p>
             <h1 className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-ink">
-              {patient?.full_name ?? "Unknown patient"}
+              {client?.full_name ?? "Unknown patient"}
             </h1>
             <p className="mt-1 text-[14px] text-muted">
               {formatDate(appointment.starts_at, tz)} · {formatTime(appointment.starts_at, tz)}–
@@ -196,55 +197,55 @@ export default async function AdminAppointmentPage({
           {/* ── Sidebar ─────────────────────────────────────── */}
           <aside className="space-y-6">
             <section className="card p-5">
-              <h2 className="mb-4 text-[15px] font-semibold text-ink">Patient</h2>
+              <h2 className="mb-4 text-[15px] font-semibold text-ink">Client</h2>
               <dl className="space-y-3 text-[13.5px]">
-                <Row label="Name">{patient?.full_name ?? "—"}</Row>
+                <Row label="Name">{client?.full_name ?? "—"}</Row>
                 <Row label="Phone">
-                  {patient?.phone ? (
+                  {client?.phone ? (
                     <a
-                      href={`tel:${patient.phone.replace(/[^\d+]/g, "")}`}
+                      href={`tel:${client.phone.replace(/[^\d+]/g, "")}`}
                       className="inline-flex items-center gap-1.5 text-primary hover:underline"
                     >
                       <Phone width={14} height={14} />
-                      {patient.phone}
+                      {client.phone}
                     </a>
                   ) : (
                     "—"
                   )}
                 </Row>
                 <Row label="Email">
-                  {patient?.email ? (
+                  {client?.email ? (
                     <a
-                      href={`mailto:${patient.email}`}
+                      href={`mailto:${client.email}`}
                       className="inline-flex items-center gap-1.5 break-all text-primary hover:underline"
                     >
                       <Mail width={14} height={14} />
-                      {patient.email}
+                      {client.email}
                     </a>
                   ) : (
                     "Not provided"
                   )}
                 </Row>
-                <Row label="Patient type">
-                  {appointment.is_new_patient ? "New patient" : "Returning patient"}
+                <Row label="Client type">
+                  {appointment.is_new_client ? "New patient" : "Returning patient"}
                 </Row>
                 <Row label="Reason">{appointment.reason || "Not provided"}</Row>
               </dl>
             </section>
 
             <section className="card p-5">
-              <h2 className="mb-4 text-[15px] font-semibold text-ink">Doctor</h2>
-              {doctor && (
+              <h2 className="mb-4 text-[15px] font-semibold text-ink">Provider</h2>
+              {provider && (
                 <div className="flex items-center gap-3">
                   <span className="relative size-12 shrink-0 overflow-hidden rounded-xl bg-surface-2">
-                    <DoctorAvatar name={doctor.name} src={doctor.photo_url} sizes="48px" />
+                    <ProviderAvatar name={provider.name} src={provider.photo_url} sizes="48px" />
                   </span>
                   <div className="min-w-0">
                     <p className="truncate text-[14px] font-semibold text-ink">
-                      Dr. {doctor.name}
+                      {providerLabel(provider)}
                     </p>
-                    <p className="truncate text-[12.5px] text-muted">{doctor.specialty}</p>
-                    <p className="truncate text-[12.5px] text-subtle">{doctor.location}</p>
+                    <p className="truncate text-[12.5px] text-muted">{provider.specialty}</p>
+                    <p className="truncate text-[12.5px] text-subtle">{provider.location}</p>
                   </div>
                 </div>
               )}

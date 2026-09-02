@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { unlock } from "@/app/login/actions";
 import { AlertTriangle, Lock, PulseMark } from "@/components/icons";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { env } from "@/lib/env";
+import { DEFAULT_VERTICAL as v } from "@/verticals";
 import { safeNext } from "@/lib/site-gate";
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default async function LoginPage({
             <PulseMark width={24} height={24} strokeWidth={2} />
           </span>
           <h1 className="mt-5 text-2xl font-semibold tracking-[-0.02em] text-ink">
-            {env.clinicName}
+            {v.brand}
           </h1>
           <p className="mt-1.5 text-[13.5px] text-muted">
             This preview is private. Enter the password to continue.

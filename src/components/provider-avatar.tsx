@@ -23,12 +23,15 @@ const initials = (name: string) =>
  */
 export function ProviderAvatar({
   name,
+  label,
   src,
   sizes,
   className = "",
   priority = false,
 }: {
   name: string;
+  /** How the person is addressed ("Dr. Elena Vasquez"); `name` alone feeds the monogram. */
+  label?: string;
   src: string;
   sizes: string;
   className?: string;
@@ -52,7 +55,7 @@ export function ProviderAvatar({
   return (
     <Image
       src={src}
-      alt={`Portrait of Dr. ${name}`}
+      alt={`Portrait of ${label ?? name}`}
       fill
       sizes={sizes}
       priority={priority}

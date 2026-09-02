@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "verify": "tsc --noEmit && next build"
+    "verify": "tsc --noEmit && next build",
+    "seed:sql": "node scripts/generate-seed-sql.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.58.0",

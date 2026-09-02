@@ -1,4 +1,6 @@
 import { env, isSupabaseConfigured } from "./env";
+import { providerLabel } from "./format";
+import { getVertical } from "@/verticals";
 import { demoStore } from "./demo-store";
 import { serviceClient } from "./supabase";
 import {
@@ -34,14 +36,14 @@ const nowIso = () => new Date().toISOString();
 const uuid = () => crypto.randomUUID();
 
 const REFERENCE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-export function newReference(): string {
+export function newReference(prefix: string): string {
   let out = "";
   const bytes = crypto.getRandomValues(new Uint8Array(6));
   for (const byte of bytes) out += REFERENCE_ALPHABET[byte % REFERENCE_ALPHABET.length];
-  return `NL-${out}`;
+  return `${prefix}-${out}`;
 }
 
-/* ── Doctors ─────────────────────────────────────────────────────────── */
+/* ── Providers ─────────────────────────────────────────────────────────── */
 
 export async function listProviders(): Promise<Provider[]> {
   if (!useSupabase()) {
@@ -86,7 +88,7 @@ export async function getProviderById(id: string): Promise<Provider | null> {
 
 /* ── Availability ────────────────────────────────────────────────────── */
 
-/** Slots the doctor is never bookable for, in clinic-local hours. */
+/** Slots no provider is bookable for, in business-local hours. */
 const LUNCH_START_MIN = 12 * 60;
 const LUNCH_END_MIN = 13 * 60;
 /** Bookings must be at least this far out, so the confirmation call has time to land. */
@@ -163,7 +165,7 @@ export async function getAvailability(
 
 /**
  * Availability summary for the next `days` days, used by the date picker.
- * `closed` distinguishes a day the doctor doesn't work from one that is simply
+ * `closed` distinguishes a day the provider doesn't work from one that is simply
  * fully booked — the picker words those differently.
  */
 export async function getAvailabilityCalendar(provider: Provider, days = 21) {
@@ -236,7 +238,7 @@ export type BookingInput = {
   phone: string;
   email: string | null;
   reason: string | null;
-  isNewPatient: boolean;
+  isNewClient: boolean;
 };
 
 export type BookingResult = {
@@ -248,7 +250,8 @@ export type BookingResult = {
 
 export async function createBooking(input: BookingInput): Promise<BookingResult> {
   const provider = await getProviderById(input.providerId);
-  if (!provider) throw new BookingError("That doctor is no longer accepting bookings.");
+  if (!provider) throw new BookingError("That provider is no longer accepting bookings.");
+  const vertical = getVertical(provider.vertical);
 
   const start = new Date(input.startsAt);
   if (Number.isNaN(start.getTime())) throw new BookingError("Invalid appointment time.");
@@ -269,14 +272,15 @@ export async function createBooking(input: BookingInput): Promise<BookingResult>
 
   const appointmentRow = {
     id: uuid(),
-    reference: newReference(),
+    vertical: provider.vertical,
+    reference: newReference(vertical.referencePrefix),
     provider_id: provider.id,
     client_id: client.id,
     starts_at: start.toISOString(),
     ends_at: end.toISOString(),
     reason: input.reason,
     status: "pending" as AppointmentStatus,
-    is_new_client: input.isNewPatient,
+    is_new_client: input.isNewClient,
     created_at: nowIso(),
     updated_at: nowIso(),
   };
@@ -612,16 +616,24 @@ const SIM_RINGING_AT = 6_000;
 const SIM_IN_PROGRESS_AT = 18_000;
 const SIM_COMPLETED_AT = 52_000;
 
-const SIM_TRANSCRIPT = (client: string, provider: string, when: string) =>
-  [
-    `Agent: Hello, this is Ava calling from ${env.clinicName}. Am I speaking with ${client}?`,
-    `${client.split(" ")[0]}: Yes, speaking.`,
-    `Agent: Great — I'm calling to confirm the appointment you just booked with Dr. ${provider}, ${when}. Does that still work for you?`,
-    `${client.split(" ")[0]}: Yes, that works.`,
-    "Agent: Perfect. Please arrive ten minutes early with a photo ID and your insurance card. If anything changes, you can reply to the text I'm sending now.",
-    `${client.split(" ")[0]}: Will do, thank you.`,
+const SIM_TRANSCRIPT = (
+  vertical: ReturnType<typeof getVertical>,
+  client: string,
+  provider: string,
+  when: string,
+) => {
+  const { agentName, arrivalAdvice } = vertical.voice;
+  const first = client.split(" ")[0];
+  return [
+    `Agent: Hello, this is ${agentName} calling from ${vertical.brand}. Am I speaking with ${client}?`,
+    `${first}: Yes, speaking.`,
+    `Agent: Great — I'm calling to confirm the ${vertical.terms.booking.one} you just booked with ${provider}, ${when}. Does that still work for you?`,
+    `${first}: Yes, that works.`,
+    `Agent: Perfect. Please ${arrivalAdvice}. If anything changes, you can reply to the text I'm sending now.`,
+    `${first}: Will do, thank you.`,
     "Agent: Thank you, and take care.",
   ].join("\n");
+};
 
 /**
  * Moves any in-flight simulated calls forward.
@@ -643,6 +655,8 @@ export async function advanceSimulatedCalls(): Promise<void> {
       const appointment = await getAppointmentRaw(call.appointment_id);
       const provider = appointment ? await getProviderById(appointment.provider_id) : null;
       const client = await getClient(call.client_id);
+      const vertical = getVertical(appointment?.vertical ?? provider?.vertical ?? "medical");
+      const { terms, voice } = vertical;
       const when = appointment
         ? new Date(appointment.starts_at).toLocaleString("en-US", {
             timeZone: env.timezone,
@@ -661,9 +675,13 @@ export async function advanceSimulatedCalls(): Promise<void> {
         cost: 0.11,
         started_at: new Date(new Date(call.created_at).getTime() + SIM_RINGING_AT).toISOString(),
         ended_at: new Date(new Date(call.created_at).getTime() + SIM_COMPLETED_AT).toISOString(),
-        transcript: SIM_TRANSCRIPT(client?.full_name ?? "there", provider?.name ?? "your doctor", when),
-        summary:
-          "Client confirmed the appointment on the first attempt. Reminded to arrive ten minutes early with photo ID and insurance card. No changes requested.",
+        transcript: SIM_TRANSCRIPT(
+          vertical,
+          client?.full_name ?? "there",
+          provider ? providerLabel(provider) : `your ${terms.provider.one}`,
+          when,
+        ),
+        summary: `${terms.client.One} confirmed the ${terms.booking.one} on the first attempt. Reminded to ${voice.arrivalAdvice}. No changes requested.`,
       };
     } else if (age >= SIM_IN_PROGRESS_AT && call.status !== "in_progress") {
       next = {

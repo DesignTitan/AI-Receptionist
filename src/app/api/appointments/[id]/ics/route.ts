@@ -1,6 +1,6 @@
 import { getAppointment } from "@/lib/db";
 import { providerLabel } from "@/lib/format";
-import { env } from "@/lib/env";
+import { getVertical } from "@/verticals";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +10,7 @@ const stamp = (iso: string) => new Date(iso).toISOString().replace(/[-:]|\.\d{3}
 const escape = (value: string) =>
   value.replace(/([,;\\])/g, "\\$1").replace(/\r?\n/g, "\\n");
 
-/** GET /api/appointments/<id>/ics?ref=NL-XXXXXX — calendar file for the patient. */
+/** GET /api/appointments/<id>/ics?ref=NL-XXXXXX — calendar file for the client. */
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> },
@@ -23,12 +23,13 @@ export async function GET(
     return new Response("Not found", { status: 404 });
   }
 
-  const title = `Appointment with ${providerLabel(appointment.provider)} · ${env.clinicName}`;
+  const { brand, terms: t, voice } = getVertical(appointment.vertical);
+  const title = `${t.booking.One} with ${providerLabel(appointment.provider)} · ${brand}`;
   const description = [
     `Reference: ${appointment.reference}`,
     appointment.provider ? `${appointment.provider.specialty} · ${appointment.provider.credentials}` : "",
     appointment.reason ? `Reason: ${appointment.reason}` : "",
-    "Please arrive ten minutes early with photo ID and your insurance card.",
+    `Please ${voice.arrivalAdvice}.`,
   ]
     .filter(Boolean)
     .join("\n");
@@ -46,7 +47,7 @@ export async function GET(
     `DTEND:${stamp(appointment.ends_at)}`,
     `SUMMARY:${escape(title)}`,
     `DESCRIPTION:${escape(description)}`,
-    `LOCATION:${escape(appointment.provider?.location ?? env.clinicName)}`,
+    `LOCATION:${escape(appointment.provider?.location ?? brand)}`,
     "BEGIN:VALARM",
     "TRIGGER:-PT2H",
     "ACTION:DISPLAY",

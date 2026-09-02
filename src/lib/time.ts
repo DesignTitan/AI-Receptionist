@@ -1,8 +1,8 @@
 /**
  * Timezone-aware date helpers.
  *
- * Everything is stored as a UTC instant (ISO string). The clinic operates in a
- * single IANA timezone (`CLINIC_TIMEZONE`), so slot generation and all display
+ * Everything is stored as a UTC instant (ISO string). The business operates in a
+ * single IANA timezone (`SITE_TIMEZONE`), so slot generation and all display
  * formatting are anchored there — not to the server's locale, which on Vercel
  * is UTC and would otherwise shift every appointment time.
  */

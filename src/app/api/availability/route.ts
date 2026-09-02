@@ -13,7 +13,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const slug = searchParams.get("provider");
   if (!slug) {
-    return NextResponse.json({ error: "doctor is required" }, { status: 400 });
+    return NextResponse.json({ error: "provider is required" }, { status: 400 });
   }
 
   const provider = await getProviderBySlug(slug);

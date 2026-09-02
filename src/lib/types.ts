@@ -1,3 +1,6 @@
+/** Which themed business a row belongs to. Extended as verticals are added. */
+export type VerticalSlug = "medical";
+
 export type AppointmentStatus =
   | "pending"
   | "confirmed"
@@ -24,6 +27,7 @@ export type CallOutcome =
 
 export type Provider = {
   id: string;
+  vertical: VerticalSlug;
   slug: string;
   name: string;
   credentials: string;
@@ -39,7 +43,7 @@ export type Provider = {
   location: string;
   /** 0 = Sunday … 6 = Saturday */
   working_days: number[];
-  /** "HH:MM" in the clinic timezone */
+  /** "HH:MM" in the business timezone */
   start_time: string;
   end_time: string;
   slot_minutes: number;
@@ -57,6 +61,7 @@ export type Client = {
 
 export type Appointment = {
   id: string;
+  vertical: VerticalSlug;
   reference: string;
   provider_id: string;
   client_id: string;
@@ -100,7 +105,7 @@ export type NotificationLog = {
   created_at: string;
 };
 
-/** An appointment joined with its doctor, patient and most recent call. */
+/** An appointment joined with its provider, client and most recent call. */
 export type AppointmentDetail = Appointment & {
   provider: Provider | null;
   client: Client | null;
@@ -111,7 +116,7 @@ export type Slot = {
   /** ISO start instant */
   start: string;
   end: string;
-  /** "9:00 AM" rendered in the clinic timezone */
+  /** "9:00 AM" rendered in the business timezone */
   label: string;
   available: boolean;
 };

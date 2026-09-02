@@ -11,7 +11,7 @@ type Payload = {
   phone?: string;
   email?: string;
   reason?: string;
-  isNewPatient?: boolean;
+  isNewClient?: boolean;
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -30,7 +30,7 @@ function validate(body: Payload) {
   }
   if (email && !EMAIL_RE.test(email)) errors.email = "That email doesn't look right.";
   if (reason.length > 600) errors.reason = "Please keep this under 600 characters.";
-  if (!body.providerId) errors.providerId = "Choose a doctor.";
+  if (!body.providerId) errors.providerId = "Choose a provider.";
   if (!body.startsAt || Number.isNaN(Date.parse(body.startsAt))) {
     errors.startsAt = "Choose an appointment time.";
   }
@@ -61,10 +61,10 @@ export async function POST(request: Request) {
       phone: values.phone,
       email: values.email,
       reason: values.reason,
-      isNewPatient: Boolean(body.isNewPatient),
+      isNewClient: Boolean(body.isNewClient),
     });
 
-    // Hand off to the new-booking webhook once the patient has their response.
+    // Hand off to the new-booking webhook once the client has their response.
     // Going over HTTP (rather than calling the function directly) keeps this
     // the same code path an external system would trigger.
     after(async () => {

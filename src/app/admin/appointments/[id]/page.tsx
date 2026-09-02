@@ -8,6 +8,8 @@ import { AppointmentBadge, CallBadge } from "@/components/admin/status-badge";
 import { ProviderAvatar } from "@/components/provider-avatar";
 import { ChevronLeft, Mail, Phone, Sparkle, Waveform } from "@/components/icons";
 import { getAppointment } from "@/lib/db";
+import { clientTypeLabel } from "@/lib/format";
+import { getVertical } from "@/verticals";
 import { env } from "@/lib/env";
 import {
   formatDate,
@@ -36,6 +38,7 @@ export default async function AdminAppointmentPage({
 
   const { provider, client, call } = appointment;
   const tz = env.timezone;
+  const t = getVertical(appointment.vertical).terms;
 
   const timeline = [
     { label: "Booked online", at: appointment.created_at },
@@ -66,7 +69,7 @@ export default async function AdminAppointmentPage({
               {appointment.reference}
             </p>
             <h1 className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-ink">
-              {client?.full_name ?? "Unknown patient"}
+              {client?.full_name ?? `Unknown ${t.client.one}`}
             </h1>
             <p className="mt-1 text-[14px] text-muted">
               {formatDate(appointment.starts_at, tz)} · {formatTime(appointment.starts_at, tz)}–
@@ -197,7 +200,7 @@ export default async function AdminAppointmentPage({
           {/* ── Sidebar ─────────────────────────────────────── */}
           <aside className="space-y-6">
             <section className="card p-5">
-              <h2 className="mb-4 text-[15px] font-semibold text-ink">Client</h2>
+              <h2 className="mb-4 text-[15px] font-semibold text-ink">{t.client.One}</h2>
               <dl className="space-y-3 text-[13.5px]">
                 <Row label="Name">{client?.full_name ?? "—"}</Row>
                 <Row label="Phone">
@@ -226,19 +229,22 @@ export default async function AdminAppointmentPage({
                     "Not provided"
                   )}
                 </Row>
-                <Row label="Client type">
-                  {appointment.is_new_client ? "New patient" : "Returning patient"}
-                </Row>
+                <Row label={`${t.client.One} type`}>{clientTypeLabel(appointment.is_new_client, t)}</Row>
                 <Row label="Reason">{appointment.reason || "Not provided"}</Row>
               </dl>
             </section>
 
             <section className="card p-5">
-              <h2 className="mb-4 text-[15px] font-semibold text-ink">Provider</h2>
+              <h2 className="mb-4 text-[15px] font-semibold text-ink">{t.provider.One}</h2>
               {provider && (
                 <div className="flex items-center gap-3">
                   <span className="relative size-12 shrink-0 overflow-hidden rounded-xl bg-surface-2">
-                    <ProviderAvatar name={provider.name} src={provider.photo_url} sizes="48px" />
+                    <ProviderAvatar
+                      name={provider.name}
+                      label={providerLabel(provider)}
+                      src={provider.photo_url}
+                      sizes="48px"
+                    />
                   </span>
                   <div className="min-w-0">
                     <p className="truncate text-[14px] font-semibold text-ink">
@@ -253,7 +259,11 @@ export default async function AdminAppointmentPage({
 
             <section className="card p-5">
               <h2 className="mb-4 text-[15px] font-semibold text-ink">Actions</h2>
-              <AppointmentActions appointmentId={appointment.id} status={appointment.status} />
+              <AppointmentActions
+                appointmentId={appointment.id}
+                status={appointment.status}
+                clientNoun={t.client.one}
+              />
             </section>
           </aside>
         </div>

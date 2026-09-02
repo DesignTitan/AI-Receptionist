@@ -4,18 +4,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookingFlow } from "@/components/booking-flow";
 import { ProviderAvatar } from "@/components/provider-avatar";
-import {
-  ChevronLeft,
-  Clock,
-  Globe,
-  MapPin,
-  Shield,
-  Star,
-  Stethoscope,
-} from "@/components/icons";
+import { ChevronLeft, Clock, Globe, MapPin, Shield, Star } from "@/components/icons";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
 import { getProviderBySlug, listProviders } from "@/lib/db";
 import { env } from "@/lib/env";
+import { DEFAULT_VERTICAL as v } from "@/verticals";
 
 export const dynamic = "force-dynamic";
 
@@ -28,7 +21,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const provider = await getProviderBySlug(slug);
-  if (!provider) return { title: "Provider not found" };
+  if (!provider) return { title: `${v.terms.provider.One} not found` };
   return {
     title: `Book ${providerLabel(provider)} · ${provider.specialty}`,
     description: provider.bio.slice(0, 160),
@@ -45,10 +38,11 @@ export default async function ProviderPage({
   if (!provider || !provider.is_active) notFound();
 
   const others = (await listProviders()).filter((d) => d.id !== provider.id).slice(0, 3);
+  const t = v.terms;
 
   return (
     <div className="min-h-dvh">
-      <SiteHeader />
+      <SiteHeader vertical={v} />
 
       <main id="main" className="mx-auto max-w-6xl px-5 py-8 lg:py-12">
         <Link
@@ -56,7 +50,7 @@ export default async function ProviderPage({
           className="mb-6 inline-flex items-center gap-1.5 text-[13.5px] font-medium text-muted transition hover:text-ink"
         >
           <ChevronLeft width={16} height={16} />
-          All doctors
+          All {t.provider.many}
         </Link>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10">
@@ -66,6 +60,7 @@ export default async function ProviderPage({
               <div className="relative aspect-[4/3] bg-surface-2">
                 <ProviderAvatar
                   name={provider.name}
+                  label={providerLabel(provider)}
                   src={provider.photo_url}
                   priority
                   sizes="(min-width: 1024px) 460px, 100vw"
@@ -92,8 +87,8 @@ export default async function ProviderPage({
                 <p className="text-[14px] leading-relaxed text-muted">{provider.bio}</p>
 
                 <dl className="space-y-3 border-t border-line pt-5 text-[13.5px]">
-                  <Detail icon={Stethoscope} label="Experience">
-                    {provider.years_experience} years · {provider.reviews_count} patient reviews
+                  <Detail icon={v.icons.provider} label="Experience">
+                    {provider.years_experience} years · {provider.reviews_count} {t.client.one} reviews
                   </Detail>
                   <Detail icon={Globe} label="Speaks">
                     {provider.languages.join(", ")}
@@ -101,17 +96,17 @@ export default async function ProviderPage({
                   <Detail icon={MapPin} label="Location">
                     {provider.location}
                   </Detail>
-                  <Detail icon={Clock} label="Clinic hours">
+                  <Detail icon={Clock} label={t.hoursLabel}>
                     {provider.start_time}–{provider.end_time} ·{" "}
                     {provider.working_days.map((d) => WEEKDAYS[d]).join(", ")}
                   </Detail>
-                  <Detail icon={Shield} label="Training">
+                  <Detail icon={Shield} label={t.educationLabel}>
                     {provider.education}
                   </Detail>
                 </dl>
 
                 <div className="flex items-center justify-between rounded-xl bg-surface-2 px-4 py-3">
-                  <span className="text-[13px] text-muted">Consultation</span>
+                  <span className="text-[13px] text-muted">{t.feeLabel}</span>
                   <span className="text-[15px] font-semibold text-ink">
                     ${provider.consultation_fee}
                     <span className="ml-1 text-[12.5px] font-normal text-muted">
@@ -127,7 +122,7 @@ export default async function ProviderPage({
           <div>
             <header className="mb-5">
               <h2 className="text-xl font-semibold tracking-[-0.02em] text-ink">
-                Book an appointment
+                {t.bookCta}
               </h2>
               <p className="mt-1.5 text-[14px] text-muted">
                 All times shown in {env.timezone.replace("_", " ")}. After booking, our AI
@@ -135,14 +130,16 @@ export default async function ProviderPage({
               </p>
             </header>
 
-            <BookingFlow provider={provider} />
+            <BookingFlow provider={provider} terms={t} />
           </div>
         </div>
 
-        {/* ── Other doctors ──────────────────────────────────── */}
+        {/* ── Other providers ──────────────────────────────────── */}
         {others.length > 0 && (
           <section className="mt-16 border-t border-line pt-10">
-            <h2 className="text-[15px] font-semibold text-ink">Other doctors at the clinic</h2>
+            <h2 className="text-[15px] font-semibold text-ink">
+              Other {t.provider.many} at the {t.business.one}
+            </h2>
             <div className="mt-5 grid gap-4 sm:grid-cols-3">
               {others.map((other) => (
                 <Link
@@ -151,7 +148,12 @@ export default async function ProviderPage({
                   className="card flex items-center gap-3.5 p-3.5 transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]"
                 >
                   <span className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-surface-2">
-                    <ProviderAvatar name={other.name} src={other.photo_url} sizes="56px" />
+                    <ProviderAvatar
+                      name={other.name}
+                      label={providerLabel(other)}
+                      src={other.photo_url}
+                      sizes="56px"
+                    />
                   </span>
                   <span className="min-w-0">
                     <span className="block truncate text-[14px] font-semibold text-ink">
@@ -168,7 +170,7 @@ export default async function ProviderPage({
         )}
       </main>
 
-      <SiteFooter />
+      <SiteFooter vertical={v} />
     </div>
   );
 }

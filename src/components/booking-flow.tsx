@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { providerLabel } from "@/lib/format";
+import { clientTypeLabel, providerLabel } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import type { Provider, Slot } from "@/lib/types";
+import type { Terms } from "@/verticals/terms";
 import {
   AlertTriangle,
   ArrowRight,
@@ -31,7 +32,7 @@ const dayLabel = (key: string) => {
   };
 };
 
-export function BookingFlow({ provider }: { provider: Provider }) {
+export function BookingFlow({ provider, terms: t }: { provider: Provider; terms: Terms }) {
   const router = useRouter();
   const [step, setStep] = useState<Step>(0);
 
@@ -49,13 +50,13 @@ export function BookingFlow({ provider }: { provider: Provider }) {
     phone: "",
     email: "",
     reason: "",
-    isNewPatient: false,
+    isNewClient: false,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
-  // Load the availability calendar once per doctor.
+  // Load the availability calendar once per provider.
   useEffect(() => {
     let cancelled = false;
     fetch(`/api/availability?provider=${provider.slug}&calendar=1`)
@@ -105,8 +106,8 @@ export function BookingFlow({ provider }: { provider: Provider }) {
     [calendar, page],
   );
   const maxPage = Math.max(0, Math.ceil(calendar.length / DAYS_PER_PAGE) - 1);
-  // Grouped off the server-rendered label so the split follows clinic time,
-  // not whatever timezone the patient's browser is in.
+  // Grouped off the server-rendered label so the split follows business time,
+  // not whatever timezone the client's browser is in.
   const morning = slots.filter((s) => s.label.toUpperCase().includes("AM"));
   const afternoon = slots.filter((s) => !s.label.toUpperCase().includes("AM"));
 
@@ -138,7 +139,7 @@ export function BookingFlow({ provider }: { provider: Provider }) {
           phone: form.phone,
           email: form.email || undefined,
           reason: form.reason || undefined,
-          isNewPatient: form.isNewPatient,
+          isNewClient: form.isNewClient,
         }),
       });
       const data = await response.json();
@@ -392,8 +393,8 @@ export function BookingFlow({ provider }: { provider: Provider }) {
               }
             />
             <Field
-              label="Reason for visit"
-              hint="Optional. Please don't include sensitive medical detail."
+              label={t.reasonLabel}
+              hint={t.reasonHint}
               error={errors.reason}
               input={
                 <textarea
@@ -401,7 +402,7 @@ export function BookingFlow({ provider }: { provider: Provider }) {
                   onChange={(e) => setForm({ ...form, reason: e.target.value })}
                   rows={3}
                   maxLength={600}
-                  placeholder="Annual physical and a question about my iron levels."
+                  placeholder={t.reasonPlaceholder}
                   className={`${inputClass(errors.reason)} resize-none`}
                 />
               }
@@ -410,13 +411,12 @@ export function BookingFlow({ provider }: { provider: Provider }) {
             <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-line bg-surface-2/60 p-3.5">
               <input
                 type="checkbox"
-                checked={form.isNewPatient}
-                onChange={(e) => setForm({ ...form, isNewPatient: e.target.checked })}
+                checked={form.isNewClient}
+                onChange={(e) => setForm({ ...form, isNewClient: e.target.checked })}
                 className="mt-0.5 size-4 accent-[var(--primary)]"
               />
               <span className="text-[13.5px] leading-relaxed text-muted">
-                <span className="font-medium text-ink">I&apos;m a new patient.</span> We&apos;ll
-                text an intake form before the visit.
+                <span className="font-medium text-ink">{t.newClientLabel}</span> {t.newClientHint}
               </span>
             </label>
 
@@ -444,7 +444,7 @@ export function BookingFlow({ provider }: { provider: Provider }) {
           <div>
             <h2 className="text-[15px] font-semibold text-ink">Check everything over</h2>
             <dl className="mt-4 divide-y divide-line rounded-xl border border-line">
-              <Row label="Provider" value={`${providerLabel(provider)} · ${provider.specialty}`} />
+              <Row label={t.provider.One} value={`${providerLabel(provider)} · ${provider.specialty}`} />
               <Row
                 label="When"
                 value={`${new Date(selectedSlot.start).toLocaleDateString("en-US", {
@@ -460,8 +460,8 @@ export function BookingFlow({ provider }: { provider: Provider }) {
               {form.email && <Row label="Email" value={form.email} />}
               {form.reason && <Row label="Reason" value={form.reason} />}
               <Row
-                label="Client"
-                value={form.isNewPatient ? "New patient" : "Returning patient"}
+                label={t.client.One}
+                value={clientTypeLabel(form.isNewClient, t)}
               />
             </dl>
 
@@ -471,7 +471,7 @@ export function BookingFlow({ provider }: { provider: Provider }) {
                 As soon as you confirm, our AI receptionist calls{" "}
                 <span className="font-medium text-ink">{form.phone || "your number"}</span> to
                 verify these details. It takes about thirty seconds, and the call is recorded
-                for the clinic&apos;s records.
+                for the {t.business.one}&apos;s records.
               </p>
             </div>
 

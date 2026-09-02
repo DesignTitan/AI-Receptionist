@@ -5,9 +5,11 @@
 
 create extension if not exists "pgcrypto";
 
--- ── Doctors ────────────────────────────────────────────────────────────────
+-- ── Providers ────────────────────────────────────────────────────────────────
 create table if not exists public.providers (
   id                uuid primary key default gen_random_uuid(),
+  -- Which themed business this row belongs to (medical, salon, …).
+  vertical          text not null default 'medical',
   slug              text not null unique,
   name              text not null,
   credentials       text not null default '',
@@ -30,7 +32,7 @@ create table if not exists public.providers (
   created_at        timestamptz not null default now()
 );
 
--- ── Patients ───────────────────────────────────────────────────────────────
+-- ── Clients ───────────────────────────────────────────────────────────────
 create table if not exists public.clients (
   id          uuid primary key default gen_random_uuid(),
   full_name   text not null,
@@ -44,6 +46,8 @@ create table if not exists public.clients (
 -- ── Appointments ───────────────────────────────────────────────────────────
 create table if not exists public.appointments (
   id              uuid primary key default gen_random_uuid(),
+  -- Denormalised from the provider so the shared dashboard can filter without a join.
+  vertical        text not null default 'medical',
   reference       text not null unique,
   provider_id       uuid not null references public.providers(id) on delete restrict,
   client_id      uuid not null references public.clients(id) on delete cascade,
@@ -61,7 +65,7 @@ create index if not exists appointments_provider_time_idx on public.appointments
 create index if not exists appointments_status_idx      on public.appointments (status);
 create index if not exists appointments_created_idx     on public.appointments (created_at desc);
 
--- Stops two patients holding the same slot with the same doctor.
+-- Stops two clients holding the same slot with the same provider.
 create unique index if not exists appointments_no_double_booking_idx
   on public.appointments (provider_id, starts_at)
   where status <> 'cancelled';
@@ -120,7 +124,7 @@ create trigger appointments_touch_updated_at
 -- ── Row level security ─────────────────────────────────────────────────────
 -- Every write in this app runs through server code holding the service role
 -- key, which bypasses RLS. The only thing the anon key may see is the public
--- doctor roster; patient records, appointments and recordings are never
+-- provider roster; client records, appointments and recordings are never
 -- readable from the browser.
 alter table public.providers           enable row level security;
 alter table public.clients          enable row level security;

@@ -1,5 +1,6 @@
 import { env, isVoiceProviderConfigured } from "./env";
 import { providerLabel } from "@/lib/format";
+import { getVertical } from "@/verticals";
 import {
   createCall,
   getAppointment,
@@ -37,36 +38,41 @@ export function voiceWebhookUrl() {
 /** The instructions the voice agent follows on the call. */
 export function buildAgentScript(detail: AppointmentDetail) {
   const tz = env.timezone;
-  const client = detail.client?.full_name ?? "the patient";
+  const { brand, terms: t, voice } = getVertical(detail.vertical);
+  const client = detail.client?.full_name ?? `the ${t.client.one}`;
   const first = client.split(" ")[0];
-  const provider = detail.provider ? `${providerLabel(detail.provider)}` : "the doctor";
+  const provider = detail.provider ? providerLabel(detail.provider) : `the ${t.provider.one}`;
 
-  return `You are Ava, the phone receptionist for ${env.clinicName}. You are making a short, warm outbound call to confirm an appointment that was just booked online. Keep it under sixty seconds.
+  return `You are ${voice.agentName}, the phone receptionist for ${brand}. You are making a short, warm outbound call to confirm ${article(t.booking.one)} ${t.booking.one} that was just booked online. Keep it under sixty seconds.
 
-Appointment details:
-- Client: ${client}
-- Provider: ${provider} (${detail.provider?.specialty ?? "General practice"})
+${t.booking.One} details:
+- ${t.client.One}: ${client}
+- ${t.provider.One}: ${provider} (${detail.provider?.specialty ?? voice.categoryFallback})
 - Date and time: ${formatDate(detail.starts_at, tz)} at ${formatTime(detail.starts_at, tz)} ${timezoneLabel(tz)}
-- Location: ${detail.provider?.location ?? env.clinicName}
+- Location: ${detail.provider?.location ?? brand}
 - Reference: ${detail.reference}
 - Reason given: ${detail.reason || "not specified"}
-- Client type: ${detail.is_new_client ? "new patient" : "returning patient"}
+- ${t.client.One} type: ${detail.is_new_client ? `new ${t.client.one}` : `returning ${t.client.one}`}
 
 How to run the call:
 1. Greet by name and confirm you are speaking with ${first}. If it is someone else, politely ask when ${first} is available and end the call.
-2. State the doctor, day and time, and ask whether that still works.
-3. If yes: confirm, then ask them to arrive ten minutes early with photo ID and insurance card.${detail.is_new_client ? " Mention that a new-patient intake form will be texted to them." : ""}
+2. State the ${t.provider.one}, day and time, and ask whether that still works.
+3. If yes: confirm, then ask them to ${voice.arrivalAdvice}.${detail.is_new_client ? voice.newClientNote : ""}
 4. If they want a different time: do not attempt to rebook on the call. Say the front desk will text options within the hour, and note the times that suit them.
 5. If they want to cancel: acknowledge without pressure and confirm the cancellation.
 6. Close politely and end the call.
 
-Rules: never give medical advice, never discuss test results or diagnoses, never take payment or insurance numbers over the phone. If asked a clinical question, say a member of the care team will follow up. Speak plainly and do not rush.
+Rules: ${voice.rules}
 
 At the end, classify the outcome as exactly one of: confirmed, rescheduled, cancelled, voicemail, no_answer.`;
 }
 
-const firstMessage = (detail: AppointmentDetail) =>
-  `Hi, this is Ava calling from ${env.clinicName}. Am I speaking with ${detail.client?.full_name ?? "the patient"}?`;
+const article = (word: string) => (/^[aeiou]/i.test(word) ? "an" : "a");
+
+const firstMessage = (detail: AppointmentDetail) => {
+  const { brand, terms: t, voice } = getVertical(detail.vertical);
+  return `Hi, this is ${voice.agentName} calling from ${brand}. Am I speaking with ${detail.client?.full_name ?? `the ${t.client.one}`}?`;
+};
 
 const cleanPhone = (phone: string) => {
   const digits = phone.replace(/[^\d+]/g, "");
@@ -157,7 +163,13 @@ async function dispatchOmniDimension(
   return { providerCallId: ((data.call_id ?? data.id) as string) ?? null };
 }
 
+/**
+ * Variables the external assistant config binds to. The KEY NAMES are a wire
+ * contract with the Vapi/Bland assistant setup and stay frozen even though
+ * the app no longer calls anyone a patient — only add keys, never rename.
+ */
 function callMetadata(detail: AppointmentDetail, call: CallLog) {
+  const vertical = getVertical(detail.vertical);
   return {
     call_log_id: call.id,
     appointment_id: detail.id,
@@ -170,7 +182,10 @@ function callMetadata(detail: AppointmentDetail, call: CallLog) {
     appointment_time: `${formatTime(detail.starts_at, env.timezone)} ${timezoneLabel(env.timezone)}`,
     location: detail.provider?.location ?? "",
     is_new_patient: detail.is_new_client,
-    clinic_name: env.clinicName,
+    clinic_name: vertical.brand,
+    // Additive, so a future assistant config can key off them.
+    business_name: vertical.brand,
+    vertical: vertical.slug,
   };
 }
 
@@ -179,7 +194,7 @@ function callMetadata(detail: AppointmentDetail, call: CallLog) {
 /**
  * Places (or re-places) the confirmation call for an appointment.
  * Reuses a queued call row if one is already waiting, so a duplicate webhook
- * delivery does not dial the patient twice.
+ * delivery does not dial the client twice.
  */
 export async function dispatchConfirmationCall(
   appointmentId: string,

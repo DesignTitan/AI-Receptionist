@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
 import { env } from "@/lib/env";
+import { DEFAULT_VERTICAL as v } from "@/verticals";
 import "./globals.css";
 
 const inter = Inter({
@@ -20,17 +21,15 @@ const display = Instrument_Serif({
 export const metadata: Metadata = {
   metadataBase: new URL(env.siteUrl),
   title: {
-    default: `${env.clinicName} · Book a doctor in under a minute`,
-    template: `%s · ${env.clinicName}`,
+    default: `${v.brand} · ${v.copy.meta.title}`,
+    template: `%s · ${v.brand}`,
   },
-  description:
-    "Book with a Northlake physician online and get a confirmation call from our AI receptionist within sixty seconds — no hold music, no phone tag.",
+  description: v.copy.meta.description,
   openGraph: {
     type: "website",
-    siteName: env.clinicName,
-    title: `${env.clinicName} · Book a doctor in under a minute`,
-    description:
-      "Real appointments, confirmed by voice within a minute of booking.",
+    siteName: v.brand,
+    title: `${v.brand} · ${v.copy.meta.title}`,
+    description: v.copy.meta.ogDescription,
   },
 };
 

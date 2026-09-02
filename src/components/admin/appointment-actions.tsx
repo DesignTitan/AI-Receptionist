@@ -9,9 +9,11 @@ import type { AppointmentStatus } from "@/lib/types";
 export function AppointmentActions({
   appointmentId,
   status,
+  clientNoun,
 }: {
   appointmentId: string;
   status: AppointmentStatus;
+  clientNoun: string;
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -51,7 +53,7 @@ export function AppointmentActions({
         className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-primary text-[14.5px] font-semibold text-on-primary transition enabled:hover:bg-primary-hover disabled:opacity-60"
       >
         <PhoneRinging width={17} height={17} />
-        {busy === "recall" ? "Dialling…" : "Call the patient again"}
+        {busy === "recall" ? "Dialling…" : `Call the ${clientNoun} again`}
       </button>
 
       <div className="grid grid-cols-2 gap-3">

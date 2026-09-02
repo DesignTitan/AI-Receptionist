@@ -1,13 +1,15 @@
-import type { Provider } from "./types";
+import type { Provider } from "@/lib/types";
 
 const photo = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&crop=faces&w=640&h=640&q=80`;
 
 /**
- * Roster used to seed Supabase (`supabase/seed.sql`) and to serve the app in
- * demo mode. Swap `photo_url` for your own headshots in production.
+ * The clinic's roster. Serves the demo directly and is the source
+ * `scripts/generate-seed-sql.ts` renders `supabase/seed.sql` from, so it must
+ * stay free of runtime imports (type-only is fine — Node strips it).
+ * Swap `photo_url` for real headshots in production.
  */
-export const SEED_PROVIDERS: Provider[] = [
+const ROSTER: Omit<Provider, "vertical">[] = [
   {
     id: "11111111-1111-4111-8111-111111111101",
     slug: "elena-vasquez",
@@ -135,3 +137,5 @@ export const SEED_PROVIDERS: Provider[] = [
     is_active: true,
   },
 ];
+
+export const MEDICAL_ROSTER: Provider[] = ROSTER.map((p) => ({ ...p, vertical: "medical" }));

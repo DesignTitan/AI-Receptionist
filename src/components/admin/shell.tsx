@@ -2,7 +2,7 @@ import Link from "next/link";
 import { logout } from "@/app/admin/actions";
 import { LogOut, PulseMark } from "@/components/icons";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { env } from "@/lib/env";
+import { DEFAULT_VERTICAL } from "@/verticals";
 
 export function AdminHeader({ subtitle }: { subtitle?: string }) {
   return (
@@ -17,7 +17,7 @@ export function AdminHeader({ subtitle }: { subtitle?: string }) {
               Front desk
             </span>
             <span className="block text-[11px] font-medium uppercase tracking-[0.14em] text-subtle">
-              {subtitle ?? env.clinicName}
+              {subtitle ?? DEFAULT_VERTICAL.brand}
             </span>
           </span>
         </Link>

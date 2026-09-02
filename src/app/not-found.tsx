@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { ArrowRight } from "@/components/icons";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
+import { DEFAULT_VERTICAL as v } from "@/verticals";
 
 export default function NotFound() {
   return (
     <div className="flex min-h-dvh flex-col">
-      <SiteHeader />
+      <SiteHeader vertical={v} />
       <main id="main" className="relative grid flex-1 place-items-center px-5 py-24">
         <div className="aurora absolute inset-0 -z-10" />
         <div className="max-w-md text-center">
@@ -15,7 +16,7 @@ export default function NotFound() {
           </h1>
           <p className="mt-3 text-[14.5px] leading-relaxed text-muted">
             The link may be out of date, or the appointment reference may not match. Try starting
-            from the doctor list.
+            from the {v.terms.provider.one} list.
           </p>
           <Link
             href="/"
@@ -26,7 +27,7 @@ export default function NotFound() {
           </Link>
         </div>
       </main>
-      <SiteFooter />
+      <SiteFooter vertical={v} />
     </div>
   );
 }

@@ -4,16 +4,26 @@ import Link from "next/link";
 import { providerLabel } from "@/lib/format";
 import { useMemo, useState } from "react";
 import type { Provider } from "@/lib/types";
+import type { Terms } from "@/verticals/terms";
 import { ProviderAvatar } from "./provider-avatar";
 import { ArrowRight, Clock, Globe, MapPin, Star } from "./icons";
 
-function ProviderCard({ provider, priority }: { provider: Provider; priority: boolean }) {
+function ProviderCard({
+  provider,
+  priority,
+  terms: t,
+}: {
+  provider: Provider;
+  priority: boolean;
+  terms: Terms;
+}) {
   return (
     <article className="group card overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-float)]">
       <Link href={`/doctors/${provider.slug}`} className="block focus-visible:outline-none">
         <div className="relative aspect-[5/4] overflow-hidden bg-surface-2">
           <ProviderAvatar
             name={provider.name}
+            label={providerLabel(provider)}
             src={provider.photo_url}
             priority={priority}
             sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
@@ -55,7 +65,7 @@ function ProviderCard({ provider, priority }: { provider: Provider; priority: bo
           </div>
           <div className="flex items-center gap-1.5">
             <span className="font-semibold text-ink">${provider.consultation_fee}</span>
-            <span>consult</span>
+            <span>{t.feeShort}</span>
           </div>
         </dl>
 
@@ -71,10 +81,16 @@ function ProviderCard({ provider, priority }: { provider: Provider; priority: bo
   );
 }
 
-export function ProviderDirectory({ providers }: { providers: Provider[] }) {
+export function ProviderDirectory({
+  providers,
+  terms: t,
+}: {
+  providers: Provider[];
+  terms: Terms;
+}) {
   const specialties = useMemo(
-    () => ["All specialties", ...Array.from(new Set(providers.map((d) => d.specialty))).sort()],
-    [providers],
+    () => [t.allCategories, ...Array.from(new Set(providers.map((d) => d.specialty))).sort()],
+    [providers, t.allCategories],
   );
   const [active, setActive] = useState(specialties[0]);
 
@@ -106,13 +122,13 @@ export function ProviderDirectory({ providers }: { providers: Provider[] }) {
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((provider, index) => (
-          <ProviderCard key={provider.id} provider={provider} priority={index < 3} />
+          <ProviderCard key={provider.id} provider={provider} priority={index < 3} terms={t} />
         ))}
       </div>
 
       {visible.length === 0 && (
         <p className="rounded-2xl border border-dashed border-line py-16 text-center text-sm text-muted">
-          No doctors in that specialty right now.
+          No {t.provider.many} in that {t.providerCategory.toLowerCase()} right now.
         </p>
       )}
     </div>

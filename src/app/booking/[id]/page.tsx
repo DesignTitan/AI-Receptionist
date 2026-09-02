@@ -9,11 +9,12 @@ import { SiteFooter, SiteHeader } from "@/components/site-header";
 import { getAppointment } from "@/lib/db";
 import { env } from "@/lib/env";
 import { formatDate, formatTime, timezoneLabel } from "@/lib/time";
+import { getVertical } from "@/verticals";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Your appointment",
+  title: "Your booking",
   robots: { index: false, follow: false },
 };
 
@@ -33,10 +34,12 @@ export default async function BookingConfirmationPage({
 
   const tz = env.timezone;
   const { provider, client } = appointment;
+  const v = getVertical(appointment.vertical);
+  const t = v.terms;
 
   return (
     <div className="min-h-dvh">
-      <SiteHeader />
+      <SiteHeader vertical={v} />
 
       <main id="main" className="mx-auto max-w-3xl px-5 py-10 lg:py-14">
         <div className="mb-8 flex items-start gap-4">
@@ -71,6 +74,8 @@ export default async function BookingConfirmationPage({
                   }
                 : null,
             }}
+            terms={t}
+            outcomes={v.copy.callOutcomes}
           />
 
           {/* ── Appointment card ─────────────────────────────── */}
@@ -78,7 +83,12 @@ export default async function BookingConfirmationPage({
             <div className="flex items-center gap-4 border-b border-line p-5">
               <span className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-surface-2">
                 {provider && (
-                  <ProviderAvatar name={provider.name} src={provider.photo_url} sizes="56px" />
+                  <ProviderAvatar
+                    name={provider.name}
+                    label={providerLabel(provider)}
+                    src={provider.photo_url}
+                    sizes="56px"
+                  />
                 )}
               </span>
               <div className="min-w-0">
@@ -102,7 +112,7 @@ export default async function BookingConfirmationPage({
               <Item icon={MapPin} label="Location">
                 {provider?.location}
               </Item>
-              <Item icon={User} label="Client">
+              <Item icon={User} label={t.client.One}>
                 {client?.full_name}
                 {appointment.is_new_client && (
                   <span className="ml-2 rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-semibold text-accent">
@@ -132,20 +142,16 @@ export default async function BookingConfirmationPage({
                 href="/#doctors"
                 className="inline-flex h-11 items-center rounded-xl border border-line px-5 text-[14.5px] font-semibold text-ink transition hover:border-line-strong"
               >
-                Book another visit
+                Book another {t.visit.one}
               </Link>
             </div>
           </section>
 
-          <p className="px-1 text-[13px] leading-relaxed text-subtle">
-            If plans change, tell the assistant when it calls, or contact the front desk with your
-            reference number. This is a demonstration project — no real medical services are
-            provided.
-          </p>
+          <p className="px-1 text-[13px] leading-relaxed text-subtle">{v.copy.confirmation.footnote}</p>
         </div>
       </main>
 
-      <SiteFooter />
+      <SiteFooter vertical={v} />
     </div>
   );
 }

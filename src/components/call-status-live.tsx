@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { AppointmentStatus, CallOutcome, CallStatus } from "@/lib/types";
+import type { CallOutcomeCopy } from "@/verticals/types";
+import type { Terms } from "@/verticals/terms";
 import { AlertTriangle, CheckCircle, PhoneRinging, Waveform } from "./icons";
 
 type Payload = {
@@ -14,56 +16,28 @@ type Payload = {
   } | null;
 };
 
-const STAGES: { key: CallStatus; label: string; detail: string }[] = [
+const stagesFor = (t: Terms): { key: CallStatus; label: string; detail: string }[] => [
   { key: "queued", label: "Queued", detail: "Handing the details to the assistant" },
   { key: "ringing", label: "Calling you", detail: "Your phone should ring any second" },
-  { key: "in_progress", label: "On the call", detail: "Confirming your appointment" },
+  { key: "in_progress", label: "On the call", detail: `Confirming your ${t.booking.one}` },
   { key: "completed", label: "Done", detail: "Outcome recorded" },
 ];
 
-const OUTCOME_COPY: Record<string, { title: string; body: string; tone: "good" | "warn" }> = {
-  confirmed: {
-    title: "Confirmed by phone",
-    body: "You're all set. Please arrive ten minutes early with photo ID and your insurance card.",
-    tone: "good",
-  },
-  rescheduled: {
-    title: "Reschedule requested",
-    body: "We've noted that this time doesn't work. The front desk will text you options shortly.",
-    tone: "warn",
-  },
-  cancelled: {
-    title: "Appointment cancelled",
-    body: "This booking has been cancelled. You can book a new time whenever you're ready.",
-    tone: "warn",
-  },
-  voicemail: {
-    title: "We left a voicemail",
-    body: "Your slot is still held. Call the clinic back or wait for our follow-up.",
-    tone: "warn",
-  },
-  no_answer: {
-    title: "We couldn't reach you",
-    body: "Your slot is still held. Someone from the practice will try again shortly.",
-    tone: "warn",
-  },
-  failed: {
-    title: "The call didn't go through",
-    body: "Your booking is safe — a member of the team will follow up by hand.",
-    tone: "warn",
-  },
-};
-
-/** Live confirmation-call tracker shown to the patient after booking. */
+/** Live confirmation-call tracker shown to the client after booking. */
 export function CallStatusLive({
   appointmentId,
   reference,
   initial,
+  terms,
+  outcomes,
 }: {
   appointmentId: string;
   reference: string;
   initial: Payload;
+  terms: Terms;
+  outcomes: CallOutcomeCopy;
 }) {
+  const STAGES = stagesFor(terms);
   const [data, setData] = useState<Payload>(initial);
   const [elapsed, setElapsed] = useState(0);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -98,7 +72,7 @@ export function CallStatusLive({
     STAGES.findIndex((stage) => stage.key === (callStatus === "failed" ? "completed" : callStatus)),
   );
   const outcome = data.call?.outcome ?? (callStatus === "failed" ? "failed" : null);
-  const summary = outcome ? OUTCOME_COPY[outcome] : null;
+  const summary = outcome ? outcomes[outcome] : null;
 
   return (
     <section className="card overflow-hidden">

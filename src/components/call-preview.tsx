@@ -1,15 +1,9 @@
+import type { VerticalCopy } from "@/verticals";
 import { PhoneRinging, Waveform } from "./icons";
 
-const LINES = [
-  { who: "Ava", text: "Hi Maya — this is Ava at Northlake Family Health." },
-  { who: "Maya", text: "Oh, hi." },
-  { who: "Ava", text: "I'm confirming Thursday at 10:30 with Dr. Vasquez. Still good?" },
-  { who: "Maya", text: "Yes, that works." },
-  { who: "Ava", text: "You're all set. Arrive ten minutes early with your ID." },
-];
-
-/** Decorative hero panel: what the confirmation call looks like from the clinic's side. */
-export function CallPreview() {
+/** Decorative hero panel: what the confirmation call looks like from the business's side. */
+export function CallPreview({ preview }: { preview: VerticalCopy["callPreview"] }) {
+  const agent = preview.lines[0]?.who;
   return (
     <div className="card relative overflow-hidden p-5 shadow-[var(--shadow-float)]">
       <div className="flex items-center gap-3 border-b border-line pb-4">
@@ -21,7 +15,7 @@ export function CallPreview() {
           <p className="truncate text-sm font-semibold text-ink">
             Outbound confirmation call
           </p>
-          <p className="text-xs text-muted">+1 415 555 0142 · Maya Thompson</p>
+          <p className="text-xs text-muted">{preview.phone} · {preview.subject}</p>
         </div>
         <span className="equalizer flex items-end gap-[3px] text-primary">
           <span style={{ animationDelay: "0ms" }} />
@@ -32,7 +26,7 @@ export function CallPreview() {
       </div>
 
       <ul className="space-y-2.5 py-4">
-        {LINES.map((line, index) => (
+        {preview.lines.map((line, index) => (
           <li
             key={line.text}
             className="rise flex gap-2.5 text-[13px] leading-relaxed"
@@ -40,12 +34,12 @@ export function CallPreview() {
           >
             <span
               className={`mt-0.5 shrink-0 text-[11px] font-semibold uppercase tracking-wide ${
-                line.who === "Ava" ? "text-accent" : "text-subtle"
+                line.who === agent ? "text-accent" : "text-subtle"
               }`}
             >
               {line.who}
             </span>
-            <span className={line.who === "Ava" ? "text-ink" : "text-muted"}>{line.text}</span>
+            <span className={line.who === agent ? "text-ink" : "text-muted"}>{line.text}</span>
           </li>
         ))}
       </ul>

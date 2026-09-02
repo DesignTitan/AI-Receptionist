@@ -63,13 +63,11 @@ export const env = {
     return read("EMAIL_FROM") ?? "AI Receptionist <onboarding@resend.dev>";
   },
   get ownerEmail() {
-    return read("CLINIC_OWNER_EMAIL");
+    return read("OWNER_EMAIL") ?? read("CLINIC_OWNER_EMAIL");
   },
-  get clinicName() {
-    return read("CLINIC_NAME") ?? "Northlake Family Health";
-  },
+  /** One timezone for every demo business; the old CLINIC_ name still works. */
   get timezone() {
-    return read("CLINIC_TIMEZONE") ?? "America/New_York";
+    return read("SITE_TIMEZONE") ?? read("CLINIC_TIMEZONE") ?? "America/New_York";
   },
   get siteUrl() {
     const explicit = read("NEXT_PUBLIC_SITE_URL");

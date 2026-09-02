@@ -2,7 +2,7 @@ import { createRequire } from "node:module";
 const require = createRequire(process.cwd() + "/package.json");
 const { chromium } = require("playwright-core");
 const [,, htmlPath, outPath] = process.argv;
-const W = 820, H = 900;
+const W = 820, H = 964;
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 2 });
 await page.goto("file://" + htmlPath, { waitUntil: "networkidle" });

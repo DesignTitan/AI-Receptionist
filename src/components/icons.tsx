@@ -195,3 +195,18 @@ export const Stethoscope = (props: IconProps) => (
     <circle cx="18.6" cy="11.6" r="1.9" />
   </svg>
 );
+
+export const Scissors = (props: IconProps) => (
+  <svg {...base(props)}>
+    <circle cx="6.5" cy="6.5" r="2.5" />
+    <circle cx="6.5" cy="17.5" r="2.5" />
+    <path d="M8.6 8.2 20 19M8.6 15.8 20 5M12.5 12l-3.9 3.8" />
+  </svg>
+);
+
+export const Layers = (props: IconProps) => (
+  <svg {...base(props)}>
+    <path d="m12 3.5 8.5 4.5L12 12.5 3.5 8 12 3.5Z" />
+    <path d="m3.5 12 8.5 4.5 8.5-4.5M3.5 16l8.5 4.5 8.5-4.5" />
+  </svg>
+);

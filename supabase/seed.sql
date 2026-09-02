@@ -49,6 +49,48 @@ insert into public.providers (
   'https://images.unsplash.com/photo-1622902046580-2b47f47f5471?auto=format&fit=crop&crop=faces&w=640&h=640&q=80',
   13, 4.7, 194, '{English,Vietnamese}', 'UCLA David Geffen SOM · Fellowship at Mayo Clinic',
   205, 'Metabolic Health · Floor 3', '{1,3,4,5}', '09:30', '17:30', 45, true
+),
+(
+  '11111111-1111-4111-8111-111111110201', 'salon', 'sasha-reyes', 'Sasha Reyes', 'Master Colourist', 'Colour',
+  'Sasha has spent twelve years doing the colour other salons send people to her to fix. Balayage, lived-in blondes, and corrective work — she''ll tell you honestly what your hair can take in one sitting and what it can''t.',
+  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&w=640&h=640&q=80',
+  12, 4.9, 388, '{English,Spanish}', 'Vidal Sassoon Academy · Wella Master Colour Expert',
+  145, 'Colour bar · Ground floor', '{2,3,4,5,6}', '09:00', '18:00', 90, true
+),
+(
+  '11111111-1111-4111-8111-111111110202', 'salon', 'theo-lindqvist', 'Theo Lindqvist', 'Senior Stylist', 'Cutting & styling',
+  'Precision cuts and the kind of blowout that survives a commute. Theo trained in London and still cuts dry first, because that''s how you actually wear it.',
+  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&crop=faces&w=640&h=640&q=80',
+  9, 4.8, 302, '{English,Swedish}', 'Toni&Guy Academy, London',
+  85, 'Main floor', '{1,2,3,4,5}', '10:00', '19:00', 60, true
+),
+(
+  '11111111-1111-4111-8111-111111110203', 'salon', 'marcus-oyelaran', 'Marcus Oyelaran', 'Barber', 'Barbering',
+  'Fades, scissor cuts, hot-towel shaves and beard shaping. Marcus keeps a chair free most days for walk-ins, but regulars book — his Saturdays go a week out.',
+  'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&w=640&h=640&q=80',
+  7, 4.9, 411, '{English}', 'Apprenticed at Ruffians, Edinburgh',
+  45, 'Barber chairs · Ground floor', '{1,2,3,5,6}', '09:00', '17:00', 30, true
+),
+(
+  '11111111-1111-4111-8111-111111110204', 'salon', 'lina-farouk', 'Lina Farouk', 'Licensed Esthetician', 'Skin & facials',
+  'Results-led facials, peels and LED, with a soft spot for skin that''s been overdone by too many products. Lina starts every first visit with a proper skin analysis before touching anything.',
+  'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&crop=faces&w=640&h=640&q=80',
+  10, 5, 276, '{English,Arabic,French}', 'CIDESCO diploma · Dermalogica Expert',
+  110, 'Treatment rooms · First floor', '{2,3,4,5,6}', '10:00', '18:00', 60, true
+),
+(
+  '11111111-1111-4111-8111-111111110205', 'salon', 'priya-nair', 'Priya Nair', 'Massage Therapist', 'Massage',
+  'Deep tissue, sports and prenatal massage. Priya trained in Thai massage in Chiang Mai and will absolutely find the knot you''ve been ignoring since March.',
+  'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&crop=faces&w=640&h=640&q=80',
+  11, 4.9, 349, '{English,Hindi}', 'CAMTC certified · Thai massage, Chiang Mai',
+  120, 'Spa suite · First floor', '{1,3,4,5,6}', '10:00', '19:00', 60, true
+),
+(
+  '11111111-1111-4111-8111-111111110206', 'salon', 'jonah-park', 'Jonah Park', 'Stylist', 'Cutting & styling',
+  'Textured cuts, curls and the occasional brave fringe. Jonah is the one to book if you have a photo on your phone and aren''t sure it''ll work — he''ll tell you, kindly.',
+  'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&crop=faces&w=640&h=640&q=80',
+  5, 4.7, 188, '{English,Korean}', 'Aveda Institute',
+  70, 'Main floor', '{1,2,4,5,6}', '11:00', '20:00', 45, true
 )
 on conflict (vertical, slug) do update set
   name             = excluded.name,

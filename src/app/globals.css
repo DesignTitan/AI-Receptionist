@@ -151,6 +151,56 @@
   --accent-soft: #1a1d3d;
 }
 
+/* ── Salon: deep rose on warm blush neutrals, gold for the AI,
+      and a high-contrast serif for the hero. ── */
+[data-vertical="salon"] {
+  --bg: #fbf7f6;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f5eeed;
+  --surface-3: #ede2e1;
+  --border: #e8dad9;
+  --border-strong: #d6c1c0;
+
+  --fg: #231a1d;
+  --fg-muted: #6c585c;
+  --fg-subtle: #927f83;
+
+  --primary: #b0475c;
+  --primary-hover: #963b4e;
+  --primary-soft: #f8e6ea;
+  --primary-ring: #b0475c33;
+  --on-primary: #ffffff;
+
+  --accent: #b8862b;
+  --accent-soft: #f8efdc;
+
+  --font-display: var(--font-display-fashion);
+}
+
+[data-vertical="salon"].dark {
+  --bg: #16100f;
+  --bg-elevated: #1e1616;
+  --surface: #211818;
+  --surface-2: #2a1f1f;
+  --surface-3: #362929;
+  --border: #3a2c2c;
+  --border-strong: #4e3c3c;
+
+  --fg: #f5eceb;
+  --fg-muted: #b9a4a6;
+  --fg-subtle: #8c777a;
+
+  --primary: #e8899a;
+  --primary-hover: #f0a3b1;
+  --primary-soft: #3a1f26;
+  --primary-ring: #e8899a33;
+  --on-primary: #2a0f15;
+
+  --accent: #e0b45a;
+  --accent-soft: #2f2612;
+}
+
 @theme inline {
   --color-bg: var(--bg);
   --color-bg-elevated: var(--bg-elevated);

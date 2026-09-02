@@ -4,9 +4,7 @@
  * runs with no build step:  npm run seed:sql
  */
 import { writeFileSync } from "node:fs";
-import { MEDICAL_ROSTER } from "../src/verticals/medical/roster.ts";
-
-const ROSTERS = [MEDICAL_ROSTER];
+import { ROSTERS } from "../src/verticals/rosters.ts";
 
 const q = (v: string) => `'${v.replace(/'/g, "''")}'`;
 const arr = (v: (string | number)[]) => `'{${v.map(String).join(",")}}'`;

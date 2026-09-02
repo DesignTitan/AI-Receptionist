@@ -1,5 +1,5 @@
 /** Which themed business a row belongs to. Extended as verticals are added. */
-export type VerticalSlug = "medical";
+export type VerticalSlug = "medical" | "salon";
 
 export type AppointmentStatus =
   | "pending"

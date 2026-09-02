@@ -182,20 +182,28 @@ async function dispatchBland(t: CallTarget): Promise<ProviderResponse> {
   return { providerCallId: (json.call_id as string) ?? null };
 }
 
+/**
+ * OmniDimension (docs.omnidim.io/docs/api-reference/calls/dispatchCall). The
+ * agent's prompt lives in their dashboard, so everything that changes per call
+ * travels as `call_context`, which the prompt reads as variables: the script,
+ * the first line, the name. `metadata` is kept by the platform for tracking and
+ * never shown to the agent. The post-call webhook is configured on the agent
+ * (Post-Call tab), not per call; its payload nests under `call_report` and is
+ * parsed in the webhook route. Numbers must be E.164 with a leading plus.
+ */
 async function dispatchOmniDimension(t: CallTarget): Promise<ProviderResponse> {
-  const { apiKey, agentId } = env.omnidimension;
-  const json = await postJson(
-    "https://backend.omnidim.io/api/v1/calls/dispatch",
-    apiKey!,
-    {
-      agent_id: agentId,
-      to_number: cleanPhone(t.phone),
-      call_context: t.metadata,
-      webhook_url: voiceWebhookUrl(),
-    },
-  );
+  const { apiKey, agentId, fromNumberId } = env.omnidimension;
+  const asId = (v: string | undefined) => (v && /^\d+$/.test(v) ? Number(v) : v);
+  const json = await postJson("https://backend.omnidim.io/api/v1/calls/dispatch", apiKey!, {
+    agent_id: asId(agentId),
+    to_number: `+${t.phone.replace(/\D/g, "")}`,
+    ...(fromNumberId ? { from_number_id: asId(fromNumberId) } : {}),
+    call_context: { ...t.metadata, contact_name: t.name, first_message: t.firstMessage, script: t.script },
+    metadata: { call_log_id: t.metadata.call_log_id, reference: t.metadata.reference, kind: t.metadata.kind },
+  });
   const data = (json.data ?? json) as Record<string, unknown>;
-  return { providerCallId: ((data.call_id ?? data.id) as string) ?? null };
+  const id = data.requestId ?? data.request_id ?? data.call_id ?? data.id;
+  return { providerCallId: id === undefined || id === null ? null : String(id) };
 }
 
 /**

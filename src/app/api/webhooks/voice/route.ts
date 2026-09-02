@@ -3,8 +3,7 @@ import {
   findCallByProviderId,
   getCall,
   updateAppointmentStatus,
-  updateCall,
-} from "@/lib/db";
+  updateCall, findRecentCallByPhone } from "@/lib/db";
 import { sendCallCompletedEmail, sendDemoCallEmail } from "@/lib/email";
 import { env } from "@/lib/env";
 import type { AppointmentStatus, CallOutcome, CallStatus } from "@/lib/types";
@@ -52,6 +51,22 @@ const asNumber = (value: unknown) => {
   return typeof n === "number" && Number.isFinite(n) ? n : null;
 };
 
+/** OmniDimension: `full_conversation` as a string, or `interactions` as turns of bot_response / user_query. */
+function omniTranscript(report: Json): string | null {
+  const full = asString(report.full_conversation);
+  if (full) return full;
+  if (!Array.isArray(report.interactions)) return null;
+  const lines: string[] = [];
+  for (const turn of report.interactions) {
+    if (!isObject(turn)) continue;
+    const bot = asString(turn.bot_response);
+    const user = asString(turn.user_query);
+    if (bot) lines.push(`Agent: ${bot}`);
+    if (user) lines.push(`You: ${user}`);
+  }
+  return lines.length ? lines.join("\n") : null;
+}
+
 /** Bland reports transcripts as an array of turns; Vapi as a string. */
 function asTranscript(value: unknown): string | null {
   if (typeof value === "string") return value.trim() || null;
@@ -97,10 +112,12 @@ const OUTCOMES: CallOutcome[] = [
   "failed",
 ];
 
-function normalizeOutcome(body: Json, transcript: string | null): CallOutcome {
-  const raw = asString(
-    pick(body, ["outcome", "call_outcome", "disposition", "result", "classification"]),
-  );
+function normalizeOutcome(body: Json, transcript: string | null, summary: string | null, report: Json | null): CallOutcome {
+  // An OmniDimension agent configured to extract an `outcome` variable reports it here.
+  const extracted = report && isObject(report.extracted_variables) ? (report.extracted_variables as Json) : null;
+  const raw =
+    (extracted ? asString(pick(extracted, ["outcome", "call_outcome", "disposition"])) : null) ??
+    asString(pick(body, ["outcome", "call_outcome", "disposition", "result", "classification"]));
   if (raw) {
     const cleaned = raw.toLowerCase().replace(/[\s-]+/g, "_");
     const match = OUTCOMES.find((o) => o && cleaned.includes(o));
@@ -120,7 +137,7 @@ function normalizeOutcome(body: Json, transcript: string | null): CallOutcome {
     return "failed";
   }
 
-  const haystack = `${transcript ?? ""} ${asString(pick(body, ["summary"])) ?? ""}`.toLowerCase();
+  const haystack = `${transcript ?? ""} ${summary ?? ""}`.toLowerCase();
   if (!haystack.trim()) return null;
   if (haystack.includes("cancel")) return "cancelled";
   if (haystack.includes("reschedul") || haystack.includes("different time")) return "rescheduled";
@@ -167,6 +184,9 @@ export async function POST(request: Request) {
 
   let call = callLogId ? await getCall(callLogId) : null;
   if (!call && providerCallId) call = await findCallByProviderId(providerCallId);
+  // OmniDimension reports by number; its call_id need not match the dispatch id.
+  const reportedPhone = asString(pick(body, ["phone_number", "to_number", "customer_number"]));
+  if (!call && reportedPhone) call = await findRecentCallByPhone(reportedPhone);
   if (!call) {
     // Nothing to attach the event to — acknowledge so the provider stops retrying.
     console.warn("[webhook:voice] no matching call log", { callLogId, providerCallId });
@@ -179,17 +199,24 @@ export async function POST(request: Request) {
     .toLowerCase()
     .replace(/\s+/g, "-");
   const completedFlag = pick(body, ["completed"]) === true;
+  // OmniDimension's post-call webhook nests everything under `call_report` and only fires once the call is over.
+  const report = isObject(body.call_report) ? (body.call_report as Json) : null;
   const status: CallStatus =
-    STATUS_MAP[rawStatus] ?? (completedFlag ? "completed" : call.status);
+    STATUS_MAP[rawStatus] ?? (completedFlag || report ? "completed" : call.status);
 
   const transcript =
     asTranscript(
       pick(body, ["transcript", "concatenated_transcript", "transcripts", "messages"]),
-    ) ?? call.transcript;
+    ) ??
+    (report ? omniTranscript(report) : null) ??
+    call.transcript;
   const recordingUrl =
     asString(pick(body, ["recordingUrl", "recording_url", "stereoRecordingUrl", "audio_url"])) ??
     call.recording_url;
-  const summary = asString(pick(body, ["summary", "call_summary", "analysis_summary"])) ?? call.summary;
+  const summary =
+    asString(pick(body, ["summary", "call_summary", "analysis_summary"])) ??
+    (report ? asString(report.summary) : null) ??
+    call.summary;
 
   const durationSeconds =
     asNumber(pick(body, ["durationSeconds", "duration_seconds", "duration"])) ??
@@ -200,7 +227,7 @@ export async function POST(request: Request) {
   const cost = asNumber(pick(body, ["cost", "price", "call_cost"])) ?? call.cost;
 
   const terminal = status === "completed" || status === "failed";
-  const outcome = terminal ? normalizeOutcome(body, transcript) : call.outcome;
+  const outcome = terminal ? normalizeOutcome(body, transcript, summary, report) : call.outcome;
 
   const alreadyFinished = call.status === "completed" || call.status === "failed";
 

@@ -62,6 +62,8 @@ export const env = {
     return {
       apiKey: read("OMNIDIMENSION_API_KEY"),
       agentId: read("OMNIDIMENSION_AGENT_ID"),
+      // Optional: a number on the account to call from; omitted, the platform default rings.
+      fromNumberId: read("OMNIDIMENSION_FROM_NUMBER_ID"),
     };
   },
   get resendApiKey() {

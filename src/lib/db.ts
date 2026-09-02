@@ -675,6 +675,43 @@ export async function findCallByProviderId(
   return (data as CallLog) ?? null;
 }
 
+/**
+ * The latest call to a phone number in the last three hours. OmniDimension's
+ * post-call webhook reports by number (its `call_id` need not equal the id the
+ * dispatch returned), so this is how that report finds its log. Prefers a call
+ * still in flight; otherwise the newest.
+ */
+export async function findRecentCallByPhone(phone: string): Promise<CallLog | null> {
+  const wanted = normalizePhone(phone);
+  if (!wanted) return null;
+  const since = new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString();
+  const open = (c: CallLog) => c.status !== "completed" && c.status !== "failed";
+  if (!useSupabase()) {
+    const store = demoStore();
+    const clientIds = new Set(store.clients.filter((p) => normalizePhone(p.phone) === wanted).map((p) => p.id));
+    const candidates = store.calls.filter(
+      (c) =>
+        c.created_at >= since &&
+        ((c.demo_phone && normalizePhone(c.demo_phone) === wanted) || (c.client_id !== null && clientIds.has(c.client_id))),
+    );
+    return candidates.find(open) ?? candidates[0] ?? null;
+  }
+  const db = serviceClient();
+  const { data: clients } = await db.from("clients").select("id").eq("phone", wanted);
+  const ids = ((clients ?? []) as { id: string }[]).map((r) => r.id);
+  const filter = [`demo_phone.eq.${wanted}`, ...(ids.length ? [`client_id.in.(${ids.join(",")})`] : [])].join(",");
+  const { data, error } = await db
+    .from("call_logs")
+    .select("*")
+    .gte("created_at", since)
+    .or(filter)
+    .order("created_at", { ascending: false })
+    .limit(10);
+  if (error) throw new Error(`findRecentCallByPhone: ${error.message}`);
+  const rows = (data ?? []) as CallLog[];
+  return rows.find(open) ?? rows[0] ?? null;
+}
+
 export async function getCall(id: string): Promise<CallLog | null> {
   if (!useSupabase()) {
     return demoStore().calls.find((c) => c.id === id) ?? null;

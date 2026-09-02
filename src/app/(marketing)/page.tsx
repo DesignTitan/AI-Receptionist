@@ -118,17 +118,25 @@ export default function HomePage() {
         </section>
 
         {/* 04 · Proof. An iris into the real dashboard, then the record. */}
-        <section id="proof" data-sc-act="pin" data-sc-span="2.6" className="rc-deckact">
+        <section id="proof" data-sc-act="pin" data-sc-span="2.9" className="rc-deckact">
           <div data-sc-stage className="rc-deckstage">
             <div className="rc-deck__head" data-sc-cue="0 1 0 0">
-              <div>
-                <p className="rc-kicker">What the desk shows you</p>
-                <h2 className="sc-display sc-display--md">One desk. Every business.</h2>
+              <div className="rc-deck__intro">
+                <p className="rc-chip"><span aria-hidden />Core features</p>
+                <h2 className="sc-display sc-display--md">
+                  It calls. It records.
+                  <span> It flags what needs a person.</span>
+                </h2>
               </div>
               <p className="rc-deck__lede">
-                The desk is built so you spend your time on clients, not on the phone. From the first
-                booking to the hundredth, it stays out of your way.
+                Three things happen on their own after every booking, so the desk keeps working while
+                you do. From the first booking to the hundredth, it stays out of your way.
               </p>
+              <div className="rc-tabs" role="presentation">
+                <span className="rc-tab" style={{ "--in": -1, "--next": 0.33 } as React.CSSProperties}>It calls</span>
+                <span className="rc-tab" style={{ "--in": 0.33, "--next": 0.68 } as React.CSSProperties}>It records</span>
+                <span className="rc-tab" style={{ "--in": 0.68, "--next": 9 } as React.CSSProperties}>It flags</span>
+              </div>
             </div>
             <div className="rc-deck" aria-label="Three things the desk does">
               <article className="rc-card" style={{ "--i": 0, "--in": -1, "--next": 0.2 } as React.CSSProperties}>

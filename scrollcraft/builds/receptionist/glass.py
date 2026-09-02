@@ -7,73 +7,89 @@ BASE = """<!doctype html><html><head><meta charset="utf-8">
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; width: 820px; height: 900px; overflow: hidden; font-family: Inter, -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-  .scene { position: relative; width: 820px; height: 900px; overflow: hidden; background: #0a0a0c; }
-  .sky { position: absolute; inset: 0 0 56% 0; background: linear-gradient(180deg, #2b3444 0%, #4a4b52 38%, #8f7358 74%, #d0a273 100%); }
+  .scene { position: relative; width: 820px; height: 900px; overflow: hidden; background: #6d6a78; }
+  .sky { position: absolute; inset: 0 0 56% 0; background: linear-gradient(180deg, #4a5060 0%, #6d6a70 34%, #a98a9 72%, #e0b98d 100%); }
+  .bloom { position: absolute; border-radius: 50%; filter: blur(60px); }
+  .b1 { left: -10%; top: 8%; width: 46%; height: 26%; background: radial-gradient(closest-side, rgba(120,150,220,.34), rgba(120,150,220,0)); }
+  .b2 { right: -6%; top: 30%; width: 44%; height: 30%; background: radial-gradient(closest-side, rgba(255,160,95,.40), rgba(255,160,95,0)); }
+  .b3 { left: 18%; bottom: 6%; width: 52%; height: 26%; background: radial-gradient(closest-side, rgba(190,120,80,.30), rgba(190,120,80,0)); }
   .sun { position: absolute; left: 66%; top: 40%; width: 520px; height: 340px; transform: translate(-50%,-50%); border-radius: 50%;
          background: radial-gradient(closest-side, rgba(255,206,150,.85), rgba(255,170,105,.28) 52%, rgba(255,170,105,0) 76%); filter: blur(22px); }
   .dune { position: absolute; left: -14%; right: -14%; border-radius: 50% 50% 0 0 / 100% 100% 0 0; }
   /* far ridge, then two mid dunes with a lit crest, then the dark foreground */
-  .d1 { bottom: 44%; height: 22%; background: linear-gradient(180deg, #c29a70 0%, #8d6a48 70%); }
-  .d2 { bottom: 30%; height: 34%; left: -34%; right: 26%; background: linear-gradient(180deg, #d8ab7a 0%, #7d5836 78%); }
-  .d3 { bottom: 12%; height: 40%; left: 14%; right: -34%; background: linear-gradient(180deg, #e0b586 0%, #6d4a2c 80%); }
-  .d4 { bottom: -14%; height: 44%; left: -20%; right: 10%; background: linear-gradient(180deg, #6a462b 0%, #2a1b11 78%); }
-  .d5 { bottom: -30%; height: 46%; background: linear-gradient(180deg, #221710 0%, #0b0806 70%); }
+  .d1 { bottom: 44%; height: 22%; background: linear-gradient(180deg, #dcb68c 0%, #a8825c 70%); }
+  .d2 { bottom: 30%; height: 34%; left: -34%; right: 26%; background: linear-gradient(180deg, #e8c396 0%, #9c7148 78%); }
+  .d3 { bottom: 12%; height: 40%; left: 14%; right: -34%; background: linear-gradient(180deg, #efcc9f 0%, #8d6440 80%); }
+  .d4 { bottom: -14%; height: 44%; left: -20%; right: 10%; background: linear-gradient(180deg, #9a7049 0%, #5a4028 78%); }
+  .d5 { bottom: -30%; height: 46%; background: linear-gradient(180deg, #8a6540 0%, #4e3826 70%); }
   .haze { position: absolute; inset: 0; background:
-      linear-gradient(180deg, rgba(12,12,16,.42) 0%, rgba(12,12,16,.06) 26%, rgba(20,12,6,.10) 60%, rgba(8,6,5,.55) 100%); }
+      linear-gradient(180deg, rgba(20,20,28,.22) 0%, rgba(20,20,28,.02) 30%, rgba(30,20,10,.04) 62%, rgba(28,20,12,.22) 100%); }
   .grain { position: absolute; inset: 0; opacity: .13; mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
   .tools { position: absolute; left: 22px; top: 22px; display: flex; gap: 10px; z-index: 3; }
-  .tool { width: 42px; height: 42px; border-radius: 12px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.16);
+  .tool { width: 42px; height: 42px; border-radius: 12px; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.24);
           backdrop-filter: blur(14px); display: grid; place-items: center; color: rgba(255,255,255,.9); }
   .tool svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-  .action { position: absolute; right: 22px; top: 22px; height: 42px; padding: 0 18px; border-radius: 12px; background: rgba(255,255,255,.14);
-            border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(14px); color: #fff; font-size: 14px; font-weight: 600;
+  .action { position: absolute; right: 22px; top: 22px; height: 42px; padding: 0 18px; border-radius: 12px; background: rgba(255,255,255,.20);
+            border: 1px solid rgba(255,255,255,.26); backdrop-filter: blur(14px); color: #fff; font-size: 14px; font-weight: 600;
             display: flex; align-items: center; gap: 8px; z-index: 3; }
   .action i { width: 7px; height: 7px; border-radius: 50%; background: #6ee7a0; box-shadow: 0 0 0 4px rgba(110,231,160,.22); }
-  .panel { position: absolute; left: 34px; right: 34px; top: 50%; transform: translateY(-50%); border-radius: 24px; padding: 24px;
-    background: linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.06)); border: 1px solid rgba(255,255,255,.2);
-    backdrop-filter: blur(26px) saturate(140%); box-shadow: 0 40px 80px -40px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.28);
+  /* Frosted pane: a solid scrim carries the contrast, the blur carries the look.
+     Relying on blur alone would let body copy pass or fail depending on the ground. */
+  .panel { position: absolute; left: 34px; right: 34px; top: 50%; transform: translateY(-50%); border-radius: 12px; padding: 24px;
+    background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+    border: 1px solid rgba(255,255,255,.24);
+    backdrop-filter: blur(40px) saturate(150%) brightness(.34); -webkit-backdrop-filter: blur(40px) saturate(150%) brightness(.34);
+    box-shadow: 0 50px 90px -45px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.34), inset 0 0 0 1px rgba(255,255,255,.06);
     color: #fff; z-index: 2; }
-  .phead { display: flex; align-items: center; gap: 12px; padding: 2px 4px 16px; }
+  .phead { display: flex; align-items: center; gap: 14px; padding: 2px 2px 16px; }
+  .orb { position: relative; width: 46px; height: 46px; border-radius: 50%; overflow: hidden; flex: none;
+         box-shadow: inset 0 0 0 1px rgba(255,255,255,.16), 0 6px 18px -8px rgba(0,0,0,.7); }
+  .orb i { position: absolute; border-radius: 50%; filter: blur(9px); }
+  .orb i:nth-child(1) { inset: -30% 30% 30% -30%; background: #7c6cff; }
+  .orb i:nth-child(2) { inset: -20% -30% 40% 20%; background: #ff9a5c; }
+  .orb i:nth-child(3) { inset: 35% -20% -35% 10%; background: #ff5f7e; }
+  .orb i:nth-child(4) { inset: 30% 25% -30% -25%; background: #4ad6c2; }
   .ptitle { font-size: 18px; font-weight: 600; letter-spacing: -.01em; }
-  .ppill { margin-left: auto; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px; }
-  .p-ok { background: rgba(110,231,160,.18); color: #8ff0b7; }
-  .p-live { background: rgba(154,157,255,.2); color: #c3c5ff; }
-  .p-warn { background: rgba(240,160,75,.18); color: #f5bd7c; }
-  .ui { border-radius: 16px; overflow: hidden; background: rgba(10,9,14,.42); border: 1px solid rgba(255,255,255,.13); }
-  .btn { margin-top: 16px; height: 58px; border-radius: 14px; background: #fff; color: #0d0c10; font-size: 17px; font-weight: 600;
+  .ppill { margin-left: auto; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 12px; }
+  .p-ok { background: rgba(20,90,55,.55); color: #b6f5cf; }
+  .p-live { background: rgba(56,58,140,.6); color: #d2d3ff; }
+  .p-warn { background: rgba(120,66,14,.6); color: #ffd7a6; }
+  .ui { border-radius: 12px; overflow: hidden; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.14); }
+  .btn { margin-top: 16px; height: 58px; border-radius: 12px; background: #fff; color: #0d0c10; font-size: 17px; font-weight: 600;
          display: grid; place-items: center; box-shadow: 0 10px 26px -12px rgba(0,0,0,.7); }
   /* feature UI bits */
-  .bar { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: rgba(255,255,255,.07); border-bottom: 1px solid rgba(255,255,255,.09); font-size: 13px; color: rgba(255,255,255,.82); }
-  .bar .pill { margin-left: auto; font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px; }
+  .bar { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: rgba(255,255,255,.09); border-bottom: 1px solid rgba(255,255,255,.12); font-size: 13px; color: rgba(255,255,255,.82); }
+  .bar .pill { margin-left: auto; font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 12px; }
   .body { padding: 14px; display: grid; gap: 10px; }
   .wave { display: flex; align-items: center; gap: 12px; }
   .wave .play { width: 34px; height: 34px; border-radius: 50%; background: #fff; display: grid; place-items: center; }
   .wave .play svg { width: 13px; height: 13px; fill: #0d0c10; }
   .wave .bars { flex: 1; display: flex; align-items: center; gap: 2px; height: 28px; }
-  .wave .bars i { width: 3px; flex: none; border-radius: 2px; background: rgba(255,255,255,.45); }
-  .wave .t { font-size: 12.5px; color: rgba(255,255,255,.6); font-variant-numeric: tabular-nums; }
+  .wave .bars i { width: 3px; flex: none; border-radius: 2px; background: rgba(255,255,255,.62); }
+  .wave .t { font-size: 12.5px; color: rgba(255,255,255,.78); font-variant-numeric: tabular-nums; }
   .turn { display: grid; grid-template-columns: 54px 1fr; gap: 10px; font-size: 13px; line-height: 1.5; }
-  .turn span:first-child { font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: rgba(255,255,255,.5); padding-top: 3px; }
+  .turn span:first-child { font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: rgba(255,255,255,.66); padding-top: 3px; }
   .turn span:last-child { color: rgba(255,255,255,.9); }
-  .sum { padding: 11px 12px; border-radius: 10px; background: rgba(110,231,160,.14); border: 1px solid rgba(110,231,160,.28); font-size: 13px; line-height: 1.5; }
+  .sum { padding: 11px 12px; border-radius: 12px; background: rgba(22,86,56,.45); border: 1px solid rgba(110,231,160,.32); font-size: 13px; line-height: 1.5; }
   .sum b { display: block; font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: #6ee7a0; margin-bottom: 5px; font-weight: 600; }
-  .row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; padding: 11px 12px; border-radius: 10px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); }
+  .row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; padding: 11px 12px; border-radius: 12px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.13); }
   .row .who { font-size: 13.5px; font-weight: 500; }
-  .row .meta { font-size: 12px; color: rgba(255,255,255,.55); margin-top: 2px; }
-  .tag { font-size: 11.5px; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
-  .t-ok { background: rgba(110,231,160,.16); color: #8ff0b7; }
-  .t-warn { background: rgba(240,160,75,.16); color: #f5bd7c; }
-  .t-info { background: rgba(154,157,255,.16); color: #b9bbff; }
+  .row .meta { font-size: 12px; color: rgba(255,255,255,.72); margin-top: 2px; }
+  .tag { font-size: 11.5px; font-weight: 600; padding: 4px 10px; border-radius: 12px; }
+  .t-ok { background: rgba(20,90,55,.55); color: #b6f5cf; }
+  .t-warn { background: rgba(120,66,14,.6); color: #ffd7a6; }
+  .t-info { background: rgba(56,58,140,.6); color: #d2d3ff; }
   .steps { display: flex; gap: 8px; }
-  .step { flex: 1; padding: 10px; border-radius: 10px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); }
-  .step .k { font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+  .step { flex: 1; padding: 10px; border-radius: 12px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.13); }
+  .step .k { font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.68); }
   .step .v { font-size: 13px; margin-top: 4px; }
   .step.on { background: rgba(154,157,255,.16); border-color: rgba(154,157,255,.35); }
   .step.on .k { color: #b9bbff; }
 </style></head><body>
 <div class="scene">
-  <div class="sky"></div><div class="sun"></div>
+  <div class="sky"></div><div class="sun"></div><div class="bloom b1"></div><div class="bloom b2"></div><div class="bloom b3"></div>
   <div class="dune d1"></div><div class="dune d2"></div><div class="dune d3"></div><div class="dune d4"></div><div class="dune d5"></div>
   <div class="haze"></div><div class="grain"></div>
   <div class="tools">
@@ -83,7 +99,7 @@ BASE = """<!doctype html><html><head><meta charset="utf-8">
   </div>
   <div class="action"><i></i>__ACTION__</div>
   <div class="panel">
-    <div class="phead"><div class="ptitle">__EYEBROW__</div><div class="ppill __PILLC__">__PILL__</div></div>
+    <div class="phead"><div class="orb"><i></i><i></i><i></i><i></i></div><div class="ptitle">__EYEBROW__</div><div class="ppill __PILLC__">__PILL__</div></div>
     __UI__
     <div class="btn">__CTA__</div>
   </div>

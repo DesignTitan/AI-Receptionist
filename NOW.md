@@ -13,6 +13,9 @@ Handoff notes for the next session. Updated 2026-09-02.
   "confirmed" when a person spoke (Ava's own "reschedules and cancellations" used to trip the
   appointment keyword heuristic into "cancelled"); OmniDimension's `LLM:`/`User:` labels are
   shown as Ava/You.
+- **Core features (chapter 4)**: its own component before the deck — chip, two-line title,
+  lede, and four clickable tabs over one product screen, on the dark steel-blue ground.
+  Keyboard accessible (tablist, arrow keys, visible focus).
 - **Proof chapter is a stacked deck of the three features**: it calls, it records, it flags.
   Dark cards on the paper ground, each with a glass panel of that feature's real UI over a
   warm dune scene. Settled: do not restyle without being asked.

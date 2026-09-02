@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Folio } from "@/components/marketing/folio";
 import { PRODUCT_NAME } from "@/components/marketing/product-chrome";
 import { ScrollCraftMount } from "@/components/marketing/scrollcraft-mount";
+import { CoreFeatures } from "@/components/marketing/core-features";
 import { TryCallPlate } from "@/components/marketing/try-call-plate";
 import { env, isLiveCallReady } from "@/lib/env";
 import "./receptionist.css";
@@ -19,11 +20,12 @@ const CHAPTERS = [
   { id: "desk", n: "01", title: "The front desk" },
   { id: "cost", n: "02", title: "The cost" },
   { id: "turn", n: "03", title: "It calls back" },
-  { id: "proof", n: "04", title: "Proof" },
-  { id: "industries", n: "05", title: "Your industry" },
-  { id: "hear", n: "06", title: "Hear it yourself" },
-  { id: "terms", n: "07", title: "Terms" },
-  { id: "colophon", n: "08", title: "Colophon" },
+  { id: "features", n: "04", title: "Core features" },
+  { id: "proof", n: "05", title: "Proof" },
+  { id: "industries", n: "06", title: "Your industry" },
+  { id: "hear", n: "07", title: "Hear it yourself" },
+  { id: "terms", n: "08", title: "Terms" },
+  { id: "colophon", n: "09", title: "Colophon" },
 ];
 
 const RAIL = [
@@ -118,6 +120,12 @@ export default function HomePage() {
         </section>
 
         {/* 04 · Proof. An iris into the real dashboard, then the record. */}
+        <section id="features" className="rc-features" data-sc-act="flow">
+          <div className="sc-wrap">
+            <CoreFeatures />
+          </div>
+        </section>
+
         <section id="proof" data-sc-act="pin" data-sc-span="2.6" className="rc-deckact">
           <div data-sc-stage className="rc-deckstage">
             <div className="rc-deck__head" data-sc-cue="0 1 0 0">

@@ -282,3 +282,13 @@ Chapter 4 is settled and is not to be changed further without being asked: dark 
 the paper ground, the warm dune glass imagery, the plain two-part header, no tabs. An
 attempt to fold a Core-features tab strip into this chapter and put it on a steel ground
 was rejected and reverted; the reference for that strip is a separate component.
+
+New chapter 4, "Core features" (`components/marketing/core-features.tsx`), built from the
+owner's reference as its own component and placed before the proof deck. A chip, a
+two-line title whose second half drops to 40% ink, a lede on the right, and four real
+tabs (booking page, the call, the record, what needs you) over one large product screen
+with a caption under it. Tabs are `role="tablist"` buttons: click or arrow-key, the
+labelled panel swaps, focus is visible. The section carries the very dark grey with a
+hint of crystallised steel blue the owner asked for; the proof deck after it stays on
+paper, unchanged. The page is now nine chapters.
+

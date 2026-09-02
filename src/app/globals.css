@@ -4,11 +4,106 @@
 
 /* ──────────────────────────────────────────────────────────────
    Tokens
-   A clinical palette: deep teal for care, indigo for anything the
-   AI does, and a very quiet neutral ramp so status colours carry
-   all the signal.
+
+   `:root` / `.dark` carry the PRODUCT palette — what the marketing
+   site, the staff dashboard and the sign-in screens render on. Each
+   themed demo overrides the brand-ish keys under `[data-vertical]`.
+
+   Two rules, because nothing here is checked by the compiler:
+
+   1. `[data-vertical="x"]` and `.dark` have identical specificity, so
+      a vertical block placed after `.dark` beats it in dark mode. A
+      key a vertical sets in its LIGHT block must therefore also be set
+      in its DARK block — otherwise dark mode falls through to the
+      vertical's light value, not to `.dark`. Keys a vertical leaves out
+      of BOTH blocks (the status colours) fall through correctly.
+   2. `color-scheme`, the shadows and the grid line are mode-dependent,
+      not brand-dependent: they live in `:root` / `.dark` only.
    ────────────────────────────────────────────────────────────── */
 :root {
+  --bg: #f8f8fa;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f1f2f6;
+  --surface-3: #e7e9ef;
+  --border: #dfe2ea;
+  --border-strong: #c9cdd9;
+
+  --fg: #0f1222;
+  --fg-muted: #555a70;
+  --fg-subtle: #7c8196;
+
+  --primary: #4b4fe0;
+  --primary-hover: #3d41c4;
+  --primary-soft: #e9eafc;
+  --primary-ring: #4b4fe033;
+  --on-primary: #ffffff;
+
+  --accent: #0f9f88;
+  --accent-soft: #dff5f0;
+
+  --success: #10794f;
+  --success-soft: #e2f5ec;
+  --warning: #a86412;
+  --warning-soft: #fdf1de;
+  --danger: #b5372c;
+  --danger-soft: #fdeceb;
+  --info: #1668a8;
+  --info-soft: #e5f1fa;
+
+  /* The product's display face is its text face, set tight. */
+  --font-display: var(--font-inter);
+
+  --shadow-sm: 0 1px 2px rgb(15 18 34 / 0.05);
+  --shadow-md: 0 4px 16px -4px rgb(15 18 34 / 0.09), 0 1px 3px rgb(15 18 34 / 0.05);
+  --shadow-lg: 0 24px 48px -20px rgb(15 18 34 / 0.22), 0 2px 8px rgb(15 18 34 / 0.05);
+
+  --grid-line: #0f12220a;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0a0b12;
+  --bg-elevated: #111320;
+  --surface: #12141f;
+  --surface-2: #181b29;
+  --surface-3: #212536;
+  --border: #252939;
+  --border-strong: #343a50;
+
+  --fg: #eceef6;
+  --fg-muted: #a0a6bd;
+  --fg-subtle: #737a94;
+
+  --primary: #8b8fff;
+  --primary-hover: #a5a8ff;
+  --primary-soft: #1c1e40;
+  --primary-ring: #8b8fff33;
+  --on-primary: #0a0b2a;
+
+  --accent: #3ad6bd;
+  --accent-soft: #0c2d2b;
+
+  --success: #46d29a;
+  --success-soft: #0b2a1f;
+  --warning: #e8ab52;
+  --warning-soft: #2c2010;
+  --danger: #ff8478;
+  --danger-soft: #2e1512;
+  --info: #6ab5ee;
+  --info-soft: #0d2436;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 18px -4px rgb(0 0 0 / 0.55);
+  --shadow-lg: 0 28px 56px -24px rgb(0 0 0 / 0.7);
+
+  --grid-line: #ffffff0a;
+  color-scheme: dark;
+}
+
+/* ── Medical: deep teal for care, indigo for anything the AI does,
+      and an editorial serif for the one italic phrase in the hero. ── */
+[data-vertical="medical"] {
   --bg: #f7f9fa;
   --bg-elevated: #ffffff;
   --surface: #ffffff;
@@ -30,24 +125,10 @@
   --accent: #5257e8;
   --accent-soft: #ebecfe;
 
-  --success: #10794f;
-  --success-soft: #e2f5ec;
-  --warning: #a86412;
-  --warning-soft: #fdf1de;
-  --danger: #b5372c;
-  --danger-soft: #fdeceb;
-  --info: #1668a8;
-  --info-soft: #e5f1fa;
-
-  --shadow-sm: 0 1px 2px rgb(10 28 36 / 0.05);
-  --shadow-md: 0 4px 16px -4px rgb(10 28 36 / 0.09), 0 1px 3px rgb(10 28 36 / 0.05);
-  --shadow-lg: 0 24px 48px -20px rgb(10 28 36 / 0.22), 0 2px 8px rgb(10 28 36 / 0.05);
-
-  --grid-line: #0a1c240a;
-  color-scheme: light;
+  --font-display: var(--font-display-editorial);
 }
 
-.dark {
+[data-vertical="medical"].dark {
   --bg: #060d11;
   --bg-elevated: #0c161c;
   --surface: #0d181e;
@@ -68,22 +149,6 @@
 
   --accent: #9aa0ff;
   --accent-soft: #1a1d3d;
-
-  --success: #46d29a;
-  --success-soft: #0b2a1f;
-  --warning: #e8ab52;
-  --warning-soft: #2c2010;
-  --danger: #ff8478;
-  --danger-soft: #2e1512;
-  --info: #6ab5ee;
-  --info-soft: #0d2436;
-
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
-  --shadow-md: 0 4px 18px -4px rgb(0 0 0 / 0.55);
-  --shadow-lg: 0 28px 56px -24px rgb(0 0 0 / 0.7);
-
-  --grid-line: #ffffff0a;
-  color-scheme: dark;
 }
 
 @theme inline {
@@ -117,7 +182,8 @@
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
-  --font-display: var(--font-display), Georgia, "Times New Roman", serif;
+  /* Resolved at paint from whatever `--font-display` the active vertical points at. */
+  --font-display: var(--font-display), ui-sans-serif, system-ui, Georgia, serif;
 
   --shadow-card: var(--shadow-md);
   --shadow-float: var(--shadow-lg);

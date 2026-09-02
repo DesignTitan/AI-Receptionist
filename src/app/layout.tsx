@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Instrument_Serif } from "next/font/google";
+import { Inter, Instrument_Serif, Playfair_Display, Space_Grotesk } from "next/font/google";
 import { env } from "@/lib/env";
 import "./globals.css";
 
@@ -9,12 +9,33 @@ const inter = Inter({
   display: "swap",
 });
 
-const display = Instrument_Serif({
+/**
+ * One display face per vertical. next/font can't be called conditionally, so
+ * every face loads here under its own variable and globals.css re-points
+ * `--font-display` at the right one under `[data-vertical]`. Browsers only
+ * fetch a face that rendered text actually matches, so an inactive vertical's
+ * font costs a few hundred bytes of @font-face CSS and no download.
+ */
+const editorial = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
   style: ["normal", "italic"],
-  variable: "--font-display",
+  variable: "--font-display-editorial",
   display: "swap",
+  preload: false,
+});
+const fashion = Playfair_Display({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  variable: "--font-display-fashion",
+  display: "swap",
+  preload: false,
+});
+const technical = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display-technical",
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -26,8 +47,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f7f9fa" },
-    { media: "(prefers-color-scheme: dark)", color: "#060d11" },
+    { media: "(prefers-color-scheme: light)", color: "#f8f8fa" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0b12" },
   ],
 };
 
@@ -42,11 +63,18 @@ try {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    // Font variables sit on <html> alongside the theme class and the
+    // data-vertical attribute, so `--font-display: var(--font-display-…)`
+    // resolves on the same element it is declared on.
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${inter.variable} ${editorial.variable} ${fashion.variable} ${technical.variable}`}
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={`${inter.variable} ${display.variable} antialiased`}>
+      <body className="antialiased">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-on-primary"

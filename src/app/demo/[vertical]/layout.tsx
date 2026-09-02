@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { VerticalTheme } from "@/components/vertical-theme";
 import { resolveVertical } from "@/verticals/resolve";
 
 type Props = { children: React.ReactNode; params: Promise<{ vertical: string }> };
@@ -22,6 +23,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function DemoLayout({ children, params }: Props) {
   // An unknown slug 404s here, before any page under it renders.
-  await resolveVertical(params);
-  return children;
+  const v = await resolveVertical(params);
+  return (
+    <>
+      <VerticalTheme slug={v.slug} />
+      {children}
+    </>
+  );
 }

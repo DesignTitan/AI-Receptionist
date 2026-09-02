@@ -4,6 +4,7 @@ import { getVertical } from "@/verticals";
 import { getAppointment, getCall, logNotification } from "./db";
 import { formatDate, formatDuration, formatTime, timezoneLabel } from "./time";
 import type { AppointmentDetail, CallLog } from "./types";
+import type { Vertical } from "@/verticals";
 
 /**
  * Transactional email via the Resend REST API.
@@ -84,18 +85,19 @@ const absolute = (path: string | null) => {
   return path.startsWith("http") ? path : `${env.siteUrl}${path}`;
 };
 
-function shell(brand: string, title: string, accentLabel: string, body: string) {
+function shell(v: Vertical, title: string, accentLabel: string, body: string) {
+  const { primary, onPrimary } = v.theme.swatch;
   return `<!doctype html><html><body style="margin:0;background:#f1f5f9;padding:32px 12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0f172a">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
     <table role="presentation" width="100%" style="max-width:600px;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0">
-      <tr><td style="background:#0f766e;padding:22px 28px">
-        <div style="color:#99f6e4;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600">${escape(accentLabel)}</div>
-        <div style="color:#ffffff;font-size:20px;font-weight:700;margin-top:4px">${escape(title)}</div>
-        <div style="color:#5eead4;font-size:13px;margin-top:2px">${escape(brand)}</div>
+      <tr><td style="background:${primary};padding:22px 28px">
+        <div style="color:${onPrimary};opacity:.75;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600">${escape(accentLabel)}</div>
+        <div style="color:${onPrimary};font-size:20px;font-weight:700;margin-top:4px">${escape(title)}</div>
+        <div style="color:${onPrimary};opacity:.8;font-size:13px;margin-top:2px">${escape(v.brand)}</div>
       </td></tr>
       <tr><td style="padding:28px">${body}</td></tr>
       <tr><td style="padding:16px 28px;background:#f8fafc;border-top:1px solid #e2e8f0;color:#64748b;font-size:12px">
-        Sent automatically by your AI receptionist. <a href="${env.siteUrl}/admin" style="color:#0f766e">Open the dashboard</a>.
+        Sent automatically by your AI receptionist. <a href="${env.siteUrl}/admin" style="color:${primary}">Open the dashboard</a>.
       </td></tr>
     </table>
   </td></tr></table></body></html>`;
@@ -109,12 +111,13 @@ const row = (label: string, value: string) =>
 
 function appointmentTable(detail: AppointmentDetail) {
   const tz = env.timezone;
-  const t = getVertical(detail.vertical).terms;
+  const { terms: t, theme } = getVertical(detail.vertical);
+  const link = theme.swatch.primary;
   return `<table role="presentation" width="100%" style="border-collapse:collapse">
     ${row("Reference", escape(detail.reference))}
     ${row(t.client.One, escape(detail.client?.full_name ?? "—"))}
-    ${row("Phone", `<a href="tel:${escape(detail.client?.phone ?? "")}" style="color:#0f766e">${escape(detail.client?.phone ?? "—")}</a>`)}
-    ${row("Email", detail.client?.email ? `<a href="mailto:${escape(detail.client.email)}" style="color:#0f766e">${escape(detail.client.email)}</a>` : "—")}
+    ${row("Phone", `<a href="tel:${escape(detail.client?.phone ?? "")}" style="color:${link}">${escape(detail.client?.phone ?? "—")}</a>`)}
+    ${row("Email", detail.client?.email ? `<a href="mailto:${escape(detail.client.email)}" style="color:${link}">${escape(detail.client.email)}</a>` : "—")}
     ${row(t.provider.One, escape(`${providerLabel(detail.provider)} · ${detail.provider?.specialty ?? ""}`))}
     ${row("When", escape(`${formatDate(detail.starts_at, tz)} at ${formatTime(detail.starts_at, tz)} ${timezoneLabel(tz)}`))}
     ${row(`${t.client.One} type`, clientTypeLabel(detail.is_new_client, t))}
@@ -128,7 +131,9 @@ function appointmentTable(detail: AppointmentDetail) {
 export async function sendBookingReceivedEmail(appointmentId: string) {
   const detail = await getAppointment(appointmentId);
   if (!detail) return;
-  const { brand, terms: t } = getVertical(detail.vertical);
+  const v = getVertical(detail.vertical);
+  const { terms: t } = v;
+  const btn = `background:${v.theme.swatch.primary};color:${v.theme.swatch.onPrimary}`;
 
   if (env.ownerEmail || !isEmailConfigured()) {
     const body = `
@@ -137,12 +142,12 @@ export async function sendBookingReceivedEmail(appointmentId: string) {
       </p>
       ${appointmentTable(detail)}
       <p style="margin:24px 0 0">
-        <a href="${env.siteUrl}/admin/appointments/${detail.id}" style="display:inline-block;background:#0f766e;color:#fff;text-decoration:none;padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600">View in dashboard</a>
+        <a href="${env.siteUrl}/admin/appointments/${detail.id}" style="display:inline-block;${btn};text-decoration:none;padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600">View in dashboard</a>
       </p>`;
     await send({
       to: env.ownerEmail ?? "owner@example.com",
       subject: `New booking · ${detail.client?.full_name ?? t.client.One} with ${providerLabel(detail.provider)} (${detail.reference})`,
-      html: shell(brand, `New ${t.booking.one} booked`, "Booking received", body),
+      html: shell(v, `New ${t.booking.one} booked`, "Booking received", body),
       appointmentId: detail.id,
     });
   }
@@ -160,7 +165,7 @@ export async function sendBookingReceivedEmail(appointmentId: string) {
     await send({
       to: detail.client.email,
       subject: `Your ${t.booking.one} with ${providerLabel(detail.provider)} · ${formatDate(detail.starts_at, tz)}`,
-      html: shell(brand, "We've got you booked", `${t.booking.One} reserved`, body),
+      html: shell(v, "We've got you booked", `${t.booking.One} reserved`, body),
       appointmentId: detail.id,
     });
   }
@@ -181,14 +186,16 @@ export async function sendCallCompletedEmail(callId: string) {
   if (!call) return;
   const detail = await getAppointment(call.appointment_id);
   if (!detail) return;
-  const { brand, terms: t } = getVertical(detail.vertical);
+  const v = getVertical(detail.vertical);
+  const { terms: t } = v;
+  const { primary, onPrimary } = v.theme.swatch;
 
   const recording = absolute(call.recording_url);
   const outcome = call.outcome ?? (call.status === "failed" ? "failed" : "no_answer");
   const attention = outcome !== "confirmed";
 
   const body = `
-    <div style="border-left:3px solid ${attention ? "#f59e0b" : "#0f766e"};background:${attention ? "#fffbeb" : "#f0fdfa"};padding:14px 16px;border-radius:0 8px 8px 0;margin:0 0 22px">
+    <div style="border-left:3px solid ${attention ? "#f59e0b" : primary};background:${attention ? "#fffbeb" : "#f0fdfa"};padding:14px 16px;border-radius:0 8px 8px 0;margin:0 0 22px">
       <div style="font-size:15px;font-weight:600;color:#0f172a">${escape(outcomeCopy(t)[outcome] ?? "Call finished.")}</div>
       <div style="font-size:13px;color:#475569;margin-top:4px">
         Duration ${escape(formatDuration(call.duration_seconds))}${call.cost ? ` · $${call.cost.toFixed(2)}` : ""} · via ${escape(call.provider)}
@@ -198,7 +205,7 @@ export async function sendCallCompletedEmail(callId: string) {
     ${
       recording
         ? `<p style="margin:22px 0 0">
-             <a href="${recording}" style="display:inline-block;background:#0f766e;color:#fff;text-decoration:none;padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600">▶ Listen to the recording</a>
+             <a href="${recording}" style="display:inline-block;background:${primary};color:${onPrimary};text-decoration:none;padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600">▶ Listen to the recording</a>
            </p>`
         : `<p style="margin:22px 0 0;font-size:13px;color:#64748b">No recording is available for this call.</p>`
     }
@@ -215,14 +222,14 @@ export async function sendCallCompletedEmail(callId: string) {
         : ""
     }
     <p style="margin:24px 0 0">
-      <a href="${env.siteUrl}/admin/appointments/${detail.id}" style="color:#0f766e;font-size:14px;font-weight:600">Open the full record in the dashboard →</a>
+      <a href="${env.siteUrl}/admin/appointments/${detail.id}" style="color:${primary};font-size:14px;font-weight:600">Open the full record in the dashboard →</a>
     </p>`;
 
   await send({
     to: env.ownerEmail ?? "owner@example.com",
     subject: `${attention ? "⚠ Action needed" : "✓ Confirmed"} · ${detail.client?.full_name ?? t.client.One} (${detail.reference})`,
     html: shell(
-      brand,
+      v,
       attention ? "Confirmation call needs follow-up" : `${t.booking.One} confirmed by phone`,
       "Call completed",
       body,

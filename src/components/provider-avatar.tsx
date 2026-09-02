@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { useState } from "react";
 
+/** Token-based so the monogram follows whichever vertical is active. */
 const PALETTES = [
-  "from-teal-500/25 to-emerald-500/10",
-  "from-indigo-500/25 to-sky-500/10",
-  "from-amber-500/25 to-rose-500/10",
-  "from-cyan-500/25 to-blue-500/10",
+  "from-primary/25 to-primary/5",
+  "from-accent/25 to-accent/5",
+  "from-warning/25 to-danger/10",
+  "from-info/25 to-primary/10",
 ];
 
 const initials = (name: string) =>

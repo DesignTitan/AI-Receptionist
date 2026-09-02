@@ -5,7 +5,7 @@ Handoff notes for the next session. Updated 2026-09-01.
 ## Just done
 
 - **Multi-vertical restructure underway** — plan at
-  `~/.claude/plans/so-you-want-to-keen-nest.md`. Chunks 0–3 of 10 landed:
+  `~/.claude/plans/so-you-want-to-keen-nest.md`. Chunks 0–4 of 10 landed:
   - 0: `/demo/` asset collision resolved (`public/demo` → `public/audio`).
   - 1: `Doctor→Provider` / `Patient→Client` rename across TS + SQL. `callMetadata` keys in
     `voice.ts` are frozen (external Vapi/Bland contract) — only their values changed.
@@ -24,6 +24,15 @@ Handoff notes for the next session. Updated 2026-09-01.
     vertical; the confirmation page refuses an appointment from another vertical.
     **Temporary** `redirects()` in `next.config.ts` send `/`, `/doctors/*`, `/booking/*` to
     the medical demo — remove when the marketing site lands at `/` (chunk 8).
+  - 4: **theming.** `:root`/`.dark` now carry the PRODUCT palette (indigo + graphite, Inter);
+    medical's tokens moved verbatim under `[data-vertical="medical"]` ×2. Rule (documented in
+    `globals.css`): a key a vertical sets in its light block MUST also be in its dark block —
+    same specificity as `.dark`, so it would otherwise win in dark mode. Display faces load once
+    in the root layout (`--font-display-{editorial,fashion,technical}`), CSS re-points
+    `--font-display`; font classes moved from `<body>` to `<html>`. `VerticalTheme` sets the
+    attribute (inline script for hard loads, layout effect for soft navs, cleared on unmount).
+    Verified all 4 palette×mode combos by computed style; soft-nav out/in restores correctly.
+    **Temporary** swatch pages at `/swatches` and `/demo/[vertical]/swatches` — delete after chunk 6.
 
 - **Password-gated the whole site.** `src/proxy.ts` (Next 16's renamed `middleware.ts` —
   one per project, so the site gate and the pre-existing `/admin` gate share it) now bounces

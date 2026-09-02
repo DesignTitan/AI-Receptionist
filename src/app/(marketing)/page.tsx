@@ -121,8 +121,14 @@ export default function HomePage() {
         <section id="proof" data-sc-act="pin" data-sc-span="2.6" className="rc-deckact">
           <div data-sc-stage className="rc-deckstage">
             <div className="rc-deck__head" data-sc-cue="0 1 0 0">
-              <p className="rc-kicker">What the desk shows you</p>
-              <h2 className="sc-display sc-display--md">One desk. Every business.</h2>
+              <div>
+                <p className="rc-kicker">What the desk shows you</p>
+                <h2 className="sc-display sc-display--md">One desk. Every business.</h2>
+              </div>
+              <p className="rc-deck__lede">
+                The desk is built so you spend your time on clients, not on the phone. From the first
+                booking to the hundredth, it stays out of your way.
+              </p>
             </div>
             <div className="rc-deck" aria-label="Three things the dashboard shows">
               <article className="rc-card" style={{ "--i": 0, "--in": -1, "--next": 0.2 } as React.CSSProperties}>

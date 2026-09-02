@@ -260,3 +260,11 @@ progress points on desktop and two at 390 wide. Crops: the record's left column
 (820×730), the call/status columns (550×440), the stats-and-chips band (1380×716).
 The page total moved from 14.8 to 15.5 viewport-heights.
 
+Owner's three refinements, same evening, all verified in the pane by computed style:
+the header (kicker, title, and a short lede on the right) sits directly above card one at
+the card's width, the next card peeks below the settled one by a fixed 84px (64px at 390),
+and a card only begins to fade once the next covers ~60% of it, finishing as it fully
+covers. Waiting cards stack with the *next* one on top so its label is what peeks; a
+rising or settled card sits above everything that waited (`round()` in the z-index, DOM
+order as the fallback for older browsers).
+

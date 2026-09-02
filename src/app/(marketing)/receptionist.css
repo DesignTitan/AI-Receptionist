@@ -148,7 +148,8 @@
   --deck-top: calc(var(--deck-pad) + var(--head-h));
   --peek: 84px;
   --card-w: min(1120px, 92vw);
-  --card-h: calc(100svh - var(--deck-top) - var(--peek) - 20px);
+  /* 80% of the room between header and peek: the owner found full-height cards too tall */
+  --card-h: calc((100svh - var(--deck-top) - var(--peek) - 20px) * 0.8);
   --rise: calc(100svh - var(--deck-top) - var(--peek));
 }
 .rc-kicker { margin: 0 0 var(--sc-3); font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-wide); text-transform: uppercase; color: var(--sc-ink-soft); }

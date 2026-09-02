@@ -4,6 +4,16 @@ Handoff notes for the next session. Updated 2026-09-02.
 
 ## Just done (2026-09-02, evening)
 
+- **Pricing is three call-volume plans, and the economics are measured.** Front desk $149/200
+  calls, Busy desk $299/600 (featured, overlaid on the outer two), Full desk $599/1,500, $1,000
+  setup flat, 30c per extra call. Two real calls put voice AI at $0.115/min (prorated) and
+  telephony at $0.03/min (rounded up): a 1.5-minute call costs ~23c and the plans keep
+  61% / 54% / 46% gross at full use. Full model: docs/pricing-economics.md and the
+  "Receptionist Unit Economics" artifact
+  (https://claude.ai/code/artifact/2d6057be-84b8-4ae8-8239-cc29a19859e3). OmniDimension seat:
+  stay on the $36 business plan to ~5 customers, business Growth ($200) to ~15, agency Scale
+  Partner past ~10,000 talk minutes a month. Verify on the billing page that the models bill on
+  top of the plan rate. Ava's demo script now quotes these plans.
 - **The phone line works end to end.** Two real calls from the live homepage to the owner's
   phone (OmniDimension call logs 7353968 and 7353970, from the platform's default number
   +1 337 379 9906): Ava opened with the visitor's name and the recording notice, pitched,

@@ -12,14 +12,19 @@ import { demoPaths } from "@/verticals/paths";
 export function DemoCards() {
   return (
     <div className="grid gap-6 md:grid-cols-3">
-      {Object.values(VERTICALS).map((v) => {
+      {Object.values(VERTICALS).map((v, index) => {
         const p = demoPaths(v.slug);
+        const reveal = [
+          "animate-on-scroll [animation:animationIn_0.7s_ease-out_0.05s_both]",
+          "animate-on-scroll [animation:animationIn_0.7s_ease-out_0.18s_both]",
+          "animate-on-scroll [animation:animationIn_0.7s_ease-out_0.31s_both]",
+        ][index % 3];
         const Mark = v.icons.mark;
         const first = v.seed.providers[0];
         return (
           <article
             key={v.slug}
-            className="group card overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-float)]"
+            className={`${reveal} group card overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-float)]`}
           >
             <Link
               href={p.home}

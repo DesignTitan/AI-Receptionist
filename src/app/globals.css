@@ -429,6 +429,21 @@ body {
   }
 }
 
+/* Reveal-on-scroll for the product pages (animation-on-scroll skill).
+   Elements start paused at frame 0 and an IntersectionObserver in
+   <AnimateOnScroll /> flips them to running once, when they enter view.
+   Works in every browser, unlike `.reveal` above. Reduced motion and no-JS
+   both fall back to "just show it" — nothing can be left invisible. */
+@keyframes animationIn {
+  0% { opacity: 0; transform: translateY(18px); filter: blur(6px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+.animate-on-scroll { animation-play-state: paused !important; }
+.animate-on-scroll.animate { animation-play-state: running !important; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll { animation: none !important; }
+}
+
 /* Scroll-driven animations never "enter" during printing, so opt out entirely. */
 @media print {
   .reveal,

@@ -94,7 +94,7 @@ export default function HomePage() {
 
       <section id="demos" className="scroll-mt-20 border-t border-line py-20">
         <div className="mx-auto max-w-6xl px-5">
-          <header className="mb-10 flex flex-wrap items-end justify-between gap-6">
+          <header className="animate-on-scroll [animation:animationIn_0.7s_ease-out_0.05s_both] mb-10 flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">Live demos</p>
               <h2 className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-ink sm:text-4xl">
@@ -116,6 +116,7 @@ export default function HomePage() {
 
       <Industries />
 
+      <div className="animate-on-scroll [animation:animationIn_0.7s_ease-out_0.05s_both]">
       <SplitFeature
         eyebrow="What's in the box"
         title="Booking page, voice front desk, one dashboard"
@@ -139,11 +140,14 @@ export default function HomePage() {
           },
         ]}
       />
+      </div>
 
-      <Faq eyebrow="Questions" title="Before you ask for a call" items={FAQ} />
+      <div className="animate-on-scroll [animation:animationIn_0.7s_ease-out_0.05s_both]">
+        <Faq eyebrow="Questions" title="Before you ask for a call" items={FAQ} />
+      </div>
 
       <section className="mx-auto max-w-6xl px-5 py-20">
-        <div className="card relative overflow-hidden p-8 text-center md:p-14">
+        <div className="animate-on-scroll [animation:animationIn_0.7s_ease-out_0.05s_both] card relative overflow-hidden p-8 text-center md:p-14">
           <div className="aurora absolute inset-0 -z-10 opacity-70" />
           <h2 className="text-3xl font-semibold tracking-[-0.02em] text-ink sm:text-4xl">
             See it work before you talk to anyone.

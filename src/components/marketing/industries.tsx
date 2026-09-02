@@ -76,7 +76,7 @@ export function Industries() {
   return (
     <section id="industries" className="scroll-mt-20 border-t border-line bg-surface-2/60 py-20">
       <div className="mx-auto max-w-6xl px-5">
-        <header className="max-w-2xl">
+        <header className="animate-on-scroll [animation:animationIn_0.7s_ease-out_0.05s_both] max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">Who it's for</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-ink sm:text-4xl">
             Any business that runs on appointments
@@ -87,7 +87,7 @@ export function Industries() {
           </p>
         </header>
 
-        <div className="mt-10 flex flex-wrap gap-2">
+        <div className="animate-on-scroll [animation:animationIn_0.7s_ease-out_0.18s_both] mt-10 flex flex-wrap gap-2">
           {Object.values(VERTICALS).map((v) => (
             <Link
               key={v.slug}
@@ -109,8 +109,15 @@ export function Industries() {
         </div>
 
         <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {GROUPS.map((group) => (
-            <div key={group.title}>
+          {GROUPS.map((group, index) => (
+            <div
+              key={group.title}
+              className={[
+                "animate-on-scroll [animation:animationIn_0.7s_ease-out_0.05s_both]",
+                "animate-on-scroll [animation:animationIn_0.7s_ease-out_0.18s_both]",
+                "animate-on-scroll [animation:animationIn_0.7s_ease-out_0.31s_both]",
+              ][index % 3]}
+            >
               <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-subtle">
                 {group.title}
               </h3>
@@ -128,7 +135,7 @@ export function Industries() {
           ))}
         </div>
 
-        <div className="mt-12 rounded-2xl border border-dashed border-line-strong bg-surface p-6 md:flex md:items-start md:gap-8">
+        <div className="animate-on-scroll [animation:animationIn_0.7s_ease-out_0.05s_both] mt-12 rounded-2xl border border-dashed border-line-strong bg-surface p-6 md:flex md:items-start md:gap-8">
           <div className="md:w-1/3">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">A different motion</p>
             <h3 className="mt-2 text-[19px] font-semibold tracking-tight text-ink">Software & SaaS</h3>

@@ -23,6 +23,12 @@ Handoff notes for the next session. Updated 2026-09-02.
   plate says "This page can't ring you", shows Ava's real opening line, and stops. The
   scripted demo transcript was removed after the owner tested it and, rightly, called it
   made up. Stages and transcript render only for a call that was placed.
+- **A person, not a script, behind every live call.** Cloudflare Turnstile
+  (`NEXT_PUBLIC_TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET_KEY`, `src/lib/turnstile.ts`) verified
+  server-side before dialling; `isLiveCallReady()` = voice line AND human check, and the
+  homepage only goes live on both (a provider without the check is ignored from the site, with a
+  warning in the log). Proven with Cloudflare's test keys: no token → 403; verified token →
+  dispatched. Owner step: two free keys from dash.cloudflare.com → Turnstile.
 - **The phone line is OmniDimension** (the voice agent from the Instagram reel the product
   came from). Fixed the integration against their docs: dispatch sends `agent_id`, E.164
   `to_number`, optional `from_number_id`, `call_context` (now carrying `script`,
@@ -205,7 +211,7 @@ and flip `SITE_GATE` to `public` when you want the marketing site open.
 **To make the call on the homepage real** (today it records a lead and says so): follow
 `docs/omnidimension.md` — an OmniDimension agent with the prompt from the guide, the Post-Call
 webhook URL with the token, then `VOICE_PROVIDER=omnidimension`, `OMNIDIMENSION_API_KEY`,
-`OMNIDIMENSION_AGENT_ID`, `VOICE_WEBHOOK_SECRET` on Vercel and a redeploy; then `OWNER_EMAIL` +
+`OMNIDIMENSION_AGENT_ID`, `VOICE_WEBHOOK_SECRET`, plus the two Turnstile keys, on Vercel and a redeploy; then `OWNER_EMAIL` +
 `RESEND_API_KEY` so the lead and the call summary actually arrive. The page flips to "Hear it yourself" mode on its own
 (`isVoiceProviderConfigured()` drives the copy, the stages and the folio). Listen to the first
 real call: `buildDemoScript` in `src/lib/voice.ts` is the script, and it will need a pass.

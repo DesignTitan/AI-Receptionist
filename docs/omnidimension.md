@@ -6,6 +6,24 @@ product started from. The app sends one API call per phone call; the agent's
 personality lives in the OmniDimension dashboard and reads the per-call script
 from a variable. Nothing here needs a code change.
 
+## 0. The human check (Cloudflare Turnstile) — required before any live call
+
+A public form that dials phone numbers must never be reachable by a script, so
+the homepage only places a real call when a visitor has passed a human check
+that the server verifies. Without these two keys a configured voice line is
+deliberately not used from the homepage (the plate takes a callback request
+instead, and the server log says why). Free:
+
+1. dash.cloudflare.com → Turnstile → **Add site**. Hostname:
+   `ai-receptionist-two-azure.vercel.app` (add your real domain later). Widget
+   mode: Managed.
+2. Copy the **site key** (public) and the **secret key**.
+3. They go on Vercel with the others in step 2 below.
+
+The check is invisible for people Cloudflare can vouch for and a small
+interaction otherwise. Cloudflare's test keys work locally: site
+`1x00000000000000000000AA`, secret `1x0000000000000000000000000000000AA`.
+
 ## 1. Create the agent (OmniDimension dashboard)
 
 1. Sign up at omnidim.io, add a payment method.
@@ -53,12 +71,14 @@ npx vercel env add OMNIDIMENSION_API_KEY production
 npx vercel env add OMNIDIMENSION_AGENT_ID production
 npx vercel env add VOICE_WEBHOOK_SECRET production      # the same value as in the webhook URL
 npx vercel env add OMNIDIMENSION_FROM_NUMBER_ID production   # optional, only if you bought a number
-npx vercel env ls production | grep -E "VOICE|OMNIDIM"  # must list every line you added
+npx vercel env add NEXT_PUBLIC_TURNSTILE_SITE_KEY production  # from step 0
+npx vercel env add TURNSTILE_SECRET_KEY production            # from step 0
+npx vercel env ls production | grep -E "VOICE|OMNIDIM|TURNSTILE"  # must list every line you added
 npx vercel --prod                                       # env vars apply to a new build only
 ```
 
 The homepage switches from "Ask for a call" to "Hear it yourself" on its own once
-`VOICE_PROVIDER` and the two OmniDimension keys are present.
+`VOICE_PROVIDER`, the two OmniDimension keys AND the two Turnstile keys are present.
 
 ## 3. The test
 

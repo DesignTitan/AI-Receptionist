@@ -3,9 +3,9 @@ import { startTryCall } from "@/lib/try-call";
 
 export const dynamic = "force-dynamic";
 
-/** POST /api/try-call  { name, phone, business?, company_website? (honeypot) } */
+/** POST /api/try-call  { name, phone, business?, turnstileToken?, company_website? (honeypot) } */
 export async function POST(request: Request) {
-  let body: { name?: string; phone?: string; business?: string; company_website?: string };
+  let body: { name?: string; phone?: string; business?: string; turnstileToken?: string; company_website?: string };
   try {
     body = await request.json();
   } catch {
@@ -20,6 +20,7 @@ export async function POST(request: Request) {
     name: body.name,
     business: body.business,
     honeypot: body.company_website,
+    turnstileToken: body.turnstileToken,
     ip,
   });
   if (!result.ok) return NextResponse.json({ error: result.error }, { status: result.status });

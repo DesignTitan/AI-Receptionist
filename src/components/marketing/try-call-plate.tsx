@@ -13,6 +13,17 @@ type Live = {
 
 type Started = { id: string; reference: string; simulated: boolean; name: string; opening: string };
 
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (el: HTMLElement, options: Record<string, unknown>) => string;
+      remove: (id: string) => void;
+      reset: (id?: string) => void;
+      getResponse: (id?: string) => string | undefined;
+    };
+  }
+}
+
 const STAGES: { key: CallStatus; label: string; detail: string }[] = [
   { key: "queued", label: "Queued", detail: "Handing your number to the assistant" },
   { key: "ringing", label: "Calling you", detail: "Your phone should ring any second" },
@@ -20,16 +31,58 @@ const STAGES: { key: CallStatus; label: string; detail: string }[] = [
   { key: "completed", label: "Done", detail: "Recorded, transcribed, summarised" },
 ];
 
+const TURNSTILE_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+
+/**
+ * Cloudflare Turnstile, rendered explicitly so it survives the form being
+ * unmounted and remounted ("ask again"). Invisible for people it can vouch
+ * for; a small interaction otherwise. The token it yields is only worth
+ * anything once the server verifies it, which the API does before dialling.
+ */
+function HumanCheck({ siteKey, widgetId }: { siteKey: string; widgetId: React.MutableRefObject<string | null> }) {
+  const host = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    function render() {
+      if (cancelled || !host.current || !window.turnstile || widgetId.current) return;
+      widgetId.current = window.turnstile.render(host.current, { sitekey: siteKey, size: "flexible", appearance: "interaction-only", theme: "auto" });
+    }
+    if (window.turnstile) render();
+    else {
+      let script = document.querySelector<HTMLScriptElement>(`script[src="${TURNSTILE_SRC}"]`);
+      if (!script) {
+        script = document.createElement("script");
+        script.src = TURNSTILE_SRC;
+        script.async = true;
+        document.head.appendChild(script);
+      }
+      script.addEventListener("load", render);
+    }
+    return () => {
+      cancelled = true;
+      if (widgetId.current && window.turnstile) {
+        try {
+          window.turnstile.remove(widgetId.current);
+        } catch {
+          /* already gone */
+        }
+      }
+      widgetId.current = null;
+    };
+  }, [siteKey, widgetId]);
+  return <div ref={host} className="rc-try__human" />;
+}
+
 /**
  * The signature move: type your name and number, the page places a real call,
  * and the plate mirrors it in the product's own stages, then shows the
  * transcript and the summary of your own call. On a deployment with no voice
- * line the server records the lead instead, and this plate says so plainly:
- * it never walks stages for a call that was not placed. Publishes
- * `data-sc-verify-state` on its root so the scroll harness can see this
- * bespoke stage change.
+ * line (or no human check) the server records the lead instead, and this plate
+ * says so plainly: it never walks stages for a call that was not placed.
+ * Publishes `data-sc-verify-state` on its root so the scroll harness can see
+ * this bespoke stage change.
  */
-export function TryCallPlate({ simulated }: { simulated: boolean }) {
+export function TryCallPlate({ simulated, turnstileSiteKey }: { simulated: boolean; turnstileSiteKey: string | null }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [business, setBusiness] = useState("");
@@ -38,6 +91,8 @@ export function TryCallPlate({ simulated }: { simulated: boolean }) {
   const [call, setCall] = useState<Started | null>(null);
   const [live, setLive] = useState<Live | null>(null);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const widgetId = useRef<string | null>(null);
+  const humanCheck = !simulated && !!turnstileSiteKey;
 
   const terminal = live?.status === "completed" || live?.status === "failed";
   const state = !call ? "idle" : call.simulated ? "requested" : terminal ? `done:${live?.outcome ?? "none"}` : `dialing:${live?.status ?? "queued"}`;
@@ -65,15 +120,22 @@ export function TryCallPlate({ simulated }: { simulated: boolean }) {
     setBusy(true);
     setError(null);
     const hp = (e.currentTarget.elements.namedItem("company_website") as HTMLInputElement | null)?.value;
+    const turnstileToken = humanCheck ? window.turnstile?.getResponse(widgetId.current ?? undefined) ?? "" : undefined;
+    if (humanCheck && !turnstileToken) {
+      setError("One moment: the check that you're a person hasn't finished. Try again in a second.");
+      setBusy(false);
+      return;
+    }
     try {
       const r = await fetch("/api/try-call", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, business, company_website: hp }),
+        body: JSON.stringify({ name, phone, business, turnstileToken, company_website: hp }),
       });
       const data = await r.json();
       if (!r.ok) {
         setError(data.error ?? "That didn't work. Try again.");
+        if (humanCheck && widgetId.current) window.turnstile?.reset(widgetId.current);
         return;
       }
       setCall({ id: data.id, reference: data.reference, simulated: !!data.simulated, name: data.name ?? name, opening: data.opening ?? "" });
@@ -124,6 +186,7 @@ export function TryCallPlate({ simulated }: { simulated: boolean }) {
             />
           </label>
           <input type="text" name="company_website" tabIndex={-1} autoComplete="off" className="rc-hp" aria-hidden="true" />
+          {humanCheck && <HumanCheck siteKey={turnstileSiteKey!} widgetId={widgetId} />}
           <button type="submit" className="rc-cta" disabled={busy}>
             {busy ? "Sending" : simulated ? "Ask for a call" : "Have it call you"}
           </button>
@@ -131,7 +194,7 @@ export function TryCallPlate({ simulated }: { simulated: boolean }) {
           <p className="rc-try__note">
             {simulated
               ? "This site isn't connected to a phone line yet, so Ava can't ring you from here. Leave your number and a person calls you back."
-              : "US and Canadian numbers. The call is recorded. Two calls per number a day."}
+              : "US and Canadian numbers. The call is recorded. Two calls per number a day. We check that you're a person before dialling."}
           </p>
         </form>
       ) : call.simulated ? (

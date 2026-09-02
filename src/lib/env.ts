@@ -66,6 +66,13 @@ export const env = {
       fromNumberId: read("OMNIDIMENSION_FROM_NUMBER_ID"),
     };
   },
+  /** Cloudflare Turnstile: the human check in front of every live call. */
+  get turnstile() {
+    return {
+      siteKey: read("NEXT_PUBLIC_TURNSTILE_SITE_KEY"),
+      secretKey: read("TURNSTILE_SECRET_KEY"),
+    };
+  },
   get resendApiKey() {
     return read("RESEND_API_KEY");
   },
@@ -114,6 +121,18 @@ export const isVoiceProviderConfigured = () => {
       return false;
   }
 };
+
+/** True when the human check can be rendered and verified. */
+export const isHumanCheckConfigured = () =>
+  Boolean(env.turnstile.siteKey && env.turnstile.secretKey);
+
+/**
+ * A live call from the public site needs BOTH a voice line and the human
+ * check. Without the check, a configured provider is deliberately not used
+ * from the homepage: a public form that dials numbers must never be reachable
+ * by a script. Confirmation calls for bookings are unaffected.
+ */
+export const isLiveCallReady = () => isVoiceProviderConfigured() && isHumanCheckConfigured();
 
 export const isEmailConfigured = () =>
   Boolean(env.resendApiKey && env.ownerEmail);

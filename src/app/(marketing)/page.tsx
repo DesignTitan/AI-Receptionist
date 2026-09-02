@@ -3,7 +3,7 @@ import { Folio } from "@/components/marketing/folio";
 import { PRODUCT_NAME } from "@/components/marketing/product-chrome";
 import { ScrollCraftMount } from "@/components/marketing/scrollcraft-mount";
 import { TryCallPlate } from "@/components/marketing/try-call-plate";
-import { isVoiceProviderConfigured } from "@/lib/env";
+import { env, isLiveCallReady } from "@/lib/env";
 import "./receptionist.css";
 
 /** Rendered per request: the call plate's mode follows the environment, not the last build. */
@@ -36,7 +36,8 @@ const RAIL = [
 ];
 
 export default function HomePage() {
-  const simulated = !isVoiceProviderConfigured();
+  // Live only with a voice line AND the human check; otherwise the plate takes a callback request.
+  const simulated = !isLiveCallReady();
   return (
     <ScrollCraftMount>
       <Folio chapters={simulated ? CHAPTERS.map((c) => (c.id === "hear" ? { ...c, title: "Ask for a call" } : c)) : CHAPTERS} />
@@ -179,7 +180,7 @@ export default function HomePage() {
                 <h2 className="sc-display sc-display--lg">{simulated ? "Ask for a call." : "Hear it yourself."}</h2>
                 <p className="sc-lede">{simulated ? "Leave your name and number. A person calls you back." : "Type your name and number. It calls you, now."}</p>
               </div>
-              <TryCallPlate simulated={simulated} />
+              <TryCallPlate simulated={simulated} turnstileSiteKey={env.turnstile.siteKey ?? null} />
             </div>
           </div>
         </section>

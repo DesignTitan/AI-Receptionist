@@ -1,6 +1,7 @@
 import { countDemoCallsToday, createDemoCall, updateCall } from "./db";
 import { sendDemoCallEmail } from "./email";
-import { env, isVoiceProviderConfigured } from "./env";
+import { env, isHumanCheckConfigured, isLiveCallReady, isVoiceProviderConfigured } from "./env";
+import { verifyHuman } from "./turnstile";
 import { demoFirstMessage, dispatchDemoCall } from "./voice";
 
 /**
@@ -50,6 +51,7 @@ export async function startTryCall(input: {
   name?: string;
   business?: string;
   honeypot?: string;
+  turnstileToken?: string;
   ip: string;
 }): Promise<TryCallResult> {
   if (input.honeypot) return { ok: true, id: "", reference: "", simulated: true, name: "", opening: "" }; // bots think it worked
@@ -58,6 +60,19 @@ export async function startTryCall(input: {
   const phone = normalizeNanp(input.phone ?? "");
   if (!phone) return { ok: false, status: 422, error: "Enter a US or Canadian number, ten digits." };
   const business = (input.business ?? "").trim().slice(0, 80) || null;
+
+  const live = isLiveCallReady();
+  if (isVoiceProviderConfigured() && !isHumanCheckConfigured()) {
+    console.warn("[try-call] voice provider is configured but the human check is not: live calls from the site are disabled until TURNSTILE keys are set");
+  }
+  if (live) {
+    // A real call is about to be dialled: the visitor must have passed the human check.
+    const human = await verifyHuman(input.turnstileToken, input.ip);
+    if (!human.ok) {
+      console.warn("[try-call] human check failed", human.reason);
+      return { ok: false, status: 403, error: "We couldn't confirm you're a person. Reload the page and try again." };
+    }
+  }
 
   if (!allow(byIp, input.ip, PER_IP_PER_HOUR, HOUR)) {
     return { ok: false, status: 429, error: "That's a few calls from this connection already. Try again in an hour." };
@@ -72,8 +87,8 @@ export async function startTryCall(input: {
 
   const call = await createDemoCall({ phone, business, name });
   const opening = demoFirstMessage(name);
-  if (!isVoiceProviderConfigured()) {
-    // No voice line on this deployment: keep the lead, tell the owner to call back, and never pretend a call happened.
+  if (!live) {
+    // No voice line (or no human check) on this deployment: keep the lead, tell the owner to call back, and never pretend a call happened.
     await updateCall(call.id, { provider: "demo", status: "failed", error: "no_voice_line" });
     await sendDemoCallEmail(call.id);
     return { ok: true, id: call.id, reference: call.reference ?? "", simulated: true, name, opening };

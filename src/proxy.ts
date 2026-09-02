@@ -64,6 +64,6 @@ export async function proxy(request: NextRequest) {
 export const config = {
   // Everything except Next's own build output and static files in /public.
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|demo/).*)",
+    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)",
   ],
 };

@@ -656,7 +656,7 @@ export async function advanceSimulatedCalls(): Promise<void> {
       next = {
         status: "completed",
         outcome: "confirmed",
-        recording_url: "/demo/sample-call.wav",
+        recording_url: "/audio/sample-call.wav",
         duration_seconds: 46,
         cost: 0.11,
         started_at: new Date(new Date(call.created_at).getTime() + SIM_RINGING_AT).toISOString(),

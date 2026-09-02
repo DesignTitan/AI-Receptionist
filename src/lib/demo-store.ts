@@ -145,7 +145,7 @@ function buildSeed(): DemoStore {
       direction: "outbound",
       status: "completed",
       outcome: "confirmed",
-      recording_url: "/demo/sample-call.wav",
+      recording_url: "/audio/sample-call.wav",
       transcript: [
         "Agent: Hi, this is Ava calling from Northlake Family Health. Am I speaking with Maya Thompson?",
         "Maya: Yes, that's me.",
@@ -173,7 +173,7 @@ function buildSeed(): DemoStore {
       direction: "outbound",
       status: "completed",
       outcome: "confirmed",
-      recording_url: "/demo/sample-call.wav",
+      recording_url: "/audio/sample-call.wav",
       transcript: [
         "Agent: Good afternoon, this is Ava from Northlake Family Health calling for Gerald Whitmore.",
         "Gerald: Speaking.",
@@ -201,7 +201,7 @@ function buildSeed(): DemoStore {
       direction: "outbound",
       status: "completed",
       outcome: "rescheduled",
-      recording_url: "/demo/sample-call.wav",
+      recording_url: "/audio/sample-call.wav",
       transcript: [
         "Agent: Hello, this is Ava at Northlake Family Health, calling for Priya Raman.",
         "Priya: Hi — yes, but I've just realised I can't make that morning.",

@@ -42,6 +42,44 @@ OmniDimension to the Growth plan. Per-customer fixed cost is **$15** plus card f
 Nobody uses the whole plan every month. At a more realistic 70% utilisation the margins are
 about 70%, 64% and 58%.
 
+## Which OmniDimension plan to sit on
+
+One OmniDimension bill covers every customer's minutes. Business plans are a cheap seat with
+pricier minutes; agency plans (OmniRelay) cost more up front, charge less per minute, and add
+white-label logins and client workspaces. Our customers never log into OmniDimension, so the
+white-label part is worth nothing here and the choice is simply which bill is lower.
+
+| Plan | Seat | Included min | Rate beyond |
+|---|---|---|---|
+| Business · Starter | $15 | 179 | $0.093 |
+| Business · Jump Starter | $30 | 395 | $0.084 |
+| Business · Early deployers | $36 | 588 | $0.0745 |
+| Business · Growth | $200 | 3,571 | $0.061 |
+| Agency · Launch Partner | $149 ($99 for two months) | 500 | $0.0527 |
+| Agency · Growth Partner | $199 | 2,000 | $0.0473 |
+| Agency · Scale Partner | $299 | 3,500 | $0.040 |
+
+At the 40/40/20 plan mix and 1.5-minute calls, each customer is about 520 talk minutes a month.
+
+| Customers | Talk minutes | Cheapest seat | Bill |
+|---|---|---|---|
+| 1 | ~520 | Business · Early deployers | $36 |
+| 3 | ~1,560 | Business · Early deployers | $108 |
+| 5 | ~2,600 | Early deployers or Growth | $186 to $200 |
+| 10 | ~5,200 | Business · Growth | $299 |
+| 20 | ~10,400 | Agency · Scale Partner | $575 |
+| 30 | ~15,600 | Agency · Scale Partner | $783 |
+
+**Recommendation:** stay on the $36 business plan to about five customers, business Growth
+from five to fifteen, and the agency Scale Partner plan only past roughly 10,000 talk minutes
+a month or when a customer wants their own branded OmniDimension login. Launch Partner is
+never the cheapest once its intro price ends.
+
+**Verify on the billing page:** the two real calls were charged $0.115/min for voice AI, above
+every listed plan rate, so the models appear to bill on top of the plan rate. That surcharge is
+the same on every plan and does not change which is cheapest, but it is what the per-call
+numbers above rest on.
+
 ## The two things to watch
 
 - **Overage.** 30 cents a call clears cost at 1.5 min (about 24 cents) but not at 2.5 min

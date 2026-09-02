@@ -5,7 +5,7 @@ Handoff notes for the next session. Updated 2026-09-01.
 ## Just done
 
 - **Multi-vertical restructure underway** — plan at
-  `~/.claude/plans/so-you-want-to-keen-nest.md`. Chunks 0–6 of 10 landed:
+  `~/.claude/plans/so-you-want-to-keen-nest.md`. Chunks 0–7 of 10 landed:
   - 0: `/demo/` asset collision resolved (`public/demo` → `public/audio`).
   - 1: `Doctor→Provider` / `Patient→Client` rename across TS + SQL. `callMetadata` keys in
     `voice.ts` are frozen (external Vapi/Bland contract) — only their values changed.
@@ -42,6 +42,10 @@ Handoff notes for the next session. Updated 2026-09-01.
     discovery session with the director who'd lead your project). Touched only
     `src/verticals/studio/*`, two palette blocks, and the slug union. Same verification set
     passed. Swatch pages removed. **All three demos are live locally.**
+  - 7: **shared admin.** One dashboard for every business: a Business filter row and column
+    (each identified by its swatch, since admin renders on the product palette), stats that
+    follow the selected business, `?vertical=` on the feed API, a business badge on the record
+    page. Admin shell + both sign-in screens are now branded "AI Receptionist", not Northlake.
 
 - **Password-gated the whole site.** `src/proxy.ts` (Next 16's renamed `middleware.ts` —
   one per project, so the site gate and the pre-existing `/admin` gate share it) now bounces

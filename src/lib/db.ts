@@ -395,6 +395,8 @@ export async function getAppointment(id: string): Promise<AppointmentDetail | nu
 
 export type AppointmentFilter = {
   status?: AppointmentStatus | "all";
+  /** One business, or every business the shared dashboard serves. */
+  vertical?: VerticalSlug | "all";
   search?: string;
   limit?: number;
 };
@@ -418,6 +420,7 @@ export async function listAppointments(
       .order("created_at", { ascending: false })
       .limit(limit);
     if (filter.status && filter.status !== "all") query = query.eq("status", filter.status);
+    if (filter.vertical && filter.vertical !== "all") query = query.eq("vertical", filter.vertical);
     const { data, error } = await query;
     if (error) throw new Error(`listAppointments: ${error.message}`);
     rows = (data ?? []).map((row) => hydrateJoined(row as unknown as JoinedRow));
@@ -425,6 +428,9 @@ export async function listAppointments(
 
   if (filter.status && filter.status !== "all") {
     rows = rows.filter((r) => r.status === filter.status);
+  }
+  if (filter.vertical && filter.vertical !== "all") {
+    rows = rows.filter((r) => r.vertical === filter.vertical);
   }
   const search = filter.search?.trim().toLowerCase();
   if (search) {
@@ -448,8 +454,10 @@ export type DashboardStats = {
   upcoming7Days: number;
 };
 
-export async function getDashboardStats(): Promise<DashboardStats> {
-  const rows = await listAppointments({ limit: 500 });
+export async function getDashboardStats(
+  vertical: VerticalSlug | "all" = "all",
+): Promise<DashboardStats> {
+  const rows = await listAppointments({ vertical, limit: 500 });
   const now = Date.now();
   const week = now + 7 * 86_400_000;
   const completedCalls = rows.filter((r) => r.call?.status === "completed");

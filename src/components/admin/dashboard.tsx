@@ -5,11 +5,12 @@ import { providerLabel } from "@/lib/format";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Refresh, Search, XMark } from "@/components/icons";
 import { formatDateTime, formatDuration, relativeTime } from "@/lib/time";
-import type { AppointmentDetail, AppointmentStatus } from "@/lib/types";
+import type { AppointmentDetail, AppointmentStatus, VerticalSlug } from "@/lib/types";
 import type { DashboardStats } from "@/lib/db";
 import { AppointmentBadge, CallBadge } from "./status-badge";
 
 type Feed = { appointments: AppointmentDetail[]; stats: DashboardStats };
+type Business = { slug: VerticalSlug; brand: string; color: string };
 
 const FILTERS: { key: AppointmentStatus | "all"; label: string }[] = [
   { key: "all", label: "All" },
@@ -22,9 +23,19 @@ const FILTERS: { key: AppointmentStatus | "all"; label: string }[] = [
 
 const POLL_MS = 8000;
 
-export function Dashboard({ initial, timezone }: { initial: Feed; timezone: string }) {
+export function Dashboard({
+  initial,
+  timezone,
+  businesses,
+}: {
+  initial: Feed;
+  timezone: string;
+  businesses: Business[];
+}) {
   const [feed, setFeed] = useState<Feed>(initial);
   const [status, setStatus] = useState<AppointmentStatus | "all">("all");
+  const [vertical, setVertical] = useState<VerticalSlug | "all">("all");
+  const businessOf = (slug: VerticalSlug) => businesses.find((b) => b.slug === slug);
   const [query, setQuery] = useState("");
   const [refreshing, setRefreshing] = useState(false);
   const [updatedAt, setUpdatedAt] = useState<string | null>(null);
@@ -35,7 +46,7 @@ export function Dashboard({ initial, timezone }: { initial: Feed; timezone: stri
       const ticket = ++requestRef.current;
       if (!silent) setRefreshing(true);
       try {
-        const params = new URLSearchParams({ status });
+        const params = new URLSearchParams({ status, vertical });
         if (query.trim()) params.set("q", query.trim());
         const response = await fetch(`/api/admin/appointments?${params}`, {
           cache: "no-store",
@@ -52,7 +63,7 @@ export function Dashboard({ initial, timezone }: { initial: Feed; timezone: stri
         if (!silent) setRefreshing(false);
       }
     },
-    [status, query],
+    [status, vertical, query],
   );
 
   // Refetch on filter/search change, then keep polling for live updates.
@@ -100,6 +111,27 @@ export function Dashboard({ initial, timezone }: { initial: Feed; timezone: stri
           tone={stats.needsAttention > 0 ? "warn" : undefined}
         />
       </div>
+
+      {businesses.length > 1 && (
+        <div className="scroll-x mb-3 flex gap-2">
+          {[{ slug: "all" as const, brand: "All businesses", color: "" }, ...businesses].map((b) => (
+            <button
+              key={b.slug}
+              type="button"
+              onClick={() => setVertical(b.slug)}
+              aria-pressed={vertical === b.slug}
+              className={`inline-flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-1.5 text-[13px] font-medium transition ${
+                vertical === b.slug
+                  ? "border-ink bg-ink text-bg"
+                  : "border-line bg-surface text-muted hover:text-ink"
+              }`}
+            >
+              {b.color && <BusinessDot color={b.color} />}
+              {b.brand}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="mb-4 flex flex-wrap items-center gap-3">
         <div className="scroll-x flex gap-2">
@@ -153,11 +185,12 @@ export function Dashboard({ initial, timezone }: { initial: Feed; timezone: stri
           <>
             {/* Desktop table */}
             <div className="scroll-x hidden md:block">
-              <table className="w-full min-w-[820px] border-collapse text-left">
+              <table className="w-full min-w-[960px] border-collapse text-left">
                 <thead>
                   <tr className="border-b border-line bg-surface-2/60 text-[11.5px] uppercase tracking-[0.08em] text-subtle">
                     <Th>Client</Th>
                     <Th>Provider</Th>
+                    <Th>Business</Th>
                     <Th>Appointment</Th>
                     <Th>Call</Th>
                     <Th>Status</Th>
@@ -192,6 +225,12 @@ export function Dashboard({ initial, timezone }: { initial: Feed; timezone: stri
                         <span className="block text-ink">{providerLabel(appointment.provider)}</span>
                         <span className="block text-[12.5px]">
                           {appointment.provider?.specialty}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3.5 text-[13px] text-muted">
+                        <span className="inline-flex items-center gap-2">
+                          <BusinessDot color={businessOf(appointment.vertical)?.color ?? ""} />
+                          {businessOf(appointment.vertical)?.brand ?? appointment.vertical}
                         </span>
                       </td>
                       <td className="px-4 py-3.5 text-[13.5px] text-ink">
@@ -245,6 +284,10 @@ export function Dashboard({ initial, timezone }: { initial: Feed; timezone: stri
                           {providerLabel(appointment.provider)} ·{" "}
                           {formatDateTime(appointment.starts_at, timezone)}
                         </p>
+                        <p className="mt-0.5 inline-flex items-center gap-1.5 text-[12px] text-subtle">
+                          <BusinessDot color={businessOf(appointment.vertical)?.color ?? ""} />
+                          {businessOf(appointment.vertical)?.brand ?? appointment.vertical}
+                        </p>
                       </div>
                       <AppointmentBadge status={appointment.status} />
                     </div>
@@ -293,6 +336,17 @@ function Stat({
       </p>
       <p className="mt-1 text-[12px] text-muted">{hint}</p>
     </div>
+  );
+}
+
+/** A business's swatch colour, so rows are tellable apart on the product palette. */
+function BusinessDot({ color }: { color: string }) {
+  return (
+    <span
+      aria-hidden
+      className="inline-block size-2 shrink-0 rounded-full ring-1 ring-inset ring-black/10"
+      style={{ background: color || "var(--fg-subtle)" }}
+    />
   );
 }
 

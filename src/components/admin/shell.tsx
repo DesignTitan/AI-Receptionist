@@ -2,7 +2,6 @@ import Link from "next/link";
 import { logout } from "@/app/admin/actions";
 import { LogOut, PulseMark } from "@/components/icons";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { DEFAULT_VERTICAL } from "@/verticals";
 
 export function AdminHeader({ subtitle }: { subtitle?: string }) {
   return (
@@ -17,7 +16,7 @@ export function AdminHeader({ subtitle }: { subtitle?: string }) {
               Front desk
             </span>
             <span className="block text-[11px] font-medium uppercase tracking-[0.14em] text-subtle">
-              {subtitle ?? DEFAULT_VERTICAL.brand}
+              {subtitle ?? "AI Receptionist"}
             </span>
           </span>
         </Link>
@@ -27,7 +26,7 @@ export function AdminHeader({ subtitle }: { subtitle?: string }) {
             href="/"
             className="hidden h-9 items-center rounded-full border border-line px-4 text-[13px] font-medium text-muted transition hover:text-ink sm:inline-flex"
           >
-            View booking site
+            View site
           </Link>
           <ThemeToggle />
           <form action={logout}>

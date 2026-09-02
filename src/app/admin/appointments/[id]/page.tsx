@@ -38,7 +38,8 @@ export default async function AdminAppointmentPage({
 
   const { provider, client, call } = appointment;
   const tz = env.timezone;
-  const t = getVertical(appointment.vertical).terms;
+  const business = getVertical(appointment.vertical);
+  const t = business.terms;
 
   const timeline = [
     { label: "Booked online", at: appointment.created_at },
@@ -77,6 +78,14 @@ export default async function AdminAppointmentPage({
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-[12.5px] font-medium text-ink">
+              <span
+                aria-hidden
+                className="inline-block size-2 rounded-full"
+                style={{ background: business.theme.swatch.primary }}
+              />
+              {business.brand}
+            </span>
             <AppointmentBadge status={appointment.status} />
             <span className="flex items-center gap-1.5 text-[11.5px] font-semibold uppercase tracking-[0.08em] text-subtle">
               Call

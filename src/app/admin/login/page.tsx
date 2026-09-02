@@ -4,7 +4,6 @@ import { login } from "@/app/admin/actions";
 import { AlertTriangle, Lock, PulseMark } from "@/components/icons";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { usingDefaultPassword } from "@/lib/auth";
-import { DEFAULT_VERTICAL as v } from "@/verticals";
 
 export const metadata: Metadata = {
   title: "Staff sign in",
@@ -35,7 +34,7 @@ export default async function AdminLoginPage({
           <h1 className="mt-5 text-2xl font-semibold tracking-[-0.02em] text-ink">
             Staff dashboard
           </h1>
-          <p className="mt-1.5 text-[13.5px] text-muted">{v.brand}</p>
+          <p className="mt-1.5 text-[13.5px] text-muted">{"AI Receptionist"}</p>
         </div>
 
         <form action={login} className="card space-y-4 p-6">
@@ -85,7 +84,7 @@ export default async function AdminLoginPage({
 
         <p className="mt-6 text-center text-[13px] text-subtle">
           <Link href="/" className="transition hover:text-ink">
-            ← Back to the booking site
+            ← Back to the site
           </Link>
         </p>
       </div>

@@ -5,7 +5,7 @@ Handoff notes for the next session. Updated 2026-09-01.
 ## Just done
 
 - **Multi-vertical restructure underway** — plan at
-  `~/.claude/plans/so-you-want-to-keen-nest.md`. Chunks 0–5 of 10 landed:
+  `~/.claude/plans/so-you-want-to-keen-nest.md`. Chunks 0–6 of 10 landed:
   - 0: `/demo/` asset collision resolved (`public/demo` → `public/audio`).
   - 1: `Doctor→Provider` / `Patient→Client` rename across TS + SQL. `callMetadata` keys in
     `voice.ts` are frozen (external Vapi/Bland contract) — only their values changed.
@@ -32,13 +32,16 @@ Handoff notes for the next session. Updated 2026-09-01.
     `--font-display`; font classes moved from `<body>` to `<html>`. `VerticalTheme` sets the
     attribute (inline script for hard loads, layout effect for soft navs, cleared on unmount).
     Verified all 4 palette×mode combos by computed style; soft-nav out/in restores correctly.
-    **Temporary** swatch pages at `/swatches` and `/demo/[vertical]/swatches` — delete after chunk 6.
   - 5: **salon** (`/demo/salon`, Solstice Salon & Spa). The acceptance test held: adding it
     touched `src/verticals/salon/*`, two palette blocks, the `VerticalSlug` union, two new
     glyphs in the shared icon set, and `verticals/rosters.ts` (the seed script now reads that
     list, so a new vertical never edits `scripts/`). Verified: tokens + Playfair in both modes,
     full booking confirms with salon copy, cross-vertical booking → 409, cross-vertical
     confirmation page → 404, shared admin shows "Sasha Reyes" beside "Dr. Elena Vasquez".
+  - 6: **studio** (`/demo/studio`, Halide Studio — a brand/design studio where you book a paid
+    discovery session with the director who'd lead your project). Touched only
+    `src/verticals/studio/*`, two palette blocks, and the slug union. Same verification set
+    passed. Swatch pages removed. **All three demos are live locally.**
 
 - **Password-gated the whole site.** `src/proxy.ts` (Next 16's renamed `middleware.ts` —
   one per project, so the site gate and the pre-existing `/admin` gate share it) now bounces

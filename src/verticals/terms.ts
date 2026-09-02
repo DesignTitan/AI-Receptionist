@@ -1,6 +1,7 @@
 import type { VerticalSlug } from "@/lib/types";
 import { MEDICAL_TERMS } from "./medical/terms";
 import { SALON_TERMS } from "./salon/terms";
+import { STUDIO_TERMS } from "./studio/terms";
 
 export { noun, type NounForms, type Terms } from "./nouns";
 
@@ -9,4 +10,4 @@ export { noun, type NounForms, type Terms } from "./nouns";
  * full configs in `./index` so a client component can look up a prefix or a
  * label without pulling icons, voice scripts and seed rosters into the bundle.
  */
-export const TERMS = { medical: MEDICAL_TERMS, salon: SALON_TERMS } satisfies Record<VerticalSlug, unknown>;
+export const TERMS = { medical: MEDICAL_TERMS, salon: SALON_TERMS, studio: STUDIO_TERMS } satisfies Record<VerticalSlug, unknown>;

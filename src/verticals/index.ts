@@ -1,6 +1,7 @@
 import type { VerticalSlug } from "@/lib/types";
 import { medical } from "./medical";
 import { salon } from "./salon";
+import { studio } from "./studio";
 import type { Vertical } from "./types";
 
 export type { CallOutcomeCopy, Icon, Vertical, VerticalCopy, VerticalVoice } from "./types";
@@ -12,7 +13,7 @@ export { TERMS, noun, type NounForms, type Terms } from "./terms";
  * palette blocks in globals.css — the closed record types make the compiler
  * the checklist.
  */
-export const VERTICALS: Record<VerticalSlug, Vertical> = { medical, salon };
+export const VERTICALS: Record<VerticalSlug, Vertical> = { medical, salon, studio };
 export const VERTICAL_SLUGS = Object.keys(VERTICALS) as VerticalSlug[];
 
 export const getVertical = (slug: VerticalSlug): Vertical => VERTICALS[slug];

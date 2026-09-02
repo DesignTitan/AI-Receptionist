@@ -91,6 +91,48 @@ insert into public.providers (
   'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&crop=faces&w=640&h=640&q=80',
   5, 4.7, 188, '{English,Korean}', 'Aveda Institute',
   70, 'Main floor', '{1,2,4,5,6}', '11:00', '20:00', 45, true
+),
+(
+  '11111111-1111-4111-8111-111111110301', 'studio', 'mira-castellanos', 'Mira Castellanos', 'Creative Director', 'Brand identity',
+  'Mira has led identity work for two IPOs and one very good bakery. She starts every project by asking what the company is afraid of looking like, and works backwards from there.',
+  'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&crop=faces&w=640&h=640&q=80',
+  14, 4.9, 61, '{English,Spanish}', 'Pentagram · ArtCenter College of Design',
+  250, 'Remote or in studio · SoMa', '{1,2,3,4}', '10:00', '16:00', 45, true
+),
+(
+  '11111111-1111-4111-8111-111111110302', 'studio', 'owen-blackwood', 'Owen Blackwood', 'Strategy Director', 'Brand strategy',
+  'Positioning, naming and the argument for why anyone should care. Owen''s sessions tend to end with a whiteboard photo and a shorter list of things to say.',
+  'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&crop=faces&w=640&h=640&q=80',
+  12, 4.8, 48, '{English}', 'Wolff Olins · London School of Economics',
+  250, 'Remote', '{1,2,3,4,5}', '09:00', '17:00', 45, true
+),
+(
+  '11111111-1111-4111-8111-111111110303', 'studio', 'anika-sato', 'Anika Sato', 'Design Director', 'Digital product',
+  'Product design from first sketch to shipped release, with a preference for teams who will let her talk to actual users. Anika ran design at a fintech through its first million customers.',
+  'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&crop=faces&w=640&h=640&q=80',
+  10, 4.9, 57, '{English,Japanese}', 'Instrument · Rhode Island School of Design',
+  250, 'Remote or in studio · SoMa', '{2,3,4,5}', '10:00', '18:00', 45, true
+),
+(
+  '11111111-1111-4111-8111-111111110304', 'studio', 'tobias-reinholt', 'Tobias Reinholt', 'Motion Director', 'Motion & film',
+  'Launch films, product motion and the thirty seconds that make a keynote land. Tobias will tell you in the first session whether your idea needs film or just a better still.',
+  'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?auto=format&fit=crop&crop=faces&w=640&h=640&q=80',
+  9, 4.7, 39, '{English,German}', 'Buck · Filmakademie Baden-Württemberg',
+  250, 'Remote', '{1,3,4,5}', '11:00', '19:00', 30, true
+),
+(
+  '11111111-1111-4111-8111-111111110305', 'studio', 'celeste-nwosu', 'Celeste Nwosu', 'Head of Content', 'Content & copy',
+  'Voice, messaging and the words on the button. Celeste came up through newsrooms and still edits like one — every sentence has to earn its place.',
+  'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&crop=faces&w=640&h=640&q=80',
+  11, 5, 44, '{English,French}', 'Wieden+Kennedy · Columbia Journalism School',
+  250, 'Remote', '{1,2,4,5}', '09:30', '15:30', 30, true
+),
+(
+  '11111111-1111-4111-8111-111111110306', 'studio', 'rafael-mendes', 'Rafael Mendes', 'Technical Director', 'Web & build',
+  'The person who makes the design real and fast. Rafael scopes builds honestly, which occasionally means telling you the site you want is three sites.',
+  'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&crop=faces&w=640&h=640&q=80',
+  13, 4.8, 52, '{English,Portuguese}', 'Work & Co · University of São Paulo',
+  250, 'Remote or in studio · SoMa', '{1,2,3,4,5}', '10:00', '17:00', 45, true
 )
 on conflict (vertical, slug) do update set
   name             = excluded.name,

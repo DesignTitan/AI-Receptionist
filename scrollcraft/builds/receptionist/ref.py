@@ -75,7 +75,29 @@ BASE = """<!doctype html><html><head><meta charset="utf-8">
   .t-warn { background:rgba(214,158,46,.24); color:#f0c15e; }
   .t-info { background:rgba(140,146,255,.24); color:#c2c6ff; }
   .t-ok { background:rgba(110,200,150,.22); color:#9fe0bb; }
+  .book { display:grid; grid-template-columns:360px 1fr; gap:30px; padding:18px 24px 0; }
+  .prof .shot { width:100%; aspect-ratio:11/12; object-fit:cover; border-radius:12px; display:block;
+                box-shadow:inset 0 0 0 1px rgba(255,255,255,.16); }
+  .prof .nm { display:flex; align-items:center; gap:10px; margin-top:14px; }
+  .prof .nm b { font-size:19px; font-weight:600; letter-spacing:-.01em; }
+  .prof .nm .rate { margin-left:auto; font-size:12.5px; font-weight:600; padding:4px 10px; border-radius:12px;
+                    background:rgba(255,255,255,.12); box-shadow:inset 0 0 0 1px rgba(255,255,255,.16); }
+  .prof .role { font-size:13.5px; color:rgba(255,255,255,.58); margin-top:3px; }
+  .prof .spec { display:inline-block; margin-top:10px; font-size:11.5px; font-weight:600; padding:4px 11px; border-radius:12px;
+                background:rgba(214,158,46,.24); color:#f0c15e; }
+  .prof .bio { font-size:13px; line-height:1.55; color:rgba(255,255,255,.78); margin-top:12px; }
+  .prof .facts { margin-top:14px; }
+  .prof .fact { display:grid; grid-template-columns:96px 1fr; gap:10px; padding:9px 0; font-size:12.5px; }
+  .prof .fact + .fact { border-top:1px solid rgba(255,255,255,.10); }
+  .prof .fact span:first-child { font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.5); padding-top:2px; }
+  .bk h4 { margin:0; font-size:19px; font-weight:600; letter-spacing:-.01em; }
+  .bk .note { margin:5px 0 0; font-size:13px; line-height:1.5; color:rgba(255,255,255,.58); }
   .sect { padding:18px 24px 0; }
+  .bk .sect { padding:18px 0 0; }
+  .next { display:grid; gap:11px; }
+  .next > div { display:grid; grid-template-columns:26px 1fr; gap:12px; align-items:start; font-size:13px; line-height:1.5; color:rgba(255,255,255,.82); }
+  .next b { width:24px; height:24px; border-radius:50%; display:grid; place-items:center; font-size:12px; font-weight:600;
+            background:rgba(255,255,255,.12); box-shadow:inset 0 0 0 1px rgba(255,255,255,.16); }
   .sect .lbl { font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-bottom:10px; }
   .days { display:flex; gap:10px; }
   .day { flex:1; text-align:center; padding:10px 6px 9px; border-radius:12px;
@@ -231,83 +253,110 @@ STAGE["book"] = f"""
   <div class="pad">
     <div class="head">
       {ORB('#ff8fab','#ffd6a5','#bdb2ff','#9bf6ff')}
-      <div class="who"><b>Book an appointment</b><span>Sasha Reyes · Master Colourist · Solstice Salon &amp; Spa</span></div>
-      <div class="chip">{MONITOR}<span class="div"></span>3 open</div>
-    </div>
-    <div class="pills"><span class="pill on">Choose a time</span><span class="pill">Your details</span><span class="pill">Confirm</span></div>
-  </div>
-  <div class="sect">
-    <div class="lbl">Pick a day</div>
-    <div class="days">
-      <div class="day on"><div class="d">Wed</div><div class="n">2</div><div class="o">3 open</div></div>
-      <div class="day"><div class="d">Thu</div><div class="n">3</div><div class="o">5 open</div></div>
-      <div class="day"><div class="d">Fri</div><div class="n">4</div><div class="o">3 open</div></div>
-      <div class="day"><div class="d">Sat</div><div class="n">5</div><div class="o">5 open</div></div>
-      <div class="day off"><div class="d">Sun</div><div class="n">6</div><div class="o">Closed</div></div>
-      <div class="day off"><div class="d">Mon</div><div class="n">7</div><div class="o">Closed</div></div>
-      <div class="day"><div class="d">Tue</div><div class="n">8</div><div class="o">5 open</div></div>
+      <div class="who"><b>Solstice Salon &amp; Spa</b><span>Hair · Skin · Massage · book with any of our people</span></div>
+      <div class="chip">{MONITOR}<span class="div"></span>Book now</div>
     </div>
   </div>
-  <div class="sect">
-    <div class="lbl">Available times · afternoon, EDT</div>
-    <div class="times">
-      <div class="time">1:30 PM</div>
-      <div class="time">3:00 PM</div>
-      <div class="time">4:30 PM</div>
+  <div class="book">
+    <div class="prof">
+      <img class="shot" src="stylist.png" alt="">
+      <div class="nm"><b>Sasha Reyes</b><span class="rate">★ 4.9</span></div>
+      <div class="role">Master Colourist</div>
+      <div class="spec">Colour</div>
+      <div class="bio">Sasha has spent twelve years doing the colour other salons send people to her to fix. Balayage, lived-in blondes and corrective work — she will tell you honestly what your hair can take in one sitting and what it cannot.</div>
+      <div class="facts">
+        <div class="fact"><span>Experience</span><span>12 years · 388 guest reviews</span></div>
+        <div class="fact"><span>Speaks</span><span>English, Spanish</span></div>
+        <div class="fact"><span>Location</span><span>Solstice on Second, second floor</span></div>
+      </div>
+    </div>
+    <div class="bk">
+      <h4>Book an appointment</h4>
+      <p class="note">All times shown in America/New York. After booking, the receptionist calls you within a minute to confirm.</p>
+      <div class="pills" style="margin-top:16px"><span class="pill on">Choose a time</span><span class="pill">Your details</span><span class="pill">Confirm</span></div>
+      <div class="sect">
+        <div class="lbl">Pick a day</div>
+        <div class="days">
+          <div class="day on"><div class="d">Wed</div><div class="n">2</div><div class="o">3 open</div></div>
+          <div class="day"><div class="d">Thu</div><div class="n">3</div><div class="o">5 open</div></div>
+          <div class="day"><div class="d">Fri</div><div class="n">4</div><div class="o">3 open</div></div>
+          <div class="day"><div class="d">Sat</div><div class="n">5</div><div class="o">5 open</div></div>
+          <div class="day off"><div class="d">Sun</div><div class="n">6</div><div class="o">Closed</div></div>
+          <div class="day off"><div class="d">Mon</div><div class="n">7</div><div class="o">Closed</div></div>
+          <div class="day"><div class="d">Tue</div><div class="n">8</div><div class="o">5 open</div></div>
+        </div>
+      </div>
+      <div class="sect">
+        <div class="lbl">Available times · afternoon, EDT</div>
+        <div class="times">
+          <div class="time">1:30 PM</div>
+          <div class="time">3:00 PM</div>
+          <div class="time">4:30 PM</div>
+        </div>
+      </div>
+      <div class="sect"><div class="cta">Continue</div></div>
+      <div class="sect">
+        <div class="lbl">What happens next</div>
+        <div class="next">
+          <div><b>1</b><span>The receptionist calls you inside a minute to confirm.</span></div>
+          <div><b>2</b><span>Confirm, move it or cancel — on the phone, in one go.</span></div>
+          <div><b>3</b><span>The salon sees the call, the transcript and the outcome.</span></div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="foot"><div class="cta">Continue</div></div>
+  <div class="foot"></div>
 """
 
-STAGE["call"] = f"""
+STAGE["after"] = f"""
   <div class="pad">
     <div class="head">
-      {ORB('#7c6cff','#8ab4ff','#4ad6c2','#c2c6ff')}
-      <div class="who"><b>You&rsquo;re booked, Nadia</b><span>Reference HS-QR4WSV · Halide Studio</span></div>
-      <div class="chip">{MONITOR}<span class="div"></span>Ringing</div>
+      {ORB('#7c6cff','#4ad6c2','#8ab4ff','#c2c6ff')}
+      <div class="who"><b>Taken while you were closed</b><span>11 of last week&rsquo;s 38 bookings came in after hours</span></div>
+      <div class="chip">{MONITOR}<span class="div"></span>Open 24/7</div>
     </div>
-    <div class="pills"><span class="pill">Queued</span><span class="pill on">Calling</span><span class="pill">Done</span></div>
+    <div class="pills"><span class="pill">Last night</span><span class="pill on">This week</span><span class="pill">This month</span></div>
   </div>
-  <div class="thead" style="--cols:220px 1fr 110px"><span>Stage</span><span>What happens</span><span class="r">At</span></div>
-  <div class="row alt" style="--cols:220px 1fr 110px"><div class="m"><div><b>Queued</b></div></div><div class="say">The booking is handed to the assistant.</div><div class="val"><b>0:00</b></div></div>
-  <div class="row" style="--cols:220px 1fr 110px"><div class="m"><div><b>Calling you</b></div></div><div class="say">Your phone rings, from the salon&rsquo;s own number.</div><div class="val"><b>0:02</b></div></div>
-  <div class="row alt" style="--cols:220px 1fr 110px"><div class="m"><div><b>On the call</b></div></div><div class="say">Confirm, move it, or cancel — on the phone.</div><div class="val"><b>0:09</b></div></div>
-  <div class="row" style="--cols:220px 1fr 110px"><div class="m"><div><b>Done</b></div></div><div class="say">Outcome recorded and sent to the front desk.</div><div class="val"><b>0:46</b></div></div>
-  <div class="foot"><div class="cta">Listen in</div></div>
+  <div class="thead" style="--cols:200px 1fr 220px"><span>Booked at</span><span>Client</span><span class="r">Confirmed</span></div>
+  <div class="row alt" style="--cols:200px 1fr 220px"><div class="m"><div><b>9:12 PM</b><span>Tuesday</span></div></div><div class="m">{ORB('#ffb36b','#ff7a59','#8b5cf6','#f0c15e')}<div><b>Nadia Feld</b><span>Colour · 90 minutes</span></div></div><div class="val"><b>9:13 PM</b><span class="up">61 seconds later</span></div></div>
+  <div class="row" style="--cols:200px 1fr 220px"><div class="m"><div><b>11:48 PM</b><span>Wednesday</span></div></div><div class="m">{ORB('#8ab4ff','#6ee7a0','#7c6cff','#ffd166')}<div><b>Tobias Lang</b><span>Consultation</span></div></div><div class="val"><b>11:49 PM</b><span class="up">44 seconds later</span></div></div>
+  <div class="row alt" style="--cols:200px 1fr 220px"><div class="m"><div><b>6:04 AM</b><span>Thursday</span></div></div><div class="m">{ORB('#ff8fab','#ffd6a5','#9bf6ff','#bdb2ff')}<div><b>Priya Raman</b><span>Massage · 60 minutes</span></div></div><div class="val"><b>6:05 AM</b><span class="up">38 seconds later</span></div></div>
+  <div class="row" style="--cols:200px 1fr 220px"><div class="m"><div><b>Sun 3:20 PM</b><span>Closed that day</span></div></div><div class="m">{ORB('#a0c4ff','#caffbf','#ffc6ff','#fdffb6')}<div><b>Felix Brandt</b><span>Cut · 45 minutes</span></div></div><div class="val"><b>3:21 PM</b><span class="up">52 seconds later</span></div></div>
+  <div class="foot"><div class="cta">See the overnight bookings</div></div>
 """
 
-STAGE["record"] = f"""
+STAGE["noshow"] = f"""
   <div class="pad">
     <div class="head">
-      {ORB('#4ad6c2','#7c6cff','#ff9a5c','#ff5f7e')}
-      <div class="who"><b>Calls today</b><span>12 placed · 9 confirmed · 77% reached</span></div>
-      <div class="chip">{MONITOR}<span class="div"></span>Live</div>
+      {ORB('#6ee7a0','#4ad6c2','#8ab4ff','#c2ffd6')}
+      <div class="who"><b>Fewer empty chairs</b><span>Confirmed on the phone, not by a text nobody opens</span></div>
+      <div class="chip">{MONITOR}<span class="div"></span>September</div>
     </div>
-    <div class="pills"><span class="pill">All</span><span class="pill on">Confirmed</span><span class="pill">Needs a person</span></div>
+    <div class="pills"><span class="pill on">This month</span><span class="pill">Last month</span><span class="pill">Year to date</span></div>
   </div>
-  <div class="thead" style="--cols:1fr 260px 150px"><span>Client</span><span>Business</span><span class="r">Outcome</span></div>
-  <div class="row alt" style="--cols:1fr 260px 150px"><div class="m">{ORB('#ffb36b','#ff7a59','#8b5cf6','#f0c15e')}<div><b>Nadia Feld</b><span>Recording · transcript · summary</span></div></div><div class="say">Halide Studio</div><div class="val"><span class="tag t-ok">Confirmed</span></div></div>
-  <div class="row" style="--cols:1fr 260px 150px"><div class="m">{ORB('#8ab4ff','#6ee7a0','#7c6cff','#ffd166')}<div><b>Mira Castellanos</b><span>Recording · transcript · summary</span></div></div><div class="say">Halide Studio</div><div class="val"><span class="tag t-ok">Confirmed</span></div></div>
-  <div class="row alt" style="--cols:1fr 260px 150px"><div class="m">{ORB('#ff8fab','#ffd6a5','#9bf6ff','#bdb2ff')}<div><b>Priya Raman</b><span>Asked for the afternoon</span></div></div><div class="say">Northlake Family Health</div><div class="val"><span class="tag t-info">Reschedule</span></div></div>
-  <div class="row" style="--cols:1fr 260px 150px"><div class="m">{ORB('#a0c4ff','#caffbf','#ffc6ff','#fdffb6')}<div><b>Felix Brandt</b><span>Flagged for a person</span></div></div><div class="say">Solstice Salon &amp; Spa</div><div class="val"><span class="tag t-warn">No answer</span></div></div>
-  <div class="foot"><div class="cta">Open the newest record</div></div>
+  <div class="thead" style="--cols:1fr 200px 200px"><span></span><span>Before</span><span class="r">With the desk</span></div>
+  <div class="row alt" style="--cols:1fr 200px 200px"><div class="m"><div><b>Bookings confirmed</b><span>Reached on the first call</span></div></div><div class="say">61%</div><div class="val"><b>94%</b><span class="up">+33 points</span></div></div>
+  <div class="row" style="--cols:1fr 200px 200px"><div class="m"><div><b>No-shows</b><span>Nobody arrived, nobody called</span></div></div><div class="say">14</div><div class="val"><b>5</b><span class="up">9 fewer</span></div></div>
+  <div class="row alt" style="--cols:1fr 200px 200px"><div class="m"><div><b>Slots put back</b><span>Cancelled early enough to refill</span></div></div><div class="say">2</div><div class="val"><b>11</b><span class="up">Refilled the same week</span></div></div>
+  <div class="row" style="--cols:1fr 200px 200px"><div class="m"><div><b>Value recovered</b><span>At your average ticket</span></div></div><div class="say">—</div><div class="val"><b>$2,240</b><span class="up">This month</span></div></div>
+  <div class="foot"><div class="cta">Open the month</div></div>
 """
 
-STAGE["flag"] = f"""
+STAGE["voice"] = f"""
   <div class="pad">
     <div class="head">
-      {ORB('#7c6cff','#ff9a5c','#ff5f7e','#4ad6c2')}
-      <div class="who"><b>Needs attention</b><span>6 flagged this week · across three businesses</span></div>
-      <div class="chip">{MONITOR}<span class="div"></span>6</div>
+      {ORB('#ff9a5c','#ff5f7e','#7c6cff','#ffd6a5')}
+      <div class="who"><b>She sounds like your business</b><span>Your words, your rules, your number on their screen</span></div>
+      <div class="chip">{MONITOR}<span class="div"></span>3 businesses</div>
     </div>
-    <div class="pills"><span class="pill">Today</span><span class="pill on">This week</span><span class="pill">All time</span></div>
+    <div class="pills"><span class="pill">Northlake Family Health</span><span class="pill on">Solstice Salon &amp; Spa</span><span class="pill">Halide Studio</span></div>
   </div>
-  <div class="thead" style="--cols:1fr 300px 150px"><span>Client</span><span>Booking</span><span class="r">Flag</span></div>
-  <div class="row alt" style="--cols:1fr 300px 150px"><div class="m">{ORB('#ffb36b','#ff7a59','#8b5cf6','#f0c15e')}<div><b>Tobias Lang</b><span>Northlake Family Health</span></div></div><div class="say">Sat, Sep 5 · 8:00 AM</div><div class="val"><span class="tag t-warn">No answer</span></div></div>
-  <div class="row" style="--cols:1fr 300px 150px"><div class="m">{ORB('#8ab4ff','#6ee7a0','#7c6cff','#ffd166')}<div><b>Priya Raman</b><span>Asked for the afternoon</span></div></div><div class="say">Thu, Sep 3 · 9:10 AM</div><div class="val"><span class="tag t-info">Reschedule</span></div></div>
-  <div class="row alt" style="--cols:1fr 300px 150px"><div class="m">{ORB('#ff8fab','#ffd6a5','#9bf6ff','#bdb2ff')}<div><b>Felix Brandt</b><span>Solstice Salon &amp; Spa</span></div></div><div class="say">Mon, Sep 7 · 5:00 PM</div><div class="val"><span class="tag t-warn">No answer</span></div></div>
-  <div class="row" style="--cols:1fr 300px 150px"><div class="m">{ORB('#a0c4ff','#caffbf','#ffc6ff','#fdffb6')}<div><b>Kenji Watanabe</b><span>Halide Studio</span></div></div><div class="say">Mon, Sep 7 · 1:00 PM</div><div class="val"><span class="tag t-warn">No answer</span></div></div>
-  <div class="foot"><div class="cta">Open the first one</div></div>
+  <div class="thead" style="--cols:220px 1fr"><span>Setting</span><span>What the caller gets</span></div>
+  <div class="row alt" style="--cols:220px 1fr"><div class="m"><div><b>Opening line</b></div></div><div class="say">&ldquo;Hi Nadia, this is Ava calling from Solstice Salon &amp; Spa. This call is recorded.&rdquo;</div></div>
+  <div class="row" style="--cols:220px 1fr"><div class="m"><div><b>Never says</b></div></div><div class="say">Prices, medical advice, or anything you have not approved.</div></div>
+  <div class="row alt" style="--cols:220px 1fr"><div class="m"><div><b>If they ask</b></div></div><div class="say">She says she is an AI, plainly, and carries on.</div></div>
+  <div class="row" style="--cols:220px 1fr"><div class="m"><div><b>Calls from</b></div></div><div class="say">Your own number, so it is not a stranger ringing.</div></div>
+  <div class="foot"><div class="cta">Hear her greeting</div></div>
 """
 
 variant = sys.argv[2] if len(sys.argv) > 2 else "B"

@@ -18,7 +18,8 @@ Handoff notes for the next session. Updated 2026-09-02.
   The pinned proof chapter needs its stage to stay sticky and the section to stay
   `overflow: visible`, or the pin breaks.
 - **Core features (chapter 4)**: its own component before the deck — chip, two-line title,
-  lede, and four clickable tabs over one product screen, on the dark steel-blue ground.
+  lede, and four clickable tabs — your booking page, open after hours, fewer no-shows,
+  sounds like you — each a frosted screen over the desert, on the dark steel-blue ground.
   Keyboard accessible (tablist, arrow keys, visible focus).
 - **Proof chapter is a stacked deck of the three features**: it calls, it records, it flags.
   Dark cards on the paper ground, each with a flat frosted-glass panel of that feature's UI over

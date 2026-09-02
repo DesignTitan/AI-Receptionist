@@ -327,7 +327,11 @@ flips for them.
 Chapter 4's four tab screens are rendered in the same glass language as the deck, not raw
 product screenshots, so the two chapters read as one room: `ref.py <out> D <key> stage`
 renders a 1600x1000 frame (16:10, the stage's aspect) for the keys book, call, record and
-flag. They show different views from the deck's three — the booking page, the client's
-confirmation page as the call runs, the day's calls with their outcomes, and the flagged
-list — so the two chapters do not repeat each other.
+flag. The four are the things an owner is actually buying, not a second pass at the deck's three:
+**your booking page** (the whole page — the stylist, her photo, bio and credentials beside the
+day picker, the times and what happens after Continue), **open after hours** (bookings taken
+overnight and on a closed day, each confirmed within a minute), **fewer no-shows** (confirmation
+rate, no-shows, slots refilled and value recovered, before and after) and **sounds like you**
+(the greeting, the rules, and the number she calls from, per business). The stylist portrait
+is lifted from the real booking page and lives in this folder as `stylist.png`.
 

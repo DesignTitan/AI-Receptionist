@@ -288,9 +288,8 @@ owner's reference as its own component and placed before the proof deck. A chip,
 two-line title whose second half drops to 40% ink, a lede on the right, and four real
 tabs (booking page, the call, the record, what needs you) over one large product screen
 with a caption under it. Tabs are `role="tablist"` buttons: click or arrow-key, the
-labelled panel swaps, focus is visible. The section carries the very dark grey with a
-hint of crystallised steel blue the owner asked for; the proof deck after it stays on
-paper, unchanged. The page is now nine chapters.
+labelled panel swaps, focus is visible. The section sits on the page's own paper ground (an earlier dark treatment was removed at
+the owner's direction); the proof deck after it is unchanged. The page is now nine chapters.
 
 The three card images, final. Built to the owner's reference component (a leaderboard card
 in dark frosted glass) piece for piece, after several wrong turns:

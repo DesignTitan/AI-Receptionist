@@ -35,8 +35,8 @@ const FEATURES: Feature[] = [
   {
     key: "flag",
     tab: "What needs you",
-    screen: "/scrollcraft/02-missed-call.jpg",
-    alt: "A booking flagged after a no-answer, waiting for a person.",
+    screen: "/scrollcraft/05-attention.jpg",
+    alt: "Bookings flagged after a no-answer, waiting for a person.",
     caption: "The ones nobody answered, flagged instead of buried.",
   },
 ];

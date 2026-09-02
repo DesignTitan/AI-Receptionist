@@ -2,7 +2,33 @@
 
 Handoff notes for the next session. Updated 2026-09-02.
 
-## Just done (2026-09-02)
+## Just done (2026-09-02, evening)
+
+- **The phone line works end to end.** Two real calls from the live homepage to the owner's
+  phone (OmniDimension call logs 7353968 and 7353970, from the platform's default number
+  +1 337 379 9906): Ava opened with the visitor's name and the recording notice, pitched,
+  quoted $199 / $1,000 / 500 calls correctly, declined to book a 3 PM slot the right way; the
+  post-call report reached `/api/webhooks/voice` and matched (`metadata.call_log_id`), the
+  page filled in, the lead email fired. Fixed from the evidence: a demo call is now
+  "confirmed" when a person spoke (Ava's own "reschedules and cancellations" used to trip the
+  appointment keyword heuristic into "cancelled"); OmniDimension's `LLM:`/`User:` labels are
+  shown as Ava/You.
+- **Human check live and visible.** Turnstile keys are on Vercel (widget "AI Receptionist -
+  ask for a call", hostname ai-receptionist-two-azure.vercel.app, Managed). The check now runs
+  on every submission (live call or callback request) and renders visibly. The plate's inputs
+  got proper field bodies.
+- **Tuning notes from the transcripts** (not done): the agent's static end-call message
+  ("Thanks for your time. Have a good one.") is spoken after Ava's own closing sentence, so
+  callers hear two goodbyes, once with a stray "yo" — set `end_call.message_type` to `prompt`
+  or shorten the static line in the dashboard. The extracted `outcome` comes back "Not
+  provided" on demo calls; the app no longer depends on it for demos. Add a real domain to the
+  Turnstile widget's hostnames when the site moves.
+- **Still open, in order:** rotate `VOICE_WEBHOOK_SECRET` (the current token has been visible
+  in call logs and chats); `SUPABASE_SERVICE_ROLE_KEY` on Vercel (today's two leads lived in
+  memory and are gone); Resend + `OWNER_EMAIL` so leads arrive; a bought number in
+  OmniDimension so calls come from a consistent, branded number.
+
+## Earlier on 2026-09-02
 
 - **The homepage is a scrollcraft build.** `/` is now a chaptered editorial on paper: title
   page, the cost (hard cut to ink), the turn (a scrub film of the real confirmation page),

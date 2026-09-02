@@ -72,11 +72,31 @@
 
 /* the rail */
 .rc-rail { display: flex; gap: clamp(1rem, 2.5vw, 2rem); padding-inline: var(--sc-gutter); align-items: stretch; height: 100%; }
-.rc-rail > * { flex: 0 0 clamp(18rem, 28vw, 24rem); display: grid; align-content: end; padding: var(--sc-6); border-radius: var(--sc-r-md); background: var(--sc-surface); box-shadow: var(--sc-e1), var(--sc-edge); min-height: 56svh; align-self: center; }
+.rc-rail > * { flex: 0 0 clamp(18rem, 28vw, 24rem); display: grid; align-content: end; padding: var(--sc-6); border-radius: 32px; background: var(--sc-surface); box-shadow: var(--sc-e1), var(--sc-edge); min-height: 56svh; align-self: center; }
 .rc-rail > .rc-rail__lead { background: transparent; box-shadow: none; flex-basis: clamp(20rem, 30vw, 28rem); }
 .rc-rail h3 { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-xl); line-height: var(--sc-leading-tight); letter-spacing: var(--sc-track-snug); margin: 0 0 var(--sc-3); }
 .rc-rail p { margin: 0; color: var(--sc-ink-soft); font-size: var(--sc-t-base); }
 .rc-rail__note a { color: var(--sc-ink); text-decoration: underline; text-underline-offset: 0.28em; }
+
+/* ── an industry tile: its photograph full bleed, white type, and a blur that
+      deepens toward the bottom. The blur is a second, blurred copy of the same
+      photograph masked upward, not backdrop-filter: the minifier drops the
+      unprefixed property, and this works the same everywhere. ── */
+.rc-tile { position: relative; overflow: hidden; isolation: isolate; padding: 0;
+  background-image: var(--shot); background-size: cover; background-position: center;
+  box-shadow: 0 30px 70px -35px rgb(0 0 0 / 0.5), inset 0 0 0 1px rgb(255 255 255 / 0.10); }
+.rc-tile::before, .rc-tile::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.rc-tile::before {
+  background-image: var(--shot); background-size: cover; background-position: center;
+  filter: blur(16px); transform: scale(1.12); transform-origin: bottom center;
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 20%, transparent 56%);
+          mask-image: linear-gradient(to top, #000 0%, #000 20%, transparent 56%); }
+/* the words sit on this, so it carries the contrast rather than the blur */
+.rc-tile::after {
+  background: linear-gradient(to top, rgb(10 9 12 / 0.86) 0%, rgb(10 9 12 / 0.62) 22%, rgb(10 9 12 / 0.12) 46%, rgb(10 9 12 / 0) 62%); }
+.rc-tile__body { position: relative; z-index: 1; align-self: end; padding: var(--sc-6); }
+.rc-tile h3 { color: #fff; }
+.rc-tile p { color: rgb(255 255 255 / 0.86); }
 @media (prefers-reduced-motion: no-preference) {
   .rc-rail > * + * { opacity: calc(0.55 + var(--sc-p, 0) * 0.45); }
 }

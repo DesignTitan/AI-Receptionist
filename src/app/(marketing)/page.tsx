@@ -29,12 +29,12 @@ const CHAPTERS = [
 ];
 
 const RAIL = [
-  { h: "Health and wellness", p: "Visits confirmed, intake reminded, the no-show flagged before it happens." },
-  { h: "Personal care", p: "Colour, cuts, facials, massage: confirmed while your hands are busy." },
-  { h: "Professional services", p: "Consultations confirmed and reschedules taken, with no phone tag." },
-  { h: "Creative studios and agencies", p: "Discovery sessions booked with the person who would do the work." },
-  { h: "Trades and field service", p: "The window confirmed the night before, so the van never waits." },
-  { h: "Instruction and sessions", p: "Lessons confirmed, cancellations noticed, the slot offered on." },
+  { h: "Health and wellness", p: "Visits confirmed, intake reminded, the no-show flagged before it happens.", img: "ind-health.jpg" },
+  { h: "Personal care", p: "Colour, cuts, facials, massage: confirmed while your hands are busy.", img: "ind-care.jpg" },
+  { h: "Professional services", p: "Consultations confirmed and reschedules taken, with no phone tag.", img: "ind-professional.jpg" },
+  { h: "Creative studios and agencies", p: "Discovery sessions booked with the person who would do the work.", img: "ind-studio.jpg" },
+  { h: "Trades and field service", p: "The window confirmed the night before, so the van never waits.", img: "ind-trades.jpg" },
+  { h: "Instruction and sessions", p: "Lessons confirmed, cancellations noticed, the slot offered on.", img: "ind-lessons.jpg" },
 ];
 
 export default function HomePage() {
@@ -197,9 +197,11 @@ export default function HomePage() {
                 <p className="sc-body">If a client picks a person and a time, and someone has to phone them to make sure, this is for you.</p>
               </div>
               {RAIL.map((item) => (
-                <article key={item.h}>
-                  <h3>{item.h}</h3>
-                  <p>{item.p}</p>
+                <article key={item.h} className="rc-tile" style={{ "--shot": `url(/scrollcraft/${item.img})` } as React.CSSProperties}>
+                  <div className="rc-tile__body">
+                    <h3>{item.h}</h3>
+                    <p>{item.p}</p>
+                  </div>
                 </article>
               ))}
               <div className="rc-rail__note">

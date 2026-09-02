@@ -335,3 +335,10 @@ rate, no-shows, slots refilled and value recovered, before and after) and **soun
 (the greeting, the rules, and the number she calls from, per business). The stylist portrait
 is lifted from the real booking page and lives in this folder as `stylist.png`.
 
+The industries rail's six tiles now carry a photograph each, full bleed, with white type over
+a blur that deepens toward the bottom. The blur is a second, blurred copy of the same
+photograph masked upward rather than `backdrop-filter`: Next's minifier drops the unprefixed
+property and keeps only the WebKit one, which computes to nothing, so the effect silently did
+not apply. A masked copy behaves identically and everywhere. A dark gradient over it carries
+the text contrast, so the words never depend on what the photograph happens to be doing.
+

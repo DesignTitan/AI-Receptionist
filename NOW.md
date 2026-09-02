@@ -23,6 +23,25 @@ Handoff notes for the next session. Updated 2026-09-02.
   plate says "This page can't ring you", shows Ava's real opening line, and stops. The
   scripted demo transcript was removed after the owner tested it and, rightly, called it
   made up. Stages and transcript render only for a call that was placed.
+- **OmniDimension is live on the account and wired to this app** (agent `248069` "Ava",
+  built in a Cowork session, ElevenLabs "Elena", gpt-4.1-mini). Verified from this session
+  through the OmniDimension connector: the agent, its Post-Call webhook to
+  `/api/webhooks/voice?token=…` with the extracted `outcome` variable, and three web-call
+  logs (a reschedule conversation worked end to end; the reports came back `matched:false`
+  because web calls have no log on our side, which is correct). Variable syntax on their side
+  is `{{name}}`. Changes made from here, all additive (versioning is not on the plan, so restore
+  by hand if needed): welcome message was
+  `Hi, this is Ava calling from {{business_name}} about your upcoming appointment. Do you have a quick moment?`
+  and is now `{{first_message}}` (our first line, which carries the recording notice); a new
+  first prompt section "Which call this is" routes on `{{kind}}` (demo → follow `{{script}}`;
+  confirmation → the seven Cowork sections, untouched); defaults added for `kind`,
+  `first_message`, `script`, `contact_name`. The app now also sends `customer_name`, `kind`
+  and `callback_number` (`CONTACT_PHONE`, optional). Production has `VOICE_PROVIDER`,
+  `OMNIDIMENSION_API_KEY`, `OMNIDIMENSION_AGENT_ID`, `VOICE_WEBHOOK_SECRET`.
+  **Still missing on Vercel: the two Turnstile keys**, so the homepage stays in callback mode
+  by design until they land. No phone number on the account yet (the platform default rings).
+  The webhook token has been visible in call logs and chats: rotate it before a customer sees
+  this (`openssl rand -hex 24` → the dashboard URL and `VOICE_WEBHOOK_SECRET`, redeploy).
 - **A person, not a script, behind every live call.** Cloudflare Turnstile
   (`NEXT_PUBLIC_TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET_KEY`, `src/lib/turnstile.ts`) verified
   server-side before dialling; `isLiveCallReady()` = voice line AND human check, and the

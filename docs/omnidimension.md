@@ -32,20 +32,20 @@ interaction otherwise. Cloudflare's test keys work locally: site
 
    ```
    You are Ava, an AI phone receptionist. Every call you make carries its own
-   instructions in the variable [script]. Follow [script] exactly: it says who you
+   instructions in the variable {{script}}. Follow {{script}} exactly: it says who you
    are calling, why, what to say, what never to say, and how to classify the
-   outcome at the end. Begin the call by saying exactly: [first_message]. If
-   [first_message] does not contain the words "This call is recorded", say them in
+   outcome at the end. Begin the call by saying exactly: {{first_message}}. If
+   {{first_message}} does not contain the words "This call is recorded", say them in
    your first sentence. Never claim to be human. Never take payment details. Keep
    the call under ninety seconds.
    ```
 
-   OmniDimension fills square-bracket variables from the call's context. The app
+   OmniDimension fills `{{double_brace}}` variables from the call's context (confirmed on the
+   live agent; the square-bracket form is for contact-list columns). The app
    sends `script`, `first_message`, `contact_name`, `reference`, `kind` and, for
-   confirmation calls, the booking details. If a test call reads the brackets out
-   loud instead of filling them, the dashboard wants `{{script}}` style — swap the
-   brackets and test again; that is the only unknown in this guide.
-4. **Welcome message** (Conversational Flow): `[first_message]`
+   confirmation calls, the booking details. The live agent `248069` already has this wiring: a first section that routes on
+   `{{kind}}` and the welcome message `{{first_message}}`.
+4. **Welcome message** (Conversational Flow): `{{first_message}}`
 5. **Post-Call tab**:
    - Delivery method **Webhook**, URL:
      `https://ai-receptionist-two-azure.vercel.app/api/webhooks/voice?token=YOUR_SECRET`

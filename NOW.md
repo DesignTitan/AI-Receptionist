@@ -130,21 +130,35 @@ Intake → `src/verticals/<slug>/` (copy the salon's four files) → their Supab
 Resend + voice keys → phone number in the voice provider + `VOICE_WEBHOOK_SECRET` → test call with
 them on the line → `book.theirdomain.com` CNAME → invoice. Full runbook in the plan, Part 3.
 
-## Next — the one blocking item: Supabase (plan chunk 10)
+## Next — ONE step left to make production durable
 
-Deliberately deferred (owner decision 2026-09-01: not yet, $10/mo). When ready, in order:
+**Supabase is live** (created 2026-09-02, $10/mo, DesignTitan's Org):
+- project `ai-receptionist`, ref `ddbldxsyvrqrlvtainzn`, region us-east-1,
+  URL `https://ddbldxsyvrqrlvtainzn.supabase.co`
+- `schema.sql` applied as migration `initial_schema`; RLS on every table; 18 providers seeded
+  (6 medical / 6 salon / 6 studio).
+- `supabase/delete-client.sql` and `supabase/ops.sql` **verified against this database**
+  (throwaway client → all four counts zero, providers untouched).
+- Already on Vercel production: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+  (the `sb_publishable_…` key), a fresh `ADMIN_SESSION_SECRET`, `SITE_GATE=locked`.
 
-1. Create a Supabase project (org "DesignTitan's Org", `us-east-1` sits nearest Vercel).
-   The Supabase MCP connector can do it: `get_cost` → `confirm_cost` → `create_project`.
-2. Apply `supabase/schema.sql` (has the `vertical` columns and the `(vertical, slug)` unique
-   index) — `apply_migration` via the connector, or paste into the SQL editor.
-3. `npm run seed:sql` regenerates `supabase/seed.sql` from `src/verticals/*/roster.ts`
-   (18 providers across three businesses); run it after the schema.
-4. `vercel env add` for production: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   (the `sb_publishable_…` key), `SUPABASE_SERVICE_ROLE_KEY`, plus `ADMIN_PASSWORD` and
-   `ADMIN_SESSION_SECRET` (`openssl rand -hex 32`). Then `SITE_GATE=public` when you want it open.
-5. Redeploy, then the acceptance test from the plan: book on the live URL, **reload the
-   confirmation page** — it must survive. Then `/admin` shows the row under its business.
+**Missing: `SUPABASE_SERVICE_ROLE_KEY`.** The app only switches from the in-memory demo store to
+Supabase when this is set (`isSupabaseConfigured()` in `src/lib/env.ts`). It is a secret, so it
+has to be added by a person, not pasted into a chat. Three attempts on 2026-09-02 did not land it
+on the project — check with the self-test below before assuming it worked.
+
+```bash
+cd /Users/bubs2/Code/AI-Receptionist
+npx vercel env add SUPABASE_SERVICE_ROLE_KEY production   # prompts; paste the service_role secret
+npx vercel env ls production | grep SUPABASE_SERVICE_ROLE_KEY   # ← must print a line. If not, it didn't land.
+npx vercel --prod                                          # env vars only apply to a new build
+```
+Where the secret is: Supabase dashboard → project ai-receptionist → Project Settings → API keys →
+`service_role`. Then the acceptance test: unlock the site (`bubs2026`), book in any demo, and
+**reload the confirmation page** — it must stay 200. Then `/admin` shows the row under its business.
+
+Also set `ADMIN_PASSWORD` (still the default `demo1234` — fine while the site is locked, not after)
+and flip `SITE_GATE` to `public` when you want the marketing site open.
 
 Everything else, in priority order once Supabase is in:
 - Decide the sales motion (the site currently has no pricing and no contact CTA — set

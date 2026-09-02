@@ -183,7 +183,7 @@ const outcomeCopy = (t: ReturnType<typeof getVertical>["terms"]): Record<string,
 /** Fired when a confirmation call finishes, with the recording and transcript. */
 export async function sendCallCompletedEmail(callId: string) {
   const call = await getCall(callId);
-  if (!call) return;
+  if (!call || !call.appointment_id) return;
   const detail = await getAppointment(call.appointment_id);
   if (!detail) return;
   const v = getVertical(detail.vertical);
@@ -235,6 +235,37 @@ export async function sendCallCompletedEmail(callId: string) {
       body,
     ),
     appointmentId: detail.id,
+  });
+}
+
+/** Fired when a demonstration call from the product site finishes: this is a lead. */
+export async function sendDemoCallEmail(callId: string) {
+  const call = await getCall(callId);
+  if (!call || call.kind !== "demo") return;
+  const recording = absolute(call.recording_url);
+  const outcome = call.outcome ?? (call.status === "failed" ? "failed" : "no_answer");
+  const noLine = call.error === "no_voice_line";
+  const body = `
+    <p style="margin:0 0 18px;font-size:15px;line-height:1.6;color:#334155">
+      ${noLine
+        ? "Someone on the product site asked to be called. No voice line is connected to this deployment, so Ava did not call them and nothing was recorded. <strong>Call them back.</strong>"
+        : `Someone on the product site asked the receptionist to call them. Outcome: <strong>${escape(outcome)}</strong>${call.duration_seconds ? ` · ${escape(formatDuration(call.duration_seconds))}` : ""}.`}
+    </p>
+    <table role="presentation" width="100%" style="border-collapse:collapse">
+      ${row("Name", escape(call.demo_name || "Not given"))}
+      ${row("Phone", `<a href="tel:${escape(call.demo_phone ?? "")}" style="color:#4b4fe0">${escape(call.demo_phone ?? "—")}</a>`)}
+      ${row("Business", escape(call.demo_business || "Not given"))}
+      ${row("Reference", escape(call.reference ?? "—"))}
+      ${row("Provider", escape(call.provider))}
+    </table>
+    ${call.summary ? `<h3 style="font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin:24px 0 8px">Summary</h3><p style="margin:0;font-size:14px;line-height:1.6;color:#334155">${escape(call.summary)}</p>` : ""}
+    ${recording ? `<p style="margin:22px 0 0"><a href="${recording}" style="display:inline-block;background:#4b4fe0;color:#fff;text-decoration:none;padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600">▶ Listen to the recording</a></p>` : ""}
+    ${call.transcript ? `<h3 style="font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin:24px 0 8px">Transcript</h3><pre style="margin:0;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.65;color:#334155;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px">${escape(call.transcript)}</pre>` : ""}`;
+  await send({
+    to: env.ownerEmail ?? "owner@example.com",
+    subject: `☎ Lead · ${call.demo_name || "someone"} asked for a call (${call.demo_phone ?? "no number"})`,
+    html: `<!doctype html><html><body style="margin:0;background:#f1f5f9;padding:32px 12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0f172a"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center"><table role="presentation" width="100%" style="max-width:600px;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0"><tr><td style="background:#4b4fe0;padding:22px 28px"><div style="color:#fff;opacity:.75;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600">Demo call</div><div style="color:#fff;font-size:20px;font-weight:700;margin-top:4px">A visitor asked the receptionist to call</div></td></tr><tr><td style="padding:28px">${body}</td></tr></table></td></tr></table></body></html>`,
+    appointmentId: null,
   });
 }
 

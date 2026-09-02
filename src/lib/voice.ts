@@ -2,6 +2,34 @@ import { env, isVoiceProviderConfigured } from "./env";
 import { providerLabel } from "@/lib/format";
 import { RECORDING_NOTICE } from "./consent";
 import { getVertical } from "@/verticals";
+import { getCall } from "./db";
+
+/** The first thing Ava says on a demonstration call: their name, then the recording notice, before anything else. */
+export function demoFirstMessage(name: string | null) {
+  return `Hi${name ? ` ${name}` : ""}, this is Ava, the AI receptionist. ${RECORDING_NOTICE} You asked me to call you from the website. Have I got the right person?`;
+}
+
+/** The script for a call a visitor requested from the product site. Product voice, no business attached yet. */
+export function buildDemoScript(call: CallLog) {
+  const business = call.demo_business?.trim() || null;
+  return `You are Ava, the AI receptionist for a product called AI Receptionist: a booking page and an AI front desk for businesses that run on appointments. Someone visiting the product's website typed their phone number and asked to be called so they could hear what you sound like. This is a short, warm demonstration call. Keep it under ninety seconds.
+
+What you know:
+- Their name: ${call.demo_name ?? "not given"}
+- Their business, if they gave one: ${business ?? "not given"}
+- Reference: ${call.reference ?? ""}
+
+How to run the call:
+1. Open with exactly: "${demoFirstMessage(call.demo_name)}"
+2. In two sentences, say what you do: when one of their clients books online, you phone the client inside a minute to confirm; you take reschedules and cancellations on the call; the recording, the transcript and a one-line summary land in their dashboard and their inbox.
+3. ${business ? `Say one concrete thing you would do for ${business}.` : "Ask what kind of business they run, then say one concrete thing you would do for it."}
+4. Ask if they have a question and answer it plainly. If it is about price: $199 a month per business and $1,000 to set up, month to month, fair use of 500 calls a month.
+5. Close: the site they are on has pricing and three live demos. Thank them and end the call.
+
+Rules: never take payment details. Never promise an integration that does not exist; there is no calendar sync yet, say it is on the roadmap. Never claim to be human; if asked, say you are an AI. Speak plainly and do not oversell.
+
+At the end, classify the outcome as exactly one of: confirmed, rescheduled, cancelled, voicemail, no_answer.`;
+}
 import {
   createCall,
   getAppointment,
@@ -84,6 +112,15 @@ const cleanPhone = (phone: string) => {
 
 type ProviderResponse = { providerCallId: string | null };
 
+/** Everything a provider needs to place one call. Built from an appointment, or from a demo request. */
+type CallTarget = {
+  phone: string;
+  name: string;
+  firstMessage: string;
+  script: string;
+  metadata: Record<string, unknown>;
+};
+
 async function postJson(url: string, apiKey: string, body: unknown) {
   const response = await fetch(url, {
     method: "POST",
@@ -104,59 +141,56 @@ async function postJson(url: string, apiKey: string, body: unknown) {
   }
 }
 
-async function dispatchVapi(detail: AppointmentDetail, call: CallLog): Promise<ProviderResponse> {
+async function dispatchVapi(t: CallTarget): Promise<ProviderResponse> {
   const { apiKey, assistantId, phoneNumberId } = env.vapi;
   const json = await postJson("https://api.vapi.ai/call", apiKey!, {
     assistantId,
     phoneNumberId,
     customer: {
-      number: cleanPhone(detail.client!.phone),
-      name: detail.client!.full_name,
+      number: cleanPhone(t.phone),
+      name: t.name,
     },
     assistantOverrides: {
-      firstMessage: firstMessage(detail),
+      firstMessage: t.firstMessage,
       model: {
         provider: "anthropic",
         model: "claude-sonnet-5",
-        messages: [{ role: "system", content: buildAgentScript(detail) }],
+        messages: [{ role: "system", content: t.script }],
       },
-      variableValues: callMetadata(detail, call),
-      metadata: callMetadata(detail, call),
+      variableValues: t.metadata,
+      metadata: t.metadata,
       server: { url: voiceWebhookUrl() },
     },
   });
   return { providerCallId: (json.id as string) ?? null };
 }
 
-async function dispatchBland(detail: AppointmentDetail, call: CallLog): Promise<ProviderResponse> {
+async function dispatchBland(t: CallTarget): Promise<ProviderResponse> {
   const { apiKey, voiceId, pathwayId } = env.bland;
   const json = await postJson("https://api.bland.ai/v1/calls", apiKey!, {
-    phone_number: cleanPhone(detail.client!.phone),
-    task: pathwayId ? undefined : buildAgentScript(detail),
+    phone_number: cleanPhone(t.phone),
+    task: pathwayId ? undefined : t.script,
     pathway_id: pathwayId,
-    first_sentence: firstMessage(detail),
+    first_sentence: t.firstMessage,
     voice: voiceId ?? "june",
     record: true,
     max_duration: 5,
     webhook: voiceWebhookUrl(),
-    metadata: callMetadata(detail, call),
-    request_data: callMetadata(detail, call),
+    metadata: t.metadata,
+    request_data: t.metadata,
   });
   return { providerCallId: (json.call_id as string) ?? null };
 }
 
-async function dispatchOmniDimension(
-  detail: AppointmentDetail,
-  call: CallLog,
-): Promise<ProviderResponse> {
+async function dispatchOmniDimension(t: CallTarget): Promise<ProviderResponse> {
   const { apiKey, agentId } = env.omnidimension;
   const json = await postJson(
     "https://backend.omnidim.io/api/v1/calls/dispatch",
     apiKey!,
     {
       agent_id: agentId,
-      to_number: cleanPhone(detail.client!.phone),
-      call_context: callMetadata(detail, call),
+      to_number: cleanPhone(t.phone),
+      call_context: t.metadata,
       webhook_url: voiceWebhookUrl(),
     },
   );
@@ -217,6 +251,37 @@ export async function dispatchConfirmationCall(
     !options.forceNew && existing && existing.status === "queued" && !existing.provider_call_id;
   const call = reusable ? existing : await createCall(appointmentId, detail.client.id);
 
+  return placeCall(call, {
+    phone: detail.client.phone,
+    name: detail.client.full_name,
+    firstMessage: firstMessage(detail),
+    script: buildAgentScript(detail),
+    metadata: callMetadata(detail, call),
+  });
+}
+
+/** The demonstration call a visitor asks for from the product site. */
+export async function dispatchDemoCall(callId: string): Promise<DispatchResult> {
+  const call = await getCall(callId);
+  if (!call || call.kind !== "demo" || !call.demo_phone) {
+    return { ok: false, provider: env.voiceProvider, callId, simulated: false, error: "Demo call not found" };
+  }
+  return placeCall(call, {
+    phone: call.demo_phone,
+    name: call.demo_name ?? "Website visitor",
+    firstMessage: demoFirstMessage(call.demo_name),
+    script: buildDemoScript(call),
+    metadata: {
+      call_log_id: call.id,
+      kind: "demo",
+      reference: call.reference,
+      business: call.demo_business ?? "",
+      name: call.demo_name ?? "",
+    },
+  });
+}
+
+async function placeCall(call: CallLog, target: CallTarget): Promise<DispatchResult> {
   if (!isVoiceProviderConfigured()) {
     // Demo mode: the simulator in db.ts walks this call through its lifecycle.
     await updateCall(call.id, { provider: "demo", status: "queued" });
@@ -233,13 +298,13 @@ export async function dispatchConfirmationCall(
     let result: ProviderResponse;
     switch (env.voiceProvider) {
       case "vapi":
-        result = await dispatchVapi(detail, call);
+        result = await dispatchVapi(target);
         break;
       case "bland":
-        result = await dispatchBland(detail, call);
+        result = await dispatchBland(target);
         break;
       case "omnidimension":
-        result = await dispatchOmniDimension(detail, call);
+        result = await dispatchOmniDimension(target);
         break;
       default:
         throw new Error(`Unknown VOICE_PROVIDER "${env.voiceProvider}"`);

@@ -1,8 +1,34 @@
 # NOW
 
-Handoff notes for the next session. Updated 2026-09-01.
+Handoff notes for the next session. Updated 2026-09-02.
 
-## Just done
+## Just done (2026-09-02)
+
+- **The homepage is a scrollcraft build.** `/` is now a chaptered editorial on paper: title
+  page, the cost (hard cut to ink), the turn (a scrub film of the real confirmation page),
+  proof, an industries rail, an authored silence, the "ask for a call" plate (the peak), terms
+  with the $199 / $1,000 / 500-call pricing, a held colophon. Engine vendored untouched at
+  `src/vendor/scrollcraft/`, mounted from `components/marketing/scrollcraft-mount.tsx`; page
+  styles in `app/(marketing)/receptionist.css`; assets in `public/scrollcraft/`. Brief, score,
+  fingerprint gate and the verification record: `scrollcraft/builds/receptionist/BRIEF.md`;
+  registry row in `scrollcraft/FINGERPRINTS.md`. Verified with the skill's harness on desktop,
+  390×844 and reduced motion (no dead scroll, clip always moving, contrast clear, no console
+  errors) and by driving the page in a browser. Lab shots are gitignored.
+- **"Have it call you" is real plumbing, and honest.** `POST /api/try-call` (name, phone,
+  business; NANP only; honeypot; 3/IP/hour, 2/phone/day, `TRY_CALL_DAILY_CAP`) creates a
+  `kind: "demo"` call log with reference `TRY-XXXXXX`, dispatches through the same
+  `placeCall` as confirmations, and `GET /api/try-call/[id]?ref=` is what the plate polls.
+  **With no voice provider the page does not pretend:** the server records the lead, marks
+  it `failed / no_voice_line`, emails the owner ("☎ Lead · <name> asked for a call"), and the
+  plate says "This page can't ring you", shows Ava's real opening line, and stops. The
+  scripted demo transcript was removed after the owner tested it and, rightly, called it
+  made up. Stages and transcript render only for a call that was placed.
+- Schema: `call_logs` demo columns (`kind`, nullable `appointment_id`/`client_id`,
+  `demo_phone`, `demo_business`, `demo_name`, `reference`) now written into
+  `supabase/schema.sql`; `demo_name` applied to the live project as migration
+  `demo_call_name`. Favicon added (`src/app/icon.svg`).
+
+## Done earlier
 
 - **Business plan + the viability floor** (`~/.claude/plans/so-you-want-to-keen-nest.md`,
   approved 2026-09-01): concierge model — a customer is one deployment, one Supabase, one config
@@ -159,6 +185,13 @@ Where the secret is: Supabase dashboard → project ai-receptionist → Project 
 
 Also set `ADMIN_PASSWORD` (still the default `demo1234` — fine while the site is locked, not after)
 and flip `SITE_GATE` to `public` when you want the marketing site open.
+
+**To make the call on the homepage real** (today it records a lead and says so):
+`VOICE_PROVIDER=vapi` plus the Vapi keys listed in `.env.example`, a phone number in Vapi, and
+`VOICE_WEBHOOK_SECRET` on Vercel; then `OWNER_EMAIL` + `RESEND_API_KEY` so the lead and the
+call summary actually arrive. The page flips to "Hear it yourself" mode on its own
+(`isVoiceProviderConfigured()` drives the copy, the stages and the folio). Listen to the first
+real call: `buildDemoScript` in `src/lib/voice.ts` is the script, and it will need a pass.
 
 Everything else, in priority order once Supabase is in:
 - Decide the sales motion (the site currently has no pricing and no contact CTA — set

@@ -5,7 +5,7 @@ import {
   updateAppointmentStatus,
   updateCall,
 } from "@/lib/db";
-import { sendCallCompletedEmail } from "@/lib/email";
+import { sendCallCompletedEmail, sendDemoCallEmail } from "@/lib/email";
 import { env } from "@/lib/env";
 import type { AppointmentStatus, CallOutcome, CallStatus } from "@/lib/types";
 
@@ -218,14 +218,16 @@ export async function POST(request: Request) {
     ended_at: terminal ? new Date().toISOString() : call.ended_at,
   });
 
-  if (terminal && outcome && OUTCOME_TO_APPOINTMENT[outcome]) {
+  if (terminal && outcome && OUTCOME_TO_APPOINTMENT[outcome] && call.appointment_id) {
     await updateAppointmentStatus(call.appointment_id, OUTCOME_TO_APPOINTMENT[outcome]);
   }
 
-  // Providers retry webhooks; only notify the clinic on the first terminal event.
+  // Providers retry webhooks; only notify the owner on the first terminal event.
+  // A demo call has no appointment; it is a lead and gets its own email.
   if (terminal && !alreadyFinished) {
     try {
-      await sendCallCompletedEmail(call.id);
+      if (call.kind === "demo") await sendDemoCallEmail(call.id);
+      else await sendCallCompletedEmail(call.id);
     } catch (error) {
       console.error("[webhook:voice] notification failed", error);
     }

@@ -74,6 +74,10 @@ export const env = {
   get contactEmail() {
     return read("CONTACT_EMAIL") ?? this.ownerEmail;
   },
+  /** Hard ceiling on "have it call you" demo calls per 24h, across the deployment. */
+  get tryCallDailyCap() {
+    return read("TRY_CALL_DAILY_CAP") ?? "50";
+  },
   get ownerEmail() {
     return read("OWNER_EMAIL") ?? read("CLINIC_OWNER_EMAIL");
   },

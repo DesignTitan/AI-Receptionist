@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* The scroll engine's floor, in its own layer: unlayered app rules always win. */
+@import "../vendor/scrollcraft/scrollcraft.css" layer(scrollcraft);
 
 @custom-variant dark (&:where(.dark, .dark *));
 

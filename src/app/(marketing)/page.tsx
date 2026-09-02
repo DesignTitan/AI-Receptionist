@@ -1,174 +1,226 @@
 import type { Metadata } from "next";
-import { CallPreview } from "@/components/call-preview";
-import { ArrowRight, Calendar, Mail, PhoneRinging, Shield, Waveform } from "@/components/icons";
-import { Faq, Hero, SplitFeature, StatStrip, StepGrid } from "@/components/marketing/blocks";
-import { DemoCards } from "@/components/marketing/demo-cards";
-import { HeroVideo } from "@/components/marketing/hero-video";
-import { Industries } from "@/components/marketing/industries";
+import { Folio } from "@/components/marketing/folio";
 import { PRODUCT_NAME } from "@/components/marketing/product-chrome";
-import { Button } from "@/components/ui/button";
-import { env } from "@/lib/env";
-import { VERTICALS } from "@/verticals";
+import { ScrollCraftMount } from "@/components/marketing/scrollcraft-mount";
+import { TryCallPlate } from "@/components/marketing/try-call-plate";
+import { isVoiceProviderConfigured } from "@/lib/env";
+import "./receptionist.css";
 
 export const metadata: Metadata = {
   title: { absolute: `${PRODUCT_NAME} · The front desk that calls back` },
   description:
-    "A booking page and an AI front desk for clinics, salons, studios — any business that runs on appointments. Clients book online; the assistant phones within a minute to confirm; every call is logged.",
+    "A booking page and an AI receptionist for any business that runs on appointments. Clients book online; it phones them inside a minute to confirm; you see every call.",
 };
 
-const STEPS = [
-  {
-    icon: Calendar,
-    title: "Your bookable team",
-    body: "Load your people, their hours and what they offer. Your booking page is live the same day, in your name and your colours.",
-  },
-  {
-    icon: PhoneRinging,
-    title: "They book, we call",
-    body: "Within a minute of every booking the assistant rings the client to confirm — and takes reschedules and cancellations on the call, no phone tag.",
-  },
-  {
-    icon: Waveform,
-    title: "Every call, logged",
-    body: "Recording, transcript and a one-line summary land in your dashboard and your inbox the moment the call ends. Nothing is lost to voicemail.",
-  },
+const CHAPTERS = [
+  { id: "desk", n: "01", title: "The front desk" },
+  { id: "cost", n: "02", title: "The cost" },
+  { id: "turn", n: "03", title: "It calls back" },
+  { id: "proof", n: "04", title: "Proof" },
+  { id: "industries", n: "05", title: "Your industry" },
+  { id: "hear", n: "06", title: "Hear it yourself" },
+  { id: "terms", n: "07", title: "Terms" },
+  { id: "colophon", n: "08", title: "Colophon" },
 ];
 
-const FAQ = [
-  {
-    q: "Who actually makes the call?",
-    a: "An AI voice agent, on the voice provider you choose. It introduces itself as automated, confirms the booking, handles reschedules and cancellations, and passes anything unusual to a person. Every call is recorded and transcribed.",
-  },
-  {
-    q: "Can it sync with my calendar or practice software?",
-    a: "Not yet — it's the next thing we build, and if you need it, you'll be the reason. Today every booking lands in your dashboard and your inbox within seconds, so nothing is lost; it just isn't written into your other system automatically.",
-  },
-  {
-    q: "Does it replace my website?",
-    a: "It doesn't have to. Run it as your booking page on its own address and point 'Book now' at it, or let it be the whole site if you'd rather. An embeddable widget is on the roadmap.",
-  },
-  {
-    q: "What happens when a client doesn't pick up?",
-    a: "The slot stays held, the booking is flagged 'no answer' in your dashboard, and a person can follow up — or you can have the assistant try again with one click.",
-  },
-  {
-    q: "How do I get started?",
-    a: "Try the three demos. They're real: book a slot, take the call, then open the shared dashboard and watch it land. Then get in touch and we'll set up a page for your business.",
-  },
+const RAIL = [
+  { h: "Health and wellness", p: "Visits confirmed, intake reminded, the no-show flagged before it happens." },
+  { h: "Personal care", p: "Colour, cuts, facials, massage: confirmed while your hands are busy." },
+  { h: "Professional services", p: "Consultations confirmed and reschedules taken, with no phone tag." },
+  { h: "Creative studios and agencies", p: "Discovery sessions booked with the person who would do the work." },
+  { h: "Trades and field service", p: "The window confirmed the night before, so the van never waits." },
+  { h: "Instruction and sessions", p: "Lessons confirmed, cancellations noticed, the slot offered on." },
 ];
 
 export default function HomePage() {
-  const contact = env.contactEmail;
+  const simulated = !isVoiceProviderConfigured();
   return (
-    <main id="main">
-      <Hero
-        eyebrow="An AI front desk for any business that takes bookings"
-        headline={{
-          line1: "Stop losing bookings",
-          line2Before: "to ",
-          emphasis: "voicemail",
-          line2After: ".",
-        }}
-        body={`${PRODUCT_NAME} gives clinics, salons, studios — anyone who runs on appointments — a booking page and a front desk that phones every client within a minute to confirm, then logs the call where you can see it.`}
-        primary={{ label: "See the live demos", href: "/demos" }}
-        secondary={{ label: "How it works", href: "#how-it-works" }}
-        bullets={[
-          "Three live demos you can book right now",
-          "Recording, transcript and summary on every call",
-          "Vapi, Bland or OmniDimension under the hood",
-        ]}
-        aside={<CallPreview preview={VERTICALS.medical.copy.callPreview} />}
-        background={<HeroVideo />}
-      />
+    <ScrollCraftMount>
+      <Folio chapters={simulated ? CHAPTERS.map((c) => (c.id === "hear" ? { ...c, title: "Ask for a call" } : c)) : CHAPTERS} />
+      <div className="sc-grain" aria-hidden="true" />
 
-      <StatStrip
-        stats={[
-          ["58 sec", "From booking to confirmation call"],
-          ["94%", "Bookings confirmed on the first call"],
-          ["0", "Clients left on hold"],
-          ["24/7", "The front desk never closes"],
-        ]}
-      />
-
-      <StepGrid eyebrow="How it works" title="Three steps, and the phone call comes from you" steps={STEPS} />
-
-      <section id="demos" className="scroll-mt-20 border-t border-line py-20">
-        <div className="mx-auto max-w-6xl px-5">
-          <header className="animate-on-scroll [animation:animationIn_0.7s_ease-out_0.05s_both] mb-10 flex flex-wrap items-end justify-between gap-6">
-            <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">Live demos</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-ink sm:text-4xl">
-                See it running as three different businesses
-              </h2>
-              <p className="mt-3 text-[15px] leading-relaxed text-muted">
-                Same product, three skins. Each one takes real bookings and places a real
-                (simulated) confirmation call you can watch walk through.
+      <main id="main">
+        {/* 01 · Title page. Type on paper, no media above the fold. */}
+        <section id="desk" className="rc-chapter rc-title" data-sc-act="flow">
+          <div className="sc-wrap">
+            <p className="rc-mark"><i aria-hidden /> {PRODUCT_NAME}</p>
+            <div className="sc-stack" data-sc-in data-sc-stagger="70">
+              <h1 className="sc-display sc-display--xl">The front desk that calls back.</h1>
+              <p className="sc-lede">
+                A booking page and an AI receptionist for any business that runs on appointments.
+                Your clients book online. It phones them inside a minute to confirm. You see every call.
+              </p>
+              <div className="rc-title__actions">
+                <a href="#hear">{simulated ? "Ask for a call" : "Have it call you"}</a>
+                <a href="/demos">See the demos</a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="rc-chapter" data-sc-act="flow" style={{ paddingTop: 0 }}>
+          <div className="sc-wrap rc-plates rc-plates--flip">
+            <figure className="rc-media" data-sc-in>
+              <img src="/scrollcraft/01-booking.jpg" width={1600} height={1000} alt="The booking page of the salon demo: a week of days and the open times under Sasha Reyes." />
+              <figcaption>A booking on the salon demo. Live availability, forty seconds to book.</figcaption>
+            </figure>
+            <div className="sc-stack" data-sc-in data-sc-stagger="60">
+              <h2 className="sc-display sc-display--md">Every booking begins with a phone that rang.</h2>
+              <p className="sc-body">
+                Someone found you, picked a time, and dialled. Whether that became a booking depended
+                on who could pick up. This page is about what happens when nobody can.
               </p>
             </div>
-            <Button href="/demos" variant="secondary" size="md">
-              All demos
-              <ArrowRight width={16} height={16} />
-            </Button>
-          </header>
-          <DemoCards />
-        </div>
-      </section>
-
-      <Industries />
-
-      <div className="animate-on-scroll [animation:animationIn_0.7s_ease-out_0.05s_both]">
-      <SplitFeature
-        eyebrow="What's in the box"
-        title="Booking page, voice front desk, one dashboard"
-        body="Your clients pick a person and a time on a page that looks like yours. The assistant confirms by phone within the minute. You get the recording, the transcript and a one-line summary — and an email the moment the call ends."
-        cta={{ label: "Open the staff dashboard", href: "/admin" }}
-        features={[
-          {
-            icon: PhoneRinging,
-            title: "Your choice of voice provider",
-            body: "Vapi, Bland.ai or OmniDimension — swap with one setting.",
-          },
-          {
-            icon: Mail,
-            title: "Owner notifications",
-            body: "Client details, outcome and a link to the recording, by email.",
-          },
-          {
-            icon: Shield,
-            title: "Your client list stays yours",
-            body: "Row-level security on every table; only your team roster is public.",
-          },
-        ]}
-      />
-      </div>
-
-      <div className="animate-on-scroll [animation:animationIn_0.7s_ease-out_0.05s_both]">
-        <Faq eyebrow="Questions" title="Before you ask for a call" items={FAQ} />
-      </div>
-
-      <section className="mx-auto max-w-6xl px-5 py-20">
-        <div className="animate-on-scroll [animation:animationIn_0.7s_ease-out_0.05s_both] card relative overflow-hidden p-8 text-center md:p-14">
-          <div className="aurora absolute inset-0 -z-10 opacity-70" />
-          <h2 className="text-3xl font-semibold tracking-[-0.02em] text-ink sm:text-4xl">
-            See it work before you talk to anyone.
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-[15.5px] leading-relaxed text-muted">
-            Book a slot in any demo. Your phone won't ring — the call is simulated — but the
-            dashboard will show you exactly what your front desk would have seen.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Button href="/demos">
-              Open the demos
-              <ArrowRight width={18} height={18} />
-            </Button>
-            {contact && (
-              <Button href={`mailto:${contact}`} variant="secondary">
-                Talk to us
-              </Button>
-            )}
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+
+        {/* 02 · The cost. A hard cut to ink. No numbers: none are verified. */}
+        <section id="cost" className="rc-chapter rc-dark" data-sc-act="flow">
+          <div className="sc-wrap rc-plates">
+            <div className="sc-stack" data-sc-in data-sc-stagger="60">
+              <h2 className="sc-display sc-display--lg">The call that went to voicemail was a booking.</h2>
+              <p className="sc-lede">
+                Hands were busy. The room was full. It was seven in the evening. They did not leave a
+                message. They booked the next place on the list.
+              </p>
+              <p className="sc-body">
+                A front desk cannot answer every call, and a client will not wait for one to be
+                returned. The booking was lost in the gap between the two.
+              </p>
+            </div>
+            <figure className="rc-media" data-sc-parallax="-0.7">
+              <img src="/scrollcraft/02-missed-call.jpg" width={1440} height={300} alt="A dashboard row reading No answer, flagged for a person to follow up." />
+              <figcaption>How a missed call looks on the dashboard: flagged, so a person follows up.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        {/* 03 · The turn. The one film chapter: the real confirmation page walking to confirmed. */}
+        <section id="turn" data-sc-act="scrub" data-sc-span="2.4" data-sc-dwell="0.32">
+          <div data-sc-stage>
+            <picture>
+              <source media="(max-width: 860px)" srcSet="/scrollcraft/03-turn-poster-p.jpg" />
+              <img className="sc-stage__poster" src="/scrollcraft/03-turn-poster.jpg" alt="" />
+            </picture>
+            <video data-sc-scrub data-sc-src="/scrollcraft/03-turn.mp4" data-sc-src-mobile="/scrollcraft/03-turn-p.mp4" muted playsInline />
+            <div className="sc-scrim sc-scrim--lead" aria-hidden="true" />
+            <div className="sc-copy sc-copy--lead" data-sc-cue="0 0.58 0">
+              <h2 className="sc-display sc-display--lg" data-sc-kinetic="lines">It calls them back before they have put the phone down.</h2>
+              <p className="sc-lede">Within a minute of a booking the assistant rings the client, confirms the time, and takes a reschedule or a cancellation on the call.</p>
+            </div>
+            <div className="sc-copy sc-copy--trail" data-sc-cue="0.62 0.96">
+              <h2 className="sc-display sc-display--md">Recorded. Transcribed. Summarised. Every time.</h2>
+            </div>
+          </div>
+        </section>
+
+        {/* 04 · Proof. An iris into the real dashboard, then the record. */}
+        <section id="proof" className="rc-chapter" data-sc-act="flow">
+          <div className="sc-wrap">
+            <div className="sc-stack" data-sc-in data-sc-stagger="60" style={{ maxWidth: "46rem" }}>
+              <h2 className="sc-display sc-display--lg">One desk. Every business.</h2>
+              <p className="sc-body">
+                The recording, the transcript and a one-line summary land in the dashboard and in your
+                inbox the moment the call ends. Three demonstration businesses run on this one desk: a
+                clinic, a salon, a design studio.
+              </p>
+            </div>
+            <figure className="rc-media rc-media--frame" data-sc-reveal="iris" data-sc-reveal-at="0.12 0.52" style={{ marginTop: "var(--sc-8)" }}>
+              <img src="/scrollcraft/04-dashboard.jpg" width={1600} height={1000} alt="The staff dashboard: bookings from three businesses, each with its call outcome." />
+            </figure>
+            <div className="sc-wrap rc-plates" style={{ paddingInline: 0, marginTop: "var(--sc-9)" }}>
+              <figure className="rc-media" data-sc-in>
+                <img src="/scrollcraft/04-record.jpg" width={1600} height={1000} alt="A single record: the recording, the transcript line by line, and the assistant's summary." />
+                <figcaption>A record. The recording, the transcript, and what the assistant took from it.</figcaption>
+              </figure>
+              <div className="sc-stack" data-sc-in data-sc-stagger="60">
+                <h3 className="sc-display sc-display--md">Nothing is lost to voicemail.</h3>
+                <p className="sc-body">
+                  A no-answer is flagged for a person. A reschedule comes back with the times that
+                  suit. A cancellation frees the slot. Each one is a row you can open.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 05 · Their industry. Lateral: breadth. */}
+        <section id="industries" data-sc-act="pan" data-sc-span="2.4">
+          <div data-sc-stage>
+            <div className="rc-rail" data-sc-pan="0.06">
+              <div className="rc-rail__lead">
+                <h2 className="sc-display sc-display--md">Any business that runs on appointments.</h2>
+                <p className="sc-body">If a client picks a person and a time, and someone has to phone them to make sure, this is for you.</p>
+              </div>
+              {RAIL.map((item) => (
+                <article key={item.h}>
+                  <h3>{item.h}</h3>
+                  <p>{item.p}</p>
+                </article>
+              ))}
+              <div className="rc-rail__note">
+                <h3>Three are live today.</h3>
+                <p>A clinic, a salon and a studio, each taking real bookings. <a href="/demos">Open the demos.</a></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Authored silence: one quiet screen before the peak. */}
+        <section className="rc-silence" aria-hidden="true" />
+
+        {/* 06 · Hear it yourself. The peak, and the signature move. */}
+        <section id="hear" data-sc-act="pin" data-sc-span="3">
+          <div data-sc-stage className="rc-plate">
+            <div data-sc-cue="0 0.97 0" style={{ width: "min(44rem, 100%)" }}>
+              <div className="rc-plate__head sc-stack">
+                <h2 className="sc-display sc-display--lg">{simulated ? "Ask for a call." : "Hear it yourself."}</h2>
+                <p className="sc-lede">{simulated ? "Leave your name and number. A person calls you back." : "Type your name and number. It calls you, now."}</p>
+              </div>
+              <TryCallPlate simulated={simulated} />
+            </div>
+          </div>
+        </section>
+
+        {/* 07 · Terms. Compressed: information, not experience. */}
+        <section id="terms" className="rc-chapter" data-sc-act="flow">
+          <div className="sc-wrap">
+            <div className="sc-stack" data-sc-in data-sc-stagger="60">
+              <h2 className="sc-display sc-display--lg">How it works, and what it costs.</h2>
+              <ol className="rc-steps">
+                <li><span><strong>Your team, your hours, your page.</strong>We set up the booking page in your name and your colours. Live the same day.</span></li>
+                <li><span><strong>They book, it calls.</strong>Every booking gets a confirmation call inside a minute. Reschedules and cancellations are taken on the call.</span></li>
+                <li><span><strong>You see everything.</strong>Recording, transcript and summary in your dashboard and your inbox. A no-answer is flagged for a person.</span></li>
+              </ol>
+              <div className="rc-price">
+                <div><b>$199</b><span>a month, per business. Month to month.</span></div>
+                <div><b>$1,000</b><span>to set up: your page, your people, your voice line, a test call with you on it.</span></div>
+                <div><b>500</b><span>calls a month, fair use. Most businesses never reach it.</span></div>
+              </div>
+              <p className="sc-body" style={{ marginTop: "var(--sc-6)" }}>
+                Calendar and practice-software sync is not built yet. If you need it, you would be the reason it gets built.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 08 · Colophon. The last act holds. */}
+        <section id="colophon" data-sc-act="pin" data-sc-span="1.15">
+          <div data-sc-stage className="rc-colophon">
+            <div className="rc-colophon__inner" data-sc-cue="0 1 0 0">
+              <p className="rc-run">
+                <a href="#hear">{simulated ? "Ask for a call" : "Have it call you"}</a>. Or <a href="/demos">open one of the three demos</a> and book something.
+              </p>
+              <hr className="rc-hair" />
+              <p>{PRODUCT_NAME}. A booking page and an AI front desk for businesses that run on appointments.</p>
+              <footer>
+                <a href="/admin">Staff dashboard</a>
+                <span>The three demo businesses are fictional.</span>
+                <span>© {new Date().getFullYear()}</span>
+              </footer>
+            </div>
+          </div>
+        </section>
+      </main>
+    </ScrollCraftMount>
   );
 }

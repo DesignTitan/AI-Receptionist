@@ -74,10 +74,19 @@ export type Appointment = {
   updated_at: string;
 };
 
+export type CallKind = "confirmation" | "demo";
+
 export type CallLog = {
   id: string;
-  appointment_id: string;
-  client_id: string;
+  /** A confirmation call belongs to an appointment; a demo call ("have it call you") to nobody. */
+  kind: CallKind;
+  appointment_id: string | null;
+  client_id: string | null;
+  demo_phone: string | null;
+  demo_business: string | null;
+  demo_name: string | null;
+  /** Capability token for reading a demo call's status from the page. */
+  reference: string | null;
   provider: string;
   provider_call_id: string | null;
   direction: "outbound" | "inbound";

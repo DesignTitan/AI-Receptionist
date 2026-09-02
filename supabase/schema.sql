@@ -97,6 +97,20 @@ create index if not exists call_logs_appointment_idx on public.call_logs (appoin
 create unique index if not exists call_logs_provider_call_idx
   on public.call_logs (provider_call_id) where provider_call_id is not null;
 
+-- ── Demo calls ("have it call you" from the product site) ──────────────
+-- A call log row with no appointment: the visitor's name, number and business
+-- live on the row, and `reference` (TRY-XXXXXX) is what the page polls with.
+alter table public.call_logs add column if not exists kind text not null default 'confirmation'
+  check (kind in ('confirmation','demo'));
+alter table public.call_logs alter column appointment_id drop not null;
+alter table public.call_logs alter column client_id   drop not null;
+alter table public.call_logs add column if not exists demo_phone    text;
+alter table public.call_logs add column if not exists demo_business text;
+alter table public.call_logs add column if not exists demo_name     text;
+alter table public.call_logs add column if not exists reference     text;
+create unique index if not exists call_logs_reference_idx on public.call_logs (reference) where reference is not null;
+create index if not exists call_logs_kind_created_idx on public.call_logs (kind, created_at desc);
+
 -- ── Notification logs ──────────────────────────────────────────────────────
 create table if not exists public.notification_logs (
   id              uuid primary key default gen_random_uuid(),

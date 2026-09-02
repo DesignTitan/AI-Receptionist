@@ -1,4 +1,5 @@
 import { env, isSupabaseConfigured } from "./env";
+import { constantTimeEquals } from "./auth";
 import { RECORDING_NOTICE } from "./consent";
 import { providerLabel } from "./format";
 import { getVertical } from "@/verticals";
@@ -297,8 +298,13 @@ export async function createBooking(input: BookingInput): Promise<BookingResult>
 
   const callRow: CallLog = {
     id: uuid(),
+    kind: "confirmation",
     appointment_id: appointmentRow.id,
     client_id: client.id,
+    demo_phone: null,
+    demo_business: null,
+    demo_name: null,
+    reference: null,
     provider: env.voiceProvider,
     provider_call_id: null,
     direction: "outbound",
@@ -537,8 +543,13 @@ export async function createCall(
 ): Promise<CallLog> {
   const row: CallLog = {
     id: uuid(),
+    kind: "confirmation",
     appointment_id: appointmentId,
     client_id: clientId,
+    demo_phone: null,
+    demo_business: null,
+    demo_name: null,
+    reference: null,
     provider: env.voiceProvider,
     provider_call_id: null,
     direction: "outbound",
@@ -566,6 +577,68 @@ export async function createCall(
   if (error) throw new Error(`createCall: ${error.message}`);
   return data as CallLog;
 }
+
+/* ── Demo calls ("have it call you") ─────────────────────────────────── */
+
+export async function createDemoCall(input: {
+  phone: string;
+  business: string | null;
+  name: string;
+}): Promise<CallLog> {
+  const row: CallLog = {
+    id: uuid(),
+    kind: "demo",
+    appointment_id: null,
+    client_id: null,
+    demo_phone: input.phone,
+    demo_business: input.business,
+    demo_name: input.name,
+    reference: newReference("TRY"),
+    provider: env.voiceProvider,
+    provider_call_id: null,
+    direction: "outbound",
+    status: "queued",
+    outcome: null,
+    recording_url: null,
+    transcript: null,
+    summary: null,
+    duration_seconds: null,
+    cost: null,
+    error: null,
+    started_at: null,
+    ended_at: null,
+    created_at: nowIso(),
+  };
+  if (!useSupabase()) {
+    demoStore().calls.unshift(row);
+    return row;
+  }
+  const { data, error } = await serviceClient().from("call_logs").insert(row).select("*").single();
+  if (error) throw new Error(`createDemoCall: ${error.message}`);
+  return data as CallLog;
+}
+
+export async function getDemoCall(id: string, reference: string): Promise<CallLog | null> {
+  const call = await getCall(id);
+  if (!call || call.kind !== "demo" || !call.reference) return null;
+  return constantTimeEquals(call.reference, reference.toUpperCase()) ? call : null;
+}
+
+/** Demo calls placed in the last 24h, for the daily cap. */
+export async function countDemoCallsToday(): Promise<number> {
+  const since = new Date(Date.now() - 86_400_000).toISOString();
+  if (!useSupabase()) {
+    return demoStore().calls.filter((c) => c.kind === "demo" && c.created_at >= since).length;
+  }
+  const { count, error } = await serviceClient()
+    .from("call_logs")
+    .select("id", { count: "exact", head: true })
+    .eq("kind", "demo")
+    .gte("created_at", since);
+  if (error) throw new Error(`countDemoCallsToday: ${error.message}`);
+  return count ?? 0;
+}
+
 
 export async function updateCall(
   id: string,
@@ -669,10 +742,10 @@ export async function advanceSimulatedCalls(): Promise<void> {
     const age = now - new Date(call.created_at).getTime();
     let next: Partial<CallLog> | null = null;
 
-    if (age >= SIM_COMPLETED_AT && call.status !== "completed") {
+    if (age >= SIM_COMPLETED_AT && call.status !== "completed" && call.appointment_id) {
       const appointment = await getAppointmentRaw(call.appointment_id);
       const provider = appointment ? await getProviderById(appointment.provider_id) : null;
-      const client = await getClient(call.client_id);
+      const client = call.client_id ? await getClient(call.client_id) : null;
       const vertical = getVertical(appointment?.vertical ?? provider?.vertical ?? "medical");
       const { terms, voice } = vertical;
       const when = appointment
@@ -715,8 +788,12 @@ export async function advanceSimulatedCalls(): Promise<void> {
     if (!next) continue;
     await updateCall(call.id, next);
     if (next.status === "completed") {
-      await updateAppointmentStatus(call.appointment_id, "confirmed");
-      void notifyCallCompleted(call.id);
+      if (call.kind === "demo") {
+        void notifyDemoCall(call.id);
+      } else if (call.appointment_id) {
+        await updateAppointmentStatus(call.appointment_id, "confirmed");
+        void notifyCallCompleted(call.id);
+      }
     }
   }
 }
@@ -767,6 +844,15 @@ export async function getClient(id: string): Promise<Client | null> {
 }
 
 /** Imported lazily to avoid a cycle between the data layer and the mailer. */
+async function notifyDemoCall(callId: string) {
+  try {
+    const { sendDemoCallEmail } = await import("./email");
+    await sendDemoCallEmail(callId);
+  } catch (error) {
+    console.error("[notify] demo-call email failed", error);
+  }
+}
+
 async function notifyCallCompleted(callId: string) {
   try {
     const { sendCallCompletedEmail } = await import("./email");

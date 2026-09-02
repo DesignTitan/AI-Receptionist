@@ -1,14 +1,11 @@
 import { AnimateOnScroll } from "@/components/marketing/animate-on-scroll";
-import { ProductFooter, ProductHeader } from "@/components/marketing/product-chrome";
 
-/** Product pages render on the product palette — no data-vertical, no attribute to set. */
+/** Product pages render on the product palette. Chrome is per page: the homepage is a chaptered editorial with a margin folio; /demos keeps the product bar. */
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-dvh">
+    <>
       <AnimateOnScroll />
-      <ProductHeader />
       {children}
-      <ProductFooter />
-    </div>
+    </>
   );
 }

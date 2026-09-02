@@ -13,8 +13,10 @@ Handoff notes for the next session. Updated 2026-09-02.
   "confirmed" when a person spoke (Ava's own "reschedules and cancellations" used to trip the
   appointment keyword heuristic into "cancelled"); OmniDimension's `LLM:`/`User:` labels are
   shown as Ava/You.
-- **Proof chapter is a stacked deck.** Three dark cards (record; call/status pills; stats and
-  business chips), each rising over the previous, which settles back and fades. Pure CSS on
+- **Proof chapter is a stacked deck of the three features**: it calls, it records, it flags.
+  Each card pairs copy with a glass panel of that feature's real UI over a dune landscape
+  (`scrollcraft/builds/receptionist/glass.py` + `render.mjs` regenerate them at 2x).
+  Each card rises over the previous, which settles back and fades once ~60% covered. Pure CSS on
   the engine's `--sc-p` (`.rc-deck*` in `receptionist.css`); reduced motion → a column. The
   page is now 15.5 viewport-heights.
 - **Human check live and visible.** Turnstile keys are on Vercel (widget "AI Receptionist -

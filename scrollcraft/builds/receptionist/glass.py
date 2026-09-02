@@ -6,9 +6,9 @@ BASE = """<!doctype html><html><head><meta charset="utf-8">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <style>
   * { box-sizing: border-box; }
-  html, body { margin: 0; width: 900px; min-height: 700px; overflow: hidden; font-family: Inter, -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-  .scene { position: relative; width: 900px; min-height: 700px; overflow: hidden; background: #0a0a0c; }
-  .sky { position: absolute; inset: 0 0 52% 0; background: linear-gradient(180deg, #2b3444 0%, #4a4b52 38%, #8f7358 74%, #d0a273 100%); }
+  html, body { margin: 0; width: 820px; height: 900px; overflow: hidden; font-family: Inter, -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .scene { position: relative; width: 820px; height: 900px; overflow: hidden; background: #0a0a0c; }
+  .sky { position: absolute; inset: 0 0 56% 0; background: linear-gradient(180deg, #2b3444 0%, #4a4b52 38%, #8f7358 74%, #d0a273 100%); }
   .sun { position: absolute; left: 66%; top: 40%; width: 520px; height: 340px; transform: translate(-50%,-50%); border-radius: 50%;
          background: radial-gradient(closest-side, rgba(255,206,150,.85), rgba(255,170,105,.28) 52%, rgba(255,170,105,0) 76%); filter: blur(22px); }
   .dune { position: absolute; left: -14%; right: -14%; border-radius: 50% 50% 0 0 / 100% 100% 0 0; }
@@ -22,15 +22,15 @@ BASE = """<!doctype html><html><head><meta charset="utf-8">
       linear-gradient(180deg, rgba(12,12,16,.42) 0%, rgba(12,12,16,.06) 26%, rgba(20,12,6,.10) 60%, rgba(8,6,5,.55) 100%); }
   .grain { position: absolute; inset: 0; opacity: .13; mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
-  .tools { position: absolute; left: 26px; top: 26px; display: flex; gap: 10px; z-index: 3; }
+  .tools { position: absolute; left: 22px; top: 22px; display: flex; gap: 10px; z-index: 3; }
   .tool { width: 42px; height: 42px; border-radius: 12px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.16);
           backdrop-filter: blur(14px); display: grid; place-items: center; color: rgba(255,255,255,.9); }
   .tool svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-  .action { position: absolute; right: 26px; top: 26px; height: 42px; padding: 0 18px; border-radius: 12px; background: rgba(255,255,255,.14);
+  .action { position: absolute; right: 22px; top: 22px; height: 42px; padding: 0 18px; border-radius: 12px; background: rgba(255,255,255,.14);
             border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(14px); color: #fff; font-size: 14px; font-weight: 600;
             display: flex; align-items: center; gap: 8px; z-index: 3; }
   .action i { width: 7px; height: 7px; border-radius: 50%; background: #6ee7a0; box-shadow: 0 0 0 4px rgba(110,231,160,.22); }
-  .panel { position: absolute; left: 96px; right: 96px; top: 104px; border-radius: 24px; padding: 24px;
+  .panel { position: absolute; left: 34px; right: 34px; top: 50%; transform: translateY(-50%); border-radius: 24px; padding: 24px;
     background: linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.06)); border: 1px solid rgba(255,255,255,.2);
     backdrop-filter: blur(26px) saturate(140%); box-shadow: 0 40px 80px -40px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.28);
     color: #fff; z-index: 2; }

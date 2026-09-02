@@ -139,7 +139,7 @@ export default function HomePage() {
                   <p className="rc-card__foot">Your front desk keeps working after hours.</p>
                 </div>
                 <figure className="rc-card__media rc-card__media--center">
-                  <img src="/scrollcraft/04-call.jpg" width={900} height={700} alt="A confirmation call in progress: the client, the stages, and the first lines of what the assistant said." />
+                  <img src="/scrollcraft/04-call.jpg" width={820} height={900} alt="A confirmation call in progress: the client, the stages, and the first lines of what the assistant said." />
                 </figure>
               </article>
               <article className="rc-card" style={{ "--i": 1, "--in": 0.2, "--next": 0.55 } as React.CSSProperties}>
@@ -150,7 +150,7 @@ export default function HomePage() {
                   <p className="rc-card__foot">Nothing to write up afterwards.</p>
                 </div>
                 <figure className="rc-card__media rc-card__media--center">
-                  <img src="/scrollcraft/04-record.jpg" width={900} height={700} alt="A finished call record: the recording, a one-line summary, and the transcript." />
+                  <img src="/scrollcraft/04-record.jpg" width={820} height={900} alt="A finished call record: the recording, a one-line summary, and the transcript." />
                 </figure>
               </article>
               <article className="rc-card" style={{ "--i": 2, "--in": 0.55, "--next": 9 } as React.CSSProperties}>
@@ -161,7 +161,7 @@ export default function HomePage() {
                   <p className="rc-card__foot">The exceptions, not the routine.</p>
                 </div>
                 <figure className="rc-card__media rc-card__media--center">
-                  <img src="/scrollcraft/04-flag.jpg" width={900} height={700} alt="The needs-attention list: four bookings flagged as no answer or reschedule, each with its business." />
+                  <img src="/scrollcraft/04-flag.jpg" width={820} height={900} alt="The needs-attention list: four bookings flagged as no answer or reschedule, each with its business." />
                 </figure>
               </article>
             </div>

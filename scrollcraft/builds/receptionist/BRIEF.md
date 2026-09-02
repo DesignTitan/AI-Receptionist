@@ -268,3 +268,13 @@ covers. Waiting cards stack with the *next* one on top so its label is what peek
 rising or settled card sits above everything that waited (`round()` in the z-index, DOM
 order as the fallback for older browsers).
 
+Chapter 4's three cards are the product's three features, chosen with the owner:
+**it calls** (a confirmation call inside a minute), **it records** (recording, transcript,
+one-line summary) and **it flags** (every no-answer surfaced for a person). Each card's
+image is a frosted glass panel holding that feature's own interface over a dune
+landscape, in the grammar of the owner's reference: three glass tool buttons top left,
+a status pill top right, a rounded panel with a header row, the live UI, and one white
+action button. Built in HTML with real backdrop-filter and rendered at 2x with headless
+Chrome; `glass.py` and `render.mjs` in this folder regenerate all three, so a fourth
+feature is one dict entry away. Frame is 820x900 to match the card's portrait image slot.
+

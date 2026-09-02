@@ -342,3 +342,9 @@ property and keeps only the WebKit one, which computes to nothing, so the effect
 not apply. A masked copy behaves identically and everywhere. A dark gradient over it carries
 the text contrast, so the words never depend on what the photograph happens to be doing.
 
+Pricing is three plans priced by the calls they use, in the reference's three-card shape:
+Front desk $149 / 200 calls, Busy desk $299 / 600 calls (the featured one, lifted and flagged),
+Full desk $599 / 1,500 calls, with the $1,000 setup flat across all three and 30 cents a call
+beyond the plan. The dark cards on the paper ground are the proof deck's own treatment, so
+pricing reads as part of the same page rather than a bolted-on table.
+

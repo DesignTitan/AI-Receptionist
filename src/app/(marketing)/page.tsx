@@ -28,6 +28,54 @@ const CHAPTERS = [
   { id: "colophon", n: "09", title: "Colophon" },
 ];
 
+const PLANS = [
+  {
+    name: "Front desk",
+    price: "$149",
+    calls: "200 calls a month",
+    who: "One room, one chair, one pair of hands.",
+    cta: "Start here",
+    featured: false,
+    has: [
+      "Your booking page, in your colours",
+      "A confirmation call inside a minute",
+      "Recording, transcript and summary",
+      "Reschedules and cancellations on the call",
+      "Email support",
+    ],
+  },
+  {
+    name: "Busy desk",
+    price: "$299",
+    calls: "600 calls a month",
+    who: "A team that fills its day and misses calls.",
+    cta: "Start here",
+    featured: true,
+    has: [
+      "Everything in Front desk",
+      "No-answers flagged for a person",
+      "After-hours and weekend bookings",
+      "Your own number on their screen",
+      "Priority support",
+    ],
+  },
+  {
+    name: "Full desk",
+    price: "$599",
+    calls: "1,500 calls a month",
+    who: "Several locations, or a very long day.",
+    cta: "Talk to us",
+    featured: false,
+    has: [
+      "Everything in Busy desk",
+      "Several businesses on one dashboard",
+      "A voice line for each business",
+      "Your script tuned with you, quarterly",
+      "A named person on your account",
+    ],
+  },
+];
+
 const RAIL = [
   { h: "Health and wellness", p: "Visits confirmed, intake reminded, the no-show flagged before it happens.", img: "ind-health.jpg" },
   { h: "Personal care", p: "Colour, cuts, facials, massage: confirmed while your hands are busy.", img: "ind-care.jpg" },
@@ -238,11 +286,30 @@ export default function HomePage() {
                 <li><span><strong>They book, it calls.</strong>Every booking gets a confirmation call inside a minute. Reschedules and cancellations are taken on the call.</span></li>
                 <li><span><strong>You see everything.</strong>Recording, transcript and summary in your dashboard and your inbox. A no-answer is flagged for a person.</span></li>
               </ol>
-              <div className="rc-price">
-                <div><b>$199</b><span>a month, per business. Month to month.</span></div>
-                <div><b>$1,000</b><span>to set up: your page, your people, your voice line, a test call with you on it.</span></div>
-                <div><b>500</b><span>calls a month, fair use. Most businesses never reach it.</span></div>
+              <div className="rc-plans">
+                {PLANS.map((plan) => (
+                  <article key={plan.name} className={plan.featured ? "rc-plan rc-plan--on" : "rc-plan"}>
+                    {plan.featured && <p className="rc-plan__flag">Most businesses</p>}
+                    <p className="rc-plan__name">{plan.name}</p>
+                    <p className="rc-plan__price"><b>{plan.price}</b><span>/month</span></p>
+                    <p className="rc-plan__calls">{plan.calls}</p>
+                    <p className="rc-plan__who">{plan.who}</p>
+                    <a className="rc-plan__cta" href="#hear">{plan.cta}</a>
+                    <ul className="rc-plan__list">
+                      {plan.has.map((line) => (
+                        <li key={line}>
+                          <svg viewBox="0 0 20 20" aria-hidden><path d="M5 10.5l3.2 3.2L15 7" /></svg>
+                          {line}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
               </div>
+              <p className="rc-plans__note">
+                <b>$1,000 to set up, once.</b> Your page, your people, your voice line, and a test call with you
+                on it. Calls beyond your plan are 30 cents each. Month to month — leave whenever you like.
+              </p>
               <p className="sc-body" style={{ marginTop: "var(--sc-6)" }}>
                 Calendar and practice-software sync is not built yet. If you need it, you would be the reason it gets built.
               </p>

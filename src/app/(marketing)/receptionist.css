@@ -179,7 +179,7 @@
   --card-pad: clamp(1.25rem, 3vw, 2.5rem);
   padding: 0;
   overflow: hidden;
-  background: #131117; color: #f2efe8; border-radius: 22px;
+  background: #131117; color: #f2efe8; border-radius: 32px;
   border: 1px solid rgb(255 255 255 / 0.08);
   box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.08);
   will-change: transform, opacity;
@@ -195,7 +195,7 @@
 /* the image sits fully inside its area, with a hair of inset; the ground
    behind it matches the render's own edges so nothing letterboxes visibly */
 .rc-card__media { margin: 0; min-width: 0; min-height: 0; padding: 6px; border-radius: 0; overflow: hidden; background: #0d0c10; display: grid; }
-.rc-card__media img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; border-radius: 14px; }
+.rc-card__media img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; border-radius: 26px; }
 
 @media (max-width: 860px) {
   .rc-deckact { --deck-pad: 5svh; --head-h: clamp(96px, 14svh, 140px); --peek: 64px; --card-w: 94vw; }

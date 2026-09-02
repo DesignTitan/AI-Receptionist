@@ -212,6 +212,12 @@ FLAG = f"""
 variant = sys.argv[2] if len(sys.argv) > 2 else "B"
 BODIES = {"call": CALL, "record": RECORD, "flag": FLAG}
 key = sys.argv[3] if len(sys.argv) > 3 else "flag"
+wide = len(sys.argv) > 4 and sys.argv[4] == "wide"
 html = BASE.replace("__PANE__", PANES[variant]).replace("__BODY__", BODIES[key])
+if wide:
+    # a landscape frame for stacked layouts, where the card's image slot is short and wide
+    html = (html.replace("width:820px; height:964px", "width:1200px; height:760px")
+                .replace(".panel { position:absolute; left:56px; right:56px;", ".panel { position:absolute; left:90px; right:90px;")
+                .replace("background-position:50% 62%", "background-position:50% 56%"))
 pathlib.Path(sys.argv[1]).write_text(html)
 print("wrote", sys.argv[1])

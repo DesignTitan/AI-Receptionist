@@ -308,3 +308,11 @@ in dark frosted glass) piece for piece, after several wrong turns:
 - `ref.py` renders all three (`python3 ref.py <out.html> D <call|record|flag>`), `render.mjs`
   shoots them at 820x964, which is the card's image slot aspect, so nothing letterboxes.
 
+Two renders per card, not one. The card's image slot is portrait beside the copy on a
+desktop and short-and-wide once the columns stack, so a single render either crops the
+glass panel or shrinks it to a stamp. `ref.py <out> D <feature> wide` renders a 1200x760
+landscape frame whose panel occupies 12-88% of the height; a `<picture>` serves it under
+1024px and the 820x964 portrait above. Cover cropping is then always safe: the visible
+band never eats into the panel. Cards stack at 1024 rather than 860, since two columns at
+tablet width squeeze both halves.
+

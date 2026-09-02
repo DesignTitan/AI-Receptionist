@@ -205,21 +205,30 @@
 .rc-card__foot::before { content: "— "; color: #9a9dff; }
 /* the image sits fully inside its area, with a hair of inset; the ground
    behind it matches the render's own edges so nothing letterboxes visibly */
-/* flush against the copy on the left, 8px of air on the other three sides */
-.rc-card__media { margin: 0; min-width: 0; min-height: 0; padding: 8px 8px 8px 0; border-radius: 0 32px 32px 0; overflow: hidden; background: #131117; display: grid; }
-.rc-card__media img { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: cover; object-position: center; border-radius: 24px; }
+/* Flush against the copy on the left, 8px of air on the other three sides.
+   The slot's shape changes with the viewport, so the image is contained rather
+   than cropped, and the space around it is the same image blurred — no band,
+   no crop, at any width. */
+.rc-card__media { position: relative; margin: 0; min-width: 0; min-height: 0; padding: 8px 8px 8px 0; border-radius: 0 32px 32px 0; overflow: hidden; background: #131117; display: grid; }
+.rc-card__media::before {
+  content: ""; position: absolute; inset: 8px 8px 8px 0; border-radius: 24px;
+  background-image: var(--shot); background-size: cover; background-position: center;
+  filter: blur(28px) saturate(120%); transform: scale(1.12); }
+.rc-card__media picture { position: relative; display: block; min-width: 0; min-height: 0; }
+.rc-card__media img { position: relative; display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: cover; object-position: 50% 50%; border-radius: 24px; }
 
-@media (max-width: 860px) {
+@media (max-width: 1024px) {
   .rc-deckact { --deck-pad: 5svh; --head-h: clamp(96px, 14svh, 140px); --peek: 64px; --card-w: 94vw; }
   .rc-deck__head { grid-template-columns: 1fr; padding-bottom: 0.75rem; }
   .rc-deck__head h2 { font-size: var(--sc-t-xl); }
   .rc-deck__lede { display: none; }
   /* stacked on a phone, so the image rounds at the bottom, not the right */
-  /* stacked on a phone: flush under the copy, 8px on the other three sides */
-  .rc-card__media { padding: 0 8px 8px; border-radius: 0 0 32px 32px; }
+  /* stacked: 8px all round, and room between the copy and the image */
+  .rc-card__media { padding: 8px; border-radius: 0 0 32px 32px; }
+  .rc-card__media::before { inset: 8px; }
   .rc-card::before { right: 0; left: 0; top: auto; bottom: 0; width: 100%; height: 62%; }
-  .rc-card { --card-pad: 1rem; top: calc(var(--i) * 12px); grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 0.9rem; }
-  .rc-card__copy { padding: var(--card-pad) var(--card-pad) 0; }
+  .rc-card { --card-pad: 1.15rem; top: calc(var(--i) * 12px); grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 1.25rem; }
+  .rc-card__copy { padding: var(--card-pad) var(--card-pad) 0; gap: 0.15rem; }
   .rc-card__copy h3 { font-size: 1.45rem; margin: 0.6rem 0 0.4rem; }
   .rc-card__copy > p:not(.rc-card__eyebrow) { font-size: var(--sc-t-sm); }
   .rc-card__foot { display: none; }

@@ -5,7 +5,7 @@ Handoff notes for the next session. Updated 2026-09-01.
 ## Just done
 
 - **Multi-vertical restructure underway** — plan at
-  `~/.claude/plans/so-you-want-to-keen-nest.md`. Chunks 0–8 of 10 landed:
+  `~/.claude/plans/so-you-want-to-keen-nest.md`. Chunks 0–9 of 10 landed:
   - 0: `/demo/` asset collision resolved (`public/demo` → `public/audio`).
   - 1: `Doctor→Provider` / `Patient→Client` rename across TS + SQL. `callMetadata` keys in
     `voice.ts` are frozen (external Vapi/Bland contract) — only their values changed.
@@ -53,6 +53,10 @@ Handoff notes for the next session. Updated 2026-09-01.
     and the demo pages use them too — verified visible-text-identical to pre-lift baselines.
     `ui/button.tsx` is the pill primitive. Temporary redirects removed. "Talk to us" only renders
     when `CONTACT_EMAIL`/`OWNER_EMAIL` is set (no fake address on a sales page).
+  - 9: **go public.** `SITE_GATE` is a two-mode switch: unset/`public` → product + demos open,
+    `/admin` staff-gated, `/login` dead; `locked` → today's whole-site `SITE_PASSWORD` gate
+    (webhooks always open). `robots.ts` disallows `/admin` + `/api/`; the demo layout is
+    `noindex` (fictional businesses). Both modes verified by contract.
 
 - **Password-gated the whole site.** `src/proxy.ts` (Next 16's renamed `middleware.ts` —
   one per project, so the site gate and the pre-existing `/admin` gate share it) now bounces

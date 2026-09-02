@@ -21,6 +21,14 @@ export const env = {
   get supabaseServiceKey() {
     return read("SUPABASE_SERVICE_ROLE_KEY");
   },
+  /**
+   * "public" (default): the product site and demos are open; /admin still needs
+   * the staff password. "locked": SITE_PASSWORD in front of everything except
+   * provider webhooks — one variable re-gates the whole site pre-launch.
+   */
+  get siteGate(): "public" | "locked" {
+    return (read("SITE_GATE") ?? "public").toLowerCase() === "locked" ? "locked" : "public";
+  },
   get sitePassword() {
     return read("SITE_PASSWORD") ?? "bubs2026";
   },

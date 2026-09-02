@@ -12,6 +12,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     // `absolute` stops the root layout's "· AI Receptionist" template wrapping the business name.
     title: { absolute: title, template: `%s · ${v.brand}` },
     description: v.copy.meta.description,
+    // Three fictional businesses with fictional staff should never rank.
+    robots: { index: false, follow: false },
     openGraph: {
       type: "website",
       siteName: v.brand,

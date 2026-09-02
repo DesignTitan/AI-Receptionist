@@ -62,6 +62,10 @@ export const env = {
   get emailFrom() {
     return read("EMAIL_FROM") ?? "AI Receptionist <onboarding@resend.dev>";
   },
+  /** Where "Talk to us" points on the product site; the CTA is omitted when unset. */
+  get contactEmail() {
+    return read("CONTACT_EMAIL") ?? this.ownerEmail;
+  },
   get ownerEmail() {
     return read("OWNER_EMAIL") ?? read("CLINIC_OWNER_EMAIL");
   },

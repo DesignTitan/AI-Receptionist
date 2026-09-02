@@ -5,7 +5,7 @@ Handoff notes for the next session. Updated 2026-09-01.
 ## Just done
 
 - **Multi-vertical restructure underway** — plan at
-  `~/.claude/plans/so-you-want-to-keen-nest.md`. Chunks 0–7 of 10 landed:
+  `~/.claude/plans/so-you-want-to-keen-nest.md`. Chunks 0–8 of 10 landed:
   - 0: `/demo/` asset collision resolved (`public/demo` → `public/audio`).
   - 1: `Doctor→Provider` / `Patient→Client` rename across TS + SQL. `callMetadata` keys in
     `voice.ts` are frozen (external Vapi/Bland contract) — only their values changed.
@@ -46,6 +46,13 @@ Handoff notes for the next session. Updated 2026-09-01.
     (each identified by its swatch, since admin renders on the product palette), stats that
     follow the selected business, `?vertical=` on the feed API, a business badge on the record
     page. Admin shell + both sign-in screens are now branded "AI Receptionist", not Northlake.
+  - 8: **marketing site at `/`** + `/demos`. Owner-facing hero, stat strip, owner-framed steps,
+    demo cards (each in its business's swatch), the full industries catalogue with the three
+    live demos called out, "what's in the box", buyer FAQ (calendar sync answered honestly as
+    roadmap), closing CTA. The five section blocks now live in `components/marketing/blocks.tsx`
+    and the demo pages use them too — verified visible-text-identical to pre-lift baselines.
+    `ui/button.tsx` is the pill primitive. Temporary redirects removed. "Talk to us" only renders
+    when `CONTACT_EMAIL`/`OWNER_EMAIL` is set (no fake address on a sales page).
 
 - **Password-gated the whole site.** `src/proxy.ts` (Next 16's renamed `middleware.ts` —
   one per project, so the site gate and the pre-existing `/admin` gate share it) now bounces

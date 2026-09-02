@@ -316,11 +316,22 @@
 }
 
 /* ── pricing: three plans, priced by the calls they use ── */
-.rc-plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); margin-top: var(--sc-8); align-items: start; }
+/* the featured plan sits over its neighbours, which tuck in behind it */
+.rc-plans { display: grid; grid-template-columns: 1fr 1.08fr 1fr; gap: 0; margin-top: var(--sc-8); align-items: center; }
 .rc-plan { position: relative; display: flex; flex-direction: column; padding: clamp(1.5rem, 2.4vw, 2.25rem);
   border-radius: 32px; background: #131117; color: #f2efe8;
   border: 1px solid rgb(255 255 255 / 0.08); box-shadow: 0 30px 70px -35px rgb(0 0 0 / 0.5), inset 0 1px 0 rgb(255 255 255 / 0.06); }
-.rc-plan--on { box-shadow: 0 40px 90px -35px rgb(0 0 0 / 0.6), inset 0 0 0 1px rgb(255 255 255 / 0.16); translate: 0 -14px; }
+.rc-plan { z-index: 1; }
+.rc-plan--on {
+  z-index: 3;
+  margin-inline: clamp(-2.5rem, -2.6vw, -1.5rem);
+  padding-block: calc(clamp(1.5rem, 2.4vw, 2.25rem) + 1.25rem);
+  box-shadow: 0 50px 110px -30px rgb(0 0 0 / 0.72), inset 0 0 0 1px rgb(255 255 255 / 0.18);
+}
+/* the outer two are quieter, and their inner corners tuck under the middle */
+.rc-plan:not(.rc-plan--on) { background: #17151c; }
+.rc-plan:first-child { padding-right: calc(clamp(1.5rem, 2.4vw, 2.25rem) + 1.5rem); }
+.rc-plan:last-child { padding-left: calc(clamp(1.5rem, 2.4vw, 2.25rem) + 1.5rem); }
 .rc-plan__flag { position: absolute; top: -11px; left: clamp(1.5rem, 2.4vw, 2.25rem); margin: 0; padding: 3px 12px; border-radius: 12px;
   background: var(--sc-accent); color: var(--sc-accent-ink); font-size: var(--sc-t-xs); font-weight: 600; letter-spacing: var(--sc-track-wide); text-transform: uppercase; }
 .rc-plan__name { margin: 0; font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-wide); text-transform: uppercase; color: #aaa49b; }
@@ -342,7 +353,8 @@
 .rc-plans__note b { color: var(--sc-ink); font-weight: 600; }
 @media (max-width: 900px) {
   .rc-plans { grid-template-columns: 1fr; gap: 1.5rem; }
-  .rc-plan--on { translate: 0; }
+  .rc-plan--on { margin-inline: 0; padding-block: clamp(1.5rem, 2.4vw, 2.25rem); }
+  .rc-plan:first-child, .rc-plan:last-child { padding-inline: clamp(1.5rem, 2.4vw, 2.25rem); }
   .rc-plan__who { min-height: 0; }
 }
 

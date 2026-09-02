@@ -17,8 +17,8 @@ Handoff notes for the next session. Updated 2026-09-02.
   lede, and four clickable tabs over one product screen, on the dark steel-blue ground.
   Keyboard accessible (tablist, arrow keys, visible focus).
 - **Proof chapter is a stacked deck of the three features**: it calls, it records, it flags.
-  Dark cards on the paper ground, each with a glass panel of that feature's real UI over a
-  warm dune scene. Settled: do not restyle without being asked.
+  Dark cards on the paper ground, each with a flat frosted-glass panel of that feature's UI over
+  a blurred desert photograph (`scrollcraft/builds/receptionist/ref.py` regenerates all three). Settled: do not restyle without being asked.
   Each card pairs copy with a glass panel of that feature's real UI over a dune landscape
   (`scrollcraft/builds/receptionist/glass.py` + `render.mjs` regenerate them at 2x).
   Each card rises over the previous, which settles back and fades once ~60% covered. Pure CSS on

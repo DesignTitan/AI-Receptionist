@@ -292,3 +292,19 @@ labelled panel swaps, focus is visible. The section carries the very dark grey w
 hint of crystallised steel blue the owner asked for; the proof deck after it stays on
 paper, unchanged. The page is now nine chapters.
 
+The three card images, final. Built to the owner's reference component (a leaderboard card
+in dark frosted glass) piece for piece, after several wrong turns:
+
+- **Backdrop** is a generated photograph of dunes at golden hour (`desert.jpg`, kept in this
+  folder), then heavily blurred and darkened in the render. Compositing over a *sharp* photo
+  was the earlier mistake: it read as a screenshot on a wallpaper, not as glass.
+- **Pane** is one flat surface, no nested boxes. Chosen density: a 13% white fill with the
+  sand desaturated inside the glass (`saturate(72%)`), which lands on the reference's neutral
+  grey rather than picking up the sand's warmth.
+- **Anatomy**, shared by all three cards: orb avatar with a white ring, title and sub-line, a
+  chip top-right with an internal hairline divider, three filter pills with one active, a
+  table header, full-bleed rows with an alternating tint, right-aligned values, and the white
+  button as the one opaque element.
+- `ref.py` renders all three (`python3 ref.py <out.html> D <call|record|flag>`), `render.mjs`
+  shoots them at 820x964, which is the card's image slot aspect, so nothing letterboxes.
+

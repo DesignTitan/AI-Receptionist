@@ -21,6 +21,7 @@ export function Hero({
   secondary,
   bullets,
   aside,
+  background,
 }: {
   eyebrow: string;
   headline: Headline;
@@ -29,9 +30,12 @@ export function Hero({
   secondary?: Cta;
   bullets: string[];
   aside: ReactNode;
+  /** Optional full-bleed layer under the aurora — the product hero puts a video here. */
+  background?: ReactNode;
 }) {
   return (
     <section className="relative overflow-hidden">
+      {background}
       <div className="aurora absolute inset-0 -z-10" />
       <div className="grid-backdrop absolute inset-0 -z-10" />
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-5 pb-20 pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:pb-28 lg:pt-24">

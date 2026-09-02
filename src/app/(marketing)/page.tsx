@@ -3,6 +3,7 @@ import { CallPreview } from "@/components/call-preview";
 import { ArrowRight, Calendar, Mail, PhoneRinging, Shield, Waveform } from "@/components/icons";
 import { Faq, Hero, SplitFeature, StatStrip, StepGrid } from "@/components/marketing/blocks";
 import { DemoCards } from "@/components/marketing/demo-cards";
+import { HeroVideo } from "@/components/marketing/hero-video";
 import { Industries } from "@/components/marketing/industries";
 import { PRODUCT_NAME } from "@/components/marketing/product-chrome";
 import { Button } from "@/components/ui/button";
@@ -77,6 +78,7 @@ export default function HomePage() {
           "Vapi, Bland or OmniDimension under the hood",
         ]}
         aside={<CallPreview preview={VERTICALS.medical.copy.callPreview} />}
+        background={<HeroVideo />}
       />
 
       <StatStrip

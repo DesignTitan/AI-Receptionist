@@ -85,6 +85,14 @@ export function TryCallPlate({ simulated }: { simulated: boolean }) {
     }
   }
 
+  /** Back to the form with their details kept, for another call. */
+  function again() {
+    if (timer.current) clearInterval(timer.current);
+    setCall(null);
+    setLive(null);
+    setError(null);
+  }
+
   const activeIndex = Math.max(0, STAGES.findIndex((s) => s.key === (live?.status === "failed" ? "completed" : live?.status ?? "queued")));
 
   return (
@@ -145,6 +153,9 @@ export function TryCallPlate({ simulated }: { simulated: boolean }) {
                 </p>
               </div>
             )}
+            <div className="rc-track__actions">
+              <button type="button" className="rc-cta rc-cta--ghost" onClick={again}>Ask again</button>
+            </div>
             <p className="rc-track__ref">Reference {call.reference}</p>
           </div>
         </div>
@@ -187,6 +198,9 @@ export function TryCallPlate({ simulated }: { simulated: boolean }) {
                   })}
                 </div>
               )}
+              <div className="rc-track__actions">
+                <button type="button" className="rc-cta" onClick={again}>Have it call you again</button>
+              </div>
               <p className="rc-track__ref">Reference {call.reference}</p>
             </div>
           )}

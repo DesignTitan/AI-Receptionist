@@ -23,6 +23,12 @@ Handoff notes for the next session. Updated 2026-09-02.
   plate says "This page can't ring you", shows Ava's real opening line, and stops. The
   scripted demo transcript was removed after the owner tested it and, rightly, called it
   made up. Stages and transcript render only for a call that was placed.
+- **Chapter six can be asked again.** After a request (or, once a line exists, after a call) one
+  button returns to the form with the visitor's details kept; the two-per-number daily limit
+  still applies and says so. The homepage renders per request (`force-dynamic`) so its mode
+  follows `VOICE_PROVIDER` the moment the keys exist, not the last build. A refused call now
+  emails the owner the lead too. The live Vapi path was dry-run with placeholder keys: the API's
+  401 surfaces as "couldn't be placed, a person will call you back", nothing is animated.
 - Schema: `call_logs` demo columns (`kind`, nullable `appointment_id`/`client_id`,
   `demo_phone`, `demo_business`, `demo_name`, `reference`) now written into
   `supabase/schema.sql`; `demo_name` applied to the live project as migration

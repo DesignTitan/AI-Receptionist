@@ -242,3 +242,9 @@ plate grew a field. Left as is; the peak's span is unchanged and nothing else mo
 
 Not verified: a real placed call (no voice line on any deployment yet); the page on a
 physical phone (the 390-wide harness stands in).
+
+Addendum, later the same day: an "Ask again" / "Have it call you again" action after the
+panel, verified in the browser (form returns with the details kept). The page is now
+rendered per request so the plate's mode follows the environment; the real Vapi dispatch
+was dry-run with placeholder keys and fails honestly (502, owner emailed the lead).
+

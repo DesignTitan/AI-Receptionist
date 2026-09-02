@@ -80,7 +80,9 @@ export async function startTryCall(input: {
   }
   const dispatch = await dispatchDemoCall(call.id);
   if (!dispatch.ok) {
-    return { ok: false, status: 502, error: "The call couldn't be placed right now. Try again in a minute." };
+    // The provider refused the call. The lead still exists: tell the owner so nobody is lost.
+    await sendDemoCallEmail(call.id);
+    return { ok: false, status: 502, error: "The call couldn't be placed right now. A person has your number and will call you back." };
   }
   return { ok: true, id: call.id, reference: call.reference ?? "", simulated: false, name, opening };
 }

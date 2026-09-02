@@ -6,6 +6,9 @@ import { TryCallPlate } from "@/components/marketing/try-call-plate";
 import { isVoiceProviderConfigured } from "@/lib/env";
 import "./receptionist.css";
 
+/** Rendered per request: the call plate's mode follows the environment, not the last build. */
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: { absolute: `${PRODUCT_NAME} · The front desk that calls back` },
   description:

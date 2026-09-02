@@ -91,28 +91,51 @@ Nothing half-finished. The repo is committed and builds clean.
 
 ## Deployed
 
-- Live on Vercel: https://ai-receptionist-two-azure.vercel.app
-  (project `bubs-1063s-projects/ai-receptionist`, linked to the GitHub repo, so pushes to
-  `main` now auto-deploy). Redeploy manually with `vercel --prod`.
-- Deployed with **no env vars**, so production is running in demo mode. Static surfaces are
-  fine — home, `/doctors/[slug]`, `/api/availability`, `/admin/login` all serve real seed data.
-- **Known limitation:** the in-memory demo store does not survive serverless invocations.
-  `POST /api/bookings` returns 201, but reading the appointment back 404s because the next
-  request lands on a different Lambda instance. The booking flow will not work end to end in
-  production until Supabase is wired up. This is not a regression — it is demo mode meeting a
-  stateless runtime.
-- Per-deployment URLs (`ai-receptionist-<hash>-…vercel.app`) sit behind Vercel SSO; the
-  `ai-receptionist-two-azure.vercel.app` alias is the public one.
+- Live on Vercel: https://ai-receptionist-two-azure.vercel.app — **locked** behind the site
+  password (`SITE_GATE=locked` set on production; password `bubs2026` = `SITE_PASSWORD`
+  default). Unlock at `/login`. Flip `SITE_GATE` to `public` (or remove it) and redeploy to
+  open the marketing site to the world.
+- Project `bubs-1063s-projects/ai-receptionist`, linked to GitHub, so pushes to `main`
+  auto-deploy. Manual: `vercel --prod`. Env vars: `vercel env ls`.
+- What's live: the product marketing site at `/`, `/demos`, three themed demos at
+  `/demo/{medical,salon,studio}`, the shared staff dashboard at `/admin` (password
+  `demo1234` = `ADMIN_PASSWORD` default — shown on the sign-in screen while it's the default).
+- **Known limitation (unchanged, now documented on the site's FAQ too):** production runs the
+  in-memory demo store. Booking returns 201, but the confirmation page 404s because the next
+  request lands on a different serverless instance. **Marketing pages are fine; demo bookings
+  do not complete in production until Supabase is wired.** Local (`npm run build && npm start`)
+  is a single process and works end to end — that's how every chunk was verified.
 
-## Next
+## Next — the one blocking item: Supabase (plan chunk 10)
 
-- **Priority:** point production at a real Supabase project — this is what unblocks booking
-  on the live URL. Set the three Supabase keys plus `ADMIN_PASSWORD` and
-  `ADMIN_SESSION_SECRET` via `vercel env add ... production`, then redeploy.
-- Point it at a real Supabase project: run `supabase/schema.sql` then `supabase/seed.sql`,
-  set the three keys, confirm the double-booking index behaves under a race.
-- Wire one real voice provider (Vapi is the least work) and set `VOICE_WEBHOOK_SECRET`.
-  Watch the first live call land in `call_logs` before trusting the outcome mapping.
-- Add a Resend key so the owner emails actually deliver, and check the recording link
-  resolves from outside the network.
-- No git remote yet — `git remote add origin …` then push.
+Deliberately deferred (owner decision 2026-09-01: not yet, $10/mo). When ready, in order:
+
+1. Create a Supabase project (org "DesignTitan's Org", `us-east-1` sits nearest Vercel).
+   The Supabase MCP connector can do it: `get_cost` → `confirm_cost` → `create_project`.
+2. Apply `supabase/schema.sql` (has the `vertical` columns and the `(vertical, slug)` unique
+   index) — `apply_migration` via the connector, or paste into the SQL editor.
+3. `npm run seed:sql` regenerates `supabase/seed.sql` from `src/verticals/*/roster.ts`
+   (18 providers across three businesses); run it after the schema.
+4. `vercel env add` for production: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   (the `sb_publishable_…` key), `SUPABASE_SERVICE_ROLE_KEY`, plus `ADMIN_PASSWORD` and
+   `ADMIN_SESSION_SECRET` (`openssl rand -hex 32`). Then `SITE_GATE=public` when you want it open.
+5. Redeploy, then the acceptance test from the plan: book on the live URL, **reload the
+   confirmation page** — it must survive. Then `/admin` shows the row under its business.
+
+Everything else, in priority order once Supabase is in:
+- Decide the sales motion (the site currently has no pricing and no contact CTA — set
+  `CONTACT_EMAIL` to make "Talk to us" appear). Decide the calendar-sync answer; the FAQ
+  currently says "not yet, roadmap".
+- Wire one real voice provider (Vapi least work); set `VOICE_WEBHOOK_SECRET`. The
+  `callMetadata` keys in `src/lib/voice.ts` are frozen for the assistant config; the values
+  are now per-business and `business_name`/`vertical` were added.
+- Resend key + `OWNER_EMAIL` so owner emails deliver (templates already use each business's
+  swatch and nouns).
+- Product name: "AI Receptionist" is the working name everywhere (`PRODUCT_NAME` in
+  `src/components/marketing/product-chrome.tsx`).
+- The one real product wall, demand-gated per the plan: a services entity with per-service
+  durations (`slot_minutes` lives on the provider today). Also the hardcoded 12–13 lunch break
+  and 90-min lead time in `src/lib/db.ts`.
+- Adding a fourth vertical = one directory under `src/verticals/`, a line in `index.ts`,
+  `terms.ts` and `rosters.ts`, a member on `VerticalSlug`, and two palette blocks in
+  `globals.css` (every key set in the light block must also be set in the dark block).

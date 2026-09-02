@@ -87,6 +87,10 @@ export const env = {
   get tryCallDailyCap() {
     return read("TRY_CALL_DAILY_CAP") ?? "50";
   },
+  /** A number clients can ring back; read out by the agent when they want to reschedule. */
+  get contactPhone() {
+    return read("CONTACT_PHONE");
+  },
   get ownerEmail() {
     return read("OWNER_EMAIL") ?? read("CLINIC_OWNER_EMAIL");
   },

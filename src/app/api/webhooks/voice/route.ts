@@ -98,6 +98,11 @@ const STATUS_MAP: Record<string, CallStatus> = {
   completed: "completed",
   complete: "completed",
   "end-of-call-report": "completed",
+  // OmniDimension terminal call_status values; the outcome comes from the extracted variable or the reason.
+  voicemail_detected: "completed",
+  no_answer: "completed",
+  "no-answer": "completed",
+  busy: "completed",
   failed: "failed",
   error: "failed",
   busy: "failed",
@@ -127,7 +132,7 @@ function normalizeOutcome(body: Json, transcript: string | null, summary: string
   }
 
   const reason = (
-    asString(pick(body, ["endedReason", "ended_reason", "error_message", "status"])) ?? ""
+    asString(pick(body, ["endedReason", "ended_reason", "error_message", "status", "call_status", "hangup_reason"])) ?? ""
   ).toLowerCase();
   if (reason.includes("voicemail")) return "voicemail";
   if (reason.includes("no-answer") || reason.includes("no_answer") || reason.includes("noanswer")) {
@@ -219,7 +224,7 @@ export async function POST(request: Request) {
     call.summary;
 
   const durationSeconds =
-    asNumber(pick(body, ["durationSeconds", "duration_seconds", "duration"])) ??
+    asNumber(pick(body, ["durationSeconds", "duration_seconds", "duration", "call_duration"])) ??
     (asNumber(pick(body, ["call_length"])) !== null
       ? Math.round(asNumber(pick(body, ["call_length"]))! * 60)
       : null) ??

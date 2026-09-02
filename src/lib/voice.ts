@@ -228,6 +228,10 @@ function callMetadata(detail: AppointmentDetail, call: CallLog) {
     clinic_name: vertical.brand,
     // Additive, so a future assistant config can key off them.
     business_name: vertical.brand,
+    // Names the OmniDimension agent prompt reads (additive; the keys above stay frozen).
+    kind: "confirmation",
+    customer_name: detail.client?.full_name ?? "",
+    callback_number: env.contactPhone ?? "the number on your confirmation",
     vertical: vertical.slug,
   };
 }
@@ -285,6 +289,7 @@ export async function dispatchDemoCall(callId: string): Promise<DispatchResult> 
       reference: call.reference,
       business: call.demo_business ?? "",
       name: call.demo_name ?? "",
+      customer_name: call.demo_name ?? "",
     },
   });
 }

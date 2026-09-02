@@ -54,17 +54,47 @@ const asNumber = (value: unknown) => {
 /** OmniDimension: `full_conversation` as a string, or `interactions` as turns of bot_response / user_query. */
 function omniTranscript(report: Json): string | null {
   const full = asString(report.full_conversation);
-  if (full) return full;
+  if (full) return relabel(full);
   if (!Array.isArray(report.interactions)) return null;
   const lines: string[] = [];
   for (const turn of report.interactions) {
     if (!isObject(turn)) continue;
     const bot = asString(turn.bot_response);
     const user = asString(turn.user_query);
-    if (bot) lines.push(`Agent: ${bot}`);
     if (user) lines.push(`You: ${user}`);
+    if (bot) lines.push(`Ava: ${bot}`);
   }
   return lines.length ? lines.join("\n") : null;
+}
+
+/** OmniDimension writes "LLM:" and "User:"; the product says Ava and You. */
+function relabel(transcript: string) {
+  return transcript
+    .split("\n")
+    .map((l) => l.replace(/^\s*(LLM|Agent|Bot|Assistant)\s*:/i, "Ava:").replace(/^\s*(User|Customer|Caller)\s*:/i, "You:"))
+    .join("\n")
+    .trim();
+}
+
+/**
+ * A demonstration call has no appointment to keep or cancel, so the
+ * appointment keyword heuristic must not run on it (Ava says "reschedules and
+ * cancellations" on every demo call). Reached a person → confirmed.
+ */
+function demoOutcome(body: Json, transcript: string | null, report: Json | null): CallOutcome {
+  const extracted = report && isObject(report.extracted_variables) ? (report.extracted_variables as Json) : null;
+  const raw = (extracted ? asString(pick(extracted, ["outcome"])) : null) ?? asString(pick(body, ["outcome"]));
+  if (raw) {
+    const cleaned = raw.toLowerCase().replace(/[\s-]+/g, "_");
+    const match = OUTCOMES.find((o) => o && cleaned === o);
+    if (match) return match;
+  }
+  const reason = (asString(pick(body, ["endedReason", "ended_reason", "call_status", "hangup_reason", "status"])) ?? "").toLowerCase();
+  if (reason.includes("voicemail")) return "voicemail";
+  if (reason.includes("no-answer") || reason.includes("no_answer") || reason.includes("noanswer")) return "no_answer";
+  if (reason.includes("busy") || reason.includes("failed") || reason.includes("error")) return "failed";
+  const spoke = (transcript ?? "").split("\n").some((l) => /^You:\s*\S/.test(l));
+  return spoke ? "confirmed" : "no_answer";
 }
 
 /** Bland reports transcripts as an array of turns; Vapi as a string. */
@@ -231,7 +261,11 @@ export async function POST(request: Request) {
   const cost = asNumber(pick(body, ["cost", "price", "call_cost"])) ?? call.cost;
 
   const terminal = status === "completed" || status === "failed";
-  const outcome = terminal ? normalizeOutcome(body, transcript, summary, report) : call.outcome;
+  const outcome = terminal
+    ? call.kind === "demo"
+      ? demoOutcome(body, transcript, report)
+      : normalizeOutcome(body, transcript, summary, report)
+    : call.outcome;
 
   const alreadyFinished = call.status === "completed" || call.status === "failed";
 

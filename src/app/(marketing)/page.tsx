@@ -138,7 +138,7 @@ export default function HomePage() {
                   <p>Every booking gets a call, not a text nobody reads. The client confirms, moves or cancels on the phone, and it is done before they have put it down.</p>
                   <p className="rc-card__foot">Your front desk keeps working after hours.</p>
                 </div>
-                <figure className="rc-card__media rc-card__media--center">
+                <figure className="rc-card__media">
                   <img src="/scrollcraft/04-call.jpg" width={820} height={900} alt="A confirmation call in progress: the client, the stages, and the first lines of what the assistant said." />
                 </figure>
               </article>
@@ -149,7 +149,7 @@ export default function HomePage() {
                   <p>The call ends and all three are already there: the recording to play, the transcript line by line, and one line of what was agreed. The same three land in your inbox.</p>
                   <p className="rc-card__foot">Nothing to write up afterwards.</p>
                 </div>
-                <figure className="rc-card__media rc-card__media--center">
+                <figure className="rc-card__media">
                   <img src="/scrollcraft/04-record.jpg" width={820} height={900} alt="A finished call record: the recording, a one-line summary, and the transcript." />
                 </figure>
               </article>
@@ -160,7 +160,7 @@ export default function HomePage() {
                   <p>A no-answer is flagged for a person. A reschedule comes back with the times that suit. A cancellation frees the slot. Each one is a row you can open.</p>
                   <p className="rc-card__foot">The exceptions, not the routine.</p>
                 </div>
-                <figure className="rc-card__media rc-card__media--center">
+                <figure className="rc-card__media">
                   <img src="/scrollcraft/04-flag.jpg" width={820} height={900} alt="The needs-attention list: four bookings flagged as no answer or reschedule, each with its business." />
                 </figure>
               </article>

@@ -35,8 +35,8 @@ const TURNSTILE_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?ren
 
 /**
  * Cloudflare Turnstile, rendered explicitly so it survives the form being
- * unmounted and remounted ("ask again"). Invisible for people it can vouch
- * for; a small interaction otherwise. The token it yields is only worth
+ * unmounted and remounted ("ask again"). Always visible, so a person can see
+ * they have been verified; a small interaction when Cloudflare is unsure. The token it yields is only worth
  * anything once the server verifies it, which the API does before dialling.
  */
 function HumanCheck({ siteKey, widgetId }: { siteKey: string; widgetId: React.MutableRefObject<string | null> }) {
@@ -45,7 +45,7 @@ function HumanCheck({ siteKey, widgetId }: { siteKey: string; widgetId: React.Mu
     let cancelled = false;
     function render() {
       if (cancelled || !host.current || !window.turnstile || widgetId.current) return;
-      widgetId.current = window.turnstile.render(host.current, { sitekey: siteKey, size: "flexible", appearance: "interaction-only", theme: "auto" });
+      widgetId.current = window.turnstile.render(host.current, { sitekey: siteKey, size: "flexible", appearance: "always", theme: "auto" });
     }
     if (window.turnstile) render();
     else {
@@ -92,7 +92,8 @@ export function TryCallPlate({ simulated, turnstileSiteKey }: { simulated: boole
   const [live, setLive] = useState<Live | null>(null);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
   const widgetId = useRef<string | null>(null);
-  const humanCheck = !simulated && !!turnstileSiteKey;
+  // The check runs on every submission when keys exist, live call or callback request alike.
+  const humanCheck = !!turnstileSiteKey;
 
   const terminal = live?.status === "completed" || live?.status === "failed";
   const state = !call ? "idle" : call.simulated ? "requested" : terminal ? `done:${live?.outcome ?? "none"}` : `dialing:${live?.status ?? "queued"}`;
@@ -193,7 +194,7 @@ export function TryCallPlate({ simulated, turnstileSiteKey }: { simulated: boole
           {error && <p className="rc-try__error" role="alert">{error}</p>}
           <p className="rc-try__note">
             {simulated
-              ? "This site isn't connected to a phone line yet, so Ava can't ring you from here. Leave your number and a person calls you back."
+              ? `This site isn't connected to a phone line yet, so Ava can't ring you from here. Leave your number and a person calls you back.${humanCheck ? " We check that you're a person first." : ""}`
               : "US and Canadian numbers. The call is recorded. Two calls per number a day. We check that you're a person before dialling."}
           </p>
         </form>

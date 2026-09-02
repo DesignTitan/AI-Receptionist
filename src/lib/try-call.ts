@@ -65,8 +65,8 @@ export async function startTryCall(input: {
   if (isVoiceProviderConfigured() && !isHumanCheckConfigured()) {
     console.warn("[try-call] voice provider is configured but the human check is not: live calls from the site are disabled until TURNSTILE keys are set");
   }
-  if (live) {
-    // A real call is about to be dialled: the visitor must have passed the human check.
+  if (isHumanCheckConfigured()) {
+    // Every submission (a real call or a callback request) must come from a person.
     const human = await verifyHuman(input.turnstileToken, input.ip);
     if (!human.ok) {
       console.warn("[try-call] human check failed", human.reason);

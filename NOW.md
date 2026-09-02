@@ -5,7 +5,7 @@ Handoff notes for the next session. Updated 2026-09-01.
 ## Just done
 
 - **Multi-vertical restructure underway** — plan at
-  `~/.claude/plans/so-you-want-to-keen-nest.md`. Chunks 0–2 of 10 landed:
+  `~/.claude/plans/so-you-want-to-keen-nest.md`. Chunks 0–3 of 10 landed:
   - 0: `/demo/` asset collision resolved (`public/demo` → `public/audio`).
   - 1: `Doctor→Provider` / `Patient→Client` rename across TS + SQL. `callMetadata` keys in
     `voice.ts` are frozen (external Vapi/Bland contract) — only their values changed.
@@ -17,6 +17,13 @@ Handoff notes for the next session. Updated 2026-09-01.
     gone; `SITE_TIMEZONE`/`OWNER_EMAIL` replace the `CLINIC_*` vars (old names still read).
     Verified: rendered HTML diff vs pre-extraction baseline shows only node-splitting and
     the intended restoration of medical nouns; full booking → call → admin passes.
+  - 3: **routes live under `/demo/[vertical]`** (`/`, `/book/[slug]`, `/confirmation/[id]`)
+    with APIs at `/api/demo/[vertical]/{availability,bookings}`. `demoPaths(slug)` is the one
+    place the prefix lives; `resolveVertical(params)` 404s unknown slugs at the layout.
+    Provider slugs are unique per vertical; a booking refuses a provider from another
+    vertical; the confirmation page refuses an appointment from another vertical.
+    **Temporary** `redirects()` in `next.config.ts` send `/`, `/doctors/*`, `/booking/*` to
+    the medical demo — remove when the marketing site lands at `/` (chunk 8).
 
 - **Password-gated the whole site.** `src/proxy.ts` (Next 16's renamed `middleware.ts` —
   one per project, so the site gate and the pre-existing `/admin` gate share it) now bounces

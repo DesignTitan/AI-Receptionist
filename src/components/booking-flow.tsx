@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { clientTypeLabel, providerLabel } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import type { Provider, Slot } from "@/lib/types";
+import { demoPaths } from "@/verticals/paths";
 import type { Terms } from "@/verticals/terms";
 import {
   AlertTriangle,
@@ -34,6 +35,7 @@ const dayLabel = (key: string) => {
 
 export function BookingFlow({ provider, terms: t }: { provider: Provider; terms: Terms }) {
   const router = useRouter();
+  const paths = demoPaths(provider.vertical);
   const [step, setStep] = useState<Step>(0);
 
   const [calendar, setCalendar] = useState<CalendarDay[]>([]);
@@ -59,7 +61,7 @@ export function BookingFlow({ provider, terms: t }: { provider: Provider; terms:
   // Load the availability calendar once per provider.
   useEffect(() => {
     let cancelled = false;
-    fetch(`/api/availability?provider=${provider.slug}&calendar=1`)
+    fetch(`${paths.api.availability}?provider=${provider.slug}&calendar=1`)
       .then((r) => r.json())
       .then((data: { days?: CalendarDay[] }) => {
         if (cancelled || !data.days) return;
@@ -74,7 +76,7 @@ export function BookingFlow({ provider, terms: t }: { provider: Provider; terms:
     return () => {
       cancelled = true;
     };
-  }, [provider.slug]);
+  }, [provider.slug, paths.api.availability]);
 
   // Load slots whenever the selected day changes.
   useEffect(() => {
@@ -82,7 +84,7 @@ export function BookingFlow({ provider, terms: t }: { provider: Provider; terms:
     let cancelled = false;
     setSlotsLoading(true);
     setSelectedSlot(null);
-    fetch(`/api/availability?provider=${provider.slug}&date=${selectedDate}`)
+    fetch(`${paths.api.availability}?provider=${provider.slug}&date=${selectedDate}`)
       .then((r) => r.json())
       .then((data: { slots?: Slot[]; timezoneLabel?: string; timezone?: string }) => {
         if (cancelled) return;
@@ -99,7 +101,7 @@ export function BookingFlow({ provider, terms: t }: { provider: Provider; terms:
     return () => {
       cancelled = true;
     };
-  }, [provider.slug, selectedDate]);
+  }, [provider.slug, selectedDate, paths.api.availability]);
 
   const pageDays = useMemo(
     () => calendar.slice(page * DAYS_PER_PAGE, page * DAYS_PER_PAGE + DAYS_PER_PAGE),
@@ -129,7 +131,7 @@ export function BookingFlow({ provider, terms: t }: { provider: Provider; terms:
     setSubmitting(true);
     setSubmitError(null);
     try {
-      const response = await fetch("/api/bookings", {
+      const response = await fetch(paths.api.bookings, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -152,14 +154,14 @@ export function BookingFlow({ provider, terms: t }: { provider: Provider; terms:
           setSelectedSlot(null);
           if (selectedDate) {
             const refreshed = await fetch(
-              `/api/availability?provider=${provider.slug}&date=${selectedDate}`,
+              `${paths.api.availability}?provider=${provider.slug}&date=${selectedDate}`,
             ).then((r) => r.json());
             setSlots(refreshed.slots ?? []);
           }
         }
         return;
       }
-      router.push(`/booking/${data.appointmentId}?ref=${data.reference}`);
+      router.push(paths.confirmation(data.appointmentId, data.reference));
     } catch {
       setSubmitError("We couldn't reach the server. Please check your connection.");
     } finally {

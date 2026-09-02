@@ -5,14 +5,18 @@ import { ArrowRight, Check, Sparkle } from "@/components/icons";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
 import { listProviders } from "@/lib/db";
 import { env } from "@/lib/env";
-import { DEFAULT_VERTICAL } from "@/verticals";
+import { resolveVertical } from "@/verticals/resolve";
 
 export const dynamic = "force-dynamic";
 
-export default async function HomePage() {
-  const v = DEFAULT_VERTICAL;
+export default async function DemoHomePage({
+  params,
+}: {
+  params: Promise<{ vertical: string }>;
+}) {
+  const v = await resolveVertical(params);
   const { hero, stats, steps, roster, owner, faq } = v.copy;
-  const providers = await listProviders();
+  const providers = await listProviders(v.slug);
   const nextAvailable = providers.length;
 
   return (
@@ -45,7 +49,7 @@ export default async function HomePage() {
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <a
-                  href="#doctors"
+                  href="#providers"
                   className="inline-flex h-12 items-center gap-2 rounded-full bg-primary px-6 text-[15px] font-semibold text-on-primary shadow-[var(--shadow-md)] transition hover:bg-primary-hover"
                 >
                   {hero.primaryCta}
@@ -120,7 +124,7 @@ export default async function HomePage() {
         </section>
 
         {/* ── Roster ───────────────────────────────────────────── */}
-        <section id="doctors" className="scroll-mt-16 border-t border-line bg-surface-2/60 py-20">
+        <section id="providers" className="scroll-mt-16 border-t border-line bg-surface-2/60 py-20">
           <div className="mx-auto max-w-6xl px-5">
             <header className="mb-10 flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-2xl">

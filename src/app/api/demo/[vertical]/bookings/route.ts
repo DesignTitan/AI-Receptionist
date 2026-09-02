@@ -1,6 +1,7 @@
 import { after, NextResponse } from "next/server";
 import { BookingError, createBooking } from "@/lib/db";
 import { env } from "@/lib/env";
+import { resolveVertical } from "@/verticals/resolve";
 
 export const dynamic = "force-dynamic";
 
@@ -40,7 +41,11 @@ function validate(body: Payload) {
   };
 }
 
-export async function POST(request: Request) {
+export async function POST(
+  request: Request,
+  { params }: { params: Promise<{ vertical: string }> },
+) {
+  const v = await resolveVertical(params);
   let body: Payload;
   try {
     body = (await request.json()) as Payload;
@@ -55,6 +60,7 @@ export async function POST(request: Request) {
 
   try {
     const result = await createBooking({
+      vertical: v.slug,
       providerId: body.providerId!,
       startsAt: new Date(body.startsAt!).toISOString(),
       fullName: values.fullName,

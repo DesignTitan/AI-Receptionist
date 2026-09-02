@@ -4,6 +4,7 @@ import Link from "next/link";
 import { providerLabel } from "@/lib/format";
 import { useMemo, useState } from "react";
 import type { Provider } from "@/lib/types";
+import { demoPaths } from "@/verticals/paths";
 import type { Terms } from "@/verticals/terms";
 import { ProviderAvatar } from "./provider-avatar";
 import { ArrowRight, Clock, Globe, MapPin, Star } from "./icons";
@@ -17,9 +18,10 @@ function ProviderCard({
   priority: boolean;
   terms: Terms;
 }) {
+  const href = demoPaths(provider.vertical).book(provider.slug);
   return (
     <article className="group card overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-float)]">
-      <Link href={`/doctors/${provider.slug}`} className="block focus-visible:outline-none">
+      <Link href={href} className="block focus-visible:outline-none">
         <div className="relative aspect-[5/4] overflow-hidden bg-surface-2">
           <ProviderAvatar
             name={provider.name}
@@ -70,7 +72,7 @@ function ProviderCard({
         </dl>
 
         <Link
-          href={`/doctors/${provider.slug}`}
+          href={href}
           className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-surface-2 px-4 py-2.5 text-sm font-semibold text-ink transition group-hover:bg-primary group-hover:text-on-primary"
         >
           Check availability

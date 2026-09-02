@@ -1,11 +1,12 @@
 import Link from "next/link";
 import type { Vertical } from "@/verticals";
+import { demoPaths } from "@/verticals/paths";
 import { ThemeToggle } from "./theme-toggle";
 
 export function Logo({ vertical: v, compact = false }: { vertical: Vertical; compact?: boolean }) {
   const Mark = v.icons.mark;
   return (
-    <Link href="/" className="group flex min-w-0 items-center gap-2.5">
+    <Link href={demoPaths(v.slug).home} className="group flex min-w-0 items-center gap-2.5">
       <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-primary text-on-primary shadow-sm transition group-hover:scale-105">
         <Mark width={20} height={20} strokeWidth={2} />
       </span>
@@ -26,25 +27,26 @@ export function Logo({ vertical: v, compact = false }: { vertical: Vertical; com
 
 export function SiteHeader({ vertical: v }: { vertical: Vertical }) {
   const t = v.terms;
+  const p = demoPaths(v.slug);
   return (
     <header className="sticky top-0 z-40 border-b border-line surface-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5">
         <Logo vertical={v} />
         <nav className="hidden items-center gap-7 text-sm font-medium text-muted md:flex">
-          <a className="transition hover:text-ink" href="/#doctors">
+          <a className="transition hover:text-ink" href={p.roster}>
             Our {t.provider.many}
           </a>
-          <a className="transition hover:text-ink" href="/#how-it-works">
+          <a className="transition hover:text-ink" href={p.howItWorks}>
             How it works
           </a>
-          <a className="transition hover:text-ink" href="/#questions">
+          <a className="transition hover:text-ink" href={p.questions}>
             Questions
           </a>
         </nav>
         <div className="flex shrink-0 items-center gap-2">
           <ThemeToggle />
           <Link
-            href="/#doctors"
+            href={p.roster}
             className="inline-flex h-9 items-center whitespace-nowrap rounded-full bg-primary px-4 text-sm font-semibold text-on-primary transition hover:bg-primary-hover"
           >
             Book now
@@ -58,6 +60,7 @@ export function SiteHeader({ vertical: v }: { vertical: Vertical }) {
 export function SiteFooter({ vertical: v }: { vertical: Vertical }) {
   const t = v.terms;
   const f = v.copy.footer;
+  const p = demoPaths(v.slug);
   return (
     <footer className="border-t border-line bg-surface">
       <div className="mx-auto max-w-6xl px-5 py-12">
@@ -73,17 +76,17 @@ export function SiteFooter({ vertical: v }: { vertical: Vertical }) {
               </h3>
               <ul className="space-y-2 text-muted">
                 <li>
-                  <a className="transition hover:text-ink" href="/#doctors">
+                  <a className="transition hover:text-ink" href={p.roster}>
                     Find a {t.provider.one}
                   </a>
                 </li>
                 <li>
-                  <a className="transition hover:text-ink" href="/#how-it-works">
+                  <a className="transition hover:text-ink" href={p.howItWorks}>
                     How booking works
                   </a>
                 </li>
                 <li>
-                  <a className="transition hover:text-ink" href="/#questions">
+                  <a className="transition hover:text-ink" href={p.questions}>
                     Common questions
                   </a>
                 </li>

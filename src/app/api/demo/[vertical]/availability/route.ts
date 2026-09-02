@@ -2,21 +2,26 @@ import { NextResponse } from "next/server";
 import { getAvailability, getAvailabilityCalendar, getProviderBySlug } from "@/lib/db";
 import { env } from "@/lib/env";
 import { timezoneLabel } from "@/lib/time";
+import { resolveVertical } from "@/verticals/resolve";
 
 export const dynamic = "force-dynamic";
 
 /**
- * GET /api/availability?provider=<slug>&date=YYYY-MM-DD  → slots for that day
- * GET /api/availability?provider=<slug>&calendar=1       → open-slot counts for 21 days
+ * GET /api/demo/<vertical>/availability?provider=<slug>&date=YYYY-MM-DD  → slots for that day
+ * GET /api/demo/<vertical>/availability?provider=<slug>&calendar=1       → open-slot counts for 21 days
  */
-export async function GET(request: Request) {
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ vertical: string }> },
+) {
+  const v = await resolveVertical(params);
   const { searchParams } = new URL(request.url);
   const slug = searchParams.get("provider");
   if (!slug) {
     return NextResponse.json({ error: "provider is required" }, { status: 400 });
   }
 
-  const provider = await getProviderBySlug(slug);
+  const provider = await getProviderBySlug(v.slug, slug);
   if (!provider) {
     return NextResponse.json({ error: "Provider not found" }, { status: 404 });
   }

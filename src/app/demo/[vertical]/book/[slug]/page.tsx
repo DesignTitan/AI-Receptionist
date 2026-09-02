@@ -8,19 +8,19 @@ import { ChevronLeft, Clock, Globe, MapPin, Shield, Star } from "@/components/ic
 import { SiteFooter, SiteHeader } from "@/components/site-header";
 import { getProviderBySlug, listProviders } from "@/lib/db";
 import { env } from "@/lib/env";
-import { DEFAULT_VERTICAL as v } from "@/verticals";
+import { demoPaths } from "@/verticals/paths";
+import { resolveVertical } from "@/verticals/resolve";
 
 export const dynamic = "force-dynamic";
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+type Props = { params: Promise<{ vertical: string; slug: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const v = await resolveVertical(params);
   const { slug } = await params;
-  const provider = await getProviderBySlug(slug);
+  const provider = await getProviderBySlug(v.slug, slug);
   if (!provider) return { title: `${v.terms.provider.One} not found` };
   return {
     title: `Book ${providerLabel(provider)} · ${provider.specialty}`,
@@ -28,17 +28,15 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProviderPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function ProviderPage({ params }: Props) {
+  const v = await resolveVertical(params);
   const { slug } = await params;
-  const provider = await getProviderBySlug(slug);
+  const provider = await getProviderBySlug(v.slug, slug);
   if (!provider || !provider.is_active) notFound();
 
-  const others = (await listProviders()).filter((d) => d.id !== provider.id).slice(0, 3);
+  const others = (await listProviders(v.slug)).filter((d) => d.id !== provider.id).slice(0, 3);
   const t = v.terms;
+  const p = demoPaths(v.slug);
 
   return (
     <div className="min-h-dvh">
@@ -46,7 +44,7 @@ export default async function ProviderPage({
 
       <main id="main" className="mx-auto max-w-6xl px-5 py-8 lg:py-12">
         <Link
-          href="/#doctors"
+          href={p.roster}
           className="mb-6 inline-flex items-center gap-1.5 text-[13.5px] font-medium text-muted transition hover:text-ink"
         >
           <ChevronLeft width={16} height={16} />
@@ -144,7 +142,7 @@ export default async function ProviderPage({
               {others.map((other) => (
                 <Link
                   key={other.id}
-                  href={`/doctors/${other.slug}`}
+                  href={p.book(other.slug)}
                   className="card flex items-center gap-3.5 p-3.5 transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]"
                 >
                   <span className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-surface-2">

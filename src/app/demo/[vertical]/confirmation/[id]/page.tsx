@@ -9,7 +9,8 @@ import { SiteFooter, SiteHeader } from "@/components/site-header";
 import { getAppointment } from "@/lib/db";
 import { env } from "@/lib/env";
 import { formatDate, formatTime, timezoneLabel } from "@/lib/time";
-import { getVertical } from "@/verticals";
+import { demoPaths } from "@/verticals/paths";
+import { resolveVertical } from "@/verticals/resolve";
 
 export const dynamic = "force-dynamic";
 
@@ -22,20 +23,23 @@ export default async function BookingConfirmationPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ vertical: string; id: string }>;
   searchParams: Promise<{ ref?: string }>;
 }) {
+  const v = await resolveVertical(params);
   const { id } = await params;
   const { ref } = await searchParams;
   const appointment = await getAppointment(id);
 
-  // The reference acts as the capability token for this page.
+  // The reference acts as the capability token for this page, and a booking
+  // only renders under the business it was made with.
   if (!appointment || !ref || appointment.reference !== ref.toUpperCase()) notFound();
+  if (appointment.vertical !== v.slug) notFound();
 
   const tz = env.timezone;
   const { provider, client } = appointment;
-  const v = getVertical(appointment.vertical);
   const t = v.terms;
+  const p = demoPaths(v.slug);
 
   return (
     <div className="min-h-dvh">
@@ -139,7 +143,7 @@ export default async function BookingConfirmationPage({
                 Add to calendar
               </a>
               <Link
-                href="/#doctors"
+                href={p.roster}
                 className="inline-flex h-11 items-center rounded-xl border border-line px-5 text-[14.5px] font-semibold text-ink transition hover:border-line-strong"
               >
                 Book another {t.visit.one}

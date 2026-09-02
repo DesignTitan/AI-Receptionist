@@ -12,6 +12,7 @@ import {
   zonedTimeToUtc,
 } from "./time";
 import type {
+  VerticalSlug,
   Appointment,
   AppointmentDetail,
   AppointmentStatus,
@@ -45,28 +46,31 @@ export function newReference(prefix: string): string {
 
 /* ── Providers ─────────────────────────────────────────────────────────── */
 
-export async function listProviders(): Promise<Provider[]> {
+export async function listProviders(vertical?: VerticalSlug): Promise<Provider[]> {
   if (!useSupabase()) {
     return demoStore()
-      .providers.filter((d) => d.is_active)
+      .providers.filter((d) => d.is_active && (!vertical || d.vertical === vertical))
       .sort((a, b) => a.name.localeCompare(b.name));
   }
-  const { data, error } = await serviceClient()
-    .from("providers")
-    .select("*")
-    .eq("is_active", true)
-    .order("name");
+  let query = serviceClient().from("providers").select("*").eq("is_active", true);
+  if (vertical) query = query.eq("vertical", vertical);
+  const { data, error } = await query.order("name");
   if (error) throw new Error(`listProviders: ${error.message}`);
   return (data ?? []) as Provider[];
 }
 
-export async function getProviderBySlug(slug: string): Promise<Provider | null> {
+/** Slugs are unique per vertical, so three fictional businesses can name staff independently. */
+export async function getProviderBySlug(
+  vertical: VerticalSlug,
+  slug: string,
+): Promise<Provider | null> {
   if (!useSupabase()) {
-    return demoStore().providers.find((d) => d.slug === slug) ?? null;
+    return demoStore().providers.find((d) => d.vertical === vertical && d.slug === slug) ?? null;
   }
   const { data, error } = await serviceClient()
     .from("providers")
     .select("*")
+    .eq("vertical", vertical)
     .eq("slug", slug)
     .maybeSingle();
   if (error) throw new Error(`getProviderBySlug: ${error.message}`);
@@ -232,6 +236,8 @@ async function upsertClient(input: {
 /* ── Bookings ────────────────────────────────────────────────────────── */
 
 export type BookingInput = {
+  /** The business the request came in under; a provider from another one is refused. */
+  vertical: VerticalSlug;
   providerId: string;
   startsAt: string;
   fullName: string;
@@ -251,6 +257,9 @@ export type BookingResult = {
 export async function createBooking(input: BookingInput): Promise<BookingResult> {
   const provider = await getProviderById(input.providerId);
   if (!provider) throw new BookingError("That provider is no longer accepting bookings.");
+  if (provider.vertical !== input.vertical) {
+    throw new BookingError("That provider isn't part of this business.");
+  }
   const vertical = getVertical(provider.vertical);
 
   const start = new Date(input.startsAt);

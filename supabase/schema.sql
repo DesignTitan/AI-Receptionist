@@ -10,7 +10,7 @@ create table if not exists public.providers (
   id                uuid primary key default gen_random_uuid(),
   -- Which themed business this row belongs to (medical, salon, …).
   vertical          text not null default 'medical',
-  slug              text not null unique,
+  slug              text not null,
   name              text not null,
   credentials       text not null default '',
   specialty         text not null,
@@ -29,7 +29,8 @@ create table if not exists public.providers (
   end_time          text not null default '17:00',
   slot_minutes      int  not null default 30,
   is_active         boolean not null default true,
-  created_at        timestamptz not null default now()
+  created_at        timestamptz not null default now(),
+  unique (vertical, slug)
 );
 
 -- ── Clients ───────────────────────────────────────────────────────────────

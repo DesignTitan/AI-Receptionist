@@ -1,0 +1,65 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 600px; height: 640px; overflow: hidden; font-family: Inter, -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .scene { position: relative; width: 600px; height: 640px; overflow: hidden; background: #0d0c10; }
+  /* the ground: dusk over low hills, built from gradients so it stays ours */
+  .sky { position: absolute; inset: 0; background:
+      radial-gradient(120% 80% at 70% 18%, #4a2a22 0%, rgba(74,42,34,0) 55%),
+      radial-gradient(90% 60% at 20% 30%, #2a2334 0%, rgba(42,35,52,0) 60%),
+      linear-gradient(180deg, #17151b 0%, #0e0d12 60%, #07070a 100%); }
+  .glow { position: absolute; left: 32%; top: 22%; width: 340px; height: 220px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,150,90,.55), rgba(255,150,90,0)); filter: blur(30px); }
+  .hill { position: absolute; border-radius: 50% 50% 0 0 / 60% 60% 0 0; }
+  .h1 { left: -30%; right: 35%; bottom: -30%; height: 60%; background: linear-gradient(180deg, #2b2226 0%, #120f12 70%); filter: blur(1px); }
+  .h2 { left: 30%; right: -40%; bottom: -35%; height: 62%; background: linear-gradient(180deg, #3a2a27 0%, #14100f 70%); }
+  .h3 { left: -10%; right: -10%; bottom: -55%; height: 70%; background: linear-gradient(180deg, #1a1416 0%, #09080a 60%); }
+  .grain { position: absolute; inset: 0; opacity: .14; mix-blend-mode: overlay; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  /* chrome around the panel */
+  .tools { position: absolute; left: 22px; top: 22px; display: flex; gap: 8px; }
+  .tool { width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(12px); display: grid; place-items: center; color: rgba(255,255,255,.85); }
+  .tool svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .live { position: absolute; right: 22px; top: 22px; height: 36px; padding: 0 14px; border-radius: 10px; background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(12px); color: #fff; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .live i { width: 7px; height: 7px; border-radius: 50%; background: #5ed48a; box-shadow: 0 0 0 4px rgba(94,212,138,.22); }
+  /* the glass */
+  .panel { position: absolute; left: 48px; right: 48px; top: 96px; border-radius: 22px; padding: 28px 28px 26px;
+    background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.07)); border: 1px solid rgba(255,255,255,.18);
+    backdrop-filter: blur(22px) saturate(140%); -webkit-backdrop-filter: blur(22px) saturate(140%);
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.25); color: #fff; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .mark { width: 96px; height: 96px; border-radius: 50%; background: #15130f; border: 1px solid rgba(255,255,255,.18); display: grid; place-items: center; box-shadow: 0 10px 30px -10px rgba(0,0,0,.8); }
+  .mark i { width: 28px; height: 28px; border-radius: 50%; background: #4b4fe0; box-shadow: 0 0 0 6px rgba(75,79,224,.25); }
+  .name { margin-top: 18px; font-size: 22px; font-weight: 600; letter-spacing: -.01em; }
+  .sub { margin-top: 4px; font-size: 14px; color: rgba(255,255,255,.62); }
+  .row { margin-top: 14px; display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(255,255,255,.9); }
+  .sw { display: flex; }
+  .sw b { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(20,18,24,.9); margin-left: -6px; }
+  .sw b:first-child { margin-left: 0; }
+  .btn { margin-top: 20px; width: 100%; height: 56px; border-radius: 12px; background: #fff; color: #0f0e12; font-size: 17px; font-weight: 600; display: grid; place-items: center; box-shadow: 0 8px 24px -10px rgba(0,0,0,.6); }
+  .lines { margin: 22px 0 0; padding: 0; list-style: none; text-align: left; align-self: stretch; font-size: 14.5px; line-height: 1.55; color: rgba(255,255,255,.92); }
+  .lines li { padding-left: 14px; text-indent: -14px; }
+  .lines li + li { margin-top: 4px; }
+</style></head><body>
+<div class="scene">
+  <div class="sky"></div><div class="glow"></div>
+  <div class="hill h1"></div><div class="hill h2"></div><div class="hill h3"></div>
+  <div class="grain"></div>
+  <div class="tools">
+    <div class="tool"><svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="14" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></div>
+    <div class="tool"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16M10 10v10"/></svg></div>
+    <div class="tool"><svg viewBox="0 0 24 24"><path d="M5 19l7-14 7 14M8.5 14h7"/></svg></div>
+  </div>
+  <div class="live"><i></i>Live</div>
+  <div class="panel">
+    <div class="mark"><i></i></div>
+    <div class="name">Front desk</div>
+    <div class="sub">ai-receptionist · one desk, three businesses</div>
+    <div class="row"><span class="sw"><b style="background:#2f7a4a"></b><b style="background:#b23a48"></b><b style="background:#15130f"></b></span>13 bookings this week</div>
+    <div class="btn">Open the desk</div>
+    <ul class="lines">
+      <li>Every call recorded, transcribed and summarised</li>
+      <li>- Every no-answer flagged for a person</li>
+      <li>- A clinic, a salon and a studio on the same desk</li>
+    </ul>
+  </div>
+</div>
+</body></html>

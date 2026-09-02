@@ -169,8 +169,8 @@ export default function HomePage() {
                   </p>
                   <p className="rc-card__foot">Built to be yours, not a template.</p>
                 </div>
-                <figure className="rc-card__media rc-card__media--wide">
-                  <img src="/scrollcraft/04c-businesses.jpg" width={1380} height={716} alt="The dashboard's totals and the three business filters: Northlake Family Health, Solstice Salon & Spa, Halide Studio." />
+                <figure className="rc-card__media rc-card__media--center">
+                  <img src="/scrollcraft/04c-frontdesk.jpg" width={1200} height={1280} alt="The front desk as a glass panel: the product mark, the three businesses, an Open the desk button, and what the desk does." />
                 </figure>
               </article>
             </div>

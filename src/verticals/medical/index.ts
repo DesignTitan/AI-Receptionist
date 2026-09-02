@@ -141,7 +141,7 @@ export const medical: Vertical = {
       subject: "Maya Thompson",
       phone: "+1 415 555 0142",
       lines: [
-        { who: "Ava", text: `Hi Maya — this is Ava at ${BRAND}.` },
+        { who: "Ava", text: `Hi Maya — this is Ava at ${BRAND}. This call is recorded.` },
         { who: "Maya", text: "Oh, hi." },
         { who: "Ava", text: "I'm confirming Thursday at 10:30 with Dr. Vasquez. Still good?" },
         { who: "Maya", text: "Yes, that works." },

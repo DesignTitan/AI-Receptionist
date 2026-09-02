@@ -1,7 +1,7 @@
 /**
  * Renders supabase/seed.sql from each vertical's roster so the two never
  * drift. Roster modules carry only type imports, which Node strips, so this
- * runs with no build step:  npm run seed:sql
+ * runs with no build step:  npm run seed:sql   (TENANT=<slug> for one business)
  */
 import { writeFileSync } from "node:fs";
 import { ROSTERS } from "../src/verticals/rosters.ts";
@@ -9,7 +9,11 @@ import { ROSTERS } from "../src/verticals/rosters.ts";
 const q = (v: string) => `'${v.replace(/'/g, "''")}'`;
 const arr = (v: (string | number)[]) => `'{${v.map(String).join(",")}}'`;
 
-const rows = ROSTERS.flat().map((p) =>
+// TENANT=salon npm run seed:sql → only that business, for a customer's own database.
+const only = process.env.TENANT ?? process.env.NEXT_PUBLIC_TENANT;
+const rows = ROSTERS.flat()
+  .filter((p) => !only || p.vertical === only)
+  .map((p) =>
   [
     "(",
     `  ${q(p.id)}, ${q(p.vertical)}, ${q(p.slug)}, ${q(p.name)}, ${q(p.credentials)}, ${q(p.specialty)},`,

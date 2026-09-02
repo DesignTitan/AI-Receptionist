@@ -1,6 +1,7 @@
 import type { VerticalSlug } from "@/lib/types";
 import { medical } from "./medical";
 import { salon } from "./salon";
+import { TENANT_SLUG, VERTICAL_SLUGS } from "./slugs";
 import { studio } from "./studio";
 import type { Vertical } from "./types";
 
@@ -14,7 +15,14 @@ export { TERMS, noun, type NounForms, type Terms } from "./terms";
  * the checklist.
  */
 export const VERTICALS: Record<VerticalSlug, Vertical> = { medical, salon, studio };
-export const VERTICAL_SLUGS = Object.keys(VERTICALS) as VerticalSlug[];
+export { TENANT_SLUG, VERTICAL_SLUGS, isVerticalSlug } from "./slugs";
+
+/** The one business this deployment is dedicated to, or null on the product deployment. */
+export const activeTenant = (): Vertical | null => (TENANT_SLUG ? VERTICALS[TENANT_SLUG] : null);
+
+/** Every business this deployment serves. */
+export const servedVerticals = (): Vertical[] =>
+  TENANT_SLUG ? [VERTICALS[TENANT_SLUG]] : (VERTICAL_SLUGS as readonly VerticalSlug[]).map((s) => VERTICALS[s]);
 
 export const getVertical = (slug: VerticalSlug): Vertical => VERTICALS[slug];
 

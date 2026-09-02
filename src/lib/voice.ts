@@ -1,5 +1,6 @@
 import { env, isVoiceProviderConfigured } from "./env";
 import { providerLabel } from "@/lib/format";
+import { RECORDING_NOTICE } from "./consent";
 import { getVertical } from "@/verticals";
 import {
   createCall,
@@ -55,7 +56,7 @@ ${t.booking.One} details:
 - ${t.client.One} type: ${detail.is_new_client ? `new ${t.client.one}` : `returning ${t.client.one}`}
 
 How to run the call:
-1. Greet by name and confirm you are speaking with ${first}. If it is someone else, politely ask when ${first} is available and end the call.
+1. Greet by name, say "${RECORDING_NOTICE}", and confirm you are speaking with ${first}. If it is someone else, politely ask when ${first} is available and end the call.
 2. State the ${t.provider.one}, day and time, and ask whether that still works.
 3. If yes: confirm, then ask them to ${voice.arrivalAdvice}.${detail.is_new_client ? voice.newClientNote : ""}
 4. If they want a different time: do not attempt to rebook on the call. Say the front desk will text options within the hour, and note the times that suit them.
@@ -71,7 +72,7 @@ const article = (word: string) => (/^[aeiou]/i.test(word) ? "an" : "a");
 
 const firstMessage = (detail: AppointmentDetail) => {
   const { brand, terms: t, voice } = getVertical(detail.vertical);
-  return `Hi, this is ${voice.agentName} calling from ${brand}. Am I speaking with ${detail.client?.full_name ?? `the ${t.client.one}`}?`;
+  return `Hi, this is ${voice.agentName} calling from ${brand}. ${RECORDING_NOTICE} Am I speaking with ${detail.client?.full_name ?? `the ${t.client.one}`}?`;
 };
 
 const cleanPhone = (phone: string) => {

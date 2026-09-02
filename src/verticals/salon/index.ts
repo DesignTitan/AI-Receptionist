@@ -137,7 +137,7 @@ export const salon: Vertical = {
       subject: "Jade Okafor",
       phone: "+1 415 555 0198",
       lines: [
-        { who: "Robin", text: `Hi Jade — this is Robin at ${BRAND}.` },
+        { who: "Robin", text: `Hi Jade — this is Robin at ${BRAND}. This call is recorded.` },
         { who: "Jade", text: "Oh, hi!" },
         { who: "Robin", text: "I'm confirming Saturday at 2:00 with Sasha for balayage. Still good?" },
         { who: "Jade", text: "Yes, perfect." },

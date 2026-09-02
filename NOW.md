@@ -4,6 +4,22 @@ Handoff notes for the next session. Updated 2026-09-01.
 
 ## Just done
 
+- **Business plan + the viability floor** (`~/.claude/plans/so-you-want-to-keen-nest.md`,
+  approved 2026-09-01): concierge model — a customer is one deployment, one Supabase, one config
+  directory. Built the code side:
+  - **Single-tenant mode.** `NEXT_PUBLIC_TENANT=<slug>` at build time makes that business the
+    site: `/`, `/book/[slug]`, `/confirmation/[id]` at the root; `/demo/*`, `/demos` and other
+    businesses' APIs 404; `/demo/<tenant>/*` redirects to the root form; admin shows one
+    business and forces its scope; the 404 page wears the tenant's chrome; the demo `noindex`
+    is dropped. `TENANT=<slug> npm run seed:sql` seeds one business. Verified end to end with
+    a salon build; default build verified visible-text identical except the consent line.
+  - **Recording consent** (`src/lib/consent.ts`): first sentence of the agent's greeting, the
+    script's step 1, the simulator transcript, every hero preview, and the booking form's phone
+    hint. Verified at runtime in a simulated transcript.
+  - `supabase/delete-client.sql` (by phone; cascades; notification logs removed explicitly) and
+    `supabase/ops.sql` (five weekly checks). **Unverified against a live database** — no
+    Supabase yet. Run the SELECT at the top of the deletion script first.
+
 - **Multi-vertical restructure underway** — plan at
   `~/.claude/plans/so-you-want-to-keen-nest.md`. Chunks 0–9 of 10 landed:
   - 0: `/demo/` asset collision resolved (`public/demo` → `public/audio`).
@@ -105,6 +121,14 @@ Nothing half-finished. The repo is committed and builds clean.
   request lands on a different serverless instance. **Marketing pages are fine; demo bookings
   do not complete in production until Supabase is wired.** Local (`npm run build && npm start`)
   is a single process and works end to end — that's how every chunk was verified.
+
+## Onboarding a customer (concierge, per the business plan)
+
+Intake → `src/verticals/<slug>/` (copy the salon's four files) → their Supabase (`schema.sql`,
+`TENANT=<slug> npm run seed:sql`, run it) → their Vercel project from this repo with
+`NEXT_PUBLIC_TENANT=<slug>`, Supabase ×3, `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET`, `OWNER_EMAIL`,
+Resend + voice keys → phone number in the voice provider + `VOICE_WEBHOOK_SECRET` → test call with
+them on the line → `book.theirdomain.com` CNAME → invoice. Full runbook in the plan, Part 3.
 
 ## Next — the one blocking item: Supabase (plan chunk 10)
 

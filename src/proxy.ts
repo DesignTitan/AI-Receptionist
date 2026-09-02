@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { ADMIN_COOKIE, verifySessionToken } from "@/lib/auth";
 import { env } from "@/lib/env";
 import { safeNext, SITE_COOKIE, verifySiteToken } from "@/lib/site-gate";
+import { TENANT_SLUG } from "@/verticals/slugs";
 
 /**
  * Two gates, outermost first.
@@ -11,6 +12,11 @@ import { safeNext, SITE_COOKIE, verifySiteToken } from "@/lib/site-gate";
  *    private again with one variable. In the default "public" mode the
  *    product site and the demos are open and /login is dead.
  * 2. The staff gate on /admin and /api/admin, always.
+ *
+ * Between them, single-tenant routing when NEXT_PUBLIC_TENANT is set: the
+ * customer's business answers at `/`, `/book/*` and `/confirmation/*`; the
+ * product site, the other demos and their APIs 404; the `/demo/<tenant>`
+ * form redirects to its root equivalent so there is one canonical URL.
  *
  * Provider callbacks under /api/webhooks carry no cookie and authenticate with
  * their own shared secret, so they bypass both gates.
@@ -50,6 +56,11 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
+  if (TENANT_SLUG) {
+    const routed = tenantRoute(TENANT_SLUG, pathname, search, request.url);
+    if (routed) return routed;
+  }
+
   if (!STAFF_ONLY.some((prefix) => pathname.startsWith(prefix))) {
     return NextResponse.next();
   }
@@ -70,6 +81,26 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(login);
   }
   return NextResponse.next();
+}
+
+function tenantRoute(tenant: string, pathname: string, search: string, base: string) {
+  const prefix = `/demo/${tenant}`;
+  const at = (path: string) => new URL(path + search, base);
+
+  if (pathname === "/") return NextResponse.rewrite(at(prefix));
+  if (pathname.startsWith("/book/") || pathname.startsWith("/confirmation/")) {
+    return NextResponse.rewrite(at(prefix + pathname));
+  }
+  if (pathname === prefix || pathname.startsWith(`${prefix}/`)) {
+    return NextResponse.redirect(at(pathname.slice(prefix.length) || "/"));
+  }
+  const foreign =
+    pathname === "/demos" ||
+    pathname.startsWith("/demo/") ||
+    (pathname.startsWith("/api/demo/") && !pathname.startsWith(`/api/demo/${tenant}/`));
+  // A route that doesn't exist renders the app's own 404 page with a 404 status.
+  if (foreign) return NextResponse.rewrite(new URL("/__not-found", base));
+  return null;
 }
 
 export const config = {

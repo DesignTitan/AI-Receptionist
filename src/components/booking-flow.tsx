@@ -366,7 +366,7 @@ export function BookingFlow({ provider, terms: t }: { provider: Provider; terms:
             />
             <Field
               label="Mobile number"
-              hint="The assistant calls this number within a minute."
+              hint="We'll call this number within a minute to confirm. The call is recorded."
               error={errors.phone}
               input={
                 <input

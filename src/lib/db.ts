@@ -1,4 +1,5 @@
 import { env, isSupabaseConfigured } from "./env";
+import { RECORDING_NOTICE } from "./consent";
 import { providerLabel } from "./format";
 import { getVertical } from "@/verticals";
 import { demoStore } from "./demo-store";
@@ -642,7 +643,7 @@ const SIM_TRANSCRIPT = (
   const { agentName, arrivalAdvice } = vertical.voice;
   const first = client.split(" ")[0];
   return [
-    `Agent: Hello, this is ${agentName} calling from ${vertical.brand}. Am I speaking with ${client}?`,
+    `Agent: Hello, this is ${agentName} calling from ${vertical.brand}. ${RECORDING_NOTICE} Am I speaking with ${client}?`,
     `${first}: Yes, speaking.`,
     `Agent: Great — I'm calling to confirm the ${vertical.terms.booking.one} you just booked with ${provider}, ${when}. Does that still work for you?`,
     `${first}: Yes, that works.`,

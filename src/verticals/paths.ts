@@ -1,16 +1,20 @@
 import type { VerticalSlug } from "@/lib/types";
+import { TENANT_SLUG } from "./slugs";
 
 /**
  * Every URL a themed demo links to, so the `/demo/<slug>` prefix lives in
  * exactly one place. Pure — safe to import from client components.
  */
 export function demoPaths(slug: VerticalSlug) {
-  const base = `/demo/${slug}`;
+  // On a customer's own deployment their business lives at the root.
+  const own = TENANT_SLUG === slug;
+  const base = own ? "" : `/demo/${slug}`;
+  const home = own ? "/" : base;
   return {
-    home: base,
-    roster: `${base}#providers`,
-    howItWorks: `${base}#how-it-works`,
-    questions: `${base}#questions`,
+    home,
+    roster: `${home}#providers`,
+    howItWorks: `${home}#how-it-works`,
+    questions: `${home}#questions`,
     book: (providerSlug: string) => `${base}/book/${providerSlug}`,
     confirmation: (id: string, reference: string) =>
       `${base}/confirmation/${id}?ref=${encodeURIComponent(reference)}`,

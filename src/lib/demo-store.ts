@@ -1,4 +1,4 @@
-import { VERTICALS } from "@/verticals";
+import { servedVerticals } from "@/verticals";
 import type { Appointment, CallLog, Client, NotificationLog, Provider } from "./types";
 
 /**
@@ -23,7 +23,7 @@ export type DemoStore = {
 function buildSeed(): DemoStore {
   const now = Date.now();
   const store: DemoStore = { providers: [], clients: [], appointments: [], calls: [], notifications: [] };
-  for (const vertical of Object.values(VERTICALS)) {
+  for (const vertical of servedVerticals()) {
     const seed = vertical.seed.build(now);
     store.providers.push(...vertical.seed.providers.map((p) => ({ ...p })));
     store.clients.push(...seed.clients);

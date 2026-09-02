@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getDashboardStats, listAppointments } from "@/lib/db";
 import type { AppointmentStatus, VerticalSlug } from "@/lib/types";
-import { VERTICAL_SLUGS } from "@/verticals";
+import { TENANT_SLUG, VERTICAL_SLUGS } from "@/verticals";
 
 export const dynamic = "force-dynamic";
 
@@ -21,10 +21,11 @@ export async function GET(request: Request) {
   const statusParam = searchParams.get("status") as AppointmentStatus | "all" | null;
   const status = statusParam && STATUSES.includes(statusParam) ? statusParam : "all";
   const verticalParam = searchParams.get("vertical");
-  const vertical =
-    verticalParam && (VERTICAL_SLUGS as string[]).includes(verticalParam)
+  const vertical: VerticalSlug | "all" =
+    TENANT_SLUG ??
+    (verticalParam && (VERTICAL_SLUGS as readonly string[]).includes(verticalParam)
       ? (verticalParam as VerticalSlug)
-      : "all";
+      : "all");
 
   const [appointments, stats] = await Promise.all([
     listAppointments({ status, vertical, search: searchParams.get("q") ?? undefined, limit: 200 }),

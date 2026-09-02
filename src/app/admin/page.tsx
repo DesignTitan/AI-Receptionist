@@ -4,7 +4,7 @@ import { AdminHeader, ModeBanner } from "@/components/admin/shell";
 import { getDashboardStats, listAppointments } from "@/lib/db";
 import { emailStatus } from "@/lib/email";
 import { env, isSupabaseConfigured, isVoiceProviderConfigured } from "@/lib/env";
-import { VERTICALS } from "@/verticals";
+import { servedVerticals, TENANT_SLUG } from "@/verticals";
 
 export const dynamic = "force-dynamic";
 
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 
 export default async function AdminPage() {
   const [appointments, stats] = await Promise.all([
-    listAppointments({ limit: 200 }),
-    getDashboardStats(),
+    listAppointments({ vertical: TENANT_SLUG ?? "all", limit: 200 }),
+    getDashboardStats(TENANT_SLUG ?? "all"),
   ]);
 
   return (
@@ -31,7 +31,7 @@ export default async function AdminPage() {
         <Dashboard
           initial={{ appointments, stats }}
           timezone={env.timezone}
-          businesses={Object.values(VERTICALS).map((v) => ({
+          businesses={servedVerticals().map((v) => ({
             slug: v.slug,
             brand: v.brand,
             // Literal hex: the dashboard renders on the product palette, so

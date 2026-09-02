@@ -141,7 +141,7 @@ export const studio: Vertical = {
       subject: "Nadia Feld",
       phone: "+1 415 555 0134",
       lines: [
-        { who: "Jules", text: `Hi Nadia — this is Jules at ${BRAND}.` },
+        { who: "Jules", text: `Hi Nadia — this is Jules at ${BRAND}. This call is recorded.` },
         { who: "Nadia", text: "Hi." },
         { who: "Jules", text: "I'm confirming Tuesday at 11:00 with Mira, about the rebrand. Still good?" },
         { who: "Nadia", text: "Yes, that works." },

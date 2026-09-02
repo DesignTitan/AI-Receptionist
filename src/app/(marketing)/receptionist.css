@@ -178,13 +178,24 @@
   display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(1.5rem, 3vw, 3rem);
   --card-pad: clamp(1.25rem, 3vw, 2.5rem);
   padding: 0;
-  overflow: hidden;
+  isolation: isolate;
   background: #131117; color: #f2efe8; border-radius: 32px;
   border: 1px solid rgb(255 255 255 / 0.08);
   box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.08);
   will-change: transform, opacity;
 }
 /* the text keeps the padding; the image bleeds to the card's edges */
+/* the drop shadow is the card's own image, blurred and pushed down behind it */
+.rc-card::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  right: 0; top: 6%; width: 58%; height: 92%;
+  background-image: var(--shot); background-size: cover; background-position: center;
+  border-radius: 32px;
+  filter: blur(46px) saturate(155%);
+  opacity: 0.55;
+  transform: translateY(30px) scale(1.03);
+}
+@media (prefers-reduced-motion: reduce) { .rc-card::before { transform: translateY(24px); } }
 .rc-card__copy { display: flex; flex-direction: column; min-width: 0; padding: var(--card-pad) 0 var(--card-pad) var(--card-pad); }
 .rc-card__eyebrow { margin: 0; font-size: var(--sc-t-sm); color: #aaa49b; display: flex; align-items: center; gap: 0.6rem; }
 .rc-card__eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: #9a9dff; }
@@ -194,7 +205,7 @@
 .rc-card__foot::before { content: "— "; color: #9a9dff; }
 /* the image sits fully inside its area, with a hair of inset; the ground
    behind it matches the render's own edges so nothing letterboxes visibly */
-.rc-card__media { margin: 0; min-width: 0; min-height: 0; padding: 6px; border-radius: 0; overflow: hidden; background: #131117; display: grid; }
+.rc-card__media { margin: 0; min-width: 0; min-height: 0; padding: 6px; border-radius: 0 32px 32px 0; overflow: hidden; background: #131117; display: grid; }
 .rc-card__media img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; border-radius: 26px; }
 
 @media (max-width: 860px) {
@@ -202,7 +213,9 @@
   .rc-deck__head { grid-template-columns: 1fr; padding-bottom: 0.75rem; }
   .rc-deck__head h2 { font-size: var(--sc-t-xl); }
   .rc-deck__lede { display: none; }
-  .rc-card__media { padding: 6px; }
+  /* stacked on a phone, so the image rounds at the bottom, not the right */
+  .rc-card__media { padding: 6px; border-radius: 0 0 32px 32px; }
+  .rc-card::before { right: 0; left: 0; top: auto; bottom: 0; width: 100%; height: 62%; }
   .rc-card { --card-pad: 1rem; top: calc(var(--i) * 12px); grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 0.9rem; }
   .rc-card__copy { padding: var(--card-pad) var(--card-pad) 0; }
   .rc-card__copy h3 { font-size: 1.45rem; margin: 0.6rem 0 0.4rem; }

@@ -139,7 +139,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="rc-deck" aria-label="Three things the desk does">
-              <article className="rc-card" style={{ "--i": 0, "--in": -1, "--next": 0.2 } as React.CSSProperties}>
+              <article className="rc-card" style={{ "--i": 0, "--in": -1, "--next": 0.2 , "--shot": "url(/scrollcraft/04-call.jpg)"} as React.CSSProperties}>
                 <div className="rc-card__copy">
                   <p className="rc-card__eyebrow"><span aria-hidden />It calls, so nobody has to</p>
                   <h3>A confirmation call inside a minute.</h3>
@@ -150,7 +150,7 @@ export default function HomePage() {
                   <img src="/scrollcraft/04-call.jpg" width={820} height={964} alt="A confirmation call in progress: the client, the stages, and the first lines of what the assistant said." />
                 </figure>
               </article>
-              <article className="rc-card" style={{ "--i": 1, "--in": 0.2, "--next": 0.55 } as React.CSSProperties}>
+              <article className="rc-card" style={{ "--i": 1, "--in": 0.2, "--next": 0.55 , "--shot": "url(/scrollcraft/04-record.jpg)"} as React.CSSProperties}>
                 <div className="rc-card__copy">
                   <p className="rc-card__eyebrow"><span aria-hidden />Every call, on the record</p>
                   <h3>Recording, transcript, summary.</h3>
@@ -161,7 +161,7 @@ export default function HomePage() {
                   <img src="/scrollcraft/04-record.jpg" width={820} height={964} alt="A finished call record: the recording, a one-line summary, and the transcript." />
                 </figure>
               </article>
-              <article className="rc-card" style={{ "--i": 2, "--in": 0.55, "--next": 9 } as React.CSSProperties}>
+              <article className="rc-card" style={{ "--i": 2, "--in": 0.55, "--next": 9 , "--shot": "url(/scrollcraft/04-flag.jpg)"} as React.CSSProperties}>
                 <div className="rc-card__copy">
                   <p className="rc-card__eyebrow"><span aria-hidden />Nothing is lost to voicemail</p>
                   <h3>Every no-answer is flagged.</h3>

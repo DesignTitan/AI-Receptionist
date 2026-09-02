@@ -75,6 +75,21 @@ BASE = """<!doctype html><html><head><meta charset="utf-8">
   .t-warn { background:rgba(214,158,46,.24); color:#f0c15e; }
   .t-info { background:rgba(140,146,255,.24); color:#c2c6ff; }
   .t-ok { background:rgba(110,200,150,.22); color:#9fe0bb; }
+  .sect { padding:18px 24px 0; }
+  .sect .lbl { font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-bottom:10px; }
+  .days { display:flex; gap:10px; }
+  .day { flex:1; text-align:center; padding:10px 6px 9px; border-radius:12px;
+         background:rgba(255,255,255,.07); box-shadow:inset 0 0 0 1px rgba(255,255,255,.12); }
+  .day .d { font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55); }
+  .day .n { font-size:19px; font-weight:600; margin-top:2px; }
+  .day .o { font-size:10.5px; color:rgba(255,255,255,.5); margin-top:2px; }
+  .day.on { background:rgba(255,255,255,.9); box-shadow:none; }
+  .day.on .d, .day.on .o { color:rgba(20,22,28,.6); }
+  .day.on .n { color:#14161c; }
+  .day.off { opacity:.42; }
+  .times { display:flex; gap:10px; }
+  .time { flex:1; text-align:center; padding:12px 8px; border-radius:12px; font-size:14px; font-weight:500;
+          background:rgba(255,255,255,.07); box-shadow:inset 0 0 0 1px rgba(255,255,255,.12); }
   .foot { padding:16px 24px 20px; }
   .cta { height:52px; border-radius:14px; background:#fff; color:#14161c; font-size:15.5px; font-weight:600; display:grid; place-items:center; }
   /* flat sections used by the call / record cards */
@@ -216,16 +231,31 @@ STAGE["book"] = f"""
   <div class="pad">
     <div class="head">
       {ORB('#ff8fab','#ffd6a5','#bdb2ff','#9bf6ff')}
-      <div class="who"><b>Book with Sasha Reyes</b><span>Master Colourist · Solstice Salon &amp; Spa</span></div>
+      <div class="who"><b>Book an appointment</b><span>Sasha Reyes · Master Colourist · Solstice Salon &amp; Spa</span></div>
       <div class="chip">{MONITOR}<span class="div"></span>3 open</div>
     </div>
     <div class="pills"><span class="pill on">Choose a time</span><span class="pill">Your details</span><span class="pill">Confirm</span></div>
   </div>
-  <div class="thead" style="--cols:1fr 150px 150px"><span>Day</span><span>Open</span><span class="r">Earliest</span></div>
-  <div class="row alt" style="--cols:1fr 150px 150px"><div class="m"><div><b>Wednesday, Sep 2</b><span>Today</span></div></div><div class="say">3 slots</div><div class="val"><b>1:30 PM</b></div></div>
-  <div class="row" style="--cols:1fr 150px 150px"><div class="m"><div><b>Thursday, Sep 3</b><span>Tomorrow</span></div></div><div class="say">5 slots</div><div class="val"><b>9:00 AM</b></div></div>
-  <div class="row alt" style="--cols:1fr 150px 150px"><div class="m"><div><b>Friday, Sep 4</b><span>Colour and cut</span></div></div><div class="say">3 slots</div><div class="val"><b>11:15 AM</b></div></div>
-  <div class="row" style="--cols:1fr 150px 150px"><div class="m"><div><b>Saturday, Sep 5</b><span>Fills quickly</span></div></div><div class="say">5 slots</div><div class="val"><b>2:00 PM</b></div></div>
+  <div class="sect">
+    <div class="lbl">Pick a day</div>
+    <div class="days">
+      <div class="day on"><div class="d">Wed</div><div class="n">2</div><div class="o">3 open</div></div>
+      <div class="day"><div class="d">Thu</div><div class="n">3</div><div class="o">5 open</div></div>
+      <div class="day"><div class="d">Fri</div><div class="n">4</div><div class="o">3 open</div></div>
+      <div class="day"><div class="d">Sat</div><div class="n">5</div><div class="o">5 open</div></div>
+      <div class="day off"><div class="d">Sun</div><div class="n">6</div><div class="o">Closed</div></div>
+      <div class="day off"><div class="d">Mon</div><div class="n">7</div><div class="o">Closed</div></div>
+      <div class="day"><div class="d">Tue</div><div class="n">8</div><div class="o">5 open</div></div>
+    </div>
+  </div>
+  <div class="sect">
+    <div class="lbl">Available times · afternoon, EDT</div>
+    <div class="times">
+      <div class="time">1:30 PM</div>
+      <div class="time">3:00 PM</div>
+      <div class="time">4:30 PM</div>
+    </div>
+  </div>
   <div class="foot"><div class="cta">Continue</div></div>
 """
 

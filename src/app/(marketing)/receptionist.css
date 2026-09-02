@@ -265,21 +265,23 @@
   background: rgb(255 255 255 / 0.06); border: 1px solid rgb(255 255 255 / 0.10); font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
 .rc-chip span { width: 6px; height: 6px; border-radius: 50%; background: var(--sc-accent); }
 .rc-cf__lede { margin: 0; padding-top: 2.6rem; color: var(--sc-ink-soft); max-width: 40ch; }
+/* the strip spans the stage below it, each tab taking an equal share */
 .rc-cf__tabs { margin-top: clamp(2rem, 5vh, 3.5rem); display: flex; gap: 6px; padding: 5px; border-radius: 12px;
-  background: rgb(255 255 255 / 0.04); border: 1px solid rgb(255 255 255 / 0.08); width: max-content; max-width: 100%; overflow-x: auto; }
-.rc-cf__tab { font: inherit; font-size: var(--sc-t-sm); font-weight: 500; white-space: nowrap; cursor: pointer;
-  padding: 0.65em 1.5em; border: 0; border-radius: 12px; background: transparent; color: rgb(238 241 245 / 0.55);
+  background: rgb(255 255 255 / 0.04); border: 1px solid rgb(255 255 255 / 0.08); width: 100%; }
+.rc-cf__tab { flex: 1; min-width: 0; font: inherit; font-size: var(--sc-t-sm); font-weight: 500; white-space: nowrap; cursor: pointer;
+  padding: 0.65em 1rem; border: 0; border-radius: 12px; background: transparent; color: rgb(238 241 245 / 0.55);
   transition: background 200ms var(--sc-ease-out), color 200ms var(--sc-ease-out); }
 .rc-cf__tab:hover { color: rgb(238 241 245 / 0.85); }
 .rc-cf__tab[aria-selected="true"] { background: rgb(255 255 255 / 0.10); color: var(--sc-ink); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12); }
 .rc-cf__tab:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 2px; }
-.rc-cf__stage { margin-top: clamp(1.25rem, 3vh, 2rem); border-radius: 12px; padding: clamp(1.5rem, 4vw, 3.5rem);
+/* same corners as the proof cards: 32px outside, 24px on the screen inside */
+.rc-cf__stage { margin-top: clamp(1.25rem, 3vh, 2rem); border-radius: 32px; padding: clamp(1.5rem, 4vw, 3.5rem);
   background:
     radial-gradient(120% 90% at 20% 0%, rgba(140,120,170,.20) 0%, rgba(140,120,170,0) 60%),
     radial-gradient(120% 90% at 90% 100%, rgba(190,140,95,.22) 0%, rgba(190,140,95,0) 60%),
     linear-gradient(180deg, #1a2029 0%, #131820 100%);
   border: 1px solid rgb(255 255 255 / 0.08); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06); }
-.rc-cf__frame { border-radius: 12px; overflow: hidden; border: 1px solid rgb(255 255 255 / 0.10);
+.rc-cf__frame { border-radius: 24px; overflow: hidden; border: 1px solid rgb(255 255 255 / 0.10);
   box-shadow: 0 40px 80px -40px rgb(0 0 0 / 0.8); background: #0b0e13; }
 .rc-cf__frame { aspect-ratio: 16 / 10; }
 .rc-cf__frame img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
@@ -287,8 +289,7 @@
 @media (max-width: 860px) {
   .rc-cf__head { grid-template-columns: 1fr; }
   .rc-cf__lede { padding-top: 0; }
-  .rc-cf__tabs { width: 100%; }
-  .rc-cf__tab { padding: 0.6em 1em; }
+  .rc-cf__tab { padding: 0.6em 0.5em; font-size: var(--sc-t-xs); }
 }
 @media (prefers-reduced-motion: reduce) { .rc-cf__tab { transition: none; } }
 

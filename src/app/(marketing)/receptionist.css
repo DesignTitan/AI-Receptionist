@@ -205,8 +205,9 @@
 .rc-card__foot::before { content: "— "; color: #9a9dff; }
 /* the image sits fully inside its area, with a hair of inset; the ground
    behind it matches the render's own edges so nothing letterboxes visibly */
-.rc-card__media { margin: 0; min-width: 0; min-height: 0; padding: 6px; border-radius: 0 32px 32px 0; overflow: hidden; background: #131117; display: grid; }
-.rc-card__media img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; border-radius: 26px; }
+/* flush against the copy on the left, 8px of air on the other three sides */
+.rc-card__media { margin: 0; min-width: 0; min-height: 0; padding: 8px 8px 8px 0; border-radius: 0 32px 32px 0; overflow: hidden; background: #131117; display: grid; }
+.rc-card__media img { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: cover; object-position: center; border-radius: 24px; }
 
 @media (max-width: 860px) {
   .rc-deckact { --deck-pad: 5svh; --head-h: clamp(96px, 14svh, 140px); --peek: 64px; --card-w: 94vw; }
@@ -214,7 +215,8 @@
   .rc-deck__head h2 { font-size: var(--sc-t-xl); }
   .rc-deck__lede { display: none; }
   /* stacked on a phone, so the image rounds at the bottom, not the right */
-  .rc-card__media { padding: 6px; border-radius: 0 0 32px 32px; }
+  /* stacked on a phone: flush under the copy, 8px on the other three sides */
+  .rc-card__media { padding: 0 8px 8px; border-radius: 0 0 32px 32px; }
   .rc-card::before { right: 0; left: 0; top: auto; bottom: 0; width: 100%; height: 62%; }
   .rc-card { --card-pad: 1rem; top: calc(var(--i) * 12px); grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 0.9rem; }
   .rc-card__copy { padding: var(--card-pad) var(--card-pad) 0; }

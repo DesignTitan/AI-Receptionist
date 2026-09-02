@@ -13,9 +13,9 @@ Handoff notes for the next session. Updated 2026-09-02.
   "confirmed" when a person spoke (Ava's own "reschedules and cancellations" used to trip the
   appointment keyword heuristic into "cancelled"); OmniDimension's `LLM:`/`User:` labels are
   shown as Ava/You.
-- **Proof chapter: a core-features header with scroll-linked tabs, then a stacked deck of the
-  three features**: it calls, it records, it flags. Very dark steel-blue ground; tabs light at
-  each card's midpoint, driven by the act's progress alone.
+- **Proof chapter is a stacked deck of the three features**: it calls, it records, it flags.
+  Dark cards on the paper ground, each with a glass panel of that feature's real UI over a
+  warm dune scene. Settled: do not restyle without being asked.
   Each card pairs copy with a glass panel of that feature's real UI over a dune landscape
   (`scrollcraft/builds/receptionist/glass.py` + `render.mjs` regenerate them at 2x).
   Each card rises over the previous, which settles back and fades once ~60% covered. Pure CSS on

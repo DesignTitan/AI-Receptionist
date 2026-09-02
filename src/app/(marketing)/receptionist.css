@@ -142,91 +142,68 @@
 .rc-colophon .rc-run { font-size: var(--sc-t-lg); line-height: 1.5; color: var(--sc-ink); }
 .rc-colophon footer { margin-top: var(--sc-8); display: flex; flex-wrap: wrap; gap: var(--sc-2) var(--sc-6); font-size: var(--sc-t-xs); }
 
-/* ── proof: core features on a steel ground, then a stacked deck of three cards.
-   Everything is keyed to the pinned act's --sc-p: the cards rise, the tab follows. */
+/* ── proof: a stacked deck of three cards, keyed to the pinned act's --sc-p ──
+   Geometry is explicit so the next card peeks below the settled one by exactly
+   --peek: header, then the deck; a settled card leaves --peek of stage below it. */
 .rc-deckact {
   --sc-p: 0;
-  --deck-pad: 5svh;
-  --head-h: clamp(210px, 30svh, 320px);
+  --deck-pad: 6svh;
+  --head-h: clamp(120px, 17svh, 190px);
   --deck-top: calc(var(--deck-pad) + var(--head-h));
-  --peek: 76px;
+  --peek: 84px;
   --card-w: min(1120px, 92vw);
-  --card-h: calc((100svh - var(--deck-top) - var(--peek) - 20px) * 0.92);
+  /* 80% of the room between header and peek: the owner found full-height cards too tall */
+  --card-h: calc((100svh - var(--deck-top) - var(--peek) - 20px) * 0.8);
   --rise: calc(100svh - var(--deck-top) - var(--peek));
-  /* very dark grey, a hint of crystallised steel blue */
-  --sc-canvas: #0e1217;
-  --sc-surface: #161b22;
-  --sc-ink: #eef1f5;
-  --sc-ink-soft: #9aa4b2;
-  --sc-accent: #9fb6ff;
-  --sc-hairline: rgb(255 255 255 / 0.08);
-  --sc-hairline-strong: rgb(255 255 255 / 0.16);
-  background:
-    radial-gradient(120% 70% at 50% -10%, #1b2430 0%, rgba(27,36,48,0) 60%),
-    radial-gradient(90% 50% at 85% 8%, rgba(96,126,168,.16) 0%, rgba(96,126,168,0) 60%),
-    linear-gradient(180deg, #10151b 0%, #0d1116 55%, #0b0e13 100%);
-  color: var(--sc-ink);
 }
-.rc-deck__head { position: absolute; top: var(--deck-pad); left: 50%; translate: -50% 0; width: var(--card-w); height: var(--head-h);
-  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-rows: 1fr auto; column-gap: clamp(1.5rem, 4vw, 4rem);
-  align-content: start; z-index: 0; }
-.rc-deck__intro { align-self: start; }
-.rc-chip { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 var(--sc-4); padding: 6px 14px; border-radius: 12px;
-  background: rgb(255 255 255 / 0.06); border: 1px solid rgb(255 255 255 / 0.10); font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
-.rc-chip span { width: 6px; height: 6px; border-radius: 50%; background: var(--sc-accent); }
-.rc-deck__head h2 { margin: 0; color: var(--sc-ink); }
-.rc-deck__head h2 span { color: rgb(255 255 255 / 0.42); }
-.rc-deck__lede { margin: 0; align-self: start; padding-top: calc(var(--sc-t-sm) + 1.9rem); color: var(--sc-ink-soft); max-width: 38ch; }
-.rc-tabs { grid-column: 1 / -1; align-self: end; display: flex; gap: 6px; padding: 5px; border-radius: 12px;
-  background: rgb(255 255 255 / 0.04); border: 1px solid rgb(255 255 255 / 0.08); width: max-content; max-width: 100%; }
-.rc-tab {
-  --on: calc(clamp(0, calc((var(--sc-p) - var(--in)) / 0.05), 1) - clamp(0, calc((var(--sc-p) - var(--next)) / 0.05), 1));
-  padding: 0.6em 1.6em; border-radius: 12px; font-size: var(--sc-t-sm); font-weight: 500; white-space: nowrap;
-  background: rgb(255 255 255 / calc(var(--on) * 0.10));
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / calc(var(--on) * 0.12));
-  color: rgb(238 241 245 / calc(0.5 + var(--on) * 0.5));
-}
+.rc-kicker { margin: 0 0 var(--sc-3); font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-wide); text-transform: uppercase; color: var(--sc-ink-soft); }
+.rc-deck__head { position: absolute; top: var(--deck-pad); left: 50%; translate: -50% 0; width: var(--card-w); height: var(--head-h); display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: end; padding-bottom: clamp(1rem, 2.5vh, 1.75rem); z-index: 0; }
+.rc-deck__head h2 { margin: 0; }
+.rc-deck__lede { margin: 0; color: var(--sc-ink-soft); max-width: 36ch; }
 .rc-deck { position: absolute; left: 0; right: 0; top: var(--deck-top); bottom: 0; }
 .rc-card {
   --t: clamp(0, calc((var(--sc-p) - var(--in)) / 0.25), 1);
   --tn: clamp(0, calc((var(--sc-p) - var(--next)) / 0.25), 1);
   /* the card beneath starts to go only once the next one covers ~60% of it */
   --s: clamp(0, calc((var(--tn) - 0.6) / 0.4), 1);
-  position: absolute; left: 50%; top: calc(var(--i) * 14px); translate: -50% 0;
+  position: absolute; left: 50%; top: calc(var(--i) * 16px); translate: -50% 0;
   width: var(--card-w); height: var(--card-h);
   transform: translateY(calc((1 - var(--t)) * var(--rise) - var(--s) * 14px)) scale(calc(1 - var(--s) * 0.04));
   opacity: calc(1 - var(--s));
+  /* Waiting cards: the next one on top (so its label is what peeks). A card that
+     has started rising, or has settled, sits above everything that waited; each
+     later card above the earlier. Browsers without round() keep DOM order. */
   z-index: calc(1 + var(--i));
   z-index: calc(10 - var(--i) + round(up, var(--t), 1) * 20 * (var(--i) + 1));
   display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(1.5rem, 3vw, 3rem);
   --card-pad: clamp(1.25rem, 3vw, 2.5rem);
   padding: 0;
   overflow: hidden;
-  background: #12161c; color: #eef1f5; border-radius: 12px;
-  border: 1px solid rgb(255 255 255 / 0.10);
-  box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.75), inset 0 1px 0 rgb(255 255 255 / 0.08);
+  background: #131117; color: #f2efe8; border-radius: 22px;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.08);
   will-change: transform, opacity;
 }
 /* the text keeps the padding; the image bleeds to the card's edges */
 .rc-card__copy { display: flex; flex-direction: column; min-width: 0; padding: var(--card-pad) 0 var(--card-pad) var(--card-pad); }
-.rc-card__eyebrow { margin: 0; font-size: var(--sc-t-sm); color: #9aa4b2; display: flex; align-items: center; gap: 0.6rem; }
-.rc-card__eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: #9fb6ff; }
-.rc-card__copy h3 { font-family: var(--sc-font-display); font-weight: 400; font-size: clamp(1.7rem, 2.6vw, 2.35rem); line-height: 1.05; letter-spacing: -0.01em; margin: clamp(1rem, 4vh, 2.25rem) 0 0.8rem; text-wrap: balance; }
-.rc-card__copy > p:not(.rc-card__eyebrow):not(.rc-card__foot) { margin: 0; color: #c2cad6; max-width: 34ch; }
-.rc-card__foot { margin: auto 0 0; padding-top: 1.25rem; font-size: var(--sc-t-sm); color: #9aa4b2; }
-.rc-card__foot::before { content: "— "; color: #9fb6ff; }
-/* the image sits fully inside its area, with a hair of inset */
-.rc-card__media { margin: 0; min-width: 0; min-height: 0; padding: 6px; border-radius: 0; overflow: hidden; background: #0e1217; display: grid; }
-.rc-card__media img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; border-radius: 12px; }
+.rc-card__eyebrow { margin: 0; font-size: var(--sc-t-sm); color: #aaa49b; display: flex; align-items: center; gap: 0.6rem; }
+.rc-card__eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: #9a9dff; }
+.rc-card__copy h3 { font-family: var(--sc-font-display); font-weight: 400; font-size: clamp(1.8rem, 2.8vw, 2.5rem); line-height: 1.05; letter-spacing: -0.01em; margin: clamp(1rem, 4vh, 2.5rem) 0 0.8rem; text-wrap: balance; }
+.rc-card__copy > p:not(.rc-card__eyebrow):not(.rc-card__foot) { margin: 0; color: #cfc9be; max-width: 34ch; }
+.rc-card__foot { margin: auto 0 0; padding-top: 1.25rem; font-size: var(--sc-t-sm); color: #aaa49b; }
+.rc-card__foot::before { content: "— "; color: #9a9dff; }
+/* the image sits fully inside its area, with a hair of inset; the ground
+   behind it matches the render's own edges so nothing letterboxes visibly */
+.rc-card__media { margin: 0; min-width: 0; min-height: 0; padding: 6px; border-radius: 0; overflow: hidden; background: #0d0c10; display: grid; }
+.rc-card__media img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; border-radius: 14px; }
+
 @media (max-width: 860px) {
-  .rc-deckact { --deck-pad: 4svh; --head-h: clamp(180px, 26svh, 240px); --peek: 56px; --card-w: 94vw; }
-  .rc-deck__head { grid-template-columns: 1fr; grid-template-rows: auto auto; row-gap: var(--sc-4); }
+  .rc-deckact { --deck-pad: 5svh; --head-h: clamp(96px, 14svh, 140px); --peek: 64px; --card-w: 94vw; }
+  .rc-deck__head { grid-template-columns: 1fr; padding-bottom: 0.75rem; }
   .rc-deck__head h2 { font-size: var(--sc-t-xl); }
   .rc-deck__lede { display: none; }
-  .rc-tabs { width: 100%; justify-content: space-between; }
-  .rc-tab { padding: 0.55em 0.9em; font-size: var(--sc-t-xs); }
   .rc-card__media { padding: 6px; }
-  .rc-card { --card-pad: 1rem; top: calc(var(--i) * 10px); grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 0.9rem; }
+  .rc-card { --card-pad: 1rem; top: calc(var(--i) * 12px); grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 0.9rem; }
   .rc-card__copy { padding: var(--card-pad) var(--card-pad) 0; }
   .rc-card__copy h3 { font-size: 1.45rem; margin: 0.6rem 0 0.4rem; }
   .rc-card__copy > p:not(.rc-card__eyebrow) { font-size: var(--sc-t-sm); }
@@ -235,7 +212,7 @@
 @media (prefers-reduced-motion: reduce) {
   .rc-deckstage { position: static; height: auto; padding: var(--sc-8) 0; }
   .rc-deck__head { position: static; translate: none; width: min(1120px, 92vw); height: auto; margin: 0 auto var(--sc-6); }
-  .rc-tab { background: rgb(255 255 255 / 0.08); color: var(--sc-ink); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12); }
+  
   .rc-deck { position: static; display: grid; gap: var(--sc-5); justify-items: center; }
   .rc-card { position: relative; left: auto; top: auto; translate: none; transform: none !important; opacity: 1 !important; height: auto; min-height: 420px; }
 }

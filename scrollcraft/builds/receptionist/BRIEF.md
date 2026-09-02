@@ -278,23 +278,7 @@ action button. Built in HTML with real backdrop-filter and rendered at 2x with h
 Chrome; `glass.py` and `render.mjs` in this folder regenerate all three, so a fourth
 feature is one dict entry away. Frame is 820x900 to match the card's portrait image slot.
 
-Chapter 4, final shape (owner-directed, against a Fora-style reference):
-
-- **Ground.** The chapter is the page's second dark act, but where chapter 2 is ink, this
-  is a very dark grey carrying a hint of crystallised steel blue (#0e1217 under a cool
-  radial sheen), so the two dark chapters do not read as the same room.
-- **Core features header.** A chip, a two-line title whose second line drops to 42% ink,
-  a short lede on the right, and a row of three tabs. The tabs are keyed to the act's
-  `--sc-p` and light at the midpoint of each card's rise, so the label always names the
-  card you are looking at. Pure CSS: no observer, no state.
-- **The three cards** are pushed below that header and behave as before: rise, settle,
-  and fade once the next covers ~60% of them.
-- **The images** are glassmorphism proper, per the owner's spec: a frosted pane over a
-  photographic ground, a solid scrim under the blur (not blur alone) so the copy holds,
-  a hairline white stroke with a lit top edge, ambient colour blooms behind the pane for
-  the blur to work with, a blurred mesh-gradient orb as the avatar, and one fully opaque
-  white CTA. Palette is light: a bright dune scene with a smoked pane over it. Measured
-  white-on-pane contrast: 5.5:1, 5.6:1, 6.0:1 — all clear of 4.5:1, which is the trade-off
-  the owner flagged and the reason the scrim exists.
-- **Corners.** Every rectangle on the page is 12px; circles stay circles.
-
+Chapter 4 is settled and is not to be changed further without being asked: dark cards on
+the paper ground, the warm dune glass imagery, the plain two-part header, no tabs. An
+attempt to fold a Core-features tab strip into this chapter and put it on a steel ground
+was rejected and reverted; the reference for that strip is a separate component.

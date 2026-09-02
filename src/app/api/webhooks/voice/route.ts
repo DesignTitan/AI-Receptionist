@@ -105,7 +105,6 @@ const STATUS_MAP: Record<string, CallStatus> = {
   busy: "completed",
   failed: "failed",
   error: "failed",
-  busy: "failed",
 };
 
 const OUTCOMES: CallOutcome[] = [

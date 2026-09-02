@@ -275,7 +275,9 @@
 }
 @media (prefers-reduced-motion: reduce) { .rc-cf__tab { transition: none; } }
 
-/* ── the two textured chapters read as dark rooms, so the page's ink flips ── */
+/* ── the two textured chapters share one ground, so the falloff runs unbroken
+      across the seam between them and the ink flips for both ── */
+.rc .rc-textured { overflow: visible; }
 .rc .textured-section {
   --sc-canvas: var(--tx-base);
   --sc-surface: #24241f;

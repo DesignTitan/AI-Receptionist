@@ -318,10 +318,9 @@ tablet width squeeze both halves.
 Textured ground, owner-supplied. `.textured-section` (in `globals.css`, `@layer components`)
 carries the conversion.ai treatment verbatim: a warm near-black base, the falloff baked into
 `6.webp` rather than a CSS gradient, and a 128px grain tile blended with `mix-blend-mode:
-overlay` inside an `isolation: isolate` parent. It is applied to two chapters, Core features
-and Proof. Two overrides were needed for the pinned chapter: `.textured-section > *` sets
-`position: relative`, which would kill the sticky stage, and the class's `overflow: hidden`
-would stop the pin working, so the stage keeps `position: sticky` and the deck section keeps
-`overflow: visible`. Both textured chapters also take a dark token set, so the page's ink
+overlay` inside an `isolation: isolate` parent. It wraps both dark chapters, Core features and Proof, in one container rather than sitting on
+each section: two copies of the texture restart the falloff and leave a hard line at the seam. One override is needed because a pinned chapter lives inside: the class's `overflow: hidden`
+would make the container a scroll port and stop the sticky stage pinning, so a container that
+holds a pinned act keeps `overflow: visible`. Both textured chapters also take a dark token set, so the page's ink
 flips for them.
 

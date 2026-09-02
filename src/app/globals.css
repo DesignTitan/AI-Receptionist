@@ -516,8 +516,7 @@ body {
     position: relative;
     z-index: 2;
   }
-  /* A pinned chapter's stage must stay sticky, and the section must not
-     become a scroll container, or the pin stops working. */
-  .textured-section > .sc-stage { position: sticky; }
-  .rc-deckact.textured-section { overflow: visible; }
+  /* A pinned chapter inside a textured container: the container must not become
+     a scroll container, or the sticky stage stops pinning. */
+  .textured-section:has(.sc-act--pinned) { overflow: visible; }
 }

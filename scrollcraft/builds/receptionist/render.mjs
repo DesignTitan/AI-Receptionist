@@ -1,0 +1,16 @@
+import { createRequire } from "node:module";
+const require = createRequire(process.cwd() + "/package.json");
+const { chromium } = require("playwright-core");
+const [,, htmlPath, outPath] = process.argv;
+const browser = await chromium.launch({ channel: "chrome", headless: true });
+const page = await browser.newPage({ viewport: { width: 900, height: 700 }, deviceScaleFactor: 2 });
+await page.goto("file://" + htmlPath, { waitUntil: "networkidle" });
+await page.evaluate(() => document.fonts.ready);
+await page.waitForTimeout(350);
+const h = await page.evaluate(() => Math.ceil(document.querySelector('.panel').getBoundingClientRect().bottom + 84));
+await page.setViewportSize({ width: 900, height: h });
+await page.evaluate((hh) => { document.body.style.height = hh + "px"; document.querySelector(".scene").style.height = hh + "px"; }, h);
+await page.waitForTimeout(200);
+await page.screenshot({ path: outPath, clip: { x: 0, y: 0, width: 900, height: h } });
+await browser.close();
+console.log("rendered", outPath, "height", h);

@@ -130,47 +130,38 @@ export default function HomePage() {
                 booking to the hundredth, it stays out of your way.
               </p>
             </div>
-            <div className="rc-deck" aria-label="Three things the dashboard shows">
+            <div className="rc-deck" aria-label="Three things the desk does">
               <article className="rc-card" style={{ "--i": 0, "--in": -1, "--next": 0.2 } as React.CSSProperties}>
                 <div className="rc-card__copy">
-                  <p className="rc-card__eyebrow"><span aria-hidden />Every call, on the record</p>
-                  <h3>Recording, transcript, summary.</h3>
-                  <p>
-                    The call ends and three things are already in the dashboard: the recording, the transcript
-                    line by line, and a one-line summary of what was agreed. The same three land in your inbox.
-                  </p>
-                  <p className="rc-card__foot">Nothing to write up afterwards.</p>
+                  <p className="rc-card__eyebrow"><span aria-hidden />It calls, so nobody has to</p>
+                  <h3>A confirmation call inside a minute.</h3>
+                  <p>Every booking gets a call, not a text nobody reads. The client confirms, moves or cancels on the phone, and it is done before they have put it down.</p>
+                  <p className="rc-card__foot">Your front desk keeps working after hours.</p>
                 </div>
-                <figure className="rc-card__media">
-                  <img src="/scrollcraft/04a-record.jpg" width={820} height={730} alt="A call record: the recording, the assistant's summary, and the transcript line by line." />
+                <figure className="rc-card__media rc-card__media--center">
+                  <img src="/scrollcraft/04-call.jpg" width={900} height={700} alt="A confirmation call in progress: the client, the stages, and the first lines of what the assistant said." />
                 </figure>
               </article>
               <article className="rc-card" style={{ "--i": 1, "--in": 0.2, "--next": 0.55 } as React.CSSProperties}>
                 <div className="rc-card__copy">
-                  <p className="rc-card__eyebrow"><span aria-hidden />Nothing is lost to voicemail</p>
-                  <h3>Every no-answer is flagged.</h3>
-                  <p>
-                    A no-answer is flagged for a person. A reschedule comes back with the times that suit. A
-                    cancellation frees the slot. Each one is a row you can open.
-                  </p>
-                  <p className="rc-card__foot">The exceptions, not the routine.</p>
+                  <p className="rc-card__eyebrow"><span aria-hidden />Every call, on the record</p>
+                  <h3>Recording, transcript, summary.</h3>
+                  <p>The call ends and all three are already there: the recording to play, the transcript line by line, and one line of what was agreed. The same three land in your inbox.</p>
+                  <p className="rc-card__foot">Nothing to write up afterwards.</p>
                 </div>
-                <figure className="rc-card__media">
-                  <img src="/scrollcraft/04b-statuses.jpg" width={550} height={440} alt="Booking rows with their call outcomes: confirmed, no answer, reschedule requested." />
+                <figure className="rc-card__media rc-card__media--center">
+                  <img src="/scrollcraft/04-record.jpg" width={900} height={700} alt="A finished call record: the recording, a one-line summary, and the transcript." />
                 </figure>
               </article>
               <article className="rc-card" style={{ "--i": 2, "--in": 0.55, "--next": 9 } as React.CSSProperties}>
                 <div className="rc-card__copy">
-                  <p className="rc-card__eyebrow"><span aria-hidden />One desk, every business</p>
-                  <h3>Three businesses. One front desk.</h3>
-                  <p>
-                    A clinic, a salon and a design studio run on the same desk, each in its own colours and its
-                    own words. Filter by business, or see all of it at once.
-                  </p>
-                  <p className="rc-card__foot">Built to be yours, not a template.</p>
+                  <p className="rc-card__eyebrow"><span aria-hidden />Nothing is lost to voicemail</p>
+                  <h3>Every no-answer is flagged.</h3>
+                  <p>A no-answer is flagged for a person. A reschedule comes back with the times that suit. A cancellation frees the slot. Each one is a row you can open.</p>
+                  <p className="rc-card__foot">The exceptions, not the routine.</p>
                 </div>
                 <figure className="rc-card__media rc-card__media--center">
-                  <img src="/scrollcraft/04c-frontdesk.jpg" width={1200} height={1280} alt="The front desk as a glass panel: the product mark, the three businesses, an Open the desk button, and what the desk does." />
+                  <img src="/scrollcraft/04-flag.jpg" width={900} height={700} alt="The needs-attention list: four bookings flagged as no answer or reschedule, each with its business." />
                 </figure>
               </article>
             </div>

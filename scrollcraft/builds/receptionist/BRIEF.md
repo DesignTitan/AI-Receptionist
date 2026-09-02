@@ -324,3 +324,10 @@ would make the container a scroll port and stop the sticky stage pinning, so a c
 holds a pinned act keeps `overflow: visible`. Both textured chapters also take a dark token set, so the page's ink
 flips for them.
 
+Chapter 4's four tab screens are rendered in the same glass language as the deck, not raw
+product screenshots, so the two chapters read as one room: `ref.py <out> D <key> stage`
+renders a 1600x1000 frame (16:10, the stage's aspect) for the keys book, call, record and
+flag. They show different views from the deck's three — the booking page, the client's
+confirmation page as the call runs, the day's calls with their outcomes, and the flagged
+list — so the two chapters do not repeat each other.
+

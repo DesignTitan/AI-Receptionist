@@ -209,15 +209,95 @@ FLAG = f"""
   <div class="foot"><div class="cta">Open the first one</div></div>
 """
 
+
+STAGE = {}
+
+STAGE["book"] = f"""
+  <div class="pad">
+    <div class="head">
+      {ORB('#ff8fab','#ffd6a5','#bdb2ff','#9bf6ff')}
+      <div class="who"><b>Book with Sasha Reyes</b><span>Master Colourist · Solstice Salon &amp; Spa</span></div>
+      <div class="chip">{MONITOR}<span class="div"></span>3 open</div>
+    </div>
+    <div class="pills"><span class="pill on">Choose a time</span><span class="pill">Your details</span><span class="pill">Confirm</span></div>
+  </div>
+  <div class="thead" style="--cols:1fr 150px 150px"><span>Day</span><span>Open</span><span class="r">Earliest</span></div>
+  <div class="row alt" style="--cols:1fr 150px 150px"><div class="m"><div><b>Wednesday, Sep 2</b><span>Today</span></div></div><div class="say">3 slots</div><div class="val"><b>1:30 PM</b></div></div>
+  <div class="row" style="--cols:1fr 150px 150px"><div class="m"><div><b>Thursday, Sep 3</b><span>Tomorrow</span></div></div><div class="say">5 slots</div><div class="val"><b>9:00 AM</b></div></div>
+  <div class="row alt" style="--cols:1fr 150px 150px"><div class="m"><div><b>Friday, Sep 4</b><span>Colour and cut</span></div></div><div class="say">3 slots</div><div class="val"><b>11:15 AM</b></div></div>
+  <div class="row" style="--cols:1fr 150px 150px"><div class="m"><div><b>Saturday, Sep 5</b><span>Fills quickly</span></div></div><div class="say">5 slots</div><div class="val"><b>2:00 PM</b></div></div>
+  <div class="foot"><div class="cta">Continue</div></div>
+"""
+
+STAGE["call"] = f"""
+  <div class="pad">
+    <div class="head">
+      {ORB('#7c6cff','#8ab4ff','#4ad6c2','#c2c6ff')}
+      <div class="who"><b>You&rsquo;re booked, Nadia</b><span>Reference HS-QR4WSV · Halide Studio</span></div>
+      <div class="chip">{MONITOR}<span class="div"></span>Ringing</div>
+    </div>
+    <div class="pills"><span class="pill">Queued</span><span class="pill on">Calling</span><span class="pill">Done</span></div>
+  </div>
+  <div class="thead" style="--cols:220px 1fr 110px"><span>Stage</span><span>What happens</span><span class="r">At</span></div>
+  <div class="row alt" style="--cols:220px 1fr 110px"><div class="m"><div><b>Queued</b></div></div><div class="say">The booking is handed to the assistant.</div><div class="val"><b>0:00</b></div></div>
+  <div class="row" style="--cols:220px 1fr 110px"><div class="m"><div><b>Calling you</b></div></div><div class="say">Your phone rings, from the salon&rsquo;s own number.</div><div class="val"><b>0:02</b></div></div>
+  <div class="row alt" style="--cols:220px 1fr 110px"><div class="m"><div><b>On the call</b></div></div><div class="say">Confirm, move it, or cancel — on the phone.</div><div class="val"><b>0:09</b></div></div>
+  <div class="row" style="--cols:220px 1fr 110px"><div class="m"><div><b>Done</b></div></div><div class="say">Outcome recorded and sent to the front desk.</div><div class="val"><b>0:46</b></div></div>
+  <div class="foot"><div class="cta">Listen in</div></div>
+"""
+
+STAGE["record"] = f"""
+  <div class="pad">
+    <div class="head">
+      {ORB('#4ad6c2','#7c6cff','#ff9a5c','#ff5f7e')}
+      <div class="who"><b>Calls today</b><span>12 placed · 9 confirmed · 77% reached</span></div>
+      <div class="chip">{MONITOR}<span class="div"></span>Live</div>
+    </div>
+    <div class="pills"><span class="pill">All</span><span class="pill on">Confirmed</span><span class="pill">Needs a person</span></div>
+  </div>
+  <div class="thead" style="--cols:1fr 260px 150px"><span>Client</span><span>Business</span><span class="r">Outcome</span></div>
+  <div class="row alt" style="--cols:1fr 260px 150px"><div class="m">{ORB('#ffb36b','#ff7a59','#8b5cf6','#f0c15e')}<div><b>Nadia Feld</b><span>Recording · transcript · summary</span></div></div><div class="say">Halide Studio</div><div class="val"><span class="tag t-ok">Confirmed</span></div></div>
+  <div class="row" style="--cols:1fr 260px 150px"><div class="m">{ORB('#8ab4ff','#6ee7a0','#7c6cff','#ffd166')}<div><b>Mira Castellanos</b><span>Recording · transcript · summary</span></div></div><div class="say">Halide Studio</div><div class="val"><span class="tag t-ok">Confirmed</span></div></div>
+  <div class="row alt" style="--cols:1fr 260px 150px"><div class="m">{ORB('#ff8fab','#ffd6a5','#9bf6ff','#bdb2ff')}<div><b>Priya Raman</b><span>Asked for the afternoon</span></div></div><div class="say">Northlake Family Health</div><div class="val"><span class="tag t-info">Reschedule</span></div></div>
+  <div class="row" style="--cols:1fr 260px 150px"><div class="m">{ORB('#a0c4ff','#caffbf','#ffc6ff','#fdffb6')}<div><b>Felix Brandt</b><span>Flagged for a person</span></div></div><div class="say">Solstice Salon &amp; Spa</div><div class="val"><span class="tag t-warn">No answer</span></div></div>
+  <div class="foot"><div class="cta">Open the newest record</div></div>
+"""
+
+STAGE["flag"] = f"""
+  <div class="pad">
+    <div class="head">
+      {ORB('#7c6cff','#ff9a5c','#ff5f7e','#4ad6c2')}
+      <div class="who"><b>Needs attention</b><span>6 flagged this week · across three businesses</span></div>
+      <div class="chip">{MONITOR}<span class="div"></span>6</div>
+    </div>
+    <div class="pills"><span class="pill">Today</span><span class="pill on">This week</span><span class="pill">All time</span></div>
+  </div>
+  <div class="thead" style="--cols:1fr 300px 150px"><span>Client</span><span>Booking</span><span class="r">Flag</span></div>
+  <div class="row alt" style="--cols:1fr 300px 150px"><div class="m">{ORB('#ffb36b','#ff7a59','#8b5cf6','#f0c15e')}<div><b>Tobias Lang</b><span>Northlake Family Health</span></div></div><div class="say">Sat, Sep 5 · 8:00 AM</div><div class="val"><span class="tag t-warn">No answer</span></div></div>
+  <div class="row" style="--cols:1fr 300px 150px"><div class="m">{ORB('#8ab4ff','#6ee7a0','#7c6cff','#ffd166')}<div><b>Priya Raman</b><span>Asked for the afternoon</span></div></div><div class="say">Thu, Sep 3 · 9:10 AM</div><div class="val"><span class="tag t-info">Reschedule</span></div></div>
+  <div class="row alt" style="--cols:1fr 300px 150px"><div class="m">{ORB('#ff8fab','#ffd6a5','#9bf6ff','#bdb2ff')}<div><b>Felix Brandt</b><span>Solstice Salon &amp; Spa</span></div></div><div class="say">Mon, Sep 7 · 5:00 PM</div><div class="val"><span class="tag t-warn">No answer</span></div></div>
+  <div class="row" style="--cols:1fr 300px 150px"><div class="m">{ORB('#a0c4ff','#caffbf','#ffc6ff','#fdffb6')}<div><b>Kenji Watanabe</b><span>Halide Studio</span></div></div><div class="say">Mon, Sep 7 · 1:00 PM</div><div class="val"><span class="tag t-warn">No answer</span></div></div>
+  <div class="foot"><div class="cta">Open the first one</div></div>
+"""
+
 variant = sys.argv[2] if len(sys.argv) > 2 else "B"
+key     = sys.argv[3] if len(sys.argv) > 3 else "flag"
+mode    = sys.argv[4] if len(sys.argv) > 4 else "card"   # card | wide | stage
+
 BODIES = {"call": CALL, "record": RECORD, "flag": FLAG}
-key = sys.argv[3] if len(sys.argv) > 3 else "flag"
-wide = len(sys.argv) > 4 and sys.argv[4] == "wide"
-html = BASE.replace("__PANE__", PANES[variant]).replace("__BODY__", BODIES[key])
-if wide:
-    # a landscape frame for stacked layouts, where the card's image slot is short and wide
+body = STAGE[key] if mode == "stage" else BODIES[key]
+html = BASE.replace("__PANE__", PANES[variant]).replace("__BODY__", body)
+
+if mode == "wide":
+    # a landscape frame for stacked card layouts, where the image slot is short and wide
     html = (html.replace("width:820px; height:964px", "width:1200px; height:760px")
                 .replace(".panel { position:absolute; left:56px; right:56px;", ".panel { position:absolute; left:90px; right:90px;")
                 .replace("background-position:50% 62%", "background-position:50% 56%"))
+elif mode == "stage":
+    # a 16:10 frame for the core-features tab stage
+    html = (html.replace("width:820px; height:964px", "width:1600px; height:1000px")
+                .replace(".panel { position:absolute; left:56px; right:56px;", ".panel { position:absolute; left:150px; right:150px;")
+                .replace("background-position:50% 62%", "background-position:50% 58%"))
+
 pathlib.Path(sys.argv[1]).write_text(html)
 print("wrote", sys.argv[1])

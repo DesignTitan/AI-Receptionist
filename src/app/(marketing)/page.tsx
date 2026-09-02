@@ -118,31 +118,55 @@ export default function HomePage() {
         </section>
 
         {/* 04 · Proof. An iris into the real dashboard, then the record. */}
-        <section id="proof" className="rc-chapter" data-sc-act="flow">
-          <div className="sc-wrap">
-            <div className="sc-stack" data-sc-in data-sc-stagger="60" style={{ maxWidth: "46rem" }}>
-              <h2 className="sc-display sc-display--lg">One desk. Every business.</h2>
-              <p className="sc-body">
-                The recording, the transcript and a one-line summary land in the dashboard and in your
-                inbox the moment the call ends. Three demonstration businesses run on this one desk: a
-                clinic, a salon, a design studio.
-              </p>
+        <section id="proof" data-sc-act="pin" data-sc-span="2.6" className="rc-deckact">
+          <div data-sc-stage className="rc-deckstage">
+            <div className="rc-deck__head" data-sc-cue="0 1 0 0">
+              <p className="rc-kicker">What the desk shows you</p>
+              <h2 className="sc-display sc-display--md">One desk. Every business.</h2>
             </div>
-            <figure className="rc-media rc-media--frame" data-sc-reveal="iris" data-sc-reveal-at="0.12 0.52" style={{ marginTop: "var(--sc-8)" }}>
-              <img src="/scrollcraft/04-dashboard.jpg" width={1600} height={1000} alt="The staff dashboard: bookings from three businesses, each with its call outcome." />
-            </figure>
-            <div className="sc-wrap rc-plates" style={{ paddingInline: 0, marginTop: "var(--sc-9)" }}>
-              <figure className="rc-media" data-sc-in>
-                <img src="/scrollcraft/04-record.jpg" width={1600} height={1000} alt="A single record: the recording, the transcript line by line, and the assistant's summary." />
-                <figcaption>A record. The recording, the transcript, and what the assistant took from it.</figcaption>
-              </figure>
-              <div className="sc-stack" data-sc-in data-sc-stagger="60">
-                <h3 className="sc-display sc-display--md">Nothing is lost to voicemail.</h3>
-                <p className="sc-body">
-                  A no-answer is flagged for a person. A reschedule comes back with the times that
-                  suit. A cancellation frees the slot. Each one is a row you can open.
-                </p>
-              </div>
+            <div className="rc-deck" aria-label="Three things the dashboard shows">
+              <article className="rc-card" style={{ "--i": 0, "--in": -1, "--next": 0.2 } as React.CSSProperties}>
+                <div className="rc-card__copy">
+                  <p className="rc-card__eyebrow"><span aria-hidden />Every call, on the record</p>
+                  <h3>Recording, transcript, summary.</h3>
+                  <p>
+                    The call ends and three things are already in the dashboard: the recording, the transcript
+                    line by line, and a one-line summary of what was agreed. The same three land in your inbox.
+                  </p>
+                  <p className="rc-card__foot">Nothing to write up afterwards.</p>
+                </div>
+                <figure className="rc-card__media">
+                  <img src="/scrollcraft/04a-record.jpg" width={820} height={730} alt="A call record: the recording, the assistant's summary, and the transcript line by line." />
+                </figure>
+              </article>
+              <article className="rc-card" style={{ "--i": 1, "--in": 0.2, "--next": 0.55 } as React.CSSProperties}>
+                <div className="rc-card__copy">
+                  <p className="rc-card__eyebrow"><span aria-hidden />Nothing is lost to voicemail</p>
+                  <h3>Every no-answer is flagged.</h3>
+                  <p>
+                    A no-answer is flagged for a person. A reschedule comes back with the times that suit. A
+                    cancellation frees the slot. Each one is a row you can open.
+                  </p>
+                  <p className="rc-card__foot">The exceptions, not the routine.</p>
+                </div>
+                <figure className="rc-card__media">
+                  <img src="/scrollcraft/04b-statuses.jpg" width={550} height={440} alt="Booking rows with their call outcomes: confirmed, no answer, reschedule requested." />
+                </figure>
+              </article>
+              <article className="rc-card" style={{ "--i": 2, "--in": 0.55, "--next": 9 } as React.CSSProperties}>
+                <div className="rc-card__copy">
+                  <p className="rc-card__eyebrow"><span aria-hidden />One desk, every business</p>
+                  <h3>Three businesses. One front desk.</h3>
+                  <p>
+                    A clinic, a salon and a design studio run on the same desk, each in its own colours and its
+                    own words. Filter by business, or see all of it at once.
+                  </p>
+                  <p className="rc-card__foot">Built to be yours, not a template.</p>
+                </div>
+                <figure className="rc-card__media rc-card__media--wide">
+                  <img src="/scrollcraft/04c-businesses.jpg" width={1380} height={716} alt="The dashboard's totals and the three business filters: Northlake Family Health, Solstice Salon & Spa, Halide Studio." />
+                </figure>
+              </article>
             </div>
           </div>
         </section>

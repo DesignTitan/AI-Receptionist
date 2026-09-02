@@ -56,7 +56,7 @@ this being cinematic." Items marked **Self-authored** were not answered and are 
 | 1 | The front desk | Recognition | A phone ringing out while hands are busy: the missed call, held still, no pitch yet |
 | 2 | The cost | Unease | The booking that never happened, named plainly, in their industry's terms |
 | 3 | The turn | Relief | It calls back. The real confirmation page walks queued → ringing → confirmed under the wheel |
-| 4 | Proof | Confidence | The dashboard: recording, transcript, summary. Three businesses, one desk |
+| 4 | Proof | Confidence | **stacked deck**: `pin`, three dark cards keyed to the act's `--sc-p`. A call record (recording, summary, transcript), the status column with its pills, the businesses band. Each rises from below; the one beneath settles back and fades out | 2.6 | Proof is three specific things, not a dashboard. Owner's direction, after a Fora-style reference |
 | 5 | Their industry | "Mine is here" | Industries travel sideways; the one they run is on the rail |
 | 6 | **Hear it yourself** | **Participation, then awe** | A number field. They type theirs. The page places the call and the tracker on screen mirrors it live |
 | 7 | Terms | Clarity | How it works and what it costs, set plainly, compressed, no theatre |
@@ -247,4 +247,16 @@ Addendum, later the same day: an "Ask again" / "Have it call you again" action a
 panel, verified in the browser (form returns with the details kept). The page is now
 rendered per request so the plate's mode follows the environment; the real Vapi dispatch
 was dry-run with placeholder keys and fails honestly (502, owner emailed the lead).
+
+Addendum, later on 2026-09-02: chapter 4 rebuilt as a stacked deck at the owner's
+direction ("we will not show the full dashboard; specific features, max three; like
+this" — a dark stacked-card reference). Three cards, each copy left / one real product
+crop right, on a pinned stage of span 2.6; the second and third rise over windows of
+the act's progress (0.20–0.45, 0.55–0.80) and the card beneath settles back 5% and
+fades out. Pure CSS on the engine's `--sc-p`; under reduced motion the deck is a
+plain column. Verified: harness desktop 15.5vh and mobile 16.1vh, no dead scroll,
+contrast clear; contact sheet read (the mid-states are there); pane check at four
+progress points on desktop and two at 390 wide. Crops: the record's left column
+(820×730), the call/status columns (550×440), the stats-and-chips band (1380×716).
+The page total moved from 14.8 to 15.5 viewport-heights.
 

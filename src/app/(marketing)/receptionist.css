@@ -137,3 +137,53 @@
 .rc-colophon a:hover { color: var(--sc-accent); }
 .rc-colophon .rc-run { font-size: var(--sc-t-lg); line-height: 1.5; color: var(--sc-ink); }
 .rc-colophon footer { margin-top: var(--sc-8); display: flex; flex-wrap: wrap; gap: var(--sc-2) var(--sc-6); font-size: var(--sc-t-xs); }
+
+/* ── proof: a stacked deck of three cards, keyed to the pinned act's --sc-p ── */
+.rc-deckact { --sc-p: 0; }
+/* the engine's .sc-stage is sticky and is the cards' containing block; do not reposition it */
+.rc-kicker { margin: 0 0 var(--sc-3); font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-wide); text-transform: uppercase; color: var(--sc-ink-soft); }
+.rc-deck__head { position: absolute; left: var(--sc-gutter); top: clamp(1.25rem, 4vh, 2.5rem); z-index: 0; max-width: 34rem; }
+.rc-deck__head h2 { margin: 0; }
+.rc-deck { position: absolute; inset: 0; }
+.rc-card {
+  --t: clamp(0, calc((var(--sc-p) - var(--in)) / 0.25), 1);
+  --s: clamp(0, calc((var(--sc-p) - var(--next)) / 0.25), 1);
+  position: absolute; left: 50%; top: 50%;
+  width: min(1120px, 92vw); height: min(600px, 72svh);
+  translate: -50% calc(-50% + var(--i) * 16px + 5vh);
+  transform: translateY(calc((1 - var(--t)) * 115svh - var(--s) * 22px)) scale(calc(1 - var(--s) * 0.05));
+  /* as the next card covers it, this one settles back and fades out */
+  opacity: calc(1 - var(--s));
+  z-index: calc(1 + var(--i));
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(1.5rem, 3vw, 3rem);
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  background: #131117; color: #f2efe8; border-radius: 22px;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.08);
+  will-change: transform;
+}
+.rc-card__copy { display: flex; flex-direction: column; min-width: 0; }
+.rc-card__eyebrow { margin: 0; font-size: var(--sc-t-sm); color: #aaa49b; display: flex; align-items: center; gap: 0.6rem; }
+.rc-card__eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: #9a9dff; }
+.rc-card__copy h3 { font-family: var(--sc-font-display); font-weight: 400; font-size: clamp(1.9rem, 3vw, 2.7rem); line-height: 1.05; letter-spacing: -0.01em; margin: clamp(1.25rem, 5vh, 3rem) 0 0.9rem; text-wrap: balance; }
+.rc-card__copy > p:not(.rc-card__eyebrow):not(.rc-card__foot) { margin: 0; color: #cfc9be; max-width: 34ch; }
+.rc-card__foot { margin: auto 0 0; padding-top: 1.5rem; font-size: var(--sc-t-sm); color: #aaa49b; }
+.rc-card__foot::before { content: "— "; color: #9a9dff; }
+.rc-card__media { margin: 0; min-width: 0; min-height: 0; border-radius: 14px; overflow: hidden; background: #1b1820; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1); }
+.rc-card__media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+.rc-card__media--wide img { object-fit: cover; object-position: left top; }
+@media (max-width: 860px) {
+  .rc-deck__head { max-width: 22rem; }
+  .rc-deck__head h2 { font-size: var(--sc-t-xl); }
+  .rc-card { width: 94vw; height: min(640px, 76svh); grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 1rem; padding: 1.1rem; translate: -50% calc(-50% + var(--i) * 12px + 6vh); }
+  .rc-card__copy h3 { font-size: 1.55rem; margin: 0.7rem 0 0.5rem; }
+  .rc-card__copy > p:not(.rc-card__eyebrow) { font-size: var(--sc-t-sm); }
+  .rc-card__foot { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rc-deckstage { position: static; height: auto; padding: var(--sc-8) 0; }
+  .rc-deck__head { position: static; padding: 0 var(--sc-gutter) var(--sc-6); }
+  .rc-deck { position: static; display: grid; gap: var(--sc-5); justify-items: center; }
+  .rc-card { position: relative; left: auto; top: auto; translate: none; transform: none !important; opacity: 1 !important; }
+}
+

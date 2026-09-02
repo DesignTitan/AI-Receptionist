@@ -13,6 +13,10 @@ Handoff notes for the next session. Updated 2026-09-02.
   "confirmed" when a person spoke (Ava's own "reschedules and cancellations" used to trip the
   appointment keyword heuristic into "cancelled"); OmniDimension's `LLM:`/`User:` labels are
   shown as Ava/You.
+- **Proof chapter is a stacked deck.** Three dark cards (record; call/status pills; stats and
+  business chips), each rising over the previous, which settles back and fades. Pure CSS on
+  the engine's `--sc-p` (`.rc-deck*` in `receptionist.css`); reduced motion → a column. The
+  page is now 15.5 viewport-heights.
 - **Human check live and visible.** Turnstile keys are on Vercel (widget "AI Receptionist -
   ask for a call", hostname ai-receptionist-two-azure.vercel.app, Managed). The check now runs
   on every submission (live call or callback request) and renders visibly. The plate's inputs

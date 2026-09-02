@@ -28,7 +28,7 @@ changes only grammar and world will fail it.
 
 | Build | Grammar | Nav treatment | Hero device | Act-sequence shape | Close pattern | Signature move | World | Port |
 |---|---|---|---|---|---|---|---|---|
-| AI Receptionist · product homepage · 2026-09-02 | Chaptered editorial on paper | Margin folio: numbered chapters down the left edge, no bar | Title page, type only; the image arrives in a column below | 9 chapters, 14.8vh: flow ×3 → scrub → flow → pan → pin (peak, 3.0) → flow → held close | Colophon: running-text CTA, small type, held | The page places a real call to the visitor (or, with no line, records the lead and says so) | Paper #f6f4ef, ink, one indigo accent; Instrument Serif + Inter | Next.js 16 route `/`, engine vendored at `src/vendor/scrollcraft`, build folder `scrollcraft/builds/receptionist` |
+| AI Receptionist · product homepage · 2026-09-02 | Chaptered editorial on paper | Margin folio: numbered chapters down the left edge, no bar | Title page, type only; the image arrives in a column below | 9 chapters, 15.5vh: flow ×3 → scrub → pin (stacked deck of three cards) → pan → pin (peak, 3.0) → flow → held close | Colophon: running-text CTA, small type, held | The page places a real call to the visitor (or, with no line, records the lead and says so) | Paper #f6f4ef, ink, one indigo accent; Instrument Serif + Inter | Next.js 16 route `/`, engine vendored at `src/vendor/scrollcraft`, build folder `scrollcraft/builds/receptionist` |
 
 ---
 
@@ -43,7 +43,8 @@ as a constraint, so writing them down is the whole point.
 - Title-page hero: type only, media arriving in a column.
 - Colophon close with a running-text CTA.
 - Signature move: the page calls the visitor.
-- Act band: 9 chapters at ~14.8vh with one scrub and one pinned live plate as the peak.
+- Act band: 9 chapters at ~15.5vh with one scrub, one stacked deck, and one pinned live plate as the peak.
+- Stacked deck of three dark feature cards keyed to a pinned act's progress (proof chapter).
 
 ---
 

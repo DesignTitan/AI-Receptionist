@@ -120,13 +120,13 @@ export default function HomePage() {
         </section>
 
         {/* 04 · Proof. An iris into the real dashboard, then the record. */}
-        <section id="features" className="rc-features" data-sc-act="flow">
+        <section id="features" className="rc-features textured-section" data-sc-act="flow">
           <div className="sc-wrap">
             <CoreFeatures />
           </div>
         </section>
 
-        <section id="proof" data-sc-act="pin" data-sc-span="2.6" className="rc-deckact">
+        <section id="proof" data-sc-act="pin" data-sc-span="2.6" className="rc-deckact textured-section">
           <div data-sc-stage className="rc-deckstage">
             <div className="rc-deck__head" data-sc-cue="0 1 0 0">
               <div>

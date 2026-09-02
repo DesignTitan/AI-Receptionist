@@ -13,6 +13,10 @@ Handoff notes for the next session. Updated 2026-09-02.
   "confirmed" when a person spoke (Ava's own "reschedules and cancellations" used to trip the
   appointment keyword heuristic into "cancelled"); OmniDimension's `LLM:`/`User:` labels are
   shown as Ava/You.
+- **Textured dark ground** on chapters 4 and 5 (`.textured-section`, assets in
+  `public/images/textures/`): baked-in photo falloff plus an overlay-blended grain tile.
+  The pinned proof chapter needs its stage to stay sticky and the section to stay
+  `overflow: visible`, or the pin breaks.
 - **Core features (chapter 4)**: its own component before the deck — chip, two-line title,
   lede, and four clickable tabs over one product screen, on the dark steel-blue ground.
   Keyboard accessible (tablist, arrow keys, visible focus).

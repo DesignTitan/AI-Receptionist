@@ -466,3 +466,58 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+@layer components {
+  /* ============================================================
+     Textured dark background (from texture-background.css)
+     The falloff is baked into 6.webp on purpose: a two-stop CSS
+     gradient bands at these dark values, a photo does not.
+     mix-blend-mode: overlay on the grain is deliberate, and
+     isolation: isolate keeps that blend inside the section.
+     ============================================================ */
+  .textured-section {
+    --tx-base:        #1a1a19;
+    --tx-ink:         #faf9f7;
+    --tx-image:       url("/images/textures/6.webp");
+    --tx-grain:       url("/images/textures/grain.avif");
+    --tx-image-op:    0.5;
+    --tx-brightness:  0.5;
+    --tx-grain-op:    0.75;
+    --tx-grain-size:  128px;
+
+    position: relative;
+    overflow: hidden;
+    background-color: var(--tx-base);
+    color: var(--tx-ink);
+    isolation: isolate;
+  }
+  .textured-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: var(--tx-image) 50% 50% / cover no-repeat;
+    filter: brightness(var(--tx-brightness)) grayscale(1);
+    opacity: var(--tx-image-op);
+    pointer-events: none;
+  }
+  .textured-section::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: var(--tx-grain) 0 0 repeat;
+    background-size: var(--tx-grain-size);
+    opacity: var(--tx-grain-op);
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+  .textured-section > * {
+    position: relative;
+    z-index: 2;
+  }
+  /* A pinned chapter's stage must stay sticky, and the section must not
+     become a scroll container, or the pin stops working. */
+  .textured-section > .sc-stage { position: sticky; }
+  .rc-deckact.textured-section { overflow: visible; }
+}

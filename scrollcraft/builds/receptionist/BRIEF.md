@@ -388,3 +388,10 @@ home, then Features, Proof, Industries, Pricing) where only the current chapter 
 tab carrying its label, and beside the pill a round accent button with the phone glyph that
 drops the call form. Under 480px even the current label goes and the pill is five icons.
 
+Nav, glass (3 Sep): the pill is liquid glass now, a 55% white face over an 18px backdrop blur
+with saturation and a touch of brightness, a bright rim along the top edge, a faint dark rim
+along the bottom, a gloss across the upper half; the current tab is a 90% white tab with the same
+rims; the call disc has a radial highlight and a specular cap. Behind the whole nav sits a
+slightly darker rounded plate (5% black over whatever is beneath, 44px corners) that wraps pill
+and disc alike, the way the owner's reference frames its bar.
+

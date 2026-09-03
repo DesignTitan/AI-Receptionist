@@ -18,7 +18,9 @@ Handoff notes for the next session. Updated 2026-09-02.
   agency plan. Agent audit applied: 2-word interruption threshold, noise reduction, static
   end-call line cleared (double goodbye fixed). Owner: buy a number, Early deployers plan,
   request voicemail detection. Platform comparison in docs/voice-platforms.md (stay on OmniDimension; Retell at 15–20
-  customers). Launch date 1 Oct 2026; phases and the self-serve signup plan in docs/ROADMAP.md.
+  customers). Launch date 1 Oct 2026; the full four-week plan with build, marketing and sales lanes, weekly scorecard and
+  triggers in docs/ROADMAP.md and the "Receptionist Launch Roadmap" artifact
+  (https://claude.ai/code/artifact/0a4ee2ad-e2b2-4998-9a5d-796e3097cd1a).
 - **The phone line works end to end.** Two real calls from the live homepage to the owner's
   phone (OmniDimension call logs 7353968 and 7353970, from the platform's default number
   +1 337 379 9906): Ava opened with the visitor's name and the recording notice, pitched,

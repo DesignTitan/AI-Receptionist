@@ -11,6 +11,16 @@ const page = await browser.newPage({ viewport: { width: W, height: H }, deviceSc
 await page.goto("file://" + htmlPath, { waitUntil: "networkidle" });
 await page.evaluate(() => document.fonts.ready);
 await page.waitForTimeout(350);
+if (alpha) {
+  // keep only the panel: clip the scene to its rounded rect so the frost is baked and the rest is clear
+  await page.evaluate(() => {
+    const p = document.querySelector(".panel"), s = document.querySelector(".scene");
+    const r = p.getBoundingClientRect(), R = parseFloat(getComputedStyle(p).borderRadius) || 26;
+    s.style.clipPath = `inset(${r.top}px ${innerWidth - r.right}px ${innerHeight - r.bottom}px ${r.left}px round ${R}px)`;
+    document.documentElement.style.background = "transparent"; document.body.style.background = "transparent";
+  });
+  await page.waitForTimeout(100);
+}
 await page.screenshot({ path: outPath, clip: { x: 0, y: 0, width: W, height: H }, omitBackground: alpha, type: alpha ? "png" : "jpeg", quality: alpha ? undefined : 88 });
 await browser.close();
 console.log("rendered", outPath, W + "x" + H);

@@ -4,11 +4,11 @@ Handoff notes for the next session. Updated 2026-09-02.
 
 ## Just done (2026-09-02, evening)
 
-- **Proof deck images now have parallax inside them.** Each card's image is two layers in the
-  same frame: the blurred desert (04-bg.jpg, shared) and the glass panel as an alpha PNG
-  (04-*-p.png), the panel travelling 22px on the rise and 10px on the cover, the ground a
-  little the other way. Keyed to the card's --t/--tn, off under reduced motion, 14/6 under
-  1024px. Rendered with `ref.py … bg|panel` + `render.mjs … png`. Geometry, fade, shadow untouched.
+- **Proof deck images now have parallax inside them.** Each card's image is a sharp desert
+  (04-bg.jpg, shared) behind a frosted glass panel rendered as an alpha PNG with its blur baked
+  (04-*-p.png). Both ride the act's --sc-p across the whole scroll: panel climbs 100px, ground
+  sinks 36px; 64/24 under 1024px; off under reduced motion. Pipeline: `ref.py … bg|panel` +
+  `render.mjs … png` (clips the scene to the panel). Geometry, fade, shadow untouched.
 - **Pricing is three call-volume plans, and the economics are measured.** Front desk $149/200
   calls, Busy desk $299/600 (featured, overlaid on the outer two), Full desk $599/1,500, $1,000
   setup flat, 30c per extra call. Two real calls put voice AI at $0.115/min (prorated) and

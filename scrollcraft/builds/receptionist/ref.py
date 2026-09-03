@@ -383,11 +383,17 @@ elif mode == "stage":
                 .replace(".panel { position:absolute; left:56px; right:56px;", ".panel { position:absolute; left:150px; right:150px;")
                 .replace("background-position:50% 62%", "background-position:50% 58%"))
 
+# The parallax pair. The owner wants the desert sharp and only the glass blurred, so both
+# layers use an unblurred photo: the ground is the scene without the panel; the panel layer is
+# the scene clipped to the panel's rounded rect (render.mjs does the clip), so the frost it
+# carries is the real blur of the photo beneath it, baked, with everything outside transparent.
+SHARP = "filter: saturate(112%) brightness(.72);"
+if layer in ("bg", "panel"):
+    html = html.replace("filter: blur(26px) saturate(115%) brightness(.62);", SHARP)
 if layer == "bg":
     html = html.replace('<div class="panel">', '<div class="panel" style="display:none">')
 elif layer == "panel":
-    html = (html.replace('<div class="photo"></div><div class="vig"></div><div class="grain"></div>', '')
-                .replace("overflow:hidden; background:#15100e;", "overflow:hidden; background:transparent;")
-                .replace(PANES[variant], PANES["T"]))
+    html = (html.replace("overflow:hidden; background:#15100e;", "overflow:hidden; background:transparent;")
+                .replace("backdrop-filter:blur(36px)", "backdrop-filter:blur(44px)"))
 pathlib.Path(sys.argv[1]).write_text(html)
 print("wrote", sys.argv[1])

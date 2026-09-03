@@ -59,7 +59,14 @@
 .rc-nav__pill::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
   background: linear-gradient(180deg, rgb(255 255 255 / 0.5) 0%, rgb(255 255 255 / 0.12) 42%, rgb(255 255 255 / 0) 60%, rgb(255 255 255 / 0.1) 100%); }
 .rc-nav__pill > li { position: relative; z-index: 1; }
-.rc-nav__pop { background: var(--nav-face); border: 5px solid var(--nav-ring); box-shadow: var(--nav-lift); }
+/* the dropdown is the same frosted glass as the feature panels */
+.rc-nav__pop { border: 1px solid rgb(255 255 255 / 0.75);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.62) 0%, rgb(255 255 255 / 0.5) 100%);
+  -webkit-backdrop-filter: blur(26px) saturate(160%) brightness(1.05); backdrop-filter: blur(26px) saturate(160%) brightness(1.05);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.95), inset 0 -1px 0 rgb(0 0 0 / 0.05), 0 1px 0 rgb(255 255 255 / 0.5), var(--nav-lift); }
+.rc-plate__inner--compact .rc-try__field input { background: rgb(255 255 255 / 0.66); border-color: rgb(255 255 255 / 0.9); box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgb(0 0 0 / 0.04); }
+.rc-plate__inner--compact .rc-try__field input:focus { border-color: var(--sc-accent); box-shadow: inset 0 1px 0 #fff, 0 0 0 4px color-mix(in oklab, var(--sc-accent) 18%, transparent); }
+.rc-plate__inner--compact .rc-try__human { border-radius: 12px; overflow: hidden; }
 .rc-nav a { text-decoration: none; color: var(--nav-mute); font: inherit; font-size: 16px; font-weight: 600; line-height: 1; display: inline-flex; align-items: center; gap: 0.6rem; }
 .rc-nav svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 .rc-nav__dot { width: 0.6rem; height: 0.6rem; margin: 0 0.35rem; border-radius: 50%; background: var(--sc-accent); flex: none; }
@@ -81,7 +88,7 @@
 .rc-nav__cta:focus-visible, .rc-nav__links a:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 3px; }
 /* the dropdown */
 .rc-nav__pop { position: absolute; top: calc(100% + 10px); right: 0; width: min(400px, calc(100vw - 24px)); border-radius: 28px; padding: 16px 18px 18px; white-space: normal; max-height: calc(100svh - 110px); overflow: auto; color: var(--nav-ink);
-  --sc-ink: var(--nav-ink); --sc-surface: #ffffff; }
+  --sc-ink: var(--nav-ink); --sc-surface: #ffffff; --sc-ink-soft: #55534e; }
 .rc-nav__pop-head { display: flex; align-items: center; justify-content: space-between; margin: 0 0 12px; }
 .rc-nav__pop-head p { margin: 0; font-weight: 600; font-size: 16px; }
 .rc-nav__pop-head button { font: inherit; border: 0; background: transparent; color: var(--nav-ink); width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; }

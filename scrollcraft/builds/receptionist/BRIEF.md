@@ -397,3 +397,6 @@ and disc alike, the way the owner's reference frames its bar.
 
 Nav plate (3 Sep): the darker plate now hangs from the top edge of the viewport, square at the
 top, 44px corners at the bottom, so the bar reads as a tab pulled down from the edge.
+
+Nav dropdown (3 Sep): the call dialog is the same frosted glass as the feature panels, a
+62%→50% white face over a 26px backdrop blur, bright top rim, hairline, glass inputs.

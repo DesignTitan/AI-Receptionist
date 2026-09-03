@@ -3,6 +3,7 @@ import { Folio } from "@/components/marketing/folio";
 import { PRODUCT_NAME } from "@/components/marketing/product-chrome";
 import { ScrollCraftMount } from "@/components/marketing/scrollcraft-mount";
 import { CoreFeatures } from "@/components/marketing/core-features";
+import { SiteNav } from "@/components/marketing/site-nav";
 import { TryCallPlate } from "@/components/marketing/try-call-plate";
 import { env, isLiveCallReady } from "@/lib/env";
 import "./receptionist.css";
@@ -94,6 +95,7 @@ export default function HomePage() {
       <div className="sc-grain" aria-hidden="true" />
 
       <main id="main">
+        <SiteNav cta={simulated ? "Ask for a call" : "Have it call you"} />
         {/* 01 · Title page. Type on paper, no media above the fold. */}
         <section id="desk" className="rc-chapter rc-title" data-sc-act="flow">
           <div className="sc-wrap">

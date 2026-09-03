@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Instrument_Serif, Playfair_Display, Space_Grotesk } from "next/font/google";
+import { Inter, Instrument_Sans, Instrument_Serif, Playfair_Display, Space_Grotesk } from "next/font/google";
 import { env } from "@/lib/env";
 import "./globals.css";
 
@@ -28,6 +28,14 @@ const fashion = Playfair_Display({
   subsets: ["latin"],
   style: ["normal", "italic"],
   variable: "--font-display-fashion",
+  display: "swap",
+  preload: false,
+});
+/** The marketing homepage's display face: a clean grotesk, after the owner turned down the serif. */
+const marketing = Instrument_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-display-marketing",
   display: "swap",
   preload: false,
 });
@@ -69,7 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${editorial.variable} ${fashion.variable} ${technical.variable}`}
+      className={`${inter.variable} ${editorial.variable} ${fashion.variable} ${technical.variable} ${marketing.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />

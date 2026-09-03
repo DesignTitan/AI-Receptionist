@@ -4,6 +4,11 @@ Handoff notes for the next session. Updated 2026-09-02.
 
 ## Just done (2026-09-02, evening)
 
+- **Display face is Instrument Sans now, headings have air, and there is a top nav.** Owner
+  turned down the serif; Instrument Sans 500 via next/font (`--font-display-marketing`). Display
+  heading → subtext is 24px everywhere, 32px in the hero (two pairs had zero). A centred floating
+  pill nav (brand, Features, Proof, Industries, Pricing, CTA → #hear) in
+  src/components/marketing/site-nav.tsx, current chapter marked; brand + CTA only under 820px.
 - **Core features tab stage has the same parallax.** 06-bg.jpg (sharp stage scene) behind
   06-{book,after,noshow,voice}-p.webp (frosted panel, alpha WebP); the section is a flow act so
   both ride its --sc-p (panel 90px, ground 40px). All alpha panels are WebP now (cwebp, q86).

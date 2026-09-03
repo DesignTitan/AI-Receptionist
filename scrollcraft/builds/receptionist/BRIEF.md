@@ -364,3 +364,14 @@ baked). The features section is a flow act, so both ride its --sc-p: panel 90px,
 other way at 1.1 scale; 56/24 under 1024px; nothing under reduced motion. The tab swap only
 replaces the panel image; the ground stays.
 
+Type and chrome, 3 Sep: the owner turned down the serif display. The homepage's display face is
+now Instrument Sans 500 (`--font-display-marketing`, loaded in layout.tsx like the vertical
+faces; the verticals keep theirs), -0.03em, 0.98 leading on the xl size. Every display heading
+now has --sc-5 (24px) before its subtext and the hero --sc-6 (32px); the industries lead and the
+turn chapter had none. And there is a navigation now: a centred pill fixed at the top (brand,
+Features, Proof, Industries, Pricing, the call-to-action), frosted over whatever chapter is
+beneath, the current chapter marked the way the folio marks it; on phones it is brand + button.
+The margin folio stays. Note for the pipeline: backdrop-filter does survive the minifier here
+(computed blur(14px) saturate(1.4) on the nav), so the earlier "stripped" finding was specific
+to that rule, not the property.
+

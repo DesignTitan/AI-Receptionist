@@ -351,9 +351,16 @@ pricing reads as part of the same page rather than a bolted-on table.
 Proof deck, 3 Sep: the owner asked for parallax inside the card images, with the desert sharp
 and only the glass blurred. Each image is two layers in the same 24px frame: the ground
 (`04-bg.jpg`, shared, the scene without its panel and without the photo blur) and the panel
-(`04-{call,record,flag}-p.png`, the scene clipped to the panel's rounded rect with everything
+(`04-{call,record,flag}-p.webp`, alpha WebP via cwebp, the scene clipped to the panel's rounded rect with everything
 outside transparent, so the frost it carries is the real 44px backdrop blur of the sharp photo,
 baked). Both ride the act's --sc-p for the whole scroll: the panel climbs 100px from the deck's
 start to its end, the ground sinks 36px with a 1.1 scale so its edges never show; 64/24 under
 1024px; nothing moves under reduced motion. Rendered by `ref.py … <mode> bg|panel` and
 `render.mjs … png`. Card geometry, fade, shadow and copy untouched.
+
+Core features stage, 3 Sep: the same two-layer treatment. `06-bg.jpg` (the stage scene, sharp,
+no panel) behind `06-{book,after,noshow,voice}-p.webp` (the stage clipped to its panel, frost
+baked). The features section is a flow act, so both ride its --sc-p: panel 90px, ground 40px the
+other way at 1.1 scale; 56/24 under 1024px; nothing under reduced motion. The tab swap only
+replaces the panel image; the ground stays.
+

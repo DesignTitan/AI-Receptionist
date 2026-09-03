@@ -4,6 +4,9 @@ Handoff notes for the next session. Updated 2026-09-02.
 
 ## Just done (2026-09-02, evening)
 
+- **Core features tab stage has the same parallax.** 06-bg.jpg (sharp stage scene) behind
+  06-{book,after,noshow,voice}-p.webp (frosted panel, alpha WebP); the section is a flow act so
+  both ride its --sc-p (panel 90px, ground 40px). All alpha panels are WebP now (cwebp, q86).
 - **Proof deck images now have parallax inside them.** Each card's image is a sharp desert
   (04-bg.jpg, shared) behind a frosted glass panel rendered as an alpha PNG with its blur baked
   (04-*-p.png). Both ride the act's --sc-p across the whole scroll: panel climbs 100px, ground

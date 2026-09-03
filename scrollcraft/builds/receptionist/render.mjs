@@ -23,4 +23,10 @@ if (alpha) {
 }
 await page.screenshot({ path: outPath, clip: { x: 0, y: 0, width: W, height: H }, omitBackground: alpha, type: alpha ? "png" : "jpeg", quality: alpha ? undefined : 88 });
 await browser.close();
+if (alpha && outPath.endsWith(".webp")) {
+  // playwright only writes png; encode the alpha layer as webp and drop the png
+  const { execFileSync } = require("node:child_process"); const fs = require("node:fs");
+  const png = outPath.replace(/\.webp$/, ".png"); fs.renameSync(outPath, png);
+  execFileSync("cwebp", ["-quiet", "-q", "86", "-alpha_q", "90", "-m", "6", png, "-o", outPath]); fs.unlinkSync(png);
+}
 console.log("rendered", outPath, W + "x" + H);

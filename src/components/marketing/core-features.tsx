@@ -14,28 +14,28 @@ const FEATURES: Feature[] = [
   {
     key: "book",
     tab: "Your booking page",
-    screen: "/scrollcraft/06-book.jpg",
+    screen: "/scrollcraft/06-book-p.webp",
     alt: "The booking page: a client picks a day and a time with one of your people.",
     caption: "Your people, your hours, your colours — live the same day.",
   },
   {
     key: "after",
     tab: "Open after hours",
-    screen: "/scrollcraft/06-after.jpg",
+    screen: "/scrollcraft/06-after-p.webp",
     alt: "Bookings taken overnight and on a closed day, each confirmed within a minute.",
     caption: "Eleven of last week's thirty-eight bookings came in after you closed.",
   },
   {
     key: "noshow",
     tab: "Fewer no-shows",
-    screen: "/scrollcraft/06-noshow.jpg",
+    screen: "/scrollcraft/06-noshow-p.webp",
     alt: "Confirmation rate, no-shows, slots refilled and value recovered this month.",
     caption: "A voice gets confirmed. A text gets ignored.",
   },
   {
     key: "voice",
     tab: "Sounds like you",
-    screen: "/scrollcraft/06-voice.jpg",
+    screen: "/scrollcraft/06-voice-p.webp",
     alt: "The greeting, the rules and the number the assistant calls from, per business.",
     caption: "Your words, your rules, your number on their screen.",
   },
@@ -98,8 +98,11 @@ export function CoreFeatures() {
       </div>
 
       <div className="rc-cf__stage" role="tabpanel" id={`${id}-panel`} aria-labelledby={`${id}-tab-${feature.key}`}>
+        {/* two layers: the sharp desert behind, the frosted panel (an alpha PNG) in front;
+            both ride the section's scroll progress so the panel floats over the scene */}
         <div className="rc-cf__frame">
-          <img key={feature.key} src={feature.screen} width={1600} height={1000} alt={feature.alt} />
+          <img className="rc-cf__bg" src="/scrollcraft/06-bg.jpg" width={1600} height={1000} alt="" aria-hidden="true" />
+          <img className="rc-cf__panel" key={feature.key} src={feature.screen} width={1600} height={1000} alt={feature.alt} />
         </div>
       </div>
 

@@ -1,59 +1,99 @@
-# Roadmap (launch 1 October 2026)
+# Roadmap (launch Thursday 1 October 2026)
+
+Visual, tickable version: the "Receptionist Launch Roadmap" artifact. Weekly scorecard at the
+end. Companion docs: pricing-economics.md, voice-platforms.md, omnidimension.md.
 
 ## How a customer gets on today
-You do it. A customer is a config directory under `src/verticals/<slug>/` plus their own
-deployment (`NEXT_PUBLIC_TENANT=<slug>`), a phone number bought in OmniDimension and attached to
-an Ava clone, and a Stripe invoice. Nothing on the site lets a stranger sign up.
+You do it. A customer is a config directory, a phone number bought in OmniDimension and attached
+to an Ava clone, and a Stripe invoice. Nothing on the site lets a stranger sign up. The four weeks
+below change that.
 
-## Phase 1 · by 1 Oct · launch with a self-serve front, concierge behind it
-- Phone number on Ava (OmniDimension → Phone numbers, $5/mo) by 26 Sep.
-- Early deployers plan; request voicemail detection.
-- Supabase service key, Resend + OWNER_EMAIL, rotated webhook secret on Vercel.
-- "Start here" signup: business name, trade, hours, roster, brand colour, preferred area code,
-  card via Stripe Checkout. Creates the account and emails "your line is being set up".
-- Every signup lands in a `customers` table (name, trade, plan, area code, Stripe id, status:
-  paid → provisioning → live → paused) and shows on the staff dashboard at /admin as a queue.
-  That table is the customer list; no spreadsheet.
-- One deployment, not one per customer: `<slug>.yourdomain.com` resolves the tenant from the
-  hostname (wildcard domain on Vercel). A hundred signups is a hundred rows, not a hundred
-  Vercel projects.
-- `npm run provision` works the queue: for every row in `paid` it buys the number (OmniDimension
-  `searchPhoneNumbers` + `purchasePhoneNumber`), clones agent 248069 with the customer's
-  variables, marks the row `live`, emails "your line is live". Run it once a day, or once an hour
-  if the launch email lands well; a hundred customers is one command, not a hundred.
-- From the customer's side: sign up, pay, live within hours. No call with you required.
-- What you do per week: run the command, skim the queue for anything stuck, listen to two calls.
+## Week 1 · 3–9 Sep · Decide and unblock
+Goal: name and domain chosen, every key on Vercel, first three posts out.
+- Build: Supabase service key; Resend + owner email + sending domain; rotate webhook secret;
+  product name + domain; Early deployers plan + request voicemail detection; customers table
+  and /admin queue (paid → provisioning → live → paused).
+- Marketing: claim handles (Instagram, TikTok, LinkedIn, X); record Ava calling you (30 s);
+  three posts (the call reel, "a salon misses 1 in 4 calls", the price card); start the email
+  list, target 25.
+- Sales: list 50 local businesses (no clinics); message 10; write the beta offer (first five:
+  setup waived, $149 locked a year, for a testimonial and a weekly 10-minute call).
 
-## Phase 2 · Oct · first five customers
-Listen weekly, fix the script, keep `docs/customers.md` current (the monthly seat check counts
-it). Learn what the signup form gets wrong before automating the last mile.
+## Week 2 · 10–16 Sep · A stranger can sign up
+Goal: signup with a card works on staging; one business agreed to the beta.
+- Build: "Start here" form (business, trade, hours, roster, colour, area code, Stripe
+  Checkout); Stripe products for three plans + setup; welcome and "line is live" emails; one
+  deployment serving every customer by subdomain (wildcard domain); terms, privacy, recording
+  notice; data-deletion script.
+- Marketing: 5 posts (2 reels, 2 carousels, 1 founder post); link-in-bio with the demo-call
+  button; draft the three launch emails (day 0, day 3, day 7).
+- Sales: 25 conversations cumulative; first beta business signed and set up by hand; listen to
+  every real call and fix the script the same day.
 
-## Phase 3 · Nov · fully self-serve
-Signup runs the provisioning script itself. Supabase Auth gives each business a login;
-Stripe subscription webhook sets plan and call cap; usage and overage in their dashboard.
-Target: signed up to live line in under ten minutes, zero steps from you.
+## Week 3 · 17–23 Sep · Three businesses live
+Goal: three beta businesses taking real calls; `npm run provision` sets one up end to end.
+- Build: `npm run provision` works the queue (buy number by area code, clone Ava, mark live,
+  email); customer dashboard shows usage and overage; ops queries (failed calls, failed emails,
+  function errors); weekly backup; voicemail message on Ava once detection is on.
+- Marketing: 5 posts, one a beta customer's reaction; post in 3 local business groups; list to 120.
+- Sales: 40 conversations; 3 beta live with Day 7 check-ins booked; first testimonial.
 
-## Trigger · platform switch
-- 15 customers or 6,000 talk minutes a month: build the Retell adapter (one file behind the
-  existing voice adapter interface) and shadow-test.
-- 20 customers or 10,000 minutes: run one customer on Retell for a month, cut over if it behaves.
-- Reported by the monthly "omnidimension-seat-check" task. Comparison in `docs/voice-platforms.md`.
+## Week 4 · 24–30 Sep · Dress rehearsal
+Goal: launch rehearsed end to end by Tuesday; Wednesday for fixes; nothing new after Wednesday.
+- Build: buy Ava's number by Fri 26 Sep (OmniDimension, $5/mo, id on Vercel); remove the site
+  password, real domain live, sitemap, share image; full dry run as a stranger; re-check the
+  demo-call limits (Turnstile, 3/connection/hour, 2/number/day, daily cap); freeze Wed 30 Sep.
+- Marketing: launch reel filmed and scheduled; launch emails loaded, list at 200; decide on
+  Product Hunt (only if you will be at the keyboard all day).
+- Sales: 50 conversations; 2 businesses warmed to sign up on launch morning; referral offer
+  (a month free per referred business).
 
-## At 1,000 customers
-About 520,000 talk minutes a month, roughly $55k to $65k of voice cost against about $300k of
-subscriptions. Retell or Vapi hold technically (concurrency is bought by the slot), but at that
-volume you negotiate an enterprise rate or run your own stack: Twilio numbers, an agent runtime
-(LiveKit or Pipecat), direct Deepgram, ElevenLabs and OpenAI contracts, at roughly $0.06 to
-$0.08 a minute. That is $20k to $30k a month back, which pays for the engineer who runs it. The
-adapter interface means the app does not care which. Trigger: 300 customers, or a monthly voice
-bill over $15k. Also by then: STIR/SHAKEN caller-ID attestation and number reputation across
-hundreds of numbers, TCPA review, and a BAA path before any clinic.
+## Thu 1 Oct · Launch
+Goal: five paying customers within two weeks.
+- Build: run provision every morning, check the queue, listen to two calls; fix only what real
+  customers hit, ship Fridays.
+- Marketing: reel + email at 8am; reply to everything the same day; one post a day for 7 days.
+- Sales: demo call the day anyone asks, follow up within the hour; 5 paying by 14 Oct.
 
-## Later · several lines per business, each with its own job
-A business owns a list of lines, not one number. Each line: a number, an agent, a purpose
-(confirmations, day-before reminders, after-hours intake, win-back calls, one per location) and
-its own script. Both OmniDimension and Retell allow many agents and numbers per account, so
-this is a `lines` table (business, number, agent id, purpose), a picker in the dashboard, and
-the dispatcher choosing the line by purpose. Price as an add-on: a second line is another $5
-number, calls count against the same plan. Explore when the first customer asks; the likely
-first ask is a second location.
+## October · First ten, learn the form
+Goal: 10 paying by 31 Oct; weekly call reviews; the form stops getting things wrong.
+- Build: fold every manual correction into the form; provisioning runs itself after payment;
+  Supabase Auth so each business has its own login.
+- Marketing: 4 posts a week, 2 customer stories; first case study; list to 500.
+- Sales: 10 paying; Day 7 and Day 30 check-ins; Growth seat at 5 customers.
+
+## November · Self-serve, end to end
+Goal: signed up to live line in under ten minutes, zero steps from you; 20 paying by 30 Nov.
+- Build: signup provisions itself; Stripe subscription webhook sets plan, cap, overage; customers
+  edit roster and hours themselves; Retell adapter if the 15-customer trigger fires.
+- Marketing: referral programme on the dashboard; 4 posts a week; salon series.
+- Sales: 20 paying; price review (Full desk to $699 or 1,200-call cap if calls run over two min).
+
+## Triggers, not dates
+- 5 customers: OmniDimension Growth seat ($200).
+- 15 customers or 6,000 talk minutes: build the Retell adapter, shadow-test on one customer.
+- 20 customers or 10,000 minutes: cut over to Retell if the shadow month behaved ($300–650/mo).
+- 300 customers or a voice bill over $15k/mo: enterprise rate or own the stack (Twilio numbers,
+  LiveKit or Pipecat, direct Deepgram/ElevenLabs/OpenAI) at 6–8¢/min; pays for the engineer.
+  At 1,000 customers: ~520,000 min/mo, $55–65k voice cost on ~$300k revenue.
+- Also at scale: STIR/SHAKEN caller-ID attestation and number reputation, TCPA review, BAA
+  path before any clinic; hire the first person when support passes 10 hours a week.
+
+## Later
+- Several lines per business, each with its own job (confirmations, day-before reminders,
+  after-hours intake, win-back, one per location): a lines table, a picker, dispatcher by
+  purpose; add-on pricing ($5 number, calls on the same plan). First ask will be a second location.
+- Calendar / practice-software sync for the first customer who makes it a condition.
+- Industry landing pages; partnerships with booking-software communities.
+
+## Weekly scorecard (Fridays)
+| Week | Posts | Conversations (cum.) | Beta / paying | Email list | Build |
+|---|---|---|---|---|---|
+| 1 · 3–9 Sep | 3 | 10 | 0 | 25 | 6 items |
+| 2 · 10–16 Sep | 5 | 25 | 1 beta | 60 | 6 |
+| 3 · 17–23 Sep | 5 | 40 | 3 beta | 120 | 6 |
+| 4 · 24–30 Sep | 5 + launch reel | 50 | 3 live, 2 waiting | 200 | all |
+| Launch · 1–14 Oct | 7 | 60 | 5 paying | 300 | fixes only |
+| October | 4/week | 40/week | 10 paying | 500 | self-serve started |
+| November | 4/week | 40/week | 20 paying | 800 | self-serve live |
+A number red two weeks running gets the next week's hours.

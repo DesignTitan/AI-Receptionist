@@ -113,3 +113,19 @@ local port, with that URL in the Post-Call tab).
   follow from `outcome`.
 - Abuse controls on the homepage plate are unchanged: US/Canada numbers, 3 per
   connection an hour, 2 per number a day, a daily cap (`TRY_CALL_DAILY_CAP`).
+
+## Agent settings that matter (audited 3 Sep 2026)
+
+Live on agent 248069 after the audit: interruptions need two words (`interruption_min_words: 2`,
+so an "um" no longer cuts Ava off), inbound noise reduction on, `max_call_duration_in_sec: 300`
+(caps a runaway call at about 75 cents), temperature 0.3, gpt-4.1-mini, ElevenLabs "Elena",
+Deepgram nova-3 en-US, post-call webhook firing on completed / voicemail / failed / no-answer /
+busy, and the static end-call line cleared: Ava's own closing sentence is the last thing a caller
+hears (the static line is what produced the double goodbye).
+
+Still on the owner: buy a US number and attach it to Ava (calls currently leave from
+OmniDimension's shared pool), move to the Early deployers plan ($36, the cheapest seat to about
+five customers), then request voicemail detection (gated per account) and set the voicemail
+message. `docs/pricing-economics.md` has the plan crossover; the scheduled task
+"omnidimension-seat-check" reports on the 1st of each month whether to change seat.
+

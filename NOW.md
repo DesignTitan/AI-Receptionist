@@ -13,7 +13,11 @@ Handoff notes for the next session. Updated 2026-09-02.
   (https://claude.ai/code/artifact/2d6057be-84b8-4ae8-8239-cc29a19859e3). OmniDimension seat:
   stay on the $36 business plan to ~5 customers, business Growth ($200) to ~15, agency Scale
   Partner past ~10,000 talk minutes a month. Verify on the billing page that the models bill on
-  top of the plan rate. Ava's demo script now quotes these plans.
+  top of the plan rate. Ava's demo script now quotes these plans. Decision: price on the business seat; a monthly
+  scheduled task (omnidimension-seat-check, 1st at 9am) reports when to move to Growth or the
+  agency plan. Agent audit applied: 2-word interruption threshold, noise reduction, static
+  end-call line cleared (double goodbye fixed). Owner: buy a number, Early deployers plan,
+  request voicemail detection. Competitor comparison in progress (docs/voice-platforms.md).
 - **The phone line works end to end.** Two real calls from the live homepage to the owner's
   phone (OmniDimension call logs 7353968 and 7353970, from the platform's default number
   +1 337 379 9906): Ava opened with the visitor's name and the recording notice, pitched,

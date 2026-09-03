@@ -14,6 +14,7 @@ const I = {
 };
 
 const LINKS = [
+  { id: "desk", label: PRODUCT_NAME, icon: <i className="rc-nav__dot" aria-hidden /> },
   { id: "features", label: "Features", icon: I.features },
   { id: "proof", label: "Proof", icon: I.proof },
   { id: "industries", label: "Industries", icon: I.industries },
@@ -21,14 +22,14 @@ const LINKS = [
 ];
 
 /**
- * The floating navigation: a raised pill with the brand and four chapter
- * links, the current chapter set in a dark tab, and beside it the one call to
- * action. The call button opens a small dropdown with the real "ask for a
+ * The floating navigation: a soft pill of icon tabs (home, then four chapters)
+ * where only the current one shows its label in a raised white tab, and beside
+ * it a round accent button, the one call to action. The call button opens a small dropdown with the real "ask for a
  * call" form: name, number, what you run, the human check. Same form, same
  * server, same honesty as the plate in chapter six.
  */
 export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; simulated: boolean; turnstileSiteKey: string | null }) {
-  const [current, setCurrent] = useState<string | null>(null);
+  const [current, setCurrent] = useState<string>("desk");
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLElement | null>(null);
 
@@ -39,7 +40,7 @@ export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; sim
       },
       { rootMargin: "-40% 0px -55% 0px" },
     );
-    [...LINKS.map((l) => l.id), "desk", "cost", "turn", "hear"].forEach((id) => {
+    [...LINKS.map((l) => l.id), "cost", "turn", "hear"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) io.observe(el);
     });
@@ -59,18 +60,16 @@ export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; sim
 
   return (
     <nav className="rc-nav" aria-label="Site" ref={root}>
-      <div className="rc-nav__pill">
-        <a className="rc-nav__brand" href="#desk" aria-label={PRODUCT_NAME}><i aria-hidden /><span>{PRODUCT_NAME}</span></a>
-        <ul className="rc-nav__links">
-          {LINKS.map((l) => (
-            <li key={l.id}>
-              <a href={`#${l.id}`} aria-current={current === l.id ? "true" : undefined}>{l.icon}<span>{l.label}</span></a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <button type="button" className="rc-nav__cta" aria-expanded={open} aria-controls="rc-nav-pop" onClick={() => setOpen((v) => !v)}>
-        {I.call}<span>{cta}</span>
+      {/* icon tabs; only the current chapter carries its label, in a raised white tab */}
+      <ul className="rc-nav__pill rc-nav__links">
+        {LINKS.map((l) => (
+          <li key={l.id}>
+            <a href={`#${l.id}`} aria-label={l.label} aria-current={current === l.id ? "true" : undefined}>{l.icon}<span>{l.label}</span></a>
+          </li>
+        ))}
+      </ul>
+      <button type="button" className="rc-nav__cta" aria-label={cta} title={cta} aria-expanded={open} aria-controls="rc-nav-pop" onClick={() => setOpen((v) => !v)}>
+        {I.call}
       </button>
       {open && (
         <div className="rc-nav__pop" id="rc-nav-pop" role="dialog" aria-label={cta}>

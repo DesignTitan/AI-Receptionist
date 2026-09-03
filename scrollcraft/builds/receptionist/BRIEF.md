@@ -383,3 +383,8 @@ the Turnstile check), same server route, same honest no-line fallback; Escape or
 closes it. The chapter-six plate keeps the harness attributes; the nav copy sets none. On phones
 the pill is the dot plus four icons and a round call button, and the dialog spans the width.
 
+Nav, third pass (3 Sep), to the owner's second reference: a soft pill of icon tabs (a dot for
+home, then Features, Proof, Industries, Pricing) where only the current chapter is a raised white
+tab carrying its label, and beside the pill a round accent button with the phone glyph that
+drops the call form. Under 480px even the current label goes and the pill is five icons.
+

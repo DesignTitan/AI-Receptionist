@@ -40,25 +40,29 @@
   color: var(--sc-ink);
 }
 
-/* ── navigation: a raised pill at the top, the current chapter in a dark tab,
-   and beside it the call button, which drops the real form ── */
-.rc-nav { position: fixed; top: clamp(12px, 2vh, 18px); left: 50%; translate: -50% 0; z-index: 40; display: flex; align-items: center; gap: 10px; white-space: nowrap;
-  --nav-ring: #ffffff; --nav-face: #f3f3f4; --nav-ink: #15130f; --nav-dark: #1b1b1e;
-  --nav-lift: 0 24px 44px -22px rgb(0 0 0 / 0.45), 0 2px 8px rgb(0 0 0 / 0.06); }
-.rc-nav__pill, .rc-nav__cta, .rc-nav__pop { background: var(--nav-face); border: 5px solid var(--nav-ring); box-shadow: var(--nav-lift); }
-.rc-nav__pill { display: flex; align-items: center; gap: 2px; padding: 5px; border-radius: 999px; }
-.rc-nav a, .rc-nav__cta { text-decoration: none; color: var(--nav-ink); font: inherit; font-size: 16px; font-weight: 600; line-height: 1; display: inline-flex; align-items: center; gap: 0.55rem; }
-.rc-nav svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; flex: none; }
-.rc-nav__brand { padding: 0 16px 0 14px; font-size: 15px; }
-.rc-nav__brand i { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--sc-accent); }
-.rc-nav__links { display: flex; align-items: center; gap: 2px; list-style: none; margin: 0; padding: 0; }
-.rc-nav__links a { padding: 13px 20px; border-radius: 999px; transition: background 160ms var(--sc-ease-out), color 160ms var(--sc-ease-out); }
-.rc-nav__links a:hover { background: color-mix(in oklab, var(--nav-ink) 6%, transparent); }
-.rc-nav__links a[aria-current="true"] { background: var(--nav-dark); color: #fff; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.14), 0 10px 18px -10px rgb(0 0 0 / 0.7); }
-.rc-nav__cta { padding: 13px 20px 13px 18px; border-radius: 999px; cursor: pointer; transition: background 160ms var(--sc-ease-out), color 160ms var(--sc-ease-out); }
-.rc-nav__cta:hover { background: #fff; }
-.rc-nav__cta[aria-expanded="true"] { background: var(--nav-dark); color: #fff; }
-.rc-nav__cta:focus-visible, .rc-nav__links a:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 2px; }
+/* ── navigation: a soft pill of icon tabs at the top; the current chapter is the
+   one raised white tab that carries its label; a round accent button beside it ── */
+.rc-nav { position: fixed; top: clamp(12px, 2vh, 18px); left: 50%; translate: -50% 0; z-index: 40; display: flex; align-items: center; gap: 12px; white-space: nowrap;
+  --nav-ring: #ffffff; --nav-face: #f6f6f7; --nav-ink: #15130f; --nav-mute: #74747a; --nav-dark: #1b1b1e;
+  --nav-lift: 0 24px 44px -22px rgb(0 0 0 / 0.42), 0 2px 8px rgb(0 0 0 / 0.05); }
+.rc-nav__pill { display: flex; align-items: center; gap: 2px; padding: 6px; border-radius: 999px; list-style: none; margin: 0;
+  background: var(--nav-face); box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.05), inset 0 1px 0 #fff, var(--nav-lift); }
+.rc-nav__pop { background: var(--nav-face); border: 5px solid var(--nav-ring); box-shadow: var(--nav-lift); }
+.rc-nav a { text-decoration: none; color: var(--nav-mute); font: inherit; font-size: 16px; font-weight: 600; line-height: 1; display: inline-flex; align-items: center; gap: 0.6rem; }
+.rc-nav svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.rc-nav__dot { width: 0.6rem; height: 0.6rem; margin: 0 0.35rem; border-radius: 50%; background: var(--sc-accent); flex: none; }
+.rc-nav__links a { padding: 14px 15px; border-radius: 999px; transition: color 160ms var(--sc-ease-out), background 160ms var(--sc-ease-out); }
+.rc-nav__links a span { display: none; }
+.rc-nav__links a:hover { color: var(--nav-ink); }
+.rc-nav__links a[aria-current="true"] { background: #fff; color: var(--nav-ink); padding: 14px 20px 14px 16px; box-shadow: 0 10px 20px -10px rgb(0 0 0 / 0.35), 0 1px 2px rgb(0 0 0 / 0.06), inset 0 0 0 1px rgb(0 0 0 / 0.03); }
+.rc-nav__links a[aria-current="true"] span { display: inline; }
+.rc-nav__cta { width: 60px; height: 60px; padding: 0; border: 0; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: #fff; background: var(--sc-accent);
+  box-shadow: 0 18px 32px -14px color-mix(in oklab, var(--sc-accent) 75%, transparent), inset 0 1px 0 rgb(255 255 255 / 0.28), inset 0 -2px 0 rgb(0 0 0 / 0.12);
+  transition: background 160ms var(--sc-ease-out), transform 140ms var(--sc-ease-out); }
+.rc-nav__cta svg { width: 24px; height: 24px; }
+.rc-nav__cta:hover { transform: translateY(-1px); }
+.rc-nav__cta[aria-expanded="true"] { background: var(--nav-dark); box-shadow: 0 18px 32px -14px rgb(0 0 0 / 0.5), inset 0 1px 0 rgb(255 255 255 / 0.14); }
+.rc-nav__cta:focus-visible, .rc-nav__links a:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 3px; }
 /* the dropdown */
 .rc-nav__pop { position: absolute; top: calc(100% + 10px); right: 0; width: min(400px, calc(100vw - 24px)); border-radius: 28px; padding: 16px 18px 18px; white-space: normal; max-height: calc(100svh - 110px); overflow: auto; color: var(--nav-ink);
   --sc-ink: var(--nav-ink); --sc-surface: #ffffff; }
@@ -73,14 +77,13 @@
 .rc-plate__inner--compact .rc-try__note, .rc-plate__inner--compact .rc-track__plain { font-size: var(--sc-t-xs); }
 .rc-plate__inner--compact .rc-track__stages { font-size: var(--sc-t-sm); }
 @media (max-width: 820px) {
-  .rc-nav { gap: 8px; }
-  .rc-nav__links a { padding: 12px 13px; }
-  .rc-nav__links a span, .rc-nav__cta span { display: none; }
-  .rc-nav__cta { padding: 12px; }
-  .rc-nav__brand { padding: 0 6px 0 12px; font-size: 14px; }
-  .rc-nav__brand span { display: none; }
+  .rc-nav { gap: 10px; }
+  .rc-nav__links a { padding: 12px 12px; }
+  .rc-nav__links a[aria-current="true"] { padding: 12px 16px 12px 13px; }
+  .rc-nav__cta { width: 52px; height: 52px; }
   .rc-nav__pop { right: auto; left: 50%; translate: -50% 0; }
 }
+@media (max-width: 480px) { .rc-nav__links a[aria-current="true"] span { display: none; } .rc-nav__links a[aria-current="true"] { padding: 12px 13px; } }
 @media (prefers-reduced-motion: reduce) { .rc-nav a, .rc-nav__cta { transition: none; } }
 
 /* ── folio ── */

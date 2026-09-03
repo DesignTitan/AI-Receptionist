@@ -6,8 +6,9 @@ Handoff notes for the next session. Updated 2026-09-02.
 
 - **Display face is Instrument Sans now, headings have air, and there is a top nav.** Owner
   turned down the serif; Instrument Sans 500 via next/font (`--font-display-marketing`). Display
-  heading → subtext is 24px everywhere, 32px in the hero (two pairs had zero). A raised tab-bar
-  nav (owner's reference: white ring, icons, dark active tab) in
+  heading → subtext is 24px everywhere, 32px in the hero (two pairs had zero). An icon-tab nav
+  (owner's reference: soft pill, only the current chapter shows its label in a raised white tab,
+  round accent call button) in
   src/components/marketing/site-nav.tsx; the call button beside it drops the real ask-for-a-call
   form (TryCallPlate compact) with the Turnstile check. Phones: dot + icons + round call button.
 - **Core features tab stage has the same parallax.** 06-bg.jpg (sharp stage scene) behind

@@ -17,7 +17,8 @@ Handoff notes for the next session. Updated 2026-09-02.
   scheduled task (omnidimension-seat-check, 1st at 9am) reports when to move to Growth or the
   agency plan. Agent audit applied: 2-word interruption threshold, noise reduction, static
   end-call line cleared (double goodbye fixed). Owner: buy a number, Early deployers plan,
-  request voicemail detection. Competitor comparison in progress (docs/voice-platforms.md).
+  request voicemail detection. Platform comparison in docs/voice-platforms.md (stay on OmniDimension; Retell at 15–20
+  customers). Launch date 1 Oct 2026; phases and the self-serve signup plan in docs/ROADMAP.md.
 - **The phone line works end to end.** Two real calls from the live homepage to the owner's
   phone (OmniDimension call logs 7353968 and 7353970, from the platform's default number
   +1 337 379 9906): Ava opened with the visitor's name and the recording notice, pitched,

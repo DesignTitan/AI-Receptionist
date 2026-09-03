@@ -395,3 +395,5 @@ rims; the call disc has a radial highlight and a specular cap. Behind the whole 
 slightly darker rounded plate (5% black over whatever is beneath, 44px corners) that wraps pill
 and disc alike, the way the owner's reference frames its bar.
 
+Nav plate (3 Sep): the darker plate now hangs from the top edge of the viewport, square at the
+top, 44px corners at the bottom, so the bar reads as a tab pulled down from the edge.

@@ -375,3 +375,11 @@ The margin folio stays. Note for the pipeline: backdrop-filter does survive the 
 (computed blur(14px) saturate(1.4) on the nav), so the earlier "stripped" finding was specific
 to that rule, not the property.
 
+Nav, second pass (3 Sep): restyled to the owner's reference, a raised tab bar. A pill with a
+5px white ring and a long soft drop, icon + label per link, the current chapter set in a dark
+tab; the call button is its own raised pill beside it. Pressing it drops a dialog under the nav
+with the real "ask for a call" form (TryCallPlate in `compact` mode: name, number, what you run,
+the Turnstile check), same server route, same honest no-line fallback; Escape or a click outside
+closes it. The chapter-six plate keeps the harness attributes; the nav copy sets none. On phones
+the pill is the dot plus four icons and a round call button, and the dialog spans the width.
+

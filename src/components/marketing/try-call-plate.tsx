@@ -82,7 +82,7 @@ function HumanCheck({ siteKey, widgetId }: { siteKey: string; widgetId: React.Mu
  * Publishes `data-sc-verify-state` on its root so the scroll harness can see
  * this bespoke stage change.
  */
-export function TryCallPlate({ simulated, turnstileSiteKey }: { simulated: boolean; turnstileSiteKey: string | null }) {
+export function TryCallPlate({ simulated, turnstileSiteKey, compact = false }: { simulated: boolean; turnstileSiteKey: string | null; compact?: boolean }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [business, setBusiness] = useState("");
@@ -159,7 +159,12 @@ export function TryCallPlate({ simulated, turnstileSiteKey }: { simulated: boole
   const activeIndex = Math.max(0, STAGES.findIndex((s) => s.key === (live?.status === "failed" ? "completed" : live?.status ?? "queued")));
 
   return (
-    <div className="rc-plate__inner" data-sc-verify-state={state} data-sc-verify-hold={terminal || call?.simulated ? "true" : undefined}>
+    <div
+      className={compact ? "rc-plate__inner rc-plate__inner--compact" : "rc-plate__inner"}
+      // the scroll harness watches the chapter's own plate, not the copy in the nav
+      data-sc-verify-state={compact ? undefined : state}
+      data-sc-verify-hold={!compact && (terminal || call?.simulated) ? "true" : undefined}
+    >
       {!call ? (
         <form className="rc-try" onSubmit={submit}>
           <label className="rc-try__field">

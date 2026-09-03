@@ -95,7 +95,7 @@ export default function HomePage() {
       <div className="sc-grain" aria-hidden="true" />
 
       <main id="main">
-        <SiteNav cta={simulated ? "Ask for a call" : "Have it call you"} />
+        <SiteNav cta={simulated ? "Ask for a call" : "Have it call you"} simulated={simulated} turnstileSiteKey={env.turnstile.siteKey ?? null} />
         {/* 01 · Title page. Type on paper, no media above the fold. */}
         <section id="desk" className="rc-chapter rc-title" data-sc-act="flow">
           <div className="sc-wrap">

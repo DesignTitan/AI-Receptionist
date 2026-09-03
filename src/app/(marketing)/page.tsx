@@ -196,9 +196,13 @@ export default function HomePage() {
                     <p className="rc-card__foot">Your front desk keeps working after hours.</p>
                   </div>
                   <figure className="rc-card__media">
-                    <picture>
-                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-call-w.jpg" width={1200} height={760} />
-                      <img src="/scrollcraft/04-call.jpg" width={820} height={964} alt="A confirmation call in progress: the client, the stages, and the first lines of what the assistant said." />
+                    <picture className="rc-card__bg" aria-hidden="true">
+                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-bg-w.jpg" width={1200} height={760} />
+                      <img src="/scrollcraft/04-bg.jpg" width={820} height={964} alt="" />
+                    </picture>
+                    <picture className="rc-card__panel">
+                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-call-p-w.png" width={1200} height={760} />
+                      <img src="/scrollcraft/04-call-p.png" width={820} height={964} alt="A confirmation call in progress: the client, the stages, and the first lines of what the assistant said." />
                     </picture>
                   </figure>
                 </article>
@@ -210,9 +214,13 @@ export default function HomePage() {
                     <p className="rc-card__foot">Nothing to write up afterwards.</p>
                   </div>
                   <figure className="rc-card__media">
-                    <picture>
-                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-record-w.jpg" width={1200} height={760} />
-                      <img src="/scrollcraft/04-record.jpg" width={820} height={964} alt="A finished call record: the recording, a one-line summary, and the transcript." />
+                    <picture className="rc-card__bg" aria-hidden="true">
+                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-bg-w.jpg" width={1200} height={760} />
+                      <img src="/scrollcraft/04-bg.jpg" width={820} height={964} alt="" />
+                    </picture>
+                    <picture className="rc-card__panel">
+                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-record-p-w.png" width={1200} height={760} />
+                      <img src="/scrollcraft/04-record-p.png" width={820} height={964} alt="A finished call record: the recording, a one-line summary, and the transcript." />
                     </picture>
                   </figure>
                 </article>
@@ -224,9 +232,13 @@ export default function HomePage() {
                     <p className="rc-card__foot">The exceptions, not the routine.</p>
                   </div>
                   <figure className="rc-card__media">
-                    <picture>
-                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-flag-w.jpg" width={1200} height={760} />
-                      <img src="/scrollcraft/04-flag.jpg" width={820} height={964} alt="The needs-attention list: four bookings flagged as no answer or reschedule, each with its business." />
+                    <picture className="rc-card__bg" aria-hidden="true">
+                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-bg-w.jpg" width={1200} height={760} />
+                      <img src="/scrollcraft/04-bg.jpg" width={820} height={964} alt="" />
+                    </picture>
+                    <picture className="rc-card__panel">
+                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-flag-p-w.png" width={1200} height={760} />
+                      <img src="/scrollcraft/04-flag-p.png" width={820} height={964} alt="The needs-attention list: four bookings flagged as no answer or reschedule, each with its business." />
                     </picture>
                   </figure>
                 </article>

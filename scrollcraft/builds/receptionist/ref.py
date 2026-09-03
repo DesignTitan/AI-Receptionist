@@ -140,6 +140,10 @@ BASE = """<!doctype html><html><head><meta charset="utf-8">
 </div></body></html>"""
 
 PANES = {
+ # "T": the pane on a transparent canvas, for the parallax layer. No backdrop-filter (nothing to
+ # blur); the photo behind is already blurred, so a neutral milk at a touch more alpha stands in
+ # for D's blur + desaturate.
+ "T": "background:rgba(226,229,238,.21); border:1px solid rgba(255,255,255,.17); box-shadow:0 40px 90px -40px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.2);",
  "A": "background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.13); backdrop-filter:blur(34px) saturate(125%); box-shadow:0 40px 90px -40px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.16);",
  "B": "background:rgba(255,255,255,.13); border:1px solid rgba(255,255,255,.16); backdrop-filter:blur(34px) saturate(125%); box-shadow:0 40px 90px -40px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.2);",
  "C": "background:rgba(255,255,255,.17); border:1px solid rgba(255,255,255,.2); backdrop-filter:blur(40px) saturate(120%); box-shadow:0 40px 90px -40px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.24);",
@@ -362,6 +366,7 @@ STAGE["voice"] = f"""
 variant = sys.argv[2] if len(sys.argv) > 2 else "B"
 key     = sys.argv[3] if len(sys.argv) > 3 else "flag"
 mode    = sys.argv[4] if len(sys.argv) > 4 else "card"   # card | wide | stage
+layer   = sys.argv[5] if len(sys.argv) > 5 else "full"   # full | bg | panel  (bg + panel = the parallax pair)
 
 BODIES = {"call": CALL, "record": RECORD, "flag": FLAG}
 body = STAGE[key] if mode == "stage" else BODIES[key]
@@ -378,5 +383,11 @@ elif mode == "stage":
                 .replace(".panel { position:absolute; left:56px; right:56px;", ".panel { position:absolute; left:150px; right:150px;")
                 .replace("background-position:50% 62%", "background-position:50% 58%"))
 
+if layer == "bg":
+    html = html.replace('<div class="panel">', '<div class="panel" style="display:none">')
+elif layer == "panel":
+    html = (html.replace('<div class="photo"></div><div class="vig"></div><div class="grain"></div>', '')
+                .replace("overflow:hidden; background:#15100e;", "overflow:hidden; background:transparent;")
+                .replace(PANES[variant], PANES["T"]))
 pathlib.Path(sys.argv[1]).write_text(html)
 print("wrote", sys.argv[1])

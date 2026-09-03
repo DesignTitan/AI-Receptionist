@@ -234,8 +234,17 @@
   content: ""; position: absolute; inset: 8px 8px 8px 0; border-radius: 24px;
   background-image: var(--shot); background-size: cover; background-position: center;
   filter: blur(28px) saturate(120%); transform: scale(1.12); }
-.rc-card__media picture { position: relative; display: block; min-width: 0; min-height: 0; }
+/* Two layers in one frame: the blurred desert at the back, the glass panel (an
+   alpha PNG) in front. As the card rises (--t) and is then covered (--tn), the
+   panel travels a little further than the ground, so it reads as floating over
+   the scene rather than printed on it. Small on purpose: depth, not jitter. */
+.rc-card__media picture { position: relative; display: block; min-width: 0; min-height: 0; grid-area: 1 / 1; overflow: hidden; border-radius: 24px; }
 .rc-card__media img { position: relative; display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: cover; object-position: 50% 50%; border-radius: 24px; }
+.rc-card__bg img { transform: translate3d(0, calc((1 - var(--t)) * -8px + var(--tn) * 4px), 0) scale(1.06); will-change: transform; }
+.rc-card__panel { z-index: 1; }
+.rc-card__panel img { transform: translate3d(0, calc((1 - var(--t)) * 22px - var(--tn) * 10px), 0); will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .rc-card__bg img, .rc-card__panel img { transform: none; } }
+@media (max-width: 1024px) { .rc-card__bg img { transform: translate3d(0, calc((1 - var(--t)) * -5px + var(--tn) * 3px), 0) scale(1.05); } .rc-card__panel img { transform: translate3d(0, calc((1 - var(--t)) * 14px - var(--tn) * 6px), 0); } }
 
 @media (max-width: 1024px) {
   .rc-deckact { --deck-pad: 5svh; --head-h: clamp(96px, 14svh, 140px); --peek: 64px; --card-w: 94vw; }

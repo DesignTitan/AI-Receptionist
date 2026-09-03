@@ -348,3 +348,12 @@ Full desk $599 / 1,500 calls, with the $1,000 setup flat across all three and 30
 beyond the plan. The dark cards on the paper ground are the proof deck's own treatment, so
 pricing reads as part of the same page rather than a bolted-on table.
 
+Proof deck, 3 Sep: the owner asked for parallax inside the card images. Each image is now two
+layers in the same 24px frame: the blurred desert (`04-bg.jpg`, shared) at the back and the
+glass panel as an alpha PNG (`04-{call,record,flag}-p.png`, pane variant T, a neutral milk at
+.21 standing in for D's backdrop blur since the photo is already blurred) in front. Keyed to the
+card's own --t and --tn: the panel travels 22px on the rise and 10px on the cover, the ground
+8px and 4px the other way with a 1.06 scale so its edges never show; 14/6 and 5/3 under 1024px;
+nothing moves under reduced motion. Rendered by `ref.py … <mode> bg|panel` and
+`render.mjs … png`. Card geometry, fade, shadow and copy untouched.
+

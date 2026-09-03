@@ -3,6 +3,7 @@ const require = createRequire(process.cwd() + "/package.json");
 const { chromium } = require("playwright-core");
 const [,, htmlPath, outPath] = process.argv;
 const mode = process.argv[4] || "card";
+const alpha = process.argv[5] === "png";   // transparent canvas: the panel layer
 const W = mode === "stage" ? 1600 : mode === "wide" ? 1200 : 820;
 const H = mode === "stage" ? 1000 : mode === "wide" ? 760 : 964;
 const browser = await chromium.launch({ channel: "chrome", headless: true });
@@ -10,6 +11,6 @@ const page = await browser.newPage({ viewport: { width: W, height: H }, deviceSc
 await page.goto("file://" + htmlPath, { waitUntil: "networkidle" });
 await page.evaluate(() => document.fonts.ready);
 await page.waitForTimeout(350);
-await page.screenshot({ path: outPath, clip: { x: 0, y: 0, width: W, height: H } });
+await page.screenshot({ path: outPath, clip: { x: 0, y: 0, width: W, height: H }, omitBackground: alpha, type: alpha ? "png" : "jpeg", quality: alpha ? undefined : 88 });
 await browser.close();
 console.log("rendered", outPath, W + "x" + H);

@@ -1,24 +1,30 @@
 # NOW
 
-Handoff notes for the next session. Updated 2026-09-02.
+Handoff notes for the next session. Updated 2026-09-07. Launch is Thursday 1 October 2026;
+the dated plan is docs/ROADMAP.md.
 
-## Just done (2026-09-02, evening)
+## Just done (2026-09-03 → 07)
 
-- **Display face is Instrument Sans now, headings have air, and there is a top nav.** Owner
-  turned down the serif; Instrument Sans 500 via next/font (`--font-display-marketing`). Display
-  heading → subtext is 24px everywhere, 32px in the hero (two pairs had zero). An icon-tab nav
-  (owner's reference: soft pill, only the current chapter shows its label in a raised white tab,
-  round accent call button) in
-  src/components/marketing/site-nav.tsx; the call button beside it drops the real ask-for-a-call
-  form (TryCallPlate compact) with the Turnstile check. Phones: dot + icons + round call button.
+- **Navigation.** A floating nav at the top of the homepage, `src/components/marketing/site-nav.tsx`,
+  iterated to the owner's references: liquid-glass pill of icon tabs (home dot, Features, Proof,
+  Industries, Pricing) where only the current chapter is a raised white tab carrying its label;
+  a round accent call disc beside it; a slightly darker plate behind both that hangs from the
+  top edge (square above, 44px corners below). The disc drops a frosted-glass dialog holding the
+  real ask-for-a-call form (`TryCallPlate` in `compact` mode: name, number, business, Turnstile),
+  flat fields a shade darker than the glass; same route and honest no-line fallback as chapter
+  six, and the nav copy sets no harness attributes. Escape / outside click closes. Phones: five
+  icons + disc. Backdrop-filter does survive the minifier (the nav proves it).
+- **Display face is Instrument Sans**, 500, via next/font (`--font-display-marketing`); the
+  owner turned down the serif. Display heading → subtext is 24px everywhere, 32px in the hero
+  (the industries lead and the turn chapter had zero).
 - **Core features tab stage has the same parallax.** 06-bg.jpg (sharp stage scene) behind
   06-{book,after,noshow,voice}-p.webp (frosted panel, alpha WebP); the section is a flow act so
   both ride its --sc-p (panel 90px, ground 40px). All alpha panels are WebP now (cwebp, q86).
 - **Proof deck images now have parallax inside them.** Each card's image is a sharp desert
   (04-bg.jpg, shared) behind a frosted glass panel rendered as an alpha PNG with its blur baked
-  (04-*-p.png). Both ride the act's --sc-p across the whole scroll: panel climbs 100px, ground
+  (04-*-p.webp). Both ride the act's --sc-p across the whole scroll: panel climbs 100px, ground
   sinks 36px; 64/24 under 1024px; off under reduced motion. Pipeline: `ref.py … bg|panel` +
-  `render.mjs … png` (clips the scene to the panel). Geometry, fade, shadow untouched.
+  `render.mjs … png` (clips the scene to the panel, encodes WebP). Geometry, fade, shadow untouched.
 - **Pricing is three call-volume plans, and the economics are measured.** Front desk $149/200
   calls, Busy desk $299/600 (featured, overlaid on the outer two), Full desk $599/1,500, $1,000
   setup flat, 30c per extra call. Two real calls put voice AI at $0.115/min (prorated) and
@@ -39,7 +45,7 @@ Handoff notes for the next session. Updated 2026-09-02.
 - **The phone line works end to end.** Two real calls from the live homepage to the owner's
   phone (OmniDimension call logs 7353968 and 7353970, from the platform's default number
   +1 337 379 9906): Ava opened with the visitor's name and the recording notice, pitched,
-  quoted $199 / $1,000 / 500 calls correctly, declined to book a 3 PM slot the right way; the
+  quoted the then-current $199 / $1,000 / 500 calls correctly (now the three plans), declined to book a 3 PM slot the right way; the
   post-call report reached `/api/webhooks/voice` and matched (`metadata.call_log_id`), the
   page filled in, the lead email fired. Fixed from the evidence: a demo call is now
   "confirmed" when a person spoke (Ava's own "reschedules and cancellations" used to trip the
@@ -56,8 +62,6 @@ Handoff notes for the next session. Updated 2026-09-02.
 - **Proof chapter is a stacked deck of the three features**: it calls, it records, it flags.
   Dark cards on the paper ground, each with a flat frosted-glass panel of that feature's UI over
   a blurred desert photograph (`scrollcraft/builds/receptionist/ref.py` regenerates all three). Settled: do not restyle without being asked.
-  Each card pairs copy with a glass panel of that feature's real UI over a dune landscape
-  (`scrollcraft/builds/receptionist/glass.py` + `render.mjs` regenerate them at 2x).
   Each card rises over the previous, which settles back and fades once ~60% covered. Pure CSS on
   the engine's `--sc-p` (`.rc-deck*` in `receptionist.css`); reduced motion → a column. The
   page is now 15.5 viewport-heights.
@@ -65,16 +69,15 @@ Handoff notes for the next session. Updated 2026-09-02.
   ask for a call", hostname ai-receptionist-two-azure.vercel.app, Managed). The check now runs
   on every submission (live call or callback request) and renders visibly. The plate's inputs
   got proper field bodies.
-- **Tuning notes from the transcripts** (not done): the agent's static end-call message
-  ("Thanks for your time. Have a good one.") is spoken after Ava's own closing sentence, so
-  callers hear two goodbyes, once with a stray "yo" — set `end_call.message_type` to `prompt`
-  or shorten the static line in the dashboard. The extracted `outcome` comes back "Not
-  provided" on demo calls; the app no longer depends on it for demos. Add a real domain to the
-  Turnstile widget's hostnames when the site moves.
-- **Still open, in order:** rotate `VOICE_WEBHOOK_SECRET` (the current token has been visible
-  in call logs and chats); `SUPABASE_SERVICE_ROLE_KEY` on Vercel (today's two leads lived in
-  memory and are gone); Resend + `OWNER_EMAIL` so leads arrive; a bought number in
-  OmniDimension so calls come from a consistent, branded number.
+- **Ava tuned from the transcripts (done 3 Sep, on the live agent):** the static end-call line
+  was cleared so callers hear one goodbye; interruptions need two words; noise reduction on.
+  The extracted `outcome` still comes back "Not provided" on demo calls; the app does not
+  depend on it for demos. Add the real domain to the Turnstile widget's hostnames when the site
+  moves.
+- **Still open, owner only, in order (all on the runbook with dates):** buy Ava a US number in
+  OmniDimension by Fri 26 Sep and put its id on Vercel; Early deployers plan + request voicemail
+  detection; rotate `VOICE_WEBHOOK_SECRET` (the token has been visible in logs);
+  `SUPABASE_SERVICE_ROLE_KEY` on Vercel; Resend + `OWNER_EMAIL`; product name + domain.
 
 ## Earlier on 2026-09-02
 
@@ -252,8 +255,10 @@ Nothing half-finished. The repo is committed and builds clean.
   password (`SITE_GATE=locked` set on production; password `bubs2026` = `SITE_PASSWORD`
   default). Unlock at `/login`. Flip `SITE_GATE` to `public` (or remove it) and redeploy to
   open the marketing site to the world.
-- Project `bubs-1063s-projects/ai-receptionist`, linked to GitHub, so pushes to `main`
-  auto-deploy. Manual: `vercel --prod`. Env vars: `vercel env ls`.
+- Project `bubs-1063s-projects/ai-receptionist`. Every deploy this week went out with
+  `npx vercel --prod` after the push; production is at commit ec05439. Env vars: `vercel env ls`.
+  On Vercel now: Supabase URL + anon key, `ADMIN_SESSION_SECRET`, `SITE_GATE`, `VOICE_PROVIDER`,
+  `OMNIDIMENSION_API_KEY`, `OMNIDIMENSION_AGENT_ID`, `VOICE_WEBHOOK_SECRET`, both Turnstile keys.
 - What's live: the product marketing site at `/`, `/demos`, three themed demos at
   `/demo/{medical,salon,studio}`, the shared staff dashboard at `/admin` (password
   `demo1234` = `ADMIN_PASSWORD` default — shown on the sign-in screen while it's the default).
@@ -301,25 +306,23 @@ Where the secret is: Supabase dashboard → project ai-receptionist → Project 
 Also set `ADMIN_PASSWORD` (still the default `demo1234` — fine while the site is locked, not after)
 and flip `SITE_GATE` to `public` when you want the marketing site open.
 
-**To make the call on the homepage real** (today it records a lead and says so): follow
-`docs/omnidimension.md` — an OmniDimension agent with the prompt from the guide, the Post-Call
-webhook URL with the token, then `VOICE_PROVIDER=omnidimension`, `OMNIDIMENSION_API_KEY`,
-`OMNIDIMENSION_AGENT_ID`, `VOICE_WEBHOOK_SECRET`, plus the two Turnstile keys, on Vercel and a redeploy; then `OWNER_EMAIL` +
-`RESEND_API_KEY` so the lead and the call summary actually arrive. The page flips to "Hear it yourself" mode on its own
-(`isVoiceProviderConfigured()` drives the copy, the stages and the folio). Listen to the first
-real call: `buildDemoScript` in `src/lib/voice.ts` is the script, and it will need a pass.
+**The call on the homepage is real** (since 2 Sep): OmniDimension agent 248069 "Ava", the
+Post-Call webhook, `VOICE_PROVIDER=omnidimension` and its keys, plus both Turnstile keys, are on
+Vercel, and two real calls have completed end to end. Still missing for a real customer: a bought
+number (calls leave from the platform's shared pool) and Resend + `OWNER_EMAIL` so the lead and
+call-summary emails actually arrive.
 
 Everything else, in priority order once Supabase is in:
-- Decide the sales motion (the site currently has no pricing and no contact CTA — set
-  `CONTACT_EMAIL` to make "Talk to us" appear). Decide the calendar-sync answer; the FAQ
-  currently says "not yet, roadmap".
-- Wire one real voice provider (Vapi least work); set `VOICE_WEBHOOK_SECRET`. The
-  `callMetadata` keys in `src/lib/voice.ts` are frozen for the assistant config; the values
-  are now per-business and `business_name`/`vertical` were added.
+- Sales motion is decided (three call-volume plans on the site, concierge behind a self-serve
+  front at launch, docs/ROADMAP.md). Calendar sync stays "not yet" until a customer makes it a
+  condition. The `callMetadata` keys in `src/lib/voice.ts` stay frozen (additive only).
 - Resend key + `OWNER_EMAIL` so owner emails deliver (templates already use each business's
   swatch and nouns).
-- Product name: "AI Receptionist" is the working name everywhere (`PRODUCT_NAME` in
-  `src/components/marketing/product-chrome.tsx`).
+- Product name: "AI Receptionist" is still the working name (`PRODUCT_NAME` in
+  `src/components/marketing/product-chrome.tsx`); Week 1 of the roadmap is picking the real one
+  and buying the domain.
+- Week 1–3 build items from the roadmap: customers table + /admin queue, "Start here" signup
+  with Stripe Checkout, one deployment serving every customer by subdomain, `npm run provision`.
 - The one real product wall, demand-gated per the plan: a services entity with per-service
   durations (`slot_minutes` lives on the provider today). Also the hardcoded 12–13 lunch break
   and 90-min lead time in `src/lib/db.ts`.

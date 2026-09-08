@@ -4,7 +4,7 @@ The product now has a separate customer platform. Existing medical/salon/studio 
 
 ## Installation status — 8 September 2026
 
-Application e4a9251 is deployed at https://ai-receptionist-two-azure.vercel.app (still locked). The production operator queue loads successfully from Supabase. The customer migration is installed in production Supabase. The Supabase Site URL is updated to the production domain; the callback allowlist is still pending approval. Unit and disposable-database tests pass. Live Stripe, email and dedicated customer calls are awaiting provider configuration. Automatic approval review blocked the Supabase callback allowlist addition and Vercel CRON_SECRET; scheduled recovery remains disabled.
+Application e4a9251 is deployed at https://ai-receptionist-two-azure.vercel.app (still locked). The production operator queue loads successfully from Supabase. The customer migration is installed in production Supabase. The Supabase Site URL is updated to the production domain; the exact production /account/callback URL is now allowlisted with Bubs’s approval. Unit and disposable-database tests pass. Live Stripe, email and dedicated customer calls are awaiting provider configuration. Bubs approved both previously blocked settings on 8 September; CRON_SECRET is saved as a sensitive Production variable and vercel.json enables daily queue recovery at 09:00 UTC.
 
 ## Routes
 
@@ -15,7 +15,7 @@ Application e4a9251 is deployed at https://ai-receptionist-two-azure.vercel.app 
 - `/b/<slug>`: public business booking page, available only after operator activation and active billing. Customer subdomains rewrite here when `CUSTOMER_ROOT_DOMAIN` is configured.
 - `/api/webhooks/stripe`: signature-verified subscription state updates. Event receipts and state changes are committed atomically. Current subscription state is retrieved from Stripe to avoid trusting old event snapshots.
 - `/api/webhooks/customer-voice`: customer-agent reports matched by both `metadata.customer_id` and `metadata.customer_booking_id`; the existing demo voice callback remains unchanged.
-- `/api/jobs`: bearer-authenticated delivery queue processor. New bookings and Stripe events trigger it after returning a response. The optional `docs/vercel-cron.example.json` adds a daily recovery pass after CRON_SECRET is configured; copy it to vercel.json only then. Use a one-minute schedule on Pro if desired.
+- `/api/jobs`: bearer-authenticated delivery queue processor. New bookings and Stripe events trigger it after returning a response. `vercel.json` enables a daily recovery pass at 09:00 UTC, authenticated with CRON_SECRET. Use a one-minute schedule on Pro if desired.
 
 ## Prepare infrastructure
 

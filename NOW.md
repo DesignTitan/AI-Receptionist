@@ -8,7 +8,7 @@ the dated plan is docs/ROADMAP.md.
 - Bubs explicitly approved the Supabase production sign-in callback and Vercel Production CRON_SECRET.
 - Saved the generated secret as a sensitive Vercel variable without committing or displaying its value.
 - Enabled the daily /api/jobs recovery schedule at 09:00 UTC; ordinary booking jobs also run immediately after submission.
-- Callback verification and production redeployment are in progress. Stripe, email/SMTP and complete live customer acceptance testing remain next.
+- Verified the exact callback in Supabase and deployed f82e18e successfully. Live queue check: 401 without a secret, 200 with the secret, zero queued jobs. Stripe, email/SMTP and complete live customer acceptance testing remain next.
 
 ## Current handoff — customer platform (2026-09-08)
 

@@ -1,9 +1,5 @@
-export const PLANS = {
-  front: { name: "Front desk", monthly: 149, calls: 200 },
-  busy: { name: "Busy desk", monthly: 299, calls: 600 },
-  full: { name: "Full desk", monthly: 599, calls: 1500 },
-} as const;
-export type Plan = keyof typeof PLANS;
+import { PLANS, type Plan } from "./pricing.ts";
+export { PLANS, type Plan } from "./pricing.ts";
 export type CustomerStatus =
   | "draft"
   | "paid"
@@ -47,6 +43,10 @@ export type Customer = {
   number_id: string | null;
   phone_number: string | null;
   provision_error: string | null;
+  period_start: string | null;
+  period_end: string | null;
+  overage_budget_cents: number;
+  pricing_version: string;
   created_at: string;
 };
 export type CustomerBooking = {

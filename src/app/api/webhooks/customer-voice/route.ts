@@ -1,3 +1,4 @@
+import { durationSeconds, reportedCostCents } from "@/lib/platform/call-report";
 import { NextResponse } from "next/server";
 import { constantTimeEquals } from "@/lib/auth";
 import { serviceClient } from "@/lib/supabase";
@@ -40,15 +41,31 @@ export async function POST(request: Request) {
     const outcome = outcomes.includes(value) ? value : "needs_review";
     const clean = (x: unknown, max = 30000) =>
       typeof x === "string" ? x.slice(0, max) : null;
+    const seconds = durationSeconds(report, body);
     const recording = clean(report.recording_url ?? body.recording_url, 3000);
-    const { data: matched, error: updateError } = await db.rpc('record_customer_call', {
-      c_id: customer, b_id: id, result: outcome,
-      call_summary: clean(report.summary ?? body.summary),
-      call_transcript: clean(report.full_conversation ?? body.transcript),
-      recording: recording?.startsWith('https://') ? recording : null,
-      seconds: Number.isFinite(Number(report.duration ?? body.duration)) ? Math.max(0, Math.round(Number(report.duration ?? body.duration))) : null,
-    });
+    const { data: matched, error: updateError } = await db.rpc(
+      "record_customer_call",
+      {
+        c_id: customer,
+        b_id: id,
+        result: outcome,
+        call_summary: clean(report.summary ?? body.summary),
+        call_transcript: clean(report.full_conversation ?? body.transcript),
+        recording: recording?.startsWith("https://") ? recording : null,
+        seconds: seconds,
+      },
+    );
     if (updateError) throw updateError;
+    if (matched) {
+      const usage = await db.rpc("settle_call_usage", {
+        c_id: customer,
+        b_id: id,
+        duration: seconds,
+        cost_cents: reportedCostCents(report),
+      });
+      if (usage.error) throw usage.error;
+    }
+
     after(async () => {
       await runJobs();
     });

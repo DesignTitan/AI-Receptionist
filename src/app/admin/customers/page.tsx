@@ -1,3 +1,4 @@
+import { economics } from "@/lib/platform/pricing";
 import { RemoteAction } from "@/components/platform/remote-action";
 import { Frame } from "@/components/platform/frame";
 import { requireStaff } from "@/lib/platform/server";
@@ -20,12 +21,88 @@ export default async function Customers() {
     .in("state", ["failed", "working"])
     .order("created_at", { ascending: false })
     .limit(30);
+  const periods = await db
+    .from("usage_periods")
+    .select("*,customers(business_name)")
+    .lte("starts_at", new Date().toISOString())
+    .gt("ends_at", new Date().toISOString());
+  const metering = await db
+    .from("call_usage")
+    .select("booking_id,stripe_state,stripe_error,settled_at,started_at")
+    .or("stripe_state.eq.review,stripe_error.not.is.null,settled_at.is.null")
+    .limit(50);
   return (
     <Frame
       eyebrow="Operator workspace"
       title="From first hello to open for business."
       description="Your customer setup queue. Payment, phone setup, and a successful test call all come before a business goes live."
     >
+      <section className="platform-panel mb-6">
+        <h2>Pricing and margin guardrails</h2>
+        <p>
+          Planning uses $0.20 per started minute, $5 phone rental, $25 support
+          reserve, and 3.6% + 30¢ payment/Billing fees. Contribution is before
+          shared overhead, acquisition, tax and extraordinary support; it is not
+          net profit.
+        </p>
+        <div className="platform-metrics">
+          {(Object.keys(PLANS) as (keyof typeof PLANS)[]).map((p) => (
+            <div key={p}>
+              {PLANS[p].name}
+              <strong>
+                {Math.round(economics(p).margin * 100)}% planned contribution
+              </strong>
+              <p>${economics(p).contribution.toFixed(2)} at full allowance</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="platform-panel mb-6">
+        <h2>Current customer usage</h2>
+        {periods.error ? (
+          <p>Usage monitor unavailable.</p>
+        ) : periods.data?.length ? (
+          periods.data.map((p) => {
+            const revenue =
+              p.monthly_cents / 100 +
+              (Math.max(0, p.used_minutes - p.included_minutes) *
+                p.overage_cents) /
+                100;
+            const contribution =
+              revenue - revenue * 0.036 - 0.3 - 30 - p.used_minutes * 0.2;
+            return (
+              <p key={p.id}>
+                <strong>{p.customers?.business_name}</strong> · {p.used_minutes}
+                /{p.included_minutes} minutes · {p.reserved_minutes} reserved ·
+                ${contribution.toFixed(2)} estimated contribution at usage so
+                far.{" "}
+                {contribution / revenue < 0.5
+                  ? "Margin below target: review provider costs and support time."
+                  : ""}
+              </p>
+            );
+          })
+        ) : (
+          <p>No active billing periods yet.</p>
+        )}
+      </section>
+      <section className="platform-panel mb-6">
+        <h2>Metering and unresolved calls</h2>
+        {metering.error ? (
+          <p>Metering monitor unavailable.</p>
+        ) : metering.data?.length ? (
+          metering.data.map((m) => (
+            <p key={m.booking_id}>
+              {m.booking_id}:{" "}
+              {m.settled_at
+                ? (m.stripe_error ?? m.stripe_state)
+                : "Awaiting duration; allowance remains reserved. Check provider report if older than 10 minutes."}
+            </p>
+          ))
+        ) : (
+          <p>No metering issues.</p>
+        )}
+      </section>
       {error ? (
         <div className="platform-error">
           The customer database migration has not been applied yet.
@@ -74,7 +151,16 @@ export default async function Customers() {
                   <p className="platform-error">{c.provision_error}</p>
                 )}
                 <CustomerControls customer={c} />
-                {c.status === 'draft' && c.checkout_session_id && <div className="platform-actions"><RemoteAction url="/api/admin/checkout-reset" label="Close unpaid checkout and allow edits" body={{id:c.id}} secondary /></div>}
+                {c.status === "draft" && c.checkout_session_id && (
+                  <div className="platform-actions">
+                    <RemoteAction
+                      url="/api/admin/checkout-reset"
+                      label="Close unpaid checkout and allow edits"
+                      body={{ id: c.id }}
+                      secondary
+                    />
+                  </div>
+                )}
               </section>
             ))
           )}
@@ -102,7 +188,17 @@ export default async function Customers() {
                 {jobs.data.map((j) => (
                   <tr key={j.id}>
                     <td>{j.kind}</td>
-                    <td>{j.state}{j.state==='failed' && j.kind!=='call' && <RemoteAction url="/api/admin/job-retry" label="Retry email" body={{id:j.id}} secondary/>}</td>
+                    <td>
+                      {j.state}
+                      {j.state === "failed" && j.kind !== "call" && (
+                        <RemoteAction
+                          url="/api/admin/job-retry"
+                          label="Retry email"
+                          body={{ id: j.id }}
+                          secondary
+                        />
+                      )}
+                    </td>
                     <td>
                       {j.error ??
                         "In progress; inspect if older than ten minutes."}

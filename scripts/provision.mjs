@@ -124,6 +124,7 @@ try {
       throw Error("Production callback requires HTTPS.");
     const agent = await omni("agents/create", {
       ...base,
+      transcriber: {...base.transcriber,max_call_duration_in_sec:300},
       name: `${c.business_name} · ${c.id}`,
       call_type: "Outgoing",
       welcome_message: "{{first_message}}",

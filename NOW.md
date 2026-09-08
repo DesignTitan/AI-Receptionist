@@ -3,6 +3,14 @@
 Handoff notes for the next session. Updated 2026-09-08. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — minute pricing and Stripe sandbox (8 September 2026)
+
+- Built minutes-v2: $199/300 minutes, $399/750, $749/1,500; $1,000 setup; $0.49 extra started minute. Shared catalogue drives storefront, signup, checkout and staff limits. Cost model targets 51–52% contribution at full use, before shared overhead and tax.
+- Created all fixed/metered sandbox prices, setup, meter, webhook and restricted billing portal in acct_1UDNPDPicyLxgU34. Bubs approved test credentials; saved them as sensitive Vercel Production variables. No live Stripe activation or real charges.
+- Installed the usage migration in production Supabase. Billing-period snapshots, atomic five-minute reservations, duplicate-safe settlement, default $0 recurring extra-spend cap, customer notices, forecasts and staff usage review are implemented.
+- Unit tests (10), database suites and build pass. Stripe invoice previews independently show exactly $49 for 100 extra minutes on all tiers. Deployment and browser acceptance are in progress.
+- Next: complete deployment/checkout acceptance, connect Resend and custom SMTP, verify a dedicated customer voice line, and review period-close reconciliation before live billing. Dashboard notices work independently; email delivery is not configured. Older call-count pricing below is historical and superseded.
+
 ## Stripe onboarding — 2026-09-08
 
 - Bubs created the separate AI Receptionist Stripe account (acct_1UDNP6PadPgqGiRq); completed its introductory business setup with the existing Vercel site and the appointment-confirmation software description.

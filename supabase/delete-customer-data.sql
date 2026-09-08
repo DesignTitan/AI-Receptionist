@@ -14,6 +14,7 @@ do $$ begin
  end if;
 end $$;
 delete from public.customer_jobs where customer_id in(select id from deletion_target);
+delete from public.call_usage where period_id in(select id from public.usage_periods where customer_id in(select id from deletion_target));
 delete from public.customer_bookings where customer_id in(select id from deletion_target);
 delete from public.customers where id in(select id from deletion_target) and billing_status in('canceled','incomplete_expired');
 rollback;

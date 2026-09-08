@@ -12,6 +12,7 @@ export async function POST(request: Request) {
       "billing_portal/sessions",
       new URLSearchParams({
         customer: c.stripe_customer_id,
+        ...(process.env.STRIPE_PORTAL_CONFIGURATION?{configuration:process.env.STRIPE_PORTAL_CONFIGURATION}:{}),
         return_url: `${env.siteUrl}/account`,
       }),
     );

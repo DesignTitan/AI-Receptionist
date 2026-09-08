@@ -4,7 +4,7 @@ import {
   ownedCustomer,
   requireOwner,
 } from "@/lib/platform/server";
-import { stripe, priceId, verifyCheckoutPrices } from "@/lib/platform/billing";
+import { stripe, priceId, verifyCheckoutPrices, verifyUsagePrice, usagePriceId } from "@/lib/platform/billing";
 import { serviceClient } from "@/lib/supabase";
 import type { Customer } from "@/lib/platform/model";
 import { env } from "@/lib/env";
@@ -19,7 +19,8 @@ export async function POST(request: Request) {
       throw Error(
         "Payments are not open yet. Your business details are saved.",
       );
-    priceId(original.plan);
+    await verifyCheckoutPrices(original.plan,priceId(original.plan),setup);
+    await verifyUsagePrice(original.plan);
     const db = serviceClient();
     const claimed = await db.rpc("claim_customer_checkout", {
       c_id: original.id,
@@ -52,6 +53,7 @@ export async function POST(request: Request) {
         "This checkout attempt expired. Contact us to restart it safely.",
       );
     await verifyCheckoutPrices(c.plan, recurringPrice, setup);
+    await verifyUsagePrice(c.plan);
     const body = new URLSearchParams({
       mode: "subscription",
       customer_email: c.owner_email,
@@ -62,6 +64,9 @@ export async function POST(request: Request) {
       "line_items[0][quantity]": "1",
       "line_items[1][price]": setup,
       "line_items[1][quantity]": "1",
+      "line_items[2][price]": usagePriceId(c.plan),
+      "subscription_data[metadata][pricing_version]": "minutes-v2",
+      "custom_text[submit][message]": "Extra minutes cost $0.49 per started minute after your included allowance. Extra spending starts disabled; choose a monthly limit in your dashboard. One location. Unused minutes expire at renewal.",
       success_url: `${env.siteUrl}/account?checkout=complete`,
       cancel_url: `${env.siteUrl}/account?checkout=cancelled`,
       expires_at: String(c.checkout_expires),

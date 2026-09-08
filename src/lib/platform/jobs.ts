@@ -3,7 +3,9 @@ import { env } from "@/lib/env";
 import { formatDateTime } from "@/lib/time";
 import { RECORDING_NOTICE } from "@/lib/consent";
 import type { Customer, CustomerBooking } from "./model";
+import { reportUsage } from "./usage";
 type Job = {
+  notice_id: string | null;
   id: string;
   customer_id: string;
   booking_id: string | null;
@@ -22,26 +24,40 @@ const escape = (s: string) =>
 async function send(job: Job, c: Customer, b: CustomerBooking | null) {
   if (!env.resendApiKey || !process.env.EMAIL_FROM)
     throw Error("Email is not configured.");
+  const notice =
+    job.kind === "usage_email"
+      ? await serviceClient()
+          .from("usage_notices")
+          .select("message")
+          .eq("id", job.notice_id)
+          .eq("customer_id", c.id)
+          .single()
+      : null;
+  if (notice?.error) throw Error("Usage notice missing");
   const subject =
-    job.kind === "signup_alert"
-      ? `New paid customer · ${c.business_name}`
-      : job.kind === "welcome"
-        ? "Welcome — your front desk is being prepared"
-        : job.kind === "live"
-          ? "Your front desk is live"
-          : job.kind === "call_email"
-            ? `Call ${b?.outcome ?? "finished"} · ${b?.full_name}`
-            : `New booking · ${b?.full_name}`;
+    job.kind === "usage_email"
+      ? "Your front desk usage update"
+      : job.kind === "signup_alert"
+        ? `New paid customer · ${c.business_name}`
+        : job.kind === "welcome"
+          ? "Welcome — your front desk is being prepared"
+          : job.kind === "live"
+            ? "Your front desk is live"
+            : job.kind === "call_email"
+              ? `Call ${b?.outcome ?? "finished"} · ${b?.full_name}`
+              : `New booking · ${b?.full_name}`;
   const message =
-    job.kind === "signup_alert"
-      ? `${c.business_name} has paid and is ready for setup. Open your customer queue at ${env.siteUrl}/admin/customers.`
-      : job.kind === "welcome"
-        ? "Your payment is received. We will prepare your booking page and phone line, then arrange a test with you."
-        : job.kind === "live"
-          ? `Your booking page is ready: ${env.siteUrl}/b/${c.slug}`
-          : job.kind === "call_email"
-            ? `Outcome: ${b?.outcome ?? "needs review"}. ${b?.summary ?? "Open your dashboard for the call details."}`
-            : `${b?.full_name} booked ${b ? formatDateTime(b.starts_at, c.config.timezone) : ""}. A confirmation call has been queued.`;
+    job.kind === "usage_email"
+      ? (notice?.data?.message ?? "Open your dashboard for your usage update.")
+      : job.kind === "signup_alert"
+        ? `${c.business_name} has paid and is ready for setup. Open your customer queue at ${env.siteUrl}/admin/customers.`
+        : job.kind === "welcome"
+          ? "Your payment is received. We will prepare your booking page and phone line, then arrange a test with you."
+          : job.kind === "live"
+            ? `Your booking page is ready: ${env.siteUrl}/b/${c.slug}`
+            : job.kind === "call_email"
+              ? `Outcome: ${b?.outcome ?? "needs review"}. ${b?.summary ?? "Open your dashboard for the call details."}`
+              : `${b?.full_name} booked ${b ? formatDateTime(b.starts_at, c.config.timezone) : ""}. A confirmation call has been queued.`;
   const recipient =
     job.kind === "signup_alert" ? env.ownerEmail : c.owner_email;
   if (!recipient) throw Error("Operator lead inbox is not configured.");
@@ -72,16 +88,12 @@ async function dispatch(job: Job, c: Customer, b: CustomerBooking) {
   if (!c.agent_id || !c.number_id || !env.omnidimension.apiKey)
     throw Error("Dedicated voice line is not configured.");
   const db = serviceClient();
-  const claim = await db
-    .from("customer_bookings")
-    .update({ call_status: "dispatching" })
-    .eq("id", b.id)
-    .eq("customer_id", c.id)
-    .eq("call_status", "queued")
-    .select("id")
-    .maybeSingle();
-  if (claim.error) throw Error("Unable to claim call.");
-  if (!claim.data) return;
+  const claim = await db.rpc("reserve_call_usage", { c_id: c.id, b_id: b.id });
+  if (claim.error) throw Error("Could not reserve call allowance.");
+  if (!claim.data)
+    throw Error(
+      "Call not placed: check spending limit, billing period, or booking status. Confirm the booking manually.",
+    );
   const member = c.config.team.find((p) => p.id === b.provider_id);
   const first = `Hi ${b.full_name.split(" ")[0]}, this is Ava, the AI receptionist calling from ${c.business_name}. ${RECORDING_NOTICE} I'm calling to confirm your appointment.`;
   try {
@@ -151,6 +163,7 @@ async function dispatch(job: Job, c: Customer, b: CustomerBooking) {
   }
 }
 export async function runJobs() {
+  await reportUsage();
   const db = serviceClient();
   const { data, error } = await db.rpc("claim_customer_jobs", {
     batch_size: 10,

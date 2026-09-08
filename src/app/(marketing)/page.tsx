@@ -1,3 +1,4 @@
+import { PLANS as PRICING, planFeatures, type Plan } from "@/lib/platform/pricing";
 import type { Metadata } from "next";
 import { Folio } from "@/components/marketing/folio";
 import { PRODUCT_NAME } from "@/components/marketing/product-chrome";
@@ -29,53 +30,9 @@ const CHAPTERS = [
   { id: "colophon", n: "09", title: "Colophon" },
 ];
 
-const PLANS = [
-  {
-    name: "Front desk",
-    price: "$149",
-    calls: "200 calls a month",
-    who: "One room, one chair, one pair of hands.",
-    cta: "Start here",
-    featured: false,
-    has: [
-      "Your booking page, in your colours",
-      "A confirmation call inside a minute",
-      "Recording, transcript and summary",
-      "Reschedules and cancellations on the call",
-      "Email support",
-    ],
-  },
-  {
-    name: "Busy desk",
-    price: "$299",
-    calls: "600 calls a month",
-    who: "A team that fills its day and misses calls.",
-    cta: "Start here",
-    featured: true,
-    has: [
-      "Everything in Front desk",
-      "No-answers flagged for a person",
-      "After-hours and weekend bookings",
-      "Your own number on their screen",
-      "Priority support",
-    ],
-  },
-  {
-    name: "Full desk",
-    price: "$599",
-    calls: "1,500 calls a month",
-    who: "Several locations, or a very long day.",
-    cta: "Talk to us",
-    featured: false,
-    has: [
-      "Everything in Busy desk",
-      "Several businesses on one dashboard",
-      "A voice line for each business",
-      "Your script tuned with you, quarterly",
-      "A named person on your account",
-    ],
-  },
-];
+const PLANS = (Object.entries(PRICING) as [Plan,typeof PRICING[Plan]][]).map(([id,p])=>({
+ name:p.name,price:`$${p.monthly}`,calls:`${p.minutes.toLocaleString()} minutes a month · about ${p.estimatedCalls} two-minute calls`,who:p.who,cta:'Start here',featured:id==='busy',has:planFeatures(id)
+}));
 
 const RAIL = [
   { h: "Health and wellness", p: "Visits confirmed, intake reminded, the no-show flagged before it happens.", img: "ind-health.jpg" },
@@ -297,7 +254,7 @@ export default function HomePage() {
               <h2 className="sc-display sc-display--lg">How it works, and what it costs.</h2>
               <ol className="rc-steps">
                 <li><span><strong>Your team, your hours, your page.</strong>We set up the booking page in your name and your colours. Live the same day.</span></li>
-                <li><span><strong>They book, it calls.</strong>Every booking gets a confirmation call inside a minute. Reschedules and cancellations are taken on the call.</span></li>
+                <li><span><strong>They book, it calls.</strong>Bookings queue a confirmation call while your allowance and spending limit permit. Cancellation and reschedule requests are flagged for your team.</span></li>
                 <li><span><strong>You see everything.</strong>Recording, transcript and summary in your dashboard and your inbox. A no-answer is flagged for a person.</span></li>
               </ol>
               <div className="rc-plans">
@@ -322,7 +279,7 @@ export default function HomePage() {
               </div>
               <p className="rc-plans__note">
                 <b>$1,000 to set up, once.</b> Your page, your people, your voice line, and a test call with you
-                on it. Calls beyond your plan are 30 cents each. Month to month — leave whenever you like.
+                on it. Extra minutes are 49 cents each, rounded up per call, only within a spending limit you choose. Extra spending starts at $0. Unused minutes expire at renewal. Each plan includes one business location; calendar sync and multiple locations are not included. Month to month — leave whenever you like.
               </p>
               <p className="sc-body" style={{ marginTop: "var(--sc-6)" }}>
                 Calendar and practice-software sync is not built yet. If you need it, you would be the reason it gets built.

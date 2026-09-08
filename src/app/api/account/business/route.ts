@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { checkOrigin, owner } from "@/lib/platform/server";
 import { serviceClient } from "@/lib/supabase";
-import { planOf, slugFor, text, validateConfig } from "@/lib/platform/model";
+import { PLANS, planOf, slugFor, text, validateConfig } from "@/lib/platform/model";
 export async function POST(request: Request) {
   try {
     checkOrigin(request);
@@ -15,6 +15,7 @@ export async function POST(request: Request) {
     const business_name = text(body.business_name, "business name");
     const config = validateConfig(body.config);
     const plan = planOf(body.plan);
+    if(config.team.length > PLANS[plan].teamLimit) throw Error(`This plan supports up to ${PLANS[plan].teamLimit} team members.`);
     const db = serviceClient();
     const { data: existing, error: readError } = await db
       .from("customers")

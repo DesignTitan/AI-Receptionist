@@ -1,3 +1,6 @@
+import { UsageControls } from "@/components/platform/usage-panel";
+import { usageFor } from "@/lib/platform/usage";
+import { recommendPlan, OVERAGE_CENTS } from "@/lib/platform/pricing";
 import Link from "next/link";
 import { Frame } from "@/components/platform/frame";
 import { RemoteAction } from "@/components/platform/remote-action";
@@ -11,17 +14,18 @@ export default async function Account() {
   const c = await ownedCustomer();
   if (!c) redirect("/start");
   const bookings = await bookingsFor(c.id);
-  const beginning = new Date();
-  beginning.setUTCDate(1);
-  beginning.setUTCHours(0, 0, 0, 0);
-  const { count, error } = await serviceClient()
-    .from("customer_bookings")
-    .select("id", { count: "exact", head: true })
-    .eq("customer_id", c.id)
-    .eq("call_status", "completed")
-    .gte("created_at", beginning.toISOString());
-  if (error) throw Error("Usage is temporarily unavailable.");
-  const used = count ?? 0;
+  const { period, notices } = await usageFor(c);
+  const used = period?.used_minutes ?? 0;
+  const included = period?.included_minutes ?? PLANS[c.plan].minutes;
+  const extra = Math.max(0, used - included) * OVERAGE_CENTS;
+  const elapsed = period
+    ? Math.max(1, (Date.now() - Date.parse(period.starts_at)) / 86400000)
+    : 1;
+  const days = period
+    ? (Date.parse(period.ends_at) - Date.parse(period.starts_at)) / 86400000
+    : 30;
+  const projected = Math.ceil((used / elapsed) * days);
+  const recommended = recommendPlan(projected, c.config.team.length);
   const plan = PLANS[c.plan];
   const next: Record<string, string> = {
     draft:
@@ -74,23 +78,87 @@ export default async function Account() {
         <div className="platform-panel">
           Your plan<strong>{plan.name}</strong>
           <p>
-            ${plan.monthly}/month · {plan.calls} calls
+            ${plan.monthly}/month · {included.toLocaleString()} minutes · up to{" "}
+            {plan.teamLimit} team members
           </p>
         </div>
         <div className="platform-panel">
-          Completed calls this calendar month
-          <strong>{used.toLocaleString()}</strong>
-          <p>Usage resets on the 1st, UTC</p>
+          Minutes used
+          <strong>
+            {used.toLocaleString()} / {included.toLocaleString()}
+          </strong>
+          <progress
+            aria-label="Included minutes used"
+            max={included}
+            value={Math.min(used, included)}
+            style={{ width: "100%" }}
+          />
+          <p>
+            {period
+              ? `Resets ${formatDateTime(period.ends_at, c.config.timezone)}`
+              : "Your billing period starts after payment."}
+          </p>
+          <p>
+            {period?.reserved_minutes ?? 0} minutes reserved for calls in
+            progress or awaiting their report.
+          </p>
         </div>
         <div className="platform-panel">
-          Estimated additional call cost
-          <strong>${(Math.max(0, used - plan.calls) * 0.3).toFixed(2)}</strong>
+          Extra usage so far<strong>${(extra / 100).toFixed(2)}</strong>
           <p>
-            30¢ per call above your allowance. Final billing is reviewed
-            separately.
+            49¢ per started minute beyond your allowance. Your recurring monthly
+            spending limit: ${(c.overage_budget_cents / 100).toFixed(2)}.
           </p>
         </div>
       </div>
+      <section className="platform-panel mb-6">
+        <h2>Your bill, without surprises</h2>
+        <p>
+          Next recurring charge estimate:{" "}
+          <strong>${(plan.monthly + extra / 100).toFixed(2)}</strong> before tax
+          or credits. It combines the next month’s plan with this month’s extra
+          usage. Your $1,000 setup fee is paid once at checkout.
+        </p>
+        {period && used > 0 && elapsed >= 3 && (
+          <p>
+            At your recent pace: about {projected.toLocaleString()} minutes this
+            period.{" "}
+            {recommended !== c.plan
+              ? `${PLANS[recommended].name} may cost less at this usage. Contact support to schedule a change at renewal; we never switch your plan automatically.`
+              : "Your current plan is cost-effective at this pace."}{" "}
+            This is a forecast, not a charge.
+          </p>
+        )}
+        <p>
+          Each call is rounded up to the next minute, including connected
+          voicemail and short attempts reported with duration. Calls with zero
+          duration use zero minutes. Maximum call length: five minutes. We
+          reserve five minutes before starting a call, so new calls can pause
+          with up to four minutes still available. Unused minutes do not roll
+          over.
+        </p>
+        <p>
+          Warnings appear here and are queued to your email at 80% and 100% of
+          your allowance, near your extra-spend limit, and when calls pause.
+          Keep checking this page if an email is delayed. Bookings stay open
+          when your call budget runs out; your team can confirm them manually.
+        </p>
+        <UsageControls budget={c.overage_budget_cents} />
+      </section>
+      <section className="platform-panel mb-6">
+        <h2>Usage notifications</h2>
+        {notices.length ? (
+          notices.map((n) => (
+            <p key={n.id}>
+              <small>{formatDateTime(n.created_at, c.config.timezone)}</small>
+              <br />
+              {n.message}
+            </p>
+          ))
+        ) : (
+          <p>No usage alerts yet.</p>
+        )}
+      </section>
       <section className="platform-panel">
         <h2>Appointments</h2>
         <p>

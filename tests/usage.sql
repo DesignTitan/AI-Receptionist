@@ -1,0 +1,31 @@
+begin;
+insert into auth.users(id) values('bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb');
+insert into customers(id,owner_id,owner_email,business_name,slug,plan,status,billing_status,config) values('cccccccc-cccc-4ccc-8ccc-cccccccccccc','bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb','test@example.test','Usage test','usage-test','front','live','active','{}');
+select sync_usage_period('cccccccc-cccc-4ccc-8ccc-cccccccccccc',date_trunc('day',now()),date_trunc('day',now())+interval '1 month','front');
+do $$ declare c uuid:='cccccccc-cccc-4ccc-8ccc-cccccccccccc'; b uuid;p usage_periods;r boolean;begin
+ insert into customer_bookings(customer_id,provider_id,full_name,phone,starts_at,ends_at) values(c,'m','Test','+12125550100',now()+interval '1 day',now()+interval '1 day 30 minutes') returning id into b;
+ if not reserve_call_usage(c,b) then raise exception 'Reserve failed';end if;
+ if reserve_call_usage(c,b) then raise exception 'Duplicate reservation';end if;
+ if settle_call_usage('00000000-0000-0000-0000-000000000001',b,61,null) then raise exception 'Foreign settlement';end if;
+ perform settle_call_usage(c,b,61,null);perform settle_call_usage(c,b,180,null);
+ select * into p from usage_periods where customer_id=c;
+ if p.used_minutes<>2 or p.reserved_minutes<>0 then raise exception 'Settlement/rounding/replay wrong';end if;
+ update usage_periods set used_minutes=298 where id=p.id;
+ insert into customer_bookings(customer_id,provider_id,full_name,phone,starts_at,ends_at) values(c,'n','Test2','+12125550101',now()+interval '2 days',now()+interval '2 days 30 minutes') returning id into b;
+ if reserve_call_usage(c,b) then raise exception 'Zero-budget overspend';end if;
+ if not exists(select 1 from usage_notices where customer_id=c and kind='calls_paused') then raise exception 'Pause notice missing';end if;
+ perform set_usage_budget(c,'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',490);
+ update customer_bookings set call_status='queued' where id=b;
+ if not reserve_call_usage(c,b) then raise exception 'Opt-in reservation failed';end if;
+ begin perform set_usage_budget(c,'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',0);raise exception 'Budget reduction passed';exception when others then if sqlerrm='Budget reduction passed' then raise;end if;end;
+ perform settle_call_usage(c,b,300,null);
+ select * into p from usage_periods where customer_id=c;
+ if p.used_minutes<>303 or p.reserved_minutes<>0 then raise exception 'Extra usage wrong';end if;
+ if (select count(*) from usage_notices where customer_id=c and kind='allowance_100')<>1 then raise exception 'Threshold alerts wrong';end if;
+ begin perform sync_usage_period(c,p.starts_at,p.ends_at,'busy');raise exception 'Midcycle change passed';exception when others then if sqlerrm='Midcycle change passed' then raise;end if;end;
+end $$;
+set local role anon;
+do $$ begin begin perform * from usage_periods;raise exception 'Anon read';exception when insufficient_privilege then null;end;begin perform reserve_call_usage(gen_random_uuid(),gen_random_uuid());raise exception 'Anon RPC';exception when insufficient_privilege then null;end;end $$;
+reset role;
+rollback;
+\echo Usage checks passed: isolation, reservation, duplicate settlement, rounding, spend cap, alerts and plan protection.

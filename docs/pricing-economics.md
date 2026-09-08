@@ -1,99 +1,41 @@
-# What a call costs, and what the plans keep
+# Pricing economics — minutes-v2
 
-Measured from two real calls on the OmniDimension line (agent 248069, 2 Sep 2026), not from
-the price list. Re-run this after the first month of a real customer's traffic.
+Effective for new subscriptions, 8 September 2026. USD, before tax. Sandbox until live acceptance is complete. Supersedes the old $149/$299/$599 call-count model.
 
-## Cost per call
+| Plan | Monthly | Included started minutes | Approx. 2-minute calls | Bookable staff |
+| --- | ---: | ---: | ---: | ---: |
+| Front desk | $199 | 300 | 150 | 3 |
+| Busy desk | $399 | 750 | 375 | 10 |
+| Full desk | $749 | 1,500 | 750 | 20 |
 
-| Item | Rate | Where it comes from |
-|---|---|---|
-| Voice AI (GPT-4.1-mini + ElevenLabs + Deepgram) | $0.115 per minute, prorated by the second | `voiceai_cost` on both call logs: $0.155 for 81 s, $0.021 for 11 s |
-| Telephony | $0.030 per minute, rounded up to the whole minute | `telephony_cost`: $0.03 for an 11 s call, $0.06 for 81 s |
-| An unanswered call or voicemail | about $0.05 | a 10 s attempt still bills one telephony minute |
+All plans include one location, branded online booking, dedicated confirmation number, AI confirmation calls, recordings/transcripts/summaries, flagged cancellation/reschedule requests, usage controls and email support. No calendar sync, multiple locations, unlimited calls or inbound receptionist service is promised. Setup is $1,000 once. Extra minutes are $0.49 each, disabled until the owner chooses a recurring extra-spend limit.
 
-So an answered call costs roughly **$0.145 per minute of talk**. A typical confirmation call
-(1 to 2 minutes) lands between **$0.15 and $0.30**. A reschedule that runs three minutes is
-about $0.44.
+## Cost assumptions and contribution
 
-## Fixed costs
+Budget $0.20 per started minute, $5 per customer number, $25 monthly support reserve and 3.6% + $0.30 collection/Billing fees. At full included usage:
 
-| Item | Per month | Shared or per customer |
-|---|---|---|
-| OmniDimension plan | $36 (Early deployers, 588 min) rising to $200 (Growth, 3,571 min) | shared |
-| Phone number | $5 | per customer (each business gets its own line) |
-| Supabase | $25 Pro, then $10 per extra project | $25 shared + $10 per customer |
-| Vercel Pro | $20 | shared |
-| Resend | free to 3,000 emails, then $20 | shared |
-| Cloudflare Turnstile | free | shared |
-| Stripe | 2.9% + $0.30 per charge | per customer |
-| Extra concurrency (only the biggest plan) | $6.74 per slot | per customer |
+| Plan | Budgeted direct cost | Contribution | Contribution margin |
+| --- | ---: | ---: | ---: |
+| Front desk | $97.46 | $101.54 | 51.0% |
+| Busy desk | $194.66 | $204.34 | 51.2% |
+| Full desk | $357.26 | $391.74 | 52.3% |
 
-Shared overhead is about **$100 a month** at the start and about **$265** once call volume pushes
-OmniDimension to the Growth plan. Per-customer fixed cost is **$15** plus card fees.
+An extra $0.49 minute contributes about $0.272 after $0.20 delivery and 3.6% fees (55.6%), before shared overhead. 100 extra minutes cost the customer $49. Card/region/currency-specific fees can differ.
 
-## What each plan keeps (1.5 min average call, 20% unanswered, plan fully used)
+This is contribution, not guaranteed net profit. Shared hosting/database/voice subscription, acquisition, administration, taxes and refunds still have to be paid. Deduct shared monthly overhead once from total contribution; do not charge the same shared bill to every customer. For example, $300 shared overhead requires at least three fully used Front customers to cover it, before additional acquisition/tax costs. Included voice-provider credits should reduce actual usage expense; do not double-count them as both free minutes and a second expense.
 
-| Plan | Price | Calls | Variable cost | Fixed per customer | Gross profit | Margin |
-|---|---|---|---|---|---|---|
-| Front desk | $149 | 200 | $38 | $20 | $91 | 61% |
-| Busy desk | $299 | 600 | $114 | $24 | $161 | 54% |
-| Full desk | $599 | 1,500 | $286 | $40 | $273 | 46% |
+Historic sample: two demo calls indicated roughly $0.115 AI/minute + $0.03 telephony/rounded minute. That sample is not a contracted universal rate. The $0.20 allowance is a planning buffer; verify the selected model, telephony geography, number, concurrency and provider invoice before each launch. The staff dashboard shows the planning contribution and exposes unresolved usage; provider costs are retained when reported. Review actual total invoices monthly. If direct cost exceeds the model, adjust new-customer pricing or delivery cost before expanding.
 
-Nobody uses the whole plan every month. At a more realistic 70% utilisation the margins are
-about 70%, 64% and 58%.
+Setup leaves $963.70 after an assumed 3.6% + $0.30 fee, before labor. Budget no more than $450 setup labor and one-time expenses to retain roughly $514 contribution. Track actual time; this is a budget, not a measured guarantee.
 
-## Which OmniDimension plan to sit on
+## Customer value and plan changes
 
-One OmniDimension bill covers every customer's minutes. Business plans are a cheap seat with
-pricier minutes; agency plans (OmniRelay) cost more up front, charge less per minute, and add
-white-label logins and client workspaces. Our customers never log into OmniDimension, so the
-white-label part is worth nothing here and the choice is simply which bill is lower.
+Call counts are estimates only. Each call rounds up separately; a 61-second call consumes two minutes. Unused minutes expire at the Stripe renewal date. A call is capped at five minutes; the app reserves five before dispatch and releases the unused portion after a final report. Up to four remaining minutes may be unavailable to start another call. Failed dispatches with uncertain provider state remain reserved until reviewed.
 
-| Plan | Seat | Included min | Rate beyond |
-|---|---|---|---|
-| Business · Starter | $15 | 179 | $0.093 |
-| Business · Jump Starter | $30 | 395 | $0.084 |
-| Business · Early deployers | $36 | 588 | $0.0745 |
-| Business · Growth | $200 | 3,571 | $0.061 |
-| Agency · Launch Partner | $149 ($99 for two months) | 500 | $0.0527 |
-| Agency · Growth Partner | $199 | 2,000 | $0.0473 |
-| Agency · Scale Partner | $299 | 3,500 | $0.040 |
+At these rates, Busy becomes cheaper than Front at approximately 709 monthly minutes; Full becomes cheaper than Busy at approximately 1,465. The dashboard compares projected totals and recommends a plan, without automatically changing it. Team size also constrains the appropriate tier. Operators perform agreed plan changes at renewal; mid-cycle changes are rejected until explicit reconciliation exists.
 
-At the 40/40/20 plan mix and 1.5-minute calls, each customer is about 520 talk minutes a month.
+## Sources checked 8 September 2026
 
-| Customers | Talk minutes | Cheapest seat | Bill |
-|---|---|---|---|
-| 1 | ~520 | Business · Early deployers | $36 |
-| 3 | ~1,560 | Business · Early deployers | $108 |
-| 5 | ~2,600 | Early deployers or Growth | $186 to $200 |
-| 10 | ~5,200 | Business · Growth | $299 |
-| 20 | ~10,400 | Agency · Scale Partner | $575 |
-| 30 | ~15,600 | Agency · Scale Partner | $783 |
-
-**Recommendation:** stay on the $36 business plan to about five customers, business Growth
-from five to fifteen, and the agency Scale Partner plan only past roughly 10,000 talk minutes
-a month or when a customer wants their own branded OmniDimension login. Launch Partner is
-never the cheapest once its intro price ends.
-
-**Verify on the billing page:** the two real calls were charged $0.115/min for voice AI, above
-every listed plan rate, so the models appear to bill on top of the plan rate. That surcharge is
-the same on every plan and does not change which is cheapest, but it is what the per-call
-numbers above rest on.
-
-## The two things to watch
-
-- **Overage.** 30 cents a call clears cost at 1.5 min (about 24 cents) but not at 2.5 min
-  (about 38 cents). If average calls run long, raise overage to 40 cents, or bill overage per
-  minute. Nothing on the site promises the rate is permanent.
-- **Full desk.** It is the thinnest plan because telephony minutes scale with calls. If the
-  first Full desk customer averages over two minutes a call, the honest fix is $699 or a
-  1,200-call cap, not a smaller number on the page.
-
-## Break-even
-
-Shared overhead of $100 a month is covered by the first Front desk customer. At Growth-plan
-overhead ($265) you need two customers on any mix of plans. Setup fees ($1,000) cover the
-onboarding hours and are profit beyond that.
-
-The interactive version of this sheet, with the assumptions as sliders, is the
-"Receptionist Unit Economics" artifact.
+- [OmniDimension pricing](https://docs.omnidim.io/docs/pricing): monthly credits, extra minutes and separate telephony/concurrency/number considerations.
+- [Stripe pricing](https://stripe.com/pricing): US domestic card 2.9% + $0.30 and Billing pay-as-you-go 0.7%.
+- [Stripe fixed fee plus overages](https://docs.stripe.com/billing/subscriptions/usage-based-v1/use-cases/flat-fee-and-overages): fixed monthly charge plus graduated metered usage.

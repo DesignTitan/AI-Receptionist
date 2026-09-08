@@ -33,6 +33,11 @@ export async function POST(request: Request) {
         !process.env.OMNIDIMENSION_API_KEY
       )
         throw Error("Connect production email and voice before going live.");
+      const response=await fetch(`https://backend.omnidim.io/api/v1/agents/${b.agent_id}`,{headers:{Authorization:`Bearer ${process.env.OMNIDIMENSION_API_KEY}`},cache:'no-store'});
+      if(!response.ok)throw Error('Could not verify the agent call-duration limit.');
+      const raw=await response.json();const agent=raw.data??raw;
+      const limit=Number(agent.transcriber?.max_call_duration_in_sec??agent.max_call_duration_in_sec);
+      if(!Number.isFinite(limit)||limit<=0||limit>300)throw Error('Set and verify the agent maximum call duration to 300 seconds before activation.');
       phone(b.phone_number);
     }
     const { error: write } = await db.rpc('activate_customer', {

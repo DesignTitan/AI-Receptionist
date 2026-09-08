@@ -1,7 +1,12 @@
 import { runJobs } from "@/lib/platform/jobs";
 import { after } from "next/server";
 import { NextResponse } from "next/server";
-import { verifyStripe, stripe, planFromPrice } from "@/lib/platform/billing";
+import {
+  verifyStripe,
+  stripe,
+  planFromPrice,
+  usagePriceId,
+} from "@/lib/platform/billing";
 import { serviceClient } from "@/lib/supabase";
 export async function POST(request: Request) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -39,12 +44,26 @@ export async function POST(request: Request) {
     );
     const customerId = sub.metadata?.customer_id;
     if (!customerId) return NextResponse.json({ received: true });
-    const recurring = sub.items?.data?.filter(
-      (i: { price: { recurring: unknown } }) => i.price.recurring,
+    const items = sub.items?.data ?? [];
+    const fixed = items.filter(
+      (i: { price: { recurring?: { usage_type: string } } }) =>
+        i.price.recurring?.usage_type === "licensed",
     );
-    if (recurring?.length !== 1) throw Error("Unexpected subscription items");
-    const plan = planFromPrice(recurring[0].price.id);
-    const { error } = await serviceClient().rpc("apply_customer_subscription", {
+    const metered = items.filter(
+      (i: { price: { recurring?: { usage_type: string } } }) =>
+        i.price.recurring?.usage_type === "metered",
+    );
+    if (fixed.length !== 1 || metered.length !== 1 || fixed[0].quantity !== 1)
+      throw Error("Unexpected subscription items");
+    const plan = planFromPrice(fixed[0].price.id);
+    if (metered[0].price.id !== usagePriceId(plan))
+      throw Error("Incorrect usage price");
+    const start = fixed[0].current_period_start ?? sub.current_period_start;
+    const end = fixed[0].current_period_end ?? sub.current_period_end;
+    if (!start || !end) throw Error("Billing period missing");
+    const { error } = await serviceClient().rpc("apply_billed_subscription", {
+      p_start: new Date(start * 1000).toISOString(),
+      p_end: new Date(end * 1000).toISOString(),
       event_id: event.id,
       c_id: customerId,
       subscription: sub.id,

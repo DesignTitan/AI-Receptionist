@@ -90,3 +90,30 @@ export async function verifyCheckoutPrices(
       "Plan pricing is being checked. Your business details are saved; no payment was started.",
     );
 }
+export function usagePriceId(plan: Plan) {
+  const id = process.env[`STRIPE_USAGE_${plan.toUpperCase()}`];
+  if (!id) throw Error("Usage billing is not configured.");
+  return id;
+}
+export async function verifyUsagePrice(plan: Plan) {
+  const p = await stripe(
+    `prices/${encodeURIComponent(usagePriceId(plan))}?expand[]=tiers`,
+  );
+  if (
+    p.currency !== "usd" ||
+    !p.active ||
+    p.billing_scheme !== "tiered" ||
+    p.tiers_mode !== "graduated" ||
+    p.recurring?.usage_type !== "metered" ||
+    p.recurring?.interval !== "month" ||
+    p.recurring?.interval_count !== 1 ||
+    p.recurring?.meter !== process.env.STRIPE_METER_ID ||
+    p.tiers?.length !== 2 ||
+    p.tiers[0].up_to !== PLANS[plan].minutes ||
+    p.tiers[0].unit_amount !== 0 ||
+    p.tiers[1].up_to !== null ||
+    p.tiers[1].unit_amount !== 49 ||
+    p.tiers.some((t: { flat_amount: number | null }) => t.flat_amount)
+  )
+    throw Error("Usage pricing does not match your plan. No checkout started.");
+}

@@ -3,6 +3,14 @@
 Handoff notes for the next session. Updated 2026-09-08. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Stripe onboarding — 2026-09-08
+
+- Bubs created the separate AI Receptionist Stripe account (acct_1UDNP6PadPgqGiRq); completed its introductory business setup with the existing Vercel site and the appointment-confirmation software description.
+- Selected online checkout, subscriptions and invoicing; automatic tax was left off for testing and standard individual products selected instead of Managed Payments.
+- Opened the new AI Receptionist sandbox (acct_1UDNPDPicyLxgU34). No live activation, payments or bank details were submitted.
+- Naming decision: keep AI Receptionist and the existing Vercel address during product testing; postpone buying a domain.
+- Next: create the three monthly test prices and setup fee, connect sandbox credentials/webhook to the app, and verify checkout. Email/SMTP and complete live acceptance remain outstanding.
+
 ## Approved launch settings — 2026-09-08
 
 - Bubs explicitly approved the Supabase production sign-in callback and Vercel Production CRON_SECRET.

@@ -23,3 +23,7 @@ Regular callbacks process jobs immediately; daily Vercel recovery is a fallback,
 Run `npm test`, `npm run typecheck`, `npm run build`, and the disposable PostgreSQL suites `tests/platform.sql` and `tests/usage.sql` after both migrations. Check sandbox invoice totals, signature rejection and customer isolation. No live keys, live activation, phone purchase or real customer contact is part of sandbox setup.
 
 The deletion runbook removes usage rows before their bookings. Retain/export billing records as required before an authorized deletion. Stripe financial records have a separate lifecycle.
+
+## Sandbox acceptance — 8 September 2026
+
+Deployed commit 5751fbf. All 10 unit checks, both PostgreSQL suites and final build pass. Production Supabase migration succeeded and the live staff usage dashboard renders. Stripe API checkout totals were $1,199/$1,399/$1,749 including setup. Invoice previews with 100 extra minutes were $248/$448/$798. Disposable sessions were expired and subscriptions cancelled. The deployed webhook returned 400 without a signature and 200 with the sandbox signing secret. These are component/integration checks; a complete authenticated-owner payment, dedicated real call and email-delivery acceptance remains outstanding before live billing.

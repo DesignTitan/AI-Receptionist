@@ -4,7 +4,7 @@ The product now has a separate customer platform. Existing medical/salon/studio 
 
 ## Installation status — 8 September 2026
 
-The customer migration is installed in production Supabase. Unit and disposable-database tests pass. Live Stripe, email and dedicated customer calls are awaiting provider configuration. Automatic approval review blocked the Supabase callback allowlist addition and Vercel CRON_SECRET; scheduled recovery remains disabled.
+Application e4a9251 is deployed at https://ai-receptionist-two-azure.vercel.app (still locked). The production operator queue loads successfully from Supabase. The customer migration is installed in production Supabase. The Supabase Site URL is updated to the production domain; the callback allowlist is still pending approval. Unit and disposable-database tests pass. Live Stripe, email and dedicated customer calls are awaiting provider configuration. Automatic approval review blocked the Supabase callback allowlist addition and Vercel CRON_SECRET; scheduled recovery remains disabled.
 
 ## Routes
 

@@ -1,4 +1,4 @@
-import { PLANS as PRICING, planFeatures, type Plan } from "@/lib/platform/pricing";
+import { PLANS as PRICING, planFeatures, SETUP_OFFER, SETUP_SCOPE, type Plan } from "@/lib/platform/pricing";
 import type { Metadata } from "next";
 import { Folio } from "@/components/marketing/folio";
 import { PRODUCT_NAME } from "@/components/marketing/product-chrome";
@@ -278,8 +278,10 @@ export default function HomePage() {
                 ))}
               </div>
               <p className="rc-plans__note">
-                <b>$1,000 to set up, once.</b> Your page, your people, your voice line, and a test call with you
-                on it. Extra minutes are 49 cents each, rounded up per call, only within a spending limit you choose. Extra spending starts at $0. Unused minutes expire at renewal. Each plan includes one business location; calendar sync and multiple locations are not included. Month to month — leave whenever you like.
+                <b>{SETUP_OFFER}</b> Setup is paid once. {SETUP_SCOPE}
+              </p>
+              <p className="rc-plans__note">
+                Extra minutes are 49 cents each, rounded up per call, only within a spending limit you choose. Extra spending starts at $0. Unused minutes expire at renewal. Each plan includes one business location; calendar sync and multiple locations are not included. Month to month — leave whenever you like.
               </p>
               <p className="sc-body" style={{ marginTop: "var(--sc-6)" }}>
                 Calendar and practice-software sync is not built yet. If you need it, you would be the reason it gets built.

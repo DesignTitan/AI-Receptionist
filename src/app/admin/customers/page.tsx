@@ -1,4 +1,10 @@
-import { economics } from "@/lib/platform/pricing";
+import {
+  economics,
+  PILOT_CUSTOMERS,
+  PILOT_SETUP_CENTS,
+  SETUP_OFFER,
+  SETUP_SCOPE,
+} from "@/lib/platform/pricing";
 import { RemoteAction } from "@/components/platform/remote-action";
 import { Frame } from "@/components/platform/frame";
 import { requireStaff } from "@/lib/platform/server";
@@ -31,12 +37,44 @@ export default async function Customers() {
     .select("booking_id,stripe_state,stripe_error,settled_at,started_at")
     .or("stripe_state.eq.review,stripe_error.not.is.null,settled_at.is.null")
     .limit(50);
+  const pilot = await db
+    .from("pilot_setup_slots")
+    .select("slot,customer_id,redeemed");
+  const pilotRedeemed = pilot.data?.filter((slot) => slot.redeemed).length ?? 0;
+  const pilotReserved =
+    pilot.data?.filter((slot) => !slot.redeemed && slot.customer_id).length ??
+    0;
   return (
     <Frame
       eyebrow="Operator workspace"
       title="From first hello to open for business."
       description="Your customer setup queue. Payment, phone setup, and a successful test call all come before a business goes live."
     >
+      <section className="platform-panel mb-6">
+        <h2>Pilot setup places</h2>
+        <p>{SETUP_OFFER}</p>
+        {pilot.error ? (
+          <p>
+            Pilot availability is unavailable. Check the setup migration before
+            opening checkout.
+          </p>
+        ) : (
+          <p>
+            {pilotRedeemed} of {PILOT_CUSTOMERS} redeemed · {pilotReserved}{" "}
+            reserved at checkout ·{" "}
+            {pilot.data?.filter((slot) => !slot.redeemed && !slot.customer_id)
+              .length ?? 0}{" "}
+            available. Paid places stay used after cancellation or refund.
+          </p>
+        )}
+        <p>{SETUP_SCOPE}</p>
+        <p>
+          Keep direct onboarding costs within $150. A $299 pilot setup leaves
+          about $137.94 after that allowance and assumed 3.6% + 30¢ fees, before
+          shared overhead. Track actual setup time and expenses. Custom work
+          starting at $1,000 is separately scoped and quoted.
+        </p>
+      </section>
       <section className="platform-panel mb-6">
         <h2>Pricing and margin guardrails</h2>
         <p>
@@ -130,6 +168,11 @@ export default async function Customers() {
                 <h2 className="mt-4">{c.business_name}</h2>
                 <p>
                   {c.owner_email} · {PLANS[c.plan].name} · {c.config.areaCode}
+                </p>
+                <p>
+                  {c.setup_fee_cents != null
+                    ? `${c.setup_fee_cents === PILOT_SETUP_CENTS ? "Pilot setup" : "Setup"}: $${(c.setup_fee_cents / 100).toFixed(2)} · ${c.setup_paid_at ? "paid" : "reserved; payment pending"}`
+                    : "Setup fee will be confirmed when checkout starts."}
                 </p>
                 <details className="my-4">
                   <summary>Business setup details</summary>

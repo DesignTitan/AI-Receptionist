@@ -1,6 +1,12 @@
 /** Pricing v2: one source for the storefront, entitlement checks and Stripe catalogue. */
 export const PRICING_VERSION = "minutes-v2";
-export const SETUP_CENTS = 100000;
+export const SETUP_CENTS = 49900;
+export const PILOT_SETUP_CENTS = 29900;
+export const PILOT_CUSTOMERS = 10;
+export const SETUP_SCOPE =
+  "One business, booking-page configuration, dedicated phone setup and one test session. Custom integrations and extra work are quoted separately.";
+export const SETUP_OFFER =
+  "$299 pilot setup for the first 10 customers; $499 standard setup afterward. Availability and your exact fee are confirmed at checkout.";
 export const OVERAGE_CENTS = 49;
 export const MAX_CALL_MINUTES = 5;
 export const MAX_BUDGET_CENTS = 50000;
@@ -57,14 +63,16 @@ export function estimateOverage(minutes: number, plan: Plan) {
   return Math.max(0, minutes - PLANS[plan].minutes) * OVERAGE_CENTS;
 }
 export function recommendPlan(minutes: number, teamSize = 1): Plan {
-  return (Object.keys(PLANS) as Plan[]).filter(p => PLANS[p].teamLimit >= teamSize).reduce(
-    (best, p) =>
-      PLANS[p].monthly * 100 + estimateOverage(minutes, p) <
-      PLANS[best].monthly * 100 + estimateOverage(minutes, best)
-        ? p
-        : best,
-    "full",
-  );
+  return (Object.keys(PLANS) as Plan[])
+    .filter((p) => PLANS[p].teamLimit >= teamSize)
+    .reduce(
+      (best, p) =>
+        PLANS[p].monthly * 100 + estimateOverage(minutes, p) <
+        PLANS[best].monthly * 100 + estimateOverage(minutes, best)
+          ? p
+          : best,
+      "full",
+    );
 }
 /** Conservative planning, not guaranteed net profit. Provider rate includes a buffer above measured $0.145. */
 export function economics(

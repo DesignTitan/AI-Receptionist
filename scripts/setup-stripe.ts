@@ -4,12 +4,19 @@ import {
   PLANS,
   PRICING_VERSION,
   SETUP_CENTS,
+  PILOT_SETUP_CENTS,
+  SETUP_SCOPE,
+  SETUP_OFFER,
   OVERAGE_CENTS,
   planFeatures,
   type Plan,
 } from "../src/lib/platform/pricing.ts";
 const key = (
-  await readFile("/private/tmp/ai-receptionist-stripe-test-key", "utf8")
+  await readFile(
+    process.env.STRIPE_SETUP_KEY_FILE ??
+      "/private/tmp/ai-receptionist-stripe-test-key",
+    "utf8",
+  )
 ).trim();
 if (!key.startsWith("sk_test_")) throw Error("Sandbox key required");
 async function api(
@@ -63,7 +70,7 @@ async function product(
   features: string[] = [],
 ) {
   const list = await api(`products?ids[]=${id}`);
-  if (list.data.length) return list.data[0];
+
   const data: Record<string, string> = {
     id,
     name,
@@ -73,6 +80,10 @@ async function product(
   features
     .slice(0, 15)
     .forEach((f, i) => (data[`marketing_features[${i}][name]`] = f));
+  if (list.data.length) {
+    delete data.id;
+    return api(`products/${id}`, data);
+  }
   return api("products", data, id);
 }
 async function price(lookup: string, data: Record<string, string>) {
@@ -86,7 +97,7 @@ async function price(lookup: string, data: Record<string, string>) {
         lookup_key: lookup,
         "metadata[pricing_version]": PRICING_VERSION,
       },
-      lookup,
+      `price-${lookup}`,
     )
   );
 }
@@ -94,7 +105,7 @@ for (const [id, p] of Object.entries(PLANS) as [Plan, (typeof PLANS)[Plan]][]) {
   const prod = await product(
     `receptionist_${id}_v2`,
     `${p.name} — AI Receptionist`,
-    `${p.minutes} minutes per billing month; up to ${p.teamLimit} bookable team members, one location. About ${p.estimatedCalls} calls at two minutes each; call count is an estimate. $1,000 setup once. Extra minutes $0.49 each with your chosen spending limit.`,
+    `${p.minutes} minutes per billing month; up to ${p.teamLimit} bookable team members, one location. About ${p.estimatedCalls} calls at two minutes each; call count is an estimate. ${SETUP_OFFER} Extra minutes $0.49 each with your chosen spending limit.`,
     planFeatures(id),
   );
   const fixed = await price(`receptionist_${id}_monthly_v2`, {
@@ -136,9 +147,30 @@ env.STRIPE_PRICE_SETUP = (
   await price("receptionist_setup_once_v2", {
     product: setup.id,
     currency: "usd",
-    unit_amount: String(SETUP_CENTS),
+    unit_amount: "100000",
   })
 ).id;
+for (const [kind, amount, label] of [
+  ["pilot", PILOT_SETUP_CENTS, "Pilot setup — first 10 customers"],
+  ["standard", SETUP_CENTS, "Standard setup"],
+] as const) {
+  const p = await product(`receptionist_setup_${kind}_v3`, label, SETUP_SCOPE);
+  const entry = await price(`receptionist_setup_${kind}_v3`, {
+    product: p.id,
+    currency: "usd",
+    unit_amount: String(amount),
+  });
+  if (
+    entry.unit_amount !== amount ||
+    entry.currency !== "usd" ||
+    entry.recurring ||
+    entry.livemode ||
+    !entry.active
+  )
+    throw Error("Setup price mismatch");
+  env[`STRIPE_PRICE_SETUP_${kind.toUpperCase()}`] = entry.id;
+  console.log(`${label}: $${amount / 100} once, verified.`);
+}
 const url = "https://ai-receptionist-two-azure.vercel.app/api/webhooks/stripe";
 const hooks = await api("webhook_endpoints?limit=100");
 let hook = hooks.data.find((h: { url: string }) => h.url === url);

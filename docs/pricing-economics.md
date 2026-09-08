@@ -8,7 +8,9 @@ Effective for new subscriptions, 8 September 2026. USD, before tax. Sandbox unti
 | Busy desk | $399 | 750 | 375 | 10 |
 | Full desk | $749 | 1,500 | 750 | 20 |
 
-All plans include one location, branded online booking, dedicated confirmation number, AI confirmation calls, recordings/transcripts/summaries, flagged cancellation/reschedule requests, usage controls and email support. No calendar sync, multiple locations, unlimited calls or inbound receptionist service is promised. Setup is $1,000 once. Extra minutes are $0.49 each, disabled until the owner chooses a recurring extra-spend limit.
+All plans include one location, branded online booking, dedicated confirmation number, AI confirmation calls, recordings/transcripts/summaries, flagged cancellation/reschedule requests, usage controls and email support. No calendar sync, multiple locations, unlimited calls or inbound receptionist service is promised. Setup is $299 once for the first 10 pilot customers and $499 standard afterward. Availability and the exact setup fee are confirmed at checkout. Extra minutes are $0.49 each, disabled until the owner chooses a recurring extra-spend limit.
+
+Both setup prices cover one business, booking-page configuration, dedicated phone setup and one test session. Custom integrations and extra work require a separate scope and quote; substantial custom projects may start at $1,000, but are never added automatically to checkout. The monthly plans and included minutes are the same for pilot and standard customers.
 
 ## Cost assumptions and contribution
 
@@ -26,7 +28,13 @@ This is contribution, not guaranteed net profit. Shared hosting/database/voice s
 
 Historic sample: two demo calls indicated roughly $0.115 AI/minute + $0.03 telephony/rounded minute. That sample is not a contracted universal rate. The $0.20 allowance is a planning buffer; verify the selected model, telephony geography, number, concurrency and provider invoice before each launch. The staff dashboard shows the planning contribution and exposes unresolved usage; provider costs are retained when reported. Review actual total invoices monthly. If direct cost exceeds the model, adjust new-customer pricing or delivery cost before expanding.
 
-Setup leaves $963.70 after an assumed 3.6% + $0.30 fee, before labor. Budget no more than $450 setup labor and one-time expenses to retain roughly $514 contribution. Track actual time; this is a budget, not a measured guarantee.
+## Setup budget and pilot controls
+
+Keep direct onboarding labor and one-time expenses within $150 per business. At the conservative 3.6% + $0.30 fee assumption, the $299 pilot setup leaves $287.94 before onboarding costs and about $137.94 contribution after the $150 allowance. The $499 standard setup covers the same scope and leaves $480.74 before onboarding costs, or about $330.74 after that allowance. These figures exclude shared overhead and tax; track actual time and expenses for each customer instead of treating the target as a measured guarantee.
+
+The pilot discount is limited to 10 places. Checkout reserves a place atomically and freezes the quoted setup price for that attempt. Pending checkouts hold their places; only a Stripe-confirmed expired checkout can release an unpaid reservation. A confirmed setup payment permanently consumes the place, including after cancellation, refund or account deletion. An uncertain response requires reconciliation before release. This keeps concurrent signups from selling more than 10 discounted setups.
+
+Initial totals, including the first monthly plan and before tax, are $498/$698/$1,048 for pilot customers and $698/$898/$1,248 at standard setup pricing. Setup does not repeat on renewal. If delivery exceeds the $150 target, review the scope and actual effort before accepting more customers; the pilot discount is a bounded learning expense, not a promise of free custom work.
 
 ## Customer value and plan changes
 

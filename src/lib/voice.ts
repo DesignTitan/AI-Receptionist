@@ -1,4 +1,4 @@
-import { PLANS, OVERAGE_CENTS } from "./platform/pricing";
+import { PLANS, OVERAGE_CENTS, SETUP_OFFER, SETUP_SCOPE } from "./platform/pricing";
 import { env, isVoiceProviderConfigured } from "./env";
 import { providerLabel } from "@/lib/format";
 import { RECORDING_NOTICE } from "./consent";
@@ -24,7 +24,7 @@ How to run the call:
 1. Open with exactly: "${demoFirstMessage(call.demo_name)}"
 2. In two sentences, say what you do: when one of their clients books online, you phone the client inside a minute to confirm; you take reschedules and cancellations on the call; the recording, the transcript and a one-line summary land in their dashboard and their inbox.
 3. ${business ? `Say one concrete thing you would do for ${business}.` : "Ask what kind of business they run, then say one concrete thing you would do for it."}
-4. Ask if they have a question and answer it plainly. If it is about price: plans are $${PLANS.front.monthly} for ${PLANS.front.minutes} minutes, $${PLANS.busy.monthly} for ${PLANS.busy.minutes} minutes, and $${PLANS.full.monthly} for ${PLANS.full.minutes} minutes per month, plus $1,000 setup once. Extra minutes are ${OVERAGE_CENTS} cents per started minute only when the owner enables a spending limit. Each plan is for one location.
+4. Ask if they have a question and answer it plainly. If it is about price: plans are $${PLANS.front.monthly} for ${PLANS.front.minutes} minutes, $${PLANS.busy.monthly} for ${PLANS.busy.minutes} minutes, and $${PLANS.full.monthly} for ${PLANS.full.minutes} minutes per month. ${SETUP_OFFER} Setup is paid once. ${SETUP_SCOPE} Do not claim a pilot place is reserved for this caller. Extra minutes are ${OVERAGE_CENTS} cents per started minute only when the owner enables a spending limit. Each plan is for one location.
 5. Close: the site they are on has pricing and three live demos. Thank them and end the call.
 
 Rules: never take payment details. Never promise an integration that does not exist; there is no calendar sync yet, say it is on the roadmap. Never claim to be human; if asked, say you are an AI. Speak plainly and do not oversell.

@@ -3,6 +3,14 @@
 Handoff notes for the next session. Updated 2026-09-08. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — pilot setup offer (8 September 2026)
+
+- Bubs approved lowering setup: $299 for 10 pilot customers, then $499 standard setup; monthly $199/$399/$749 and 49¢ extra minutes are unchanged. Same fixed scope: one business, booking configuration, dedicated phone setup and one test session; custom work quoted separately.
+- Added atomic pilot reservations, immutable per-checkout setup fee/price, confirmed-expiry release and paid-invoice validation. Paid places stay consumed after cancellation/refund/deletion. Staff can see reserved/redeemed/available places; all storefront/signup/dashboard/demo script copy is aligned.
+- New Stripe sandbox setup prices are created and connected to Vercel. Production Supabase pilot migration is installed; all 10 places are available. Legacy issued $1,000 checkouts retain their original price.
+- Verification: 11 unit checks, all three SQL suites, simultaneous 11-customer allocation (10 pilot, 1 standard), and build pass. All six Stripe setup/plan checkout totals pass; actual paid sandbox setup invoices pass app validation; test subscriptions cancelled. Deployment/browser acceptance in progress.
+- Target direct onboarding cost is at most $150; $299 leaves about $137.94 after that cost and assumed fees, before shared overhead. Next: deploy, verify live screens, then finish email setup and authenticated customer/voice acceptance before live billing. Stripe remains test mode.
+
 ## Current handoff — minute pricing and Stripe sandbox (8 September 2026)
 
 - Built minutes-v2: $199/300 minutes, $399/750, $749/1,500; $1,000 setup; $0.49 extra started minute. Shared catalogue drives storefront, signup, checkout and staff limits. Cost model targets 51–52% contribution at full use, before shared overhead and tax.

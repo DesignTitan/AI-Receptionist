@@ -69,6 +69,7 @@ export async function verifyCheckoutPrices(
   plan: Plan,
   recurringId: string,
   setupId: string,
+  setupCents: number,
 ) {
   const [recurring, setup] = await Promise.all([
     stripe(`prices/${encodeURIComponent(recurringId)}`),
@@ -83,7 +84,7 @@ export async function verifyCheckoutPrices(
     recurring.recurring?.usage_type !== "licensed" ||
     !setup.active ||
     setup.currency !== "usd" ||
-    setup.unit_amount !== 100000 ||
+    setup.unit_amount !== setupCents ||
     setup.recurring
   )
     throw Error(

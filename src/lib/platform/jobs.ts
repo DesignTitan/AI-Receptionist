@@ -3,6 +3,7 @@ import { env } from "@/lib/env";
 import { formatDateTime } from "@/lib/time";
 import { RECORDING_NOTICE } from "@/lib/consent";
 import type { Customer, CustomerBooking } from "./model";
+import { releaseExpiredPilotCheckouts } from "./setup-offer";
 import { reportUsage } from "./usage";
 type Job = {
   notice_id: string | null;
@@ -163,6 +164,7 @@ async function dispatch(job: Job, c: Customer, b: CustomerBooking) {
   }
 }
 export async function runJobs() {
+  if(process.env.STRIPE_SECRET_KEY) await releaseExpiredPilotCheckouts();
   await reportUsage();
   const db = serviceClient();
   const { data, error } = await db.rpc("claim_customer_jobs", {

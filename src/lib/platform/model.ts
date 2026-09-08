@@ -35,6 +35,9 @@ export type Customer = {
   config: BusinessConfig;
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
+  setup_fee_cents: number | null;
+  setup_price_id: string | null;
+  setup_paid_at: string | null;
   checkout_attempt: string | null;
   checkout_expires: number | null;
   checkout_session_id: string | null;

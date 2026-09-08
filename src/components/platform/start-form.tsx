@@ -1,5 +1,5 @@
 "use client";
-import { COMMON_FEATURES } from "@/lib/platform/pricing";
+import { COMMON_FEATURES, SETUP_OFFER, SETUP_SCOPE } from "@/lib/platform/pricing";
 import { useState } from "react";
 import { PLANS, type Customer, type Plan } from "@/lib/platform/model";
 export function StartForm({
@@ -83,7 +83,10 @@ export function StartForm({
           ))}
         </div>
         <p className="platform-note">
-          $1,000 one-time setup. Extra minutes are 49¢, rounded up per call, and disabled until you authorize a spending limit. Unused minutes expire at renewal. Each plan serves one business location. Payment is collected securely by Stripe.
+          <strong>{SETUP_OFFER}</strong> Setup is paid once. {SETUP_SCOPE}
+        </p>
+        <p className="platform-note">
+          Extra minutes are 49¢, rounded up per call, and disabled until you authorize a spending limit. Unused minutes expire at renewal. Each plan serves one business location. Payment is collected securely by Stripe.
         </p>
       </fieldset>
       <ul className="platform-note">{COMMON_FEATURES.map(f=><li key={f}>{f}</li>)}<li>Up to {PLANS[chosen].teamLimit} bookable team members on this plan.</li></ul>

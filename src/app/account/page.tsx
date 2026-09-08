@@ -1,6 +1,12 @@
 import { UsageControls } from "@/components/platform/usage-panel";
 import { usageFor } from "@/lib/platform/usage";
-import { recommendPlan, OVERAGE_CENTS } from "@/lib/platform/pricing";
+import {
+  recommendPlan,
+  OVERAGE_CENTS,
+  PILOT_SETUP_CENTS,
+  SETUP_OFFER,
+  SETUP_SCOPE,
+} from "@/lib/platform/pricing";
 import Link from "next/link";
 import { Frame } from "@/components/platform/frame";
 import { RemoteAction } from "@/components/platform/remote-action";
@@ -117,7 +123,20 @@ export default async function Account() {
           Next recurring charge estimate:{" "}
           <strong>${(plan.monthly + extra / 100).toFixed(2)}</strong> before tax
           or credits. It combines the next month’s plan with this month’s extra
-          usage. Your $1,000 setup fee is paid once at checkout.
+          usage. Setup is charged once and does not repeat on renewal.
+        </p>
+        <p>
+          {c.setup_fee_cents != null ? (
+            <>
+              Your {c.setup_fee_cents === PILOT_SETUP_CENTS ? "pilot " : ""}
+              setup fee:{" "}
+              <strong>${(c.setup_fee_cents / 100).toFixed(2)}</strong>
+              {c.setup_paid_at ? " · paid." : " · payable at checkout."}
+            </>
+          ) : (
+            SETUP_OFFER
+          )}{" "}
+          {SETUP_SCOPE}
         </p>
         {period && used > 0 && elapsed >= 3 && (
           <p>

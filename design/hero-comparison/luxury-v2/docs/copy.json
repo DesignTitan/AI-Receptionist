@@ -1,0 +1,157 @@
+{
+  "version": "02",
+  "title": "AI Receptionist — Visual studies",
+  "defaultConcept": "04",
+  "product": {
+    "headline": "A booking. A confirmation call. A clear record.",
+    "description": "Customers book online. AI makes an outbound call to confirm the appointment. The owner sees the call record, and staff handle requests that need a person.",
+    "steps": [
+      {
+        "label": "Book online",
+        "detail": "The customer chooses an appointment through your booking page."
+      },
+      {
+        "label": "Call to confirm",
+        "detail": "AI follows up with an outbound confirmation call."
+      },
+      {
+        "label": "See the record",
+        "detail": "The owner can review the call outcome and transcript. Staff handle customer requests."
+      }
+    ]
+  },
+  "concepts": [
+    {
+      "id": "01",
+      "name": "Monolith",
+      "asset": "assets/01-monolith.png",
+      "headline": "Give your customer your full attention.",
+      "description": "While you are with a customer, others can book online. AI follows up with a confirmation call, and you can review the result.",
+      "alt": "A precision product photograph of an ordinary black smartphone on a seamless graphite shelf, with restrained cool light and a dark architectural composition.",
+      "cameraMotion": "A slow lateral move reveals the phone's edge. Cut cleanly to the booking, then the outbound call and the owner's record. The physical object stays familiar; the service is explained in readable interface text.",
+      "storyboard": [
+        {
+          "label": "A familiar object.",
+          "detail": "One measured camera move across the phone and graphite surface."
+        },
+        {
+          "label": "Booked online.",
+          "detail": "A clean cut introduces a customer choosing an appointment."
+        },
+        {
+          "label": "Called to confirm.",
+          "detail": "The appointment leads into a clearly identified outbound confirmation call."
+        },
+        {
+          "label": "The outcome, recorded.",
+          "detail": "The call record settles into the owner's dashboard."
+        }
+      ]
+    },
+    {
+      "id": "02",
+      "name": "Architecture",
+      "asset": "assets/02-architecture.png",
+      "headline": "Step away from the desk.",
+      "description": "Customers can choose an appointment online. AI calls to confirm, so the follow-up does not depend on you staying at the desk.",
+      "alt": "A full-scale boutique reception atrium with white-metal architectural surfaces, a precise reception desk, cool natural light and generous empty space.",
+      "cameraMotion": "Move slowly through the reception atrium toward the desk. Match its geometry to the online booking interface, then follow the outgoing call into the owner's dashboard. Keep the space full-scale and the movement deliberate.",
+      "storyboard": [
+        {
+          "label": "Space to arrive.",
+          "detail": "The camera enters a quiet, full-scale reception atrium."
+        },
+        {
+          "label": "Booked online.",
+          "detail": "The desk's geometry gives way to a simple booking interface."
+        },
+        {
+          "label": "Called to confirm.",
+          "detail": "An outbound call connects the appointment with the customer."
+        },
+        {
+          "label": "The outcome, recorded.",
+          "detail": "The owner's dashboard presents the appointment and call record."
+        }
+      ]
+    },
+    {
+      "id": "03",
+      "name": "Interface",
+      "asset": "assets/03-interface.png",
+      "headline": "Spend less time chasing confirmations.",
+      "description": "AI calls to confirm online bookings. You can review the call record and handle any requests that need a person.",
+      "alt": "A macro study of precisely aligned, separated smoked-glass software interface planes against a dark background, with clear spacing and subtle cool-white edge lighting.",
+      "cameraMotion": "Track along the edges of four aligned interface planes. Move between booking, call, transcript and summary, then return to a straight-on dashboard. Keep every movement on a clear axis and every final label in real interface text.",
+      "storyboard": [
+        {
+          "label": "The booking.",
+          "detail": "A single appointment establishes the starting point."
+        },
+        {
+          "label": "The structure.",
+          "detail": "Four software layers separate: booking, call, transcript and summary."
+        },
+        {
+          "label": "Called to confirm.",
+          "detail": "The camera isolates the outbound confirmation call within the layers."
+        },
+        {
+          "label": "The outcome, recorded.",
+          "detail": "The layers align into a readable dashboard and call record."
+        }
+      ]
+    },
+    {
+      "id": "04",
+      "name": "Evolution",
+      "asset": "assets/04-evolution.png",
+      "headline": "Take a break. Keep bookings moving.",
+      "description": "Customers book online. AI calls to confirm. You see the outcome when you return.",
+      "alt": "Three ordinary phones — a rotary desk phone, a push-button desk phone and a smartphone — arranged in a disciplined diagonal progression, photographed in graphite and titanium tones.",
+      "cameraMotion": "Use disciplined match cuts across the three phones for the first 20% of the proposed sequence. Give the remaining 80% to online booking, the outbound AI confirmation call and the owner's record. Match position and lighting between devices; keep each device's form intact.",
+      "storyboard": [
+        {
+          "label": "The hardware evolved.",
+          "detail": "Three familiar phones, connected by precise match cuts. The opening occupies 20% of the proposed sequence."
+        },
+        {
+          "label": "Booked online.",
+          "detail": "The smartphone introduces a customer selecting an appointment."
+        },
+        {
+          "label": "Called to confirm.",
+          "detail": "AI makes the outbound confirmation call for that booking."
+        },
+        {
+          "label": "The outcome, recorded.",
+          "detail": "The owner sees the call record. Staff handle requests that need a person."
+        }
+      ]
+    }
+  ],
+  "opening": {
+    "headline": "Step away. Bookings keep moving.",
+    "support": "Your customers book online. AI calls them to confirm. You see the outcome.",
+    "asset": "assets/05-time-back.png",
+    "alt": "A business owner taking a quiet coffee break on a coastal terrace, with a phone face down beside them and a wide view of the sea."
+  },
+  "benefits": [
+    {
+      "label": "With a customer",
+      "detail": "Give them your attention. Other customers can book online, with AI calling to confirm their appointments."
+    },
+    {
+      "label": "Away from the desk",
+      "detail": "Step out without taking booking follow-up with you. Customers book online and AI makes the confirmation call."
+    },
+    {
+      "label": "Taking a break",
+      "detail": "Enjoy a coffee or a little breathing room. Review the call outcome when you are ready."
+    },
+    {
+      "label": "Taking time off",
+      "detail": "Customers can still book online. Your appointment and call records stay together for you to review."
+    }
+  ]
+}

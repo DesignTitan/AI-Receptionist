@@ -1,8 +1,19 @@
 # Marketing hero directions — research and comparison
 
-Research date: 8 September 2026. Bubs subsequently approved developing all three concepts and adding phone evolution as a fourth, in 1:1 compositions. Four generated boards and an interactive still-frame viewer are ready at [design/hero-comparison/index.html](../design/hero-comparison/index.html). No final video or replacement hero has been produced.
+Research date: 8 September 2026. The latest revision is [the luxury, owner-benefit comparison](../design/hero-comparison/luxury-v2/index.html). The original four square storyboards remain archived below. No final video or replacement live hero has been produced.
 
-## Comparison update
+## Current revision: luxury imagery and time back
+
+Bubs rejected the first images as generic AI and requested clean, luxurious, futuristic art direction with the scale and restraint of SpaceX. The later Starlink reference clarified the message: show what the service lets owners do when busy, away from their desk, taking a break or taking time off.
+
+The [V2 visual comparison](../design/hero-comparison/luxury-v2/index.html) now opens with an owner enjoying a quiet coastal break and the headline **Step away. Bookings keep moving.** The explanation is immediate: **Your customers book online. AI calls them to confirm. You see the outcome.** Four concrete owner moments follow. Four refined technical directions remain available below: precision phone, full-scale reception architecture, aligned software layers and phone evolution. These are single square images, not four-scene contact sheets.
+
+SpaceX's [Starship page](https://www.spacex.com/vehicles/starship) informed photographic scale and restraint; [Starlink Roam](https://www.starlink.com/roam) informed the benefit-first narrative. All five images are original generated assets, with no copied brand media. Prompts, manifest and detailed reference interpretation are saved with V2. Browser review passed for desktop, keyboard controls and a 390px layout. Original V1 files remain intact.
+
+Next: refine the owner-benefit story and selected visual direction before connected motion production. For phone evolution, shorten the historical portion to roughly 20%, then devote 80% to the real booking/call/record journey. This supersedes the 45%/55% timing in the original comparison below. Keep the product obvious; avoid guarantees such as “never miss a booking,” inbound-answering claims and promises of full unattended operation.
+
+## Original comparison update (superseded art direction)
+
 
 The fourth direction holds a consistent camera and setting while a rotary phone becomes a push-button phone, then an ordinary smartphone. Its final scene expands into the current software workflow: online booking, an outbound AI confirmation call and the owner's dashboard. Proposed headline: **The phone evolved. Your follow-up is next.** Keep the device evolution to roughly 45% of the eventual sequence, reserving at least 55% for the product.
 

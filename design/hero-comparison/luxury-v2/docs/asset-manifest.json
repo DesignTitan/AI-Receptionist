@@ -1,0 +1,42 @@
+{
+  "created": "2026-09-08",
+  "tool": "Built-in image_gen",
+  "purpose": "Luxury art-direction and owner-benefit studies; not motion footage",
+  "assets": [
+    {
+      "file": "assets/01-monolith.png",
+      "width": 1254,
+      "height": 1254,
+      "aspectRatio": "1:1",
+      "sha256": "5d444ee7292793edd887c1469574106d212cbc344a16cc9d5585085ff645a469"
+    },
+    {
+      "file": "assets/02-architecture.png",
+      "width": 1254,
+      "height": 1254,
+      "aspectRatio": "1:1",
+      "sha256": "41ff8d6ead6176901c5e7ca5c2ba6ae4b16ed8c8014b7a73a8879d8bbee58de5"
+    },
+    {
+      "file": "assets/03-interface.png",
+      "width": 1254,
+      "height": 1254,
+      "aspectRatio": "1:1",
+      "sha256": "ef78b9e19da911be2160e784fa5fbeefd742906719c6231dc0433e740023dd6c"
+    },
+    {
+      "file": "assets/04-evolution.png",
+      "width": 1254,
+      "height": 1254,
+      "aspectRatio": "1:1",
+      "sha256": "270ed6c7803eef1e783c3a00c26bfe01d649f2aa3d5e24cf84fc0df5c1a50d2f"
+    },
+    {
+      "file": "assets/05-time-back.png",
+      "width": 1254,
+      "height": 1254,
+      "aspectRatio": "1:1",
+      "sha256": "98606477c5195730642a3da89d67f29ea721db30e4f65faef0e65a9e6efb37c3"
+    }
+  ]
+}

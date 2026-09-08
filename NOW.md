@@ -3,13 +3,13 @@
 Handoff notes for the next session. Updated 2026-09-08. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
-## Current handoff — four marketing hero storyboards (8 September 2026)
+## Current handoff — luxury imagery and owner-benefit story (8 September 2026)
 
-- Bubs approved developing all three proposed directions plus a fourth showing the phone evolving into the AI receptionist workflow. Interpreted the requested 1:1 as square compositions and prepared all four for comparison.
-- Created four square generated boards containing 16 scene studies: phone on stone, a miniature studio, booking layers and phone evolution. The offline interactive viewer is design/hero-comparison/index.html; prompts, copy and asset checksums are saved alongside it.
-- Browser review passed: shared scene selection, full storyboards, concept detail, Escape/focus return, and a 390px mobile layout with square images and no horizontal overflow. No browser errors. These are still-frame storyboards; no rendered video, application change or site deployment.
-- Next: Bubs compares the directions and chooses the overall story/opening composition; refine those keyframes and make a short connected motion test. For the fourth direction, spend about 45% on rotary/push-button/smartphone evolution and at least 55% showing online booking, an outbound AI confirmation call and the owner's record.
-- Keep the actual product clear: outbound confirmation calls after online booking, one business, and staff handling reschedule requests. Build final readable text and UI separately from generated scenery; plan portrait and reduced-motion versions. Public GitHub push remains pending the previously requested explicit publication approval after automatic review rejected it.
+- Bubs rejected the first concepts as generic AI imagery and requested clean, luxurious, futuristic SpaceX-like art direction. Further steering: use Starlink-style real-life benefits to sell time back when owners are busy, away from the desk, taking a break or taking time off. Inspected both official references.
+- Built design/hero-comparison/luxury-v2/index.html with five new square images: four refined technical directions and an owner taking a coastal coffee break. The human benefit leads: “Step away. Bookings keep moving.” Support: “Your customers book online. AI calls them to confirm. You see the outcome.” All four technical directions remain available in focus/compare views; V1 is preserved.
+- Saved exact image prompts, checksums, copy and reference rationale with V2. Visual review, browser controls, keyboard selection and 390px mobile checks pass; no page overflow or browser errors. Corrected mobile image framing and decorative loading announcements. These are still images and proposed sequences; no application change, video generation or deployment.
+- Next: review the benefit story and choose/refine the strongest visual direction, then develop connected story frames and a short motion test. Phone evolution should use precise cuts, with about 20% historical phones and 80% booking, outbound AI confirmation call and owner outcome. Keep customer value obvious throughout.
+- Preserve product truth: online bookings, outbound confirmation calls, owner records and human follow-up for requests. Do not promise inbound answering, guaranteed bookings, unlimited calls, customer team accounts or a fully unattended business. Public GitHub push remains blocked by the earlier automatic approval review of the public destination and awaits the previously requested explicit publication approval.
 
 ## Current handoff — customer pricing and Stripe live preparation (8 September 2026)
 

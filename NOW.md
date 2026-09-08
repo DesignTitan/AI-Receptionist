@@ -3,6 +3,14 @@
 Handoff notes for the next session. Updated 2026-09-07. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Just done — production storage connected (2026-09-07)
+
+- Added the existing Supabase `service_role` key as sensitive `SUPABASE_SERVICE_ROLE_KEY` on Vercel Production with the owner's explicit approval; no secret is stored in the repo.
+- Redeployed successfully: `ai-receptionist-52weqrm2v-bubs-1063s-projects.vercel.app`, aliased to the existing production domain. Production build and TypeScript checks passed; application source unchanged (59594fe).
+- Verified through the live browser: salon booking `SS-95YG2Q` reached confirmation, survived a full reload, and appeared under Solstice Salon & Spa in admin. A direct database read independently confirmed the saved appointment.
+- The fictional `Production Persistence Test` used a reserved test phone number and no email; its call failed, so this was a storage test, not a successful real-call test. Cancelled the test booking after verification to free the slot; retained the labelled record as evidence.
+- Nothing remains in progress for storage. Next: Resend + `OWNER_EMAIL`, dedicated voice number, webhook-secret rotation, and a non-default admin password before public access. The site remains locked.
+
 ## Just done (2026-09-03 → 07)
 
 - **Navigation.** A floating nav at the top of the homepage, `src/components/marketing/site-nav.tsx`,
@@ -77,7 +85,7 @@ the dated plan is docs/ROADMAP.md.
 - **Still open, owner only, in order (all on the runbook with dates):** buy Ava a US number in
   OmniDimension by Fri 26 Sep and put its id on Vercel; Early deployers plan + request voicemail
   detection; rotate `VOICE_WEBHOOK_SECRET` (the token has been visible in logs);
-  `SUPABASE_SERVICE_ROLE_KEY` on Vercel; Resend + `OWNER_EMAIL`; product name + domain.
+  Resend + `OWNER_EMAIL`; product name + domain. Supabase service key completed 7 Sep.
 
 ## Earlier on 2026-09-02
 
@@ -256,17 +264,14 @@ Nothing half-finished. The repo is committed and builds clean.
   default). Unlock at `/login`. Flip `SITE_GATE` to `public` (or remove it) and redeploy to
   open the marketing site to the world.
 - Project `bubs-1063s-projects/ai-receptionist`. Every deploy this week went out with
-  `npx vercel --prod` after the push; production is at commit ec05439. Env vars: `vercel env ls`.
-  On Vercel now: Supabase URL + anon key, `ADMIN_SESSION_SECRET`, `SITE_GATE`, `VOICE_PROVIDER`,
+  `npx vercel --prod` after the push; latest application source is 59594fe, redeployed 7 Sep with durable storage. Env vars: `vercel env ls`.
+  On Vercel now: Supabase URL + anon key + sensitive service-role key, `ADMIN_SESSION_SECRET`, `SITE_GATE`, `VOICE_PROVIDER`,
   `OMNIDIMENSION_API_KEY`, `OMNIDIMENSION_AGENT_ID`, `VOICE_WEBHOOK_SECRET`, both Turnstile keys.
 - What's live: the product marketing site at `/`, `/demos`, three themed demos at
   `/demo/{medical,salon,studio}`, the shared staff dashboard at `/admin` (password
   `demo1234` = `ADMIN_PASSWORD` default — shown on the sign-in screen while it's the default).
-- **Known limitation (unchanged, now documented on the site's FAQ too):** production runs the
-  in-memory demo store. Booking returns 201, but the confirmation page 404s because the next
-  request lands on a different serverless instance. **Marketing pages are fine; demo bookings
-  do not complete in production until Supabase is wired.** Local (`npm run build && npm start`)
-  is a single process and works end to end — that's how every chunk was verified.
+- **Production storage fixed (7 Sep):** bookings now persist in Supabase. The live salon booking,
+  confirmation-page reload and admin record all passed. The former cross-request 404 is resolved.
 
 ## Onboarding a customer (concierge, per the business plan)
 
@@ -276,7 +281,7 @@ Intake → `src/verticals/<slug>/` (copy the salon's four files) → their Supab
 Resend + voice keys → phone number in the voice provider + `VOICE_WEBHOOK_SECRET` → test call with
 them on the line → `book.theirdomain.com` CNAME → invoice. Full runbook in the plan, Part 3.
 
-## Next — ONE step left to make production durable
+## Production storage — completed 2026-09-07
 
 **Supabase is live** (created 2026-09-02, $10/mo, DesignTitan's Org):
 - project `ai-receptionist`, ref `ddbldxsyvrqrlvtainzn`, region us-east-1,
@@ -288,20 +293,9 @@ them on the line → `book.theirdomain.com` CNAME → invoice. Full runbook in t
 - Already on Vercel production: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
   (the `sb_publishable_…` key), a fresh `ADMIN_SESSION_SECRET`, `SITE_GATE=locked`.
 
-**Missing: `SUPABASE_SERVICE_ROLE_KEY`.** The app only switches from the in-memory demo store to
-Supabase when this is set (`isSupabaseConfigured()` in `src/lib/env.ts`). It is a secret, so it
-has to be added by a person, not pasted into a chat. Three attempts on 2026-09-02 did not land it
-on the project — check with the self-test below before assuming it worked.
-
-```bash
-cd /Users/bubs2/Code/AI-Receptionist
-npx vercel env add SUPABASE_SERVICE_ROLE_KEY production   # prompts; paste the service_role secret
-npx vercel env ls production | grep SUPABASE_SERVICE_ROLE_KEY   # ← must print a line. If not, it didn't land.
-npx vercel --prod                                          # env vars only apply to a new build
-```
-Where the secret is: Supabase dashboard → project ai-receptionist → Project Settings → API keys →
-`service_role`. Then the acceptance test: unlock the site (`bubs2026`), book in any demo, and
-**reload the confirmation page** — it must stay 200. Then `/admin` shows the row under its business.
+**Completed: `SUPABASE_SERVICE_ROLE_KEY`.** Added as a sensitive Production variable and
+redeployed. Acceptance test passed: the live booking confirmation survives reload and the
+record is visible in Supabase and admin. Older notes about the missing key are historical.
 
 Also set `ADMIN_PASSWORD` (still the default `demo1234` — fine while the site is locked, not after)
 and flip `SITE_GATE` to `public` when you want the marketing site open.
@@ -312,7 +306,7 @@ Vercel, and two real calls have completed end to end. Still missing for a real c
 number (calls leave from the platform's shared pool) and Resend + `OWNER_EMAIL` so the lead and
 call-summary emails actually arrive.
 
-Everything else, in priority order once Supabase is in:
+Remaining launch work, in priority order:
 - Sales motion is decided (three call-volume plans on the site, concierge behind a self-serve
   front at launch, docs/ROADMAP.md). Calendar sync stays "not yet" until a customer makes it a
   condition. The `callMetadata` keys in `src/lib/voice.ts` stay frozen (additive only).

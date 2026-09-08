@@ -1,3 +1,4 @@
+import { stripeConfiguration, assertStripeObjectMode } from "./billing-mode.ts";
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { PLANS, planOf, type Plan } from "./model.ts";
 
@@ -30,12 +31,11 @@ export async function stripe(
   body?: URLSearchParams,
   idempotencyKey?: string,
 ) {
-  const key = process.env.STRIPE_SECRET_KEY;
-  if (!key)
-    throw Error("Payments are not open yet. Your business details are saved.");
+  const { key, mode } = stripeConfiguration();
   const response = await fetch(`https://api.stripe.com/v1/${path}`, {
     method: body ? "POST" : "GET",
     cache: "no-store",
+    signal: AbortSignal.timeout(15000),
     headers: {
       Authorization: `Bearer ${key}`,
       ...(body ? { "Content-Type": "application/x-www-form-urlencoded" } : {}),
@@ -48,6 +48,7 @@ export async function stripe(
     throw Error(
       "The payment provider could not complete this request. Please try again.",
     );
+  assertStripeObjectMode(result, mode);
   return result;
 }
 export function priceId(plan: Plan) {

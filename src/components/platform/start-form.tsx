@@ -1,5 +1,10 @@
 "use client";
-import { COMMON_FEATURES, SETUP_OFFER, SETUP_SCOPE } from "@/lib/platform/pricing";
+import {
+  COMMON_FEATURES,
+  PILOT_SETUP_CENTS,
+  SETUP_CENTS,
+  SETUP_OFFER,
+} from "@/lib/platform/pricing";
 import { useState } from "react";
 import { PLANS, type Customer, type Plan } from "@/lib/platform/model";
 export function StartForm({
@@ -78,18 +83,86 @@ export function StartForm({
                 ${p.monthly}
                 <small style={{ fontSize: 13, fontWeight: 400 }}>/mo</small>
               </strong>
-              <span>{p.minutes.toLocaleString()} minutes included · about {p.estimatedCalls} two-minute calls</span>
+              <span>{p.minutes.toLocaleString()} minutes included</span>
+              <span>
+                Estimated {p.estimatedCalls} calls at two minutes each
+              </span>
             </label>
           ))}
         </div>
+        <p className="platform-note">{SETUP_OFFER}</p>
+        <section
+          className="platform-panel"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <h2>Your {PLANS[chosen].name} payment breakdown</h2>
+          <div className="platform-table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Charge</th>
+                  <th scope="col">Pilot setup</th>
+                  <th scope="col">Standard setup</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">First month</th>
+                  <td>${PLANS[chosen].monthly}</td>
+                  <td>${PLANS[chosen].monthly}</td>
+                </tr>
+                <tr>
+                  <th scope="row">One-time setup</th>
+                  <td>${PILOT_SETUP_CENTS / 100}</td>
+                  <td>${SETUP_CENTS / 100}</td>
+                </tr>
+                <tr>
+                  <th scope="row">First payment</th>
+                  <td>
+                    <strong>
+                      $
+                      {(
+                        PLANS[chosen].monthly +
+                        PILOT_SETUP_CENTS / 100
+                      ).toLocaleString()}
+                    </strong>
+                  </td>
+                  <td>
+                    <strong>
+                      $
+                      {(
+                        PLANS[chosen].monthly +
+                        SETUP_CENTS / 100
+                      ).toLocaleString()}
+                    </strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            <strong>Then ${PLANS[chosen].monthly}/month.</strong> Setup does not
+            repeat. Amounts are in USD, before tax and any extra minutes you
+            authorize. You will see your confirmed setup price before paying.
+          </p>
+        </section>
         <p className="platform-note">
-          <strong>{SETUP_OFFER}</strong> Setup is paid once. {SETUP_SCOPE}
-        </p>
-        <p className="platform-note">
-          Extra minutes are 49¢, rounded up per call, and disabled until you authorize a spending limit. Unused minutes expire at renewal. Each plan serves one business location. Payment is collected securely by Stripe.
+          Your allowance is measured in minutes; call counts are estimates. Each
+          call rounds up separately. Extra minutes are 49¢, and disabled until
+          you authorize a spending limit. Unused minutes expire at renewal. Each
+          plan serves one business location. Payment is collected securely by
+          Stripe.
         </p>
       </fieldset>
-      <ul className="platform-note">{COMMON_FEATURES.map(f=><li key={f}>{f}</li>)}<li>Up to {PLANS[chosen].teamLimit} bookable team members on this plan.</li></ul>
+      <ul className="platform-note">
+        {COMMON_FEATURES.map((f) => (
+          <li key={f}>{f}</li>
+        ))}
+        <li>
+          Up to {PLANS[chosen].teamLimit} bookable team members on this plan.
+        </li>
+      </ul>
       <fieldset>
         <legend>02 — Meet your business</legend>
         <div className="platform-fields">

@@ -1,5 +1,9 @@
-// Sandbox only. Reruns reuse stable product IDs, price lookup keys, meter names and endpoint URL.
-import { readFile, writeFile } from "node:fs/promises";
+// Verify by default. --apply creates/repairs the catalogue in the explicitly selected account.
+import { readFile, writeFile, rename, chmod } from "node:fs/promises";
+import { parseArgs } from "node:util";
+import { resolve, dirname, relative } from "node:path";
+import { fileURLToPath } from "node:url";
+import { createHash, randomUUID } from "node:crypto";
 import {
   PLANS,
   PRICING_VERSION,
@@ -11,27 +15,84 @@ import {
   planFeatures,
   type Plan,
 } from "../src/lib/platform/pricing.ts";
-const key = (
-  await readFile(
-    process.env.STRIPE_SETUP_KEY_FILE ??
-      "/private/tmp/ai-receptionist-stripe-test-key",
-    "utf8",
-  )
-).trim();
-if (!key.startsWith("sk_test_")) throw Error("Sandbox key required");
+import { stripeConfiguration } from "../src/lib/platform/billing-mode.ts";
+import {
+  validateFixedPrice,
+  validateUsagePrice,
+  validateMeter,
+  validateWebhook,
+  validatePortal,
+  STRIPE_EVENTS,
+} from "../src/lib/platform/stripe-catalogue.ts";
+const { values: v } = parseArgs({
+  options: {
+    mode: { type: "string" },
+    account: { type: "string" },
+    site: { type: "string" },
+    "key-file": { type: "string" },
+    out: { type: "string" },
+    apply: { type: "boolean", default: false },
+    help: { type: "boolean" },
+  },
+});
+if (v.help) {
+  console.log(
+    "npm run stripe:setup -- --mode test|live --account acct_... --site https://your-site [--key-file /secure/key] [--out /secure/stripe.json] [--apply]\nDefault: verify existing Stripe configuration without changes. --apply: create missing products/prices/meter and repair webhook/portal settings. Credentials are never printed.",
+  );
+  process.exit(0);
+}
+if (!v.mode || !v.account || !v.site)
+  throw Error("--mode, --account and --site are required. Use --help.");
+const siteURL = new URL(v.site);
+if (
+  siteURL.protocol !== "https:" ||
+  siteURL.username ||
+  siteURL.password ||
+  siteURL.pathname !== "/" ||
+  siteURL.search ||
+  siteURL.hash
+)
+  throw Error(
+    "--site must be an HTTPS origin with no path, credentials, query or fragment.",
+  );
+const site = siteURL.origin;
+const rawKey = v["key-file"]
+  ? (await readFile(v["key-file"], "utf8")).trim()
+  : process.env.STRIPE_SECRET_KEY;
+const {
+  mode,
+  key,
+  account: accountId,
+} = stripeConfiguration({
+  ...process.env,
+  STRIPE_MODE: v.mode,
+  STRIPE_ACCOUNT_ID: v.account,
+  STRIPE_SECRET_KEY: rawKey,
+});
+const out = resolve(
+  v.out ?? `/private/tmp/ai-receptionist-stripe-${mode}-${accountId}.json`,
+);
+const repo = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+if (!relative(repo, out).startsWith(".."))
+  throw Error("Write the credential manifest outside the repository.");
+const siteKey = createHash("sha256").update(site).digest("hex").slice(0, 12);
 async function api(
   path: string,
   data?: Record<string, string>,
   idempotency?: string,
 ) {
+  if (data && !v.apply) throw Error("Read-only check cannot modify Stripe.");
   const r = await fetch(`https://api.stripe.com/v1/${path}`, {
     method: data ? "POST" : "GET",
     headers: {
       Authorization: `Bearer ${key}`,
       ...(data ? { "Content-Type": "application/x-www-form-urlencoded" } : {}),
-      ...(idempotency ? { "Idempotency-Key": idempotency } : {}),
+      ...(idempotency
+        ? { "Idempotency-Key": `${mode}-${accountId}-${idempotency}` }
+        : {}),
     },
     body: data ? new URLSearchParams(data) : undefined,
+    signal: AbortSignal.timeout(20000),
   });
   const j = await r.json();
   if (!r.ok)
@@ -39,9 +100,12 @@ async function api(
   return j;
 }
 const account = await api("account");
-if (account.id !== "acct_1UDNPDPicyLxgU34")
-  throw Error("Wrong Stripe sandbox account");
+if (account.id !== accountId)
+  throw Error("Key belongs to a different Stripe account.");
+console.log(`Checking ${mode} mode, account ${accountId}, site ${site}.`);
 const env: Record<string, string> = {
+  STRIPE_MODE: mode,
+  STRIPE_ACCOUNT_ID: accountId,
   STRIPE_SECRET_KEY: key,
   STRIPE_METER_EVENT: "receptionist_minutes_v2",
 };
@@ -49,7 +113,11 @@ const meters = await api("billing/meters?limit=100");
 let meter = meters.data.find(
   (m: { event_name: string }) => m.event_name === env.STRIPE_METER_EVENT,
 );
-if (!meter)
+if (!meter) {
+  if (!v.apply)
+    throw Error(
+      "Meter missing. Run the same command with --apply to configure it.",
+    );
   meter = await api(
     "billing/meters",
     {
@@ -60,8 +128,10 @@ if (!meter)
       "customer_mapping[event_payload_key]": "stripe_customer_id",
       "value_settings[event_payload_key]": "value",
     },
-    "receptionist-meter-v2",
+    "meter-v2",
   );
+}
+validateMeter(meter);
 env.STRIPE_METER_ID = meter.id;
 async function product(
   id: string,
@@ -70,27 +140,40 @@ async function product(
   features: string[] = [],
 ) {
   const list = await api(`products?ids[]=${id}`);
-
+  const old = list.data[0];
+  if (!v.apply) {
+    if (
+      !old ||
+      !old.active ||
+      old.name !== name ||
+      old.description !== description ||
+      features.some(
+        (f) =>
+          !old.marketing_features?.some((x: { name: string }) => x.name === f),
+      )
+    )
+      throw Error(
+        `Product ${name} is missing or needs its customer copy updated; use --apply.`,
+      );
+    return old;
+  }
   const data: Record<string, string> = {
-    id,
     name,
     description,
+    active: "true",
     "metadata[pricing_version]": PRICING_VERSION,
   };
-  features
-    .slice(0, 15)
-    .forEach((f, i) => (data[`marketing_features[${i}][name]`] = f));
-  if (list.data.length) {
-    delete data.id;
-    return api(`products/${id}`, data);
-  }
-  return api("products", data, id);
+  features.forEach((f, i) => (data[`marketing_features[${i}][name]`] = f));
+  return old
+    ? api(`products/${old.id}`, data)
+    : api("products", { id, ...data }, `product-${id}`);
 }
 async function price(lookup: string, data: Record<string, string>) {
   const list = await api(`prices?lookup_keys[]=${lookup}`);
-  return (
-    list.data[0] ??
-    api(
+  let p = list.data[0];
+  if (!p) {
+    if (!v.apply) throw Error(`Price ${lookup} missing; use --apply.`);
+    p = await api(
       "prices",
       {
         ...data,
@@ -98,8 +181,11 @@ async function price(lookup: string, data: Record<string, string>) {
         "metadata[pricing_version]": PRICING_VERSION,
       },
       `price-${lookup}`,
-    )
-  );
+    );
+  }
+  if (p.product !== data.product)
+    throw Error("Price product mismatch; create a reviewed new version.");
+  return p;
 }
 for (const [id, p] of Object.entries(PLANS) as [Plan, (typeof PLANS)[Plan]][]) {
   const prod = await product(
@@ -114,6 +200,7 @@ for (const [id, p] of Object.entries(PLANS) as [Plan, (typeof PLANS)[Plan]][]) {
     unit_amount: String(p.monthly * 100),
     "recurring[interval]": "month",
   });
+  validateFixedPrice(fixed, p.monthly * 100, true, mode);
   env[`STRIPE_PRICE_${id.toUpperCase()}`] = fixed.id;
   const up = await product(
     `receptionist_${id}_minutes_v2`,
@@ -133,99 +220,136 @@ for (const [id, p] of Object.entries(PLANS) as [Plan, (typeof PLANS)[Plan]][]) {
     "tiers[1][up_to]": "inf",
     "tiers[1][unit_amount]": String(OVERAGE_CENTS),
   });
+  validateUsagePrice(
+    await api(`prices/${usage.id}?expand[]=tiers`),
+    id,
+    meter.id,
+    mode,
+  );
   env[`STRIPE_USAGE_${id.toUpperCase()}`] = usage.id;
   console.log(
-    `${p.name}: $${p.monthly}/month, ${p.minutes} minutes, $0.49 overage; catalogue created/verified.`,
+    `${p.name}: monthly price, included minutes and overage verified.`,
   );
 }
-const setup = await product(
-  "receptionist_setup_v2",
-  "AI Receptionist setup",
-  "One-time business intake, booking-page configuration, dedicated phone/agent setup and a test call before launch. One location.",
-);
-env.STRIPE_PRICE_SETUP = (
-  await price("receptionist_setup_once_v2", {
-    product: setup.id,
-    currency: "usd",
-    unit_amount: "100000",
-  })
-).id;
 for (const [kind, amount, label] of [
   ["pilot", PILOT_SETUP_CENTS, "Pilot setup — first 10 customers"],
   ["standard", SETUP_CENTS, "Standard setup"],
 ] as const) {
-  const p = await product(`receptionist_setup_${kind}_v3`, label, SETUP_SCOPE);
-  const entry = await price(`receptionist_setup_${kind}_v3`, {
-    product: p.id,
+  const prod = await product(
+    `receptionist_setup_${kind}_v3`,
+    label,
+    SETUP_SCOPE,
+  );
+  const p = await price(`receptionist_setup_${kind}_v3`, {
+    product: prod.id,
     currency: "usd",
     unit_amount: String(amount),
   });
-  if (
-    entry.unit_amount !== amount ||
-    entry.currency !== "usd" ||
-    entry.recurring ||
-    entry.livemode ||
-    !entry.active
-  )
-    throw Error("Setup price mismatch");
-  env[`STRIPE_PRICE_SETUP_${kind.toUpperCase()}`] = entry.id;
-  console.log(`${label}: $${amount / 100} once, verified.`);
+  validateFixedPrice(p, amount, false, mode);
+  env[`STRIPE_PRICE_SETUP_${kind.toUpperCase()}`] = p.id;
 }
-const url = "https://ai-receptionist-two-azure.vercel.app/api/webhooks/stripe";
+// Legacy $1,000 is never created in a fresh account; retain only when already present.
+const legacy = await api("prices?lookup_keys[]=receptionist_setup_once_v2");
+if (legacy.data[0]) {
+  validateFixedPrice(legacy.data[0], 100000, false, mode);
+  env.STRIPE_PRICE_SETUP = legacy.data[0].id;
+}
+const url = `${site}/api/webhooks/stripe`;
 const hooks = await api("webhook_endpoints?limit=100");
-let hook = hooks.data.find((h: { url: string }) => h.url === url);
+const matches = hooks.data.filter((h: { url: string }) => h.url === url);
+if (matches.length > 1)
+  throw Error(
+    "Multiple webhook endpoints for this site; reconcile duplicate deliveries first.",
+  );
+let hook = matches[0];
+const hookData: Record<string, string> = {
+  url,
+  description: `AI Receptionist ${mode} subscriptions and metered minutes`,
+};
+STRIPE_EVENTS.forEach((s, i) => (hookData[`enabled_events[${i}]`] = s));
 if (!hook) {
-  const d: Record<string, string> = {
-    url,
-    description: "AI Receptionist sandbox subscriptions and metered minutes",
-  };
-  [
-    "checkout.session.completed",
-    "checkout.session.async_payment_succeeded",
-    "customer.subscription.created",
-    "customer.subscription.updated",
-    "customer.subscription.deleted",
-    "invoice.paid",
-    "invoice.payment_failed",
-  ].forEach((s, i) => (d[`enabled_events[${i}]`] = s));
-  hook = await api("webhook_endpoints", d, "receptionist-webhook-v2");
-}
-if (hook.secret) env.STRIPE_WEBHOOK_SECRET = hook.secret;
-else {
-  try {
-    const saved = JSON.parse(
-      await readFile("/private/tmp/ai-receptionist-stripe-env.json", "utf8"),
-    );
-    if (saved.STRIPE_SECRET_KEY === key)
-      env.STRIPE_WEBHOOK_SECRET = saved.STRIPE_WEBHOOK_SECRET;
-  } catch {}
-}
+  if (!v.apply) throw Error("Webhook missing; use --apply.");
+  hook = await api("webhook_endpoints", hookData, `webhook-v2-${siteKey}`);
+} else if (v.apply)
+  hook = await api(`webhook_endpoints/${hook.id}`, {
+    ...hookData,
+    disabled: "false",
+  });
+validateWebhook(hook, url);
+env.STRIPE_WEBHOOK_ENDPOINT = hook.id;
+let saved: any = null;
+try {
+  saved = JSON.parse(await readFile(out, "utf8"));
+} catch {}
+const same =
+  saved?.STRIPE_MODE === mode &&
+  saved?.STRIPE_ACCOUNT_ID === accountId &&
+  saved?.STRIPE_WEBHOOK_ENDPOINT === hook.id;
+const envMatches =
+  process.env.STRIPE_MODE === mode &&
+  process.env.STRIPE_ACCOUNT_ID === accountId &&
+  process.env.STRIPE_WEBHOOK_ENDPOINT === hook.id;
+const secret =
+  hook.secret ??
+  (envMatches ? process.env.STRIPE_WEBHOOK_SECRET : undefined) ??
+  (same ? saved.STRIPE_WEBHOOK_SECRET : undefined);
+if (secret?.startsWith("whsec_")) env.STRIPE_WEBHOOK_SECRET = secret;
 const configs = await api("billing_portal/configurations?limit=100");
 let portal = configs.data.find(
-  (x: { metadata?: { app?: string } }) => x.metadata?.app === "receptionist-v2",
+  (p: { metadata?: { app?: string }; default_return_url?: string }) =>
+    p.metadata?.app === "receptionist-v2" &&
+    p.default_return_url === `${site}/account`,
 );
-if (!portal)
+const portalData = {
+  "business_profile[headline]": "Manage your AI Receptionist subscription",
+  "features[payment_method_update][enabled]": "true",
+  "features[invoice_history][enabled]": "true",
+  "features[subscription_cancel][enabled]": "true",
+  "features[subscription_cancel][mode]": "at_period_end",
+  "features[subscription_update][enabled]": "false",
+  "metadata[app]": "receptionist-v2",
+  default_return_url: `${site}/account`,
+};
+if (!portal) {
+  if (!v.apply) throw Error("Billing portal missing; use --apply.");
   portal = await api(
     "billing_portal/configurations",
-    {
-      "business_profile[headline]": "Manage your AI Receptionist subscription",
-      "features[payment_method_update][enabled]": "true",
-      "features[invoice_history][enabled]": "true",
-      "features[subscription_cancel][enabled]": "true",
-      "features[subscription_cancel][mode]": "at_period_end",
-      "features[subscription_update][enabled]": "false",
-      "metadata[app]": "receptionist-v2",
-      default_return_url:
-        "https://ai-receptionist-two-azure.vercel.app/account",
-    },
-    "receptionist-portal-v2",
+    portalData,
+    `portal-v2-${siteKey}`,
   );
+} else if (v.apply)
+  portal = await api(`billing_portal/configurations/${portal.id}`, {
+    ...portalData,
+    active: "true",
+  });
+validatePortal(portal, site);
 env.STRIPE_PORTAL_CONFIGURATION = portal.id;
-await writeFile(
-  "/private/tmp/ai-receptionist-stripe-env.json",
-  JSON.stringify(env),
-  { mode: 0o600 },
-);
-console.log(
-  "Catalogue, meter, billing portal and webhook prepared. Credentials saved to protected temporary file.",
-);
+if (v.apply) {
+  const tmp = `${out}.${randomUUID()}.tmp`;
+  await writeFile(tmp, JSON.stringify(env, null, 2), {
+    mode: 0o600,
+    flag: "wx",
+  });
+  await rename(tmp, out);
+  await chmod(out, 0o600);
+  console.log(
+    `Protected configuration written to ${out}. No Vercel settings were changed.`,
+  );
+}
+console.log("Catalogue, meter, webhook events and billing portal verified.");
+if (!env.STRIPE_WEBHOOK_SECRET)
+  console.log(
+    "Action needed: get the signing secret for this exact webhook endpoint from Stripe. It cannot be retrieved by API after creation. Keep the existing Vercel secret during a same-account check.",
+  );
+if (
+  mode === "live" &&
+  (!account.charges_enabled ||
+    !account.payouts_enabled ||
+    !account.details_submitted)
+) {
+  console.log(
+    "Action needed: finish Stripe live account activation before accepting payment.",
+  );
+  process.exitCode = 2;
+}
+if (!env.STRIPE_WEBHOOK_SECRET) process.exitCode = 2;

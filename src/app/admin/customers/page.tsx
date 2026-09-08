@@ -12,9 +12,22 @@ import { serviceClient } from "@/lib/supabase";
 import { CustomerControls } from "@/components/platform/customer-controls";
 import type { Customer } from "@/lib/platform/model";
 import { PLANS } from "@/lib/platform/model";
+import { billingMode } from "@/lib/platform/billing-mode";
+import { BillingReadiness } from "@/components/platform/billing-readiness";
 export const dynamic = "force-dynamic";
 export default async function Customers() {
   await requireStaff();
+  let mode: ReturnType<typeof billingMode> | null = null;
+  try {
+    mode = billingMode();
+  } catch {
+    /* Keep diagnostics available for a bad setting. */
+  }
+  const configuredAccount = process.env.STRIPE_ACCOUNT_ID;
+  const accountLabel =
+    configuredAccount && /^acct_[A-Za-z0-9]+$/.test(configuredAccount)
+      ? configuredAccount
+      : "Not configured correctly";
   const db = serviceClient();
   const { data, error } = await db
     .from("customers")
@@ -50,6 +63,14 @@ export default async function Customers() {
       title="From first hello to open for business."
       description="Your customer setup queue. Payment, phone setup, and a successful test call all come before a business goes live."
     >
+      <section className="platform-panel mb-6">
+        <h2>{mode ? `Stripe ${mode} mode` : "Stripe mode needs review"}</h2>
+        <p>Account: {accountLabel}</p>
+        <p>
+          API key: {process.env.STRIPE_SECRET_KEY ? "configured" : "missing"}.
+        </p>
+        <BillingReadiness />
+      </section>
       <section className="platform-panel mb-6">
         <h2>Pilot setup places</h2>
         <p>{SETUP_OFFER}</p>

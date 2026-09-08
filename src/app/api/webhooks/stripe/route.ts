@@ -1,3 +1,5 @@
+import { assertBillingEnvironment } from "@/lib/platform/billing-environment";
+import { billingMode } from "@/lib/platform/billing-mode";
 import { verifySetupInvoice } from "@/lib/platform/setup-payment";
 import { runJobs } from "@/lib/platform/jobs";
 import { after } from "next/server";
@@ -21,6 +23,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   try {
     const event = JSON.parse(raw);
+    if (event.livemode !== (billingMode() === "live"))
+      return NextResponse.json(
+        { error: "Incorrect billing mode" },
+        { status: 400 },
+      );
     const object = event.data?.object;
     const accepted = [
       "checkout.session.completed",
@@ -40,6 +47,7 @@ export async function POST(request: Request) {
         : object.parent?.subscription_details?.subscription;
     if (!subscriptionId) return NextResponse.json({ received: true });
     // Fetch current state: late or reordered events cannot restore an old plan/status.
+    const billing = await assertBillingEnvironment();
     const sub = await stripe(
       `subscriptions/${encodeURIComponent(subscriptionId)}`,
     );
@@ -106,7 +114,9 @@ export async function POST(request: Request) {
     const start = fixed[0].current_period_start ?? sub.current_period_start;
     const end = fixed[0].current_period_end ?? sub.current_period_end;
     if (!start || !end) throw Error("Billing period missing");
-    const { error } = await db.rpc("apply_pilot_subscription", {
+    const { error } = await db.rpc("apply_environment_subscription", {
+      expected_mode: billing.mode,
+      expected_account: billing.account,
       paid_setup: paidSetup,
       p_start: new Date(start * 1000).toISOString(),
       p_end: new Date(end * 1000).toISOString(),

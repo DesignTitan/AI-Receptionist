@@ -2,6 +2,8 @@ import { Frame } from "@/components/platform/frame";
 import { StartForm } from "@/components/platform/start-form";
 import { ownedCustomer } from "@/lib/platform/server";
 import { planOf } from "@/lib/platform/model";
+import { SETUP_SCOPE } from "@/lib/platform/pricing";
+import { billingMode } from "@/lib/platform/billing-mode";
 import { redirect } from "next/navigation";
 export const dynamic = "force-dynamic";
 export default async function Start({
@@ -21,6 +23,11 @@ export default async function Start({
       title="A front desk of your own."
       description="Tell us how your business works. We’ll take care of the booking page, the phone line, and the first hello."
     >
+      {billingMode() === "test" && (
+        <div className="platform-panel mb-6" role="note">
+          <strong>Test checkout — no real payment will be taken.</strong>
+        </div>
+      )}
       <div className="platform-grid">
         <StartForm customer={c} plan={plan} />
         <aside className="platform-panel platform-aside">
@@ -34,6 +41,8 @@ export default async function Start({
             <li>You’re open for bookings</li>
           </ol>
           <hr />
+          <h3>Included in your one-time setup</h3>
+          <p>{SETUP_SCOPE}</p>
           <p>
             No calendar connection is included yet. Your booking page has its
             own appointment book.

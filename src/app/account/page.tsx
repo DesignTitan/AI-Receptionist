@@ -4,6 +4,7 @@ import {
   recommendPlan,
   OVERAGE_CENTS,
   PILOT_SETUP_CENTS,
+  SETUP_CENTS,
   SETUP_OFFER,
   SETUP_SCOPE,
 } from "@/lib/platform/pricing";
@@ -15,6 +16,7 @@ import { PLANS } from "@/lib/platform/model";
 import { serviceClient } from "@/lib/supabase";
 import { redirect } from "next/navigation";
 import { formatDateTime } from "@/lib/time";
+import { billingMode } from "@/lib/platform/billing-mode";
 export const dynamic = "force-dynamic";
 export default async function Account() {
   const c = await ownedCustomer();
@@ -48,6 +50,11 @@ export default async function Account() {
       title={c.business_name}
       description={next[c.status]}
     >
+      {billingMode() === "test" && (
+        <div className="platform-panel mb-6" role="note">
+          <strong>Test checkout — no real payment will be taken.</strong>
+        </div>
+      )}
       <div className="platform-actions">
         <span className="platform-badge">{c.status}</span>
         {c.status === "draft" ? (
@@ -119,12 +126,44 @@ export default async function Account() {
       </div>
       <section className="platform-panel mb-6">
         <h2>Your bill, without surprises</h2>
-        <p>
-          Next recurring charge estimate:{" "}
-          <strong>${(plan.monthly + extra / 100).toFixed(2)}</strong> before tax
-          or credits. It combines the next month’s plan with this month’s extra
-          usage. Setup is charged once and does not repeat on renewal.
-        </p>
+        {c.status === "draft" && !c.setup_paid_at ? (
+          <>
+            {c.setup_fee_cents != null ? (
+              <p>
+                Your first payment:{" "}
+                <strong>
+                  ${(plan.monthly + c.setup_fee_cents / 100).toFixed(2)}
+                </strong>{" "}
+                before tax. This includes your first month (${plan.monthly}) and
+                one-time setup (${(c.setup_fee_cents / 100).toFixed(2)}).
+              </p>
+            ) : (
+              <p>
+                First month + setup:{" "}
+                <strong>
+                  ${(plan.monthly + PILOT_SETUP_CENTS / 100).toFixed(2)}
+                </strong>{" "}
+                if pilot pricing is available, or{" "}
+                <strong>
+                  ${(plan.monthly + SETUP_CENTS / 100).toFixed(2)}
+                </strong>{" "}
+                with standard setup, before tax. Your exact setup price is
+                confirmed before payment.
+              </p>
+            )}
+            <p>
+              Then <strong>${plan.monthly}/month</strong>, plus any extra
+              minutes you authorize and applicable tax. Setup does not repeat.
+            </p>
+          </>
+        ) : (
+          <p>
+            Next recurring charge estimate:{" "}
+            <strong>${(plan.monthly + extra / 100).toFixed(2)}</strong> before
+            tax or credits. It combines the next month’s plan with this month’s
+            extra usage. Setup is charged once and does not repeat on renewal.
+          </p>
+        )}
         <p>
           {c.setup_fee_cents != null ? (
             <>

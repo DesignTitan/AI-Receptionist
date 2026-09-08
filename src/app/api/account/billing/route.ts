@@ -1,3 +1,4 @@
+import { assertBillingEnvironment } from "@/lib/platform/billing-environment";
 import { NextResponse } from "next/server";
 import { checkOrigin, ownedCustomer } from "@/lib/platform/server";
 import { stripe } from "@/lib/platform/billing";
@@ -6,13 +7,16 @@ export async function POST(request: Request) {
   try {
     checkOrigin(request);
     const c = await ownedCustomer();
+    await assertBillingEnvironment();
     if (!c?.stripe_customer_id)
       throw Error("Billing is available after checkout.");
+    const configuration = process.env.STRIPE_PORTAL_CONFIGURATION;
+    if (!configuration) throw Error("Billing portal needs configuration.");
     const session = await stripe(
       "billing_portal/sessions",
       new URLSearchParams({
         customer: c.stripe_customer_id,
-        ...(process.env.STRIPE_PORTAL_CONFIGURATION?{configuration:process.env.STRIPE_PORTAL_CONFIGURATION}:{}),
+        configuration,
         return_url: `${env.siteUrl}/account`,
       }),
     );

@@ -34,6 +34,11 @@ const business = {
   plan: "busy",
   status: "draft",
   billing_status: null,
+  overage_budget_cents: 0,
+  setup_fee_cents: null,
+  setup_paid_at: null,
+  period_start: null,
+  period_end: null,
   config,
   created_at: new Date().toISOString(),
 };
@@ -85,6 +90,7 @@ const server = http.createServer(async (req, res) => {
     res.end("[]");
     return;
   }
+  if (["/rest/v1/usage_notices", "/rest/v1/usage_periods"].includes(u.pathname)) { res.end("[]"); return; }
   if (u.pathname === "/rest/v1/customer_jobs") {
     res.end("[]");
     return;

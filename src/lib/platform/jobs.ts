@@ -1,3 +1,4 @@
+import { assertBillingEnvironment } from "./billing-environment";
 import { serviceClient } from "@/lib/supabase";
 import { env } from "@/lib/env";
 import { formatDateTime } from "@/lib/time";
@@ -164,7 +165,10 @@ async function dispatch(job: Job, c: Customer, b: CustomerBooking) {
   }
 }
 export async function runJobs() {
-  if(process.env.STRIPE_SECRET_KEY) await releaseExpiredPilotCheckouts();
+  if (process.env.STRIPE_SECRET_KEY) {
+    await assertBillingEnvironment();
+    await releaseExpiredPilotCheckouts();
+  }
   await reportUsage();
   const db = serviceClient();
   const { data, error } = await db.rpc("claim_customer_jobs", {

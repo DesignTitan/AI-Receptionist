@@ -3,6 +3,14 @@
 Handoff notes for the next session. Updated 2026-09-08. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — customer pricing and Stripe live preparation (8 September 2026)
+
+- Marketing, signup and owner dashboard now show setup, first payment and recurring costs clearly, with estimated call counts and conditional test-payment notices. Pricing remains $199/$399/$749 monthly, $299 pilot/$499 standard setup and 49¢ extra started minutes.
+- Added a shared test/live setup command and staff billing connection check for account, database, all prices, usage meter, webhook and portal. New database binding rejects mixed environments and preserves financial history; existing-customer updates remain available if a live account's activation flags change.
+- Applied the Stripe environment migration to production Supabase and saved STRIPE_MODE=test plus the sandbox account ID on Vercel. No live credentials, activation or real payment. Existing sandbox catalogue, meter, webhook settings and portal passed read-only Stripe verification; existing Vercel signing secret is retained.
+- Verification: 16 unit tests, four SQL suites and production build pass. Browser fixtures verify owner payment totals, reactive plan changes and removal of the test notice in live mode. Deployment and production billing-connection check are next.
+- Live transition is documented in docs/stripe-live.md, including a protected credential manifest, clean database binding, auth callback/SMTP settings and one complete configuration deployment. Still required before real customer launch: live Stripe activation/credentials, email delivery, authenticated purchase/voice acceptance and period-close reconciliation. GitHub push remains awaiting explicit approval after automatic review rejected publishing to the existing public DesignTitan/AI-Receptionist repository.
+
 ## Current handoff — pilot setup offer (8 September 2026)
 
 - Bubs approved lowering setup: $299 for 10 pilot customers, then $499 standard setup; monthly $199/$399/$749 and 49¢ extra minutes are unchanged. Same fixed scope: one business, booking configuration, dedicated phone setup and one test session; custom work quoted separately.

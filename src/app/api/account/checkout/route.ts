@@ -1,3 +1,4 @@
+import { assertBillingEnvironment } from "@/lib/platform/billing-environment";
 import { NextResponse } from "next/server";
 import {
   checkOrigin,
@@ -20,14 +21,21 @@ export async function POST(request: Request) {
   try {
     checkOrigin(request);
     const user = await requireOwner();
+    const billing = await assertBillingEnvironment(true);
     const original = await ownedCustomer();
     if (!original) throw Error("Save your business first.");
     // A card-authentication attempt can link an incomplete subscription while its
     // original Checkout session is still open. Resume that session, never replace it.
     if (original.checkout_session_id) {
-      const existing = await stripe(`checkout/sessions/${encodeURIComponent(original.checkout_session_id)}`);
-      if (existing.status === "open" && existing.url) return NextResponse.json({url:existing.url});
-      if (existing.status === "complete") throw Error("Payment is being confirmed. Refresh your dashboard shortly.");
+      const existing = await stripe(
+        `checkout/sessions/${encodeURIComponent(original.checkout_session_id)}`,
+      );
+      if (existing.status === "open" && existing.url)
+        return NextResponse.json({ url: existing.url });
+      if (existing.status === "complete")
+        throw Error(
+          "Payment is being confirmed. Refresh your dashboard shortly.",
+        );
     }
     const pilot = process.env.STRIPE_PRICE_SETUP_PILOT;
     const standard = process.env.STRIPE_PRICE_SETUP_STANDARD;
@@ -52,7 +60,9 @@ export async function POST(request: Request) {
     ]);
     await releaseExpiredPilotCheckouts();
     const db = serviceClient();
-    const claimed = await db.rpc("claim_pilot_checkout", {
+    const claimed = await db.rpc("claim_environment_checkout", {
+      expected_mode: billing.mode,
+      expected_account: billing.account,
       c_id: original.id,
       user_id: user.id,
       pilot_price: pilot,

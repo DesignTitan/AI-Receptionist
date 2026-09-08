@@ -1,3 +1,4 @@
+import { assertBillingEnvironment } from "./billing-environment";
 import { serviceClient } from "@/lib/supabase";
 import { stripe } from "./billing";
 import type { Customer } from "./model";
@@ -24,6 +25,7 @@ export async function usageFor(c: Customer) {
 /** Stable per-booking identifiers + Stripe idempotency. Old uncertain events require review, not a blind resend. */
 export async function reportUsage() {
   if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_METER_EVENT) return;
+  await assertBillingEnvironment();
   const db = serviceClient();
   const { data, error } = await db
     .from("call_usage")

@@ -1,4 +1,4 @@
-import { PLANS as PRICING, planFeatures, SETUP_OFFER, SETUP_SCOPE, type Plan } from "@/lib/platform/pricing";
+import { PLANS as PRICING, planFeatures, PILOT_SETUP_CENTS, SETUP_CENTS, SETUP_OFFER, SETUP_SCOPE, type Plan } from "@/lib/platform/pricing";
 import type { Metadata } from "next";
 import { Folio } from "@/components/marketing/folio";
 import { PRODUCT_NAME } from "@/components/marketing/product-chrome";
@@ -31,7 +31,7 @@ const CHAPTERS = [
 ];
 
 const PLANS = (Object.entries(PRICING) as [Plan,typeof PRICING[Plan]][]).map(([id,p])=>({
- name:p.name,price:`$${p.monthly}`,calls:`${p.minutes.toLocaleString()} minutes a month · about ${p.estimatedCalls} two-minute calls`,who:p.who,cta:'Start here',featured:id==='busy',has:planFeatures(id)
+ name:p.name,price:`$${p.monthly}`,calls:`${p.minutes.toLocaleString()} minutes a month · estimated ${p.estimatedCalls} two-minute calls`,firstPilot:p.monthly+PILOT_SETUP_CENTS/100,firstStandard:p.monthly+SETUP_CENTS/100,who:p.who,cta:'Start here',featured:id==='busy',has:planFeatures(id)
 }));
 
 const RAIL = [
@@ -265,6 +265,7 @@ export default function HomePage() {
                     <p className="rc-plan__price"><b>{plan.price}</b><span>/month</span></p>
                     <p className="rc-plan__calls">{plan.calls}</p>
                     <p className="rc-plan__who">{plan.who}</p>
+                    <p className="rc-plan__who">First month + setup: <b>${plan.firstPilot.toLocaleString()}</b> if pilot pricing is available; <b>${plan.firstStandard.toLocaleString()}</b> standard. Before tax.</p>
                     <a className="rc-plan__cta" href={`/start?plan=${["front", "busy", "full"][index]}`}>{plan.cta}</a>
                     <ul className="rc-plan__list">
                       {plan.has.map((line) => (
@@ -281,7 +282,7 @@ export default function HomePage() {
                 <b>{SETUP_OFFER}</b> Setup is paid once. {SETUP_SCOPE}
               </p>
               <p className="rc-plans__note">
-                Extra minutes are 49 cents each, rounded up per call, only within a spending limit you choose. Extra spending starts at $0. Unused minutes expire at renewal. Each plan includes one business location; calendar sync and multiple locations are not included. Month to month — leave whenever you like.
+                Call counts are estimates; your allowance is measured in minutes, rounded up separately for each call. Extra minutes are 49 cents each, only within a spending limit you choose. Extra spending starts at $0. Setup does not repeat on renewal. Unused minutes expire at renewal. Each plan includes one business location; calendar sync and multiple locations are not included. Month to month — leave whenever you like.
               </p>
               <p className="sc-body" style={{ marginTop: "var(--sc-6)" }}>
                 Calendar and practice-software sync is not built yet. If you need it, you would be the reason it gets built.

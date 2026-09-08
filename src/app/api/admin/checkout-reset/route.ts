@@ -1,3 +1,4 @@
+import { assertBillingEnvironment } from "@/lib/platform/billing-environment";
 import { NextResponse } from "next/server";
 import { checkOrigin, requireStaff } from "@/lib/platform/server";
 import { serviceClient } from "@/lib/supabase";
@@ -6,6 +7,7 @@ export async function POST(request: Request) {
   try {
     checkOrigin(request);
     await requireStaff();
+    await assertBillingEnvironment();
     const { id } = await request.json();
     const db = serviceClient();
     const { data: c, error } = await db

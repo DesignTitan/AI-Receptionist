@@ -17,6 +17,10 @@ Application e4a9251 is deployed at https://ai-receptionist-two-azure.vercel.app 
 - `/api/webhooks/customer-voice`: customer-agent reports matched by both `metadata.customer_id` and `metadata.customer_booking_id`; the existing demo voice callback remains unchanged.
 - `/api/jobs`: bearer-authenticated delivery queue processor. New bookings and Stripe events trigger it after returning a response. `vercel.json` enables a daily recovery pass at 09:00 UTC, authenticated with CRON_SECRET. Use a one-minute schedule on Pro if desired.
 
+## Stripe mode and live transition
+
+Use `docs/stripe-live.md` for the complete transition. `npm run stripe:setup` verifies or prepares either test or live mode from the shared catalogue. The staff billing connection check verifies the active configuration. Apply `20260908_stripe_environment.sql` and configure STRIPE_MODE/STRIPE_ACCOUNT_ID before this version processes Stripe requests.
+
 ## Prepare infrastructure
 
 1. Apply `supabase/migrations/20260908_customer_platform.sql` as one transaction. It adds tables/functions without changing existing demo tables. Set public-schema API access to the normal Supabase configuration. No customer tables have browser-readable policies; RPCs are executable by service_role only.

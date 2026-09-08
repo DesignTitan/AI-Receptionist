@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-08. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — marketing hero exploration (8 September 2026)
+
+- Bubs requested a much stronger scroll-controlled hero and specifically asked to discuss ideas before generating video. Researched Pinterest, YouTube and X, including creator-attributed GPT-6 Astra work; proposal and source links are in docs/hero-directions.md.
+- Recommended direction: a cinematic phone/studio scene following one online booking through an outbound confirmation call into the owner dashboard. Alternatives: an unfolding miniature business, or an appointment card opening into the product workflow. These are proposals, not approved designs.
+- No application code, site deployment or generated media changed. Next: choose a direction and agree on headline/storyboard, then review an anchor still before producing motion. Preserve accurate outbound-call messaging, readable text/buttons, mobile composition and a reduced-motion experience.
+
 ## Current handoff — customer pricing and Stripe live preparation (8 September 2026)
 
 - Marketing, signup and owner dashboard now show setup, first payment and recurring costs clearly, with estimated call counts and conditional test-payment notices. Pricing remains $199/$399/$749 monthly, $299 pilot/$499 standard setup and 49¢ extra started minutes.

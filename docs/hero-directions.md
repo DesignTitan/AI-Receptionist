@@ -1,0 +1,51 @@
+# Marketing hero directions — discussion draft
+
+Research date: 8 September 2026. No video generation, application implementation or deployment is authorized by this concept discussion. Bubs wants to compare ideas before production.
+
+## Recommendation: The booking comes alive
+
+A sculptural phone sits on warm stone, with a softly lit studio behind it. Rich shadows, brushed metal, glass and one cobalt accent connect the current brand to a much stronger physical scene. One continuous camera journey follows a booking through the actual product.
+
+Proposed headline: **They book. Your AI follows up.**
+
+Supporting copy: **Online booking and AI confirmation calls, with every outcome in your dashboard.**
+
+Primary action: **Hear a demo call** (connect to the existing demo call experience). Secondary action: **Explore the demos**.
+
+| Scroll position | Visual story | Short copy |
+| --- | --- | --- |
+| Opening | A clear booking screen on the phone; headline and action already readable. The scene must work as a still. | They book. Your AI follows up. |
+| First movement | Camera moves closer as one appointment is submitted. The appointment card lifts out of the screen. | Booked online. |
+| Middle | The card opens into an outgoing call state. A restrained waveform communicates a conversation. | Called automatically. |
+| Outcome | This example resolves to Confirmed; a brief call summary appears. | You know what happened. |
+| Release | Camera pulls back to the owner dashboard in the studio, then the ordinary page continues. | Back to your business. |
+
+Target a compact sequence around 10–12 seconds of footage, mapped to approximately two to three viewport heights of scrolling. These are starting design targets, to adjust after testing. Scrolling backward reverses the journey; stopping holds the scene. Keep headings, buttons and all important interface text as real web elements. Generate the environment/camera movement; compose accurate product UI over it. Prepare a deliberate portrait composition and a reduced-motion still.
+
+Why lead with this: strongest combination of a cinematic physical setting and a clear explanation of the current product. Continuity of device shape, light and camera is the main production challenge.
+
+## Alternative 2: A little world that keeps working
+
+A beautifully detailed miniature studio unfolds from a single tabletop. The camera enters the space; one online booking, one outgoing call and one owner record become visible within it. Warm architectural lighting and tactile materials, with carefully sized interface captions.
+
+This has the most distinctive visual identity. It needs more scene work and disciplined framing to keep the product understandable. Keep it to one business; a network of locations would imply unsupported capabilities.
+
+## Alternative 3: Inside one booking
+
+One oversized appointment card floats against deep ink. As the visitor scrolls, it separates into a booking, call, transcript and summary, then settles into the owner dashboard. Macro camera angles, precise lighting and satisfying alignment supply the drama.
+
+This offers the clearest interface demonstration and the most predictable production effort. It will need unusually good art direction to avoid feeling like a familiar software animation. Most of it can use real web animation, with little or no generated video.
+
+## References inspected
+
+- [Bart Slodyczka: GPT Astra website walkthrough](https://www.youtube.com/watch?v=h2MjhbwVKLk). The opening demonstrates berries becoming a smoothie, a watch separating into components and ending on a wrist, and pizza progressing into a takeaway box. The relevant principle is a connected product story. Opened the video, sampled a visual state and read its transcript. The [creator repository](https://github.com/Barty-Bart/gpt-6-astra-10k-websites) explicitly describes GPT-6 Astra plus Higgsfield and separate mobile compositions. The title's $10K language is not a verified sale.
+- [Meng To: Astra and Three.js interface studies on X](https://x.com/MengTo/status/2096510126244999366). Read the original post in the browser. Creator describes coded glass, lighting, procedural objects and motion. Useful for accurate UI layered over cinematic scenery; independent performance was not tested.
+- [Spline / Abdus Salam on Pinterest](https://es.pinterest.com/pin/124482377195615820/). Opened the pin and inspected its video poster/description: a prominent headset anchors a scroll animation built with Spline and Framer. Use as a composition/motion reference; no AI or Astra attribution is established.
+- [marktmng: architectural scroll sequence](https://www.reddit.com/r/SoftwareEngineerJobs/comments/1vxpbih/i_built_10k_scrolldriven_architectural_website/). Creator describes blueprint, construction and completed-building views controlled by scroll. AI generation is claimed; model not specified. Read the post; live behavior not tested.
+- [Chase AI: unfolding origami world](https://www.chaseai.io/blog/one-shot-scroll-animation-website-ai-skill). The creator describes linked scenes and an anchor image establishing continuity. Relevant to the miniature-business alternative; not an Astra-specific example.
+
+## Product truth and next decision
+
+The current product accepts online bookings and makes outbound confirmation calls. The hero must show that direction clearly. A ringing desk phone would imply inbound answering. Show a sample confirmed outcome without implying every client answers. Reschedule requests are flagged for staff; do not depict automatic calendar sync or automatic rescheduling.
+
+Choose the overall direction first, then agree on the opening composition, headline and storyboard. After Bubs approves those, prepare an anchor still for review before generating the motion. No production media was generated during this research.

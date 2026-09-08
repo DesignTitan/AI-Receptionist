@@ -3,10 +3,8 @@
 Visual, tickable version: the "Receptionist Launch Roadmap" artifact. Weekly scorecard at the
 end. Companion docs: pricing-economics.md, voice-platforms.md, omnidimension.md.
 
-## How a customer gets on today
-You do it. A customer is a config directory, a phone number bought in OmniDimension and attached
-to an Ava clone, and a Stripe invoice. Nothing on the site lets a stranger sign up. The four weeks
-below change that.
+## Current build status — 8 September
+Owner sign-in, intake, hosted Stripe checkout, customer booking pages/dashboard, staff setup queue, dedicated-line provisioning and delivery jobs are implemented. The customer schema is installed in Supabase. Provider setup and complete live acceptance testing remain; this is not a public launch. See customer-platform.md for the configuration checklist and supported launch scope.
 
 ## Week 1 · 3–9 Sep · Decide and unblock
 Goal: name and domain chosen, every key on Vercel, first three posts out.

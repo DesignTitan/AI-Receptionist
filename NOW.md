@@ -3,6 +3,15 @@
 Handoff notes for the next session. Updated 2026-09-07. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — customer platform (2026-09-08)
+
+- Built owner email-link accounts, business/plan intake, Stripe Checkout and billing portal, owner booking/call dashboard, branded customer booking pages, and staff setup/recovery queue. Pricing stays $149/$299/$599 monthly plus $1,000 setup.
+- Installed the additive customer-platform migration in production Supabase. Owner data is scoped to its account; database rules prevent overlapping bookings and duplicate event jobs. Existing demos and voice metadata remain unchanged.
+- Added dedicated-agent/number provisioning with spending limits, durable email/call jobs, signed Stripe callbacks, scoped voice reports, and backup/deletion tools. Activation stays concierge: review and test each customer's line first.
+- Verification: unit tests and disposable PostgreSQL tests pass, including account isolation, overlap rejection, checkout reuse, callback deduplication and cancellation protection. Owner/signup browser checks passed with explicitly local fixtures; live payments, customer calls and email delivery are not yet verified.
+- External setup remains: Stripe, Resend/custom SMTP and sending domain, Bubs's lead inbox, customer domain and reviewed policies. Site stays locked; no number purchase or external message was sent. Overage is an estimate with manual invoicing.
+- Approval review blocked two settings: adding the production /account/callback URL to Supabase's redirect allowlist and saving CRON_SECRET to Vercel Production. Scheduled recovery stays disabled. Finish deployment verification, then connect integrations and run a complete test customer. See docs/customer-platform.md; older notes below are historical.
+
 ## Just done — production storage connected (2026-09-07)
 
 - Added the existing Supabase `service_role` key as sensitive `SUPABASE_SERVICE_ROLE_KEY` on Vercel Production with the owner's explicit approval; no secret is stored in the repo.
@@ -255,7 +264,7 @@ the dated plan is docs/ROADMAP.md.
 
 ## In progress
 
-Nothing half-finished. The repo is committed and builds clean.
+Customer platform launch verification; see the latest handoff above.
 
 ## Deployed
 

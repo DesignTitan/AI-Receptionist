@@ -30,7 +30,7 @@ const STAFF_ONLY = ["/admin", "/api/admin"];
 export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
-  if (ALWAYS_OPEN.some((prefix) => pathname.startsWith(prefix))) {
+  if (pathname === "/api/jobs" || ALWAYS_OPEN.some((prefix) => pathname.startsWith(prefix))) {
     return NextResponse.next();
   }
 
@@ -54,6 +54,22 @@ export async function proxy(request: NextRequest) {
   } else if (pathname === "/login") {
     // Gate is off: nothing to unlock.
     return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  const rootDomain = process.env.CUSTOMER_ROOT_DOMAIN?.toLowerCase();
+  const host = request.nextUrl.hostname.toLowerCase();
+  if (rootDomain && host !== rootDomain && host.endsWith(`.${rootDomain}`)) {
+    const slug = host.slice(0, -(rootDomain.length + 1));
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return NextResponse.rewrite(new URL("/__not-found", request.url));
+    if (pathname === "/" || pathname.startsWith("/confirmation/")) {
+      return NextResponse.rewrite(new URL(`/b/${slug}${pathname === "/" ? "" : pathname}${search}`, request.url));
+    }
+    if (pathname === `/b/${slug}` || pathname.startsWith(`/b/${slug}/`)) {
+      return NextResponse.redirect(new URL((pathname.slice(`/b/${slug}`.length) || "/") + search, request.url));
+    }
+    if (!pathname.startsWith(`/api/bookings/${slug}`) && !pathname.startsWith("/_next/") && !pathname.startsWith("/icon")) {
+      return NextResponse.rewrite(new URL("/__not-found", request.url));
+    }
   }
 
   if (TENANT_SLUG) {

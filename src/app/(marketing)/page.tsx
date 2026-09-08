@@ -301,14 +301,14 @@ export default function HomePage() {
                 <li><span><strong>You see everything.</strong>Recording, transcript and summary in your dashboard and your inbox. A no-answer is flagged for a person.</span></li>
               </ol>
               <div className="rc-plans">
-                {PLANS.map((plan) => (
+                {PLANS.map((plan, index) => (
                   <article key={plan.name} className={plan.featured ? "rc-plan rc-plan--on" : "rc-plan"}>
                     {plan.featured && <p className="rc-plan__flag">Most businesses</p>}
                     <p className="rc-plan__name">{plan.name}</p>
                     <p className="rc-plan__price"><b>{plan.price}</b><span>/month</span></p>
                     <p className="rc-plan__calls">{plan.calls}</p>
                     <p className="rc-plan__who">{plan.who}</p>
-                    <a className="rc-plan__cta" href="#hear">{plan.cta}</a>
+                    <a className="rc-plan__cta" href={`/start?plan=${["front", "busy", "full"][index]}`}>{plan.cta}</a>
                     <ul className="rc-plan__list">
                       {plan.has.map((line) => (
                         <li key={line}>
@@ -341,7 +341,7 @@ export default function HomePage() {
               <hr className="rc-hair" />
               <p>{PRODUCT_NAME}. A booking page and an AI front desk for businesses that run on appointments.</p>
               <footer>
-                <a href="/admin">Staff dashboard</a>
+                <a href="/account">Owner sign in</a>
                 <span>The three demo businesses are fictional.</span>
                 <span>© {new Date().getFullYear()}</span>
               </footer>

@@ -28,6 +28,7 @@ export function AdminHeader({ subtitle }: { subtitle?: string }) {
           >
             View site
           </Link>
+          <Link href="/admin/customers" className="px-3 text-sm">Customers</Link>
           <ThemeToggle />
           <form action={logout}>
             <button

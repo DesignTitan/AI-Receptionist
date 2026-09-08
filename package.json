@@ -8,7 +8,11 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "verify": "tsc --noEmit && next build",
-    "seed:sql": "node scripts/generate-seed-sql.ts"
+    "seed:sql": "node scripts/generate-seed-sql.ts",
+    "test": "node --test tests/*.test.ts",
+    "provision": "node --env-file-if-exists=.env.local scripts/provision.mjs",
+    "ops": "node --env-file-if-exists=.env.local scripts/platform-ops.mjs",
+    "backup": "node --env-file-if-exists=.env.local scripts/backup-platform.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.58.0",

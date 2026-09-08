@@ -89,8 +89,8 @@ export function ProductFooter() {
               </h3>
               <ul className="space-y-2 text-muted">
                 <li>
-                  <Link className="transition hover:text-ink" href="/admin">
-                    Staff dashboard
+                  <Link className="transition hover:text-ink" href="/account">
+                    Owner dashboard
                   </Link>
                 </li>
                 <li>

@@ -1,5 +1,7 @@
 # AI Receptionist
 
+Customer-platform setup, routes, operational tools and launch limits are documented in [the customer platform runbook](docs/customer-platform.md). Read NOW.md for the current handoff. The original demo documentation follows.
+
 A medical clinic booking site where the front desk calls you back. Patients pick a doctor
 and a time online; within about a minute an AI voice agent phones them to confirm, and the
 recording, transcript, outcome and patient details land in a live staff dashboard and in the

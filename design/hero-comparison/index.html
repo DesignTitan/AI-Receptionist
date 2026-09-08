@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Four hero directions — AI Receptionist</title>
+  <style>
+    :root{--paper:#f7f6f2;--ink:#202823;--muted:#66716a;--line:#d8ddd5;--accent:#304f3c;--soft:#e8ece3;--serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,serif;--sans:"Avenir Next",Avenir,"Helvetica Neue",sans-serif}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:130px}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+    button,a{-webkit-tap-highlight-color:transparent}
+    button{font:inherit;color:inherit;cursor:pointer}
+    button:focus-visible,a:focus-visible{outline:3px solid #6c8250;outline-offset:5px}
+    button:disabled{cursor:default}
+    a{color:inherit}
+    .skip-link{position:fixed;z-index:10;top:8px;left:8px;transform:translateY(-150%);padding:12px 18px;background:var(--ink);color:#fff}
+    .skip-link:focus{transform:translateY(0)}
+    .page{width:min(1440px,calc(100% - 104px));margin:auto}
+    .masthead{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:29px 0;border-bottom:1px solid var(--line);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+    .brand{display:flex;gap:12px;align-items:center;font-weight:650;letter-spacing:.09em}
+    .brand-mark{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--ink);border-radius:50%;font-family:var(--serif);font-size:17px;letter-spacing:-.1em;padding-right:2px}
+    .edition{color:var(--muted);text-align:right}
+    .intro{display:grid;grid-template-columns:1.5fr 1fr;gap:64px;align-items:end;padding:63px 0 49px}
+    .eyebrow{display:flex;align-items:center;gap:9px;margin:0 0 24px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:650}
+    .eyebrow::before{content:"";display:block;width:6px;height:6px;background:var(--accent);border-radius:50%;flex:none}
+    h1{font-family:var(--serif);font-weight:400;font-size:clamp(52px,6.2vw,90px);letter-spacing:-.054em;line-height:.99;margin:0}
+    h1 span{display:block}
+    .intro-note{max-width:400px;padding-bottom:2px;justify-self:end}
+    .intro-note p{margin:0 0 18px;font-size:18px;line-height:1.6;letter-spacing:-.015em}
+    .intro-note .instruction{margin:0;color:var(--muted);font-size:13px;max-width:340px}
+    .control-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:28px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(247,246,242,.97);padding:18px 0;margin-bottom:35px;backdrop-filter:blur(14px)}
+    .scene-controls{display:flex;align-items:center;gap:18px}
+    .control-label{font-size:12px;color:var(--muted);line-height:1.4;white-space:nowrap}
+    .control-label strong{display:block;color:var(--ink);font-size:13px;font-weight:600;margin-bottom:2px}
+    .steps{display:flex;gap:5px}
+    .step{height:43px;width:43px;border:1px solid transparent;border-radius:3px;background:transparent;font-size:13px;font-variant-numeric:tabular-nums;transition:background .16s,color .16s}
+    .step:hover{background:var(--soft)}
+    .step[aria-pressed="true"]{background:var(--accent);color:white}
+    .view-switch{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:4px;background:#efefea}
+    .view-option{border:0;background:transparent;border-radius:2px;padding:9px 13px;font-size:12px;line-height:1.4;white-space:nowrap}
+    .view-option[aria-pressed="true"]{background:#fff;box-shadow:0 1px 3px #2028230a}
+    .view-option:hover{color:var(--accent)}
+    .comparison-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:42px;row-gap:57px}
+    .concept{min-width:0}
+    .concept-heading{display:flex;align-items:center;gap:14px;margin-bottom:15px}
+    .concept-number{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;display:grid;place-items:center;border:1px solid var(--line);width:29px;height:29px;border-radius:50%;flex:none}
+    .concept h2{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.2vw,32px);letter-spacing:-.035em;line-height:1.2;margin:0}
+    .concept-explore{border:0;background:transparent;margin-left:auto;flex:none;width:36px;height:36px;border-radius:50%;font-size:23px;line-height:1;transition:transform .2s,background .2s}
+    .concept-explore:hover{background:var(--soft);transform:translate(1px,-1px)}
+    .visual-button{display:block;width:100%;padding:0;border:0;text-align:left;background:transparent;position:relative;border-radius:3px}
+    .visual{position:relative;width:100%;aspect-ratio:1;background-color:#e9eae3;background-size:200% 200%;background-position:0% 0%;background-repeat:no-repeat;border-radius:3px;overflow:hidden}
+    .visual::after{content:"";position:absolute;inset:0;border:1px solid #1829190a;border-radius:inherit;pointer-events:none}
+    .visual[data-board="true"]{background-size:100% 100%;background-position:50% 50%}
+    .asset-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--muted);background:#eceee8;font-size:13px;padding:24px;text-align:center}
+    .asset-placeholder span:first-child{font-family:var(--serif);font-size:30px;color:var(--ink)}
+    .asset-ready .asset-placeholder{display:none}
+    .image-cue{position:absolute;right:16px;bottom:16px;display:grid;place-items:center;background:#f7f6f2e8;border:1px solid #f7f6f255;width:38px;height:38px;border-radius:50%;color:var(--ink);transition:transform .2s,background .2s}
+    .visual-button:hover .image-cue{transform:scale(1.08);background:#fff}
+    .image-cue svg{width:17px;height:17px}
+    .concept-caption{padding:19px 0 21px;border-bottom:1px solid var(--line);min-height:116px}
+    .scene-label{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 7px;font-weight:650}
+    .scene-copy{font-size:17px;letter-spacing:-.02em;margin:0;line-height:1.45}
+    .product-journey{margin-top:74px;padding:33px 0 39px;border-top:1px solid var(--line);display:flex;gap:30px;justify-content:space-between;align-items:center}
+    .product-journey>p{margin:0;font-size:12px;line-height:1.5;color:var(--muted);max-width:170px}
+    .journey{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin:0;padding:0;list-style:none;font-size:14px;letter-spacing:-.02em}
+    .journey li{display:flex;align-items:center;gap:24px}
+    .journey li+li::before{content:"→";color:#8a9489;font-size:19px}
+    .footer{border-top:1px solid var(--line);padding:20px 0 28px;display:flex;justify-content:space-between;gap:20px;font-size:11px;color:var(--muted)}
+    .footer p{margin:0}
+    .footer a{text-decoration-color:#a9b4a7;text-underline-offset:3px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    dialog{border:1px solid var(--line);padding:0;border-radius:7px;width:min(1380px,calc(100% - 48px));max-height:calc(100dvh - 48px);color:var(--ink);background:var(--paper);box-shadow:0 28px 90px #0a150f24}
+    dialog::backdrop{background:#17231bb3;backdrop-filter:blur(6px)}
+    .focus-topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 28px;border-bottom:1px solid var(--line)}
+    .focus-topbar p{margin:0;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+    .close-button{display:flex;align-items:center;gap:10px;border:0;background:transparent;padding:6px 0 6px 12px;font-size:13px}
+    .close-button span:last-child{font-size:24px;line-height:1;font-weight:300}
+    .focus-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:42px;padding:28px}
+    .focus-media{min-width:0;align-self:start}
+    .focus-media .scene-copy{font-size:16px;min-height:2.9em}
+    .focus-media .concept-caption{min-height:0;padding-bottom:19px}
+    .focus-controls{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:16px;flex-wrap:wrap}
+    .focus-controls .step{height:36px;width:36px;font-size:12px}
+    .focus-controls .view-option{padding:7px 9px;font-size:11px}
+    .focus-copy{padding:9px 8px 8px 0;min-width:0}
+    .focus-copy .eyebrow{font-size:10px;margin-bottom:21px}
+    .focus-copy h2{margin:0 0 17px;font-family:var(--serif);font-size:clamp(36px,3.7vw,55px);font-weight:400;line-height:1.08;letter-spacing:-.045em}
+    .focus-subcopy{font-size:15px;color:var(--muted);line-height:1.7;margin:0 0 27px}
+    .detail-block{border-top:1px solid var(--line);padding:19px 0 0;margin:20px 0 0}
+    .detail-block h3{font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 9px;color:var(--muted);font-weight:650}
+    .detail-block p,.detail-block li{font-size:13px;line-height:1.65;margin:0}
+    .detail-block ul{padding-left:17px;margin:0;display:grid;gap:6px}
+    .detail-block li::marker{color:#7b8c76}
+    .focus-navigation{display:flex;justify-content:space-between;gap:20px;padding:19px 28px;border-top:1px solid var(--line)}
+    .direction-button{border:0;background:transparent;padding:6px 0;font-size:12px;display:flex;gap:9px;align-items:center}
+    .direction-button:hover{text-decoration:underline;text-underline-offset:4px}
+    .direction-button:disabled{opacity:.3;text-decoration:none}
+    @media(min-width:1650px){.page{width:min(1510px,calc(100% - 128px))}.comparison-grid{column-gap:50px}}
+    @media(max-width:1000px){.page{width:calc(100% - 64px)}.intro{gap:36px;grid-template-columns:1.2fr 1fr;padding-top:51px}.intro-note p{font-size:16px}.comparison-grid{gap:40px 26px}.control-label{display:none}.focus-layout{gap:25px;grid-template-columns:minmax(0,1fr) minmax(290px,.9fr)}.focus-copy h2{font-size:38px}.journey{gap:15px;font-size:13px}.journey li{gap:15px}}
+    @media(max-width:760px){.page{width:calc(100% - 40px)}.masthead{padding:22px 0}.edition{font-size:10px;letter-spacing:.05em}.intro{grid-template-columns:1fr;gap:29px;padding:40px 0 33px}.eyebrow{font-size:9px;letter-spacing:.08em;margin-bottom:22px}h1{font-size:60px;line-height:1.02}.intro-note{justify-self:start;max-width:470px}.intro-note p{font-size:16px;margin-bottom:12px}.intro-note .instruction{font-size:12px;max-width:400px}.control-bar{padding:14px 0;gap:12px;margin-bottom:26px}.steps{gap:2px}.step{width:35px;height:38px;font-size:12px}.view-option{padding:9px 9px;font-size:11px}.view-switch{padding:3px;gap:0}.comparison-grid{gap:35px 20px}.concept-heading{gap:8px;min-height:48px;align-items:flex-start;margin-bottom:10px}.concept-number{width:23px;height:23px;font-size:9px;margin-top:2px}.concept h2{font-size:23px}.concept-explore{width:22px;height:24px;font-size:20px}.concept-caption{padding:14px 0 18px;min-height:115px}.scene-label{font-size:8px}.scene-copy{font-size:14px}.image-cue{width:30px;height:30px;right:10px;bottom:10px}.image-cue svg{width:14px;height:14px}.product-journey{margin-top:44px;display:block;padding:26px 0}.product-journey>p{max-width:none;margin-bottom:17px}.journey{gap:10px;font-size:12px}.journey li{gap:10px}.journey li+li::before{font-size:15px}.footer{font-size:10px}dialog{width:calc(100% - 24px);max-height:calc(100dvh - 24px)}.focus-topbar{padding:15px 19px}.focus-layout{grid-template-columns:1fr;gap:24px;padding:19px}.focus-copy{padding:0}.focus-copy h2{font-size:39px;max-width:450px}.focus-copy .eyebrow{margin-bottom:13px}.focus-subcopy{margin-bottom:20px;max-width:550px}.detail-block{padding-top:16px;margin-top:16px}.focus-navigation{padding:15px 19px}.focus-media .scene-copy{min-height:0}.focus-controls .view-option{padding:8px}.focus-copy h2{scroll-margin-top:18px}}
+    @media(max-width:480px){.comparison-grid{grid-template-columns:1fr;row-gap:31px}.concept-heading{min-height:0;align-items:center;margin-bottom:12px}.concept h2{font-size:28px}.concept-number{width:26px;height:26px;font-size:10px}.concept-explore{margin-left:auto;width:28px;height:28px}.concept-caption{min-height:0;padding:15px 0 20px}.scene-label{font-size:9px}.scene-copy{font-size:16px}.control-bar{gap:6px}.step{width:32px}.view-option{padding:8px 7px;font-size:10px}.journey{display:grid;gap:8px}.journey li+li::before{content:"↳"}.journey li+li{padding-left:2px}.footer{flex-direction:column;gap:7px}h1{font-size:58px}.focus-topbar p{font-size:9px}.focus-controls{gap:10px}.focus-copy h2{font-size:36px}.direction-button{font-size:11px}.asset-placeholder span:first-child{font-size:25px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#comparison">Skip to the four directions</a>
+  <div class="page">
+    <header class="masthead">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">ar</span><span>AI Receptionist</span></div>
+      <div class="edition">Hero exploration <span aria-hidden="true">/</span> September 2026</div>
+    </header>
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Concept storyboards · still-frame previews</p>
+          <h1 id="page-title">One story.<span>Four directions.</span></h1>
+        </div>
+        <div class="intro-note">
+          <p>A phone on stone. A miniature business. The layers of a booking. A new chapter for the phone.</p>
+          <p class="instruction">Four equal possibilities for the opening of the site. Compare the scenes, then open a direction to explore its story and proposed camera movement.</p>
+        </div>
+      </section>
+      <section id="comparison" aria-label="Compare four hero directions">
+        <div class="control-bar">
+          <div class="scene-controls">
+            <div class="control-label"><strong>The same scene on every board</strong><span id="scene-state">Scene 01 of 04</span></div>
+            <div class="steps" role="group" aria-label="Choose a storyboard scene" data-controls="scenes">
+              <button class="step" type="button" data-scene="0" aria-label="Show scene 1 on all four concepts" aria-pressed="true">01</button>
+              <button class="step" type="button" data-scene="1" aria-label="Show scene 2 on all four concepts" aria-pressed="false">02</button>
+              <button class="step" type="button" data-scene="2" aria-label="Show scene 3 on all four concepts" aria-pressed="false">03</button>
+              <button class="step" type="button" data-scene="3" aria-label="Show scene 4 on all four concepts" aria-pressed="false">04</button>
+            </div>
+          </div>
+          <div class="view-switch" role="group" aria-label="Storyboard view">
+            <button type="button" class="view-option" data-view="scene" aria-pressed="true">Individual scenes</button>
+            <button type="button" class="view-option" data-view="board" aria-pressed="false">Full storyboard</button>
+          </div>
+        </div>
+        <div class="comparison-grid">
+          <article class="concept" aria-labelledby="concept-title-01">
+            <div class="concept-heading">
+              <span class="concept-number" aria-hidden="true">01</span>
+              <h2 id="concept-title-01">The phone on stone</h2>
+              <button class="concept-explore" type="button" data-focus="0" aria-label="Explore The phone on stone"><span aria-hidden="true">↗</span></button>
+            </div>
+            <button id="open-01" class="visual-button" type="button" data-focus="0" aria-label="Explore The phone on stone. Scene 1.">
+              <div class="visual" id="visual-01" role="img" aria-label="A contemporary smartphone stands on a pale stone plinth. Grazing light reveals the stone texture; a small appointment card glows on the screen." style="background-image:url('assets/concept-01.png')">
+                <div class="asset-placeholder" aria-hidden="true"><span>The phone on stone</span><span>Loading the storyboard image…</span></div>
+              </div>
+              <span class="image-cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></span>
+            </button>
+            <div class="concept-caption"><p class="scene-label" id="scene-label-01">01 / The object</p><p class="scene-copy" id="scene-copy-01">Every booking starts something.</p></div>
+          </article>
+          <article class="concept" aria-labelledby="concept-title-02">
+            <div class="concept-heading">
+              <span class="concept-number" aria-hidden="true">02</span>
+              <h2 id="concept-title-02">A business in miniature</h2>
+              <button class="concept-explore" type="button" data-focus="1" aria-label="Explore A business in miniature"><span aria-hidden="true">↗</span></button>
+            </div>
+            <button id="open-02" class="visual-button" type="button" data-focus="1" aria-label="Explore A business in miniature. Scene 1.">
+              <div class="visual" id="visual-02" role="img" aria-label="A miniature boutique creative studio sits inside a nearly closed architectural shell. Warm light escapes through the entrance; there are no people." style="background-image:url('assets/concept-02.png')">
+                <div class="asset-placeholder" aria-hidden="true"><span>A business in miniature</span><span>Loading the storyboard image…</span></div>
+              </div>
+              <span class="image-cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></span>
+            </button>
+            <div class="concept-caption"><p class="scene-label" id="scene-label-02">01 / Business as usual</p><p class="scene-copy" id="scene-copy-02">Your day is already full.</p></div>
+          </article>
+          <article class="concept" aria-labelledby="concept-title-03">
+            <div class="concept-heading">
+              <span class="concept-number" aria-hidden="true">03</span>
+              <h2 id="concept-title-03">Inside the booking</h2>
+              <button class="concept-explore" type="button" data-focus="2" aria-label="Explore Inside the booking"><span aria-hidden="true">↗</span></button>
+            </div>
+            <button id="open-03" class="visual-button" type="button" data-focus="2" aria-label="Explore Inside the booking. Scene 1.">
+              <div class="visual" id="visual-03" role="img" aria-label="A single booking card floats on a quiet background. A selected time and customer name provide a simple, recognizable starting point." style="background-image:url('assets/concept-03.png')">
+                <div class="asset-placeholder" aria-hidden="true"><span>Inside the booking</span><span>Loading the storyboard image…</span></div>
+              </div>
+              <span class="image-cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></span>
+            </button>
+            <div class="concept-caption"><p class="scene-label" id="scene-label-03">01 / One appointment</p><p class="scene-copy" id="scene-copy-03">It starts with an online booking.</p></div>
+          </article>
+          <article class="concept" aria-labelledby="concept-title-04">
+            <div class="concept-heading">
+              <span class="concept-number" aria-hidden="true">04</span>
+              <h2 id="concept-title-04">The next chapter of the phone</h2>
+              <button class="concept-explore" type="button" data-focus="3" aria-label="Explore The next chapter of the phone"><span aria-hidden="true">↗</span></button>
+            </div>
+            <button id="open-04" class="visual-button" type="button" data-focus="3" aria-label="Explore The next chapter of the phone. Scene 1.">
+              <div class="visual" id="visual-04" role="img" aria-label="A sculptural rotary phone sits alone on a simple pedestal. The dial turns slightly as the camera settles into the angle that will remain consistent through the next transformations." style="background-image:url('assets/concept-04.png')">
+                <div class="asset-placeholder" aria-hidden="true"><span>The next chapter of the phone</span><span>Loading the storyboard image…</span></div>
+              </div>
+              <span class="image-cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></span>
+            </button>
+            <div class="concept-caption"><p class="scene-label" id="scene-label-04">01 / Rotary</p><p class="scene-copy" id="scene-copy-04">First, we turned the dial.</p></div>
+          </article>
+        </div>
+      </section>
+      <section class="product-journey" aria-label="The product story shared by every direction">
+        <p>One product journey.<br>Four ways to bring it to life.</p>
+        <ol class="journey"><li>Customer books online</li><li>AI calls to confirm</li><li>Owner sees the call record</li></ol>
+      </section>
+    </main>
+    <footer class="footer">
+      <p>Exploration only. These are storyboards for proposed motion, not rendered video.</p>
+      <p>Square study <span aria-hidden="true">·</span> <a href="docs/hero-comparison-copy.json">Storyboard copy</a></p>
+    </footer>
+  </div>
+  <p class="sr-only" aria-live="polite" aria-atomic="true" id="scene-announcement"></p>
+  <dialog id="focus-dialog" aria-labelledby="focus-title">
+    <header class="focus-topbar">
+      <p id="focus-position">Direction 01 of 04 · Still-frame preview</p>
+      <button class="close-button" type="button" id="close-focus" autofocus><span>Close</span><span aria-hidden="true">×</span></button>
+    </header>
+    <div class="focus-layout">
+      <div class="focus-media">
+        <div class="visual" id="focus-visual" role="img"></div>
+        <div class="concept-caption"><p class="scene-label" id="focus-scene-label"></p><p class="scene-copy" id="focus-scene-copy"></p></div>
+        <div class="focus-controls">
+          <div class="steps" role="group" aria-label="Choose a storyboard scene" data-controls="scenes">
+            <button class="step" type="button" data-scene="0" aria-label="Show scene 1 on all four concepts" aria-pressed="true">01</button>
+            <button class="step" type="button" data-scene="1" aria-label="Show scene 2 on all four concepts" aria-pressed="false">02</button>
+            <button class="step" type="button" data-scene="2" aria-label="Show scene 3 on all four concepts" aria-pressed="false">03</button>
+            <button class="step" type="button" data-scene="3" aria-label="Show scene 4 on all four concepts" aria-pressed="false">04</button>
+          </div>
+          <div class="view-switch" role="group" aria-label="Storyboard view">
+            <button class="view-option" type="button" data-view="scene" aria-pressed="true">Individual scenes</button>
+            <button class="view-option" type="button" data-view="board" aria-pressed="false">Full storyboard</button>
+          </div>
+        </div>
+      </div>
+      <div class="focus-copy">
+        <p class="eyebrow" id="focus-name"></p>
+        <h2 id="focus-title"></h2>
+        <p class="focus-subcopy" id="focus-subcopy"></p>
+        <section class="detail-block" aria-labelledby="motion-title"><h3 id="motion-title">Proposed camera movement</h3><p id="focus-motion"></p></section>
+        <section class="detail-block" aria-labelledby="strengths-title"><h3 id="strengths-title">What it brings</h3><ul id="focus-strengths"></ul></section>
+        <section class="detail-block" aria-labelledby="tradeoff-title"><h3 id="tradeoff-title">The consideration</h3><p id="focus-tradeoff"></p></section>
+      </div>
+    </div>
+    <nav class="focus-navigation" aria-label="Explore other directions">
+      <button class="direction-button" type="button" id="previous-direction"><span aria-hidden="true">←</span><span>Previous direction</span></button>
+      <button class="direction-button" type="button" id="next-direction"><span>Next direction</span><span aria-hidden="true">→</span></button>
+    </nav>
+  </dialog>
+  <script id="concept-data" type="application/json">{"format": "1:1", "concepts": [{"id": "01", "name": "The phone on stone", "headline": "Booked online. Confirmed by a call.", "subcopy": "Customers book online. Your AI follows up with a confirmation call, and you see the call details in your dashboard.", "cameraMotion": "Begin close to the stone surface, rise toward a sculptural phone, then move through its screen. Follow one appointment into a call and pull back to reveal the owner's dashboard.", "strengths": ["A striking opening with one clear focal point.", "Makes the phone feel tangible while the product story stays simple.", "The restrained composition gives the headline room to breathe."], "tradeoff": "The opening could resemble a phone advertisement. The booking screen must appear early so the service becomes clear.", "storyboard": [{"label": "01 / The object", "visual": "A contemporary smartphone stands on a pale stone plinth. Grazing light reveals the stone texture; a small appointment card glows on the screen.", "copy": "Every booking starts something."}, {"label": "02 / The booking", "visual": "The camera approaches the screen as a customer selects a time. The completed appointment card lifts slightly above the glass, remaining the focal point.", "copy": "Your customer books online."}, {"label": "03 / The confirmation call", "visual": "The same appointment card becomes a restrained outbound call display. A waveform moves beside the customer's appointment details; the phone remains visible behind it.", "copy": "AI calls to confirm the details."}, {"label": "04 / The record", "visual": "The waveform settles into a call record with its outcome and transcript. The camera pulls back as the record finds its place in the owner's dashboard.", "copy": "You see how the call went."}]}, {"id": "02", "name": "A business in miniature", "headline": "Keep your business moving.", "subcopy": "Give customers a simple way to book online, follow up with an AI confirmation call, and keep the call record close at hand.", "cameraMotion": "Orbit a nearly closed miniature creative studio. Slide its front wall aside, move inside toward the booking card and outgoing call, then pull back to reveal the whole studio beside the owner's dashboard.", "strengths": ["Connects the service to the owner's working day.", "Creates a memorable world with warmth and depth.", "One continuous setting helps explain who benefits at each step."], "tradeoff": "A detailed scene can compete with the message. Use one studio without people, minimal props and a clear focus on the booking and outgoing call.", "storyboard": [{"label": "01 / Business as usual", "visual": "A miniature boutique creative studio sits inside a nearly closed architectural shell. Warm light escapes through the entrance; there are no people.", "copy": "Your day is already full."}, {"label": "02 / A new appointment", "visual": "The studio's front wall slides aside to reveal a simple desk and an appointment card. The booking becomes the clear focal point inside the model.", "copy": "Let customers book online."}, {"label": "03 / A call goes out", "visual": "The camera moves into the studio toward an ordinary smartphone. An outgoing call display and restrained waveform connect the call to the appointment.", "copy": "AI follows up with a confirmation call."}, {"label": "04 / Back to the owner", "visual": "The camera pulls back to show the entire open studio. The owner's dashboard appears beside it, displaying the appointment and the completed call record.", "copy": "The call details are there when you need them."}]}, {"id": "03", "name": "Inside the booking", "headline": "One booking. The whole story.", "subcopy": "Follow each online booking through its AI confirmation call, with the appointment and call record visible in your dashboard.", "cameraMotion": "Start above one appointment card and tilt into a shallow three-dimensional view. Separate four layers for booking, call, transcript and summary, move between them toward the outgoing waveform, then assemble the owner's dashboard.", "strengths": ["Explains the actual product with very little translation.", "Makes the transition from booking to call record easy to follow.", "Offers clear pauses for readable text and real interface details."], "tradeoff": "It may feel like a familiar software demonstration. Strong lighting, depth and carefully timed movement must provide the visual distinction.", "storyboard": [{"label": "01 / One appointment", "visual": "A single booking card floats on a quiet background. A selected time and customer name provide a simple, recognizable starting point.", "copy": "It starts with an online booking."}, {"label": "02 / The layers", "visual": "The appointment card opens into four distinct layers: booking, call, transcript and summary. Generous space and fine connecting lines reveal how the pieces belong together.", "copy": "Booking, call and details. All connected."}, {"label": "03 / The confirmation call", "visual": "The camera moves between the separated layers to feature an outgoing call waveform. The appointment details remain visible nearby, grounding the call in the original booking.", "copy": "AI calls your customer to confirm."}, {"label": "04 / The whole picture", "visual": "The layers glide together into the owner's dashboard. A sample confirmed appointment sits beside its call record; the camera returns to a straight-on, readable view.", "copy": "Keep the appointment and call record together."}]}, {"id": "04", "name": "The next chapter of the phone", "headline": "The phone evolved. Your follow-up is next.", "subcopy": "From dialling numbers to following up on bookings. Customers book online, AI calls to confirm, and you get the call record.", "cameraMotion": "Hold a consistent three-quarter view as a rotary phone becomes a push-button phone, then a smartphone. Give the historic phone sequence the first 45% of the proposed motion; use the final 55% for online booking, the outbound AI confirmation call and the owner's dashboard.", "strengths": ["Creates an immediately recognizable story of change.", "Provides three memorable transformations before the product reveal.", "Can make the final workflow feel like a natural next step."], "tradeoff": "The historical sequence delays the product explanation and could imply AI answers every incoming call. Keep it brief and make the final outbound booking flow explicit.", "storyboard": [{"label": "01 / Rotary", "visual": "A sculptural rotary phone sits alone on a simple pedestal. The dial turns slightly as the camera settles into the angle that will remain consistent through the next transformations.", "copy": "First, we turned the dial."}, {"label": "02 / Push-button", "visual": "The rotary dial contracts into a push-button keypad. The handset and base reshape into a familiar desk phone while the pedestal, lighting and framing stay continuous.", "copy": "Then, we pressed a button."}, {"label": "03 / Smartphone", "visual": "The desk phone becomes a slim smartphone. Its screen wakes to an online booking page, bringing the historical sequence into the present product story.", "copy": "Then, we could book from anywhere."}, {"label": "04 / The booking gets a call", "visual": "Within one final scene, a submitted booking becomes an outbound AI confirmation call. The completed call record moves into the owner's dashboard as the camera pulls back.", "copy": "Now, AI follows up. You see the result."}]}]}</script>
+  <script>
+    (() => {
+      'use strict';
+      const {concepts} = JSON.parse(document.getElementById('concept-data').textContent);
+      const positions = ['0% 0%', '100% 0%', '0% 100%', '100% 100%'];
+      const dialog = document.getElementById('focus-dialog');
+      const readyAssets = new Set();
+      const failedAssets = new Set();
+      let scene = 0;
+      let view = 'scene';
+      let focused = 0;
+      const byId = id => document.getElementById(id);
+      const padded = number => String(number).padStart(2, '0');
+      const sceneDescription = concept => view === 'board'
+        ? `Four scenes for ${concept.name}. ${concept.storyboard.map(step => step.visual).join(' ')}`
+        : concept.storyboard[scene].visual;
+      const sceneLabel = concept => view === 'board' ? '01—04 / The full storyboard' : concept.storyboard[scene].label;
+      const sceneCopy = concept => view === 'board' ? concept.headline : concept.storyboard[scene].copy;
+
+      function setVisual(element, concept) {
+        element.style.backgroundImage = `url("assets/concept-${concept.id}.png")`;
+        element.style.backgroundPosition = view === 'board' ? '50% 50%' : positions[scene];
+        element.dataset.board = String(view === 'board');
+        element.setAttribute('aria-label', sceneDescription(concept));
+        element.classList.toggle('asset-ready', readyAssets.has(concept.id));
+        const placeholder = element.querySelector('.asset-placeholder');
+        if (placeholder) placeholder.lastElementChild.textContent = failedAssets.has(concept.id)
+          ? 'Storyboard image is being prepared.'
+          : 'Loading the storyboard image…';
+      }
+
+      function renderFocus() {
+        const concept = concepts[focused];
+        byId('focus-position').textContent = `Direction ${concept.id} of 04 · Still-frame preview`;
+        byId('focus-name').textContent = concept.name;
+        byId('focus-title').textContent = concept.headline;
+        byId('focus-subcopy').textContent = concept.subcopy;
+        byId('focus-motion').textContent = concept.cameraMotion;
+        byId('focus-tradeoff').textContent = concept.tradeoff;
+        byId('focus-strengths').replaceChildren(...concept.strengths.map(strength => {
+          const li = document.createElement('li');
+          li.textContent = strength;
+          return li;
+        }));
+        const visual = byId('focus-visual');
+        if (!visual.firstElementChild) {
+          const placeholder = document.createElement('div');
+          placeholder.className = 'asset-placeholder';
+          placeholder.setAttribute('aria-hidden', 'true');
+          const name = document.createElement('span');
+          const message = document.createElement('span');
+          placeholder.append(name, message);
+          visual.append(placeholder);
+        }
+        visual.querySelector('.asset-placeholder span').textContent = concept.name;
+        setVisual(visual, concept);
+        byId('focus-scene-label').textContent = sceneLabel(concept);
+        byId('focus-scene-copy').textContent = sceneCopy(concept);
+        byId('previous-direction').disabled = focused === 0;
+        byId('next-direction').disabled = focused === concepts.length - 1;
+      }
+
+      function render(announce = false) {
+        document.querySelectorAll('[data-scene]').forEach(button => {
+          button.setAttribute('aria-pressed', String(view === 'scene' && Number(button.dataset.scene) === scene));
+        });
+        document.querySelectorAll('[data-view]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.view === view)));
+        byId('scene-state').textContent = view === 'board' ? 'All four scenes together' : `Scene ${padded(scene + 1)} of 04`;
+        concepts.forEach((concept, index) => {
+          setVisual(byId(`visual-${concept.id}`), concept);
+          byId(`scene-label-${concept.id}`).textContent = sceneLabel(concept);
+          byId(`scene-copy-${concept.id}`).textContent = sceneCopy(concept);
+          byId(`open-${concept.id}`).setAttribute('aria-label', `Explore ${concept.name}. ${view === 'board' ? 'Full storyboard.' : `Scene ${scene + 1}: ${concept.storyboard[scene].label.split(' / ')[1]}.`}`);
+        });
+        renderFocus();
+        if (announce) byId('scene-announcement').textContent = view === 'board'
+          ? 'Showing all four scenes for every direction.'
+          : `Showing scene ${scene + 1} of 4 for every direction.`;
+      }
+
+      document.querySelectorAll('[data-scene]').forEach(button => button.addEventListener('click', () => {
+        scene = Number(button.dataset.scene);
+        view = 'scene';
+        render(true);
+      }));
+      document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => {
+        view = button.dataset.view;
+        render(true);
+      }));
+      document.querySelectorAll('[data-controls="scenes"]').forEach(group => group.addEventListener('keydown', event => {
+        const buttons = [...group.querySelectorAll('button')];
+        const current = buttons.indexOf(document.activeElement);
+        if (current < 0 || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? 3 : (current + (event.key === 'ArrowRight' ? 1 : 3)) % 4;
+        buttons[next].focus();
+        buttons[next].click();
+      }));
+      document.querySelectorAll('[data-focus]').forEach(button => button.addEventListener('click', () => {
+        focused = Number(button.dataset.focus);
+        renderFocus();
+        dialog.showModal();
+        dialog.scrollTop = 0;
+        document.body.style.overflow = 'hidden';
+      }));
+      byId('close-focus').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('close', () => { document.body.style.overflow = ''; });
+      dialog.addEventListener('click', event => {
+        if (event.target !== dialog) return;
+        const bounds = dialog.getBoundingClientRect();
+        if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
+      });
+      byId('previous-direction').addEventListener('click', () => {
+        if (focused === 0) return;
+        focused -= 1;
+        renderFocus();
+        dialog.scrollTop = 0;
+        byId('focus-title').setAttribute('tabindex', '-1');
+        byId('focus-title').focus({preventScroll:true});
+      });
+      byId('next-direction').addEventListener('click', () => {
+        if (focused === concepts.length - 1) return;
+        focused += 1;
+        renderFocus();
+        dialog.scrollTop = 0;
+        byId('focus-title').setAttribute('tabindex', '-1');
+        byId('focus-title').focus({preventScroll:true});
+      });
+      render();
+      concepts.forEach(concept => {
+        const image = new Image();
+        image.onload = () => { readyAssets.add(concept.id); render(); };
+        image.onerror = () => { failedAssets.add(concept.id); render(); };
+        image.src = `assets/concept-${concept.id}.png`;
+      });
+    })();
+  </script>
+</body>
+</html>

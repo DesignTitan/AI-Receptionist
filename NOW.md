@@ -3,11 +3,13 @@
 Handoff notes for the next session. Updated 2026-09-08. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
-## Current handoff — marketing hero exploration (8 September 2026)
+## Current handoff — four marketing hero storyboards (8 September 2026)
 
-- Bubs requested a much stronger scroll-controlled hero and specifically asked to discuss ideas before generating video. Researched Pinterest, YouTube and X, including creator-attributed GPT-6 Astra work; proposal and source links are in docs/hero-directions.md.
-- Recommended direction: a cinematic phone/studio scene following one online booking through an outbound confirmation call into the owner dashboard. Alternatives: an unfolding miniature business, or an appointment card opening into the product workflow. These are proposals, not approved designs.
-- No application code, site deployment or generated media changed. Next: choose a direction and agree on headline/storyboard, then review an anchor still before producing motion. Preserve accurate outbound-call messaging, readable text/buttons, mobile composition and a reduced-motion experience.
+- Bubs approved developing all three proposed directions plus a fourth showing the phone evolving into the AI receptionist workflow. Interpreted the requested 1:1 as square compositions and prepared all four for comparison.
+- Created four square generated boards containing 16 scene studies: phone on stone, a miniature studio, booking layers and phone evolution. The offline interactive viewer is design/hero-comparison/index.html; prompts, copy and asset checksums are saved alongside it.
+- Browser review passed: shared scene selection, full storyboards, concept detail, Escape/focus return, and a 390px mobile layout with square images and no horizontal overflow. No browser errors. These are still-frame storyboards; no rendered video, application change or site deployment.
+- Next: Bubs compares the directions and chooses the overall story/opening composition; refine those keyframes and make a short connected motion test. For the fourth direction, spend about 45% on rotary/push-button/smartphone evolution and at least 55% showing online booking, an outbound AI confirmation call and the owner's record.
+- Keep the actual product clear: outbound confirmation calls after online booking, one business, and staff handling reschedule requests. Build final readable text and UI separately from generated scenery; plan portrait and reduced-motion versions. Public GitHub push remains pending the previously requested explicit publication approval after automatic review rejected it.
 
 ## Current handoff — customer pricing and Stripe live preparation (8 September 2026)
 

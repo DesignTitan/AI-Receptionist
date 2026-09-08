@@ -1,6 +1,12 @@
-# Marketing hero directions — discussion draft
+# Marketing hero directions — research and comparison
 
-Research date: 8 September 2026. No video generation, application implementation or deployment is authorized by this concept discussion. Bubs wants to compare ideas before production.
+Research date: 8 September 2026. Bubs subsequently approved developing all three concepts and adding phone evolution as a fourth, in 1:1 compositions. Four generated boards and an interactive still-frame viewer are ready at [design/hero-comparison/index.html](../design/hero-comparison/index.html). No final video or replacement hero has been produced.
+
+## Comparison update
+
+The fourth direction holds a consistent camera and setting while a rotary phone becomes a push-button phone, then an ordinary smartphone. Its final scene expands into the current software workflow: online booking, an outbound AI confirmation call and the owner's dashboard. Proposed headline: **The phone evolved. Your follow-up is next.** Keep the device evolution to roughly 45% of the eventual sequence, reserving at least 55% for the product.
+
+The viewer gives all four directions equal square framing, shared scene controls, full-board viewing and detailed copy/camera plans. Artwork, exact prompts and copy live together in the comparison folder. Browser checks cover the controls, keyboard dismissal and a 390px layout. This is a concept comparison, not motion footage. The original research and three concepts follow.
 
 ## Recommendation: The booking comes alive
 
@@ -48,4 +54,4 @@ This offers the clearest interface demonstration and the most predictable produc
 
 The current product accepts online bookings and makes outbound confirmation calls. The hero must show that direction clearly. A ringing desk phone would imply inbound answering. Show a sample confirmed outcome without implying every client answers. Reschedule requests are flagged for staff; do not depict automatic calendar sync or automatic rescheduling.
 
-Choose the overall direction first, then agree on the opening composition, headline and storyboard. After Bubs approves those, prepare an anchor still for review before generating the motion. No production media was generated during this research.
+Review the four visual storyboards, choose the overall direction and opening composition, then refine the selected keyframes and headline. Make a short connected motion test before producing the complete desktop and mobile hero. The image details are illustrative; final interface text and actions must be readable web elements.

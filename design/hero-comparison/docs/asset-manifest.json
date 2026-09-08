@@ -1,0 +1,67 @@
+{
+  "created": "2026-09-08",
+  "tool": "Built-in image_gen",
+  "purpose": "Hero concept storyboards for comparison; not production video",
+  "assets": [
+    {
+      "file": "assets/concept-01.png",
+      "format": "PNG",
+      "width": 1254,
+      "height": 1254,
+      "aspectRatio": "1:1",
+      "panels": 4,
+      "panelOrder": [
+        "top-left",
+        "top-right",
+        "bottom-left",
+        "bottom-right"
+      ],
+      "sha256": "a1ecfc8876b8f40762f577cf7bfe866c18ee599ef86713d64041a59f0d97ec90"
+    },
+    {
+      "file": "assets/concept-02.png",
+      "format": "PNG",
+      "width": 1254,
+      "height": 1254,
+      "aspectRatio": "1:1",
+      "panels": 4,
+      "panelOrder": [
+        "top-left",
+        "top-right",
+        "bottom-left",
+        "bottom-right"
+      ],
+      "sha256": "6cd4cac6dcd76d877f19797b2cdab058efd594bee14082545338bd73d43d4d25"
+    },
+    {
+      "file": "assets/concept-03.png",
+      "format": "PNG",
+      "width": 1254,
+      "height": 1254,
+      "aspectRatio": "1:1",
+      "panels": 4,
+      "panelOrder": [
+        "top-left",
+        "top-right",
+        "bottom-left",
+        "bottom-right"
+      ],
+      "sha256": "bd65df1b7bd9ca8a7cef7338abdb98f42c91a69163e5f0ebccbfd434975c4a71"
+    },
+    {
+      "file": "assets/concept-04.png",
+      "format": "PNG",
+      "width": 1254,
+      "height": 1254,
+      "aspectRatio": "1:1",
+      "panels": 4,
+      "panelOrder": [
+        "top-left",
+        "top-right",
+        "bottom-left",
+        "bottom-right"
+      ],
+      "sha256": "a1d80b0c67cf64ad9191832f752ad767e7f9904cbc268993851b91a478af99d8"
+    }
+  ]
+}

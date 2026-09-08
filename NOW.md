@@ -1,7 +1,14 @@
 # NOW
 
-Handoff notes for the next session. Updated 2026-09-07. Launch is Thursday 1 October 2026;
+Handoff notes for the next session. Updated 2026-09-08. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
+
+## Approved launch settings — 2026-09-08
+
+- Bubs explicitly approved the Supabase production sign-in callback and Vercel Production CRON_SECRET.
+- Saved the generated secret as a sensitive Vercel variable without committing or displaying its value.
+- Enabled the daily /api/jobs recovery schedule at 09:00 UTC; ordinary booking jobs also run immediately after submission.
+- Callback verification and production redeployment are in progress. Stripe, email/SMTP and complete live customer acceptance testing remain next.
 
 ## Current handoff — customer platform (2026-09-08)
 
@@ -10,7 +17,7 @@ the dated plan is docs/ROADMAP.md.
 - Added dedicated-agent/number provisioning with spending limits, durable email/call jobs, signed Stripe callbacks, scoped voice reports, and backup/deletion tools. Activation stays concierge: review and test each customer's line first.
 - Verification: unit tests and disposable PostgreSQL tests pass, including account isolation, overlap rejection, checkout reuse, callback deduplication and cancellation protection. Owner/signup browser checks passed with explicitly local fixtures; live payments, customer calls and email delivery are not yet verified.
 - External setup remains: Stripe, Resend/custom SMTP and sending domain, Bubs's lead inbox, customer domain and reviewed policies. Site stays locked; no number purchase or external message was sent. Overage is an estimate with manual invoicing.
-- Approval review blocked two settings: adding the production /account/callback URL to Supabase's redirect allowlist and saving CRON_SECRET to Vercel Production. Scheduled recovery stays disabled. Next: approve those settings, connect integrations and run a complete test customer. See docs/customer-platform.md; older notes below are historical.
+- Previously, approval review blocked two settings: adding the production /account/callback URL to Supabase's redirect allowlist and saving CRON_SECRET to Vercel Production. Scheduled recovery stays disabled. Next: approve those settings, connect integrations and run a complete test customer. See docs/customer-platform.md; older notes below are historical.
 
 ## Just done — production storage connected (2026-09-07)
 

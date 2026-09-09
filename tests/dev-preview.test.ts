@@ -151,6 +151,12 @@ test("page catalogue contains canonical routes for ordinary and tenant previews"
   assert.equal(journey?.kind, "internal");
   assert.equal(journey?.access, "development");
   assert.deepEqual(journey?.sources, ["dev/journey.html", "dev/journey.js"]);
+  const marketingV2 = pages.find((entry) => entry.id === "study-luxury");
+  assert.equal(marketingV2?.label, "Marketing site · V2");
+  assert.equal(marketingV2?.group, "Marketing");
+  assert.equal(marketingV2?.kind, "study");
+  assert.equal(marketingV2?.access, "development");
+  assert.equal(marketingV2?.href, "/__dev/design/luxury-v2/");
   assert.equal(pages.filter((entry) => entry.kind === "study").length, 3);
   assert.deepEqual(getPages({ tenant: "unknown" }), pages);
   assert.equal(getPages({ siteGate: "  LOCKED " }).length, 20);
@@ -159,7 +165,9 @@ test("page catalogue contains canonical routes for ordinary and tenant previews"
     assert.equal(preview.length, 10);
     assert.equal(preview.find((entry) => entry.id === `${tenant}-home`)?.href, "/");
     assert.match(preview.find((entry) => entry.id === `${tenant}-booking`)!.href, /^\/book\/[^/]+$/);
-    assert.ok(!preview.some((entry) => ["Marketing", "Customer"].includes(entry.group)));
+    assert.deepEqual(preview.find((entry) => entry.id === "study-luxury"), marketingV2);
+    assert.ok(!preview.some((entry) => entry.kind === "app" && ["Marketing", "Customer"].includes(entry.group)));
+    assert.ok(!preview.some((entry) => ["marketing", "demos", "start", "account", "owner-login"].includes(entry.id)));
     assert.ok(!preview.some((entry) => entry.href.startsWith("/demo/")));
   }
   assert.ok(pages.every((entry) => entry.sources.length > 0 && entry.sources.every((source: string) =>

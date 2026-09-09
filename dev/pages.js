@@ -7,15 +7,15 @@ let sort = "section";
 let loaded = false;
 const sections = [
   { key: "application", title: "Application", eyebrow: "Customer & staff workspace", description: "Accounts, bookings, business demos and staff tools. Sign-in still applies.", grouped: true },
-  { key: "marketing", title: "Marketing Site", eyebrow: "The public-facing product", description: "The original marketing site, product overview, pricing and demo directory." },
+  { key: "marketing", title: "Marketing Site", eyebrow: "The public-facing product", description: "The original site, V2 marketing preview, product pricing and demo directory." },
   { key: "study", title: "Design Studies", eyebrow: "Drafts & experiments", description: "Visual directions and imagery to review alongside the original site." },
   { key: "internal", title: "Internal Tools", eyebrow: "Workspace utilities", description: "The page index, user journey and access tools. Each page shows its access requirements." },
 ];
 
 function sectionKey(page) {
   if (page.kind === "internal" || page.group === "Internal tools") return "internal";
-  if (page.kind === "study") return "study";
   if (page.group === "Marketing") return "marketing";
+  if (page.kind === "study") return "study";
   return "application";
 }
 

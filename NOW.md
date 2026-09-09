@@ -5,8 +5,9 @@ the dated plan is docs/ROADMAP.md.
 
 ## Current handoff — page-index sections (9 September 2026)
 
-- Organized the page index into Application, Marketing Site, Design Studies and Internal Tools, in that order. The default catalogue still contains all 19 pages: 12 application pages, 2 marketing pages, 3 studies and 2 internal tools. User journey stays under Internal Tools; the site access gate also appears there when the site is locked.
+- Organized the page index into Application, Marketing Site, Design Studies and Internal Tools, in that order. Bubs requested V2 under Marketing: it is now labeled “Marketing site · V2” there and in the dev bar’s Marketing group. All 19 pages remain: 12 application pages, 3 marketing pages, 2 design studies and 2 internal tools. V2 still uses its existing local-only preview URL. User journey stays under Internal Tools; the site access gate also appears there when the site is locked.
 - The four sections sit alongside each other on desktop, become two columns on smaller screens and stack on mobile. Search now recognizes section names; sorting, page links, dates and access labels remain available.
+- Verified V2 appears under Marketing Site with the same preview link and Local only label. The updated catalogue checks pass for the main app and tenant previews. Development was restarted on 3101 (session 14749) to load the catalogue change.
 - Verified section counts, marketing and journey search, clearing search, date sorting and 390px mobile width in the browser. Existing development-preview checks pass (4 tests), as do JavaScript syntax and diff checks. This is a local directory update; product pages and live deployment are unchanged. Next product work remains phone connection/pilot acceptance and the signup follow-ups recorded below. Saved locally; public GitHub push is still awaiting the previously requested publication approval.
 
 ## Current handoff — visual user journey (9 September 2026)

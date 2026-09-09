@@ -13,6 +13,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .gstack/
+.local/
 
 # scrollcraft: raw capture frames and per-build node_modules are scratch; assets, brief and lab sheets are kept
 scrollcraft/builds/*/out/

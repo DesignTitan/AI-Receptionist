@@ -43,6 +43,19 @@ const business = {
   created_at: new Date().toISOString(),
 };
 let state = "draft";
+let phoneSettings = {};
+// Model JSONB's reordered object keys independently from application hashing.
+// Length-first ordering also catches a hash that only sorts the top-level keys.
+function phoneJsonb(value) {
+  if (Array.isArray(value)) return value.map(phoneJsonb);
+  if (value !== null && typeof value === "object") {
+    return Object.fromEntries(Object.entries(value)
+      .sort(([a], [b]) => a.length - b.length || (a < b ? -1 : a > b ? 1 : 0))
+      .map(([key, entry]) => [key, phoneJsonb(entry)]));
+  }
+  return value;
+}
+const send = (res, value) => res.end(JSON.stringify(value));
 const server = http.createServer(async (req, res) => {
   const u = new URL(req.url, "http://localhost");
   res.setHeader("Content-Type", "application/json");
@@ -69,9 +82,17 @@ const server = http.createServer(async (req, res) => {
     return;
   }
   if (u.pathname === "/rest/v1/customers") {
+    if (req.method === "PATCH") {
+      let raw = ""; for await (const part of req) raw += part;
+      const update = JSON.parse(raw);
+      const filter = u.searchParams.get("phone_settings");
+      if (filter?.startsWith("eq.") && JSON.stringify(phoneJsonb(JSON.parse(filter.slice(3)))) !== JSON.stringify(phoneSettings)) { send(res, []); return; }
+      if (update.phone_settings) phoneSettings = phoneJsonb(update.phone_settings);
+    }
     const isPublic = u.searchParams.has("slug");
     const c = {
       ...business,
+      phone_settings: phoneSettings,
       ...(isPublic || state === "live"
         ? {
             status: "live",
@@ -85,6 +106,8 @@ const server = http.createServer(async (req, res) => {
     res.end(JSON.stringify(req.headers.accept?.includes("object") ? c : [c]));
     return;
   }
+  if (u.pathname === "/rest/v1/customer_phone_connections") { send(res, []); return; }
+  if (u.pathname === "/rest/v1/customer_calls") { send(res, []); return; }
   if (u.pathname === "/rest/v1/customer_bookings") {
     res.setHeader("Content-Range", "0-0/0");
     res.end("[]");

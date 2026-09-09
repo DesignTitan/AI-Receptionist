@@ -54,7 +54,11 @@ export default async function Confirmation({
           {customer.config.address}
         </p>
         <p className="mt-5">
-          {b.call_status === "failed"
+          {b.call_status === "not_required"
+            ? b.source === "phone"
+              ? "Your appointment was confirmed during your call. Contact the business if you need to change anything."
+              : "Your booking is saved. No automated confirmation call is queued. Contact the business if you need to change anything."
+            : b.call_status === "failed"
             ? "The confirmation call could not be completed. Your booking is still saved; please call the business."
             : b.call_status === "completed"
               ? "Your confirmation call has finished. Contact the business if you need to change anything."

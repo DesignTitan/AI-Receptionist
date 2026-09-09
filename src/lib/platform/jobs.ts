@@ -6,11 +6,13 @@ import { RECORDING_NOTICE } from "@/lib/consent";
 import type { Customer, CustomerBooking } from "./model";
 import { releaseExpiredPilotCheckouts } from "./setup-offer";
 import { reportUsage } from "./usage";
+import { needsConfirmation } from "./booking";
 type Job = {
   notice_id: string | null;
   id: string;
   customer_id: string;
   booking_id: string | null;
+  call_id: string | null;
   kind: string;
   dedupe_key: string;
   attempts: number;
@@ -36,8 +38,15 @@ async function send(job: Job, c: Customer, b: CustomerBooking | null) {
           .single()
       : null;
   if (notice?.error) throw Error("Usage notice missing");
+  const incoming = job.kind === "inbound_call_email"
+    ? await serviceClient().from("customer_calls").select("caller_phone,result,summary")
+      .eq("id", job.call_id).eq("customer_id", c.id).single()
+    : null;
+  if (incoming?.error) throw Error("Incoming call missing");
   const subject =
-    job.kind === "usage_email"
+    job.kind === "inbound_call_email"
+      ? `Incoming call · ${incoming?.data?.caller_phone ?? "Caller number withheld"}`
+      : job.kind === "usage_email"
       ? "Your front desk usage update"
       : job.kind === "signup_alert"
         ? `New paid customer · ${c.business_name}`
@@ -49,7 +58,9 @@ async function send(job: Job, c: Customer, b: CustomerBooking | null) {
               ? `Call ${b?.outcome ?? "finished"} · ${b?.full_name}`
               : `New booking · ${b?.full_name}`;
   const message =
-    job.kind === "usage_email"
+    job.kind === "inbound_call_email"
+      ? `Outcome: ${incoming?.data?.result ?? "needs review"}. ${incoming?.data?.summary ?? "Open your dashboard for the call details."}`
+      : job.kind === "usage_email"
       ? (notice?.data?.message ?? "Open your dashboard for your usage update.")
       : job.kind === "signup_alert"
         ? `${c.business_name} has paid and is ready for setup. Open your customer queue at ${env.siteUrl}/admin/customers.`
@@ -59,7 +70,7 @@ async function send(job: Job, c: Customer, b: CustomerBooking | null) {
             ? `Your booking page is ready: ${env.siteUrl}/b/${c.slug}`
             : job.kind === "call_email"
               ? `Outcome: ${b?.outcome ?? "needs review"}. ${b?.summary ?? "Open your dashboard for the call details."}`
-              : `${b?.full_name} booked ${b ? formatDateTime(b.starts_at, c.config.timezone) : ""}. A confirmation call has been queued.`;
+              : `${b?.full_name} booked ${b ? formatDateTime(b.starts_at, c.config.timezone) : ""}. ${b?.source === "phone" ? "The appointment was confirmed during the incoming call." : b?.call_status === "not_required" ? "No automated confirmation call is queued." : "A confirmation call has been queued."}`;
   const recipient =
     job.kind === "signup_alert" ? env.ownerEmail : c.owner_email;
   if (!recipient) throw Error("Operator lead inbox is not configured.");
@@ -81,6 +92,14 @@ async function send(job: Job, c: Customer, b: CustomerBooking | null) {
   if (!response.ok) throw Error(`Email provider returned ${response.status}.`);
 }
 async function dispatch(job: Job, c: Customer, b: CustomerBooking) {
+  if (!needsConfirmation(b, c.phone_settings)) {
+    if (b.call_status === "queued") {
+      const skipped = await serviceClient().from("customer_bookings")
+        .update({ call_status: "not_required" }).eq("id", b.id).eq("customer_id", c.id).eq("call_status", "queued");
+      if (skipped.error) throw Error("Could not record that no confirmation call is needed.");
+    }
+    return;
+  }
   if (
     c.status !== "live" ||
     c.billing_status !== "active" ||
@@ -92,10 +111,16 @@ async function dispatch(job: Job, c: Customer, b: CustomerBooking) {
   const db = serviceClient();
   const claim = await db.rpc("reserve_call_usage", { c_id: c.id, b_id: b.id });
   if (claim.error) throw Error("Could not reserve call allowance.");
-  if (!claim.data)
+  if (!claim.data) {
+    // Settings may change after the worker reads the customer. The locked
+    // reservation is authoritative and marks that case as not_required.
+    const current = await db.from("customer_bookings").select("call_status,status,source")
+      .eq("id", b.id).eq("customer_id", c.id).single();
+    if (!current.error && (current.data.call_status === "not_required" || current.data.status !== "pending" || current.data.source === "phone")) return;
     throw Error(
       "Call not placed: check spending limit, billing period, or booking status. Confirm the booking manually.",
     );
+  }
   const member = c.config.team.find((p) => p.id === b.provider_id);
   const first = `Hi ${b.full_name.split(" ")[0]}, this is Ava, the AI receptionist calling from ${c.business_name}. ${RECORDING_NOTICE} I'm calling to confirm your appointment.`;
   try {

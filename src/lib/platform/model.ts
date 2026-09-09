@@ -1,4 +1,6 @@
 import { PLANS, type Plan } from "./pricing.ts";
+import type { PhoneSettings } from "./phone-settings.ts";
+import { validatePhoneSetup, type PhoneSetup } from "./phone-provider.ts";
 export { PLANS, type Plan } from "./pricing.ts";
 export type CustomerStatus =
   | "draft"
@@ -13,6 +15,7 @@ export type TeamMember = {
   minutes: number;
 };
 export type BusinessConfig = {
+  phoneSetup?: PhoneSetup;
   trade: "salon" | "studio" | "other";
   timezone: string;
   days: number[];
@@ -33,6 +36,7 @@ export type Customer = {
   plan: Plan;
   status: CustomerStatus;
   config: BusinessConfig;
+  phone_settings?: Partial<PhoneSettings>;
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
   setup_fee_cents: number | null;
@@ -63,7 +67,9 @@ export type CustomerBooking = {
   ends_at: string;
   reference: string;
   status: "pending" | "confirmed" | "cancelled" | "rescheduled";
-  call_status: "queued" | "dispatching" | "ringing" | "completed" | "failed";
+  call_status: "queued" | "dispatching" | "ringing" | "completed" | "failed" | "not_required";
+  source?: "web" | "phone";
+  inbound_call_id?: string | null;
   provider_call_id: string | null;
   outcome: string | null;
   summary: string | null;
@@ -143,6 +149,7 @@ export function validateConfig(input: unknown): BusinessConfig {
   });
   return {
     trade: c.trade,
+    ...(c.phoneSetup ? { phoneSetup: validatePhoneSetup(c.phoneSetup) } : {}),
     timezone,
     days: [...new Set(c.days)],
     opens: c.opens,

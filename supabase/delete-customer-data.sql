@@ -6,7 +6,9 @@ begin;
 create temporary table deletion_target(id uuid primary key);
 insert into deletion_target values ('00000000-0000-0000-0000-000000000000');
 select c.id,c.business_name,c.owner_email,c.status,c.stripe_subscription_id,c.number_id,
- (select count(*) from public.customer_bookings b where b.customer_id=c.id) as bookings
+ (select count(*) from public.customer_bookings b where b.customer_id=c.id) as bookings,
+ (select count(*) from public.customer_calls x where x.customer_id=c.id) as incoming_calls,
+ (select p.inbound_number from public.customer_phone_connections p where p.customer_id=c.id) as incoming_number
 from public.customers c join deletion_target t using(id);
 do $$ begin
  if exists(select 1 from public.customers where id in(select id from deletion_target) and billing_status not in('canceled','incomplete_expired')) then
@@ -14,7 +16,14 @@ do $$ begin
  end if;
 end $$;
 delete from public.customer_jobs where customer_id in(select id from deletion_target);
+delete from public.inbound_call_usage where call_id in(select id from public.customer_calls where customer_id in(select id from deletion_target));
 delete from public.call_usage where period_id in(select id from public.usage_periods where customer_id in(select id from deletion_target));
+-- The call and booking reference each other. Detach only this customer's call
+-- references before deleting bookings, then remove calls and private routing.
+update public.customer_calls set booking_id=null,booking_key=null where customer_id in(select id from deletion_target);
 delete from public.customer_bookings where customer_id in(select id from deletion_target);
+delete from public.customer_calls where customer_id in(select id from deletion_target);
+delete from public.customer_phone_connections where customer_id in(select id from deletion_target);
+-- Billing event receipts and redeemed pilot places keep their existing rules.
 delete from public.customers where id in(select id from deletion_target) and billing_status in('canceled','incomplete_expired');
 rollback;

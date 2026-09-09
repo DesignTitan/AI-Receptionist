@@ -350,3 +350,61 @@
 .platform-header .text-subtle {
   color: #657176;
 }
+
+/* Owner phone controls: scoped so the existing product and dev toolbar keep their styles. */
+.phone-controls .phone-heading { display:flex; justify-content:space-between; align-items:start; gap:24px; }
+.phone-controls .phone-heading h2 { margin-bottom:10px; }
+.phone-controls .phone-heading p { margin:0 0 22px; max-width:620px; font-size:14px; }
+.phone-controls .platform-badge { flex:none; white-space:normal; max-width:190px; text-align:center; }
+.phone-controls .phone-connected { background:#e1eee6; color:#22583d; }
+.phone-controls .phone-status { display:grid; grid-template-columns:1fr 1fr; gap:24px; background:#f1f4ef; border:1px solid #dce2d9; border-radius:12px; padding:22px; }
+.phone-controls .phone-status strong { display:block; font-size:17px; line-height:1.45; font-weight:550; margin:9px 0; }
+.phone-controls .phone-status p { font-size:12px; margin:7px 0 0; }
+.phone-controls .phone-caption { display:block; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:#637478; }
+.phone-controls .phone-unsaved { color:#8a5e2c!important; }
+.phone-controls .phone-features { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:23px 0 30px; }
+.phone-controls .phone-features legend { font-size:10px; padding:0 0 13px; margin:0; }
+.phone-controls .phone-toggle { display:flex; align-items:start; gap:12px; padding:20px 17px; border:1px solid #cad6d2; border-radius:12px; background:#fcfcf8; }
+.phone-controls .phone-toggle input { flex:none; width:18px; height:18px; margin:3px 0 0; }
+.phone-controls .phone-toggle strong { display:block; line-height:1.55; font-weight:550; font-size:14px; }
+.phone-controls .phone-toggle small { display:block; margin-top:8px; font-size:12px; line-height:1.7; color:#627176; }
+.phone-controls .phone-section { border-top:1px solid #dce0d9; padding-top:23px; margin-bottom:30px; }
+.phone-controls .phone-section legend { font-size:18px; padding:0 13px 0 0; margin-bottom:9px; }
+.phone-controls .phone-fields { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:19px 23px; }
+.phone-controls .phone-help { display:block; color:#627176; font-size:12px; line-height:1.7; margin-top:9px; font-weight:400; }
+.phone-controls .phone-week { border-top:1px solid #dce0d9; }
+.phone-controls .phone-day { display:grid; grid-template-columns:140px minmax(0,1fr) minmax(0,1fr) minmax(115px,1.1fr); gap:17px; align-items:center; padding:16px 0; border-bottom:1px solid #e7e9e2; }
+.phone-controls .phone-day-name { display:flex; align-items:center; font-size:13px; }
+.phone-controls .phone-day input[type="time"] { min-width:0; padding:10px; font-size:13px; }
+.phone-controls .phone-day > label:not(.phone-day-name) { color:#627176; font-size:11px; }
+.phone-controls .phone-day-note { font-size:11px; line-height:1.5; color:#627176; }
+.phone-controls .phone-holidays { display:grid; gap:17px; margin-bottom:18px; }
+.phone-controls .phone-holiday { border:1px solid #d8dfd8; border-radius:12px; padding:21px; background:#f8f9f4; display:grid; gap:18px; }
+.phone-controls .phone-holiday-action { display:flex; align-items:end; gap:20px; }
+.phone-controls .phone-holiday-action > label { flex:1; min-width:0; }
+.phone-controls .phone-holiday-action button { flex:none; }
+.phone-controls .phone-empty { font-size:13px; padding:11px 0; }
+.phone-controls .phone-override { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:18px 20px; background:#edf2ed; border-radius:11px; margin-bottom:20px; }
+.phone-controls .phone-override p { margin:0; font-size:13px; }
+.phone-controls .phone-override-button { margin-top:19px; }
+.phone-controls .phone-usage { border-top:1px solid #dce0d9; padding-top:22px; }
+.phone-controls .phone-save { align-items:center; }
+.phone-controls input:disabled,.phone-controls select:disabled { opacity:.5; }
+@media(max-width:760px) {
+  .phone-controls .phone-heading { flex-direction:column; gap:0; margin-bottom:20px; }
+  .phone-controls .phone-heading p { margin-bottom:14px; }
+  .phone-controls .phone-status,.phone-controls .phone-features { grid-template-columns:1fr; gap:17px; }
+  .phone-controls .phone-status > div+div { border-top:1px solid #dce2d9; padding-top:17px; }
+  .phone-controls .phone-day { grid-template-columns:110px minmax(0,1fr) minmax(0,1fr); gap:12px; }
+  .phone-controls .phone-day-note { grid-column:2/-1; margin-top:-5px; }
+}
+@media(max-width:520px) {
+  .phone-controls .phone-fields { grid-template-columns:1fr; gap:17px; }
+  .phone-controls .phone-day { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+  .phone-controls .phone-day-name,.phone-controls .phone-day-note { grid-column:1/-1; }
+  .phone-controls .phone-status { padding:17px; }
+  .phone-controls .phone-toggle { padding:17px 14px; }
+  .phone-controls .phone-holiday { padding:17px; }
+  .phone-controls .phone-holiday-action,.phone-controls .phone-override { align-items:stretch; flex-direction:column; gap:14px; }
+  .phone-controls .phone-save { align-items:stretch; flex-direction:column; }
+}

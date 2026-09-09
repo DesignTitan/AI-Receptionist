@@ -17,7 +17,9 @@ export default async function Business({
     <Frame
       eyebrow="Book directly with us"
       title={c.business_name}
-      description="Choose your person and a time. Our AI receptionist will call to confirm the details."
+      description={c.phone_settings?.confirmationCalls === false
+        ? "Choose your person and a time. Your appointment details will be saved for the team."
+        : "Choose your person and a time. Our AI receptionist will call to confirm the details."}
     >
       <div className="platform-grid">
         <CustomerBookingForm
@@ -56,9 +58,9 @@ export default async function Business({
           <p>Have a question?</p>
           <a href={`tel:${c.config.phone}`}>{c.config.phone}</a>
           <p className="platform-note">
-            Confirmation calls are made by an AI assistant and are recorded.
-            Tell the assistant if you need to cancel or ask the team to
-            reschedule.
+            {c.phone_settings?.confirmationCalls === false
+              ? "Automated confirmation calls are currently off. Contact the business if you need to change your appointment."
+              : "Confirmation calls are made by an AI assistant and are recorded. Tell the assistant if you need to cancel or ask the team to reschedule."}
           </p>
         </aside>
       </div>

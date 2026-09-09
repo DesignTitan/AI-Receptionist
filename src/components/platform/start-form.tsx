@@ -7,6 +7,7 @@ import {
 } from "@/lib/platform/pricing";
 import { useState } from "react";
 import { PLANS, type Customer, type Plan } from "@/lib/platform/model";
+import { PhoneProviderFields } from "./phone-provider-fields";
 export function StartForm({
   customer,
   plan,
@@ -45,6 +46,12 @@ export function StartForm({
               phone: f.get("phone"),
               color: f.get("color"),
               areaCode: f.get("areaCode"),
+              phoneSetup: {
+                provider: f.get("phoneProvider"),
+                serviceType: f.get("phoneServiceType"),
+                serviceName: f.get("phoneServiceName"),
+                bookingSystem: f.get("bookingSystem"),
+              },
               team,
             },
           };
@@ -193,7 +200,7 @@ export function StartForm({
             />
           </label>
           <label>
-            Callback phone
+            Existing business phone number
             <input name="phone" type="tel" required defaultValue={c?.phone} />
           </label>
           <label>
@@ -221,8 +228,9 @@ export function StartForm({
           separate review before onboarding.
         </p>
       </fieldset>
+      <PhoneProviderFields initial={c?.phoneSetup} />
       <fieldset>
-        <legend>03 — When you’re open</legend>
+        <legend>04 — When you’re open</legend>
         <label>
           Timezone
           <select
@@ -281,7 +289,7 @@ export function StartForm({
         </p>
       </fieldset>
       <fieldset>
-        <legend>04 — Who clients can book</legend>
+        <legend>05 — Who clients can book</legend>
         {team.map((p, i) => (
           <div className="platform-team" key={p.id}>
             <div className="platform-fields">

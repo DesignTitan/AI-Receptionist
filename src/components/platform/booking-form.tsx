@@ -165,8 +165,8 @@ export function CustomerBookingForm({
             </label>
           </div>
           <label className="my-5">
-            <input type="checkbox" name="consent" required />I agree to receive
-            an AI confirmation call about this booking. The call is recorded.
+            <input type="checkbox" name="consent" required />I agree to be contacted
+            about this appointment, including a recorded AI confirmation call.
           </label>
           {siteKey ? (
             <HumanCheck siteKey={siteKey} onToken={setToken} reset={reset} />

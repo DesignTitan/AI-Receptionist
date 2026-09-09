@@ -1,4 +1,6 @@
 import { UsageControls } from "@/components/platform/usage-panel";
+import { PhoneControls } from "@/components/platform/phone-controls";
+import { InboundCallHistory } from "@/components/platform/inbound-call-history";
 import { usageFor } from "@/lib/platform/usage";
 import {
   recommendPlan,
@@ -124,6 +126,7 @@ export default async function Account() {
           </p>
         </div>
       </div>
+      <PhoneControls config={c.config} />
       <section className="platform-panel mb-6">
         <h2>Your bill, without surprises</h2>
         {c.status === "draft" && !c.setup_paid_at ? (
@@ -217,6 +220,7 @@ export default async function Account() {
           <p>No usage alerts yet.</p>
         )}
       </section>
+      <InboundCallHistory customerId={c.id} timezone={c.config.timezone} />
       <section className="platform-panel">
         <h2>Appointments</h2>
         <p>

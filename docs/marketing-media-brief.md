@@ -36,6 +36,51 @@ These are the user's subjects, not six competing art directions. They belong to 
 | **On vacation — “Be where you are.”** | A quiet lakeside or coastal walk with a companion, with the owner's phone out of their hands. Relatable time off, expansive composition and a natural setting. | A gentle lateral or distant shot of the pair walking. Cut back to a future appointment being saved; finish on the owner continuing their day away. | Date-based vacation answering rules and organized booking records. Never imply appointments take place while the business is closed, or that all follow-up is unattended. |
 | **After hours — “Bookings don’t have to close with you.”** | The owner locking the salon at dusk and heading home. A credible storefront and a clear end-of-day moment. | The lights settle, the owner leaves; cut to a customer booking a future available appointment that evening. | Online booking outside business hours is the current evidence. A verified after-hours answering call becomes the phone version after pilot acceptance. |
 
+## Make the new features solve a visible problem
+
+Bubs's follow-up on 9 September: the new capabilities must appear in the marketing story through the problems they solve. Pair each human scene with one relevant product action and a visible result. The controls explain how the owner gets the benefit.
+
+**Story structure: a recognizable problem → the owner's chosen help → a visible result → the owner carries on.**
+
+| Owner's problem | Built capability to show | Visual treatment and result | Placement |
+| --- | --- | --- | --- |
+| “I cannot stop halfway through this service to answer.” | Incoming booking; staff-first with optional AI overflow; AI-first choice. | Stay with a stylist and client. In one clearly labeled phone-booking demonstration, show the saved answering choice, an available slot, caller agreement, then the saved appointment. Return to the uninterrupted service. | Main working-day story. Choose one answering mode for this sequence. |
+| “Some callers need an appointment; others need a person.” | Caller menu and separate staff destination. | Begin with a customer's reason for calling. A restrained two-choice graphic reads “1 · Book an appointment” and “2 · Speak with the team.” Follow one choice at a time. Appointment requests go through booking; the human choice rings staff or offers voicemail when unavailable. | Beside the busy-reception scene; optional replay to show the other choice. |
+| “I need a break without remembering to change everything back.” | Expiring temporary answering choice. | Show the owner preparing “AI answers first” for one hour and saving it. Cut to lunch. A small time transition then shows the normal schedule resuming. | Break scene. Headline: **Take a break. Your schedule picks up again.** |
+| “I want evenings and time off without managing calls all day.” | Weekly phone hours, separate outside-hours choice, holiday/vacation dates. | Show a closing-time boundary on a simple timeline, then the owner leaving. For vacation, show the date range once and return to the human scene. A later customer books an actually available future appointment. | After-hours and vacation scenes. Headline: **Set your hours. Enjoy your time.** |
+| “Following up on online appointments takes time.” | Independently controlled outgoing AI confirmations. | Show an online booking, an enabled confirmation call, then the actual call outcome in the owner's record. Include an unanswered or change-request example as a follow-up item when explaining exceptions. | A distinct online-booking chapter. Headline: **Less chasing. Clearer follow-up.** |
+| “What happened while I was busy, and who still needs me?” | Incoming call history plus appointment status, summaries and available transcripts. | Bring one saved appointment and one call needing a person into focus. The owner reads the result and knows what to handle next. Show actual available records, not a fabricated automatic task queue or a universal success tick. | Shared ending after the human scenes. Headline: **See what happened. Know what's next.** |
+| “Will a busy month bring extra costs I did not choose?” | Shared minute allowance, dashboard notices, forecast and owner-set extra-spend cap. | Show a dashboard allowance notice, then the owner leaving the extra limit at $0 or explicitly choosing and saving a cap. If the allowance/budget can no longer admit a call, show AI paused and the configured staff/voicemail fallback, with online booking still available. | Beside pricing. Headline: **Know your usage. Choose your limit.** |
+| “How will this work with the number my customers already use?” | Provider/service/appointment-system intake and visible connection status. | Keep the same fictional public number visible across the setup story; select the provider and show the compatibility/setup review. End the current capture at “Not connected” or testing. Only use a connected result after real acceptance. | Setup section near signup. Headline: **Start with the number your customers know.** |
+
+### One connected scroll sequence
+
+Use the client-service scene as the first short storyboard. Each step advances the same appointment:
+
+1. **The moment:** a stylist is working with a client while another customer calls.
+2. **The choice:** a brief view of the owner's saved “AI answers first” setting explains who will answer.
+3. **The work:** AI offers a real available time and the caller agrees; the appointment is saved.
+4. **The proof:** the owner's record shows that appointment and the call outcome.
+5. **The payoff:** return to the stylist finishing the service with full attention on the client.
+
+This is the proposed incoming-call demonstration, not evidence of a connected pilot. The existing online-booking/confirmation story remains separate. Record the product steps from the application with labeled fictional data; use the approved photographic direction for the human moments.
+
+### Keep the page understandable
+
+The main story is booking coverage, time back and owner visibility. Give the caller menu and schedule controls short contextual moments. Put spending controls beside pricing and provider setup beside signup. Do not turn every control into a full-screen chapter or force visitors through every alternate call path.
+
+Show one understandable UI detail at a time: an answering choice, one date range, one appointment, one call result or one allowance notice. Match it to the scene; retain large photography and restrained typography. Keep all product text in HTML or actual UI captures so it stays readable and accurate.
+
+### Evidence for production
+
+Checked against `src/components/platform/phone-controls.tsx`, `src/lib/platform/phone-settings.ts`, `src/components/platform/phone-provider-fields.tsx`, `src/components/platform/inbound-call-history.tsx`, `src/app/account/page.tsx`, `docs/inbound-phone.md` and `docs/usage-billing.md`.
+
+- The phone controls and booking tools are locally implemented. Incoming audio, menu, transfers, voicemail and both pilots still require the carrier/voice connection and acceptance test. The owner can prepare preferences now; selecting a provider or saving a toggle does not connect the line or change carrier forwarding.
+- Temporary choices require saving and incoming routing enabled; they then expire back to the saved schedule. Phone hours and vacation rules control answering, not appointment availability. A request to speak to staff does not silently return to AI if staff are unavailable.
+- Outgoing confirmation is independent of incoming routing and requires available call budget. An incoming appointment already confirmed during the call does not trigger an immediate duplicate confirmation call. Do not promise fewer no-shows as a measured result without evidence.
+- Usage notices can be shown in the dashboard now. Email delivery still requires configuration. Extra spend defaults to $0; no automatic paid upgrade or automatic consent to overages exists. The forecast is an estimate, and the cap concerns AI extra usage, not the entire subscription or separate carrier bill.
+- Keep forecasts, appointment names and call outcomes explicitly illustrative in a storyboard. Capture final product proof from a verified flow before publishing live-service claims.
+
 ## Finish with proof
 
 End on one clear customer appointment in the owner dashboard: the saved time, the call outcome and any request needing a person. Show the owner glancing at the result and returning to their day. This is a product capture plus a human scene, not another speculative photograph of floating software.
@@ -57,8 +102,8 @@ Do not combine these into an unexplained montage. The visitor should be able to 
 1. Approved coastal opening and a plain explanation of the service.
 2. Working-day scenes: serving a customer, a busy reception area, away from the desk.
 3. Time-back scenes: a break, vacation, leaving after hours.
-4. One readable booking/call/record demonstration.
-5. Owner controls and a clear demo/signup action.
+4. One readable booking/call/record demonstration, with caller choice and schedule controls tied to the relevant human scenes.
+5. Usage visibility and extra-spend choice beside pricing; provider setup beside the demo/signup action.
 
 Use large image or video sections with one short headline and one sentence each. Let the human moment remain visible long enough to understand. Keep navigation and captions restrained.
 
@@ -77,7 +122,7 @@ Phone evolution may remain a short optional transition near the product explanat
 
 ## Deliverables and review order
 
-1. **This brief:** recovered scenarios, their benefit and the proof each requires.
+1. **This brief:** recovered scenarios, the new features mapped to owner problems, a connected scroll storyboard and the proof each requires.
 2. **First still review:** focused-client and busy-reception scenes alongside the already approved opening. Check realism and continuity before commissioning the full set.
 3. **Complete keyframes:** the six scenario photographs, using the approved opening as the campaign anchor. Each has its planned mobile composition and fallback still.
 4. **Short motion test:** one approved human scene and one product sequence. Review pacing and clarity before generating all clips.

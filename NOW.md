@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-09. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — showing the new features through owner problems (9 September 2026)
+
+- Expanded docs/marketing-media-brief.md with eight problem/action/result treatments for incoming booking, caller choice, temporary coverage, weekly/vacation schedules, independent confirmations, call records, usage/spend controls and provider onboarding. Verified the descriptions against the current UI, phone settings and operating notes.
+- Added a five-step scroll storyboard: stylist with client → saved answering choice → agreed slot and saved booking → owner record → uninterrupted service. Controls appear alongside their human benefit; usage belongs beside pricing and setup beside signup. Preserve the approved V2 opening and separate incoming booking from online/outgoing confirmation.
+- Next: review this direction and the first focused-client/busy-reception keyframes before motion production. This block updates planning only; no media, app page, live connection or deployment changed. Incoming phone demonstrations still need a real adapter/pilot test before live claims; use dashboard notices until email is configured. Work is saved locally; public GitHub publishing remains pending the previously requested approval.
+
 ## Current handoff — benefit-led photos and videos (9 September 2026)
 
 - Recovered Bubs's existing scenario list and inspected Starlink Roam's actual hero and travel/camping/boating imagery. The media story must show what owners gain: attention with a client, help during busy periods, freedom from the desk, breaks, vacation and after-hours coverage. V2 currently has one human opening followed by text-only benefits and large technical studies; those studies should no longer lead the campaign.

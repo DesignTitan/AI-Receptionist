@@ -3,6 +3,14 @@
 Handoff notes for the next session. Updated 2026-09-09. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — preferred V2 marketing direction (9 September 2026)
+
+- Bubs now likes the opening image and UI in the V2 marketing preview, specifically its SpaceX/Starlink feel. Treat this as the preferred direction; this latest feedback supersedes the earlier rejection for this opening image and layout, without approving all four technical studies.
+- Verified the visible image in the selected browser tab: design/hero-comparison/luxury-v2/assets/05-time-back.png, the woman having coffee on a coastal terrace. Preserve this exact image for the current direction. The separate Higgsfield V3 photograph was not the image on screen and remains an alternative.
+- Carry forward the large photography, dark framing, restrained white typography, generous spacing and minimal navigation. Keep the owner benefit immediately clear: room to focus on customers, take a break or step away while bookings continue.
+- Next: develop the scroll story around this opening, then show a customer booking online, the outbound AI confirmation call, and the owner's call record. Keep the story tied to the real product; requests needing a person still require follow-up.
+- This block records design feedback only; no imagery, video, application or live deployment changed. Keep the original site intact. GitHub push remains blocked by the earlier automatic review of the public repository, pending the previously requested publication approval.
+
 ## Current handoff — local development navigation (9 September 2026)
 
 - Added Bubs's burgundy DEV toolbar with a searchable Pages dropdown, current-page label, local path shortcut and Command/Ctrl K. The direct Page index link opens a full directory inspired by the requested localhost:8090/pages reference: internal tools, application/design columns, search, recency filters and date sorting. Both menus share the same 18-entry catalogue.

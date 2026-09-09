@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-09. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — localhost restored (9 September 2026)
+
+- The local 3101 Next process was orphaned, using a CPU core and accepting connections without responding; the development-preview launcher had stopped. Stopped only that project's stale process group and restarted npm run dev on 127.0.0.1:3101 in attached PTY session 10741. No application/source repair was needed or confirmed; this was a local process recovery.
+- Verified HTTP 200 for V2, the approved hero image, page index/data, journey, toolbar and original homepage. Browser verification confirms the full 19-page index and its Marketing site · V2 link; the approved opening and dev bar render. An old tab was stuck on a cached network-error document, so opened and retained a fresh working V2 tab (22).
+- Continue the feature/problem storyboard and first human keyframe review in docs/marketing-media-brief.md. The old separate mock preview on 3102 and its mock service are no longer running; restart those isolated fixtures only when needed for owner-screen review. No live deployment or phone changes occurred. Public GitHub publishing remains pending the earlier requested approval.
+
 ## Current handoff — showing the new features through owner problems (9 September 2026)
 
 - Expanded docs/marketing-media-brief.md with eight problem/action/result treatments for incoming booking, caller choice, temporary coverage, weekly/vacation schedules, independent confirmations, call records, usage/spend controls and provider onboarding. Verified the descriptions against the current UI, phone settings and operating notes.

@@ -3,6 +3,14 @@
 Handoff notes for the next session. Updated 2026-09-09. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — local development navigation (9 September 2026)
+
+- Added Bubs's burgundy DEV toolbar with a searchable Pages dropdown, current-page label, local path shortcut and Command/Ctrl K. The direct Page index link opens a full directory inspired by the requested localhost:8090/pages reference: internal tools, application/design columns, search, recency filters and date sorting. Both menus share the same 18-entry catalogue.
+- Run `npm run dev` to launch Next plus a loopback-only preview server. Current workspace preview is http://127.0.0.1:3101/__dev/pages; comparison is `/__dev/design/luxury-v2`, and the original site is still `/`. Source dates use real Git history plus uncommitted file edits and refresh when the index reloads. Original design files and the live Vercel site were not changed.
+- Production resolves the toolbar import to an empty server component; preview rewrites exist only during development. Every production build now fails if generated assets or route manifests include the toolbar. App sign-in gates stay intact; only the local static development namespace bypasses them.
+- Verified desktop/mobile navigation and directory, search, date sorting, empty filters, arrow keys, Escape, path validation, mouse navigation and Next client navigation. The 20 tests and production build pass; local production HTML has no toolbar and all directory/tool/metadata URLs return 404. Production verification server was stopped; development remains running for review.
+- Next: review the Higgsfield human image and settle the hero direction before producing motion. This work is saved in a local commit; GitHub push remains blocked by the earlier automatic review of the public repository, pending the previously requested publication approval.
+
 ## Current handoff — Higgsfield human photograph (9 September 2026)
 
 - Bubs rejected all technical imagery from V2. Only the human time-back idea was promising, but its image still looked artificial. Explicit request: use Higgsfield and “Canto 2.5” for realism. Keep the benefit of time with customers, breaks and time off; no approved final hero yet.

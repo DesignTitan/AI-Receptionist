@@ -30,6 +30,12 @@ const STAFF_ONLY = ["/admin", "/api/admin"];
 export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
+  // Only static developer tools use this namespace. Actual app routes still
+  // pass through the site, customer and staff gates below.
+  if (process.env.NODE_ENV === "development" && pathname.startsWith("/__dev/")) {
+    return NextResponse.next();
+  }
+
   if (pathname === "/api/jobs" || ALWAYS_OPEN.some((prefix) => pathname.startsWith(prefix))) {
     return NextResponse.next();
   }

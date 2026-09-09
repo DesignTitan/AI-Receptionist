@@ -23,6 +23,7 @@
       }
     ],
     "paths": {
+      "@development-tools": ["./src/components/development-tools.disabled.tsx"],
       "@/*": [
         "./src/*"
       ]

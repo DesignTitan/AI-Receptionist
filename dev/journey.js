@@ -50,7 +50,10 @@ function render(){
   document.querySelector('#position').textContent=`${selected+1} of ${list.length} · ${audience==='owner'?'Business owner':channel==='phone'?'Customer calling':'Customer booking online'}`;
   document.querySelector('#prev').disabled=selected===0;
   document.querySelector('#next').disabled=selected===list.length-1;
-  history.replaceState(null,'',`#${audience==='owner'?'owner':channel}-${entry.key}`);
+  // A fragment-only URL would resolve against the preview's injected <base>.
+  const selectedUrl = new URL(location.href);
+  selectedUrl.hash = `${audience==='owner'?'owner':channel}-${entry.key}`;
+  history.replaceState(null,'',selectedUrl.href);
 }
 document.querySelectorAll('[data-audience]').forEach(el=>el.addEventListener('click',()=>{audience=el.dataset.audience;selected=audience==='owner'?2:0;render();}));
 document.querySelectorAll('[data-channel]').forEach(el=>el.addEventListener('click',()=>{channel=el.dataset.channel;selected=0;render();}));

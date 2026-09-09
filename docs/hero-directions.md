@@ -1,8 +1,10 @@
 # Marketing hero directions — research and comparison
 
-Research date: 8 September 2026. The latest revision is [the luxury, owner-benefit comparison](../design/hero-comparison/luxury-v2/index.html). The original four square storyboards remain archived below. No final video or replacement live hero has been produced.
+Latest update: 9 September 2026. Bubs rejected V1/V2 imagery and retained only the human time-back idea. The current review asset is the [Higgsfield human photograph](../design/hero-comparison/higgsfield-v3/assets/coastal-break-cinema-2-5-clean.png), with [provenance and notes](../design/hero-comparison/higgsfield-v3/README.md). Cinema Studio Image 2.5 was used as the stated interpretation of “Canto 2.5,” which is absent from the live catalogue. No final video or replacement live hero has been produced.
 
-## Current revision: luxury imagery and time back
+Review this one candid coastal-café photograph before making another set. The source is 4096 × 4096; the clean version is 4016 × 4016 after a 40px border crop in Higgsfield. The rejected research directions below are historical.
+
+## Rejected V2 imagery: luxury and time back
 
 Bubs rejected the first images as generic AI and requested clean, luxurious, futuristic art direction with the scale and restraint of SpaceX. The later Starlink reference clarified the message: show what the service lets owners do when busy, away from their desk, taking a break or taking time off.
 

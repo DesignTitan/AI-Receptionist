@@ -1,15 +1,15 @@
 # NOW
 
-Handoff notes for the next session. Updated 2026-09-08. Launch is Thursday 1 October 2026;
+Handoff notes for the next session. Updated 2026-09-09. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
-## Current handoff — luxury imagery and owner-benefit story (8 September 2026)
+## Current handoff — Higgsfield human photograph (9 September 2026)
 
-- Bubs rejected the first concepts as generic AI imagery and requested clean, luxurious, futuristic SpaceX-like art direction. Further steering: use Starlink-style real-life benefits to sell time back when owners are busy, away from the desk, taking a break or taking time off. Inspected both official references.
-- Built design/hero-comparison/luxury-v2/index.html with five new square images: four refined technical directions and an owner taking a coastal coffee break. The human benefit leads: “Step away. Bookings keep moving.” Support: “Your customers book online. AI calls them to confirm. You see the outcome.” All four technical directions remain available in focus/compare views; V1 is preserved.
-- Saved exact image prompts, checksums, copy and reference rationale with V2. Visual review, browser controls, keyboard selection and 390px mobile checks pass; no page overflow or browser errors. Corrected mobile image framing and decorative loading announcements. These are still images and proposed sequences; no application change, video generation or deployment.
-- Next: review the benefit story and choose/refine the strongest visual direction, then develop connected story frames and a short motion test. Phone evolution should use precise cuts, with about 20% historical phones and 80% booking, outbound AI confirmation call and owner outcome. Keep customer value obvious throughout.
-- Preserve product truth: online bookings, outbound confirmation calls, owner records and human follow-up for requests. Do not promise inbound answering, guaranteed bookings, unlimited calls, customer team accounts or a fully unattended business. Public GitHub push remains blocked by the earlier automatic approval review of the public destination and awaits the previously requested explicit publication approval.
+- Bubs rejected all technical imagery from V2. Only the human time-back idea was promising, but its image still looked artificial. Explicit request: use Higgsfield and “Canto 2.5” for realism. Keep the benefit of time with customers, breaks and time off; no approved final hero yet.
+- The full live Higgsfield catalogue has no Canto model. It lists Cinema Studio Image 2.5; asked for clarification, then proceeded with that stated interpretation. This was not a confirmed alias. Used the Higgsfield connector with cinematic_studio_2_5, 4k, square, one candid coastal-café image. Actual source is 4096 × 4096.
+- A requested border-only generative edit failed. Removed its decorative black film border by cropping 40 pixels per side with ImageMagick in Higgsfield's cloud sandbox; no resampling. Final is 4016 × 4016, with untouched source retained. Visual review found no obvious anatomy blocker; realism and style still await Bubs's judgment.
+- Saved both images, exact requests, provider results and checksums in design/hero-comparison/higgsfield-v3. Next: review this single human image before connecting further scenes or producing motion. No live site, application or video changed. Rejected V1/V2 files remain history, not approved assets.
+- Product promise remains online booking, outbound AI confirmation calls and owner call records, with human follow-up for requests. Public GitHub publishing remains blocked by the earlier automatic review of the public destination and awaits the previously requested explicit publication approval.
 
 ## Current handoff — customer pricing and Stripe live preparation (8 September 2026)
 

@@ -1,0 +1,23 @@
+{
+  "model": "Cinema Studio Image 2.5",
+  "provider": "Higgsfield",
+  "original_job_id": "7ffd60de-fd6b-41d7-a61b-c844f4802afc",
+  "cleanup": "40 pixels cropped from each edge in Higgsfield sandbox; no resampling",
+  "review": "No material anatomy problem found; subjective realism requires user review",
+  "assets": [
+    {
+      "file": "assets/coastal-break-cinema-2-5-4k.png",
+      "width": 4096,
+      "height": 4096,
+      "bytes": 25449324,
+      "sha256": "c8d47fa767250433ed3f066db1a4380fd68c99956f27e8d98f5a444cc0f73983"
+    },
+    {
+      "file": "assets/coastal-break-cinema-2-5-clean.png",
+      "width": 4016,
+      "height": 4016,
+      "bytes": 16460496,
+      "sha256": "cf9447aefb4d0da12639d79bfe326b3e3418cd379357c63a8d8490684790a9e2"
+    }
+  ]
+}

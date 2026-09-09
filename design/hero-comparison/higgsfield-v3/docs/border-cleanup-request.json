@@ -1,0 +1,13 @@
+{
+  "model": "cinematic_studio_2_5",
+  "resolution": "4k",
+  "aspect_ratio": "1:1",
+  "count": 1,
+  "medias": [
+    {
+      "role": "image",
+      "value": "7ffd60de-fd6b-41d7-a61b-c844f4802afc"
+    }
+  ],
+  "prompt": "Edit this photograph with ONE precise correction: remove the irregular black decorative film-frame border along the extreme outer edges on all four sides. Extend the existing photograph naturally only into that narrow border area so the image is fully edge-to-edge with no black film border. Preserve the entire existing photograph inside that border: same woman, exact face, expression, skin texture, hair, anatomy, hands and fingers, white shirt, dark trousers, table, coffee cup and spoon, phone, cafe, ocean, camera viewpoint, composition, natural daylight, shadows, depth of field and photographic grain. Do not recompose, crop into the subject, smooth skin, beautify, sharpen, restyle or add objects. Do not change the person's identity or pose. This is a border cleanup only. Final output is a square full-bleed natural photograph with no frame, no decorative edges, no text, no logo, and no watermark."
+}

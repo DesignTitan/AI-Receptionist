@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-09. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — page-index sections (9 September 2026)
+
+- Organized the page index into Application, Marketing Site, Design Studies and Internal Tools, in that order. The default catalogue still contains all 19 pages: 12 application pages, 2 marketing pages, 3 studies and 2 internal tools. User journey stays under Internal Tools; the site access gate also appears there when the site is locked.
+- The four sections sit alongside each other on desktop, become two columns on smaller screens and stack on mobile. Search now recognizes section names; sorting, page links, dates and access labels remain available.
+- Verified section counts, marketing and journey search, clearing search, date sorting and 390px mobile width in the browser. Existing development-preview checks pass (4 tests), as do JavaScript syntax and diff checks. This is a local directory update; product pages and live deployment are unchanged. Next product work remains phone connection/pilot acceptance and the signup follow-ups recorded below. Saved locally; public GitHub push is still awaiting the previously requested publication approval.
+
 ## Current handoff — visual user journey (9 September 2026)
 
 - Built a clickable visual guide at http://127.0.0.1:3101/__dev/journey, with seven owner stages and separate online/phone customer journeys. The initial view highlights the existing setup form at step 3: after email sign-in and before Stripe checkout. Each stage includes a screen sketch, actions and the next transition; sketches use illustrative data and do not submit forms.

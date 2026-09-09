@@ -5,6 +5,19 @@ let pages = [];
 let activeFilter = "all";
 let sort = "section";
 let loaded = false;
+const sections = [
+  { key: "application", title: "Application", eyebrow: "Customer & staff workspace", description: "Accounts, bookings, business demos and staff tools. Sign-in still applies.", grouped: true },
+  { key: "marketing", title: "Marketing Site", eyebrow: "The public-facing product", description: "The original marketing site, product overview, pricing and demo directory." },
+  { key: "study", title: "Design Studies", eyebrow: "Drafts & experiments", description: "Visual directions and imagery to review alongside the original site." },
+  { key: "internal", title: "Internal Tools", eyebrow: "Workspace utilities", description: "The page index, user journey and access tools. Each page shows its access requirements." },
+];
+
+function sectionKey(page) {
+  if (page.kind === "internal" || page.group === "Internal tools") return "internal";
+  if (page.kind === "study") return "study";
+  if (page.group === "Marketing") return "marketing";
+  return "application";
+}
 
 function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -79,13 +92,13 @@ function countLabel(count) {
   return node;
 }
 
-function content(items) {
+function content(items, grouped) {
   const body = element("div", "column-body");
   if (!items.length) {
     body.append(element("p", "empty", "No pages match this view."));
     return body;
   }
-  if (sort !== "section") {
+  if (sort !== "section" || !grouped) {
     sortPages(items).forEach(page => body.append(row(page)));
     return body;
   }
@@ -103,14 +116,14 @@ function content(items) {
   return body;
 }
 
-function column(items, title, eyebrow, description) {
+function column(items, title, eyebrow, description, grouped = false) {
   const section = element("section", "column");
   const header = element("header", "column-head");
   header.append(element("p", "eyebrow", eyebrow));
   const heading = element("div", "column-title");
   heading.append(element("h2", "", title), countLabel(items.length));
   header.append(heading, element("p", "column-desc", description));
-  section.append(header, content(items));
+  section.append(header, content(items, grouped));
   return section;
 }
 
@@ -119,7 +132,7 @@ function render() {
   const query = search.value.trim().toLowerCase();
   const matching = pages.filter(page =>
     (activeFilter === "all" || recency(page) === activeFilter)
-    && `${page.label} ${page.href} ${page.group} ${page.description ?? ""}`.toLowerCase().includes(query));
+    && `${page.label} ${page.href} ${page.group} ${sections.find(section => section.key === sectionKey(page)).title} ${page.description ?? ""}`.toLowerCase().includes(query));
   resultCount.textContent = `${matching.length} of ${pages.length} pages`;
   for (const node of document.querySelectorAll("[data-count]")) {
     node.textContent = String(node.dataset.count === "all" ? pages.length : pages.filter(page=>recency(page)===node.dataset.count).length);
@@ -130,28 +143,12 @@ function render() {
     empty.append(element("strong", "", "No pages in this view."), element("p", "", "Choose All or try another page name."));
     fragment.append(empty);
   } else {
-    const internal = matching.filter(page=>page.kind === "internal");
-    if (internal.length) {
-      const section = element("section", "internal");
-      const header = element("header", "internal-head");
-      const copy = element("div");
-      copy.append(element("p", "eyebrow", "Owner and development access"), element("h2", "", "Internal tools"), element("p", "", "Working utilities for this project. Available only in your local workspace."));
-      header.append(copy, countLabel(internal.length));
-      const list = element("div", "internal-list");
-      sortPages(internal).forEach(page=>list.append(row(page)));
-      section.append(header, list);
-      fragment.append(section);
+    const columns = element("div", "columns");
+    for (const section of sections) {
+      const items = matching.filter(page => sectionKey(page) === section.key);
+      if (items.length) columns.append(column(items, section.title, section.eyebrow, section.description, section.grouped));
     }
-    const app = matching.filter(page=>page.kind === "app");
-    const studies = matching.filter(page=>page.kind === "study");
-    if (app.length || studies.length) {
-      const columns = element("div", "columns");
-      columns.append(
-        column(app, "Application", "The original site & product", "Marketing, customer accounts, business demos, and the staff workspace. Sign-in still applies."),
-        column(studies, "Design studies", "Drafts & experiments", "Compare the hero directions and imagery alongside the original site."),
-      );
-      fragment.append(columns);
-    }
+    fragment.append(columns);
   }
   directory.replaceChildren(fragment);
 }

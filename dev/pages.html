@@ -23,19 +23,17 @@
     .search{height:34px;width:240px;border:1px solid #d7d1c6;border-radius:7px;background:#fdfcf9;padding:0 11px;font-size:12px;color:#25231f}.search::placeholder{color:#8c857b}
     .meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:29px;min-height:33px}
     .result-note{font-size:11px;color:#8b8378;margin:0;line-height:1.6}.result-note strong{font-weight:550;color:#4e473e}.sort button{padding:7px 10px;font-size:10px}
-    .internal{border:1px solid #d8d0c0;border-radius:15px;overflow:hidden;margin-bottom:29px;background:#fcfbf7}
-    .internal-head{display:flex;align-items:center;justify-content:space-between;gap:32px;padding:25px 28px;border-bottom:1px solid #e9e3d8}
-    .internal h2{font-size:24px;line-height:1.2;letter-spacing:-.035em;font-weight:610;margin:0 0 8px}.internal p:not(.eyebrow){font-size:12px;line-height:1.6;color:#81796d;margin:0}
     .count{font-size:37px;line-height:1;letter-spacing:-.045em;font-weight:500;color:#857240;display:flex;align-items:baseline;gap:8px}.count span:last-child{font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:#898174}
-    .internal-list{padding:8px 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));background:#f3f0e85c}
-    .columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px;align-items:start}
+    .columns{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:start}
     .column{border:1px solid #ded8cd;border-radius:15px;overflow:hidden;background:#fdfcf9;min-width:0}
-    .column-head{padding:28px 26px 25px;border-bottom:1px solid #e5dfd5}
-    .column-title{display:flex;align-items:baseline;justify-content:space-between;gap:20px}
-    .column h2{font-size:28px;letter-spacing:-.035em;line-height:1.2;font-weight:610;margin:0 0 12px}
-    .column-title .count{font-size:30px;color:#8b857a}
+    .column-head{padding:24px 18px 21px;border-bottom:1px solid #e5dfd5;min-height:179px}
+    .column-head .eyebrow{font-size:8px;letter-spacing:.12em}
+    .column-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .column h2{font-size:22px;letter-spacing:-.035em;line-height:1.2;font-weight:610;margin:0 0 12px}
+    .column-title .count{font-size:22px;color:#8b857a;gap:5px}
+    .column-title .count span:last-child{font-size:7px;letter-spacing:.03em}
     .column-desc{font-size:12px;line-height:1.65;color:#898174;max-width:44ch;margin:0}
-    .column-body{padding:3px 17px 18px}.group-title{font-size:10px;font-weight:650;text-transform:uppercase;letter-spacing:.11em;color:#91806b;display:flex;align-items:center;gap:10px;margin:23px 10px 4px}.group-title::after{content:"";height:1px;background:#eae4da;flex:1}
+    .column-body{padding:3px 9px 18px}.group-title{font-size:10px;font-weight:650;text-transform:uppercase;letter-spacing:.11em;color:#91806b;display:flex;align-items:center;gap:10px;margin:23px 10px 4px}.group-title::after{content:"";height:1px;background:#eae4da;flex:1}
     .page-row{display:block;padding:17px 11px 16px;border-bottom:1px solid #e8e1d7;border-radius:5px;min-width:0;transition:background .12s}
     .page-row:last-child{border-bottom-color:transparent}.page-row:hover{background:#f2eee6}.page-title{font-size:14px;font-weight:560;letter-spacing:-.015em;line-height:1.4;display:flex;align-items:center;gap:9px;color:#302c26}.page-title .arrow{font-weight:400;margin-left:auto;font-size:16px;color:#a99d8b}
     .page-path{font:10px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:#948c81;display:block;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -47,8 +45,8 @@
     .retry{border:1px solid #bba99b;padding:9px 14px;background:#fffaf3;color:#554234;border-radius:6px;margin-left:12px}
     .footnote{font-size:11px;color:#938a7d;line-height:1.7;padding:27px 0 38px;margin:0}.footnote span{color:#766b5b}
     @media(prefers-reduced-motion:reduce){.page-row{transition:none}}
-    @media(max-width:1050px){.shell{width:calc(100% - 48px)}.controls{align-items:stretch;gap:14px}.search{width:100%}.intro{gap:24px}.original{gap:15px}}
-    @media(max-width:720px){.shell{width:calc(100% - 32px)}.intro{padding-top:31px;align-items:start;flex-direction:column;gap:19px}.lede{font-size:13px}.original{padding:10px 13px}.columns{grid-template-columns:1fr;gap:22px}.internal-list{grid-template-columns:1fr}.internal-head{padding:23px 21px;gap:16px}.internal h2{font-size:23px}.internal-head .count{font-size:31px}.internal-head .count span:last-child{display:none}.filters{overflow-x:auto;max-width:100%;padding:3px 0;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.filter{padding:9px 10px;font-size:10px}.meta{align-items:start;flex-direction:column;gap:12px;margin-bottom:21px}.column-head{padding:24px 23px}.column h2{font-size:26px}.column-body{padding:0 13px 13px}.footnote{font-size:10px}}
+    @media(max-width:1050px){.shell{width:calc(100% - 48px)}.controls{align-items:stretch;gap:14px}.search{width:100%}.intro{gap:24px}.original{gap:15px}.columns{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.column-head{min-height:0;padding:24px}.column h2{font-size:26px}.column-title .count{font-size:26px}}
+    @media(max-width:720px){.shell{width:calc(100% - 32px)}.intro{padding-top:31px;align-items:start;flex-direction:column;gap:19px}.lede{font-size:13px}.original{padding:10px 13px}.columns{grid-template-columns:1fr;gap:22px}.filters{overflow-x:auto;max-width:100%;padding:3px 0;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.filter{padding:9px 10px;font-size:10px}.meta{align-items:start;flex-direction:column;gap:12px;margin-bottom:21px}.column-head{padding:24px 23px}.column-body{padding:0 13px 13px}.footnote{font-size:10px}}
   </style>
   <script type="module" src="/__dev/pages.js"></script>
 </head>
@@ -56,7 +54,7 @@
   <a class="skip" href="#main">Skip to page directory</a>
   <main class="shell" id="main">
     <header class="intro">
-      <div><p class="eyebrow">AI Receptionist · Workspace</p><h1>Pages</h1><p class="lede">The original site, customer tools, business demos, and every design study. All in one place.</p></div>
+      <div><p class="eyebrow">AI Receptionist · Workspace</p><h1>Pages</h1><p class="lede">Application, Marketing Site, Design Studies and Internal Tools. Every project page, clearly organized.</p></div>
       <a class="original" href="/">Open original site <span aria-hidden="true">↗</span></a>
     </header>
     <div class="controls">

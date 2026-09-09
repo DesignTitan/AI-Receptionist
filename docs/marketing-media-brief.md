@@ -2,6 +2,8 @@
 
 Updated 9 September 2026. Production direction from Bubs's existing photo/video requests and renewed Starlink reference. This is the shot brief for review before producing motion, not a record of completed media or an activated phone service.
 
+**Current priority:** Bubs has explicitly deferred new images and video. Review the [marketing copy and flow](marketing-story.md) in the local V2 page first. Keep this media brief for later production; it does not authorize beginning generation now.
+
 ## The idea
 
 **Give owners more time for the person, work or life in front of them, while appointments keep moving.**
@@ -138,4 +140,3 @@ No media was generated or purchased as part of this brief. The earlier request t
 - Text remains readable without sound or motion. The owner/caller task stays understandable on mobile.
 - Incoming claims use real pilot evidence before they are presented as a working live service. Neither pilot phone is connected yet. External booking software sync and email delivery also require verification.
 - No absolute promises of never missing a booking, unlimited calling or complete unattended operation. Prefer specific demonstrated results over guarantees.
-

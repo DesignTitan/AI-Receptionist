@@ -4,377 +4,170 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="Four photographic art directions for AI Receptionist. Visual studies and proposed storytelling sequences.">
-  <title>AI Receptionist — Visual studies 02</title>
+  <meta name="description" content="Make room for your customers and your day. Explore online booking, AI confirmation calls and the incoming phone-booking pilot with AI Receptionist.">
+  <title>AI Receptionist — Make room for your day</title>
   <style>
-    :root{--black:#08090b;--surface:#101215;--white:#f1f3f5;--silver:#b2b8c0;--muted:#848c98;--line:#292d34;--font:"Helvetica Neue",Helvetica,"Arial Nova",Arial,sans-serif}
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth;scroll-padding-top:28px}
-    body{margin:0;background:var(--black);color:var(--white);font-family:var(--font);font-weight:400;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
-    button,a{-webkit-tap-highlight-color:transparent}
-    button{font:inherit;color:inherit;cursor:pointer}
-    button:focus-visible,a:focus-visible{outline:2px solid #d0e2f4;outline-offset:5px}
-    a{color:inherit;text-decoration:none}
-    [hidden]{display:none!important}
-    .shell{width:min(1780px,calc(100% - 104px));margin:auto}
-    .skip{position:fixed;z-index:10;top:12px;left:12px;transform:translateY(-180%);padding:13px 18px;background:var(--white);color:var(--black);font-size:13px}
-    .skip:focus{transform:translateY(0)}
-    .masthead{height:86px;display:flex;align-items:center;justify-content:space-between;gap:28px;border-bottom:1px solid var(--line)}
-    .wordmark{font-size:12px;font-weight:500;letter-spacing:.17em;text-transform:uppercase;line-height:1.2;white-space:nowrap}
-    .masthead-note{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);text-align:right;white-space:nowrap}
-    .masthead-note span{color:var(--silver);margin-left:26px}
-    .toolbar{min-height:95px;display:flex;align-items:center;justify-content:space-between;gap:28px}
-    .direction-tabs{display:flex;align-items:center;gap:30px;min-width:0;max-width:100%}
-    .direction-tab{position:relative;display:flex;align-items:center;gap:11px;min-height:45px;border:0;border-bottom:1px solid transparent;padding:7px 0;background:transparent;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
-    .direction-tab .tab-number{font-size:9px;font-variant-numeric:tabular-nums;letter-spacing:.05em;color:#68717d}
-    .direction-tab:hover{color:var(--white)}
-    .direction-tab[aria-pressed="true"]{border-bottom-color:#c4cedb;color:var(--white)}
-    .direction-tab[aria-pressed="true"] .tab-number{color:var(--silver)}
-    .view-controls{display:flex;align-items:center;gap:19px;flex:none}
-    .view-button{display:flex;align-items:center;gap:7px;padding:11px 0;border:0;background:transparent;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
-    .view-button svg{width:12px;height:12px;opacity:.7}
-    .view-button[aria-pressed="true"],.view-button:hover{color:var(--white)}
-    .view-button[aria-pressed="true"] svg{opacity:1}
-    .view-divider{width:1px;height:12px;background:var(--line)}
-    .study-stage{display:grid;grid-template-columns:minmax(0,1.68fr) minmax(300px,.82fr);gap:64px;align-items:center}
-    .study-figure{position:relative;aspect-ratio:1;margin:0;background:#101215;overflow:hidden}
-    .study-figure img{position:relative;z-index:1;display:block;width:100%;height:100%;object-fit:contain;background:#101215}
-    .image-placeholder{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;padding:30px;text-align:center;background:#101215}
-    .image-placeholder span:first-child{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--silver)}
-    .image-placeholder span:last-child{font-size:12px;color:var(--muted)}
-    .study-copy{max-width:430px;padding:40px 0 48px}
-    .study-index{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--silver);margin:0 0 36px;display:flex;gap:13px;align-items:center}
-    .study-index .dash{width:25px;height:1px;background:#5b6470}
-    h1,.study-title{font-size:clamp(36px,3.2vw,63px);font-weight:400;line-height:1.12;letter-spacing:-.045em;margin:0 0 29px;text-wrap:balance}
-    .study-description{font-size:15px;color:var(--silver);line-height:1.85;margin:0;max-width:370px}
-    .story-link{display:inline-flex;align-items:center;gap:20px;margin-top:44px;padding:12px 0;border-bottom:1px solid #4b535f;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:#d1d6de}
-    .story-link span:last-child{font-size:15px;line-height:1}
-    .story-link:hover{border-color:var(--white);color:var(--white)}
-    .study-caption{display:flex;justify-content:space-between;gap:20px;padding:15px 0 0;margin:0;color:var(--muted);font-size:9px;letter-spacing:.11em;text-transform:uppercase}
-    .study-caption span:last-child{text-align:right}
-    .sequence{padding:72px 0 0}
-    .section-intro{display:grid;grid-template-columns:1fr 2.5fr;gap:64px;padding:29px 0 35px;border-top:1px solid var(--line)}
-    .section-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:400;margin:3px 0 0;color:var(--silver)}
-    .camera-description{font-size:15px;line-height:1.9;color:var(--silver);margin:0;max-width:875px}
-    .sequence-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:34px;margin:0;padding:0;list-style:none}
-    .sequence-step{border-top:1px solid var(--line);padding:20px 0 0}
-    .step-number{display:block;font-size:9px;letter-spacing:.1em;color:var(--muted);font-variant-numeric:tabular-nums;margin-bottom:20px}
-    .sequence-step h3{font-size:17px;line-height:1.45;font-weight:400;letter-spacing:-.02em;margin:0 0 12px}
-    .sequence-step p{font-size:12px;line-height:1.85;color:var(--muted);margin:0;max-width:305px}
-    .compare-intro{display:flex;justify-content:space-between;gap:30px;align-items:end;padding:18px 0 34px}
-    .compare-intro h2{font-size:33px;line-height:1.2;letter-spacing:-.035em;font-weight:400;margin:0}
-    .compare-intro p{font-size:12px;color:var(--muted);margin:0;max-width:220px;text-align:right;line-height:1.7}
-    .compare-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
-    .compare-card{min-width:0}
-    .compare-open{display:block;width:100%;border:0;padding:0;text-align:left;background:transparent}
-    .compare-visual{position:relative;display:block;width:100%;aspect-ratio:1;background:var(--surface);overflow:hidden}
-    .compare-visual img{position:relative;z-index:1;display:block;width:100%;height:100%;object-fit:contain;background:var(--surface)}
-    .compare-caption{display:flex;align-items:center;gap:12px;margin:20px 0 0;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#d8dde4}
-    .compare-caption .compare-id{font-size:9px;letter-spacing:.05em;color:var(--muted)}
-    .compare-caption .compare-arrow{font-size:18px;line-height:1;margin-left:auto;color:var(--muted)}
-    .compare-open:hover .compare-arrow{color:var(--white)}
-    .compare-description{font-size:12px;color:var(--muted);line-height:1.85;margin:15px 0 0;padding-right:9px}
-    .compare-note{border-top:1px solid var(--line);margin:39px 0 0;padding:20px 0 0;font-size:11px;color:var(--muted);line-height:1.8}
-    .product{margin-top:94px;padding:36px 0 52px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 2.5fr;gap:64px}
-    .product-body h2{font-size:clamp(25px,2.3vw,39px);line-height:1.25;letter-spacing:-.035em;font-weight:400;margin:0 0 23px;max-width:620px;text-wrap:balance}
-    .product-description{font-size:14px;line-height:1.9;color:var(--silver);max-width:770px;margin:0}
-    .product-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px;margin:32px 0 0;padding:0;list-style:none}
-    .product-steps h3{font-size:11px;line-height:1.5;letter-spacing:.025em;font-weight:400;color:#d7dce4;margin:0 0 12px}
-    .product-steps p{font-size:11px;line-height:1.85;color:var(--muted);margin:0}
-    .footer{display:flex;justify-content:space-between;gap:30px;padding:22px 0 30px;border-top:1px solid var(--line);font-size:10px;color:var(--muted);line-height:1.6}
-    .footer p{margin:0}
-    .footer a{border-bottom:1px solid #3f4650;padding-bottom:2px}
-    .footer a:hover{color:var(--white)}
-    .opening{position:relative;width:100%;aspect-ratio:1.32;min-height:580px;max-height:1000px;overflow:hidden;background:#142027;margin-top:24px}
+    :root{--black:#08090b;--surface:#101215;--white:#f1f3f5;--silver:#b2b8c0;--muted:#929aa5;--line:#292d34;--font:"Helvetica Neue",Helvetica,Arial,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}
+    body{margin:0;background:var(--black);color:var(--white);font:400 16px/1.7 var(--font);-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}a,summary{-webkit-tap-highlight-color:transparent}
+    a:focus-visible,summary:focus-visible{outline:2px solid #d0e2f4;outline-offset:6px}
+    .shell{width:min(1680px,calc(100% - 104px));margin:auto}
+    .skip{position:fixed;top:12px;left:12px;z-index:1000;transform:translateY(-200%);padding:12px 20px;background:var(--white);color:var(--black)}.skip:focus{transform:translateY(0)}
+    .masthead{min-height:86px;display:flex;align-items:center;justify-content:space-between;gap:32px;border-bottom:1px solid var(--line)}
+    .wordmark{font-size:12px;font-weight:500;letter-spacing:.17em;text-transform:uppercase;white-space:nowrap}
+    .nav{display:flex;align-items:center;gap:30px;font-size:12px}.nav a{padding:12px 0;color:var(--silver)}.nav a:hover{color:var(--white)}.nav .nav-cta{color:var(--white);border-bottom:1px solid #7a8088}
+    h1,h2,h3,p{margin:0}h1,h2,h3{font-weight:400}h1,h2{text-wrap:balance}h2{font-size:clamp(32px,3.6vw,62px);line-height:1.12;letter-spacing:-.04em}h3{font-size:24px;line-height:1.25;letter-spacing:-.025em}
+    p{color:var(--silver)}.kicker{font-size:11px;line-height:1.5;letter-spacing:.12em;text-transform:uppercase;color:var(--silver)}
+    .opening{position:relative;aspect-ratio:1.32;min-height:620px;max-height:1000px;overflow:hidden;background:#142027;margin-top:24px}
     .opening-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 58%}
-    .opening::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(2,8,12,.63),rgba(2,8,12,.14) 57%,transparent 78%),linear-gradient(0deg,rgba(2,8,12,.35),transparent 25%);pointer-events:none}
-    .opening-copy{position:relative;z-index:1;padding:clamp(38px,5vw,90px);max-width:780px}
-    .opening h1{font-size:clamp(48px,5.6vw,102px);line-height:1.04;letter-spacing:-.045em;max-width:690px;font-weight:400;color:#fff;margin:0 0 29px;text-wrap:balance}
-    .opening-support{font-size:clamp(14px,1.25vw,19px);line-height:1.8;max-width:415px;color:#eef1f3;margin:0}
-    .opening-links{display:flex;flex-wrap:wrap;gap:28px;margin-top:32px}
-    .opening-links a{border-bottom:1px solid #c2cbd080;padding:10px 0;font-size:10px;letter-spacing:.09em;text-transform:uppercase;display:flex;gap:17px;align-items:center;color:#fff}
-    .opening-links a:hover{border-color:#fff}
-    .opening-caption{font-size:9px;line-height:1.5;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin:14px 0 0}
-    .owner-moments{padding:61px 0 0}
-    .owner-moments h2{font-weight:400;font-size:clamp(27px,2.8vw,46px);line-height:1.2;letter-spacing:-.04em;margin:0 0 32px;max-width:760px}
-    .moment-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:34px}
-    .moment{border-top:1px solid var(--line);padding-top:20px}
-    .moment h3{font-size:16px;font-weight:400;letter-spacing:-.02em;margin:0 0 12px}
-    .moment p{font-size:12px;line-height:1.85;color:var(--silver);margin:0;max-width:295px}
-    .direction-intro{border-top:1px solid var(--line);margin-top:79px;padding-top:31px;display:flex;align-items:end;justify-content:space-between;gap:32px}
-    .direction-intro h2{font-size:31px;font-weight:400;line-height:1.2;letter-spacing:-.035em;margin:0}
-    .direction-intro p{font-size:11px;line-height:1.8;color:var(--muted);max-width:230px;margin:0;text-align:right}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    @media(min-width:1800px){.study-copy{max-width:470px}.study-description{font-size:16px;max-width:415px}.study-stage{gap:88px}.sequence-steps{gap:44px}.study-index{margin-bottom:44px}}
-    @media(max-width:1250px){.shell{width:calc(100% - 80px)}.study-stage{grid-template-columns:minmax(0,1.68fr) minmax(270px,.82fr);gap:44px}.direction-tabs{gap:23px}.direction-tab{font-size:9px;gap:8px}.study-description{font-size:14px}.study-index{margin-bottom:28px}.story-link{margin-top:33px}.section-intro,.product{gap:44px}.compare-grid{gap:19px}.compare-description{font-size:11px}}
-    @media(max-width:1000px){.shell{width:calc(100% - 56px)}.masthead{height:74px}.toolbar{min-height:82px;gap:18px}.direction-tabs{gap:17px}.direction-tab{gap:6px;letter-spacing:.07em}.view-controls{gap:12px}.view-button{font-size:9px;gap:5px}.study-stage{grid-template-columns:minmax(0,1.6fr) minmax(250px,.9fr);gap:30px}h1,.study-title{font-size:36px}.study-copy{padding:20px 0}.study-description{font-size:13px;line-height:1.8}.study-index{font-size:9px;margin-bottom:23px}.story-link{font-size:9px;margin-top:28px}.sequence{padding-top:52px}.section-intro,.product{grid-template-columns:1fr 2.5fr;gap:30px}.sequence-steps{gap:22px}.sequence-step h3{font-size:15px}.sequence-step p{font-size:11px}.camera-description{font-size:13px}.compare-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:38px 24px}.compare-description{font-size:12px}.compare-intro{padding-top:13px}.product{margin-top:67px}.product-steps{gap:22px}.product-description{font-size:13px}.opening{min-height:565px;aspect-ratio:1.18}.opening-copy{padding:40px}.opening h1{font-size:62px;max-width:510px}.moment-grid{gap:24px}.moment h3{font-size:15px}.moment p{font-size:11px}.owner-moments{padding-top:48px}}
-    @media(max-width:740px){.shell{width:calc(100% - 40px)}.masthead{height:69px;gap:14px}.wordmark{font-size:10px;letter-spacing:.14em}.masthead-note{font-size:8px;letter-spacing:.1em}.masthead-note span{margin-left:12px}.toolbar{align-items:stretch;min-height:0;display:grid;gap:0;margin:13px 0 19px}.direction-tabs{justify-content:space-between;gap:13px;overflow-x:auto;scrollbar-width:none}.direction-tabs::-webkit-scrollbar{display:none}.direction-tab{font-size:9px;gap:7px;min-height:45px;letter-spacing:.06em}.direction-tab .tab-number{font-size:8px}.view-controls{justify-content:flex-end;padding-top:7px;gap:16px}.view-button{padding:6px 0;font-size:9px}.study-stage{grid-template-columns:1fr;gap:0}.study-copy{max-width:600px;padding:36px 0 0}.study-index{font-size:9px;margin-bottom:22px}h1{font-size:clamp(36px,7.5vw,52px);max-width:540px;margin-bottom:21px}.study-description{font-size:14px;max-width:480px;line-height:1.85}.story-link{margin-top:23px;font-size:9px}.study-caption{font-size:8px;letter-spacing:.06em;padding-top:15px;line-height:1.6;gap:12px}.sequence{padding-top:53px}.section-intro,.product{grid-template-columns:1fr;gap:19px}.section-intro{padding:23px 0 28px}.camera-description{font-size:13px}.sequence-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 25px}.step-number{margin-bottom:14px}.sequence-step{padding-top:16px}.sequence-step h3{font-size:16px;margin-bottom:9px}.sequence-step p{font-size:12px;line-height:1.8}.product{padding-top:26px;padding-bottom:37px;margin-top:60px;gap:23px}.product-body h2{font-size:30px;margin-bottom:18px;max-width:440px}.product-description{font-size:13px}.product-steps{gap:22px;margin-top:27px}.product-steps h3{font-size:11px}.product-steps p{font-size:11px}.footer{font-size:9px;gap:20px;padding-bottom:26px}.compare-intro{padding:13px 0 27px;display:block}.compare-intro h1{font-size:30px}.compare-intro p{text-align:left;max-width:none;margin-top:14px;font-size:11px}.compare-grid{gap:29px 18px}.compare-caption{margin-top:16px;gap:8px;font-size:9px;letter-spacing:.07em}.compare-caption .compare-arrow{font-size:16px}.compare-description{font-size:11px;padding:0;margin-top:12px}.compare-note{margin-top:29px;font-size:10px}}
-    @media(max-width:440px){.shell{width:calc(100% - 32px)}.masthead-note span{display:none}.direction-tabs{gap:12px}.direction-tab{gap:4px;font-size:8px;letter-spacing:.035em}.direction-tab .tab-number{font-size:7px}.view-controls{padding-top:8px}.study-copy{padding-top:30px}h1{font-size:39px;line-height:1.13;letter-spacing:-.043em}.study-index{margin-bottom:21px}.study-description{font-size:13px}.study-caption{display:block}.study-caption span{display:block}.study-caption span:last-child{text-align:left;margin-top:4px}.section-label{font-size:9px}.sequence-steps{gap:25px 21px}.sequence-step h3{font-size:15px}.sequence-step p{font-size:11px}.product-body h2{font-size:28px}.product-steps{grid-template-columns:1fr;gap:21px;margin-top:28px}.product-steps h3{margin-bottom:6px}.footer{display:block}.footer p+p{margin-top:12px}.compare-grid{gap:25px 14px}.compare-caption{gap:6px;font-size:8px}.compare-description{font-size:10px}.compare-caption .compare-id{font-size:8px}.compare-caption .compare-arrow{font-size:14px}}
-    @media(max-width:740px){.opening{min-height:640px;aspect-ratio:1;margin-top:17px}.opening-copy{padding:34px 28px}.opening h1{font-size:clamp(45px,8vw,63px);max-width:540px;margin-bottom:24px}.opening-support{font-size:14px;max-width:340px}.opening-links{margin-top:23px;gap:22px}.opening-links a{font-size:9px}.opening-image{object-position:right center}.opening::after{background:linear-gradient(180deg,rgba(2,8,12,.64),rgba(2,8,12,.08) 66%,rgba(2,8,12,.12))}.opening-caption{font-size:8px;letter-spacing:.05em;line-height:1.7}.owner-moments{padding-top:41px}.owner-moments h2{font-size:30px;max-width:440px;margin-bottom:29px}.moment-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 24px}.moment h3{font-size:16px}.moment p{font-size:12px}.direction-intro{display:block;margin-top:55px;padding-top:28px}.direction-intro h2{font-size:28px}.direction-intro p{max-width:none;text-align:left;margin-top:14px;font-size:11px}.study-title{font-size:clamp(36px,7.5vw,52px);max-width:540px;margin-bottom:21px}.compare-intro h2{font-size:30px}}
-    @media(max-width:440px){.opening{min-height:610px}.opening-copy{padding:31px 23px}.opening h1{font-size:45px;line-height:1.07;max-width:320px}.opening-support{font-size:13px;max-width:285px}.opening-links{gap:18px}.opening-links a{font-size:8px;gap:10px}.moment-grid{gap:26px 21px}.moment p{font-size:11px}.moment h3{font-size:15px}.owner-moments h2{font-size:28px}.study-title{font-size:39px;line-height:1.13;letter-spacing:-.043em}.direction-intro h2{font-size:27px}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+    .opening::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(2,8,12,.69),rgba(2,8,12,.16) 60%,transparent 82%),linear-gradient(0deg,rgba(2,8,12,.3),transparent 25%);pointer-events:none}
+    .opening-copy{position:relative;z-index:1;padding:clamp(38px,5vw,90px);max-width:830px}.opening .kicker{color:#e0e6eb;margin-bottom:25px}
+    h1{font-size:clamp(48px,5.6vw,102px);line-height:1.04;letter-spacing:-.045em;color:#fff;margin-bottom:28px;max-width:700px}
+    .opening-support{max-width:440px;color:#eef1f3;font-size:clamp(15px,1.3vw,19px);line-height:1.8}
+    .actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px;margin-top:30px}
+    .button{display:inline-flex;justify-content:center;align-items:center;gap:24px;min-height:48px;padding:12px 22px;border:1px solid #d5dbe0;font-size:13px;line-height:1.5}
+    .button.primary{background:var(--white);color:var(--black)}.button:hover{background:#d5dbe0;color:var(--black)}
+    .text-link{display:inline-flex;gap:24px;align-items:center;min-height:44px;border-bottom:1px solid #66707a;font-size:13px}.text-link:hover{border-color:var(--white)}.opening .text-link{color:#fff;border-color:#bac5ce}
+    .chapter{padding:88px 0;border-bottom:1px solid var(--line)}.chapter-heading{display:grid;grid-template-columns:minmax(140px,1fr) minmax(0,3fr);gap:52px;align-items:start}.chapter-heading>.kicker{padding-top:8px}
+    .intro{max-width:810px}.intro>p:not(.kicker){margin-top:24px;max-width:650px}.intro h2+p{font-size:18px}
+    .problem{padding:100px 0}.problem .intro p{max-width:680px}.problem .closing-line{color:var(--white);font-size:22px;line-height:1.45;margin-top:30px;max-width:600px}
+    .paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px;margin-top:52px}.path{padding-top:25px;border-top:1px solid #5d646f}.path-label{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:25px}.badge{display:inline-block;border:1px solid #56606d;padding:3px 8px;font-size:10px;line-height:1.6;letter-spacing:.08em;text-transform:uppercase;color:#d1d9e2}.path h3{font-size:clamp(25px,2.4vw,38px);max-width:510px}.path>p{margin-top:20px;max-width:550px}
+    .steps{list-style:none;counter-reset:steps;margin:30px 0 0;padding:0}.steps li{counter-increment:steps;display:grid;grid-template-columns:28px 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--line)}.steps li::before{content:"0" counter(steps);font-size:11px;color:var(--muted);padding-top:4px}.steps strong{display:block;font-size:15px;font-weight:400;color:var(--white)}.steps p{font-size:14px;margin-top:4px}
+    .path .note,.note{font-size:13px;line-height:1.75;color:var(--muted)}.path .text-link{margin-top:22px}
+    .choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:45px}.choice{border-top:1px solid var(--line);padding-top:24px}.choice .number{display:block;font-size:11px;color:var(--muted);margin-bottom:18px}.choice h3{font-size:22px;margin-bottom:14px}.choice p{font-size:15px}.choice strong{font-weight:400;color:var(--white)}
+    .control-notes{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:40px}.control-notes p{font-size:13px;color:var(--muted)}
+    .moments{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:48px}.moment{border-top:1px solid var(--line);padding-top:25px}.moment h3{margin-bottom:18px}.moment p{font-size:15px}.moment .setting{color:var(--white);font-size:12px;letter-spacing:.025em;padding-top:21px}
+    .records{display:grid;grid-template-columns:1fr 1.1fr;gap:65px;align-items:center}.records .kicker{margin-bottom:25px}.records h2{max-width:550px}.records .body{margin-top:24px;max-width:520px}
+    .record-example{margin:0;background:var(--surface);padding:32px}.record-example figcaption{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}.record-row{padding:24px 0;border-top:1px solid #363c45}.record-row:last-child{padding-bottom:0}.record-top{display:flex;gap:16px;justify-content:space-between;align-items:baseline}.record-row h3{font-size:18px}.record-status{font-size:11px;color:#d1d9e2;white-space:nowrap}.record-row p{font-size:14px;margin-top:8px}.record-row small{display:block;color:var(--muted);font-size:12px;margin-top:8px}
+    .usage{display:grid;grid-template-columns:1fr 1fr;gap:65px;margin-top:42px}.usage-text p{margin-bottom:20px;max-width:550px}.usage-details{margin:0;border-top:1px solid #5d646f}.usage-details>div{padding:19px 0;display:grid;grid-template-columns:1fr 1fr;gap:25px;border-bottom:1px solid var(--line)}.usage-details dt{color:var(--white);font-size:14px}.usage-details dd{margin:0;color:var(--silver);font-size:14px}
+    .setup-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:44px;list-style:none;padding:0;counter-reset:setup}.setup-steps li{counter-increment:setup;border-top:1px solid var(--line);padding-top:24px}.setup-steps li::before{content:"0" counter(setup);display:block;font-size:11px;color:var(--muted);margin-bottom:20px}.setup-steps h3{font-size:23px;margin-bottom:13px}.setup-steps p{font-size:15px}
+    .questions{margin-top:40px;max-width:960px;margin-left:auto}.questions details{border-top:1px solid var(--line);padding:20px 0}.questions summary{cursor:pointer;font-size:15px;color:var(--white);padding-right:20px}.questions details p{font-size:14px;max-width:720px;padding:15px 0 0 18px}
+    .final{padding:100px 0 90px;text-align:center}.final .kicker{margin-bottom:25px}.final h2{max-width:850px;margin:auto}.final>p:not(.kicker){max-width:570px;margin:25px auto 0;font-size:18px}.final .actions{justify-content:center}.final .note{font-size:13px!important}
+    .footer{padding:25px 0 35px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:30px;font-size:12px;color:var(--muted)}.footer nav{display:flex;flex-wrap:wrap;gap:24px}.footer a{border-bottom:1px solid #414955}.footer a:hover{color:var(--white)}
+    @media(max-width:1100px){.shell{width:calc(100% - 64px)}.nav{gap:22px}.chapter-heading{grid-template-columns:140px 1fr;gap:32px}.opening{min-height:640px}.opening-copy{padding:44px}.opening h1{font-size:64px;max-width:550px}.paths{gap:35px}.records,.usage{gap:40px}.chapter{padding:70px 0}.record-example{padding:25px}.moments,.setup-steps{gap:30px}}
+    @media(max-width:760px){html{scroll-padding-top:90px}.shell{width:calc(100% - 40px)}.masthead{min-height:74px;gap:16px}.wordmark{font-size:10px}.nav{gap:17px;font-size:11px}.nav .secondary-nav{display:none}.opening{min-height:720px;aspect-ratio:auto;max-height:none;margin-top:18px}.opening-copy{padding:34px 28px}.opening h1{font-size:clamp(43px,8.5vw,62px);max-width:520px}.opening-support{font-size:15px;max-width:360px}.opening-image{object-position:61% center}.opening::after{background:linear-gradient(180deg,rgba(2,8,12,.72),rgba(2,8,12,.22) 57%,transparent 84%)}.opening .kicker{font-size:10px;max-width:240px}.opening .actions{gap:15px;margin-top:26px}.opening .button{padding:11px 16px;font-size:12px}.opening .text-link{font-size:12px}.chapter{padding:58px 0}.chapter-heading{grid-template-columns:1fr;gap:20px}.chapter-heading>.kicker{padding-top:0}h2{font-size:clamp(32px,6.8vw,46px)}.intro h2+p{font-size:16px}.problem .closing-line{font-size:20px}.paths{grid-template-columns:1fr;gap:40px;margin-top:35px}.path h3{font-size:29px}.choices,.moments,.setup-steps{grid-template-columns:1fr;gap:30px;margin-top:35px}.choice .number{margin-bottom:12px}.choice h3,.moment h3{font-size:24px}.control-notes{grid-template-columns:1fr;gap:12px;margin-top:24px}.moment .setting{padding-top:15px}.records,.usage{grid-template-columns:1fr;gap:30px}.record-example{padding:22px}.record-top{flex-wrap:wrap;gap:8px}.record-status{font-size:11px}.usage{margin-top:30px}.questions details p{padding-left:0}.final{padding:70px 0}.final>p:not(.kicker){font-size:16px}.footer{flex-direction:column;gap:18px}.footer nav{gap:18px}}
+    @media(max-width:390px){.shell{width:calc(100% - 32px)}.nav{gap:12px}.opening-copy{padding:30px 22px}.opening{min-height:745px}.opening h1{font-size:43px}.opening .actions{align-items:flex-start;flex-direction:column}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   </style>
 </head>
 <body>
-  <a class="skip" href="#study-view">Skip to the visual study</a>
+  <a class="skip" href="#main">Skip to the story</a>
   <div class="shell">
     <header class="masthead">
-      <a href="#opening" class="wordmark" aria-label="AI Receptionist">AI Receptionist</a>
-      <a href="#product-flow" class="masthead-note">How it works <span aria-hidden="true">↓</span></a>
+      <a class="wordmark" href="#opening">AI Receptionist</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#product-flow">How it works</a>
+        <a class="secondary-nav" href="#your-choice">Your controls</a>
+        <a class="secondary-nav" href="#setup">Setup</a>
+        <a class="nav-cta" href="/start">Get started <span aria-hidden="true">↗</span></a>
+      </nav>
     </header>
     <main id="main">
       <section class="opening" id="opening" aria-labelledby="opening-title">
-        <img class="opening-image" id="opening-image" src="assets/05-time-back.png" alt="A business owner taking a quiet coffee break on a coastal terrace, with a phone face down beside them and a wide view of the sea." width="1254" height="1254" fetchpriority="high">
+        <img class="opening-image" src="assets/05-time-back.png" width="1254" height="1254" fetchpriority="high" alt="A business owner taking a quiet coffee break on a coastal terrace, with a phone face down beside them and a wide view of the sea.">
         <div class="opening-copy">
-          <h1 id="opening-title">Step away. Bookings keep moving.</h1>
-          <p class="opening-support">Your customers book online. AI calls them to confirm. You see the outcome.</p>
-          <div class="opening-links"><a href="#product-flow"><span>See how it works</span><span aria-hidden="true">↓</span></a><a href="#directions"><span>Explore four directions</span><span aria-hidden="true">↗</span></a></div>
-        </div>
-      </section>
-      <p class="opening-caption">Campaign visual study / A proposed story about getting time back</p>
-      <section class="owner-moments" aria-labelledby="moments-title">
-        <h2 id="moments-title">More attention for the moment you are in.</h2>
-        <div class="moment-grid">
-          <article class="moment"><h3>With a customer</h3><p>Give them your attention. Other customers can book online, with AI calling to confirm their appointments.</p></article>
-          <article class="moment"><h3>Away from the desk</h3><p>Step out without taking booking follow-up with you. Customers book online and AI makes the confirmation call.</p></article>
-          <article class="moment"><h3>Taking a break</h3><p>Enjoy a coffee or a little breathing room. Review the call outcome when you are ready.</p></article>
-          <article class="moment"><h3>Taking time off</h3><p>Customers can still book online. Your appointment and call records stay together for you to review.</p></article>
-        </div>
-      </section>
-      <div class="direction-intro" id="directions">
-        <h2>Four ways to tell the story.</h2>
-        <p>Explore each visual direction, or compare the four studies together.</p>
-      </div>
-      <div class="toolbar">
-        <div class="direction-tabs" role="group" aria-label="Choose a visual direction">
-          <button type="button" class="direction-tab" data-direction="01" aria-pressed="false" aria-controls="study-view"><span class="tab-number">01</span><span>Monolith</span></button>
-          <button type="button" class="direction-tab" data-direction="02" aria-pressed="false" aria-controls="study-view"><span class="tab-number">02</span><span>Architecture</span></button>
-          <button type="button" class="direction-tab" data-direction="03" aria-pressed="false" aria-controls="study-view"><span class="tab-number">03</span><span>Interface</span></button>
-          <button type="button" class="direction-tab" data-direction="04" aria-pressed="true" aria-controls="study-view"><span class="tab-number">04</span><span>Evolution</span></button>
-        </div>
-        <div class="view-controls" role="group" aria-label="Presentation view">
-          <button type="button" class="view-button" data-mode="focus" aria-pressed="true" aria-controls="study-view"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M2 2h12v12H2z"/></svg><span>Focus</span></button>
-          <span class="view-divider" aria-hidden="true"></span>
-          <button type="button" class="view-button" data-mode="compare" aria-pressed="false" aria-controls="compare-view"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M2 2h4v4H2zM10 2h4v4h-4zM2 10h4v4H2zM10 10h4v4h-4z"/></svg><span>Compare</span></button>
-        </div>
-      </div>
-      <section id="study-view" aria-labelledby="study-title">
-        <div class="study-stage">
-          <figure class="study-figure">
-            <div class="image-placeholder" aria-hidden="true"><span id="placeholder-name">Evolution</span><span id="placeholder-status">Visual study is being prepared.</span></div>
-            <img id="study-image" src="assets/04-evolution.png" alt="Three ordinary phones — a rotary desk phone, a push-button desk phone and a smartphone — arranged in a disciplined diagonal progression, photographed in graphite and titanium tones." width="1254" height="1254" decoding="async">
-          </figure>
-          <div class="study-copy">
-            <p class="study-index"><span id="study-number">04</span><span class="dash" aria-hidden="true"></span><span id="study-name">Evolution</span></p>
-            <h2 class="study-title" id="study-title">Take a break. Keep bookings moving.</h2>
-            <p class="study-description" id="study-description">Customers book online. AI calls to confirm. You see the outcome when you return.</p>
-            <a class="story-link" href="#proposed-story"><span>The proposed story</span><span aria-hidden="true">↓</span></a>
+          <p class="kicker">An AI front desk for appointment businesses</p>
+          <h1 id="opening-title">Step away.<br>Bookings keep moving.</h1>
+          <p class="opening-support">Give customers a simple way to book online, choose AI confirmation calls, and see what happened when you return.</p>
+          <div class="actions">
+            <a class="button primary" href="/demos">Explore a booking demo <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#product-flow">See how it works <span aria-hidden="true">↓</span></a>
           </div>
         </div>
-        <p class="study-caption"><span>Photographic art direction / Single-frame study</span><span>Proposed motion described below</span></p>
-        <section class="sequence" id="proposed-story" aria-labelledby="sequence-label">
-          <div class="section-intro">
-            <h2 class="section-label" id="sequence-label">Proposed sequence</h2>
-            <p class="camera-description" id="camera-description">Use disciplined match cuts across the three phones for the first 20% of the proposed sequence. Give the remaining 80% to online booking, the outbound AI confirmation call and the owner's record. Match position and lighting between devices; keep each device's form intact.</p>
+      </section>
+      <section class="chapter problem" aria-labelledby="problem-title">
+        <div class="chapter-heading">
+          <p class="kicker">01 / The day you know</p>
+          <div class="intro">
+            <h2 id="problem-title">You can’t be at the desk all day.</h2>
+            <p>You’re with a customer. The phone rings. Another appointment needs confirming. Something has to wait.</p>
+            <p>AI Receptionist gives customers a way to book and helps with the follow-up, so more of your attention stays with the work in front of you.</p>
+            <p class="closing-line">And when it’s time for a break, you have room for that, too.</p>
           </div>
-          <ol class="sequence-steps" id="sequence-steps">
-            <li class="sequence-step"><span class="step-number" aria-hidden="true">01</span><h3>The hardware evolved.</h3><p>Three familiar phones, connected by precise match cuts. The opening occupies 20% of the proposed sequence.</p></li>
-            <li class="sequence-step"><span class="step-number" aria-hidden="true">02</span><h3>Booked online.</h3><p>The smartphone introduces a customer selecting an appointment.</p></li>
-            <li class="sequence-step"><span class="step-number" aria-hidden="true">03</span><h3>Called to confirm.</h3><p>AI makes the outbound confirmation call for that booking.</p></li>
-            <li class="sequence-step"><span class="step-number" aria-hidden="true">04</span><h3>The outcome, recorded.</h3><p>The owner sees the call record. Staff handle requests that need a person.</p></li>
-          </ol>
-        </section>
+        </div>
       </section>
-      <section id="compare-view" aria-labelledby="compare-title" hidden>
-        <div class="compare-intro">
-          <h2 id="compare-title">Four directions. One product.</h2>
-          <p>Select a study to view the full image and proposed story.</p>
+      <section class="chapter" id="product-flow" aria-labelledby="booking-title">
+        <div class="chapter-heading">
+          <p class="kicker">02 / Keep bookings moving</p>
+          <div class="intro"><h2 id="booking-title">Give the next customer a way to book.</h2><p>Start with online booking and confirmation calls. Incoming AI booking is the next experience we’re preparing for pilot businesses.</p></div>
         </div>
-        <div class="compare-grid">
-          <article class="compare-card">
-            <button type="button" class="compare-open" data-open="01" aria-label="View Monolith at full size">
-              <span class="compare-visual"><span class="image-placeholder" aria-hidden="true"><span>Monolith</span><span>Visual study is being prepared.</span></span><img src="assets/01-monolith.png" alt="A precision product photograph of an ordinary black smartphone on a seamless graphite shelf, with restrained cool light and a dark architectural composition." width="1254" height="1254" decoding="async"></span>
-              <span class="compare-caption"><span class="compare-id">01</span><span>Monolith</span><span class="compare-arrow" aria-hidden="true">↗</span></span>
-            </button>
-            <p class="compare-description">Give your customer your full attention.</p>
+        <div class="paths">
+          <article class="path" aria-labelledby="phone-title">
+            <div class="path-label"><p class="kicker">Incoming phone booking</p><span class="badge">Pilot preview</span></div>
+            <h3 id="phone-title">They call. AI helps them book.</h3>
+            <p>The planned experience starts with the number customers already know. Once the connection is set up and tested, AI can help them find an appointment.</p>
+            <ol class="steps">
+              <li><div><strong>Ask for an appointment.</strong><p>The caller tells the AI who they want to see and when.</p></div></li>
+              <li><div><strong>Agree on an available time.</strong><p>AI checks the appointment book and reads the details back.</p></div></li>
+              <li><div><strong>See the booking saved.</strong><p>After the caller agrees, the appointment and call result appear in your records.</p></div></li>
+            </ol>
+            <p class="note">Incoming phone booking is awaiting a verified pilot connection. We check your phone service and appointment book before activation.</p>
           </article>
-          <article class="compare-card">
-            <button type="button" class="compare-open" data-open="02" aria-label="View Architecture at full size">
-              <span class="compare-visual"><span class="image-placeholder" aria-hidden="true"><span>Architecture</span><span>Visual study is being prepared.</span></span><img src="assets/02-architecture.png" alt="A full-scale boutique reception atrium with white-metal architectural surfaces, a precise reception desk, cool natural light and generous empty space." width="1254" height="1254" decoding="async"></span>
-              <span class="compare-caption"><span class="compare-id">02</span><span>Architecture</span><span class="compare-arrow" aria-hidden="true">↗</span></span>
-            </button>
-            <p class="compare-description">Step away from the desk.</p>
-          </article>
-          <article class="compare-card">
-            <button type="button" class="compare-open" data-open="03" aria-label="View Interface at full size">
-              <span class="compare-visual"><span class="image-placeholder" aria-hidden="true"><span>Interface</span><span>Visual study is being prepared.</span></span><img src="assets/03-interface.png" alt="A macro study of precisely aligned, separated smoked-glass software interface planes against a dark background, with clear spacing and subtle cool-white edge lighting." width="1254" height="1254" decoding="async"></span>
-              <span class="compare-caption"><span class="compare-id">03</span><span>Interface</span><span class="compare-arrow" aria-hidden="true">↗</span></span>
-            </button>
-            <p class="compare-description">Spend less time chasing confirmations.</p>
-          </article>
-          <article class="compare-card">
-            <button type="button" class="compare-open" data-open="04" aria-label="View Evolution at full size">
-              <span class="compare-visual"><span class="image-placeholder" aria-hidden="true"><span>Evolution</span><span>Visual study is being prepared.</span></span><img src="assets/04-evolution.png" alt="Three ordinary phones — a rotary desk phone, a push-button desk phone and a smartphone — arranged in a disciplined diagonal progression, photographed in graphite and titanium tones." width="1254" height="1254" decoding="async"></span>
-              <span class="compare-caption"><span class="compare-id">04</span><span>Evolution</span><span class="compare-arrow" aria-hidden="true">↗</span></span>
-            </button>
-            <p class="compare-description">Take a break. Keep bookings moving.</p>
+          <article class="path" aria-labelledby="online-title">
+            <div class="path-label"><p class="kicker">Online booking + confirmation calls</p></div>
+            <h3 id="online-title">They choose a time. You choose the follow-up.</h3>
+            <p>Customers book through your online page, even outside business hours. Turn on AI confirmation calls when you want help following up.</p>
+            <ol class="steps">
+              <li><div><strong>Your customer books online.</strong><p>They choose a team member and an available appointment.</p></div></li>
+              <li><div><strong>AI calls to confirm.</strong><p>When enabled and call minutes are available, AI follows up about that booking.</p></div></li>
+              <li><div><strong>You see the outcome.</strong><p>Review the confirmation, an unanswered call or a request that needs your team.</p></div></li>
+            </ol>
+            <a class="text-link" href="/demos">Explore the online booking demos <span aria-hidden="true">↗</span></a>
           </article>
         </div>
-        <p class="compare-note">All four directions use the same product flow. The difference is the visual language: object, architecture, interface or evolution.</p>
       </section>
-      <section class="product" id="product-flow" aria-labelledby="product-label">
-        <h2 class="section-label" id="product-label">The product flow</h2>
-        <div class="product-body">
-          <h2>A booking. A confirmation call. A clear record.</h2>
-          <p class="product-description">Customers book online. AI makes an outbound call to confirm the appointment. The owner sees the call record, and staff handle requests that need a person.</p>
-          <ol class="product-steps">
-            <li><h3>Book online</h3><p>The customer chooses an appointment through your booking page.</p></li>
-            <li><h3>Call to confirm</h3><p>AI follows up with an outbound confirmation call.</p></li>
-            <li><h3>See the record</h3><p>The owner can review the call outcome and transcript. Staff handle customer requests.</p></li>
-          </ol>
+      <section class="chapter" id="your-choice" aria-labelledby="choice-title">
+        <div class="chapter-heading"><p class="kicker">03 / You stay in control</p><div class="intro"><h2 id="choice-title">You decide who answers.</h2><p>Keep a personal welcome when your team is available. Prepare a different approach for the moments they’re busy.</p></div></div>
+        <div class="choices">
+          <article class="choice"><span class="number">01</span><h3>Let the caller choose.</h3><p><strong>Press 1 to book. Press 2 for the team.</strong> Give appointment requests and conversations that need a person their own route.</p></article>
+          <article class="choice"><span class="number">02</span><h3>Give your team the first ring.</h3><p>If nobody answers, choose whether AI helps with the booking or the caller goes to voicemail.</p></article>
+          <article class="choice"><span class="number">03</span><h3>Let AI answer first.</h3><p>Prepare AI to handle appointment requests while you focus on the customer in front of you. Choose staff only whenever that suits your business.</p></article>
         </div>
+        <div class="control-notes"><p>These incoming-call choices take effect after your connection is tested. Speaking with staff uses a separate staff number, with voicemail if they’re unavailable.</p><p>Incoming answering and outgoing confirmation calls have separate controls. Use the help you need for each.</p></div>
+      </section>
+      <section class="chapter" id="time-back" aria-labelledby="time-title">
+        <div class="chapter-heading"><p class="kicker">04 / Make room for your day</p><div class="intro"><h2 id="time-title">Your day needs breathing room.</h2><p>Plan who answers around your working hours, a busy afternoon or a week away.</p></div></div>
+        <div class="moments">
+          <article class="moment"><h3>Take a proper break.</h3><p>Prepare AI to answer for an hour and save the change. Your normal answering schedule resumes automatically afterward.</p><p class="setting">A temporary choice. An automatic return.</p></article>
+          <article class="moment"><h3>Let the workday end.</h3><p>Set one answering choice for business hours and another for the evening. Customers can still book online while you’re off the clock.</p><p class="setting">Business hours and after-hours choices.</p></article>
+          <article class="moment"><h3>Be where you are.</h3><p>Add your holiday or vacation dates ahead of time. Decide how incoming calls should be handled while you enjoy your time away.</p><p class="setting">Your time off, planned in advance.</p></article>
+        </div>
+        <p class="note" style="margin-top:28px">Phone schedules apply to a connected line. They control who answers; appointment availability is managed separately.</p>
+      </section>
+      <section class="chapter records" aria-labelledby="records-title">
+        <div><p class="kicker">05 / Come back informed</p><h2 id="records-title">Know what happened.<br>Know what needs you.</h2><p class="body">See bookings, call outcomes and requests that need a person. Review the details and pick up where you’re needed.</p><p class="body">If someone asks to change an appointment, your team handles the follow-up. You keep the context of the conversation.</p></div>
+        <figure class="record-example">
+          <figcaption>Example appointment and call records</figcaption>
+          <div class="record-row"><div class="record-top"><h3>Jordan Lee</h3><span class="record-status">Confirmed</span></div><p>Tuesday · 2:30 PM · Haircut</p><small>Customer confirmed the appointment during the call.</small></div>
+          <div class="record-row"><div class="record-top"><h3>Alex Morgan</h3><span class="record-status">Needs your attention</span></div><p>Asked for a later appointment.</p><small>Review the call summary and arrange the change with the customer.</small></div>
+        </figure>
+      </section>
+      <section class="chapter" id="usage" aria-labelledby="usage-title">
+        <div class="chapter-heading"><p class="kicker">06 / Keep costs in view</p><div class="intro"><h2 id="usage-title">Know your usage.<br>Choose your limit.</h2></div></div>
+        <div class="usage">
+          <div class="usage-text"><p>A busy month should be something you can plan for. See the minutes used, your remaining allowance and usage notices in your dashboard.</p><p>Extra-minute spending starts at $0. Choose and save a monthly limit if you want AI calls to continue beyond the included allowance.</p><a class="text-link" href="/#terms">Compare plans and pricing <span aria-hidden="true">↗</span></a></div>
+          <dl class="usage-details"><div><dt>One allowance</dt><dd>Incoming and outgoing AI calls share your plan minutes.</dd></div><div><dt>Your extra-spend limit</dt><dd>You decide whether to allow extra AI minutes.</dd></div><div><dt>When AI minutes run out</dt><dd>Incoming calls use your staff or voicemail fallback. Online booking stays available.</dd></div></dl>
+        </div>
+        <p class="note" style="margin-top:24px">Calling can pause before the allowance is fully used so there’s room to finish the next call. The extra-spend limit covers additional AI minutes; your subscription and phone-provider charges are separate.</p>
+      </section>
+      <section class="chapter" id="setup" aria-labelledby="setup-title">
+        <div class="chapter-heading"><p class="kicker">07 / A clear way to get started</p><div class="intro"><h2 id="setup-title">Start with the way your business works.</h2><p>Your phone number. Your team. Your appointment book. We review the details with you before incoming AI answering goes live.</p></div></div>
+        <ol class="setup-steps"><li><h3>Tell us about your business.</h3><p>Add your team, phone provider and the place you manage appointments. “Not sure” is a starting point, too.</p></li><li><h3>Choose the help you want.</h3><p>Select a plan and prepare your answering choices, confirmation calls and working hours.</p></li><li><h3>Test the setup together.</h3><p>We check the phone connection and appointment book, then test the call and booking flow before activation.</p></li></ol>
+        <div class="questions">
+          <details><summary>Can customers keep using our current number?</summary><p>That’s the aim. We check your phone provider and service first, then agree the connection steps with you. Choosing a provider during signup saves your details; it doesn’t change your phone routing.</p></details>
+          <details><summary>Will it work with our existing booking software?</summary><p>The current booking page uses AI Receptionist’s own appointment book. Existing booking software needs a compatibility review and does not automatically sync. Tell us what you use before switching.</p></details>
+          <details><summary>Can I switch AI answering off?</summary><p>Yes. On a connected line, switching incoming routing off sends new calls to your configured staff destination or voicemail. It doesn’t undo forwarding set with your phone provider. Outgoing confirmation calls have their own switch.</p></details>
+        </div>
+      </section>
+      <section class="final" aria-labelledby="final-title">
+        <p class="kicker">More attention for what matters</p><h2 id="final-title">Make room for your customers.<br>And for yourself.</h2>
+        <p>Explore the booking experience, then start a setup that fits your business.</p>
+        <div class="actions"><a class="button primary" href="/start">Start your setup <span aria-hidden="true">↗</span></a><a class="text-link" href="/demos">Explore a booking demo <span aria-hidden="true">↗</span></a></div>
+        <p class="note">Sign in with your email to save your business details and choose a plan.</p>
       </section>
     </main>
-    <footer class="footer">
-      <p>Visual studies only. These are still images; the motion described is proposed.</p>
-      <p><a href="docs/copy.json">Study notes</a> <span aria-hidden="true">/</span> AI Receptionist</p>
-    </footer>
+    <footer class="footer"><p>AI Receptionist · Make room for your day.</p><nav aria-label="Footer navigation"><a href="/account/login">Owner sign in</a><a href="/">Original marketing site</a><a href="visual-studies.html">Earlier visual studies</a></nav></footer>
   </div>
-  <div class="sr-only" role="status" aria-live="polite" aria-atomic="true" id="announcement"></div>
-  <script type="application/json" id="study-data">{"version": "02", "title": "AI Receptionist — Visual studies", "defaultConcept": "04", "product": {"headline": "A booking. A confirmation call. A clear record.", "description": "Customers book online. AI makes an outbound call to confirm the appointment. The owner sees the call record, and staff handle requests that need a person.", "steps": [{"label": "Book online", "detail": "The customer chooses an appointment through your booking page."}, {"label": "Call to confirm", "detail": "AI follows up with an outbound confirmation call."}, {"label": "See the record", "detail": "The owner can review the call outcome and transcript. Staff handle customer requests."}]}, "concepts": [{"id": "01", "name": "Monolith", "asset": "assets/01-monolith.png", "headline": "Give your customer your full attention.", "description": "While you are with a customer, others can book online. AI follows up with a confirmation call, and you can review the result.", "alt": "A precision product photograph of an ordinary black smartphone on a seamless graphite shelf, with restrained cool light and a dark architectural composition.", "cameraMotion": "A slow lateral move reveals the phone's edge. Cut cleanly to the booking, then the outbound call and the owner's record. The physical object stays familiar; the service is explained in readable interface text.", "storyboard": [{"label": "A familiar object.", "detail": "One measured camera move across the phone and graphite surface."}, {"label": "Booked online.", "detail": "A clean cut introduces a customer choosing an appointment."}, {"label": "Called to confirm.", "detail": "The appointment leads into a clearly identified outbound confirmation call."}, {"label": "The outcome, recorded.", "detail": "The call record settles into the owner's dashboard."}]}, {"id": "02", "name": "Architecture", "asset": "assets/02-architecture.png", "headline": "Step away from the desk.", "description": "Customers can choose an appointment online. AI calls to confirm, so the follow-up does not depend on you staying at the desk.", "alt": "A full-scale boutique reception atrium with white-metal architectural surfaces, a precise reception desk, cool natural light and generous empty space.", "cameraMotion": "Move slowly through the reception atrium toward the desk. Match its geometry to the online booking interface, then follow the outgoing call into the owner's dashboard. Keep the space full-scale and the movement deliberate.", "storyboard": [{"label": "Space to arrive.", "detail": "The camera enters a quiet, full-scale reception atrium."}, {"label": "Booked online.", "detail": "The desk's geometry gives way to a simple booking interface."}, {"label": "Called to confirm.", "detail": "An outbound call connects the appointment with the customer."}, {"label": "The outcome, recorded.", "detail": "The owner's dashboard presents the appointment and call record."}]}, {"id": "03", "name": "Interface", "asset": "assets/03-interface.png", "headline": "Spend less time chasing confirmations.", "description": "AI calls to confirm online bookings. You can review the call record and handle any requests that need a person.", "alt": "A macro study of precisely aligned, separated smoked-glass software interface planes against a dark background, with clear spacing and subtle cool-white edge lighting.", "cameraMotion": "Track along the edges of four aligned interface planes. Move between booking, call, transcript and summary, then return to a straight-on dashboard. Keep every movement on a clear axis and every final label in real interface text.", "storyboard": [{"label": "The booking.", "detail": "A single appointment establishes the starting point."}, {"label": "The structure.", "detail": "Four software layers separate: booking, call, transcript and summary."}, {"label": "Called to confirm.", "detail": "The camera isolates the outbound confirmation call within the layers."}, {"label": "The outcome, recorded.", "detail": "The layers align into a readable dashboard and call record."}]}, {"id": "04", "name": "Evolution", "asset": "assets/04-evolution.png", "headline": "Take a break. Keep bookings moving.", "description": "Customers book online. AI calls to confirm. You see the outcome when you return.", "alt": "Three ordinary phones — a rotary desk phone, a push-button desk phone and a smartphone — arranged in a disciplined diagonal progression, photographed in graphite and titanium tones.", "cameraMotion": "Use disciplined match cuts across the three phones for the first 20% of the proposed sequence. Give the remaining 80% to online booking, the outbound AI confirmation call and the owner's record. Match position and lighting between devices; keep each device's form intact.", "storyboard": [{"label": "The hardware evolved.", "detail": "Three familiar phones, connected by precise match cuts. The opening occupies 20% of the proposed sequence."}, {"label": "Booked online.", "detail": "The smartphone introduces a customer selecting an appointment."}, {"label": "Called to confirm.", "detail": "AI makes the outbound confirmation call for that booking."}, {"label": "The outcome, recorded.", "detail": "The owner sees the call record. Staff handle requests that need a person."}]}], "opening": {"headline": "Step away. Bookings keep moving.", "support": "Your customers book online. AI calls them to confirm. You see the outcome.", "asset": "assets/05-time-back.png", "alt": "A business owner taking a quiet coffee break on a coastal terrace, with a phone face down beside them and a wide view of the sea."}, "benefits": [{"label": "With a customer", "detail": "Give them your attention. Other customers can book online, with AI calling to confirm their appointments."}, {"label": "Away from the desk", "detail": "Step out without taking booking follow-up with you. Customers book online and AI makes the confirmation call."}, {"label": "Taking a break", "detail": "Enjoy a coffee or a little breathing room. Review the call outcome when you are ready."}, {"label": "Taking time off", "detail": "Customers can still book online. Your appointment and call records stay together for you to review."}]}</script>
-  <script>
-    (() => {
-      'use strict';
-      const data = JSON.parse(document.getElementById('study-data').textContent);
-      const concepts = data.concepts;
-      const byId = id => document.getElementById(id);
-      const image = byId('study-image');
-      let selected = data.defaultConcept;
-      let mode = 'focus';
-      const loaded = new Set();
-      const failed = new Set();
-
-      function updateImageVisibility() {
-        const hasFailed = failed.has(selected);
-        image.style.visibility = hasFailed ? 'hidden' : 'visible';
-        image.setAttribute('aria-hidden', String(hasFailed));
-        image.parentElement.querySelector('.image-placeholder').hidden = loaded.has(selected) && !hasFailed;
-        byId('placeholder-status').textContent = hasFailed ? 'Visual study is being prepared.' : 'Loading visual study…';
-      }
-
-      function updateMode() {
-        byId('study-view').hidden = mode !== 'focus';
-        byId('compare-view').hidden = mode !== 'compare';
-        document.querySelectorAll('[data-mode]').forEach(button => {
-          button.setAttribute('aria-pressed', String(button.dataset.mode === mode));
-        });
-        document.querySelectorAll('[data-direction]').forEach(button => {
-          button.setAttribute('aria-pressed', String(mode === 'focus' && button.dataset.direction === selected));
-        });
-        document.querySelector('.skip').href = mode === 'focus' ? '#study-view' : '#compare-view';
-      }
-
-      function renderStudy() {
-        const concept = concepts.find(item => item.id === selected);
-        byId('study-number').textContent = concept.id;
-        byId('study-name').textContent = concept.name;
-        byId('placeholder-name').textContent = concept.name;
-        byId('study-title').textContent = concept.headline;
-        byId('study-description').textContent = concept.description;
-        byId('camera-description').textContent = concept.cameraMotion;
-        image.alt = concept.alt;
-        if (image.getAttribute('src') !== concept.asset) image.src = concept.asset;
-        byId('sequence-steps').replaceChildren(...concept.storyboard.map((step, index) => {
-          const li = document.createElement('li');
-          li.className = 'sequence-step';
-          const number = document.createElement('span');
-          number.className = 'step-number';
-          number.setAttribute('aria-hidden', 'true');
-          number.textContent = String(index + 1).padStart(2, '0');
-          const label = document.createElement('h3');
-          label.textContent = step.label;
-          const detail = document.createElement('p');
-          detail.textContent = step.detail;
-          li.append(number, label, detail);
-          return li;
-        }));
-        updateImageVisibility();
-        updateMode();
-      }
-
-      function selectDirection(id, moveFocus = false) {
-        selected = id;
-        mode = 'focus';
-        renderStudy();
-        byId('announcement').textContent = `Study ${id}: ${concepts.find(item => item.id === id).name}.`;
-        if (moveFocus) {
-          const button = document.querySelector(`[data-direction="${id}"]`);
-          button.focus({preventScroll:true});
-          document.querySelector('.toolbar').scrollIntoView({block:'start',behavior:'instant'});
-        }
-      }
-
-      document.querySelectorAll('[data-direction]').forEach(button => {
-        button.addEventListener('click', () => selectDirection(button.dataset.direction));
-      });
-      document.querySelector('.direction-tabs').addEventListener('keydown', event => {
-        const buttons = [...document.querySelectorAll('[data-direction]')];
-        const current = buttons.indexOf(document.activeElement);
-        if (current < 0 || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-        event.preventDefault();
-        const next = event.key === 'Home' ? 0 : event.key === 'End' ? 3 : (current + (event.key === 'ArrowRight' ? 1 : 3)) % 4;
-        buttons[next].focus();
-        buttons[next].click();
-      });
-      document.querySelectorAll('[data-mode]').forEach(button => {
-        button.addEventListener('click', () => {
-          mode = button.dataset.mode;
-          updateMode();
-          byId('announcement').textContent = mode === 'compare' ? 'Comparing all four visual studies.' : `Showing the ${concepts.find(item => item.id === selected).name} visual study.`;
-        });
-      });
-      document.querySelectorAll('[data-open]').forEach(button => {
-        button.addEventListener('click', () => selectDirection(button.dataset.open, true));
-      });
-
-      image.addEventListener('load', () => {
-        loaded.add(selected);
-        failed.delete(selected);
-        updateImageVisibility();
-      });
-      image.addEventListener('error', () => {
-        failed.add(selected);
-        updateImageVisibility();
-      });
-      document.querySelectorAll('.compare-visual img').forEach(comparisonImage => {
-        const placeholder = comparisonImage.parentElement.querySelector('.image-placeholder');
-        comparisonImage.addEventListener('error', () => {
-          comparisonImage.style.visibility = 'hidden';
-          comparisonImage.setAttribute('aria-hidden', 'true');
-          placeholder.hidden = false;
-        });
-        comparisonImage.addEventListener('load', () => {
-          comparisonImage.style.visibility = 'visible';
-          comparisonImage.removeAttribute('aria-hidden');
-          placeholder.hidden = true;
-        });
-        if (comparisonImage.complete && comparisonImage.naturalWidth > 0) placeholder.hidden = true;
-      });
-      renderStudy();
-      concepts.forEach(concept => {
-        const preload = new Image();
-        preload.onload = () => {
-          loaded.add(concept.id);
-          failed.delete(concept.id);
-          if (concept.id === selected) updateImageVisibility();
-        };
-        preload.onerror = () => {
-          failed.add(concept.id);
-          if (concept.id === selected) updateImageVisibility();
-        };
-        preload.src = concept.asset;
-      });
-    })();
-  </script>
 </body>
 </html>

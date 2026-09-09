@@ -1,5 +1,7 @@
 # Marketing hero directions — research and comparison
 
+**Current priority, 9 September:** copy and page flow now come first; new images and video are deferred. The local V2 page tells the customer story using the existing approved photo. See [marketing story and flow](marketing-story.md). Its earlier four-direction page is preserved as `design/hero-comparison/luxury-v2/visual-studies.html`.
+
 Latest update: 9 September 2026. The current production direction is the [owner-benefit photography and video brief](marketing-media-brief.md): with a customer, too busy to answer, away from the desk, taking a break, on vacation and after hours. Lead with these human situations, then show the booking work that makes each benefit possible.
 
 Bubs subsequently approved the existing V2 coastal opening image, [05-time-back.png](../design/hero-comparison/luxury-v2/assets/05-time-back.png), and its SpaceX/Starlink-like UI. Preserve that exact image. This supersedes the earlier blanket rejection of V2. The separate [Higgsfield V3 photograph](../design/hero-comparison/higgsfield-v3/assets/coastal-break-cinema-2-5-clean.png) remains an alternative, not the selected opening. No final video or replacement live hero has been produced.

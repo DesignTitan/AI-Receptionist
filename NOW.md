@@ -3,6 +3,13 @@
 Handoff notes for the next session. Updated 2026-09-09. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — Marketing V2 copy and story (9 September 2026)
+
+- Bubs deferred new photos and video. Rebuilt the local V2 reading flow around the owner's interrupted day, two distinct booking paths, caller/staff/AI choices, breaks and time off, call records, usage controls, setup and clear demo/signup actions. The exact approved coastal image remains the only photograph on the page.
+- Preserved the previous V2 page byte-for-byte at design/hero-comparison/luxury-v2/visual-studies.html, linked in the footer. Original marketing remains unchanged; V2 stays at /__dev/design/luxury-v2 under Marketing in the page index. New narrative notes are in docs/marketing-story.md; media docs explicitly defer production.
+- Four development-preview tests and source/anchor checks pass. Desktop and 390px browser checks confirm the story, loaded image, no horizontal overflow, FAQ and setup destination. The setup link reaches /account/login, where local sign-in is currently disabled pending configuration; signup completion is not claimed. Incoming phone booking remains a labeled pilot preview awaiting connection acceptance.
+- Next: review and refine the headline sequence and story before returning to images/video. Main preview remains port 3101, session 10741. No generation, deployment or phone changes occurred. Work is saved locally; public GitHub publishing still awaits the previously requested approval.
+
 ## Current handoff — localhost restored (9 September 2026)
 
 - The local 3101 Next process was orphaned, using a CPU core and accepting connections without responding; the development-preview launcher had stopped. Stopped only that project's stale process group and restarted npm run dev on 127.0.0.1:3101 in attached PTY session 10741. No application/source repair was needed or confirmed; this was a local process recovery.

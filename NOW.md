@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-09. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — benefit-led photos and videos (9 September 2026)
+
+- Recovered Bubs's existing scenario list and inspected Starlink Roam's actual hero and travel/camping/boating imagery. The media story must show what owners gain: attention with a client, help during busy periods, freedom from the desk, breaks, vacation and after-hours coverage. V2 currently has one human opening followed by text-only benefits and large technical studies; those studies should no longer lead the campaign.
+- Wrote docs/marketing-media-brief.md with six concrete photo/video treatments, headlines, adjacent booking evidence, page order, restrained motion, mobile/reduced-motion requirements and staged production. Keep the exact approved V2 coastal image (05-time-back.png). Corrected stale hero-direction notes that still called all V2 rejected and incorrectly positioned V3 as the current selection.
+- Next: review the treatments, then produce focused-client and busy-reception keyframes through Higgsfield before the full set and motion test. The earlier request to review before video generation remains in effect. No media generation, purchases, V2 page replacement or live deployment occurred. The product explanation must distinguish online/outgoing evidence from incoming phone booking, whose actual connection and pilot acceptance are still pending. Notes are saved locally; public GitHub publishing still awaits the previously requested approval.
+
 ## Current handoff — page-index sections (9 September 2026)
 
 - Organized the page index into Application, Marketing Site, Design Studies and Internal Tools, in that order. Bubs requested V2 under Marketing: it is now labeled “Marketing site · V2” there and in the dev bar’s Marketing group. All 19 pages remain: 12 application pages, 3 marketing pages, 2 design studies and 2 internal tools. V2 still uses its existing local-only preview URL. User journey stays under Internal Tools; the site access gate also appears there when the site is locked.

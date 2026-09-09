@@ -1,10 +1,10 @@
 # Marketing hero directions — research and comparison
 
-Latest update: 9 September 2026. Bubs rejected V1/V2 imagery and retained only the human time-back idea. The current review asset is the [Higgsfield human photograph](../design/hero-comparison/higgsfield-v3/assets/coastal-break-cinema-2-5-clean.png), with [provenance and notes](../design/hero-comparison/higgsfield-v3/README.md). Cinema Studio Image 2.5 was used as the stated interpretation of “Canto 2.5,” which is absent from the live catalogue. No final video or replacement live hero has been produced.
+Latest update: 9 September 2026. The current production direction is the [owner-benefit photography and video brief](marketing-media-brief.md): with a customer, too busy to answer, away from the desk, taking a break, on vacation and after hours. Lead with these human situations, then show the booking work that makes each benefit possible.
 
-Review this one candid coastal-café photograph before making another set. The source is 4096 × 4096; the clean version is 4016 × 4016 after a 40px border crop in Higgsfield. The rejected research directions below are historical.
+Bubs subsequently approved the existing V2 coastal opening image, [05-time-back.png](../design/hero-comparison/luxury-v2/assets/05-time-back.png), and its SpaceX/Starlink-like UI. Preserve that exact image. This supersedes the earlier blanket rejection of V2. The separate [Higgsfield V3 photograph](../design/hero-comparison/higgsfield-v3/assets/coastal-break-cinema-2-5-clean.png) remains an alternative, not the selected opening. No final video or replacement live hero has been produced.
 
-## Rejected V2 imagery: luxury and time back
+## Existing V2 and earlier technical studies
 
 Bubs rejected the first images as generic AI and requested clean, luxurious, futuristic art direction with the scale and restraint of SpaceX. The later Starlink reference clarified the message: show what the service lets owners do when busy, away from their desk, taking a break or taking time off.
 
@@ -12,7 +12,7 @@ The [V2 visual comparison](../design/hero-comparison/luxury-v2/index.html) now o
 
 SpaceX's [Starship page](https://www.spacex.com/vehicles/starship) informed photographic scale and restraint; [Starlink Roam](https://www.starlink.com/roam) informed the benefit-first narrative. All five images are original generated assets, with no copied brand media. Prompts, manifest and detailed reference interpretation are saved with V2. Browser review passed for desktop, keyboard controls and a 390px layout. Original V1 files remain intact.
 
-Next: refine the owner-benefit story and selected visual direction before connected motion production. For phone evolution, shorten the historical portion to roughly 20%, then devote 80% to the real booking/call/record journey. This supersedes the 45%/55% timing in the original comparison below. Keep the product obvious; avoid guarantees such as “never miss a booking,” inbound-answering claims and promises of full unattended operation.
+Next: review the six scenario treatments in the media brief, then the first human keyframes before connected motion production. Phone evolution is optional supporting material, with roughly 20% history and 80% booking/call/record evidence. This supersedes the 45%/55% timing below. Incoming answering controls and tools are now built locally, but live carrier/voice connection and pilot acceptance are pending; only publish that story as a working service after verification. Avoid guaranteed bookings and promises of complete unattended operation.
 
 ## Original comparison update (superseded art direction)
 

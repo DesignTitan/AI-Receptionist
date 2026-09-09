@@ -1,5 +1,7 @@
 # AI Receptionist — luxury visual studies, revision 2
 
+Current direction, 9 September: preserve the approved `assets/05-time-back.png` opening and build the main media story around the six owner situations in the [photo/video production brief](../../../docs/marketing-media-brief.md). The technical comparisons below are retained references. New footage has not been generated; review the scenario treatments and first human keyframes before video production.
+
 Created 8 September 2026 after Bubs requested imagery with a luxurious, clean, futuristic aerospace feel, then asked to lead with the value of time back. Open `index.html` for the owner-benefit opening, followed by a large single-direction view and a four-direction comparison. All images, copy and controls work offline.
 
 The original comparison remains in the parent folder. This revision uses four new full-square technical photographs/visuals, one per direction, plus a human-benefit photograph of an owner taking a break. These are art-direction anchors and proposed story sequences, not generated motion footage or a replacement live homepage.

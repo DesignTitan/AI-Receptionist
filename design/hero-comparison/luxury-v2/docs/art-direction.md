@@ -1,5 +1,7 @@
 # Luxury hero revision — 8 September 2026
 
+**Current steering, 9 September:** the [photography and video brief](../../../../docs/marketing-media-brief.md) is the production direction. Preserve the approved V2 coastal opening, then show the owner's actual situations with large photographs and restrained motion. The four technical studies below remain historical references. Incoming answering is now locally implemented but still needs real connection and pilot verification before live claims.
+
 Bubs rejected the first concepts as generic, cheesy AI imagery. This revision preserves four ideas but rebuilds the visual language around luxurious, elite, futuristic precision. The 1:1 format stays; each asset is one large image instead of a four-panel sheet.
 
 ## Reusable visual grammar

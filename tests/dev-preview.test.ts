@@ -35,6 +35,8 @@ test("development preview exposes only allowed files and injects the navigation"
     writeFile(join(root, "dev/toolbar.js"), 'customElements.define("fixture-toolbar", class extends HTMLElement {});'),
     writeFile(join(root, "dev/pages.html"), html),
     writeFile(join(root, "dev/pages.js"), 'document.title = "Page index";'),
+    writeFile(join(root, "dev/journey.html"), html.replace("Design fixture", "User journey fixture")),
+    writeFile(join(root, "dev/journey.js"), 'document.title = "User journey";'),
     writeFile(join(root, "dev/page-catalogue.mjs"), 'export const fixture = true;'),
     writeFile(join(root, "dev/private.json"), '{"secret":"fixture"}'),
     writeFile(join(gallery, "index.html"), html),
@@ -69,28 +71,30 @@ test("development preview exposes only allowed files and injects the navigation"
     assert.equal(Number(head.headers["content-length"]), page.body.length);
   }
   assert.equal((await get("/toolbar.js")).status, 200);
-  for (const path of ["/pages", "/pages/"]) {
+  for (const path of ["/pages", "/pages/", "/journey", "/journey/"]) {
     const page = await get(path);
     assert.equal(page.status, 200);
     assert.match(page.body.toString(), /<body[^>]*><ai-dev-toolbar tenant="salon" site-gate="locked">/);
     assert.match(page.body.toString(), /<script type="module" src="\/__dev\/toolbar.js">/);
+    if (path.startsWith("/journey")) assert.match(page.body.toString(), /User journey fixture/);
     const head = await get(path, "HEAD");
     assert.equal(head.status, 200);
     assert.equal(head.body.length, 0);
     assert.equal(Number(head.headers["content-length"]), page.body.length);
   }
-  for (const path of ["/pages.js", "/page-catalogue.mjs"]) {
+  for (const path of ["/pages.js", "/journey.js", "/page-catalogue.mjs"]) {
     const script = await get(path);
     assert.equal(script.status, 200);
     assert.equal(script.headers["content-type"], "text/javascript; charset=utf-8");
     assert.equal(script.headers["cache-control"], "no-store");
+    if (path === "/journey.js") assert.equal(script.body.toString(), 'document.title = "User journey";');
   }
   const data = await get("/pages-data.json");
   assert.equal(data.status, 200);
   assert.equal(data.headers["content-type"], "application/json; charset=utf-8");
   assert.equal(data.headers["cache-control"], "no-store");
   const snapshot = JSON.parse(data.body.toString());
-  assert.equal(snapshot.pages.length, 10);
+  assert.equal(snapshot.pages.length, 11);
   assert.ok(snapshot.pages.every((entry: { updatedAt: string | null; workingCopy: boolean }) => entry.updatedAt === null && !entry.workingCopy));
   assert.ok(Number.isFinite(Date.parse(snapshot.generatedAt)));
   assert.equal(snapshot.pages.find((entry: { id: string }) => entry.id === "salon-home").href, "/");
@@ -115,7 +119,8 @@ test("development preview exposes only allowed files and injects the navigation"
   assert.equal(post.status, 405);
   assert.equal(post.headers.allow, "GET, HEAD");
   assert.equal((await get("/pages-data.json", "POST")).status, 405);
-  for (const path of ["/", "/.env.local", "/pages.html", "/private.json", "/dev/private.json", "/pages-data.json/",
+  for (const path of ["/", "/.env.local", "/pages.html", "/journey.html", "/private.json", "/dev/private.json", "/pages-data.json/",
+    "/journey.js/../private.json",
     "/page-catalogue.mjs/../private.json", "/design/docs/secret.html", "/design/docs/private.json", "/design/docs/copy.json", "/design/assets/manifest.json",
     "/design/assets/", "/design/assets/linked.html", "/design/linked-directory/leak.html",
     "/design/../../private/leak.html", "/design/%2e%2e/%2e%2e/private/leak.html",
@@ -132,19 +137,26 @@ test("development preview exposes only allowed files and injects the navigation"
 
 test("page catalogue contains canonical routes for ordinary and tenant previews", () => {
   const pages = getPages();
-  assert.equal(pages.length, 18);
+  assert.equal(pages.length, 19);
   assert.equal(new Set(pages.map((entry) => entry.id)).size, pages.length);
   assert.equal(new Set(pages.map((entry) => entry.href)).size, pages.length);
   assert.deepEqual([...new Set(pages.map((entry) => entry.group))], [
     "Marketing", "Customer", "Business demos", "Booking pages", "Staff", "Design studies", "Internal tools",
   ]);
   assert.equal(pages.find((entry) => entry.id === "page-index")?.kind, "internal");
+  const journey = pages.find((entry) => entry.id === "user-journey");
+  assert.equal(journey?.label, "User journey");
+  assert.equal(journey?.href, "/__dev/journey");
+  assert.equal(journey?.group, "Internal tools");
+  assert.equal(journey?.kind, "internal");
+  assert.equal(journey?.access, "development");
+  assert.deepEqual(journey?.sources, ["dev/journey.html", "dev/journey.js"]);
   assert.equal(pages.filter((entry) => entry.kind === "study").length, 3);
   assert.deepEqual(getPages({ tenant: "unknown" }), pages);
-  assert.equal(getPages({ siteGate: "  LOCKED " }).length, 19);
+  assert.equal(getPages({ siteGate: "  LOCKED " }).length, 20);
   for (const tenant of ["medical", "salon", "studio"]) {
     const preview = getPages({ tenant });
-    assert.equal(preview.length, 9);
+    assert.equal(preview.length, 10);
     assert.equal(preview.find((entry) => entry.id === `${tenant}-home`)?.href, "/");
     assert.match(preview.find((entry) => entry.id === `${tenant}-booking`)!.href, /^\/book\/[^/]+$/);
     assert.ok(!preview.some((entry) => ["Marketing", "Customer"].includes(entry.group)));

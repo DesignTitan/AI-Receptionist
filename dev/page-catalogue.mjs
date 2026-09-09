@@ -55,6 +55,8 @@ export function getPages({ tenant = "", siteGate = "public" } = {}) {
       ["scripts/dev-preview.mjs", "design/hero-comparison/higgsfield-v3/assets/coastal-break-cinema-2-5-clean.png"]),
     page("page-index", "Page index", "/__dev/pages", "Internal tools", "internal", "development",
       "Browse project pages, design studies and their source update dates.", ["dev/pages.html", "dev/pages.js"]),
+    page("user-journey", "User journey", "/__dev/journey", "Internal tools", "internal", "development",
+      "Explore the product journey from setup to booking and follow-up.", ["dev/journey.html", "dev/journey.js"]),
   );
   if (typeof siteGate === "string" && siteGate.trim().toLowerCase() === "locked") {
     pages.push(page("site-login", "Site sign in", "/login", "Internal tools", "app", "site-gate",

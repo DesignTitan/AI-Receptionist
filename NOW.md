@@ -3,6 +3,13 @@
 Handoff notes for the next session. Updated 2026-09-09. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — visual user journey (9 September 2026)
+
+- Built a clickable visual guide at http://127.0.0.1:3101/__dev/journey, with seven owner stages and separate online/phone customer journeys. The initial view highlights the existing setup form at step 3: after email sign-in and before Stripe checkout. Each stage includes a screen sketch, actions and the next transition; sketches use illustrative data and do not submit forms.
+- Added “User journey” to the dev bar's Pages menu and page directory. The guide and its script are served only by the loopback development preview, never as public application assets. Original marketing, V2 imagery and real signup behavior are unchanged. Development was restarted on 3101 (session 77364); the mock application preview remains on 3102.
+- Checked every owner/online/phone stage, desktop and 390px mobile layout, deep-link state, and the directory entry. Four development-preview tests pass, JavaScript syntax and diff checks pass, and the production exclusion check passes against the current build.
+- Journey review confirmed two follow-ups: V2 still has no signup CTA, and a logged-out visitor's selected pricing plan is lost through email sign-in and defaults to Busy on the setup form. Both are documented in the guide; neither was changed in this visualization task. Phone connection, calendar compatibility, email delivery and pilot acceptance remain pending as below. Work is committed locally; public GitHub push still awaits the previously requested publication approval after automatic review blocked it.
+
 ## Current handoff — incoming phone booking and provider onboarding (9 September 2026)
 
 - Built the approved owner controls: independent outgoing confirmations and incoming routing, menu/staff/AI choices, weekly hours, holidays, vacation dates, temporary overrides, shared usage limits and incoming call history. Provider, phone-service type/plan and appointment software are now collected during onboarding, including “Not sure yet” and specific Comcast/T-Mobile guidance.

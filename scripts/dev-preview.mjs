@@ -25,6 +25,9 @@ const DEV_FILES = new Map([
   ["/pages", ["dev", "pages.html"]],
   ["/pages/", ["dev", "pages.html"]],
   ["/pages.js", ["dev", "pages.js"]],
+  ["/journey", ["dev", "journey.html"]],
+  ["/journey/", ["dev", "journey.html"]],
+  ["/journey.js", ["dev", "journey.js"]],
   ["/page-catalogue.mjs", ["dev", "page-catalogue.mjs"]],
 ]);
 const PHOTO = "/design/higgsfield-v3/assets/coastal-break-cinema-2-5-clean.png";

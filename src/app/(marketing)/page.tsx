@@ -77,7 +77,6 @@ export default function HomePage() {
               <span className="rc-overview__booked" aria-hidden="true">Booked <span>✓</span></span>{' '}
               and get more of your day back.
             </h2>
-            <p className="rc-overview__audience" data-sc-in>For businesses built around appointments.</p>
             <OverviewBenefits />
             <div className="rc-overview__footer" data-sc-in>
               <a href="/features">Explore all features <span aria-hidden="true">↗</span></a>

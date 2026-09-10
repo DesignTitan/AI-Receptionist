@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — overview copy trim (10 September 2026)
+
+- Removed “For businesses built around appointments.” from #benefits and its unused styling at Bubs’s request.
+- The approved headline, mascot and illustrated benefits stay in place.
+- Next: continue section review. Saved locally; public publishing remains pending the earlier approval.
+
 ## Current handoff — illustrated overview benefits (10 September 2026)
 
 - Built the approved revised #benefits mockup: replaced the salon photograph with an inline Booked detail and added the line “For businesses built around appointments.”

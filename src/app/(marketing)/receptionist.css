@@ -557,7 +557,6 @@
 
 .rc-overview__booked { position: relative; display: inline-flex; align-items: center; gap: .5em; padding: .45em .7em; margin-inline: .15em; vertical-align: middle; border-radius: .7em; background: #e0f0e8; box-shadow: 0 8px 18px -12px #1e3a3450; font-family: var(--font-inter), sans-serif; font-size: .31em; line-height: 1.2; letter-spacing: -.02em; font-weight: 500; }
 .rc-overview__booked > span { font-size: 1.45em; }
-.rc-overview__audience { margin: 24px 0 0; font-size: clamp(16px, 1.6vw, 21px); color: #526b63; }
 .rc-overview__benefits { gap: 0; margin-top: 48px; }
 .rc-overview__benefits article { min-width: 0; padding-inline: 30px; border-left: 1px solid #d5e6dd; }
 .rc-overview__benefits article:first-child { padding-left: 0; border-left: 0; }

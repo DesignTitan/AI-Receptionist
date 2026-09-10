@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — Higgsfield motion revision (10 September 2026)
+
+- Bubs requested less artificial footage, an open-eyed talking mascot and restrained liquid-glass overlays with clean typography.
+- Verified Seedance 2.5 in Higgsfield and submitted a 12-second 1080p motion test; job and exact prompt saved in docs/design/busy-life/seedance-2.5-test.md. Generation is pending, not yet visually accepted.
+- Next: inspect the result before integrating anything; prepare approved character references and separate motion layers for production. Site unchanged; public push remains blocked by prior approval review.
+
 ## Current handoff — busy-life explainer preview (10 September 2026)
 
 - Created a four-frame visual storyboard: busy hands, AI conversation, booking outcome, and time off. Saved the image and exact generation prompt in docs/design/busy-life.

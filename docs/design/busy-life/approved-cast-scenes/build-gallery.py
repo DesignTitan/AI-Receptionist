@@ -2,7 +2,7 @@ from pathlib import Path
 import json,html
 p=Path(__file__).parent
 scenes=json.loads((p/'scenes.json').read_text())
-scenes[3]['action']='Milo sits beside his customer, with the wild-haired reference guiding his appearance. She calls the groomer.'
+scenes[3]['action']='Milo cocks his head, sticks out his tongue and tugs at the blanket, with wild flyaway hair. His customer calls the groomer.'
 scenes[5]['action']='Cut to the same caller, speaking naturally. Milo stays off-screen rather than changing appearance.'
 scenes[7]['action']='The same caller smiles as she accepts the offered appointment.'
 scenes[10]['action']='Work finished, the groomer heads outside with her hiking bag.'
@@ -13,7 +13,7 @@ mascot='<img class="mascot" src="raw/scene-13.png" alt="Open-eyed fuzzy AI masco
 overlays={3:'<div class="glass mini"><div class="eyebrow"><span class="live"></span>Incoming call</div><h2>Happy Paws Grooming</h2></div>',5:f'<div class="glass"><div class="topline">{mascot}<div><div class="eyebrow"><span class="live"></span>AI Receptionist</div><p>Happy Paws Grooming</p></div></div><h2>Hi. How can I help?</h2>{wave}</div>',7:f'<div class="glass"><div class="topline">{mascot}<div><div class="eyebrow">AI Receptionist</div><p>Finding the right time.</p></div></div><div class="divider"></div><h2>Thursday works.</h2><p>Would two o’clock suit you?</p><div class="time"><span>Thursday</span><b>2:00 PM</b></div></div>',9:f'<div class="glass"><div class="topline">{mascot}<div><div class="eyebrow">Happy Paws Grooming</div><p>Appointment confirmed</p></div></div><div class="divider"></div><h2>You’re all set.</h2><p>Milo · Usual groom</p><div class="time"><span>Thursday · 2 PM</span><span class="check">✓</span></div><span class="spark">✧</span></div>',12:'<div class="endshade"></div><div class="end"><h2>Take your day back.</h2><p>Be there for your customers. And for yourself.</p><span class="cta">Meet your AI receptionist &nbsp; ↗</span></div><div class="pilot">Incoming AI booking available through a connected pilot.</div>'}
 films=[]
 for s in scenes:
- n=s['number'];src={3:33,4:14,5:35,7:35,9:39,11:41,12:23}.get(n,n)
+ n=s['number'];src={3:33,4:44,5:35,7:35,9:39,11:41,12:23}.get(n,n)
  style=''
  if False:style=' style="width:135%;max-width:none;object-fit:cover;object-position:left center"'
  films.append(f'<section class="film" id="scene-{n:02}"><img class="photo"{style} src="raw/scene-{src:02}.png" alt="{html.escape(s["title"])}">'+overlays.get(n,'')+'</section>')

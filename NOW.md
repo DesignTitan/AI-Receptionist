@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — mischievous Milo (10 September 2026)
+
+- Bubs approved the restored cast and requested wilder reference-like hair and a bratty little dog in scene 4.
+- Edited only the caller image through Higgsfield Seedream 4.5: irregular upright flyaways, head tilt, tongue out and paw tugging blanket; preserved caller and room.
+- Updated scene 4, overview and gallery; retained earlier raw artwork. Next: review this dog expression before animation.
+- Commit locally; earlier public-push approval block remains.
+
 ## Current handoff — industries image examples (10 September 2026)
 
 - Created three visual section mockups in docs/design/industries: white, mint and deep-forest horizontal galleries with people working in salons, pet grooming and photography.

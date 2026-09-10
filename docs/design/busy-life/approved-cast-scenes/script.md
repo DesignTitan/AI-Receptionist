@@ -22,7 +22,7 @@ NARRATOR: “And there’s someone on the other end who needs you, too.”
 
 ## 04. Milo could use a little help — 14–19
 
-Milo sits beside his customer, with the wild-haired reference guiding his appearance. She calls the groomer.
+Milo cocks his head, sticks out his tongue and tugs at the blanket, with wild flyaway hair. His customer calls the groomer.
 
 CUSTOMER, affectionately to Milo: “We’re getting you a haircut.”
 A short ringback.

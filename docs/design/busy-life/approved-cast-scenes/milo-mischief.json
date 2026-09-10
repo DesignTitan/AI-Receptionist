@@ -1,0 +1,19 @@
+{
+  "job_id": "19bd5a33-b434-4a39-95e6-4ac0df061b6f",
+  "params": {
+    "model": "seedream_v4_5",
+    "aspect_ratio": "16:9",
+    "quality": "basic",
+    "medias": [
+      {
+        "role": "image",
+        "value": "89503ea4-aa55-4541-8cd7-498721e9e487"
+      },
+      {
+        "role": "image",
+        "value": "894ef38c-089d-4fe4-82e5-ec50fe123ae9"
+      }
+    ],
+    "prompt": "Precise photographic edit of image1. Keep the SAME woman on phone, her face, cream sweater, room, lighting, blanket and framing. Change ONLY the small Yorkshire terrier: much WILDER hair matching image2's exact crazy static flyaway silhouette. Extremely fine long tan hair shooting UP high and diagonally OUT in irregular wisps in all directions, not flattened and not a groomed symmetric curtain. A hilariously scruffy bedhead like image2. The little dog looks mischievous, cheeky and a little bratty: head slightly cocked, one eye peeking sideways through hair, tiny tip of pink tongue sticking out, one front paw tugging a little fold of the blanket as if caught making trouble. Keep a real tiny terrier's anatomy, small black nose, black collar, dark face and silky tan fur. Playful impish character, not angry or aggressive, not human eyebrows or cartoon expression. Real candid pet photography, realistic eyes and fur, no text or UI, no other changes."
+  }
+}

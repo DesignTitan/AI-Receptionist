@@ -9,6 +9,10 @@ function VoiceIcon({ kind }: { kind: "mic" | "muted" | "end" }) {
   </svg>;
 }
 
+export function VoiceDemoTrigger({ className = "rc-voice-trigger" }: { className?: string }) {
+  return <button className={className} onClick={event => window.dispatchEvent(new CustomEvent("open-receptionist-demo", { detail: event.currentTarget }))}>Meet your AI receptionist <span aria-hidden="true">↗</span></button>;
+}
+
 export function VoiceExample() {
   const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
@@ -44,6 +48,14 @@ export function VoiceExample() {
     }, 250);
     return () => clearInterval(timer);
   }, [busy]);
+  useEffect(() => {
+    const onOpen = (event: Event) => {
+      trigger.current = (event as CustomEvent<HTMLButtonElement>).detail;
+      void open();
+    };
+    window.addEventListener("open-receptionist-demo", onOpen);
+    return () => window.removeEventListener("open-receptionist-demo", onOpen);
+  }, []);
   async function open() {
     setError(""); setCaptions({ user: "", agent: "" }); setStatus("idle"); setAvailable(null);
     dialog.current?.showModal();
@@ -98,7 +110,7 @@ export function VoiceExample() {
     }
   }
   return <>
-    <button ref={trigger} className="rc-voice-trigger" onClick={open}>▷ Meet your AI receptionist</button>
+    <VoiceDemoTrigger />
     <dialog ref={dialog} className="rc-voice-dialog" aria-labelledby="voice-example-title" onCancel={event => { event.preventDefault(); close(); }} onClick={event => { if (event.target === dialog.current) close(); }}>
       <div className="rc-voice-dialog__content">
         <button className="rc-voice-close" aria-label="Close voice example" onClick={close}>×</button>

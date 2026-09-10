@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — hero live-demo CTA (10 September 2026)
+
+- Replaced the hero’s “See it in action” button with “Meet your AI receptionist,” opening the approved live demo immediately.
+- Hero and busy-section buttons share one modal and restore keyboard focus to the button used. Both paths and typecheck passed; hero button styling retains the existing white treatment.
+- Next: generate a visual concept for the following confirmation section before implementation, as requested. Saved locally; no public deployment.
+
 ## Current handoff — approved responsive voice modal built (10 September 2026)
 
 - Implemented the approved combined desktop and mobile concepts: “Go ahead. Say hello.”, large fuzzy mascot, mint rays/ripple, decorative animated waveform, separate customer/AI live caption bubbles and compact call controls.

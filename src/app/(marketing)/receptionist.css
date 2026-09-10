@@ -717,3 +717,5 @@
  .rc-voice-end { font-size:14px !important; padding-inline:10px; gap:6px; }
  .rc-voice-end svg { width:20px; height:20px; flex-shrink:0; }
 }
+.rc-home button.rc-home-button { font-family:inherit; cursor:pointer; }
+.rc-home button.rc-home-button:focus-visible { outline:2px solid white; outline-offset:6px; }

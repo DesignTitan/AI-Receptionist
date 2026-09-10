@@ -1,3 +1,4 @@
+import { VoiceDemoTrigger } from "@/components/marketing/voice-example";
 import { BusySection } from "@/components/marketing/busy-section";
 import { OverviewBenefits } from "@/components/marketing/overview-benefits";
 import { PLANS as PRICING, planFeatures, PILOT_SETUP_CENTS, SETUP_CENTS, SETUP_OFFER, SETUP_SCOPE, type Plan } from "@/lib/platform/pricing";
@@ -61,7 +62,7 @@ export default function HomePage() {
             <h1 id="hero-title">Your AI receptionist.<br />Your day back.</h1>
             <p>Let customers book online. Let AI make the confirmation calls. See what needs your attention, so you can get back to the people and work that matter.</p>
             <div className="rc-home-actions">
-              <a className="rc-home-button" href="/demos">See it in action <span aria-hidden="true">↗</span></a>
+              <VoiceDemoTrigger className="rc-home-button" />
               <a className="rc-home-link" href="/features">Explore all features <span aria-hidden="true">↗</span></a>
             </div>
           </div>

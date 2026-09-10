@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — busy-life explainer preview (10 September 2026)
+
+- Created a four-frame visual storyboard: busy hands, AI conversation, booking outcome, and time off. Saved the image and exact generation prompt in docs/design/busy-life.
+- This is a screenshot concept for review; no video or website changes yet. Incoming phone booking remains a connected pilot capability.
+- Next: review the frames with Bubs, then create separate footage and motion layers. Keep the confirmation concept for a later section. Public push remains blocked by the earlier approval review.
+
 ## Current handoff — confirmation story concept (10 September 2026)
 
 - Hero CTA is complete. Created the next section’s visual concept: “Booked online. Confirmed by AI.” with connected booking, call and outcome illustrations.

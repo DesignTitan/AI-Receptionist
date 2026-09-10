@@ -3,6 +3,13 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — approved responsive voice modal built (10 September 2026)
+
+- Implemented the approved combined desktop and mobile concepts: “Go ahead. Say hello.”, large fuzzy mascot, mint rays/ripple, decorative animated waveform, separate customer/AI live caption bubbles and compact call controls.
+- Ready state has one Let’s talk button; active state shows mute, countdown and End call. The layout stacks on phones, supports scrolling long captions and respects reduced motion. No mock dialogue or prerecorded audio appears in the product.
+- Verified a real spoken photography appointment request produces a contextual AI audio reply. Separate mocked-provider visual checks cover ready/active/ended states, captions, mute, keyboard close/focus, 320/390/768/1440px fit and reduced motion. Production build/dev-tool exclusion passed; smallest-phone dock spacing was adjusted and rechecked.
+- Existing local live connection and provider safety boundaries remain. Next: Bubs reviews the working modal in #cost. Saved locally; no deployment or public publishing.
+
 ## Current handoff — mobile modal image (10 September 2026)
 
 - Created the requested phone portrait version of the combined modal, with vertically stacked mascot, live captions and compact call controls.

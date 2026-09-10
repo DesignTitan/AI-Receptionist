@@ -3,6 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import type { WebSession } from "@omnidim-ai/client";
 
+function VoiceIcon({ kind }: { kind: "mic" | "muted" | "end" }) {
+  return <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    {kind === "end" ? <path d="M3 15v-4c5-5 13-5 18 0v4l-5-1v-3a13 13 0 0 0-8 0v3z" /> : <><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 10v1a7 7 0 0 0 14 0v-1M12 18v4M8 22h8" />{kind === "muted" && <path d="m3 3 18 18" />}</>}
+  </svg>;
+}
+
 export function VoiceExample() {
   const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
@@ -14,7 +20,7 @@ export function VoiceExample() {
   const [seconds, setSeconds] = useState(90);
   const [muted, setMuted] = useState(false);
   const [error, setError] = useState("");
-  const [caption, setCaption] = useState("");
+  const [captions, setCaptions] = useState({ user: "", agent: "" });
   const busy = status === "connecting" || status === "active";
 
   function stop() {
@@ -39,7 +45,7 @@ export function VoiceExample() {
     return () => clearInterval(timer);
   }, [busy]);
   async function open() {
-    setError(""); setCaption(""); setStatus("idle"); setAvailable(null);
+    setError(""); setCaptions({ user: "", agent: "" }); setStatus("idle"); setAvailable(null);
     dialog.current?.showModal();
     try {
       const response = await fetch("/api/voice-demo/session", { cache: "no-store" });
@@ -53,7 +59,7 @@ export function VoiceExample() {
   }
   async function start() {
     if (busy || !available) return;
-    setError(""); setCaption(""); setMuted(false);
+    setError(""); setCaptions({ user: "", agent: "" }); setMuted(false);
     setStatus("connecting"); setSeconds(90); deadline.current = Date.now() + 90_000;
     const run = ++generation.current;
     let current: WebSession | null = null;
@@ -75,7 +81,7 @@ export function VoiceExample() {
         else setStatus(value);
       });
       current.on("transcript", value => {
-        if (run === generation.current) setCaption(`${value.role === "agent" ? "Receptionist" : "You"}: ${value.text}`);
+        if (run === generation.current) setCaptions(previous => ({ ...previous, [value.role]: value.text }));
       });
       current.on("error", () => {
         if (run === generation.current) { stop(); setError("The conversation was interrupted. Please try again."); }
@@ -96,29 +102,40 @@ export function VoiceExample() {
     <dialog ref={dialog} className="rc-voice-dialog" aria-labelledby="voice-example-title" onCancel={event => { event.preventDefault(); close(); }} onClick={event => { if (event.target === dialog.current) close(); }}>
       <div className="rc-voice-dialog__content">
         <button className="rc-voice-close" aria-label="Close voice example" onClick={close}>×</button>
-        <div className="rc-voice-heading">
-          <div><p className="rc-benefit-eyebrow">A little hello. A lot of possibility.</p>
-          <h2 id="voice-example-title">Meet your<br />AI receptionist.</h2>
-          <p>No prerecorded answers.<br />Just you and a receptionist that listens.</p></div>
-          <div className="rc-voice-mascot" aria-hidden="true"><img src="/marketing/receptionist-mascot.png" width={160} height={160} alt="" /><span>✧</span></div>
-        </div>
-        <section className="rc-voice-live" aria-label="Practice conversation">
-          <div><span className="rc-benefit-eyebrow">Try it for yourself · 90 seconds</span><h3>A real conversation. A practice booking.</h3>
-          <p>Ask for an appointment. Change your mind. See how it responds.</p></div>
-          <div className="rc-voice-live__actions">
-            {busy ? <><span role="status">{status === "connecting" ? "Connecting…" : "Conversation in progress"}</span><span className="rc-voice-timer" aria-label="Time remaining">{Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, "0")}</span>
-            {status === "active" && <button onClick={() => { session.current?.mute(!muted); setMuted(!muted); }} aria-pressed={muted}>{muted ? "Unmute" : "Mute"}</button>}
-            <button onClick={stop}>End conversation</button></> : <button disabled={!available} onClick={start}>{available === null ? "Checking availability…" : available ? (status === "ended" ? "Talk again" : "Let’s talk") : "Live connection unavailable"}</button>}
+        <header className="rc-voice-heading">
+          <p className="rc-voice-eyebrow">Meet your AI receptionist</p>
+          <h2 id="voice-example-title">Go ahead. <span>Say hello.</span></h2>
+          <p>Ask a question. Try a booking.<span className="rc-voice-desktop-copy"> See how it responds.</span></p>
+        </header>
+        <div className="rc-voice-layout">
+          <div className="rc-voice-visual">
+            <div className="rc-voice-mascot" aria-hidden="true">
+              <svg className="rc-voice-rays" viewBox="0 0 400 240" fill="none" stroke="#b2dccb" strokeWidth="9" strokeLinecap="round"><path d="m35 67 19 15M24 117h24m-13 50 19-15M365 67l-19 15m30 35h-24m13 50-19-15" /></svg>
+              <img src="/marketing/receptionist-mascot.png" width={300} height={300} alt="" />
+              <div className="rc-voice-ripple" />
+            </div>
+            <div className="rc-voice-wave" data-active={status === "active" && !muted} aria-hidden="true">{[4,7,11,18,25,34,23,39,49,32,24,36,23,17,10,7,4].map((height, i) => <i key={i} style={{ height, animationDelay: `${i * -0.13}s` }} />)}</div>
+            <p className="rc-voice-visual-status" role="status">{status === "connecting" ? "Connecting…" : status === "active" ? muted ? "Microphone muted" : "Microphone on" : status === "ended" ? "Conversation ended" : "A little hello. A lot of possibility."}</p>
           </div>
-          <p className="rc-voice-note">Turn your volume up and allow your microphone when asked. No signup or phone number. Fictional appointments only.</p>
-          {available === false && <p className="rc-voice-note">We’re connecting the live experience. The conversation will be available here once connected.</p>}
-          {caption && <p className="rc-voice-caption">{caption}</p>}
-          {status === "ended" && available && !error && <p role="status">Conversation ended. No appointment was created.</p>}
-        </section>
-        {error && <p role="alert">{error}</p>}
-        <div className="rc-voice-prompts"><span className="rc-benefit-eyebrow">Not sure where to start?</span><p>“Do you have anything Thursday?”</p><p>“Actually, could we try a different time?”</p><p>“What happens if I need to speak to someone?”</p></div>
-        <div className="rc-voice-choice-note"><strong>Your business. Your voice.</strong><p>This demo introduces one AI receptionist. Explore available voice options during setup to find the right fit for your business.</p></div>
-        <p className="rc-voice-note">This is a live AI conversation, with responses generated as you speak. It demonstrates fictional bookings only. Your audio is processed by our voice provider; please use fictional details.</p>
+          <section className="rc-voice-conversation" aria-label="Live conversation">
+            <p className="rc-voice-eyebrow rc-voice-live-label"><i data-live={status === "active"} aria-hidden="true" />{status === "active" ? "Live conversation" : status === "ended" ? "Your conversation" : "Try a live conversation"}</p>
+            <div className="rc-voice-captions" aria-label="Live captions" tabIndex={0}>
+              {!captions.user && !captions.agent ? <div className="rc-voice-empty"><h3>{status === "connecting" ? "Getting ready to listen." : status === "active" ? "You’re connected." : "What would you like to ask?"}</h3><p>{status === "active" ? "Your live conversation will appear here." : "Try booking an appointment, or ask how it could help your business."}</p></div> : <>
+                {captions.user && <div className="rc-voice-message rc-voice-message--user"><span>You</span><p>{captions.user}</p></div>}
+                {captions.agent && <div className="rc-voice-message rc-voice-message--agent"><img src="/marketing/receptionist-mascot.png" width={38} height={38} alt="" /><div><span>AI receptionist</span><p>{captions.agent}</p></div></div>}
+              </>}
+            </div>
+            <div className="rc-voice-dock">
+              {busy ? <>
+                <button className="rc-voice-mute" disabled={status !== "active"} onClick={() => { session.current?.mute(!muted); setMuted(!muted); }} aria-pressed={muted}><VoiceIcon kind={muted ? "muted" : "mic"} /><span>{muted ? "Unmute" : "Mute"}</span></button>
+                <span className="rc-voice-timer" aria-label="Time remaining">{String(Math.floor(seconds / 60)).padStart(2, "0")}:{String(seconds % 60).padStart(2, "0")}</span>
+                <button className="rc-voice-primary rc-voice-end" onClick={stop}><VoiceIcon kind="end" /><span>End call</span></button>
+              </> : <button className="rc-voice-primary rc-voice-start" disabled={!available} onClick={start}><VoiceIcon kind="mic" /><span>{available === null ? "Checking connection…" : available ? status === "ended" ? "Talk again" : "Let’s talk" : "Currently unavailable"}</span></button>}
+            </div>
+            {error ? <p className="rc-voice-help" role="alert">{error}</p> : <p className="rc-voice-help">{available === false ? "The live connection is unavailable. Please try again later." : busy ? "AI responds live. No real appointment is made." : status === "ended" ? "No real appointment was made. Ready for another hello?" : "Turn up your volume · Allow your microphone"}</p>}
+          </section>
+        </div>
+        <footer className="rc-voice-footer"><p>90-second live demo · No signup<span> · Practice bookings only</span></p><small>Audio is processed by our voice provider. Please use fictional details.</small></footer>
       </div>
     </dialog>
   </>;

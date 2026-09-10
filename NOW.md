@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — callback scroll fix (10 September 2026)
+
+- Removed section 7’s three-screen pin and scroll-driven fade; callback form now flows directly into section 8.
+- Preserved the form and added normal responsive vertical spacing.
+- Typecheck passed; browser confirmed static positioning and zero inter-section gap.
+- Local commit only; prior public-push approval block remains.
+
 ## Current handoff — industry ending and callback concepts (10 September 2026)
 
 - Added an And many more end card linking to the callback section. Removed the intentionally empty rc-silence full-screen section after the gallery.

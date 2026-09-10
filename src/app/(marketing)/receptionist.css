@@ -810,3 +810,5 @@
 .rc-industry[data-more="true"] h3 { font-size: clamp(38px, 4vw, 60px); }
 .rc-industry[data-more="true"] small { color: #526b60; }
 .rc-industry[data-more="true"] a { display: inline-block; border-bottom: 1px solid; margin-top: 28px; font-size: 16px; }
+
+.rc-callback .rc-plate { min-height: 80svh; padding-block: clamp(64px, 8vw, 120px); }

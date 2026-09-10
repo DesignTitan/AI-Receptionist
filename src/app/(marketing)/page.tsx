@@ -171,9 +171,9 @@ export default function HomePage() {
 
 
         {/* 06 · Hear it yourself. The peak, and the signature move. */}
-        <section id="hear" data-sc-act="pin" data-sc-span="3">
-          <div data-sc-stage className="rc-plate">
-            <div data-sc-cue="0 0.97 0" style={{ width: "min(44rem, 100%)" }}>
+        <section id="hear" data-sc-act="flow" className="rc-callback">
+          <div className="rc-plate">
+            <div style={{ width: "min(44rem, 100%)" }}>
               <div className="rc-plate__head sc-stack">
                 <h2 className="sc-display sc-display--lg">{simulated ? "Ask for a call." : "Hear it yourself."}</h2>
                 <p className="sc-lede">{simulated ? "Leave your name and number. A person calls you back." : "Type your name and number. It calls you, now."}</p>

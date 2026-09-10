@@ -16,7 +16,7 @@ const FEATURES: Feature[] = [
     tab: "Your booking page",
     screen: "/scrollcraft/06-book-p.webp",
     alt: "Illustrative booking interface: a client picks a day and a time with a team member.",
-    caption: "Your team, your hours, your colours. We prepare and test the booking page with you. Illustrative interface.",
+    caption: "Your logo, your team, your hours. We prepare and test the booking page with you. Illustrative interface.",
   },
   {
     key: "after",
@@ -67,13 +67,13 @@ export function ScrollingFeatures() {
         <div>
           <p className="rc-chip"><span aria-hidden />Core features</p>
           <h2 className="sc-display sc-display--md">
-            One desk to run
-            <span> every booking you take.</span>
+            Your bookings. Your calls.
+            <span> All together.</span>
           </h2>
         </div>
         <p className="rc-cf__lede">
-          The booking page, the optional confirmation call, the record of it and the ones that need a person.
-          Four parts of the same desk, so you stop stitching tools together and get on with the work.
+          Give customers a place to book, let AI make the confirmation calls, and see who needs a follow-up.
+          Less time on the phone. More time for your business.
         </p>
       </div>
 

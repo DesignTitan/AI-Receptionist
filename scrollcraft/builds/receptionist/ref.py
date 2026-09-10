@@ -10,11 +10,25 @@ def bars(n=64):
 ORB = lambda a,b,c,d: (f'<span class="orb"><i style="background:{a}"></i><i style="background:{b}"></i>'
                        f'<i style="background:{c}"></i><i style="background:{d}"></i></span>')
 
+
+# Match the logos in ProductLogo and the salon vertical's Logo component.
+PRODUCT_MARK = '<span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M7.2 8.4h2.4l1.1 2.8-1.6 1.1a10 10 0 0 0 4 4l1.1-1.6 2.8 1.1v2.4a1.6 1.6 0 0 1-1.8 1.6A13.6 13.6 0 0 1 5.6 10.2 1.6 1.6 0 0 1 7.2 8.4Z"/><path d="M15.5 3.6a6 6 0 0 1 4.9 4.9M15 7.1a2.6 2.6 0 0 1 1.9 1.9"/></svg></span>'
+SALON_MARK = '<span class="brand-mark salon-mark"><svg viewBox="0 0 24 24"><path d="M12 3.5 13.7 9l5.5 1.7-5.5 1.7L12 18l-1.7-5.6L4.8 10.7 10.3 9 12 3.5Z"/><path d="M18.6 16.4 19.3 18.4l2 .7-2 .7-.7 2-.7-2-2-.7 2-.7.7-2Z"/></svg></span>'
+
 BASE = """<!doctype html><html><head><meta charset="utf-8">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
 <style>
+  @font-face { font-family: "Open Runde"; src: url("../../../public/fonts/open-runde/OpenRunde-Regular.woff2"); font-weight: 400; }
+  @font-face { font-family: "Open Runde"; src: url("../../../public/fonts/open-runde/OpenRunde-Medium.woff2"); font-weight: 500; }
+  @font-face { font-family: "Open Runde"; src: url("../../../public/fonts/open-runde/OpenRunde-Semibold.woff2"); font-weight: 600; }
+  @font-face { font-family: "Apfel Grotezk"; src: url("../../../public/fonts/apfel-grotezk/ApfelGrotezk-Mittel.woff2"); font-weight: 500; }
+  .brand-mark { width:46px; height:46px; display:grid; place-items:center; flex:none; border-radius:12px; background:#1e3a34; color:#c3e6d6; box-shadow:inset 0 0 0 1px #ffffff20; }
+  .brand-mark svg { width:27px; height:27px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .salon-mark { background:#b0475c; color:#fff; }
+  h4 { font-family:"Apfel Grotezk",sans-serif; }
+
   * { box-sizing: border-box; }
-  html, body { margin:0; width:820px; height:964px; overflow:hidden; font-family:Inter,-apple-system,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  html, body { margin:0; width:820px; height:964px; overflow:hidden; font-family:"Open Runde",-apple-system,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
   .scene { position:relative; width:820px; height:964px; overflow:hidden; background:#15100e; }
   /* heavily blurred landscape, as in the reference: colour and tone, no detail */
   .photo { position:absolute; inset:-8%; background-image:url("desert.jpg"); background-size:cover; background-position:50% 62%;
@@ -158,7 +172,7 @@ MEDAL = '<svg class="medal" viewBox="0 0 24 24"><path d="M12 3v7M8.5 5.5L12 10l3
 CALL = f"""
   <div class="pad">
     <div class="head">
-      {ORB('#7c6cff','#ff9a5c','#ff5f7e','#4ad6c2')}
+      {PRODUCT_MARK}
       <div class="who"><b>Confirmation call</b><span>Nadia Feld · +1 415 555 0134</span></div>
       <div class="chip">{MONITOR}<span class="div"></span>Ringing</div>
     </div>
@@ -191,7 +205,7 @@ CALL = f"""
 RECORD = f"""
   <div class="pad">
     <div class="head">
-      {ORB('#4ad6c2','#7c6cff','#ff9a5c','#ff5f7e')}
+      {PRODUCT_MARK}
       <div class="who"><b>Call record</b><span>Nadia Feld · Halide Studio · Sep 2</span></div>
       <div class="chip">{MONITOR}<span class="div"></span>Confirmed</div>
     </div>
@@ -220,7 +234,7 @@ RECORD = f"""
 FLAG = f"""
   <div class="pad">
     <div class="head">
-      {ORB('#7c6cff','#ff9a5c','#ff5f7e','#4ad6c2')}
+      {PRODUCT_MARK}
       <div class="who"><b>Needs attention</b><span>6 flagged this week · across three businesses</span></div>
       <div class="chip">{MONITOR}<span class="div"></span>Live</div>
     </div>
@@ -256,7 +270,7 @@ STAGE = {}
 STAGE["book"] = f"""
   <div class="pad">
     <div class="head">
-      {ORB('#ff8fab','#ffd6a5','#bdb2ff','#9bf6ff')}
+      {SALON_MARK}
       <div class="who"><b>Solstice Salon &amp; Spa</b><span>Hair · Skin · Massage · book with any of our people</span></div>
       <div class="chip">{MONITOR}<span class="div"></span>Book now</div>
     </div>
@@ -276,7 +290,7 @@ STAGE["book"] = f"""
     </div>
     <div class="bk">
       <h4>Book an appointment</h4>
-      <p class="note">All times shown in America/New York. After booking, the receptionist calls you within a minute to confirm.</p>
+      <p class="note">All times shown in America/New York. Confirmation calls are available when calling is enabled and minutes are available.</p>
       <div class="pills" style="margin-top:16px"><span class="pill on">Choose a time</span><span class="pill">Your details</span><span class="pill">Confirm</span></div>
       <div class="sect">
         <div class="lbl">Pick a day</div>
@@ -302,8 +316,8 @@ STAGE["book"] = f"""
       <div class="sect">
         <div class="lbl">What happens next</div>
         <div class="next">
-          <div><b>1</b><span>The receptionist calls you inside a minute to confirm.</span></div>
-          <div><b>2</b><span>Confirm, move it or cancel — on the phone, in one go.</span></div>
+          <div><b>1</b><span>Your AI receptionist calls to confirm the appointment.</span></div>
+          <div><b>2</b><span>Confirm or cancel by phone. Requests for a new time go to the salon.</span></div>
           <div><b>3</b><span>The salon sees the call, the transcript and the outcome.</span></div>
         </div>
       </div>
@@ -315,7 +329,7 @@ STAGE["book"] = f"""
 STAGE["after"] = f"""
   <div class="pad">
     <div class="head">
-      {ORB('#7c6cff','#4ad6c2','#8ab4ff','#c2c6ff')}
+      {PRODUCT_MARK}
       <div class="who"><b>Taken while you were closed</b><span>11 of last week&rsquo;s 38 bookings came in after hours</span></div>
       <div class="chip">{MONITOR}<span class="div"></span>Open 24/7</div>
     </div>
@@ -332,7 +346,7 @@ STAGE["after"] = f"""
 STAGE["noshow"] = f"""
   <div class="pad">
     <div class="head">
-      {ORB('#6ee7a0','#4ad6c2','#8ab4ff','#c2ffd6')}
+      {PRODUCT_MARK}
       <div class="who"><b>Fewer empty chairs</b><span>Confirmed on the phone, not by a text nobody opens</span></div>
       <div class="chip">{MONITOR}<span class="div"></span>September</div>
     </div>
@@ -349,7 +363,7 @@ STAGE["noshow"] = f"""
 STAGE["voice"] = f"""
   <div class="pad">
     <div class="head">
-      {ORB('#ff9a5c','#ff5f7e','#7c6cff','#ffd6a5')}
+      {PRODUCT_MARK}
       <div class="who"><b>She sounds like your business</b><span>Your words, your rules, your number on their screen</span></div>
       <div class="chip">{MONITOR}<span class="div"></span>3 businesses</div>
     </div>

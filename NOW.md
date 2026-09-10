@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — darker core features and preview logos (10 September 2026)
+
+- Bubs confirmed #turn is reserved for the video being produced in the other task; the static confirmation concept is not replacing it.
+- Kept the core-feature tabs and parallax layout, deepened the shared charcoal ground while preserving grain, and applied Apfel Grotezk/Open Runde with white/mint heading “Your bookings. Your calls. All together.”
+- Rebuilt all ten active feature/proof illustration layers with existing site logos: Solstice’s sparkle on the booking page, AI Receptionist’s phone mark on owner views. Updated preview fonts and removed the booking preview’s fixed call-time/automatic-rescheduling wording. Rebuild with node scripts/render-marketing-previews.mjs.
+- Verified all four tabs, keyboard navigation and image loading at 320/390/1440px without overflow; typecheck and production build/dev-tool exclusion passed.
+- Next: review #features, then continue the following website sections. Video artwork remains in progress in the other task. Local commit only; the earlier automatic review block on public GitHub publishing remains unresolved.
+
 ## Current handoff — individual scene artwork (10 September 2026)
 
 - Built twelve individual 2560×1440 scene exports in docs/design/busy-life/final-scenes, with a one-at-a-time HTML viewer, full script and overview. No video or live-site changes.

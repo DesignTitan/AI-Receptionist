@@ -356,10 +356,10 @@
 /* ── core features: on the page's own paper ground. Real tabs; the screen
    below swaps on click. ── */
 /* less air under the caption: the proof chapter opens with its own space */
-.rc-features { padding: clamp(4rem, 12vh, 9rem) 0 clamp(1.5rem, 4vh, 3rem); }
+.rc-features { font-family: "Open Runde", sans-serif; padding: clamp(4rem, 12vh, 9rem) 0 clamp(1.5rem, 4vh, 3rem); }
 .rc-cf__head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
-.rc-cf__head h2 { margin: 0; }
-.rc-cf__head h2 span { color: color-mix(in oklab, var(--sc-ink) 38%, transparent); }
+.rc-cf__head h2 { margin: 0; font-family: "Apfel Grotezk", sans-serif; font-size: clamp(2.5rem, 4.2vw, 4.5rem); line-height: 1.03; text-wrap: balance; }
+.rc-cf__head h2 span { color: #c3e6d6; }
 .rc-chip { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 var(--sc-4); padding: 6px 14px; border-radius: 12px;
   background: var(--sc-surface); border: 1px solid var(--sc-hairline); font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
 .rc-chip span { width: 6px; height: 6px; border-radius: 50%; background: var(--sc-accent); }
@@ -401,6 +401,9 @@
       across the seam between them and the ink flips for both ── */
 .rc .rc-textured { overflow: visible; }
 .rc .textured-section {
+  --tx-base: #0c100f;
+  --tx-brightness: 0.28;
+  --tx-image-op: 0.38;
   --sc-canvas: var(--tx-base);
   --sc-surface: #1e3a34;
   --sc-ink: #ffffff;

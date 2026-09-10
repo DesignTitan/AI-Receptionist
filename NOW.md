@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — industries image examples (10 September 2026)
+
+- Created three visual section mockups in docs/design/industries: white, mint and deep-forest horizontal galleries with people working in salons, pet grooming and photography.
+- These are generated design examples for review, not final photographic assets. Website remains unchanged.
+- Next: Bubs selects or adjusts a direction before implementation; #turn remains reserved for the other task’s video.
+- Saved locally; earlier automatic review block on public GitHub publishing remains unresolved.
+
 ## Current handoff — restore approved characters (10 September 2026)
 
 - Bubs rejected the recast people in final-scenes; restored the supplied original brunette groomer and lakeside partner as character references using Higgsfield Seedream 4.5.

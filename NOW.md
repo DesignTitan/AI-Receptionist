@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — pricing comparison implemented (10 September 2026)
+
+- Replaced homepage #terms pricing cards with the selected comparison-table layout: white/forest, mint Busy desk column, shared features and separate setup/overage details.
+- Prices, minutes, team limits, features and setup totals come directly from pricing.ts; billing unchanged. Used actual $199/$399/$749 plans, not erroneous reference-image values.
+- Typecheck passed; visually checked desktop, validated all three plan links and mobile horizontal table scrolling without page overflow.
+- Local commit only; previous public-push approval block remains.
+
 ## Current handoff — minimal pricing concepts (10 September 2026)
 
 - Created two pricing images using real pricing.ts content: A editorial columns, B comparison table. Saved in docs/design/pricing-concepts.

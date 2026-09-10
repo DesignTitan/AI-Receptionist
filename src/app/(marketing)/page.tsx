@@ -3,7 +3,7 @@ import { IndustryGallery } from "@/components/marketing/industry-gallery";
 import { VoiceDemoTrigger } from "@/components/marketing/voice-example";
 import { BusySection } from "@/components/marketing/busy-section";
 import { OverviewBenefits } from "@/components/marketing/overview-benefits";
-import { PLANS as PRICING, planFeatures, PILOT_SETUP_CENTS, SETUP_CENTS, SETUP_OFFER, SETUP_SCOPE, type Plan } from "@/lib/platform/pricing";
+import { PricingComparison } from "@/components/marketing/pricing-comparison";
 import type { Metadata } from "next";
 import { Folio } from "@/components/marketing/folio";
 import { PRODUCT_NAME } from "@/components/marketing/product-chrome";
@@ -34,10 +34,6 @@ const CHAPTERS = [
   { id: "terms", n: "08", title: "Terms" },
   { id: "colophon", n: "09", title: "Colophon" },
 ];
-
-const PLANS = (Object.entries(PRICING) as [Plan,typeof PRICING[Plan]][]).map(([id,p])=>({
- name:p.name,price:`$${p.monthly}`,calls:`${p.minutes.toLocaleString()} minutes a month · estimated ${p.estimatedCalls} two-minute calls`,firstPilot:p.monthly+PILOT_SETUP_CENTS/100,firstStandard:p.monthly+SETUP_CENTS/100,who:p.who,cta:'Start here',featured:id==='busy',has:planFeatures(id)
-}));
 
 export default function HomePage() {
   // Live only with a voice line AND the human check; otherwise the plate takes a callback request.
@@ -184,48 +180,7 @@ export default function HomePage() {
         </section>
 
         {/* 07 · Terms. Compressed: information, not experience. */}
-        <section id="terms" className="rc-chapter" data-sc-act="flow">
-          <div className="sc-wrap">
-            <div className="sc-stack" data-sc-in data-sc-stagger="60">
-              <h2 className="sc-display sc-display--lg">How it works, and what it costs.</h2>
-              <ol className="rc-steps">
-                <li><span><strong>Your team, your hours, your page.</strong>We prepare the booking page in your name and colours, then test the setup with you before activation.</span></li>
-                <li><span><strong>They book, it calls.</strong>Bookings queue a confirmation call while your allowance and spending limit permit. Cancellation and reschedule requests are flagged for your team.</span></li>
-                <li><span><strong>You see everything.</strong>Review outcomes and available recordings, transcripts and summaries in your dashboard. A no-answer is flagged for a person.</span></li>
-              </ol>
-              <div className="rc-plans">
-                {PLANS.map((plan, index) => (
-                  <article key={plan.name} className={plan.featured ? "rc-plan rc-plan--on" : "rc-plan"}>
-                    {plan.featured && <p className="rc-plan__flag">More room to grow</p>}
-                    <p className="rc-plan__name">{plan.name}</p>
-                    <p className="rc-plan__price"><b>{plan.price}</b><span>/month</span></p>
-                    <p className="rc-plan__calls">{plan.calls}</p>
-                    <p className="rc-plan__who">{plan.who}</p>
-                    <p className="rc-plan__who">First month + setup: <b>${plan.firstPilot.toLocaleString()}</b> if pilot pricing is available; <b>${plan.firstStandard.toLocaleString()}</b> standard. Before tax.</p>
-                    <a className="rc-plan__cta" href={`/start?plan=${["front", "busy", "full"][index]}`}>{plan.cta}</a>
-                    <ul className="rc-plan__list">
-                      {plan.has.map((line) => (
-                        <li key={line}>
-                          <svg viewBox="0 0 20 20" aria-hidden><path d="M5 10.5l3.2 3.2L15 7" /></svg>
-                          {line}
-                        </li>
-                      ))}
-                    </ul>
-                  </article>
-                ))}
-              </div>
-              <p className="rc-plans__note">
-                <b>{SETUP_OFFER}</b> Setup is paid once. {SETUP_SCOPE}
-              </p>
-              <p className="rc-plans__note">
-                Call counts are estimates; your allowance is measured in minutes, rounded up separately for each call. Extra minutes are 49 cents each, only within a spending limit you choose. Extra spending starts at $0. Setup does not repeat on renewal. Unused minutes expire at renewal. Each plan includes one business location; calendar sync and multiple locations are not included. Month to month — leave whenever you like.
-              </p>
-              <p className="sc-body" style={{ marginTop: "var(--sc-6)" }}>
-                Calendar and booking-software connections are on the roadmap. <a href="/features#coming-soon">Vote for what you need next.</a>
-              </p>
-            </div>
-          </div>
-        </section>
+        <PricingComparison />
 
         {/* 08 · Colophon. The last act holds. */}
         <section id="colophon" data-sc-act="pin" data-sc-span="1.15">

@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — reference-based storyboard and script (10 September 2026)
+
+- Created six-frame storyboard through Higgsfield using the original four-frame image as an uploaded reference. Saved storyboard-v2.png, exact prompt and full 30-second script in docs/design/busy-life.
+- Sequence establishes busy hands, ringing phone and glance, AI answering, conversation, booking result, then lakeside time off. Mascot direction is open-eyed with restrained glass overlays.
+- The earlier 12-second video was rejected for visual drift. Next: review this storyboard before rendering reference-driven Seedance 2.5 footage. Site unchanged; local commit only because prior public-push review remains unresolved.
+
 ## Current handoff — Higgsfield motion revision (10 September 2026)
 
 - Bubs requested less artificial footage, an open-eyed talking mascot and restrained liquid-glass overlays with clean typography.

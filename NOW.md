@@ -1,5 +1,11 @@
 # NOW
 
+## Current handoff — larger film corners (10 September 2026)
+
+- Doubled the film’s top corner radius from 24px to 48px.
+- Bottom corners remain square, with no side padding.
+- Verified the targeted CSS change; unrelated work preserved. Local commit only; earlier public-push approval block remains.
+
 ## Current handoff — industry gallery built (10 September 2026)
 
 - Built the approved white #industries gallery with eleven categories: doctors, dental, healthcare, fitness, personal care, retail, pet services, creative studios, home/auto services, professional services and lessons/coaching.

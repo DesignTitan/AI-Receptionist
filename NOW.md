@@ -3,6 +3,13 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — busy section and voice modal in progress (10 September 2026)
+
+- Built the approved white #cost story: “You can’t be in two conversations at once,” new standalone conversation photograph, online booking preview, mascot and incoming-call pilot option.
+- Added a native accessible voice-example dialog with volume guidance, audio controls, transcript support, errors, Escape/backdrop closing and focus restoration. Audio pauses/reset on close; no autoplay. Until a real demo asset is connected it honestly shows “preview is being prepared.”
+- Bubs authorized a new clearly labeled scripted AI voice demo. Existing sample-call.wav is synthetic test tones, unsuitable for marketing. Magnific generation is unavailable on the account tier; Higgsfield voice selection is the next step before generating and wiring audio.
+- Layout/keyboard checks and production build are being verified. Next: complete audio generation, connect transcript and test playback. No deployment; local work only, public publishing remains pending prior approval.
+
 ## Current handoff — Booked accent detail (10 September 2026)
 
 - Added the three mint excitement lines beside the inline Booked badge to match the approved mockup, with reserved spacing before the following text.

@@ -1,3 +1,4 @@
+import { BusySection } from "@/components/marketing/busy-section";
 import { OverviewBenefits } from "@/components/marketing/overview-benefits";
 import { PLANS as PRICING, planFeatures, PILOT_SETUP_CENTS, SETUP_CENTS, SETUP_OFFER, SETUP_SCOPE, type Plan } from "@/lib/platform/pricing";
 import type { Metadata } from "next";
@@ -85,26 +86,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 02 · The cost. A hard cut to ink. No numbers: none are verified. */}
-        <section id="cost" className="rc-chapter rc-dark" data-sc-act="flow">
-          <div className="sc-wrap rc-plates">
-            <div className="sc-stack" data-sc-in data-sc-stagger="60">
-              <h2 className="sc-display sc-display--lg">A missed call can be a missed appointment.</h2>
-              <p className="sc-lede">
-                Hands were busy. The room was full. It was seven in the evening. They did not leave a
-                message. They booked the next place on the list.
-              </p>
-              <p className="sc-body">
-                Your online booking page gives customers another way to make an appointment. Incoming AI
-                phone booking is also being prepared for pilot businesses, after a tested phone connection.
-              </p>
-            </div>
-            <figure className="rc-media" data-sc-parallax="-0.7">
-              <img src="/scrollcraft/02-missed-call.jpg" width={1440} height={300} alt="A dashboard row reading No answer, flagged for a person to follow up." />
-              <figcaption>How a missed call looks on the dashboard: flagged, so a person follows up.</figcaption>
-            </figure>
-          </div>
-        </section>
+        <BusySection />
 
         {/* 03 · The turn. The one film chapter: the real confirmation page walking to confirmed. */}
         <div id="how-it-works" aria-hidden="true" />

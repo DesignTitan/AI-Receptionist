@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — compact player and dark-section finish (10 September 2026)
+
+- Replaced full-width native controls with a centered 600px glass bar: pause/play, time, seek, mute, captions and fullscreen. Mobile fits within 16px side margins.
+- Rounded the dark feature/proof block’s bottom corners to 48px to match the film top; clip-path preserves sticky scrolling.
+- Typecheck passed; browser verified pause, seeking, mute, captions, desktop/mobile control widths and corner radius.
+- Local commit only; previous public-push approval block remains.
+
 ## Current handoff — larger film corners (10 September 2026)
 
 - Doubled the film’s top corner radius from 24px to 48px.

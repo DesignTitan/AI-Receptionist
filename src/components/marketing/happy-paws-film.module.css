@@ -29,3 +29,13 @@
 @media (prefers-reduced-motion: reduce) { .prompt { transition: none; } }
 
 .play[data-following="true"] .prompt { left: var(--play-x); top: var(--play-y); right: auto; bottom: auto; transform: translate(-50%, -50%); }
+
+.controls { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; width: min(600px, calc(100% - 32px)); box-sizing: border-box; padding: 6px 10px; border-radius: 999px; background: rgba(11,24,21,.7); border: 1px solid #ffffff30; backdrop-filter: blur(20px); color: white; box-shadow: 0 8px 28px #0003; }
+.controls button { display: grid; place-items: center; flex-shrink: 0; width: 36px; height: 36px; padding: 7px; border: 0; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; font-size: 11px; font-weight: 600; }
+.controls button:hover, .controls button[aria-pressed="true"] { background: #ffffff25; }
+.controls svg { width: 18px; height: 18px; fill: currentColor; }
+.controls :focus-visible { outline: 2px solid #c3e6d6; outline-offset: 2px; }
+.time { font-size: 11px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.scrubber { flex: 1; min-width: 30px; width: 100%; height: 24px; accent-color: #c3e6d6; cursor: pointer; }
+.section:fullscreen { max-height: none; height: 100%; border-radius: 0; }
+@media (max-width: 640px) { .controls { bottom: 16px; gap: 3px; padding: 5px 6px; } .controls button { width: 32px; height: 36px; } .time { font-size: 10px; } }

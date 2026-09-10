@@ -1,5 +1,12 @@
 # NOW
 
+## In progress — Happy Paws video (10 September 2026)
+
+- Bubs approved the storyboard and mischievous Milo; authorized moving video with talking mascot, narration and back-and-forth booking dialogue.
+- Submitted Seedance 2.5 clips via Higgsfield; 70-second script now puts the AI greeting before the caller reveal. Prompts and job IDs in docs/design/busy-life/video-v1/generations.json.
+- Bubs supplied mascot examples: fuzzy open-eyed bubble outside a compact glass speech bubble. Revised greeting and confirmation jobs submitted; revised availability shot hit provider rate limit and awaits a slot.
+- Next: finish generations, inspect spoken dialogue and animated mascot, assemble and review MP4. No website deployment. Prior public-push block remains.
+
 ## Current handoff — industry mascot conversations (10 September 2026)
 
 - Bubs selected the white industries gallery and wants the mascot to demonstrate customer conversations specific to each industry as cards scroll into focus.

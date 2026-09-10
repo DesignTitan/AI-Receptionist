@@ -1,0 +1,354 @@
+{
+  "requests": [
+    {
+      "index": 1,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "resolution": "1080p",
+        "bitrate_mode": "high",
+        "duration": 10,
+        "aspect_ratio": "16:9",
+        "generate_audio": true,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "6c242af1-e828-487d-898f-e33159b81790"
+          },
+          {
+            "role": "image",
+            "value": "e38e4aa9-5098-4ce6-bf32-c9e1f25951b9"
+          }
+        ],
+        "prompt": "Premium natural live-action commercial for AI Receptionist. Preserve EXACT people, dog, wardrobe and environment from image references, no recasting. Real subtle movements and skin texture. Clean restrained cinematography, no split screens. Spoken dialogue is natural conversational American English, clearly intelligible, no music, no extra words. Opening sequence. First6seconds woman washing smiling Samoyed, BOTH soapy hands busy. Gentle water sounds. Close up on adorable dog's face, then hands. At second4 warm female narrator, calm mature low-mid register says: 'It always rings when your hands are full.' At second7 phone rings softly. End with woman still washing, hears it but cannot pick up. No mascot yet. No writing."
+      }
+    },
+    {
+      "index": 2,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "resolution": "1080p",
+        "bitrate_mode": "high",
+        "duration": 10,
+        "aspect_ratio": "16:9",
+        "generate_audio": true,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "3348ebb2-96bc-4351-b641-684a0df326de"
+          },
+          {
+            "role": "image",
+            "value": "bd96f16d-c1bd-4785-be5f-ad02cbd7ec83"
+          }
+        ],
+        "prompt": "Premium natural live-action commercial for AI Receptionist. Preserve EXACT people, dog, wardrobe and environment from image references, no recasting. Real subtle movements and skin texture. Clean restrained cinematography, no split screens. Spoken dialogue is natural conversational American English, clearly intelligible, no music, no extra words. Continue same groomer BOTH soapy hands on Samoyed, glances toward phone on counter. Phone rings first1.5seconds. At second2 a tiny incoming-call icon expands into glass card and fuzzy mascot pops up. Ring stops. Mascot smiles and says in warm clear friendly female receptionist voice, medium register light upbeat American tone: 'Hi, Happy Paws Grooming. How can I help?' Mascot mouth moves on those words. Groomer is SILENT and keeps washing. No narration. Hold listening pose for last2seconds. The second reference is the mascot: preserve its fuzzy mint-green rounded chat-bubble body, dark OPEN eyes and smiling mouth. Animate it as a friendly listening/talking character in a small translucent liquid-glass floating call card on the RIGHT, never covering the human or dog's face. It pops into view with a gentle spring, has subtle breathing and head tilts, visibly mouth-syncs precisely to its own dialogue, mouth rests while listening. No new robot. Minimal graphic label 'AI Receptionist'."
+      }
+    },
+    {
+      "index": 3,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "resolution": "1080p",
+        "bitrate_mode": "high",
+        "duration": 10,
+        "aspect_ratio": "16:9",
+        "generate_audio": true,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "19bd5a33-b434-4a39-95e6-4ac0df061b6f"
+          },
+          {
+            "role": "image",
+            "value": "6fd56e0c-a1e7-478f-8130-d61ab4d171fb"
+          }
+        ],
+        "prompt": "Premium natural live-action commercial for AI Receptionist. Preserve EXACT people, dog, wardrobe and environment from image references, no recasting. Real subtle movements and skin texture. Clean restrained cinematography, no split screens. Spoken dialogue is natural conversational American English, clearly intelligible, no music, no extra words. Cut to caller at home in cream sweater, same cheeky Yorkshire terrier with impossibly crazy fine flyaway hair and little tongue. Dog playfully tugs blanket with paw, looks up; keep hair wild, no breed change. Woman on phone smiles at naughty dog, then speaks naturally, lip synchronized, her voice friendly female American slightly lower huskier than receptionist: 'Could I book Milo for his usual groom on Thursday? After lunch would be ideal.' Brief playful dog reaction before she speaks. No mascot here, no narrator, no text."
+      }
+    },
+    {
+      "index": 4,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "resolution": "1080p",
+        "bitrate_mode": "high",
+        "duration": 9,
+        "aspect_ratio": "16:9",
+        "generate_audio": true,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "5ac5209f-db29-4d5d-81c6-2c4b4b0471e2"
+          },
+          {
+            "role": "image",
+            "value": "bd96f16d-c1bd-4785-be5f-ad02cbd7ec83"
+          }
+        ],
+        "prompt": "Premium natural live-action commercial for AI Receptionist. Preserve EXACT people, dog, wardrobe and environment from image references, no recasting. Real subtle movements and skin texture. Clean restrained cinematography, no split screens. Spoken dialogue is natural conversational American English, clearly intelligible, no music, no extra words. Back to same woman washing Samoyed, hands remain busy, she stays silent. Mascot in right glass call card speaks in warm clear friendly female receptionist voice, medium register light upbeat American tone: 'There’s a two o’clock appointment available on Thursday. Would you like that one?' Natural pacing. Mascot clearly mouth-synced. Tiny pill below says 'Thursday · 2 PM'. No narration. The second reference is the mascot: preserve its fuzzy mint-green rounded chat-bubble body, dark OPEN eyes and smiling mouth. Animate it as a friendly listening/talking character in a small translucent liquid-glass floating call card on the RIGHT, never covering the human or dog's face. It pops into view with a gentle spring, has subtle breathing and head tilts, visibly mouth-syncs precisely to its own dialogue, mouth rests while listening. No new robot. Minimal graphic label 'AI Receptionist'."
+      }
+    },
+    {
+      "index": 5,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "resolution": "1080p",
+        "bitrate_mode": "high",
+        "duration": 5,
+        "aspect_ratio": "16:9",
+        "generate_audio": true,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "c53c1f78-a4b0-4528-9e31-bfd73a99cce3"
+          }
+        ],
+        "prompt": "Premium natural live-action commercial for AI Receptionist. Preserve EXACT people, dog, wardrobe and environment from image references, no recasting. Real subtle movements and skin texture. Clean restrained cinematography, no split screens. Spoken dialogue is natural conversational American English, clearly intelligible, no music, no extra words. Same caller in cream sweater, phone at right ear. Natural subtle smile, nods and says, lips synchronized in friendly female American slightly lower husky voice: 'Two is perfect. Thank you.' No extra speech, no narrator, no text. Dog remains out of frame."
+      }
+    },
+    {
+      "index": 6,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "resolution": "1080p",
+        "bitrate_mode": "high",
+        "duration": 9,
+        "aspect_ratio": "16:9",
+        "generate_audio": true,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "c9e0373e-d7af-4c1e-8e9a-c10f2c53af1f"
+          },
+          {
+            "role": "image",
+            "value": "bd96f16d-c1bd-4785-be5f-ad02cbd7ec83"
+          }
+        ],
+        "prompt": "Premium natural live-action commercial for AI Receptionist. Preserve EXACT people, dog, wardrobe and environment from image references, no recasting. Real subtle movements and skin texture. Clean restrained cinematography, no split screens. Spoken dialogue is natural conversational American English, clearly intelligible, no music, no extra words. Same groomer now towel drying same Samoyed. Friendly fuzzy mascot in glass call card right says, warm clear friendly female receptionist medium register light upbeat American voice: 'You’re all set. Milo is booked for Thursday at two. See you then.' Clearly mouth synchronized. At end card shows a simple animated checkmark and 'Milo booked'. Mascot gives tiny satisfied bounce then settles. Groomer stays silent, smiling at dog. The second reference is the mascot: preserve its fuzzy mint-green rounded chat-bubble body, dark OPEN eyes and smiling mouth. Animate it as a friendly listening/talking character in a small translucent liquid-glass floating call card on the RIGHT, never covering the human or dog's face. It pops into view with a gentle spring, has subtle breathing and head tilts, visibly mouth-syncs precisely to its own dialogue, mouth rests while listening. No new robot. Minimal graphic label 'AI Receptionist'."
+      }
+    },
+    {
+      "index": 7,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "resolution": "1080p",
+        "bitrate_mode": "high",
+        "duration": 17,
+        "aspect_ratio": "16:9",
+        "generate_audio": true,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "823e8930-cda5-4e11-abc8-c5810799ae0e"
+          },
+          {
+            "role": "image",
+            "value": "bfa4a66c-fa01-496c-a470-33f3ce7e3533"
+          },
+          {
+            "role": "image",
+            "value": "e685c4de-3232-4c78-9650-305e80ff16cd"
+          }
+        ],
+        "prompt": "Premium natural live-action commercial for AI Receptionist. Preserve EXACT people, dog, wardrobe and environment from image references, no recasting. Real subtle movements and skin texture. Clean restrained cinematography, no split screens. Spoken dialogue is natural conversational American English, clearly intelligible, no music, no extra words. Closing3shot sequence, reference1 is firstshot groomer finishes folding green apron, ref2 is her putting on backpack and walking out, ref3 is same woman and male partner and Samoyed walking by lake. 0–5sec folds apron. 5–9sec leaves shop.9–17sec lakeside walk smiling with same man and normal-sized white Samoyed. Preserve exact faces, shoes, outfits and dogs. Warm female narrator mature low-mid register calm American voice begins second1: 'The appointment’s booked. One less call to return. And time for the plans you made.' Pause, then second10: 'Be there for your customers. And for yourself. Meet your AI receptionist.' People don't speak or mouth narration. Water birds subtle. No music, no text, no mascot."
+      }
+    },
+    {
+      "index": 12,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "resolution": "1080p",
+        "bitrate_mode": "high",
+        "duration": 10,
+        "aspect_ratio": "16:9",
+        "generate_audio": true,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "3348ebb2-96bc-4351-b641-684a0df326de"
+          },
+          {
+            "role": "image",
+            "value": "3eca4151-23a6-4da0-8dcc-273aa96c32ca"
+          }
+        ],
+        "prompt": "Premium natural live-action commercial for AI Receptionist. Preserve EXACT people, dog, wardrobe and environment from image references, no recasting. Real subtle movements and skin texture. Clean restrained cinematography, no split screens. Spoken dialogue is natural conversational American English, clearly intelligible, no music, no extra words. Continue same groomer BOTH soapy hands on Samoyed, glances toward phone on counter. Phone rings first1.5seconds. At second2 a tiny incoming-call icon expands into glass card and fuzzy mascot pops up. Ring stops. Mascot smiles and says in warm clear friendly female receptionist voice, medium register light upbeat American tone: 'Hi, Happy Paws Grooming. How can I help?' Mascot mouth moves on those words. Groomer is SILENT and keeps washing. No narration. Hold listening pose for last2seconds. The SECOND reference shows EXACT desired mascot and graphic treatment: a fuzzy mint chat-bubble creature with large OPEN glossy dark eyes, happy smiling mouth, little tail lower-left. It floats OUTSIDE and to the LEFT of a compact translucent frosted-glass speech bubble. Match this silhouette, face and eyes; no enclosed avatar card. It pops up with a soft spring, speaks with visible mouth shapes precisely synchronized to the AI dialogue and subtle bobbing, blinking, then pauses listening. The glass bubble beside it has minimal readable text and small rounded time pills where relevant. Overlay occupies right third, mascot is visibly expressive, never covers groomer or dog. Do not copy the reference screenshot's background; use first image's live-action shop. No changes to human identity."
+      }
+    },
+    {
+      "index": 14,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "resolution": "1080p",
+        "bitrate_mode": "high",
+        "duration": 9,
+        "aspect_ratio": "16:9",
+        "generate_audio": true,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "5ac5209f-db29-4d5d-81c6-2c4b4b0471e2"
+          },
+          {
+            "role": "image",
+            "value": "3eca4151-23a6-4da0-8dcc-273aa96c32ca"
+          }
+        ],
+        "prompt": "Premium natural live-action commercial for AI Receptionist. Preserve EXACT people, dog, wardrobe and environment from image references, no recasting. Real subtle movements and skin texture. Clean restrained cinematography, no split screens. Spoken dialogue is natural conversational American English, clearly intelligible, no music, no extra words. Back to same woman washing Samoyed, hands remain busy, she stays silent. Mascot in right glass call card speaks in warm clear friendly female receptionist voice, medium register light upbeat American tone: 'There’s a two o’clock appointment available on Thursday. Would you like that one?' Natural pacing. Mascot clearly mouth-synced. Tiny pill below says 'Thursday · 2 PM'. No narration. The SECOND reference shows EXACT desired mascot and graphic treatment: a fuzzy mint chat-bubble creature with large OPEN glossy dark eyes, happy smiling mouth, little tail lower-left. It floats OUTSIDE and to the LEFT of a compact translucent frosted-glass speech bubble. Match this silhouette, face and eyes; no enclosed avatar card. It pops up with a soft spring, speaks with visible mouth shapes precisely synchronized to the AI dialogue and subtle bobbing, blinking, then pauses listening. The glass bubble beside it has minimal readable text and small rounded time pills where relevant. Overlay occupies right third, mascot is visibly expressive, never covers groomer or dog. Do not copy the reference screenshot's background; use first image's live-action shop. No changes to human identity."
+      }
+    },
+    {
+      "index": 16,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "resolution": "1080p",
+        "bitrate_mode": "high",
+        "duration": 9,
+        "aspect_ratio": "16:9",
+        "generate_audio": true,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "c9e0373e-d7af-4c1e-8e9a-c10f2c53af1f"
+          },
+          {
+            "role": "image",
+            "value": "3eca4151-23a6-4da0-8dcc-273aa96c32ca"
+          }
+        ],
+        "prompt": "Premium natural live-action commercial for AI Receptionist. Preserve EXACT people, dog, wardrobe and environment from image references, no recasting. Real subtle movements and skin texture. Clean restrained cinematography, no split screens. Spoken dialogue is natural conversational American English, clearly intelligible, no music, no extra words. Same groomer now towel drying same Samoyed. Friendly fuzzy mascot in glass call card right says, warm clear friendly female receptionist medium register light upbeat American voice: 'You’re all set. Milo is booked for Thursday at two. See you then.' Clearly mouth synchronized. At end card shows a simple animated checkmark and 'Milo booked'. Mascot gives tiny satisfied bounce then settles. Groomer stays silent, smiling at dog. The SECOND reference shows EXACT desired mascot and graphic treatment: a fuzzy mint chat-bubble creature with large OPEN glossy dark eyes, happy smiling mouth, little tail lower-left. It floats OUTSIDE and to the LEFT of a compact translucent frosted-glass speech bubble. Match this silhouette, face and eyes; no enclosed avatar card. It pops up with a soft spring, speaks with visible mouth shapes precisely synchronized to the AI dialogue and subtle bobbing, blinking, then pauses listening. The glass bubble beside it has minimal readable text and small rounded time pills where relevant. Overlay occupies right third, mascot is visibly expressive, never covers groomer or dog. Do not copy the reference screenshot's background; use first image's live-action shop. No changes to human identity."
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "index": 1,
+      "job_id": "12b23baf-3cd8-4d8e-bdd1-8b9c77fe3281",
+      "status": "pending",
+      "adjustments": {
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 2,
+      "job_id": "ef8371ff-b01e-4767-83ec-82f80140acc9",
+      "status": "pending",
+      "adjustments": {
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 3,
+      "job_id": "2c11a36a-f364-4372-968a-2ee91adc21a3",
+      "status": "pending",
+      "adjustments": {
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 4,
+      "job_id": "29829b0f-b12a-45dd-8e56-5f93f010d8b5",
+      "status": "pending",
+      "adjustments": {
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 5,
+      "job_id": "9404da79-42fc-41b0-b433-c379e6a8c83c",
+      "status": "pending"
+    },
+    {
+      "index": 6,
+      "job_id": "8a09b76d-cb66-4260-b4f2-4a58638f47b3",
+      "status": "pending",
+      "adjustments": {
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 7,
+      "job_id": "6009b6ce-b574-4eaf-957c-37a6e679ad94",
+      "status": "pending",
+      "adjustments": {
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        },
+        "medias[2].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 12,
+      "job_id": "dfb27eb9-fc01-45d1-b499-8c01ac5ae7b7",
+      "status": "pending",
+      "adjustments": {
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 14,
+      "status": "submission_failed",
+      "error": "seedance_2_5 backend request failed (429): rate_limit_reached",
+      "adjustments": {
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 16,
+      "job_id": "aa24816b-2ed1-4604-8e16-45b3674528af",
+      "status": "pending",
+      "adjustments": {
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      }
+    }
+  ]
+}

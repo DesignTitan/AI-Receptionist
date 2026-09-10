@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — confirmation story concept (10 September 2026)
+
+- Hero CTA is complete. Created the next section’s visual concept: “Booked online. Confirmed by AI.” with connected booking, call and outcome illustrations.
+- Saved the image and exact prompt in docs/design/confirmation. Existing #turn scroll section is unchanged pending visual approval.
+- Requests for appointment changes remain team follow-up; copy notes calling requires setup and minutes. Next: Bubs reviews the concept before implementation. Local save only.
+
 ## Current handoff — hero live-demo CTA (10 September 2026)
 
 - Replaced the hero’s “See it in action” button with “Meet your AI receptionist,” opening the approved live demo immediately.

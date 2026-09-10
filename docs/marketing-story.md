@@ -1,6 +1,6 @@
 # Marketing V2 — copy and reading flow
 
-Updated 9 September 2026. Bubs has deferred new photographs and video. The current task is to make the product story work through copy and page order, using the approved existing opening image.
+Updated 10 September 2026. The copy and page flow were built on 9 September using the approved existing opening image. Bubs has now requested the full Higgsfield still-image set; review it in the separate campaign gallery before final placement. Video remains a later step.
 
 ## Current preview
 
@@ -44,6 +44,6 @@ Updated 9 September 2026. Bubs has deferred new photographs and video. The curre
 
 Keep the existing coastal photograph, dark framing and restrained type. All other chapters use normal page flow and readable HTML; no animation or new media is required to understand the story. Native FAQ disclosures work without JavaScript. Reduced-motion preferences disable smooth anchor scrolling.
 
-Review the headline sequence, clarity of the two booking paths and setup invitation before returning to media production. The photo/video brief remains a later production reference, not the next active task.
+Continue reviewing the headline sequence, clarity of the two booking paths and setup invitation alongside the separate campaign photographs at `/__dev/design/campaign-v4`. The photo/video brief supplies their scenarios and intended product evidence. New image generation does not replace this page or the approved coastal opening.
 
 Verification: existing development-preview checks pass (four tests), local anchors and labels resolve, the original V2 archive is byte-for-byte preserved, and the existing photo loads. Desktop and 390px browser checks cover the story, FAQ and setup destination. Local owner sign-in currently displays a disabled form pending configuration, so signup completion has not been verified.

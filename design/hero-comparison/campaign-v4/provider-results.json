@@ -1,0 +1,391 @@
+{
+  "items": [
+    {
+      "id": "5df3b91d-7208-42e9-ad25-4ed231101c8c",
+      "type": "image",
+      "status": "completed",
+      "model": "cinematic_studio_2_5",
+      "params": {
+        "prompt": "Create a single exceptionally believable premium documentary advertising photograph for AI Receptionist, a service for appointment businesses. Cinema-grade natural photography, full-bleed square 1:1 composition. Refined cool daylight, restrained warm skin tones, charcoal, soft ivory, pale limestone and dark oak; carefully organized real environments and generous architectural negative space. Authentic pores, small wrinkles, flyaway hair, physically plausible hands and object contact, natural lens depth; restrained contrast, never glossy airbrushed CGI. Candid moment, nobody looking at camera. A quiet editorial luxury sensibility, expansive photographic scale and visual restraint reminiscent of premium aerospace-service campaign art direction, but no space hardware or copied brand elements. No typography, readable screens, logos, watermark, border, fake film frame, panels, collage, graphic overlays, robots, holograms, neon, floating software or ornamental waveforms. Screens, if any, must be angled away or naturally out of focus. Keep main action clear in the central/right two thirds with useful breathing room toward left; do not sacrifice credible human posture. Our fictional recurring salon owner is a woman around 40 with medium warm-olive skin, dark brown hair loosely twisted into a low bun, subtle small gold hoop earrings, an ivory linen button-up shirt with sleeves rolled neatly and charcoal tailored trousers, comfortable black flats; approachable and absorbed in her work. The salon is a believable welcoming boutique with lightly textured pale limestone walls, dark oak joinery, black metal-framed tall windows and a few black leather chairs. Modest real signs of use, no spaceship interior or grand sterile atrium. SCENE: One owner stylist beside a seated adult female client with shoulder-length auburn hair in a charcoal salon cape, carefully brushing and arranging the finished hair. Three-quarter side view at client shoulder height, honest 50mm perspective, modest working distance. Stylist's right hand holds one simple black paddle brush correctly, her left lightly supports a section of hair; no scissors, hairdryer or extra implements. Client relaxed, each clearly absorbed in the service. A single chair and workstation, mirror mostly outside frame so no complex duplicated reflections. The salon is active but quiet. Large window side light falls through the space. Do not show a phone being used: this image sells uninterrupted personal attention. Ordinary furniture scale, complete believable arms and chair base.",
+        "aspect_ratio": "1:1",
+        "medias": [],
+        "mode": "auto",
+        "seed": 304841,
+        "width": 4096,
+        "height": 4096,
+        "batch_size": 1,
+        "resolution": "4k",
+        "folder_id": null,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_5df3b91d-7208-42e9-ad25-4ed231101c8c.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_5df3b91d-7208-42e9-ad25-4ed231101c8c_min.webp"
+      },
+      "createdAt": 1789039656.73227
+    },
+    {
+      "id": "c17a1b3f-9177-4091-a36e-62365b35e596",
+      "type": "image",
+      "status": "completed",
+      "model": "gpt_image_2",
+      "params": {
+        "prompt": "Create a single exceptionally believable premium documentary advertising photograph for AI Receptionist, a service for appointment businesses. Cinema-grade natural photography, full-bleed square 1:1 composition. Refined cool daylight, restrained warm skin tones, charcoal, soft ivory, pale limestone and dark oak; carefully organized real environments and generous architectural negative space. Authentic pores, small wrinkles, flyaway hair, physically plausible hands and object contact, natural lens depth; restrained contrast, never glossy airbrushed CGI. Candid moment, nobody looking at camera. A quiet editorial luxury sensibility, expansive photographic scale and visual restraint reminiscent of premium aerospace-service campaign art direction, but no space hardware or copied brand elements. No typography, readable screens, logos, watermark, border, fake film frame, panels, collage, graphic overlays, robots, holograms, neon, floating software or ornamental waveforms. Screens, if any, must be angled away or naturally out of focus. Keep main action clear in the central/right two thirds with useful breathing room toward left; do not sacrifice credible human posture. Our fictional recurring salon owner is a woman around 40 with medium warm-olive skin, shoulder-length softly waved dark brown hair worn down, matching the reference, subtle small gold hoop earrings, an ivory linen button-up shirt with sleeves rolled neatly and charcoal tailored trousers, comfortable black flats; approachable and absorbed in her work. The salon is a believable welcoming boutique with lightly textured pale limestone walls, dark oak joinery, black metal-framed tall windows and a few black leather chairs. Modest real signs of use, no spaceship interior or grand sterile atrium. Use the supplied reference for the exact recurring owner, dark-blonde-haired client and salon materials where applicable. Preserve photographic character, not the reference's exact composition. SCENE: A busy yet orderly reception moment in the EXACT same fictional boutique salon as reference image. Medium-wide natural 35mm photograph at shoulder height. The recurring ivory-shirt owner is behind a compact dark-oak reception desk, giving attention to one standing adult customer in a taupe coat checking out; one other arriving customer waits naturally near the entrance, and a second stylist works in the softly unfocused far background. A small ordinary black cordless phone rests in its cradle on the near edge of reception, unattended. Keep just these few people with clear spacing and correct body relationships; no crowd duplication, no panic or exaggerated smiles. Payment terminal angled away with screen invisible. Clear reception activity and working salon in one legible photograph, natural side light, clean geometry and realistic usable counter height.",
+        "aspect_ratio": "1:1",
+        "medias": [
+          {
+            "role": "image",
+            "data": {
+              "id": "5df3b91d-7208-42e9-ad25-4ed231101c8c",
+              "type": "image_job",
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_5df3b91d-7208-42e9-ad25-4ed231101c8c.png"
+            }
+          }
+        ],
+        "width": 2880,
+        "height": 2880,
+        "quality": "high",
+        "resolution": "4k",
+        "model": "videotape-alpha",
+        "remove_bg": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113043_c17a1b3f-9177-4091-a36e-62365b35e596.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113043_c17a1b3f-9177-4091-a36e-62365b35e596_min.webp"
+      },
+      "createdAt": 1789039843.937842
+    },
+    {
+      "id": "05e4a456-c886-4b91-a1a8-4e73cec7d5c8",
+      "type": "image",
+      "status": "completed",
+      "model": "gpt_image_2",
+      "params": {
+        "prompt": "Create a single exceptionally believable premium documentary advertising photograph for AI Receptionist, a service for appointment businesses. Cinema-grade natural photography, full-bleed square 1:1 composition. Refined cool daylight, restrained warm skin tones, charcoal, soft ivory, pale limestone and dark oak; carefully organized real environments and generous architectural negative space. Authentic pores, small wrinkles, flyaway hair, physically plausible hands and object contact, natural lens depth; restrained contrast, never glossy airbrushed CGI. Candid moment, nobody looking at camera. A quiet editorial luxury sensibility, expansive photographic scale and visual restraint reminiscent of premium aerospace-service campaign art direction, but no space hardware or copied brand elements. No typography, readable screens, logos, watermark, border, fake film frame, panels, collage, graphic overlays, robots, holograms, neon, floating software or ornamental waveforms. Screens, if any, must be angled away or naturally out of focus. Keep main action clear in the central/right two thirds with useful breathing room toward left; do not sacrifice credible human posture. Our fictional recurring salon owner is a woman around 40 with medium warm-olive skin, shoulder-length softly waved dark brown hair worn down, matching the reference, subtle small gold hoop earrings, an ivory linen button-up shirt with sleeves rolled neatly and charcoal tailored trousers, comfortable black flats; approachable and absorbed in her work. The salon is a believable welcoming boutique with lightly textured pale limestone walls, dark oak joinery, black metal-framed tall windows and a few black leather chairs. Modest real signs of use, no spaceship interior or grand sterile atrium. Use the supplied reference for the exact recurring owner, dark-blonde-haired client and salon materials where applicable. Preserve photographic character, not the reference's exact composition. SCENE: The EXACT same fictional owner and salon as the reference. Photograph from just behind an unattended dark-oak reception desk, toward the functioning salon. The ivory-shirt owner is several paces beyond the desk, walking calmly toward one waiting client in the central-right middle distance, carrying two neatly folded charcoal towels with believable arms. The desk remains visible in the left foreground with an ordinary cordless phone seated in its cradle and one closed paper appointment notebook. No person at the desk, yet the business clearly active. Realistic stride and shoes, no blur disguising malformed hands. Strong depth through aligned architecture, candid 35mm documentary framing, soft window light.",
+        "aspect_ratio": "1:1",
+        "medias": [
+          {
+            "role": "image",
+            "data": {
+              "id": "5df3b91d-7208-42e9-ad25-4ed231101c8c",
+              "type": "image_job",
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_5df3b91d-7208-42e9-ad25-4ed231101c8c.png"
+            }
+          }
+        ],
+        "width": 2880,
+        "height": 2880,
+        "quality": "high",
+        "resolution": "4k",
+        "model": "videotape-alpha",
+        "remove_bg": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113411_05e4a456-c886-4b91-a1a8-4e73cec7d5c8.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113411_05e4a456-c886-4b91-a1a8-4e73cec7d5c8_min.webp"
+      },
+      "createdAt": 1789040051.577765
+    },
+    {
+      "id": "b17d45df-38f0-41f6-8a14-11929c5d9229",
+      "type": "image",
+      "status": "completed",
+      "model": "gpt_image_2",
+      "params": {
+        "prompt": "Create a single exceptionally believable premium documentary advertising photograph for AI Receptionist, a service for appointment businesses. Cinema-grade natural photography, full-bleed square 1:1 composition. Refined cool daylight, restrained warm skin tones, charcoal, soft ivory, pale limestone and dark oak; carefully organized real environments and generous architectural negative space. Authentic pores, small wrinkles, flyaway hair, physically plausible hands and object contact, natural lens depth; restrained contrast, never glossy airbrushed CGI. Candid moment, nobody looking at camera. A quiet editorial luxury sensibility, expansive photographic scale and visual restraint reminiscent of premium aerospace-service campaign art direction, but no space hardware or copied brand elements. No typography, readable screens, logos, watermark, border, fake film frame, panels, collage, graphic overlays, robots, holograms, neon, floating software or ornamental waveforms. Screens, if any, must be angled away or naturally out of focus. Keep main action clear in the central/right two thirds with useful breathing room toward left; do not sacrifice credible human posture. Our fictional recurring salon owner is a woman around 40 with medium warm-olive skin, shoulder-length softly waved dark brown hair worn down, matching the reference, subtle small gold hoop earrings, an ivory linen button-up shirt with sleeves rolled neatly and charcoal tailored trousers, comfortable black flats; approachable and absorbed in her work. The salon is a believable welcoming boutique with lightly textured pale limestone walls, dark oak joinery, black metal-framed tall windows and a few black leather chairs. Modest real signs of use, no spaceship interior or grand sterile atrium. Use the supplied reference for the exact recurring owner, dark-blonde-haired client and salon materials where applicable. Preserve photographic character, not the reference's exact composition. SCENE: The same fictional owner from reference, same ivory linen shirt and charcoal trousers, taking a quiet 15-minute lunch in a small planted courtyard directly behind her salon. This is a credible ordinary working-day break, not a resort or vacation. Seated right of frame on a simple bench at a small outdoor table, relaxed slightly tired profile, looking toward a little tree. Her empty hands rest naturally on her lap. A ceramic cup and a simple sandwich on a small plate rest on table; NO phone visible. Through the open doorway behind her are subtle recognizable pale stone and dark-oak salon details, naturally out of focus. Leaf shadows and soft afternoon daylight, real linen creases and aging wood, generous calm negative space. No luxury props or staged laughter.",
+        "aspect_ratio": "1:1",
+        "medias": [
+          {
+            "role": "image",
+            "data": {
+              "id": "5df3b91d-7208-42e9-ad25-4ed231101c8c",
+              "type": "image_job",
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_5df3b91d-7208-42e9-ad25-4ed231101c8c.png"
+            }
+          }
+        ],
+        "width": 2880,
+        "height": 2880,
+        "quality": "high",
+        "resolution": "4k",
+        "model": "videotape-alpha",
+        "remove_bg": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113410_b17d45df-38f0-41f6-8a14-11929c5d9229.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113410_b17d45df-38f0-41f6-8a14-11929c5d9229_min.webp"
+      },
+      "createdAt": 1789040050.006443
+    },
+    {
+      "id": "6c9bdde3-7a74-484d-b91d-d01c35353226",
+      "type": "image",
+      "status": "completed",
+      "model": "gpt_image_2",
+      "params": {
+        "prompt": "Create a single exceptionally believable premium documentary advertising photograph for AI Receptionist, a service for appointment businesses. Cinema-grade natural photography, full-bleed square 1:1 composition. Refined cool daylight, restrained warm skin tones, charcoal, soft ivory, pale limestone and dark oak; carefully organized real environments and generous architectural negative space. Authentic pores, small wrinkles, flyaway hair, physically plausible hands and object contact, natural lens depth; restrained contrast, never glossy airbrushed CGI. Candid moment, nobody looking at camera. A quiet editorial luxury sensibility, expansive photographic scale and visual restraint reminiscent of premium aerospace-service campaign art direction, but no space hardware or copied brand elements. No typography, readable screens, logos, watermark, border, fake film frame, panels, collage, graphic overlays, robots, holograms, neon, floating software or ornamental waveforms. Screens, if any, must be angled away or naturally out of focus. Keep main action clear in the central/right two thirds with useful breathing room toward left; do not sacrifice credible human posture. Our fictional recurring salon owner is a woman around 40 with medium warm-olive skin, shoulder-length softly waved dark brown hair worn down, matching the reference, subtle small gold hoop earrings, an ivory linen button-up shirt with sleeves rolled neatly and charcoal tailored trousers, comfortable black flats; approachable and absorbed in her work. The salon is a believable welcoming boutique with lightly textured pale limestone walls, dark oak joinery, black metal-framed tall windows and a few black leather chairs. Modest real signs of use, no spaceship interior or grand sterile atrium. Use the supplied reference for the exact recurring owner, dark-blonde-haired client and salon materials where applicable. Preserve photographic character, not the reference's exact composition. SCENE: Same fictional brunette owner from reference in an ivory overshirt, charcoal easy trousers and ordinary walking shoes, seen from behind with one adult companion in a slate jacket. The pair walk naturally along a quiet Lake Michigan shoreline boardwalk above sand and dune grass, heading toward a distant water horizon. Michigan-like freshwater coastal landscape, no mountains or tropical palms. They are small in the lower-right third of a broad expansive square landscape; believable walking strides and a little space between them. Phones put away, no devices in their hands. Gentle overcast morning light, pale slate blue water, wide clean sky, dry grasses, wind in fabric. Modest human-scale time off, premium location photography, calm and present rather than tourism brochure smiles.",
+        "aspect_ratio": "1:1",
+        "medias": [
+          {
+            "role": "image",
+            "data": {
+              "id": "5df3b91d-7208-42e9-ad25-4ed231101c8c",
+              "type": "image_job",
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_5df3b91d-7208-42e9-ad25-4ed231101c8c.png"
+            }
+          }
+        ],
+        "width": 2880,
+        "height": 2880,
+        "quality": "high",
+        "resolution": "4k",
+        "model": "videotape-alpha",
+        "remove_bg": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113409_6c9bdde3-7a74-484d-b91d-d01c35353226.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113409_6c9bdde3-7a74-484d-b91d-d01c35353226_min.webp"
+      },
+      "createdAt": 1789040049.451761
+    },
+    {
+      "id": "2377cbff-a27c-4010-b449-51affcc55862",
+      "type": "image",
+      "status": "completed",
+      "model": "gpt_image_2",
+      "params": {
+        "prompt": "Create a single exceptionally believable premium documentary advertising photograph for AI Receptionist, a service for appointment businesses. Cinema-grade natural photography, full-bleed square 1:1 composition. Refined cool daylight, restrained warm skin tones, charcoal, soft ivory, pale limestone and dark oak; carefully organized real environments and generous architectural negative space. Authentic pores, small wrinkles, flyaway hair, physically plausible hands and object contact, natural lens depth; restrained contrast, never glossy airbrushed CGI. Candid moment, nobody looking at camera. A quiet editorial luxury sensibility, expansive photographic scale and visual restraint reminiscent of premium aerospace-service campaign art direction, but no space hardware or copied brand elements. No typography, readable screens, logos, watermark, border, fake film frame, panels, collage, graphic overlays, robots, holograms, neon, floating software or ornamental waveforms. Screens, if any, must be angled away or naturally out of focus. Keep main action clear in the central/right two thirds with useful breathing room toward left; do not sacrifice credible human posture. Our fictional recurring salon owner is a woman around 40 with medium warm-olive skin, shoulder-length softly waved dark brown hair worn down, matching the reference, subtle small gold hoop earrings, an ivory linen button-up shirt with sleeves rolled neatly and charcoal tailored trousers, comfortable black flats; approachable and absorbed in her work. The salon is a believable welcoming boutique with lightly textured pale limestone walls, dark oak joinery, black metal-framed tall windows and a few black leather chairs. Modest real signs of use, no spaceship interior or grand sterile atrium. Use the supplied reference for the exact recurring owner, dark-blonde-haired client and salon materials where applicable. Preserve photographic character, not the reference's exact composition. SCENE: The exact same fictional boutique salon's understated street-front exterior at blue hour, with dark metal door/window frames and warm but dim interior where pale stone and oak can be glimpsed. The recurring owner in her ivory shirt and charcoal trousers stands in natural three-quarter rear view beside the closed glass door, right hand using a small ordinary key at a normal waist-height lock, left arm relaxed with a simple charcoal canvas tote on shoulder. She has just finished work and is about to leave. Keep key/hand detail plausible and modest in frame, reflections subtle and coherent. Sidewalk, simple neighboring facade, no pedestrians, cars, readable signage, logos, lettering or neon. Photographed across pavement at normal eye level 50mm, deep blue dusk and gentle interior amber, quiet sense of closure.",
+        "aspect_ratio": "1:1",
+        "medias": [
+          {
+            "role": "image",
+            "data": {
+              "id": "5df3b91d-7208-42e9-ad25-4ed231101c8c",
+              "type": "image_job",
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_5df3b91d-7208-42e9-ad25-4ed231101c8c.png"
+            }
+          }
+        ],
+        "width": 2880,
+        "height": 2880,
+        "quality": "high",
+        "resolution": "4k",
+        "model": "videotape-alpha",
+        "remove_bg": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113409_2377cbff-a27c-4010-b449-51affcc55862.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113409_2377cbff-a27c-4010-b449-51affcc55862_min.webp"
+      },
+      "createdAt": 1789040049.603458
+    },
+    {
+      "id": "b401eb77-e838-4d96-80f9-c9703ec6b46f",
+      "type": "image",
+      "status": "completed",
+      "model": "gpt_image_2",
+      "params": {
+        "prompt": "Create a single exceptionally believable premium documentary advertising photograph for AI Receptionist, a service for appointment businesses. Cinema-grade natural photography, full-bleed square 1:1 composition. Refined cool daylight, restrained warm skin tones, charcoal, soft ivory, pale limestone and dark oak; carefully organized real environments and generous architectural negative space. Authentic pores, small wrinkles, flyaway hair, physically plausible hands and object contact, natural lens depth; restrained contrast, never glossy airbrushed CGI. Candid moment, nobody looking at camera. A quiet editorial luxury sensibility, expansive photographic scale and visual restraint reminiscent of premium aerospace-service campaign art direction, but no space hardware or copied brand elements. No typography, readable screens, logos, watermark, border, fake film frame, panels, collage, graphic overlays, robots, holograms, neon, floating software or ornamental waveforms. Screens, if any, must be angled away or naturally out of focus. Keep main action clear in the central/right two thirds with useful breathing room toward left; do not sacrifice credible human posture. Our fictional recurring salon owner is a woman around 40 with medium warm-olive skin, shoulder-length softly waved dark brown hair worn down, matching the reference, subtle small gold hoop earrings, an ivory linen button-up shirt with sleeves rolled neatly and charcoal tailored trousers, comfortable black flats; approachable and absorbed in her work. The salon is a believable welcoming boutique with lightly textured pale limestone walls, dark oak joinery, black metal-framed tall windows and a few black leather chairs. Modest real signs of use, no spaceship interior or grand sterile atrium. Use the supplied reference for the exact recurring owner, dark-blonde-haired client and salon materials where applicable. Preserve photographic character, not the reference's exact composition. SCENE: The seated dark-blonde-haired adult client from the reference appears in a different scene as a prospective customer at home, wearing a soft slate sweater, comfortably seated at a simple light-oak kitchen table. Candid right-side profile in the right half of image, holding an ordinary black smartphone naturally to her RIGHT ear with her right hand; correct grip and phone orientation, mouth subtly mid-conversation, relaxed focused expression, eyes looking into space rather than camera. Other hand rests on table. Soft late afternoon window daylight across a real restrained kitchen, ceramic mug, clean pale wall with breathing room on left. No screen visible, no call icons, no interface, no theatrical excitement. The image clearly means an ordinary person making an appointment call.",
+        "aspect_ratio": "1:1",
+        "medias": [
+          {
+            "role": "image",
+            "data": {
+              "id": "5df3b91d-7208-42e9-ad25-4ed231101c8c",
+              "type": "image_job",
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_5df3b91d-7208-42e9-ad25-4ed231101c8c.png"
+            }
+          }
+        ],
+        "width": 2880,
+        "height": 2880,
+        "quality": "high",
+        "resolution": "4k",
+        "model": "videotape-alpha",
+        "remove_bg": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113409_b401eb77-e838-4d96-80f9-c9703ec6b46f.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113409_b401eb77-e838-4d96-80f9-c9703ec6b46f_min.webp"
+      },
+      "createdAt": 1789040049.31451
+    },
+    {
+      "id": "a0e3fa71-7416-444f-8de5-b65728a7d31e",
+      "type": "image",
+      "status": "completed",
+      "model": "gpt_image_2",
+      "params": {
+        "prompt": "Create a single exceptionally believable premium documentary advertising photograph for AI Receptionist, a service for appointment businesses. Cinema-grade natural photography, full-bleed square 1:1 composition. Refined cool daylight, restrained warm skin tones, charcoal, soft ivory, pale limestone and dark oak; carefully organized real environments and generous architectural negative space. Authentic pores, small wrinkles, flyaway hair, physically plausible hands and object contact, natural lens depth; restrained contrast, never glossy airbrushed CGI. Candid moment, nobody looking at camera. A quiet editorial luxury sensibility, expansive photographic scale and visual restraint reminiscent of premium aerospace-service campaign art direction, but no space hardware or copied brand elements. No typography, readable screens, logos, watermark, border, fake film frame, panels, collage, graphic overlays, robots, holograms, neon, floating software or ornamental waveforms. Screens, if any, must be angled away or naturally out of focus. Keep main action clear in the central/right two thirds with useful breathing room toward left; do not sacrifice credible human posture. Our fictional recurring salon owner is a woman around 40 with medium warm-olive skin, shoulder-length softly waved dark brown hair worn down, matching the reference, subtle small gold hoop earrings, an ivory linen button-up shirt with sleeves rolled neatly and charcoal tailored trousers, comfortable black flats; approachable and absorbed in her work. The salon is a believable welcoming boutique with lightly textured pale limestone walls, dark oak joinery, black metal-framed tall windows and a few black leather chairs. Modest real signs of use, no spaceship interior or grand sterile atrium. Use the supplied reference for the exact recurring owner, dark-blonde-haired client and salon materials where applicable. Preserve photographic character, not the reference's exact composition. SCENE: The same dark-blonde-haired adult customer as the reference, now at her own quiet light-oak kitchen table in a slate sweater, booking an appointment on an open thin ordinary dark laptop. Candid over-the-right-shoulder composition, one hand naturally using the trackpad and the other resting on table, correct human hand proportions, sleeves and contact. Laptop screen turned mostly away, softly out of focus with only soft neutral light and NO readable interface/text. A closed notebook and ceramic mug, no clutter, evening window blue outside balanced with a small warm practical lamp. Viewer understands choosing an appointment from home after the working day; do not show a phone call or phone to ear. Spacious authentic home, not sci-fi office.",
+        "aspect_ratio": "1:1",
+        "medias": [
+          {
+            "role": "image",
+            "data": {
+              "id": "5df3b91d-7208-42e9-ad25-4ed231101c8c",
+              "type": "image_job",
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_5df3b91d-7208-42e9-ad25-4ed231101c8c.png"
+            }
+          }
+        ],
+        "width": 2880,
+        "height": 2880,
+        "quality": "high",
+        "resolution": "4k",
+        "model": "videotape-alpha",
+        "remove_bg": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113409_a0e3fa71-7416-444f-8de5-b65728a7d31e.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113409_a0e3fa71-7416-444f-8de5-b65728a7d31e_min.webp"
+      },
+      "createdAt": 1789040049.588279
+    },
+    {
+      "id": "21a2b552-84ae-4609-904f-01f49565b442",
+      "type": "image",
+      "status": "completed",
+      "model": "gpt_image_2",
+      "params": {
+        "prompt": "Create a single exceptionally believable premium documentary advertising photograph for AI Receptionist, a service for appointment businesses. Cinema-grade natural photography, full-bleed square 1:1 composition. Refined cool daylight, restrained warm skin tones, charcoal, soft ivory, pale limestone and dark oak; carefully organized real environments and generous architectural negative space. Authentic pores, small wrinkles, flyaway hair, physically plausible hands and object contact, natural lens depth; restrained contrast, never glossy airbrushed CGI. Candid moment, nobody looking at camera. A quiet editorial luxury sensibility, expansive photographic scale and visual restraint reminiscent of premium aerospace-service campaign art direction, but no space hardware or copied brand elements. No typography, readable screens, logos, watermark, border, fake film frame, panels, collage, graphic overlays, robots, holograms, neon, floating software or ornamental waveforms. Screens, if any, must be angled away or naturally out of focus. Keep main action clear in the central/right two thirds with useful breathing room toward left; do not sacrifice credible human posture. Our fictional recurring salon owner is a woman around 40 with medium warm-olive skin, shoulder-length softly waved dark brown hair worn down, matching the reference, subtle small gold hoop earrings, an ivory linen button-up shirt with sleeves rolled neatly and charcoal tailored trousers, comfortable black flats; approachable and absorbed in her work. The salon is a believable welcoming boutique with lightly textured pale limestone walls, dark oak joinery, black metal-framed tall windows and a few black leather chairs. Modest real signs of use, no spaceship interior or grand sterile atrium. Use the supplied reference for the exact recurring owner, dark-blonde-haired client and salon materials where applicable. Preserve photographic character, not the reference's exact composition. SCENE: The exact same fictional salon owner and reception interior as reference, seen from the side at the end of a calm working moment. Ivory-shirt owner standing comfortably at the compact dark-oak counter, briefly reviewing a single ordinary laptop at natural working height, fingers resting on the countertop rather than complex typing. Face in calm attentive profile, not delighted stock-photo performance. Laptop screen angled away from camera, no readable details, ready for a real product record to appear BESIDE the photograph in HTML later. Recognizable pale-stone walls, dark oak and black-framed window, one client chair softly in background. Clean late-afternoon window light, breathing room on left; readable quiet moment of checking what happened then returning to clients, no floating software or all-success badges.",
+        "aspect_ratio": "1:1",
+        "medias": [
+          {
+            "role": "image",
+            "data": {
+              "id": "5df3b91d-7208-42e9-ad25-4ed231101c8c",
+              "type": "image_job",
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_5df3b91d-7208-42e9-ad25-4ed231101c8c.png"
+            }
+          }
+        ],
+        "width": 2880,
+        "height": 2880,
+        "quality": "high",
+        "resolution": "4k",
+        "model": "videotape-alpha",
+        "remove_bg": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113416_21a2b552-84ae-4609-904f-01f49565b442.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113416_21a2b552-84ae-4609-904f-01f49565b442_min.webp"
+      },
+      "createdAt": 1789040056.664238
+    },
+    {
+      "id": "3905fdcd-3562-4d36-8733-6b2be25a21f1",
+      "type": "image",
+      "status": "completed",
+      "model": "cinematic_studio_2_5",
+      "params": {
+        "prompt": "Create a single exceptionally believable premium documentary advertising photograph for AI Receptionist, a service for appointment businesses. Cinema-grade natural photography, full-bleed square 1:1 composition. Refined cool daylight, restrained warm skin tones, charcoal, soft ivory, pale limestone and dark oak; carefully organized real environments and generous architectural negative space. Authentic pores, small wrinkles, flyaway hair, physically plausible hands and object contact, natural lens depth; restrained contrast, never glossy airbrushed CGI. Candid moment, nobody looking at camera. A quiet editorial luxury sensibility, expansive photographic scale and visual restraint reminiscent of premium aerospace-service campaign art direction, but no space hardware or copied brand elements. No typography, readable screens, logos, watermark, border, fake film frame, panels, collage, graphic overlays, robots, holograms, neon, floating software or ornamental waveforms. Screens, if any, must be angled away or naturally out of focus. Keep main action clear in the central/right two thirds with useful breathing room toward left; do not sacrifice credible human posture. SCENE: One single real studio photograph of exactly three actual unbranded telephones, arranged from left to right on one continuous matte charcoal reception counter against a near-black seamless background: a vintage black rotary desk telephone, a discreet contemporary black cordless landline with handset resting correctly in its cradle, and a modern dark smartphone lying flat face-up with its screen OFF. All share the same ground plane, coherent proportions, realistic tiny wear and natural material surfaces. Quiet narrow softboxes make precise soft edge highlights; deep black negative space above and calm horizontal spacing. Photograph the physical objects, do not make a diagram, timeline, triptych, collage or concept render. No text, numbers, light beams, icons, glowing screens or futuristic imaginary objects. Rotary dial details subtle, not emphasized. This is an optional visual transition about familiar phones evolving, not an AI robot.",
+        "aspect_ratio": "1:1",
+        "medias": [],
+        "mode": "auto",
+        "seed": 93746,
+        "width": 4096,
+        "height": 4096,
+        "batch_size": 1,
+        "resolution": "4k",
+        "folder_id": null,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_3905fdcd-3562-4d36-8733-6b2be25a21f1.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_3905fdcd-3562-4d36-8733-6b2be25a21f1_min.webp"
+      },
+      "createdAt": 1789039656.836077
+    }
+  ],
+  "jobs": [
+    {
+      "index": 1,
+      "job_id": "5df3b91d-7208-42e9-ad25-4ed231101c8c",
+      "status": "completed",
+      "type": "image",
+      "model": "cinematic_studio_2_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_5df3b91d-7208-42e9-ad25-4ed231101c8c.png"
+    },
+    {
+      "index": 2,
+      "job_id": "c17a1b3f-9177-4091-a36e-62365b35e596",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113043_c17a1b3f-9177-4091-a36e-62365b35e596.png"
+    },
+    {
+      "index": 3,
+      "job_id": "05e4a456-c886-4b91-a1a8-4e73cec7d5c8",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113411_05e4a456-c886-4b91-a1a8-4e73cec7d5c8.png"
+    },
+    {
+      "index": 4,
+      "job_id": "b17d45df-38f0-41f6-8a14-11929c5d9229",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113410_b17d45df-38f0-41f6-8a14-11929c5d9229.png"
+    },
+    {
+      "index": 5,
+      "job_id": "6c9bdde3-7a74-484d-b91d-d01c35353226",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113409_6c9bdde3-7a74-484d-b91d-d01c35353226.png"
+    },
+    {
+      "index": 6,
+      "job_id": "2377cbff-a27c-4010-b449-51affcc55862",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113409_2377cbff-a27c-4010-b449-51affcc55862.png"
+    },
+    {
+      "index": 7,
+      "job_id": "b401eb77-e838-4d96-80f9-c9703ec6b46f",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113409_b401eb77-e838-4d96-80f9-c9703ec6b46f.png"
+    },
+    {
+      "index": 8,
+      "job_id": "a0e3fa71-7416-444f-8de5-b65728a7d31e",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113409_a0e3fa71-7416-444f-8de5-b65728a7d31e.png"
+    },
+    {
+      "index": 9,
+      "job_id": "21a2b552-84ae-4609-904f-01f49565b442",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_113416_21a2b552-84ae-4609-904f-01f49565b442.png"
+    },
+    {
+      "index": 10,
+      "job_id": "3905fdcd-3562-4d36-8733-6b2be25a21f1",
+      "status": "completed",
+      "type": "image",
+      "model": "cinematic_studio_2_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_3905fdcd-3562-4d36-8733-6b2be25a21f1.png"
+    }
+  ],
+  "all_found": true
+}

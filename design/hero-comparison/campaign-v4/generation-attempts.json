@@ -1,0 +1,176 @@
+{
+  "created": "2026-09-10",
+  "firstSubmissions": [
+    {
+      "jobs": [
+        {
+          "index": 1,
+          "job_id": "5df3b91d-7208-42e9-ad25-4ed231101c8c",
+          "status": "pending"
+        },
+        {
+          "index": 10,
+          "job_id": "3905fdcd-3562-4d36-8733-6b2be25a21f1",
+          "status": "pending"
+        }
+      ],
+      "submitted_count": 2,
+      "failed_count": 0
+    },
+    {
+      "jobs": [
+        {
+          "index": 2,
+          "job_id": "17355f87-2da1-459a-afa5-69fc5f9aedd2",
+          "status": "pending"
+        },
+        {
+          "index": 3,
+          "job_id": "8b808471-489a-4ca4-9646-9c355197a390",
+          "status": "pending"
+        },
+        {
+          "index": 4,
+          "job_id": "42457eb2-d48b-4047-94b5-98d3aef39721",
+          "status": "pending"
+        },
+        {
+          "index": 5,
+          "job_id": "b4db5d4a-9c39-414a-83ef-944aacc712e2",
+          "status": "pending"
+        },
+        {
+          "index": 6,
+          "job_id": "7f6dd09b-dac9-46c1-973b-0ecc9bdcbc7b",
+          "status": "pending"
+        },
+        {
+          "index": 7,
+          "job_id": "705c18ea-7aa0-43f2-8675-3070355375bb",
+          "status": "pending"
+        }
+      ],
+      "submitted_count": 6,
+      "failed_count": 0
+    },
+    {
+      "jobs": [
+        {
+          "index": 8,
+          "job_id": "71d9b5dc-9d50-449a-a0b3-f7d60af1fffc",
+          "status": "pending"
+        },
+        {
+          "index": 9,
+          "job_id": "c4bd38d2-0330-47cf-b336-809a5cdf716f",
+          "status": "pending"
+        }
+      ],
+      "submitted_count": 2,
+      "failed_count": 0
+    }
+  ],
+  "completed": [
+    {
+      "index": 1,
+      "job_id": "5df3b91d-7208-42e9-ad25-4ed231101c8c",
+      "status": "completed",
+      "type": "image",
+      "model": "cinematic_studio_2_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_5df3b91d-7208-42e9-ad25-4ed231101c8c.png"
+    },
+    {
+      "index": 10,
+      "job_id": "3905fdcd-3562-4d36-8733-6b2be25a21f1",
+      "status": "completed",
+      "type": "image",
+      "model": "cinematic_studio_2_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_112736_3905fdcd-3562-4d36-8733-6b2be25a21f1.png"
+    }
+  ],
+  "failed": [
+    {
+      "index": 2,
+      "job_id": "17355f87-2da1-459a-afa5-69fc5f9aedd2",
+      "status": "failed",
+      "type": "image",
+      "model": "cinematic_studio_2_5"
+    },
+    {
+      "index": 3,
+      "job_id": "8b808471-489a-4ca4-9646-9c355197a390",
+      "status": "failed",
+      "type": "image",
+      "model": "cinematic_studio_2_5"
+    },
+    {
+      "index": 4,
+      "job_id": "42457eb2-d48b-4047-94b5-98d3aef39721",
+      "status": "failed",
+      "type": "image",
+      "model": "cinematic_studio_2_5"
+    },
+    {
+      "index": 5,
+      "job_id": "b4db5d4a-9c39-414a-83ef-944aacc712e2",
+      "status": "failed",
+      "type": "image",
+      "model": "cinematic_studio_2_5"
+    },
+    {
+      "index": 6,
+      "job_id": "7f6dd09b-dac9-46c1-973b-0ecc9bdcbc7b",
+      "status": "failed",
+      "type": "image",
+      "model": "cinematic_studio_2_5"
+    },
+    {
+      "index": 7,
+      "job_id": "705c18ea-7aa0-43f2-8675-3070355375bb",
+      "status": "failed",
+      "type": "image",
+      "model": "cinematic_studio_2_5"
+    },
+    {
+      "index": 8,
+      "job_id": "71d9b5dc-9d50-449a-a0b3-f7d60af1fffc",
+      "status": "failed",
+      "type": "image",
+      "model": "cinematic_studio_2_5"
+    },
+    {
+      "index": 9,
+      "job_id": "c4bd38d2-0330-47cf-b336-809a5cdf716f",
+      "status": "failed",
+      "type": "image",
+      "model": "cinematic_studio_2_5"
+    }
+  ],
+  "fallbackRequest": {
+    "index": 2,
+    "params": {
+      "model": "gpt_image_2",
+      "resolution": "4k",
+      "aspect_ratio": "1:1",
+      "medias": [
+        {
+          "role": "image",
+          "value": "5df3b91d-7208-42e9-ad25-4ed231101c8c"
+        }
+      ],
+      "prompt": "Create a single exceptionally believable premium documentary advertising photograph for AI Receptionist, a service for appointment businesses. Cinema-grade natural photography, full-bleed square 1:1 composition. Refined cool daylight, restrained warm skin tones, charcoal, soft ivory, pale limestone and dark oak; carefully organized real environments and generous architectural negative space. Authentic pores, small wrinkles, flyaway hair, physically plausible hands and object contact, natural lens depth; restrained contrast, never glossy airbrushed CGI. Candid moment, nobody looking at camera. A quiet editorial luxury sensibility, expansive photographic scale and visual restraint reminiscent of premium aerospace-service campaign art direction, but no space hardware or copied brand elements. No typography, readable screens, logos, watermark, border, fake film frame, panels, collage, graphic overlays, robots, holograms, neon, floating software or ornamental waveforms. Screens, if any, must be angled away or naturally out of focus. Keep main action clear in the central/right two thirds with useful breathing room toward left; do not sacrifice credible human posture. Our fictional recurring salon owner is a woman around 40 with medium warm-olive skin, shoulder-length softly waved dark brown hair worn down, matching the reference, subtle small gold hoop earrings, an ivory linen button-up shirt with sleeves rolled neatly and charcoal tailored trousers, comfortable black flats; approachable and absorbed in her work. The salon is a believable welcoming boutique with lightly textured pale limestone walls, dark oak joinery, black metal-framed tall windows and a few black leather chairs. Modest real signs of use, no spaceship interior or grand sterile atrium. Use the supplied reference for the exact recurring owner, dark-blonde-haired client and salon materials where applicable. Preserve photographic character, not the reference's exact composition. SCENE: A busy yet orderly reception moment in the EXACT same fictional boutique salon as reference image. Medium-wide natural 35mm photograph at shoulder height. The recurring ivory-shirt owner is behind a compact dark-oak reception desk, giving attention to one standing adult customer in a taupe coat checking out; one other arriving customer waits naturally near the entrance, and a second stylist works in the softly unfocused far background. A small ordinary black cordless phone rests in its cradle on the near edge of reception, unattended. Keep just these few people with clear spacing and correct body relationships; no crowd duplication, no panic or exaggerated smiles. Payment terminal angled away with screen invisible. Clear reception activity and working salon in one legible photograph, natural side light, clean geometry and realistic usable counter height.",
+      "quality": "high"
+    }
+  },
+  "fallbackSubmission": {
+    "jobs": [
+      {
+        "index": 2,
+        "job_id": "c17a1b3f-9177-4091-a36e-62365b35e596",
+        "status": "pending"
+      }
+    ],
+    "submitted_count": 1,
+    "failed_count": 0
+  }
+}

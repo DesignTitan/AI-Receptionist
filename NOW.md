@@ -1,7 +1,15 @@
 # NOW
 
-Handoff notes for the next session. Updated 2026-09-09. Launch is Thursday 1 October 2026;
+Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
+
+## Current handoff — full Higgsfield campaign image set (10 September 2026)
+
+- Bubs explicitly authorized all still images, superseding the previous media deferral. Generated ten images through Higgsfield: focused service, busy reception, away from desk, working-day break, vacation, closing time, customer call, online booking, owner review and optional phone evolution. Preserved the exact approved coastal hero and current V2 page.
+- Cinema Studio Image 2.5 produced the first service image and phone study at 4096 square. Its eight reference-input jobs failed; GPT Image 2 high quality through Higgsfield completed the other eight using the first scene as a reference. Their actual size is 2880 square despite the requested 4k setting. Untouched PNGs, exact requests/results and checksums are in design/hero-comparison/campaign-v4; 2048-square WebP display copies total about 3 MB.
+- Built the local comparison gallery at /__dev/design/campaign-v4, with all ten full-size links, the existing hero shown separately, and each scene paired with its intended product proof. Added Marketing campaign images under Marketing Site in the page index and dev bar. Incoming booking remains a labeled pilot preview; generated people/business are fictional.
+- Verified all ten images visually, all original/preview checksums, 23 local endpoints, four development-preview tests, desktop rendering, page-index navigation and an isolated 390px browser check with all ten images loaded and no horizontal overflow. In-app viewport resizing did not apply, so responsive verification used an isolated browser. Restarted the independent local launcher to load the new gallery route; current PID 15541, private runtime/log paths remain .local/preview/development.json and development.log.
+- Next: Bubs reviews the full image set, then select final placements and deliberate wide/mobile compositions before producing video. No marketing page replacement, live deployment or phone changes. Work is saved locally; public GitHub publishing remains pending the earlier requested approval.
 
 ## Current handoff — stable localhost address (9 September 2026)
 

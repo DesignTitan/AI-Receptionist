@@ -1,8 +1,8 @@
 # AI Receptionist — photography and video brief
 
-Updated 9 September 2026. Production direction from Bubs's existing photo/video requests and renewed Starlink reference. This is the shot brief for review before producing motion, not a record of completed media or an activated phone service.
+Updated 10 September 2026. Production direction from Bubs's existing photo/video requests and renewed Starlink reference. This brief describes the campaign and product evidence; it is not evidence of an activated phone service.
 
-**Current priority:** Bubs has explicitly deferred new images and video. Review the [marketing copy and flow](marketing-story.md) in the local V2 page first. Keep this media brief for later production; it does not authorize beginning generation now.
+**Current priority:** On 10 September Bubs explicitly requested the full image set through Higgsfield. This supersedes the earlier image-production deferral and first-two-stills checkpoint. Produce the six owner situations plus customer calling, customer booking online, owner reviewing results and an optional phone-evolution still. Preserve the approved coastal opening. Review all stills together before video production and final marketing-page placement.
 
 ## The idea
 
@@ -130,7 +130,7 @@ Phone evolution may remain a short optional transition near the product explanat
 4. **Short motion test:** one approved human scene and one product sequence. Review pacing and clarity before generating all clips.
 5. **Final local page assembly:** use approved photos/video and accurate product captures, then check desktop/mobile, reduced motion and load performance before publishing.
 
-No media was generated or purchased as part of this brief. The earlier request to review the direction before producing video remains in effect.
+The initial 9 September brief did not generate media. The 10 September still-image production is recorded separately in `design/hero-comparison/campaign-v4`. The earlier request to review the direction before producing video remains in effect.
 
 ## Acceptance checks
 

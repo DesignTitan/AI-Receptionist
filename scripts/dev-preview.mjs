@@ -163,7 +163,7 @@ export async function startDevPreview({ repoRoot, tenant = "", siteGate = "publi
       if (!path.startsWith("/") || path.startsWith("//") || /[\\\0]/.test(path)
         || parts.some((p) => p.startsWith(".") || (p.toLowerCase() === "docs" && !STUDY_NOTES.has(path))))
         return send(404, "Not found");
-      if (["/design", "/design/luxury-v2", "/design/higgsfield-v3"].includes(path)) {
+      if (["/design", "/design/luxury-v2", "/design/higgsfield-v3", "/design/campaign-v4"].includes(path)) {
         // Next normalizes away trailing slashes; a base element preserves relative assets.
         path += "/";
       }

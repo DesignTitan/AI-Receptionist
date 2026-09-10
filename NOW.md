@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — researched twelve-shot story (10 September 2026)
+
+- Researched advertising hooks, character goals, narrative engagement, runtime and customer pain points; saved a cited strategy brief in docs/design/busy-life/storytelling-research.md.
+- Created a new 72-second, twelve-shot story with caller perspective and a hiking-bag setup/payoff. Generated reference-based 4K stills through Higgsfield (job 0fd98703-3e56-4d38-bd73-7b0b271f8d83).
+- Saved storyboard-v3.html, two rendered page PNGs, full script and prompt in docs/design/busy-life; inspected layouts and aligned caller descriptions. Next: Bubs reviews before Seedance video production. No site changes; public push remains blocked by prior approval review.
+
 ## Current handoff — production storyboard sheet (10 September 2026)
 
 - Reformatted existing six frames into a traditional three-column, two-row storyboard with timing, action, dialogue and sound/graphics directly below each frame, matching Bubs’s example.

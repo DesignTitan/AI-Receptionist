@@ -24,11 +24,23 @@ Patient books ──▶ POST /api/bookings ──▶ POST /api/webhooks/new-book
 
 ---
 
+## Local workspace preview (macOS)
+
+Run `npm run dev:workspace` to keep the preview available at <http://127.0.0.1:3101> during your Mac login session. The command returns after startup; macOS manages the server independently of temporary terminals and restarts it if it exits.
+
+- Marketing V2: <http://127.0.0.1:3101/__dev/design/luxury-v2>
+- Features: <http://127.0.0.1:3101/features>
+- Page index: <http://127.0.0.1:3101/__dev/pages>
+- Check: `npm run dev:workspace:status`
+- Stop: `npm run dev:workspace:stop`
+
+This installs no login startup item. Start it again after logging out or restarting the Mac. Runtime state, the service definition and logs stay in ignored `.local/preview/`. Do not run a second development server on port 3101. For an attached terminal on any platform, stop the workspace service first, then use `npm run dev`.
+
 ## Quick start
 
 ```bash
 npm install
-npm run dev          # http://localhost:3000
+npm run dev          # http://127.0.0.1:3101
 ```
 
 That's it — no database, no API keys. With an empty environment the app boots in **demo
@@ -36,15 +48,15 @@ mode**: an in-memory store seeded with six doctors and four appointments, a simu
 that walks through queued → ringing → on-call → confirmed over about fifty seconds, and
 emails rendered and logged to the console instead of sent.
 
-- Booking site: <http://localhost:3000>
-- Staff dashboard: <http://localhost:3000/admin> — password `demo1234`
+- Booking site: <http://127.0.0.1:3101>
+- Staff dashboard: <http://127.0.0.1:3101/admin> — password `demo1234`
 
 Book something and watch the confirmation screen: the call really does progress, the
 appointment really does flip to confirmed, and the recording really does show up in the
 dashboard. Everything you see in demo mode is the same code path production uses; only the
 storage and telephony back ends are swapped.
 
-> If port 3000 is taken, run `PORT=3100 NEXT_PUBLIC_SITE_URL=http://localhost:3100 npm run dev`.
+> If port 3101 is taken, run `PORT=3100 NEXT_PUBLIC_SITE_URL=http://localhost:3100 npm run dev`.
 > The booking API calls its own webhook over HTTP, so `NEXT_PUBLIC_SITE_URL` has to match the
 > port you are actually serving on.
 

@@ -3,6 +3,14 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — workspace server recovery (10 September 2026)
+
+- The detached local launcher had exited again: no process and no listener remained on port 3101. The browser also retained a cached connection-error document. Restored the site and verified V2’s current headline, its loaded 1254px hero image, Features and the development page index.
+- Added macOS session-managed preview commands: npm run dev:workspace, dev:workspace:status and dev:workspace:stop. launchd keeps the existing dev launcher independent of temporary terminals and restarts exits; Next stays in the same job process group so cleanup covers its workers. Normal npm run dev remains available.
+- The service binds 127.0.0.1:3101, refuses a conflicting listener, and stores its definition/logs in ignored .local/preview. It is not installed as a login startup item: rerun the start command after logout/reboot. Current service label local.ai-receptionist.preview.1841425c22; use status rather than relying on an old PID.
+- Plist syntax, JS syntax, four preview tests, successful startup after the launching command exited, repeated-start reuse and browser rendering pass. An in-app error tab could not reload its cached data document; a fresh verified V2 tab was opened for review.
+- Next: keep the preview available for marketing review. Bubs now requests a light Features page; that visual update is being handled separately. No production deployment or phone changes. Local commit only; public GitHub publishing remains pending the earlier approval after automatic review rejected the public push.
+
 ## Current handoff — clear homepage and dedicated Features page (10 September 2026)
 
 - Replaced the unclear callback positioning with “Your AI receptionist. Your day back.” on the actual homepage and preferred local V2 preview. The supporting copy explains online booking, optional confirmation calls and owner follow-up. Shortened both home stories and moved the detailed capability/benefit explanations into the new /features page.

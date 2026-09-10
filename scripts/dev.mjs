@@ -31,7 +31,8 @@ async function main() {
     tenant: process.env.NEXT_PUBLIC_TENANT ?? "",
     siteGate: process.env.SITE_GATE ?? "public",
   });
-  const grouped = process.platform !== "win32";
+  // launchd owns the entire job group, including Next and its server workers.
+  const grouped = process.platform !== "win32" && process.env.DEV_WORKSPACE_MANAGED !== "1";
   const child = spawn(process.execPath, [next, "dev", "--hostname", "127.0.0.1", ...process.argv.slice(2)], {
     cwd: repoRoot,
     stdio: "inherit",

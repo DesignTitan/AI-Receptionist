@@ -13,7 +13,10 @@
     "stripe:setup": "node --env-file-if-exists=.env.local scripts/setup-stripe.ts",
     "provision": "node --env-file-if-exists=.env.local scripts/provision.mjs",
     "ops": "node --env-file-if-exists=.env.local scripts/platform-ops.mjs",
-    "backup": "node --env-file-if-exists=.env.local scripts/backup-platform.mjs"
+    "backup": "node --env-file-if-exists=.env.local scripts/backup-platform.mjs",
+    "dev:workspace": "node scripts/dev-workspace.mjs start",
+    "dev:workspace:status": "node scripts/dev-workspace.mjs status",
+    "dev:workspace:stop": "node scripts/dev-workspace.mjs stop"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.58.0",

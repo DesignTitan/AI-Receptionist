@@ -1,0 +1,492 @@
+{
+  "items": [
+    {
+      "id": "15ac585d-9962-4dd3-a9ec-73591e04e485",
+      "type": "image",
+      "status": "completed",
+      "model": "seedream_v4_5",
+      "params": {
+        "prompt": "Create one finished 16:9 photographic commercial film still, NOT a storyboard sheet, collage, split screen or wireframe. Preserve exact identities from references. Photographic natural skin, individually resolved fur, believable natural daylight, tasteful film color, high detail, not CGI, not stock-photo posing. No text unless explicitly specified. REFERENCE 1 locks the female groomer's face, brown tied-back hair, sage T-shirt, forest apron, white tiled room, tub and window. REFERENCE 2 locks the beautiful smiling Samoyed. New camera angle: medium-wide frontal shot at dog's eye level. Samoyed whole smiling face visible near left-center, happy upright ears. Body fur wet and clumped, head dry and fluffy. SAME woman stands behind/right, both hands visibly wet and lathered, actively shampooing dog's shoulders. Her face visible, eyes on dog, mouth closed. Dry phone on counter at far right with black screen. Cinematic but real, soft window light. One groomer, one dog, single continuous room. Frame feels like a genuine captured moment, not synthetic.",
+        "aspect_ratio": "16:9",
+        "input_images": [
+          {
+            "id": "7c4302f8-d75b-47f1-933f-4e8467f1f311",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_7c4302f8-d75b-47f1-933f-4e8467f1f311.png"
+          },
+          {
+            "id": "8cc75bfd-3378-4d3f-a37b-a4c52673e270",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_174509_8cc75bfd-3378-4d3f-a37b-a4c52673e270.png"
+          }
+        ],
+        "batch_size": 1,
+        "quality": "basic",
+        "seed": 349352,
+        "width": 2560,
+        "height": 1440,
+        "use_unlim": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181458_15ac585d-9962-4dd3-a9ec-73591e04e485.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181458_15ac585d-9962-4dd3-a9ec-73591e04e485_min.webp"
+      },
+      "createdAt": 1789064098.551193
+    },
+    {
+      "id": "df0688d8-8ac5-455a-ab49-7cf0c754a85e",
+      "type": "image",
+      "status": "completed",
+      "model": "seedream_v4_5",
+      "params": {
+        "prompt": "Create one finished 16:9 photographic commercial film still, NOT a storyboard sheet, collage, split screen or wireframe. Preserve exact identities from references. Photographic natural skin, individually resolved fur, believable natural daylight, tasteful film color, high detail, not CGI, not stock-photo posing. No text unless explicitly specified. Keep the EXACT same woman, Samoyed, window, white tile, tub, clothing, daylight from reference. Move camera closer to Samoyed's smiling face and BOTH visibly soapy hands working through wet shoulder fur. Tight cinematic insert. All hands remain touching dog and washing. Frame dog ears fully. Woman's face may be out of crop. Single photograph.",
+        "aspect_ratio": "16:9",
+        "input_images": [
+          {
+            "id": "15ac585d-9962-4dd3-a9ec-73591e04e485",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181458_15ac585d-9962-4dd3-a9ec-73591e04e485.png"
+          }
+        ],
+        "batch_size": 1,
+        "quality": "basic",
+        "seed": 975761,
+        "width": 2560,
+        "height": 1440,
+        "use_unlim": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_df0688d8-8ac5-455a-ab49-7cf0c754a85e.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_df0688d8-8ac5-455a-ab49-7cf0c754a85e_min.webp"
+      },
+      "createdAt": 1789064220.114419
+    },
+    {
+      "id": "f75ae295-d617-42eb-85ad-f978669b6c6b",
+      "type": "image",
+      "status": "completed",
+      "model": "seedream_v4_5",
+      "params": {
+        "prompt": "Create one finished 16:9 photographic commercial film still, NOT a storyboard sheet, collage, split screen or wireframe. Preserve exact identities from references. Photographic natural skin, individually resolved fur, believable natural daylight, tasteful film color, high detail, not CGI, not stock-photo posing. No text unless explicitly specified. Keep exact referenced scene, woman, dog, clothing and set. Change woman's eyeline: she looks sideways at phone on dry counter to right, mouth closed, both hands still actively washing dog. Camera slightly wider shows phone and her face. Phone screen glows softly. No graphics. One woman only, natural anatomy.",
+        "aspect_ratio": "16:9",
+        "input_images": [
+          {
+            "id": "15ac585d-9962-4dd3-a9ec-73591e04e485",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181458_15ac585d-9962-4dd3-a9ec-73591e04e485.png"
+          }
+        ],
+        "batch_size": 1,
+        "quality": "basic",
+        "seed": 530332,
+        "width": 2560,
+        "height": 1440,
+        "use_unlim": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_f75ae295-d617-42eb-85ad-f978669b6c6b.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_f75ae295-d617-42eb-85ad-f978669b6c6b_min.webp"
+      },
+      "createdAt": 1789064220.123755
+    },
+    {
+      "id": "a868d6d1-9029-41d5-ad1a-df874619f9b0",
+      "type": "image",
+      "status": "completed",
+      "model": "seedream_v4_5",
+      "params": {
+        "prompt": "Create one finished 16:9 photographic commercial film still, NOT a storyboard sheet, collage, split screen or wireframe. Preserve exact identities from references. Photographic natural skin, individually resolved fur, believable natural daylight, tasteful film color, high detail, not CGI, not stock-photo posing. No text unless explicitly specified. Reference1 is ABSOLUTE dog identity and hair guide. Preserve EXACT tiny tan Yorkshire terrier face, dark muzzle and black nose, hair explosion: very long fine tan strands stand straight up and sideways wildly, asymmetrical spikes reaching a full head-height above its skull. Do not tidy, shorten, curl, soften or comb the hair. Serious deadpan small face beneath spectacular crazy flyaway hair. Reference2 gives ONLY customer's exact face, dark curly hair, blue shirt, home and sofa, NOT its dog. A single coherent real photographic scene: tiny reference1 dog in foreground on dark sofa blanket, entire absurd hair silhouette in frame, customer from ref2 seated behind and to left, holding phone to ear looking down affectionately at dog. Dog is dominant subject but woman clearly visible. No split panel. No white second dog. Natural window light, dark background behind flyaway hair to reveal every strand.",
+        "aspect_ratio": "16:9",
+        "input_images": [
+          {
+            "id": "894ef38c-089d-4fe4-82e5-ec50fe123ae9",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/894ef38c-089d-4fe4-82e5-ec50fe123ae9.png"
+          },
+          {
+            "id": "bcef52c9-49ec-46fc-98b1-9da8ef870082",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_bcef52c9-49ec-46fc-98b1-9da8ef870082.png"
+          }
+        ],
+        "batch_size": 1,
+        "quality": "basic",
+        "seed": 608988,
+        "width": 2560,
+        "height": 1440,
+        "use_unlim": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181458_a868d6d1-9029-41d5-ad1a-df874619f9b0.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181458_a868d6d1-9029-41d5-ad1a-df874619f9b0_min.webp"
+      },
+      "createdAt": 1789064098.616119
+    },
+    {
+      "id": "a7a80dc3-6a9a-4eb9-a497-10b833eb9eaa",
+      "type": "image",
+      "status": "completed",
+      "model": "seedream_v4_5",
+      "params": {
+        "prompt": "Create one finished 16:9 photographic commercial film still, NOT a storyboard sheet, collage, split screen or wireframe. Preserve exact identities from references. Photographic natural skin, individually resolved fur, believable natural daylight, tasteful film color, high detail, not CGI, not stock-photo posing. No text unless explicitly specified. Same woman same white Samoyed same grooming shop. Woman concentrates silently on washing dog with both hands, gaze lowered to dog. Place them mostly left two thirds of composition, right third calm softly defocused white tile for graphic overlay to be composed later. Natural real scene, no graphics.",
+        "aspect_ratio": "16:9",
+        "input_images": [
+          {
+            "id": "15ac585d-9962-4dd3-a9ec-73591e04e485",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181458_15ac585d-9962-4dd3-a9ec-73591e04e485.png"
+          }
+        ],
+        "batch_size": 1,
+        "quality": "basic",
+        "seed": 545807,
+        "width": 2560,
+        "height": 1440,
+        "use_unlim": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_a7a80dc3-6a9a-4eb9-a497-10b833eb9eaa.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_a7a80dc3-6a9a-4eb9-a497-10b833eb9eaa_min.webp"
+      },
+      "createdAt": 1789064220.329481
+    },
+    {
+      "id": "8b096fca-2970-4d06-bdd5-5e99442fb711",
+      "type": "image",
+      "status": "completed",
+      "model": "seedream_v4_5",
+      "params": {
+        "prompt": "Create one finished 16:9 photographic commercial film still, NOT a storyboard sheet, collage, split screen or wireframe. Preserve exact identities from references. Photographic natural skin, individually resolved fur, believable natural daylight, tasteful film color, high detail, not CGI, not stock-photo posing. No text unless explicitly specified. Use EXACT curly-haired woman identity and blue cotton shirt from reference. New medium close shot of HER ONLY sitting on same dark sofa, phone at ear, speaking naturally. Dog is outside frame; no dog visible anywhere. Normal relaxed human face. Preserve her curls, facial proportions, skin tone, same home. Single continuous photograph, no split panels.",
+        "aspect_ratio": "16:9",
+        "input_images": [
+          {
+            "id": "bcef52c9-49ec-46fc-98b1-9da8ef870082",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_bcef52c9-49ec-46fc-98b1-9da8ef870082.png"
+          }
+        ],
+        "batch_size": 1,
+        "quality": "basic",
+        "seed": 3301,
+        "width": 2560,
+        "height": 1440,
+        "use_unlim": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181917_8b096fca-2970-4d06-bdd5-5e99442fb711.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181917_8b096fca-2970-4d06-bdd5-5e99442fb711_min.webp"
+      },
+      "createdAt": 1789064357.508556
+    },
+    {
+      "id": "65bda242-77a7-4f58-a99b-036cf9ed1dd5",
+      "type": "image",
+      "status": "completed",
+      "model": "seedream_v4_5",
+      "params": {
+        "prompt": "Create one finished 16:9 photographic commercial film still, NOT a storyboard sheet, collage, split screen or wireframe. Preserve exact identities from references. Photographic natural skin, individually resolved fur, believable natural daylight, tasteful film color, high detail, not CGI, not stock-photo posing. No text unless explicitly specified. Use EXACT curly-haired woman identity, blue cotton shirt and home from reference. Close-up of HER ONLY on same dark sofa, phone at ear, smiling with relief as she agrees to appointment. Dog outside frame, no dog visible. Same face and hairstyle. Slightly tighter lens than source. One single photograph.",
+        "aspect_ratio": "16:9",
+        "input_images": [
+          {
+            "id": "bcef52c9-49ec-46fc-98b1-9da8ef870082",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_bcef52c9-49ec-46fc-98b1-9da8ef870082.png"
+          }
+        ],
+        "batch_size": 1,
+        "quality": "basic",
+        "seed": 884419,
+        "width": 2560,
+        "height": 1440,
+        "use_unlim": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181917_65bda242-77a7-4f58-a99b-036cf9ed1dd5.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181917_65bda242-77a7-4f58-a99b-036cf9ed1dd5_min.webp"
+      },
+      "createdAt": 1789064357.584389
+    },
+    {
+      "id": "78d53d64-3897-436f-9d9c-5bfd7f82a871",
+      "type": "image",
+      "status": "completed",
+      "model": "seedream_v4_5",
+      "params": {
+        "prompt": "Create one finished 16:9 photographic commercial film still, NOT a storyboard sheet, collage, split screen or wireframe. Preserve exact identities from references. Photographic natural skin, individually resolved fur, believable natural daylight, tasteful film color, high detail, not CGI, not stock-photo posing. No text unless explicitly specified. Same exact woman face identity and same Samoyed and clothing and white tiled shop as reference. Progress action: she is now drying Samoyed with a fluffy white towel held in BOTH hands over dog's shoulders. Face softly smiles at dog, eyes looking down. Dog in same tub. Maintain window placement and light. Subjects left two thirds, room at right for graphics later. No graphics.",
+        "aspect_ratio": "16:9",
+        "input_images": [
+          {
+            "id": "15ac585d-9962-4dd3-a9ec-73591e04e485",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181458_15ac585d-9962-4dd3-a9ec-73591e04e485.png"
+          }
+        ],
+        "batch_size": 1,
+        "quality": "basic",
+        "seed": 337914,
+        "width": 2560,
+        "height": 1440,
+        "use_unlim": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_78d53d64-3897-436f-9d9c-5bfd7f82a871.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_78d53d64-3897-436f-9d9c-5bfd7f82a871_min.webp"
+      },
+      "createdAt": 1789064220.191903
+    },
+    {
+      "id": "a6b10cf5-55b1-4089-b3ab-e3ab5ff5345d",
+      "type": "image",
+      "status": "completed",
+      "model": "seedream_v4_5",
+      "params": {
+        "prompt": "Create one finished 16:9 photographic commercial film still, NOT a storyboard sheet, collage, split screen or wireframe. Preserve exact identities from references. Photographic natural skin, individually resolved fur, believable natural daylight, tasteful film color, high detail, not CGI, not stock-photo posing. No text unless explicitly specified. Same EXACT freckled woman identity, brown hair tied back, sage short sleeve T-shirt. End of work in same white tiled shop. She stands alone holding her folded green apron in both hands at waist. No dog in shot; appointment finished. Medium shot, face visible, relieved small smile. One person one image, no panels, no extra hands.",
+        "aspect_ratio": "16:9",
+        "input_images": [
+          {
+            "id": "15ac585d-9962-4dd3-a9ec-73591e04e485",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181458_15ac585d-9962-4dd3-a9ec-73591e04e485.png"
+          }
+        ],
+        "batch_size": 1,
+        "quality": "basic",
+        "seed": 760022,
+        "width": 2560,
+        "height": 1440,
+        "use_unlim": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_a6b10cf5-55b1-4089-b3ab-e3ab5ff5345d.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_a6b10cf5-55b1-4089-b3ab-e3ab5ff5345d_min.webp"
+      },
+      "createdAt": 1789064220.230931
+    },
+    {
+      "id": "e7da565a-2fa3-4303-8bad-086e0ca295a6",
+      "type": "image",
+      "status": "completed",
+      "model": "seedream_v4_5",
+      "params": {
+        "prompt": "Create one finished 16:9 photographic commercial film still, NOT a storyboard sheet, collage, split screen or wireframe. Preserve exact identities from references. Photographic natural skin, individually resolved fur, believable natural daylight, tasteful film color, high detail, not CGI, not stock-photo posing. No text unless explicitly specified. Preserve EXACT freckled woman face and brown tied-back hair from reference. Same sage T-shirt and dark trousers, apron removed. She walks outside the closed door of this modest grooming shop, a small hiking backpack on one shoulder. Clearly outdoors on sidewalk, late afternoon, relieved smile. No dogs, no other people, no words. One woman. Same identity as reference.",
+        "aspect_ratio": "16:9",
+        "input_images": [
+          {
+            "id": "15ac585d-9962-4dd3-a9ec-73591e04e485",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181458_15ac585d-9962-4dd3-a9ec-73591e04e485.png"
+          }
+        ],
+        "batch_size": 1,
+        "quality": "basic",
+        "seed": 734668,
+        "width": 2560,
+        "height": 1440,
+        "use_unlim": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181917_e7da565a-2fa3-4303-8bad-086e0ca295a6.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181917_e7da565a-2fa3-4303-8bad-086e0ca295a6_min.webp"
+      },
+      "createdAt": 1789064357.875925
+    },
+    {
+      "id": "258db977-8dad-4ecb-92fd-4f964ade0387",
+      "type": "image",
+      "status": "completed",
+      "model": "seedream_v4_5",
+      "params": {
+        "prompt": "Create one finished 16:9 photographic commercial film still, NOT a storyboard sheet, collage, split screen or wireframe. Preserve exact identities from references. Photographic natural skin, individually resolved fur, believable natural daylight, tasteful film color, high detail, not CGI, not stock-photo posing. No text unless explicitly specified. Preserve reference woman's brown tied-back hair, sage shirt, build. Wide new scene by a peaceful Michigan lake after work. Same woman and her male partner in navy shirt sit together on wooden bench facing the water, seen from behind, small on right third of frame. No apron, no dogs, no phones, no other people. Natural late afternoon lake and trees. Restful open water to left, realistic not fantasy. NO TEXT, NO LOGOS, NO SYMBOLS, entire frame is a photograph.",
+        "aspect_ratio": "16:9",
+        "input_images": [
+          {
+            "id": "15ac585d-9962-4dd3-a9ec-73591e04e485",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181458_15ac585d-9962-4dd3-a9ec-73591e04e485.png"
+          }
+        ],
+        "batch_size": 1,
+        "quality": "basic",
+        "seed": 251134,
+        "width": 2560,
+        "height": 1440,
+        "use_unlim": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181918_258db977-8dad-4ecb-92fd-4f964ade0387.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181918_258db977-8dad-4ecb-92fd-4f964ade0387_min.webp"
+      },
+      "createdAt": 1789064358.22044
+    },
+    {
+      "id": "bd96f16d-c1bd-4785-be5f-ad02cbd7ec83",
+      "type": "image",
+      "status": "completed",
+      "model": "seedream_v4_5",
+      "params": {
+        "prompt": "A single premium soft fuzzy mint-green speech-bubble mascot isolated on pure white. Rounded square pillow body with small tapered speech tail at bottom left, thick incredibly fine short plush mint fur, tiny two OPEN dark forest-green oval eyes with discreet glints and a small friendly open smiling mouth as if talking. Calm, intelligent, endearing. No arms, no legs, no accessories, no extra shapes, no text. Soft studio lighting, front facing, full silhouette entirely visible with white margin, subtle realistic fiber detail. Green color #C3E6D6, face #1E3A34. Elegant brand character, not robot.",
+        "aspect_ratio": "1:1",
+        "input_images": [],
+        "batch_size": 1,
+        "quality": "basic",
+        "seed": 205775,
+        "width": 2048,
+        "height": 2048,
+        "use_unlim": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181917_bd96f16d-c1bd-4785-be5f-ad02cbd7ec83.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181917_bd96f16d-c1bd-4785-be5f-ad02cbd7ec83_min.webp"
+      },
+      "createdAt": 1789064357.332002
+    },
+    {
+      "id": "c6730373-663b-4210-8934-b70d966e245d",
+      "type": "image",
+      "status": "completed",
+      "model": "flux_2_pro_outpaint",
+      "params": {
+        "prompt": "",
+        "medias": [
+          {
+            "role": "image",
+            "data": {
+              "id": "894ef38c-089d-4fe4-82e5-ec50fe123ae9",
+              "type": "media_input",
+              "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/894ef38c-089d-4fe4-82e5-ec50fe123ae9.png"
+            }
+          }
+        ],
+        "expand_top": 0,
+        "expand_bottom": 0,
+        "expand_left": 697,
+        "expand_right": 0,
+        "folder_id": null
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_c6730373-663b-4210-8934-b70d966e245d.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_c6730373-663b-4210-8934-b70d966e245d_min.webp"
+      },
+      "createdAt": 1789064220.735463
+    }
+  ],
+  "jobs": [
+    {
+      "index": 1,
+      "job_id": "15ac585d-9962-4dd3-a9ec-73591e04e485",
+      "status": "completed",
+      "type": "image",
+      "model": "seedream_v4_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181458_15ac585d-9962-4dd3-a9ec-73591e04e485.png"
+    },
+    {
+      "index": 2,
+      "job_id": "df0688d8-8ac5-455a-ab49-7cf0c754a85e",
+      "status": "completed",
+      "type": "image",
+      "model": "seedream_v4_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_df0688d8-8ac5-455a-ab49-7cf0c754a85e.png"
+    },
+    {
+      "index": 3,
+      "job_id": "f75ae295-d617-42eb-85ad-f978669b6c6b",
+      "status": "completed",
+      "type": "image",
+      "model": "seedream_v4_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_f75ae295-d617-42eb-85ad-f978669b6c6b.png"
+    },
+    {
+      "index": 4,
+      "job_id": "a868d6d1-9029-41d5-ad1a-df874619f9b0",
+      "status": "completed",
+      "type": "image",
+      "model": "seedream_v4_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181458_a868d6d1-9029-41d5-ad1a-df874619f9b0.png"
+    },
+    {
+      "index": 5,
+      "job_id": "a7a80dc3-6a9a-4eb9-a497-10b833eb9eaa",
+      "status": "completed",
+      "type": "image",
+      "model": "seedream_v4_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_a7a80dc3-6a9a-4eb9-a497-10b833eb9eaa.png"
+    },
+    {
+      "index": 6,
+      "job_id": "8b096fca-2970-4d06-bdd5-5e99442fb711",
+      "status": "completed",
+      "type": "image",
+      "model": "seedream_v4_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181917_8b096fca-2970-4d06-bdd5-5e99442fb711.png"
+    },
+    {
+      "index": 8,
+      "job_id": "65bda242-77a7-4f58-a99b-036cf9ed1dd5",
+      "status": "completed",
+      "type": "image",
+      "model": "seedream_v4_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181917_65bda242-77a7-4f58-a99b-036cf9ed1dd5.png"
+    },
+    {
+      "index": 9,
+      "job_id": "78d53d64-3897-436f-9d9c-5bfd7f82a871",
+      "status": "completed",
+      "type": "image",
+      "model": "seedream_v4_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_78d53d64-3897-436f-9d9c-5bfd7f82a871.png"
+    },
+    {
+      "index": 10,
+      "job_id": "a6b10cf5-55b1-4089-b3ab-e3ab5ff5345d",
+      "status": "completed",
+      "type": "image",
+      "model": "seedream_v4_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_a6b10cf5-55b1-4089-b3ab-e3ab5ff5345d.png"
+    },
+    {
+      "index": 11,
+      "job_id": "e7da565a-2fa3-4303-8bad-086e0ca295a6",
+      "status": "completed",
+      "type": "image",
+      "model": "seedream_v4_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181917_e7da565a-2fa3-4303-8bad-086e0ca295a6.png"
+    },
+    {
+      "index": 12,
+      "job_id": "258db977-8dad-4ecb-92fd-4f964ade0387",
+      "status": "completed",
+      "type": "image",
+      "model": "seedream_v4_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181918_258db977-8dad-4ecb-92fd-4f964ade0387.png"
+    },
+    {
+      "index": 13,
+      "job_id": "bd96f16d-c1bd-4785-be5f-ad02cbd7ec83",
+      "status": "completed",
+      "type": "image",
+      "model": "seedream_v4_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181917_bd96f16d-c1bd-4785-be5f-ad02cbd7ec83.png"
+    },
+    {
+      "index": 14,
+      "job_id": "c6730373-663b-4210-8934-b70d966e245d",
+      "status": "completed",
+      "type": "image",
+      "model": "flux_2_pro_outpaint",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181700_c6730373-663b-4210-8934-b70d966e245d.png"
+    }
+  ],
+  "all_found": true
+}

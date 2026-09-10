@@ -1,0 +1,81 @@
+{
+  "items": [
+    {
+      "id": "08b191ed-56c5-4846-92e1-2bab7e420e2e",
+      "type": "image",
+      "status": "completed",
+      "model": "seedream_v4_5",
+      "params": {
+        "prompt": "Edit this photograph precisely. Keep woman, face, clothing, backpack, light, camera framing unchanged. Remove the barber pole completely and replace with plain wall. Remove EVERY letter, number, sticker, logo, word from the shop door and windows, leaving clean unmarked dark glass. Door closed. This is a dog groomer's shop, not a barber. Photorealistic seamless retouch, no new text.",
+        "aspect_ratio": "16:9",
+        "input_images": [
+          {
+            "id": "e7da565a-2fa3-4303-8bad-086e0ca295a6",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181917_e7da565a-2fa3-4303-8bad-086e0ca295a6.png"
+          }
+        ],
+        "batch_size": 1,
+        "quality": "basic",
+        "seed": 801850,
+        "width": 2560,
+        "height": 1440,
+        "use_unlim": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_182108_08b191ed-56c5-4846-92e1-2bab7e420e2e.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_182108_08b191ed-56c5-4846-92e1-2bab7e420e2e_min.webp"
+      },
+      "createdAt": 1789064468.695696
+    },
+    {
+      "id": "837d3bf7-b58b-4f0b-9a97-c277672c585d",
+      "type": "image",
+      "status": "completed",
+      "model": "seedream_v4_5",
+      "params": {
+        "prompt": "Edit only the woman's shirt in this photo: replace collared button-up with a plain sage green short-sleeve crewneck T-shirt, no collar no buttons, matching soft cotton. Keep exact composition, woman's tied-back brown hair, partner, lake, bench, lighting unchanged. One photographic image, no text.",
+        "aspect_ratio": "16:9",
+        "input_images": [
+          {
+            "id": "258db977-8dad-4ecb-92fd-4f964ade0387",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_181918_258db977-8dad-4ecb-92fd-4f964ade0387.png"
+          }
+        ],
+        "batch_size": 1,
+        "quality": "basic",
+        "seed": 58986,
+        "width": 2560,
+        "height": 1440,
+        "use_unlim": false,
+        "reference_elements": []
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_182108_837d3bf7-b58b-4f0b-9a97-c277672c585d.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_182108_837d3bf7-b58b-4f0b-9a97-c277672c585d_min.webp"
+      },
+      "createdAt": 1789064468.105579
+    }
+  ],
+  "jobs": [
+    {
+      "index": 21,
+      "job_id": "08b191ed-56c5-4846-92e1-2bab7e420e2e",
+      "status": "completed",
+      "type": "image",
+      "model": "seedream_v4_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_182108_08b191ed-56c5-4846-92e1-2bab7e420e2e.png"
+    },
+    {
+      "index": 22,
+      "job_id": "837d3bf7-b58b-4f0b-9a97-c277672c585d",
+      "status": "completed",
+      "type": "image",
+      "model": "seedream_v4_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_182108_837d3bf7-b58b-4f0b-9a97-c277672c585d.png"
+    }
+  ],
+  "all_found": true
+}

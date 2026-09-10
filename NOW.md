@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — individual scene artwork (10 September 2026)
+
+- Built twelve individual 2560×1440 scene exports in docs/design/busy-life/final-scenes, with a one-at-a-time HTML viewer, full script and overview. No video or live-site changes.
+- Switched to Higgsfield Seedream 4.5 reference editing for consistent groomer/caller imagery. Milo uses FLUX outpainting of the exact supplied photo; caller close-ups keep him off-screen. Source remains lower-resolution than other frames.
+- Added readable glass call/booking treatments, a newly generated open-eyed fuzzy mascot and closing CTA. Corrected unwanted storefront lettering and closing wardrobe; checked exports and viewer navigation.
+- Upload of the non-public original mascot was rejected by automatic approval review; it stayed local and a description-based version was used. Public push remains blocked by the earlier review; commit locally.
+- Next: Bubs reviews the individual finished stills before animation and voice production.
+
 ## Current handoff — Samoyed and wild-haired Milo storyboard (10 September 2026)
 
 - Rebuilt the 72-second, twelve-panel storyboard using Higgsfield Soul 2.0 photography and Bubs’s uploaded wild-haired Yorkshire terrier reference for scene 4; Samoyed remains the grooming customer.

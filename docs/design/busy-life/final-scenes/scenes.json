@@ -1,0 +1,110 @@
+[
+  {
+    "number": 1,
+    "title": "Meet the customer in her hands",
+    "time": "00\u201304",
+    "image": "scene-01.png",
+    "action": "Open on the beautiful Samoyed\u2019s whole face: upright ears, a goofy natural grin. The groomer is already washing him with both hands.",
+    "audio": "Water and gentle room tone. The phone begins to ring.",
+    "graphics": "Tiny AI Receptionist brand mark. No large overlay."
+  },
+  {
+    "number": 2,
+    "title": "Both hands. One very good dog.",
+    "time": "04\u201309",
+    "image": "scene-02.png",
+    "action": "The Samoyed tilts his head as her soapy hands work through his coat. Stay in the present. She has not stopped grooming.",
+    "audio": "NARRATOR: \u201cIt always rings when your hands are full.\u201d",
+    "graphics": "Natural little dog movement, no cartoon sound effects."
+  },
+  {
+    "number": 3,
+    "title": "She hears it. She can\u2019t pick up.",
+    "time": "09\u201314",
+    "image": "scene-03.png",
+    "action": "She glances at the ringing phone on the dry counter. Both hands stay wet and occupied with the dog; she returns her attention to him.",
+    "audio": "NARRATOR: \u201cAnd there\u2019s someone on the other end who needs you, too.\u201d",
+    "graphics": "Small incoming-call glass pill. No attempted reach for the phone."
+  },
+  {
+    "number": 4,
+    "title": "Milo could use a little help",
+    "time": "14\u201319",
+    "image": "scene-04.png",
+    "action": "Hold on Milo\u2019s exact wild-haired face. His customer says the haircut line from off-screen.",
+    "audio": "CUSTOMER, affectionately to Milo: \u201cWe\u2019re getting you a haircut.\u201d\nA short ringback.",
+    "graphics": "Let the real-looking dog supply the humor; no gag text."
+  },
+  {
+    "number": 5,
+    "title": "A reassuring answer",
+    "time": "19\u201325",
+    "image": "scene-05.png",
+    "action": "The open-eyed mascot answers beside the studio scene. The groomer stays quiet and keeps washing; the AI is speaking to the caller.",
+    "audio": "AI: \u201cHi, Happy Paws Grooming. How can I help?\u201d",
+    "graphics": "\u201cAI Receptionist\u201d remains visible on the small glass overlay. Happy Paws Grooming is a fictional demo name."
+  },
+  {
+    "number": 6,
+    "title": "A specific request",
+    "time": "25\u201332",
+    "image": "scene-06.png",
+    "action": "Cut to the same caller, speaking naturally. Milo stays off-screen rather than changing appearance.",
+    "audio": "CUSTOMER: \u201cCould I book Milo for his usual groom on Thursday? After lunch would be ideal.\u201d",
+    "graphics": "One short caption at a time. Returning-customer example; details established off-screen."
+  },
+  {
+    "number": 7,
+    "title": "An answer that fits",
+    "time": "32\u201339",
+    "image": "scene-07.png",
+    "action": "The AI presents a suitable available afternoon slot. Keep the owner visible in the background; this happens alongside her work.",
+    "audio": "AI: \u201cThere\u2019s a two o\u2019clock appointment available on Thursday. Would you like that one?\u201d",
+    "graphics": "Highlight \u201cThursday \u00b7 2 PM\u201d; do not make the caller navigate the interface."
+  },
+  {
+    "number": 8,
+    "title": "The customer chooses",
+    "time": "39\u201344",
+    "image": "scene-08.png",
+    "action": "The same caller smiles as she accepts the offered appointment.",
+    "audio": "CUSTOMER: \u201cTwo is perfect. Thank you.\u201d",
+    "graphics": "The selected time settles gently into place. No narrator over dialogue."
+  },
+  {
+    "number": 9,
+    "title": "Both customers taken care of",
+    "time": "44\u201351",
+    "image": "scene-09.png",
+    "action": "The owner dries the dog. Beside her, the new appointment resolves into a confirmation. The two threads meet.",
+    "audio": "AI: \u201cYou\u2019re all set. Milo is booked for Thursday at two. See you then.\u201d",
+    "graphics": "Booking card, drawn check, three brief celebration strokes. Quiet confirmation tone."
+  },
+  {
+    "number": 10,
+    "title": "The work is finished",
+    "time": "51\u201357",
+    "image": "scene-10.png",
+    "action": "The appointment has finished. She puts away her apron, ready to leave. This is the first time her hands are free.",
+    "audio": "NARRATOR: \u201cThe appointment\u2019s booked. One less call to return before you head out.\u201d",
+    "graphics": "A quiet, settled booking confirmation. No new person, business or location."
+  },
+  {
+    "number": 11,
+    "title": "Time for her plans",
+    "time": "57\u201364",
+    "image": "scene-11.png",
+    "action": "Work finished, the groomer heads outside with her hiking bag.",
+    "audio": "NARRATOR: \u201cBecause you have plans, too.\u201d\nOWNER, voice message: \u201cOn my way.\u201d",
+    "graphics": "Door closes; music opens up. The bag appears here for the first time."
+  },
+  {
+    "number": 12,
+    "title": "A life beyond the next ring",
+    "time": "64\u201372",
+    "image": "scene-12.png",
+    "action": "The groomer meets her partner by the lake after work. She is present with her partner, phone put away. Let this shot breathe, then add the invitation.",
+    "audio": "NARRATOR: \u201cBe there for your customers. And for yourself. Meet your AI receptionist.\u201d",
+    "graphics": "\u201cTake your day back.\u201d \u2192 \u201cMeet your AI receptionist.\u201d Small connected-pilot note."
+  }
+]

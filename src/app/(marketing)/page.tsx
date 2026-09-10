@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 const CHAPTERS = [
   { id: "desk", n: "01", title: "The front desk" },
-  { id: "cost", n: "02", title: "The cost" },
+  { id: "cost", n: "02", title: "When you’re busy" },
   { id: "turn", n: "03", title: "Confirmation calls" },
   { id: "features", n: "04", title: "Core features" },
   { id: "proof", n: "05", title: "Proof" },

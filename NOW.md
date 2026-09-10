@@ -3,6 +3,13 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — three playable AI voice examples (10 September 2026)
+
+- Completed the busy-day section’s modal with Ainsley, Grady and Brielle voice choices, volume guidance, native playback controls, replay and the sample script. Visitors can compare the same receptionist-side dialogue; switching voices and closing stops playback. Samples do not autoplay.
+- Generated three 29–32 second scripted Seed Audio demos through Higgsfield, saved locally in public/audio/voice-*.mp3. The modal labels these as illustrative AI demos, not customer recordings or the guaranteed production voice, and explains that more options can be explored during setup subject to the voice service.
+- Verified all three files decode and play, replay, closing/reset, keyboard focus and 320/390/1440px dialog layouts. Production build and dev-tool exclusion pass. Renamed the chapter navigation to “When you’re busy.”
+- Next: review voices in #cost, then mock up the later confirmation/follow-up story before changing another section. No real calls or deployment. Local commit only; public publishing remains pending the earlier approval.
+
 ## Current handoff — busy section and voice modal in progress (10 September 2026)
 
 - Built the approved white #cost story: “You can’t be in two conversations at once,” new standalone conversation photograph, online booking preview, mascot and incoming-call pilot option.

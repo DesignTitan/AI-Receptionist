@@ -638,3 +638,12 @@
 @media (min-width: 1101px) { .rc-busy > .sc-wrap { width: calc(100% - 280px); max-width: 1200px; padding-inline: 0; margin-left: max(220px, calc((100% - 1200px) / 2)); margin-right: 60px; } }
 @media (max-width: 900px) { .rc-busy__story, .rc-busy__options { grid-template-columns: 1fr; } .rc-busy__options > div + div { border-left: 0; border-top: 1px solid #d5e6dd; padding: 28px 0 0; } .rc-busy__photo > img { height: 420px; } }
 @media (max-width: 480px) { .rc-busy__photo > img { height: 320px; } .rc-busy__voice { gap: 10px; } .rc-busy__voice > img { width: 70px; height: 70px; } .rc-voice-dialog__content { padding: 25px; } }
+.rc-voice-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 24px; }
+.rc-voice-options button { min-height: 46px; padding: 10px 6px; border: 1px solid #b7cec2; border-radius: 12px; font: inherit; font-size: 13px; background: #fff; color: #1e3a34; cursor: pointer; }
+.rc-voice-options button[aria-pressed="true"] { background: #1e3a34; color: #fff; border-color: #1e3a34; }
+.rc-voice-options button:focus-visible, .rc-voice-replay:focus-visible { outline: 2px solid #1e3a34; outline-offset: 3px; }
+.rc-voice-dialog .rc-voice-current { font-size: 13px; margin: 20px 0 0; font-weight: 600; }
+.rc-voice-dialog audio { margin-block: 12px; }
+.rc-voice-replay { padding: 8px 0; min-height: 44px; border: 0; background: none; color: #1e3a34; font: inherit; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.rc-voice-choice-note { margin-top: 20px; padding: 18px; background: #eef6f1; border-radius: 14px; font-size: 14px; }
+.rc-voice-choice-note p { font-size: 13px; margin: 8px 0 0; color: #526b63; }

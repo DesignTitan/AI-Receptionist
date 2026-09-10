@@ -1,0 +1,121 @@
+{
+  "items": [
+    {
+      "id": "ff6d00e3-ddb9-407c-a426-ed9d4858dd9b",
+      "type": "image",
+      "status": "completed",
+      "model": "text2image_soul_v2",
+      "params": {
+        "prompt": "One single photograph. Medium portrait of a freckled brown-haired woman age 35 with hair tied back, wearing a sage green T-shirt, holding a folded dark green work apron in her two hands. She stands alone inside a small white tiled grooming shop at end of day. One woman only. Natural window light, realistic candid photography.",
+        "width": 2048,
+        "height": 1152,
+        "batch_size": 1,
+        "seed": 785308,
+        "enhance_prompt": false,
+        "use_sage_attention": false,
+        "quality": "1080p",
+        "use_relax": false,
+        "style_id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+        "style": {
+          "id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+          "name": "General",
+          "url": "https://cdn.higgsfield.ai/soul-v2-style/f33d85f2-6521-4fa8-8e8f-894cfbdee578.webp",
+          "strength": null
+        },
+        "style_strength": null
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180930_ff6d00e3-ddb9-407c-a426-ed9d4858dd9b.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180930_ff6d00e3-ddb9-407c-a426-ed9d4858dd9b_min.webp"
+      },
+      "createdAt": 1789063770.966219
+    },
+    {
+      "id": "1d9619c7-9fb3-4fb8-b988-d1e033b39c90",
+      "type": "image",
+      "status": "completed",
+      "model": "text2image_soul_v2",
+      "params": {
+        "prompt": "One single photograph. A freckled brown-haired woman age 35 with hair tied back, wearing sage green T-shirt and dark trousers, small hiking backpack over shoulder, walking on sidewalk outside a closed shop door. She smiles, ready for an afternoon off. Natural candid daylight photograph, medium shot of one person. Plain shop window without signage.",
+        "width": 2048,
+        "height": 1152,
+        "batch_size": 1,
+        "seed": 201950,
+        "enhance_prompt": false,
+        "use_sage_attention": false,
+        "quality": "1080p",
+        "use_relax": false,
+        "style_id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+        "style": {
+          "id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+          "name": "General",
+          "url": "https://cdn.higgsfield.ai/soul-v2-style/f33d85f2-6521-4fa8-8e8f-894cfbdee578.webp",
+          "strength": null
+        },
+        "style_strength": null
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180930_1d9619c7-9fb3-4fb8-b988-d1e033b39c90.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180930_1d9619c7-9fb3-4fb8-b988-d1e033b39c90_min.webp"
+      },
+      "createdAt": 1789063770.629199
+    },
+    {
+      "id": "b551071c-2c91-4c2c-b2b5-5d6f641cf638",
+      "type": "image",
+      "status": "completed",
+      "model": "text2image_soul_v2",
+      "params": {
+        "prompt": "An ordinary candid photograph of a quiet Michigan lake in late afternoon. A brown-haired woman with low ponytail in a sage green T-shirt and dark trousers sits on a wooden bench beside her partner in a navy shirt, both seen from behind looking at the water. Wide landscape photograph. Peaceful natural daylight, realistic modest lake and tree-lined shore. Unretouched camera photograph.",
+        "width": 2048,
+        "height": 1152,
+        "batch_size": 1,
+        "seed": 695626,
+        "enhance_prompt": false,
+        "use_sage_attention": false,
+        "quality": "1080p",
+        "use_relax": false,
+        "style_id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+        "style": {
+          "id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+          "name": "General",
+          "url": "https://cdn.higgsfield.ai/soul-v2-style/f33d85f2-6521-4fa8-8e8f-894cfbdee578.webp",
+          "strength": null
+        },
+        "style_strength": null
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180931_b551071c-2c91-4c2c-b2b5-5d6f641cf638.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180931_b551071c-2c91-4c2c-b2b5-5d6f641cf638_min.webp"
+      },
+      "createdAt": 1789063771.110352
+    }
+  ],
+  "jobs": [
+    {
+      "index": 10,
+      "job_id": "ff6d00e3-ddb9-407c-a426-ed9d4858dd9b",
+      "status": "completed",
+      "type": "image",
+      "model": "text2image_soul_v2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180930_ff6d00e3-ddb9-407c-a426-ed9d4858dd9b.png"
+    },
+    {
+      "index": 11,
+      "job_id": "1d9619c7-9fb3-4fb8-b988-d1e033b39c90",
+      "status": "completed",
+      "type": "image",
+      "model": "text2image_soul_v2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180930_1d9619c7-9fb3-4fb8-b988-d1e033b39c90.png"
+    },
+    {
+      "index": 12,
+      "job_id": "b551071c-2c91-4c2c-b2b5-5d6f641cf638",
+      "status": "completed",
+      "type": "image",
+      "model": "text2image_soul_v2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180931_b551071c-2c91-4c2c-b2b5-5d6f641cf638.png"
+    }
+  ],
+  "all_found": true
+}

@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — Samoyed and wild-haired Milo storyboard (10 September 2026)
+
+- Rebuilt the 72-second, twelve-panel storyboard using Higgsfield Soul 2.0 photography and Bubs’s uploaded wild-haired Yorkshire terrier reference for scene 4; Samoyed remains the grooming customer.
+- Created storyboard-v6.html, two visual page PNGs, full script and generation provenance in docs/design/busy-life. Glass call/booking treatments are composed separately; scenes 5 and 7 continue the same washing moment.
+- Replaced defective final shots after visual review. These are concept boards: human faces/set continuity and final fuzzy mascot animation still need a production pass before video generation. No site or video changes.
+- Next: review the storyboard with Bubs. Commit locally; earlier automatic approval review still blocks public push.
+- Latest correction: Milo must look exactly like the supplied photo, including extreme flyaway hair. Saved original as milo-approved-reference.png and used it unmodified in scenes 4, 6 and 8; generated lookalikes are superseded.
+
 ## Current handoff — photographic dog casting (10 September 2026)
 
 - Bubs rejected v4's AI-looking images. New direction: Samoyed grooming dog with a natural funny smile; shaggy caller dog in scene 4.

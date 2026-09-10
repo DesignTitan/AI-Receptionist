@@ -1,0 +1,397 @@
+{
+  "items": [
+    {
+      "id": "a5832e09-1857-44eb-a457-ec99444a880f",
+      "type": "image",
+      "status": "completed",
+      "model": "text2image_soul_v2",
+      "params": {
+        "prompt": "A close-up eye-level shot captures a large white dog, likely a Samoyed with fluffy, slightly wet fur due to grooming, standing inside a metal washing tub. The dog's tongue is out, creating a friendly and approachable facial expression, and its thick white coat appears well-kept with subtle separation at the midsection. Partially visible behind the dog is a young Latina woman, characterized by her long dark hair, a green T-shirt, and a darker green apron, with her hand gently resting on the dog’s back to steady it during the washing process. The background features stainless steel fixtures and an indoor setting with a window that allows soft daylight to illuminate the dog's face, bringing out the vibrancy and lucidity of its black nose, mouth, and eyes. Dominant colors include white, various greens, and muted metallic grays, and a smartphone propped on the countertop displays a white screen with text and an animal photo. The moderately wide-angle lens used causes a slight distortion in the dog’s facial features, particularly around its snout, and the entire image is in focus with sharp digital clarity, suggesting it was shot on a modern smartphone. The atmosphere feels light-hearted and routine, typical of a grooming session.\nHEX VALUES: [\"#29231a\", \"#928974\", \"#7d7563\", \"#a29a86\", \"#676050\", \"#12110c\", \"#393127\", \"#504539\", \"#b0ac9e\", \"#c6c1b2\", \"#d5d4cd\", \"#0a2c27\"]",
+        "width": 2048,
+        "height": 1152,
+        "batch_size": 1,
+        "seed": 262648,
+        "enhance_prompt": true,
+        "use_sage_attention": false,
+        "quality": "1080p",
+        "use_relax": false,
+        "image_reference": {
+          "id": "8cc75bfd-3378-4d3f-a37b-a4c52673e270",
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_174509_8cc75bfd-3378-4d3f-a37b-a4c52673e270.png",
+          "type": "image_job"
+        },
+        "style_id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+        "style": {
+          "id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+          "name": "General",
+          "url": "https://cdn.higgsfield.ai/soul-v2-style/f33d85f2-6521-4fa8-8e8f-894cfbdee578.webp",
+          "strength": null
+        },
+        "style_strength": null
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180437_a5832e09-1857-44eb-a457-ec99444a880f.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180437_a5832e09-1857-44eb-a457-ec99444a880f_min.webp"
+      },
+      "createdAt": 1789063477.089706
+    },
+    {
+      "id": "d84edbe4-2ad0-4b54-a112-9924c2891f19",
+      "type": "image",
+      "status": "completed",
+      "model": "text2image_soul_v2",
+      "params": {
+        "prompt": "Single candid photographic film storyboard still, 16:9. Natural window daylight, realistic imperfect skin and fur, understated premium documentary cinematography, no CGI, no illustration, no airbrushing, no text or interface. Same character throughout: 35-year-old female groomer with brown hair in a low ponytail, freckles, sage green short-sleeve T-shirt, dark forest-green apron, dark trousers. Same practical white-tile dog grooming shop with a large stainless wash tub beside a window and dry counter on right. Beautiful white adult Samoyed, upright ears, black nose, happy natural grin. Tight view of both wet soapy hands gently shampooing Samoyed shoulders while its whole goofy smiling face stays visible. Body fur visibly wet, head fluffy. No phone needed.",
+        "width": 2048,
+        "height": 1152,
+        "batch_size": 1,
+        "seed": 64744,
+        "enhance_prompt": false,
+        "use_sage_attention": false,
+        "quality": "1080p",
+        "use_relax": false,
+        "style_id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+        "style": {
+          "id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+          "name": "General",
+          "url": "https://cdn.higgsfield.ai/soul-v2-style/f33d85f2-6521-4fa8-8e8f-894cfbdee578.webp",
+          "strength": null
+        },
+        "style_strength": null
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_d84edbe4-2ad0-4b54-a112-9924c2891f19.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_d84edbe4-2ad0-4b54-a112-9924c2891f19_min.webp"
+      },
+      "createdAt": 1789063595.695404
+    },
+    {
+      "id": "7c4302f8-d75b-47f1-933f-4e8467f1f311",
+      "type": "image",
+      "status": "completed",
+      "model": "text2image_soul_v2",
+      "params": {
+        "prompt": "Single candid photographic film storyboard still, 16:9. Natural window daylight, realistic imperfect skin and fur, understated premium documentary cinematography, no CGI, no illustration, no airbrushing, no text or interface. Same character throughout: 35-year-old female groomer with brown hair in a low ponytail, freckles, sage green short-sleeve T-shirt, dark forest-green apron, dark trousers. Same practical white-tile dog grooming shop with a large stainless wash tub beside a window and dry counter on right. Beautiful white adult Samoyed, upright ears, black nose, happy natural grin. WIDE medium shot from side with whole woman's head and both hands visible. She glances right toward a ringing smartphone on dry counter while both hands remain shampooing the Samoyed in the tub. Her mouth closed. No reaching. Actual portrait of woman's face must be visible. Wet clumped dog body coat, fluffy white head.",
+        "width": 2048,
+        "height": 1152,
+        "batch_size": 1,
+        "seed": 462244,
+        "enhance_prompt": false,
+        "use_sage_attention": false,
+        "quality": "1080p",
+        "use_relax": false,
+        "style_id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+        "style": {
+          "id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+          "name": "General",
+          "url": "https://cdn.higgsfield.ai/soul-v2-style/f33d85f2-6521-4fa8-8e8f-894cfbdee578.webp",
+          "strength": null
+        },
+        "style_strength": null
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_7c4302f8-d75b-47f1-933f-4e8467f1f311.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_7c4302f8-d75b-47f1-933f-4e8467f1f311_min.webp"
+      },
+      "createdAt": 1789063595.575428
+    },
+    {
+      "id": "3c64a3b6-73f6-4b00-8829-976bc131b1b9",
+      "type": "image",
+      "status": "completed",
+      "model": "text2image_soul_v2",
+      "params": {
+        "prompt": "A close-up straight-on shot focuses on a small Yorkshire Terrier dog with strikingly wild and unkempt tan and light brown fur. The hair spikes outward in every direction, creating a dramatic, comical texture reminiscent of static electricity or an exaggerated \"bedhead\" look. The dog’s dark eyes peer through tufts of fur barely revealing its expressive, compact face. The animal wears a black collar with a shiny metal buckle. The background is dimly lit and softly blurred, featuring warm-toned wooden walls and a faint star-shaped decoration, suggesting a cozy indoor setting. Soft, diffused artificial lighting from the right casts gentle shadows that accentuate the various layers of the dog's hair, adding depth and dimension. In the left of the frame, a secondary out-of-focus white furry dog with a blue dotted collar is partially visible in the background. Dominant colors include the various browns and tans of the Yorkshire Terrier’s hair, creamy whites, and muted slate blue-greys of a blanket in the foreground. Captured with a smartphone or digital camera, the image has a slightly soft quality with minor digital noise visible in the darker regions. The overall impression is humorous and endearing, combining a sense of playful chaos with domestic warmth.\nHEX VALUES: [\"#362715\", \"#482f19\", \"#24190e\", \"#5e3c1f\", \"#fceed4\", \"#e5ddd4\", \"#795231\", \"#926a46\", \"#e5b37b\", \"#ad8259\", \"#eecda2\", \"#c99868\", \"#cfc4b8\", \"#bfa88e\"]",
+        "width": 2048,
+        "height": 1152,
+        "batch_size": 1,
+        "seed": 364472,
+        "enhance_prompt": true,
+        "use_sage_attention": false,
+        "quality": "1080p",
+        "use_relax": false,
+        "image_reference": {
+          "id": "894ef38c-089d-4fe4-82e5-ec50fe123ae9",
+          "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/894ef38c-089d-4fe4-82e5-ec50fe123ae9.png",
+          "type": "media_input"
+        },
+        "style_id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+        "style": {
+          "id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+          "name": "General",
+          "url": "https://cdn.higgsfield.ai/soul-v2-style/f33d85f2-6521-4fa8-8e8f-894cfbdee578.webp",
+          "strength": null
+        },
+        "style_strength": null
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180437_3c64a3b6-73f6-4b00-8829-976bc131b1b9.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180437_3c64a3b6-73f6-4b00-8829-976bc131b1b9_min.webp"
+      },
+      "createdAt": 1789063477.463087
+    },
+    {
+      "id": "bcef52c9-49ec-46fc-98b1-9da8ef870082",
+      "type": "image",
+      "status": "completed",
+      "model": "text2image_soul_v2",
+      "params": {
+        "prompt": "Single candid photographic film storyboard still, 16:9. Natural window daylight, realistic imperfect skin and fur, understated premium documentary cinematography, no CGI, no illustration, no airbrushing, no text or interface. Same customer throughout: woman age 30, shoulder-length dark curly hair, blue cotton shirt, jeans, sitting on a dark brown sofa in a lived-in home. Her tiny tan Yorkshire terrier Milo has wildly disheveled fine silky hair standing out like static electricity around his whole head, dark muzzle, little black nose and a comically serious expression. Tiny dog, not a sheepdog. MEDIUM WIDE scene, show woman's entire face and torso, phone held to ear as she talks, tiny terrier perched beside her on blanket, ridiculously flyaway spiky tan hair visible. Show both human and dog, not only a dog closeup.",
+        "width": 2048,
+        "height": 1152,
+        "batch_size": 1,
+        "seed": 85904,
+        "enhance_prompt": false,
+        "use_sage_attention": false,
+        "quality": "1080p",
+        "use_relax": false,
+        "style_id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+        "style": {
+          "id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+          "name": "General",
+          "url": "https://cdn.higgsfield.ai/soul-v2-style/f33d85f2-6521-4fa8-8e8f-894cfbdee578.webp",
+          "strength": null
+        },
+        "style_strength": null
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_bcef52c9-49ec-46fc-98b1-9da8ef870082.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_bcef52c9-49ec-46fc-98b1-9da8ef870082_min.webp"
+      },
+      "createdAt": 1789063595.61686
+    },
+    {
+      "id": "7f4ee89d-eacf-4a1e-a2ca-c286eae16691",
+      "type": "image",
+      "status": "completed",
+      "model": "text2image_soul_v2",
+      "params": {
+        "prompt": "Single candid photographic film storyboard still, 16:9. Natural window daylight, realistic imperfect skin and fur, understated premium documentary cinematography, no CGI, no illustration, no airbrushing, no text or interface. Same customer throughout: woman age 30, shoulder-length dark curly hair, blue cotton shirt, jeans, sitting on a dark brown sofa in a lived-in home. Her tiny tan Yorkshire terrier Milo has wildly disheveled fine silky hair standing out like static electricity around his whole head, dark muzzle, little black nose and a comically serious expression. Tiny dog, not a sheepdog. MEDIUM shot with her entire face in view: woman nods and smiles while speaking into phone at her ear, one hand affectionately on the tiny terrier beside her, crazy spiky flyaway hair untouched. Same sofa and outfit.",
+        "width": 2048,
+        "height": 1152,
+        "batch_size": 1,
+        "seed": 807988,
+        "enhance_prompt": false,
+        "use_sage_attention": false,
+        "quality": "1080p",
+        "use_relax": false,
+        "style_id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+        "style": {
+          "id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+          "name": "General",
+          "url": "https://cdn.higgsfield.ai/soul-v2-style/f33d85f2-6521-4fa8-8e8f-894cfbdee578.webp",
+          "strength": null
+        },
+        "style_strength": null
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_7f4ee89d-eacf-4a1e-a2ca-c286eae16691.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_7f4ee89d-eacf-4a1e-a2ca-c286eae16691_min.webp"
+      },
+      "createdAt": 1789063595.708399
+    },
+    {
+      "id": "55635389-8759-42bf-81c0-171e5932fbd2",
+      "type": "image",
+      "status": "completed",
+      "model": "text2image_soul_v2",
+      "params": {
+        "prompt": "Single candid photographic film storyboard still, 16:9. Natural window daylight, realistic imperfect skin and fur, understated premium documentary cinematography, no CGI, no illustration, no airbrushing, no text or interface. Same character throughout: 35-year-old female groomer with brown hair in a low ponytail, freckles, sage green short-sleeve T-shirt, dark forest-green apron, dark trousers. Same practical white-tile dog grooming shop with a large stainless wash tub beside a window and dry counter on right. Beautiful white adult Samoyed, upright ears, black nose, happy natural grin. Medium shot of woman drying the same Samoyed with a large white towel in same grooming shop. Her head face fully visible; hands busy with towel, mouth closed. Leave clear space at upper right for a future graphic.",
+        "width": 2048,
+        "height": 1152,
+        "batch_size": 1,
+        "seed": 859493,
+        "enhance_prompt": false,
+        "use_sage_attention": false,
+        "quality": "1080p",
+        "use_relax": false,
+        "style_id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+        "style": {
+          "id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+          "name": "General",
+          "url": "https://cdn.higgsfield.ai/soul-v2-style/f33d85f2-6521-4fa8-8e8f-894cfbdee578.webp",
+          "strength": null
+        },
+        "style_strength": null
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_55635389-8759-42bf-81c0-171e5932fbd2.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_55635389-8759-42bf-81c0-171e5932fbd2_min.webp"
+      },
+      "createdAt": 1789063595.651326
+    },
+    {
+      "id": "cca342b7-9de3-4710-8a6d-565210959bfe",
+      "type": "image",
+      "status": "completed",
+      "model": "text2image_soul_v2",
+      "params": {
+        "prompt": "Single candid photographic film storyboard still, 16:9. Natural window daylight, realistic imperfect skin and fur, understated premium documentary cinematography, no CGI, no illustration, no airbrushing, no text or interface. Same character throughout: 35-year-old female groomer with brown hair in a low ponytail, freckles, sage green short-sleeve T-shirt, dark forest-green apron, dark trousers. Same practical white-tile dog grooming shop with a large stainless wash tub beside a window and dry counter on right. Beautiful white adult Samoyed, upright ears, black nose, happy natural grin. WIDE end of appointment scene. Clean dry fluffy Samoyed on floor beside woman. She has finished work and is removing her green apron; sage T-shirt now visible. Same shop. Both faces visible. Clock on wall, no other characters.",
+        "width": 2048,
+        "height": 1152,
+        "batch_size": 1,
+        "seed": 288706,
+        "enhance_prompt": false,
+        "use_sage_attention": false,
+        "quality": "1080p",
+        "use_relax": false,
+        "style_id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+        "style": {
+          "id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+          "name": "General",
+          "url": "https://cdn.higgsfield.ai/soul-v2-style/f33d85f2-6521-4fa8-8e8f-894cfbdee578.webp",
+          "strength": null
+        },
+        "style_strength": null
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_cca342b7-9de3-4710-8a6d-565210959bfe.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_cca342b7-9de3-4710-8a6d-565210959bfe_min.webp"
+      },
+      "createdAt": 1789063595.9559
+    },
+    {
+      "id": "62813a3b-d36f-4dbd-b219-84d21333e2a6",
+      "type": "image",
+      "status": "completed",
+      "model": "text2image_soul_v2",
+      "params": {
+        "prompt": "Single candid photographic film storyboard still, 16:9. Natural window daylight, realistic imperfect skin and fur, understated premium documentary cinematography, no CGI, no illustration, no airbrushing, no text or interface. A 35-year-old woman with brown hair in a low ponytail, freckles, sage green short sleeve T-shirt and dark trousers, NO apron, leaving her white-tile dog grooming shop after finishing work. She carries a small hiking backpack over one shoulder, stepping through the open front door with a relieved smile. Wide view includes whole face and upper body, afternoon light outdoors. No phone in hands, no dog left unattended, no other people. Quiet everyday scene.",
+        "width": 2048,
+        "height": 1152,
+        "batch_size": 1,
+        "seed": 423302,
+        "enhance_prompt": false,
+        "use_sage_attention": false,
+        "quality": "1080p",
+        "use_relax": false,
+        "style_id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+        "style": {
+          "id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+          "name": "General",
+          "url": "https://cdn.higgsfield.ai/soul-v2-style/f33d85f2-6521-4fa8-8e8f-894cfbdee578.webp",
+          "strength": null
+        },
+        "style_strength": null
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180726_62813a3b-d36f-4dbd-b219-84d21333e2a6.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180726_62813a3b-d36f-4dbd-b219-84d21333e2a6_min.webp"
+      },
+      "createdAt": 1789063646.546893
+    },
+    {
+      "id": "163bee23-684d-484a-bd28-976091373979",
+      "type": "image",
+      "status": "completed",
+      "model": "text2image_soul_v2",
+      "params": {
+        "prompt": "Single candid photographic film storyboard still, 16:9. Natural window daylight, realistic imperfect skin and fur, understated premium documentary cinematography, no CGI, no illustration, no airbrushing, no text or interface. Wide lakeside landscape with a 35-year-old woman with brown hair in a low ponytail, sage green short sleeve T-shirt, dark trousers, small hiking backpack, spending peaceful time beside her male partner on a lakeside path after work. Both facing the water, relaxed, small figures toward right of frame. Soft late afternoon natural light. No dog in this scene, no phone, no apron. Room on left for a future headline. Real Michigan lake, ordinary beautiful moment, not fantasy epic landscape.",
+        "width": 2048,
+        "height": 1152,
+        "batch_size": 1,
+        "seed": 476402,
+        "enhance_prompt": false,
+        "use_sage_attention": false,
+        "quality": "1080p",
+        "use_relax": false,
+        "style_id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+        "style": {
+          "id": "3db34ab5-3439-4317-9e03-08dc30852e69",
+          "name": "General",
+          "url": "https://cdn.higgsfield.ai/soul-v2-style/f33d85f2-6521-4fa8-8e8f-894cfbdee578.webp",
+          "strength": null
+        },
+        "style_strength": null
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180727_163bee23-684d-484a-bd28-976091373979.png",
+        "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180727_163bee23-684d-484a-bd28-976091373979_min.webp"
+      },
+      "createdAt": 1789063647.07685
+    }
+  ],
+  "jobs": [
+    {
+      "index": 1,
+      "job_id": "a5832e09-1857-44eb-a457-ec99444a880f",
+      "status": "completed",
+      "type": "image",
+      "model": "text2image_soul_v2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180437_a5832e09-1857-44eb-a457-ec99444a880f.png"
+    },
+    {
+      "index": 2,
+      "job_id": "d84edbe4-2ad0-4b54-a112-9924c2891f19",
+      "status": "completed",
+      "type": "image",
+      "model": "text2image_soul_v2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_d84edbe4-2ad0-4b54-a112-9924c2891f19.png"
+    },
+    {
+      "index": 3,
+      "job_id": "7c4302f8-d75b-47f1-933f-4e8467f1f311",
+      "status": "completed",
+      "type": "image",
+      "model": "text2image_soul_v2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_7c4302f8-d75b-47f1-933f-4e8467f1f311.png"
+    },
+    {
+      "index": 4,
+      "job_id": "3c64a3b6-73f6-4b00-8829-976bc131b1b9",
+      "status": "completed",
+      "type": "image",
+      "model": "text2image_soul_v2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180437_3c64a3b6-73f6-4b00-8829-976bc131b1b9.png"
+    },
+    {
+      "index": 6,
+      "job_id": "bcef52c9-49ec-46fc-98b1-9da8ef870082",
+      "status": "completed",
+      "type": "image",
+      "model": "text2image_soul_v2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_bcef52c9-49ec-46fc-98b1-9da8ef870082.png"
+    },
+    {
+      "index": 8,
+      "job_id": "7f4ee89d-eacf-4a1e-a2ca-c286eae16691",
+      "status": "completed",
+      "type": "image",
+      "model": "text2image_soul_v2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_7f4ee89d-eacf-4a1e-a2ca-c286eae16691.png"
+    },
+    {
+      "index": 9,
+      "job_id": "55635389-8759-42bf-81c0-171e5932fbd2",
+      "status": "completed",
+      "type": "image",
+      "model": "text2image_soul_v2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_55635389-8759-42bf-81c0-171e5932fbd2.png"
+    },
+    {
+      "index": 10,
+      "job_id": "cca342b7-9de3-4710-8a6d-565210959bfe",
+      "status": "completed",
+      "type": "image",
+      "model": "text2image_soul_v2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180635_cca342b7-9de3-4710-8a6d-565210959bfe.png"
+    },
+    {
+      "index": 11,
+      "job_id": "62813a3b-d36f-4dbd-b219-84d21333e2a6",
+      "status": "completed",
+      "type": "image",
+      "model": "text2image_soul_v2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180726_62813a3b-d36f-4dbd-b219-84d21333e2a6.png"
+    },
+    {
+      "index": 12,
+      "job_id": "163bee23-684d-484a-bd28-976091373979",
+      "status": "completed",
+      "type": "image",
+      "model": "text2image_soul_v2",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260910_180727_163bee23-684d-484a-bd28-976091373979.png"
+    }
+  ],
+  "all_found": true
+}

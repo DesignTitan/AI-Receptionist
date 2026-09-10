@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — mobile modal image (10 September 2026)
+
+- Created the requested phone portrait version of the combined modal, with vertically stacked mascot, live captions and compact call controls.
+- Saved docs/design/voice-modal/mobile-concept.png and mobile-prompt.md. This is an active-call visual concept; sample captions show placement only.
+- Next: Bubs reviews mobile before implementation. Working site unchanged; saved locally.
+
 ## Current handoff — combined modal image (10 September 2026)
 
 - Generated the requested single combined concept: welcoming headline and large fuzzy mascot with mint rays, alongside live captions and call controls.

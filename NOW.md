@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — minimal pricing concepts (10 September 2026)
+
+- Created two pricing images using real pricing.ts content: A editorial columns, B comparison table. Saved in docs/design/pricing-concepts.
+- Verified plan prices, minutes, team limits, setup and overage against source. First B render invented values and was rejected; saved B is corrected.
+- Pricing UI and billing remain unchanged, awaiting design selection. Callback concepts were rejected; keep future direction clean and minimal.
+- Section 7-to-8 scroll delay fixed in prior commit. Local commit only; earlier public-push approval block remains.
+
 ## Current handoff — callback scroll fix (10 September 2026)
 
 - Removed section 7’s three-screen pin and scroll-driven fade; callback form now flows directly into section 8.

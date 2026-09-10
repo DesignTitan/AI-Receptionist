@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — production storyboard sheet (10 September 2026)
+
+- Reformatted existing six frames into a traditional three-column, two-row storyboard with timing, action, dialogue and sound/graphics directly below each frame, matching Bubs’s example.
+- Saved editable production-storyboard.html and rendered production-storyboard.png in docs/design/busy-life. No new imagery, video or site changes.
+- Next: review the complete visual/script sheet before animation. Prior public-push approval block remains unresolved; saved locally.
+
 ## Current handoff — reference-based storyboard and script (10 September 2026)
 
 - Created six-frame storyboard through Higgsfield using the original four-frame image as an uploaded reference. Saved storyboard-v2.png, exact prompt and full 30-second script in docs/design/busy-life.

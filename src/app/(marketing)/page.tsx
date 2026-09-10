@@ -1,4 +1,5 @@
 import { HappyPawsFilm } from "@/components/marketing/happy-paws-film";
+import { IndustryGallery } from "@/components/marketing/industry-gallery";
 import { VoiceDemoTrigger } from "@/components/marketing/voice-example";
 import { BusySection } from "@/components/marketing/busy-section";
 import { OverviewBenefits } from "@/components/marketing/overview-benefits";
@@ -37,15 +38,6 @@ const CHAPTERS = [
 const PLANS = (Object.entries(PRICING) as [Plan,typeof PRICING[Plan]][]).map(([id,p])=>({
  name:p.name,price:`$${p.monthly}`,calls:`${p.minutes.toLocaleString()} minutes a month · estimated ${p.estimatedCalls} two-minute calls`,firstPilot:p.monthly+PILOT_SETUP_CENTS/100,firstStandard:p.monthly+SETUP_CENTS/100,who:p.who,cta:'Start here',featured:id==='busy',has:planFeatures(id)
 }));
-
-const RAIL = [
-  { h: "Health and wellness", p: "Appointment confirmations and a clear view of what needs follow-up.", img: "ind-health.jpg" },
-  { h: "Personal care", p: "Colour, cuts, facials, massage: confirmed while your hands are busy.", img: "ind-care.jpg" },
-  { h: "Professional services", p: "Consultations confirmed and requests for changes ready for your team.", img: "ind-professional.jpg" },
-  { h: "Creative studios and agencies", p: "Discovery sessions booked with the person who would do the work.", img: "ind-studio.jpg" },
-  { h: "Trades and field service", p: "Appointment details confirmed while your team is out on the job.", img: "ind-trades.jpg" },
-  { h: "Instruction and sessions", p: "Lessons confirmed and cancellations visible in the appointment book.", img: "ind-lessons.jpg" },
-];
 
 export default function HomePage() {
   // Live only with a voice line AND the human check; otherwise the plate takes a callback request.
@@ -175,28 +167,7 @@ export default function HomePage() {
           {/* 05 · Their industry. Lateral: breadth. */}
         </div>
 
-        <section id="industries" data-sc-act="pan" data-sc-span="2.4">
-          <div data-sc-stage>
-            <div className="rc-rail" data-sc-pan="0.06">
-              <div className="rc-rail__lead">
-                <h2 className="sc-display sc-display--md">Any business that runs on appointments.</h2>
-                <p className="sc-body">If a client picks a person and a time, and someone has to phone them to make sure, this is for you.</p>
-              </div>
-              {RAIL.map((item) => (
-                <article key={item.h} className="rc-tile" style={{ "--shot": `url(/scrollcraft/${item.img})` } as React.CSSProperties}>
-                  <div className="rc-tile__body">
-                    <h3>{item.h}</h3>
-                    <p>{item.p}</p>
-                  </div>
-                </article>
-              ))}
-              <div className="rc-rail__note">
-                <h3>Try three example businesses.</h3>
-                <p>A fictional clinic, salon and studio show how online booking works. <a href="/demos">Open the demos.</a></p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <IndustryGallery />
 
         {/* Authored silence: one quiet screen before the peak. */}
         <section className="rc-silence" aria-hidden="true" />

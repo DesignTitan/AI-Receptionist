@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — industry gallery built (10 September 2026)
+
+- Built the approved white #industries gallery with eleven categories: doctors, dental, healthcare, fitness, personal care, retail, pet services, creative studios, home/auto services, professional services and lessons/coaching.
+- Added new people-at-work photographs and one consistent awake, dimensional fuzzy mascot; the branded conversation card changes with the active industry. Desktop scroll pans the gallery; phones/reduced motion use native swipe with buttons and arrow keys. No automatic audio.
+- Generated and visually checked all twelve assets, optimized to under 1 MB total. Sources/direction are in docs/design/industries; implementation is industry-gallery.tsx plus marketing CSS. Mobile navigation spacing corrected.
+- Verified all images, all eleven categories, keyboard controls, 320/390/1440px fit, reduced motion and production build/dev-tool exclusion. Also verified the other task’s new Happy Paws film in the exact #turn block: playback, captions, native controls and mobile fit.
+- Next: Bubs reviews the finished gallery. Suggested placing the separate booking → call → outcome graphic after the video and before Core features; this remains a recommendation. Local commit only; previous automatic public-push approval block remains unresolved.
+
 ## Current handoff — film corner refinement (10 September 2026)
 
 - Removed the film wrapper’s side padding; video is edge to edge again.

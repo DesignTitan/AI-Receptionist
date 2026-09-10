@@ -1,0 +1,65 @@
+{
+  "method": "Built-in image generation; photography: portrait 3:4, candid work scenes, natural colour/window light, no logos/UI. Optimized WebP at 900px width, q85. Mascot 600px q90.",
+  "assets": [
+    {
+      "key": "medical",
+      "scene": "A female doctor listening to an adult patient during an ordinary consultation, clipboard, bright calm doctor's office.",
+      "optimizedAsset": "/marketing/industries/medical.webp"
+    },
+    {
+      "key": "dental",
+      "scene": "A dentist and adult patient chatting beside a dental chair before an appointment, relaxed faces, clean modern dental practice, no procedure.",
+      "optimizedAsset": "/marketing/industries/dental.webp"
+    },
+    {
+      "key": "healthcare",
+      "scene": "A physiotherapist coaching an adult patient's gentle shoulder mobility exercise in a bright rehabilitation clinic.",
+      "optimizedAsset": "/marketing/industries/healthcare.webp"
+    },
+    {
+      "key": "fitness",
+      "scene": "A personal trainer coaching an adult through a light kettlebell exercise in a sunlit boutique gym, anatomically correct natural grip.",
+      "optimizedAsset": "/marketing/industries/fitness.webp"
+    },
+    {
+      "key": "care",
+      "scene": "A skilled hairdresser styling a seated adult client's hair with a brush in a warm sophisticated salon.",
+      "optimizedAsset": "/marketing/industries/care.webp"
+    },
+    {
+      "key": "retail",
+      "scene": "A boutique shop owner helping an adult shopper choose a folded linen shirt across a tidy shop counter.",
+      "optimizedAsset": "/marketing/industries/retail.webp"
+    },
+    {
+      "key": "pets",
+      "scene": "A professional groomer brushing a friendly shaggy dog on a grooming table, both relaxed, credible correct brush grip.",
+      "optimizedAsset": "/marketing/industries/pets.webp"
+    },
+    {
+      "key": "studio",
+      "scene": "A professional photographer holding a camera and directing an adult portrait client in a natural light photography studio.",
+      "optimizedAsset": "/marketing/industries/studio.webp"
+    },
+    {
+      "key": "trades",
+      "scene": "An electrician and homeowner discussing a scheduled visit beside a toolkit in a clean home, no exposed live wiring.",
+      "optimizedAsset": "/marketing/industries/trades.webp"
+    },
+    {
+      "key": "professional",
+      "scene": "An accountant meeting an adult small-business client at a desk, reviewing papers in a calm office.",
+      "optimizedAsset": "/marketing/industries/professional.webp"
+    },
+    {
+      "key": "lessons",
+      "scene": "An adult piano teacher sitting beside an adult beginner student at an upright piano in a welcoming music studio.",
+      "optimizedAsset": "/marketing/industries/lessons.webp"
+    },
+    {
+      "key": "mascot",
+      "scene": "Standalone version of the approved v3 studio mascot, preserving recessed open eyes and dimensional fuzzy face.",
+      "optimizedAsset": "/marketing/industries/mascot.webp"
+    }
+  ]
+}

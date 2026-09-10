@@ -1,36 +1,60 @@
-import { PLANS as PRICING, planFeatures, PILOT_SETUP_CENTS, SETUP_CENTS, SETUP_OFFER, SETUP_SCOPE, OVERAGE_CENTS, type Plan } from "@/lib/platform/pricing";
+import { PLANS as PRICING, planFeatures, PILOT_SETUP_CENTS, SETUP_CENTS, SETUP_OFFER, SETUP_SCOPE, type Plan } from "@/lib/platform/pricing";
 import type { Metadata } from "next";
+import { Folio } from "@/components/marketing/folio";
 import { PRODUCT_NAME } from "@/components/marketing/product-chrome";
 import { ScrollCraftMount } from "@/components/marketing/scrollcraft-mount";
+import { ScrollingFeatures } from "@/components/marketing/scrolling-features";
 import { SiteNav } from "@/components/marketing/site-nav";
 import { TryCallPlate } from "@/components/marketing/try-call-plate";
 import { env, isLiveCallReady } from "@/lib/env";
 import "./receptionist.css";
 
-/** The demo call follows the current environment, rather than the last build. */
+/** Rendered per request: the call plate's mode follows the environment, not the last build. */
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: { absolute: `${PRODUCT_NAME} · Your AI receptionist. Your day back.` },
-  description: "Online booking, AI confirmation calls and a clear view of what needs your attention. An AI receptionist for businesses that run on appointments.",
+  description:
+    "Online booking, AI confirmation calls and a clear view of what needs your attention. An AI receptionist for businesses that run on appointments.",
 };
 
-const PLANS = (Object.entries(PRICING) as [Plan, typeof PRICING[Plan]][]).map(([id, p]) => ({
-  id, name: p.name, price: `$${p.monthly}`,
-  calls: `${p.minutes.toLocaleString()} minutes a month · estimated ${p.estimatedCalls} two-minute calls`,
-  firstPilot: p.monthly + PILOT_SETUP_CENTS / 100, firstStandard: p.monthly + SETUP_CENTS / 100,
-  who: p.who, cta: "Set up my business", featured: id === "busy", has: planFeatures(id).slice(0, 2),
+const CHAPTERS = [
+  { id: "desk", n: "01", title: "The front desk" },
+  { id: "cost", n: "02", title: "The cost" },
+  { id: "turn", n: "03", title: "Confirmation calls" },
+  { id: "features", n: "04", title: "Core features" },
+  { id: "proof", n: "05", title: "Proof" },
+  { id: "industries", n: "06", title: "Your industry" },
+  { id: "hear", n: "07", title: "Hear it yourself" },
+  { id: "terms", n: "08", title: "Terms" },
+  { id: "colophon", n: "09", title: "Colophon" },
+];
+
+const PLANS = (Object.entries(PRICING) as [Plan,typeof PRICING[Plan]][]).map(([id,p])=>({
+ name:p.name,price:`$${p.monthly}`,calls:`${p.minutes.toLocaleString()} minutes a month · estimated ${p.estimatedCalls} two-minute calls`,firstPilot:p.monthly+PILOT_SETUP_CENTS/100,firstStandard:p.monthly+SETUP_CENTS/100,who:p.who,cta:'Start here',featured:id==='busy',has:planFeatures(id)
 }));
 
+const RAIL = [
+  { h: "Health and wellness", p: "Appointment confirmations and a clear view of what needs follow-up.", img: "ind-health.jpg" },
+  { h: "Personal care", p: "Colour, cuts, facials, massage: confirmed while your hands are busy.", img: "ind-care.jpg" },
+  { h: "Professional services", p: "Consultations confirmed and requests for changes ready for your team.", img: "ind-professional.jpg" },
+  { h: "Creative studios and agencies", p: "Discovery sessions booked with the person who would do the work.", img: "ind-studio.jpg" },
+  { h: "Trades and field service", p: "Appointment details confirmed while your team is out on the job.", img: "ind-trades.jpg" },
+  { h: "Instruction and sessions", p: "Lessons confirmed and cancellations visible in the appointment book.", img: "ind-lessons.jpg" },
+];
+
 export default function HomePage() {
+  // Live only with a voice line AND the human check; otherwise the plate takes a callback request.
   const simulated = !isLiveCallReady();
   return (
     <ScrollCraftMount>
-      <main id="main" className="rc-home">
+      <Folio chapters={simulated ? CHAPTERS.map((c) => (c.id === "hear" ? { ...c, title: "Ask for a call" } : c)) : CHAPTERS} />
+
+      <main id="main" className="rc-v1">
         <SiteNav cta={simulated ? "Ask for a call" : "Have it call you"} simulated={simulated} turnstileSiteKey={env.turnstile.siteKey ?? null} />
-        <section id="desk" className="rc-home-hero" aria-labelledby="hero-title">
+        <section id="desk" className="rc-home rc-home-hero" data-sc-act="flow" aria-labelledby="hero-title">
           <img className="rc-home-hero__image" src="/marketing/coastal-owner.png" width={1254} height={1254} fetchPriority="high" alt="A business owner enjoying a quiet coffee by the sea, with her phone set aside." />
-          <div className="sc-wrap rc-home-hero__copy">
+          <div className="sc-wrap rc-home-hero__copy" data-sc-in data-sc-stagger="70">
             <p className="rc-kicker">For businesses that run on appointments</p>
             <h1 id="hero-title">Your AI receptionist.<br />Your day back.</h1>
             <p>Let customers book online. Let AI make the confirmation calls. See what needs your attention, so you can get back to the people and work that matter.</p>
@@ -41,68 +65,196 @@ export default function HomePage() {
           </div>
           <p className="rc-home-hero__caption">Online booking. AI confirmation calls. One place to follow up.</p>
         </section>
-
         <section id="benefits" className="rc-chapter" data-sc-act="flow">
-          <div className="sc-wrap">
-            <div className="rc-home-heading">
-              <p className="rc-kicker">Make room for the work you love</p>
-              <h2 className="sc-display sc-display--lg">You built a business.<br />It shouldn’t keep you at the desk.</h2>
-              <p className="sc-lede">A client in your chair. A full afternoon. A well-earned day off. Give booking and routine follow-up a place of their own.</p>
+          <div className="sc-wrap rc-plates rc-plates--flip">
+            <figure className="rc-media" data-sc-in>
+              <img src="/scrollcraft/01-booking.jpg" width={1600} height={1000} alt="The booking page of the salon demo: a week of days and the open times under Sasha Reyes." />
+              <figcaption>The salon demo: choose a team member, find a time and book online.</figcaption>
+            </figure>
+            <div className="sc-stack" data-sc-in data-sc-stagger="60">
+              <h2 className="sc-display sc-display--md">The next booking shouldn’t interrupt this one.</h2>
+              <p className="sc-body">
+                Someone found your business and wants an appointment. Your online booking page lets them
+                choose a person and an available time while you stay focused on the client in front of you.
+              </p>
             </div>
-            <div className="rc-home-benefits">
-              <article><span>01 / More attention</span><h3>Stay with your customer.</h3><p>Your booking page lets the next person choose a team member and available time, without waiting for you to finish.</p></article>
-              <article><span>02 / Less chasing</span><h3>Hand off the confirmation call.</h3><p>Turn on AI calls to check appointment details with customers. Confirmations and requests come back to your dashboard.</p></article>
-              <article><span>03 / More breathing room</span><h3>Step away. Stay informed.</h3><p>Online booking stays open after hours. When you return, see what’s booked and which conversations need a person.</p></article>
+          </div>
+        </section>
+
+        {/* 02 · The cost. A hard cut to ink. No numbers: none are verified. */}
+        <section id="cost" className="rc-chapter rc-dark" data-sc-act="flow">
+          <div className="sc-wrap rc-plates">
+            <div className="sc-stack" data-sc-in data-sc-stagger="60">
+              <h2 className="sc-display sc-display--lg">A missed call can be a missed appointment.</h2>
+              <p className="sc-lede">
+                Hands were busy. The room was full. It was seven in the evening. They did not leave a
+                message. They booked the next place on the list.
+              </p>
+              <p className="sc-body">
+                Your online booking page gives customers another way to make an appointment. Incoming AI
+                phone booking is also being prepared for pilot businesses, after a tested phone connection.
+              </p>
             </div>
-            <a className="rc-home-link" href="/features">See everything your receptionist can do <span aria-hidden="true">↗</span></a>
+            <figure className="rc-media" data-sc-parallax="-0.7">
+              <img src="/scrollcraft/02-missed-call.jpg" width={1440} height={300} alt="A dashboard row reading No answer, flagged for a person to follow up." />
+              <figcaption>How a missed call looks on the dashboard: flagged, so a person follows up.</figcaption>
+            </figure>
           </div>
         </section>
 
-        <section id="how-it-works" className="rc-chapter rc-dark" data-sc-act="flow">
-          <div className="sc-wrap rc-home-split">
-            <div className="sc-stack">
-              <p className="rc-kicker">From booking to follow-up</p>
-              <h2 className="sc-display sc-display--lg">A simpler day starts with a better booking.</h2>
-              <p className="sc-lede">Your business on the page. Your team in the appointment book. Your choice about when AI makes a call.</p>
-              <a className="rc-home-link" href="/demos">Try an online booking <span aria-hidden="true">↗</span></a>
+        {/* 03 · The turn. The one film chapter: the real confirmation page walking to confirmed. */}
+        <div id="how-it-works" aria-hidden="true" />
+        <section id="turn" data-sc-act="scrub" data-sc-span="2.4" data-sc-dwell="0.32">
+          <div data-sc-stage>
+            <picture>
+              <source media="(max-width: 860px)" srcSet="/scrollcraft/03-turn-poster-p.jpg" />
+              <img className="sc-stage__poster" src="/scrollcraft/03-turn-poster.jpg" alt="" />
+            </picture>
+            <video data-sc-scrub data-sc-src="/scrollcraft/03-turn.mp4" data-sc-src-mobile="/scrollcraft/03-turn-p.mp4" muted playsInline />
+            <div className="sc-scrim sc-scrim--lead" aria-hidden="true" />
+            <div className="sc-copy sc-copy--lead" data-sc-cue="0 0.58 0">
+              <h2 className="sc-display sc-display--lg" data-sc-kinetic="lines">The booking is made. Let AI handle the confirmation.</h2>
+              <p className="sc-lede">After an online booking, your AI receptionist can call to confirm the details when calling is enabled and minutes are available. Requests for a new time go to your team.</p>
             </div>
-            <ol className="rc-home-process">
-              <li><span>01</span><div><h3>Your customer books.</h3><p>They choose a team member and an available time on your branded booking page.</p></div></li>
-              <li><span>02</span><div><h3>AI calls to confirm.</h3><p>When you enable confirmation calls and minutes are available, AI follows up about the appointment.</p></div></li>
-              <li><span>03</span><div><h3>You see what needs you.</h3><p>Review the outcome and call summary. Your team handles unanswered calls and requests to choose a different time.</p></div></li>
-            </ol>
+            <div className="sc-copy sc-copy--trail" data-sc-cue="0.62 0.96">
+              <h2 className="sc-display sc-display--md">The outcome. The details. Ready for your team.</h2>
+            </div>
           </div>
         </section>
 
-        <section id="incoming" className="rc-chapter" data-sc-act="flow">
-          <div className="sc-wrap rc-home-split">
-            <div><p className="rc-kicker">The next chapter <span className="rc-home-badge">Incoming call pilot</span></p><h2 className="sc-display sc-display--lg">What if the next caller could book, too?</h2></div>
-            <div className="sc-stack"><p className="sc-lede">We’re preparing AI phone booking for pilot businesses: callers ask for an appointment, choose an available time and agree the details in the conversation.</p><p className="sc-body">Let callers choose AI or your team. Give staff the first ring. Plan coverage for a busy afternoon or time away. Your phone connection must be reviewed and tested before these options go live.</p><a className="rc-home-link" href="/features#incoming-calls">Explore incoming call options <span aria-hidden="true">↗</span></a></div>
+        {/* 04 · Proof. An iris into the real dashboard, then the record. */}
+        <div className="rc-textured textured-section">
+          <section id="features" className="rc-features" data-sc-act="flow">
+            <div className="sc-wrap">
+              <ScrollingFeatures />
+            </div>
+          </section>
+
+          <section id="proof" data-sc-act="pin" data-sc-span="2.6" className="rc-deckact">
+            <div data-sc-stage className="rc-deckstage">
+              <div className="rc-deck__head" data-sc-cue="0 1 0 0">
+                <div>
+                  <p className="rc-kicker">What the desk shows you</p>
+                  <h2 className="sc-display sc-display--md">One desk. Every business.</h2>
+                </div>
+                <p className="rc-deck__lede">
+                  The desk is built so you spend your time on clients, not on the phone. From the first
+                  booking to the hundredth, it stays out of your way.
+                </p>
+              </div>
+              <div className="rc-deck" aria-label="Three things the desk does">
+                <article className="rc-card" style={{ "--i": 0, "--in": -1, "--next": 0.2 , "--shot": "url(/scrollcraft/04-call.jpg)"} as React.CSSProperties}>
+                  <div className="rc-card__copy">
+                    <p className="rc-card__eyebrow"><span aria-hidden />It calls, so nobody has to</p>
+                    <h3>The confirmation call, taken care of.</h3>
+                    <p>Turn on confirmation calls after online bookings. Customers confirm their appointment or ask for a change, and the outcome appears in your dashboard.</p>
+                    <p className="rc-card__foot">Calling requires completed setup and available minutes.</p>
+                  </div>
+                  <figure className="rc-card__media">
+                    <picture className="rc-card__bg" aria-hidden="true">
+                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-bg-w.jpg" width={1200} height={760} />
+                      <img src="/scrollcraft/04-bg.jpg" width={820} height={964} alt="" />
+                    </picture>
+                    <picture className="rc-card__panel">
+                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-call-p-w.webp" width={1200} height={760} />
+                      <img src="/scrollcraft/04-call-p.webp" width={820} height={964} alt="A confirmation call in progress: the client, the stages, and the first lines of what the assistant said." />
+                    </picture>
+                  </figure>
+                </article>
+                <article className="rc-card" style={{ "--i": 1, "--in": 0.2, "--next": 0.55 , "--shot": "url(/scrollcraft/04-record.jpg)"} as React.CSSProperties}>
+                  <div className="rc-card__copy">
+                    <p className="rc-card__eyebrow"><span aria-hidden />Every call, on the record</p>
+                    <h3>Recording, transcript, summary.</h3>
+                    <p>See the call outcome with available summaries and transcripts. Play recordings when the voice provider supplies them, and follow up with the details in one place.</p>
+                    <p className="rc-card__foot">Email delivery requires a connected email service.</p>
+                  </div>
+                  <figure className="rc-card__media">
+                    <picture className="rc-card__bg" aria-hidden="true">
+                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-bg-w.jpg" width={1200} height={760} />
+                      <img src="/scrollcraft/04-bg.jpg" width={820} height={964} alt="" />
+                    </picture>
+                    <picture className="rc-card__panel">
+                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-record-p-w.webp" width={1200} height={760} />
+                      <img src="/scrollcraft/04-record-p.webp" width={820} height={964} alt="A finished call record: the recording, a one-line summary, and the transcript." />
+                    </picture>
+                  </figure>
+                </article>
+                <article className="rc-card" style={{ "--i": 2, "--in": 0.55, "--next": 9 , "--shot": "url(/scrollcraft/04-flag.jpg)"} as React.CSSProperties}>
+                  <div className="rc-card__copy">
+                    <p className="rc-card__eyebrow"><span aria-hidden />Know what needs a person</p>
+                    <h3>Every no-answer is flagged.</h3>
+                    <p>A no-answer is flagged for a person. Your team arranges reschedules; a confirmed cancellation frees the slot. Open each booking to see the outcome.</p>
+                    <p className="rc-card__foot">The exceptions, not the routine.</p>
+                  </div>
+                  <figure className="rc-card__media">
+                    <picture className="rc-card__bg" aria-hidden="true">
+                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-bg-w.jpg" width={1200} height={760} />
+                      <img src="/scrollcraft/04-bg.jpg" width={820} height={964} alt="" />
+                    </picture>
+                    <picture className="rc-card__panel">
+                      <source media="(max-width: 1024px)" srcSet="/scrollcraft/04-flag-p-w.webp" width={1200} height={760} />
+                      <img src="/scrollcraft/04-flag-p.webp" width={820} height={964} alt="The needs-attention list: four bookings flagged as no answer or reschedule, each with its business." />
+                    </picture>
+                  </figure>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          {/* 05 · Their industry. Lateral: breadth. */}
+        </div>
+
+        <section id="industries" data-sc-act="pan" data-sc-span="2.4">
+          <div data-sc-stage>
+            <div className="rc-rail" data-sc-pan="0.06">
+              <div className="rc-rail__lead">
+                <h2 className="sc-display sc-display--md">Any business that runs on appointments.</h2>
+                <p className="sc-body">If a client picks a person and a time, and someone has to phone them to make sure, this is for you.</p>
+              </div>
+              {RAIL.map((item) => (
+                <article key={item.h} className="rc-tile" style={{ "--shot": `url(/scrollcraft/${item.img})` } as React.CSSProperties}>
+                  <div className="rc-tile__body">
+                    <h3>{item.h}</h3>
+                    <p>{item.p}</p>
+                  </div>
+                </article>
+              ))}
+              <div className="rc-rail__note">
+                <h3>Try three example businesses.</h3>
+                <p>A fictional clinic, salon and studio show how online booking works. <a href="/demos">Open the demos.</a></p>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section id="industries" className="rc-chapter rc-home-industries" data-sc-act="flow">
-          <div className="sc-wrap rc-home-split">
-            <div><p className="rc-kicker">Built around appointments</p><h2 className="sc-display sc-display--md">Different businesses.<br />The same need for a little more time.</h2></div>
-            <div className="sc-stack"><p className="sc-body">Salons and spas. Studios and consultants. Lessons, sessions and service appointments. Start with the way your customers book and the people who do the work.</p><p className="sc-body">Explore three fictional businesses to see the experience. We review your phone service and any existing booking software during setup.</p><a className="rc-home-link" href="/demos">Find a demo that feels like you <span aria-hidden="true">↗</span></a></div>
+        {/* Authored silence: one quiet screen before the peak. */}
+        <section className="rc-silence" aria-hidden="true" />
+
+        {/* 06 · Hear it yourself. The peak, and the signature move. */}
+        <section id="hear" data-sc-act="pin" data-sc-span="3">
+          <div data-sc-stage className="rc-plate">
+            <div data-sc-cue="0 0.97 0" style={{ width: "min(44rem, 100%)" }}>
+              <div className="rc-plate__head sc-stack">
+                <h2 className="sc-display sc-display--lg">{simulated ? "Ask for a call." : "Hear it yourself."}</h2>
+                <p className="sc-lede">{simulated ? "Leave your name and number. A person calls you back." : "Type your name and number. It calls you, now."}</p>
+              </div>
+              <TryCallPlate simulated={simulated} turnstileSiteKey={env.turnstile.siteKey ?? null} />
+            </div>
           </div>
         </section>
 
-        <section id="hear" className="rc-chapter rc-home-call" data-sc-act="flow">
-          <div className="sc-wrap rc-home-split">
-            <div className="sc-stack"><p className="rc-kicker">Experience the conversation</p><h2 className="sc-display sc-display--lg">{simulated ? "Let’s talk about your business." : "Meet your next receptionist."}</h2><p className="sc-lede">{simulated ? "Request a callback to talk through your appointments, your phone setup and the help you need." : "Hear the AI for yourself. Enter your details to receive a demonstration call."}</p></div>
-            <TryCallPlate simulated={simulated} turnstileSiteKey={env.turnstile.siteKey ?? null} />
-          </div>
-        </section>
-
+        {/* 07 · Terms. Compressed: information, not experience. */}
         <section id="terms" className="rc-chapter" data-sc-act="flow">
           <div className="sc-wrap">
-            <div className="sc-stack">
-              <p className="rc-kicker">Room for your business to grow</p>
-              <h2 className="sc-display sc-display--lg">The same core features.<br />The minutes your team needs.</h2>
-              <p className="sc-lede">Choose a monthly allowance. See your usage. Decide whether to allow extra minutes, with a spending limit you control.</p>
+            <div className="sc-stack" data-sc-in data-sc-stagger="60">
+              <h2 className="sc-display sc-display--lg">How it works, and what it costs.</h2>
+              <ol className="rc-steps">
+                <li><span><strong>Your team, your hours, your page.</strong>We prepare the booking page in your name and colours, then test the setup with you before activation.</span></li>
+                <li><span><strong>They book, it calls.</strong>Bookings queue a confirmation call while your allowance and spending limit permit. Cancellation and reschedule requests are flagged for your team.</span></li>
+                <li><span><strong>You see everything.</strong>Review outcomes and available recordings, transcripts and summaries in your dashboard. A no-answer is flagged for a person.</span></li>
+              </ol>
               <div className="rc-plans">
-                {PLANS.map((plan) => (
+                {PLANS.map((plan, index) => (
                   <article key={plan.name} className={plan.featured ? "rc-plan rc-plan--on" : "rc-plan"}>
                     {plan.featured && <p className="rc-plan__flag">More room to grow</p>}
                     <p className="rc-plan__name">{plan.name}</p>
@@ -110,8 +262,7 @@ export default function HomePage() {
                     <p className="rc-plan__calls">{plan.calls}</p>
                     <p className="rc-plan__who">{plan.who}</p>
                     <p className="rc-plan__who">First month + setup: <b>${plan.firstPilot.toLocaleString()}</b> if pilot pricing is available; <b>${plan.firstStandard.toLocaleString()}</b> standard. Before tax.</p>
-                    <a className="rc-plan__cta" href={`/start?plan=${plan.id}`}>{plan.cta}</a>
-                    <p className="rc-plan__who">All core booking and confirmation features included.</p>
+                    <a className="rc-plan__cta" href={`/start?plan=${["front", "busy", "full"][index]}`}>{plan.cta}</a>
                     <ul className="rc-plan__list">
                       {plan.has.map((line) => (
                         <li key={line}>
@@ -127,30 +278,32 @@ export default function HomePage() {
                 <b>{SETUP_OFFER}</b> Setup is paid once. {SETUP_SCOPE}
               </p>
               <p className="rc-plans__note">
-                Call counts are estimates; your allowance is measured in minutes, rounded up separately for each call. Extra minutes are {OVERAGE_CENTS} cents each, only within a spending limit you choose. Extra spending starts at $0. Setup does not repeat on renewal. Unused minutes expire at renewal. Each plan includes one business location; calendar sync and multiple locations are not included. Month to month — leave whenever you like.
+                Call counts are estimates; your allowance is measured in minutes, rounded up separately for each call. Extra minutes are 49 cents each, only within a spending limit you choose. Extra spending starts at $0. Setup does not repeat on renewal. Unused minutes expire at renewal. Each plan includes one business location; calendar sync and multiple locations are not included. Month to month — leave whenever you like.
+              </p>
+              <p className="sc-body" style={{ marginTop: "var(--sc-6)" }}>
+                Calendar and booking-software connections are on the roadmap. <a href="/features#coming-soon">Vote for what you need next.</a>
               </p>
             </div>
           </div>
         </section>
 
-        <section id="questions" className="rc-chapter rc-home-questions" data-sc-act="flow">
-          <div className="sc-wrap rc-home-split">
-            <div><p className="rc-kicker">Before you begin</p><h2 className="sc-display sc-display--md">A few things you’ll want to know.</h2><a className="rc-home-link" href="/features#setup">More about features and setup <span aria-hidden="true">↗</span></a></div>
-            <div>
-              <details><summary>What can I start with?</summary><p>Start with your branded booking page, AI confirmation calls and owner dashboard through guided setup. Incoming AI phone booking and answering schedules are a pilot offering, awaiting a tested phone connection.</p></details>
-              <details><summary>Will it work with the number and software I already use?</summary><p>Tell us your phone provider and booking software during setup. We check compatibility first. The current product uses its own appointment book; external calendar and booking-software sync are not included. Selecting your provider does not change your phone service.</p></details>
-              <details><summary>What happens when I use my included minutes?</summary><p>Extra spending starts at $0. You can choose a monthly cap for additional minutes at {OVERAGE_CENTS} cents per minute. AI calls pause when there isn’t enough budget for another call. Online booking stays available.</p></details>
+        {/* 08 · Colophon. The last act holds. */}
+        <section id="colophon" data-sc-act="pin" data-sc-span="1.15">
+          <div data-sc-stage className="rc-colophon">
+            <div className="rc-colophon__inner" data-sc-cue="0 1 0 0">
+              <p className="rc-run">
+                <a href="#hear">{simulated ? "Ask for a call" : "Have it call you"}</a>. Or <a href="/demos">open one of the three demos</a> and book something.
+              </p>
+              <hr className="rc-hair" />
+              <p>{PRODUCT_NAME}. A booking page and an AI front desk for businesses that run on appointments.</p>
+              <footer>
+                <a href="/features">Features &amp; benefits</a>
+                <a href="/features#coming-soon">Coming soon</a>
+                <a href="/account">Owner sign in</a>
+                <span>The three demo businesses are fictional.</span>
+                <span>© {new Date().getFullYear()}</span>
+              </footer>
             </div>
-          </div>
-        </section>
-
-        <section id="colophon" className="rc-chapter rc-dark rc-home-close">
-          <div className="sc-wrap">
-            <p className="rc-kicker">Your business. With room to breathe.</p>
-            <h2 className="sc-display sc-display--lg">Give your next booking<br />a better beginning.</h2>
-            <p className="sc-lede">Tell us how your business works. We’ll help you set up the booking page, confirmation calls and controls that fit.</p>
-            <div className="rc-home-actions"><a className="rc-home-button" href="/start">Set up my business <span aria-hidden="true">↗</span></a><a className="rc-home-link" href="/features">Explore all features <span aria-hidden="true">↗</span></a></div>
-            <footer className="rc-home-footer"><a href="#desk">{PRODUCT_NAME}</a><nav aria-label="Footer"><a href="/features">Features</a><a href="/demos">Demos</a><a href="#terms">Pricing</a><a href="/account">Owner sign in</a></nav><small>© {new Date().getFullYear()} · Demo businesses are fictional.</small></footer>
           </div>
         </section>
       </main>

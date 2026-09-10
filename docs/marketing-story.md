@@ -16,12 +16,12 @@ The category and everyday actions explain the product immediately. The promise c
 
 | Page | Purpose and sequence |
 | --- | --- |
-| `/` | Clear product promise → attention, less chasing and room to step away → online booking / optional confirmation / owner follow-up → incoming pilot introduction → industry fit → call demonstration or callback request → shared pricing → short buying questions → setup invitation. |
+| `/` | Original V1 scroll experience restored: coastal photographic hero → online booking and missed-call context → scroll-scrubbed confirmation film → tabbed parallax feature stage → stacked dashboard cards → horizontal industry rail → call demonstration or callback request → shared pricing → pinned closing chapter. |
 | `/features` | Light presentation → benefit-led overview → six feature stories → plan allowances and team limits → setup and compatibility questions → demo or signup → Coming soon roadmap, upvotes and new-feature suggestions. |
 | `/__dev/design/luxury-v2` | Preferred dark visual direction with the same hero message. The current online flow comes before the incoming pilot. Short benefit previews link to the full Features page; setup and the approved coastal image remain. |
 | `/demos` | Three fictional business examples, with shared navigation to Features, pricing and the homepage. |
 
-The development page index lists **Marketing homepage**, **Features & benefits**, and **Marketing site · V2** under Marketing. The original homepage design remains recoverable in Git; earlier V2 visual studies remain at `design/hero-comparison/luxury-v2/visual-studies.html`. This copy update does not deploy the site.
+The development page index lists **Marketing homepage**, **Features & benefits**, and **Marketing site · V2** under Marketing. The original V1 homepage structure from `c3a9ef8` is restored at `/`, with its existing media, motion hooks and a separate `ScrollingFeatures` component. The current hero image/message and accurate product boundaries remain. Earlier V2 visual studies remain at `design/hero-comparison/luxury-v2/visual-studies.html`. These changes do not deploy the site.
 
 ## The six feature stories
 

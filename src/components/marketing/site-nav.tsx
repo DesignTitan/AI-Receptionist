@@ -16,7 +16,7 @@ const I = {
 const LINKS = [
   { id: "desk", label: PRODUCT_NAME, icon: <i className="rc-nav__dot" aria-hidden /> },
   { id: "features", label: "Features", icon: I.features },
-  { id: "how-it-works", label: "How it works", icon: I.proof },
+  { id: "turn", label: "How it works", icon: I.proof },
   { id: "industries", label: "Industries", icon: I.industries },
   { id: "terms", label: "Pricing", icon: I.terms },
 ];
@@ -40,7 +40,7 @@ export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; sim
       },
       { rootMargin: "-40% 0px -55% 0px" },
     );
-    [...LINKS.map((l) => l.id), "benefits", "incoming", "hear"].forEach((id) => {
+    [...LINKS.map((l) => l.id), "cost", "proof", "hear"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) io.observe(el);
     });

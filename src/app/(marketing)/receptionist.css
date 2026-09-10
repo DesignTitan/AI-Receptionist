@@ -114,10 +114,12 @@
 @media (prefers-reduced-motion: reduce) { .rc-nav a, .rc-nav__cta { transition: none; } }
 
 /* ── folio ── */
-.rc-folio { position: fixed; left: clamp(0.75rem, 2vw, 2rem); top: 50%; transform: translateY(-50%); z-index: 20; }
+.rc-folio { position: fixed; left: clamp(0.75rem, 2vw, 2rem); top: 50%; transform: translateY(-50%); z-index: 20; mix-blend-mode: difference; }
 .rc-folio ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
 .rc-folio a { display: grid; grid-template-columns: 1.6rem 1fr; align-items: baseline; gap: 0.5rem; text-decoration: none; color: var(--sc-ink-soft); font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-wide); text-transform: uppercase; transition: color 160ms var(--sc-ease-out); }
-.rc-folio a[aria-current="true"] { color: var(--sc-ink); }
+/* Keep chapter labels legible over both the new hero photograph and white sections. */
+.rc-folio a { color: rgb(255 255 255 / .72); }
+.rc-folio a[aria-current="true"] { color: #ffffff; }
 .rc-folio__n { font-variant-numeric: tabular-nums; }
 .rc-folio__t { opacity: 0; transform: translateX(-4px); transition: opacity 160ms var(--sc-ease-out), transform 160ms var(--sc-ease-out); white-space: nowrap; }
 .rc-folio a[aria-current="true"] .rc-folio__t, .rc-folio:hover .rc-folio__t { opacity: 1; transform: none; }
@@ -388,6 +390,10 @@
   .rc-cf__head { grid-template-columns: 1fr; }
   .rc-cf__lede { padding-top: 0; }
   .rc-cf__tab { padding: 0.6em 0.5em; font-size: var(--sc-t-xs); }
+}
+@media (max-width: 480px) {
+  .rc-cf__tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rc-cf__tab { min-height: 48px; white-space: normal; overflow-wrap: anywhere; }
 }
 @media (prefers-reduced-motion: reduce) { .rc-cf__tab { transition: none; } }
 

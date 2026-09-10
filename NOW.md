@@ -3,6 +3,14 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — original V1 scrolling homepage restored (10 September 2026)
+
+- Bubs rejected the simplified homepage layout. Restored the complete original V1 page structure from c3a9ef8 (d05aece's parent): flowing chapters, confirmation video scrubbing, tabbed parallax feature stage, pinned dashboard card stack, horizontal industry rail, call section and closing chapter.
+- The opening now uses the approved coastal-owner photograph and current “Your AI receptionist. Your day back.” message, with V1's entrance animation. White canvas/panels from the preceding change stay; the page-wide grain was omitted to keep white clean. Original chapter art, media and dark contrast sections remain. Chapter labels adapt over the photograph, and feature tabs form two columns on narrow phones.
+- Restored the old feature stage as ScrollingFeatures in its own file, preserving the dedicated light Features page and Coming Soon voting/review system. Kept current shared pricing and corrected unsupported old timing, automated rescheduling, inbox and example-metric claims. Navbar and shared anchor links resolve to the restored sections.
+- Verified real video time changes with scroll, sticky stages, changing card transforms, horizontal rail movement, feature mouse/keyboard controls, all referenced media, 320/390/1440px layouts without horizontal overflow, reduced-motion posters and the visible hero entrance. Features and roadmap still respond successfully; production build and development-tool exclusion pass.
+- Next: review the restored V1 at /. Work is committed locally with no deployment. Public GitHub publishing still awaits the earlier approval after automatic review rejected the public push; live roadmap migration also remains pending.
+
 ## Current handoff — white marketing backgrounds (10 September 2026)
 
 - Replaced the beige homepage canvas and the warm Features/Coming Soon backgrounds with pure white, including panels, vote controls and the suggestion dialog. Features pilot badges, focus rings and hover fills now use neutral colours; roadmap errors retain a pale red treatment.

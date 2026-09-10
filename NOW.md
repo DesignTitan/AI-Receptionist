@@ -3,6 +3,13 @@
 Handoff notes for the next session. Updated 2026-09-09. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — stable localhost address (9 September 2026)
+
+- Saved V2 links on port 3101 were down while a separate Next process for this repo had started on the default port 3000. Stopped that confirmed project process and changed scripts/dev.mjs to default to 127.0.0.1:3101; explicit port and hostname overrides remain available.
+- Restarted the development launcher independently of the temporary terminal (PID 95071, parent PID 1). Ignored runtime details and logs live in .local/preview/development.json and development.log. To stop it, verify the recorded PID still belongs to this launcher, then send SIGTERM so it cleans up Next and the preview service. This is not automatic crash recovery or login startup.
+- Verified HTTP 200 for V2, its approved image, page index/data, journey, dev toolbar and original homepage. A fresh in-app browser tab renders V2 and the dev navigation; earlier tabs had cached network-error documents. JavaScript syntax, the four development-preview tests and diff checks pass.
+- Next: continue reviewing V2 copy and story before new media. No production deployment or phone changes occurred. Work is saved locally; public GitHub publishing remains pending the previously requested approval.
+
 ## Current handoff — Marketing V2 copy and story (9 September 2026)
 
 - Bubs deferred new photos and video. Rebuilt the local V2 reading flow around the owner's interrupted day, two distinct booking paths, caller/staff/AI choices, breaks and time off, call records, usage controls, setup and clear demo/signup actions. The exact approved coastal image remains the only photograph on the page.

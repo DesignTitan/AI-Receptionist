@@ -17,6 +17,9 @@ async function main() {
   }
   if (process.env.NODE_ENV === "production")
     throw Error("Development tools cannot use NODE_ENV=production.");
+  // Keep saved workspace links stable when started with plain `npm run dev`.
+  // Next still honors an explicit --port/-p override before the PORT fallback.
+  process.env.PORT ??= "3101";
   let next;
   try {
     next = require.resolve("next/dist/bin/next");
@@ -29,7 +32,7 @@ async function main() {
     siteGate: process.env.SITE_GATE ?? "public",
   });
   const grouped = process.platform !== "win32";
-  const child = spawn(process.execPath, [next, "dev", ...process.argv.slice(2)], {
+  const child = spawn(process.execPath, [next, "dev", "--hostname", "127.0.0.1", ...process.argv.slice(2)], {
     cwd: repoRoot,
     stdio: "inherit",
     detached: grouped,

@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — full-section film (10 September 2026)
+
+- Made the homepage #turn film fill its section, with white overlay copy and a Play me hover prompt.
+- Mobile and keyboard users see the play prompt; starting playback clears the overlay and enables native controls and captions.
+- Verified actual playback, typecheck and mobile width; playback contains the full frame to preserve dialogue.
+- Preserved separate industry-gallery work. Local commit only; prior public-push approval block remains.
+
 ## Current handoff — approved film on homepage (10 September 2026)
 
 - Bubs approved the Happy Paws cut; integrated it into the reserved homepage #turn section, replacing the old confirmation scroll-scrub clip.

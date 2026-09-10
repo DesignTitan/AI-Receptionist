@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — industry mascot conversations (10 September 2026)
+
+- Bubs selected the white industries gallery and wants the mascot to demonstrate customer conversations specific to each industry as cards scroll into focus.
+- Generated three reference-based static examples: health confirmation, personal-care booking and creative-studio booking. Saved mascot-*.png and exact prompts in docs/design/industries.
+- Each shows one mascot conversation below the active card, clear of faces and labels; incoming booking examples retain the pilot note. Website unchanged pending visual feedback.
+- Next: review these examples before implementation. Local commit only; prior automatic approval block on public publishing remains unresolved.
+
 ## Current handoff — mischievous Milo (10 September 2026)
 
 - Bubs approved the restored cast and requested wilder reference-like hair and a bratty little dog in scene 4.

@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — combined modal image (10 September 2026)
+
+- Generated the requested single combined concept: welcoming headline and large fuzzy mascot with mint rays, alongside live captions and call controls.
+- Saved docs/design/voice-modal/combined-concept.png and the exact prompt in combined-prompt.md. The example captions illustrate placement only.
+- Next: Bubs reviews this combined image before implementation. No changes to the working site; local save only.
+
 ## Current handoff — visual voice modal concepts (10 September 2026)
 
 - Created two image concepts for a simpler, more visual live AI demo: mascot-centered welcome and an active conversation with live captions/control dock.

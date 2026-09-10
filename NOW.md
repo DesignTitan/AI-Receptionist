@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — chronological grooming revision (10 September 2026)
+
+- Applied Bubs’s scene notes: beautiful golden retriever opening, hands remain occupied, shaggy caller dog, business-name greeting, no flashback or photographer cutaway, clear voiceover connecting finished work to leaving.
+- Generated revised Higgsfield frames (job d04d970b-f84f-404f-b90f-f6a19f8eedc2); saved storyboard-v4.html, two page PNGs, script and exact prompt in docs/design/busy-life. Visually reviewed both sheets. Glass overlays remain production treatments to refine separately.
+- Recorded plan for separate photographer, salon, mechanic and other business films after this story is approved. Next: review v4 before video production. Site unchanged; local commit only due to prior public-push approval block.
+
 ## Current handoff — researched twelve-shot story (10 September 2026)
 
 - Researched advertising hooks, character goals, narrative engagement, runtime and customer pain points; saved a cited strategy brief in docs/design/busy-life/storytelling-research.md.

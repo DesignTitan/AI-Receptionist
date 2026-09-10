@@ -6,12 +6,13 @@
 - Updated conversation cards to match the white/forest/mint site styling without cartoon speech tails. Saved three mascot-v3 images and direction notes in docs/design/industries; website unchanged.
 - Expanded industry coverage includes doctors, dental, broader healthcare, fitness, retail and other services. Next: approve a consistent mascot treatment before implementation. Prior public publishing approval block remains unresolved; commit locally.
 
-## In progress — Happy Paws video (10 September 2026)
+## Current handoff — Happy Paws first moving cut (10 September 2026)
 
-- Bubs approved the storyboard and mischievous Milo; authorized moving video with talking mascot, narration and back-and-forth booking dialogue.
-- Submitted Seedance 2.5 clips via Higgsfield; 70-second script now puts the AI greeting before the caller reveal. Prompts and job IDs in docs/design/busy-life/video-v1/generations.json.
-- Bubs supplied mascot examples: fuzzy open-eyed bubble outside a compact glass speech bubble. Revised greeting and confirmation jobs submitted; revised availability shot hit provider rate limit and awaits a slot.
-- Next: finish generations, inspect spoken dialogue and animated mascot, assemble and review MP4. No website deployment. Prior public-push block remains.
+- Built 70.294-second 1080p first cut in docs/design/busy-life/video-v1/happy-paws-first-cut.mp4; review player on localhost:55447.
+- Uses approved cast and mischievous Milo, incoming-call greeting before caller reveal, back-and-forth dialogue, narrator and lakeside ending. Seedance 2.5 via Higgsfield.
+- Fuzzy dimensional mascot has animated mouth and eyes, separately composited beside exact speech text after combined generations copied reference backgrounds. Rendered animation, not a rigged 3D model.
+- Checked dialogue transcript, sampled finished frames, mascot motion and output duration. Next: Bubs reviews first cut; refine scale, voice continuity and edge polish before release.
+- No site deployment. Saved locally; prior public-push approval block remains.
 
 ## Current handoff — industry mascot conversations (10 September 2026)
 

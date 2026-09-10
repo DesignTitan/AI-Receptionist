@@ -1,0 +1,127 @@
+{
+  "mascotImage": {
+    "request": {
+      "model": "seedream_v4_5",
+      "aspect_ratio": "1:1",
+      "quality": "basic",
+      "medias": [
+        {
+          "role": "image",
+          "value": "3eca4151-23a6-4da0-8dcc-273aa96c32ca"
+        }
+      ],
+      "prompt": "Extract and recreate ONLY the exact fuzzy mint chat-bubble mascot from supplied reference. Same light mint furry rounded square body, small lower-left chat tail, large glossy black OPEN eyes with white reflections, cheerful small mouth. Full body centered occupying60percent of canvas with ample margin. Background perfectly SOLID FLAT MAGENTA #ff00ff edge to edge for chroma key, no shadow. Absolutely no humans, no speech bubble UI, no text, no buttons. Preserve exact mascot design. Clean high quality fuzzy character render."
+    },
+    "job_id": "24f8e2ec-2a0f-43c4-bdc3-6cfbfe2a565e"
+  },
+  "requests": [
+    {
+      "index": 22,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "resolution": "1080p",
+        "aspect_ratio": "1:1",
+        "duration": 8,
+        "generate_audio": true,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "24f8e2ec-2a0f-43c4-bdc3-6cfbfe2a565e"
+          }
+        ],
+        "prompt": "Locked camera. Preserve EXACT supplied fuzzy mint speech-bubble mascot centered on perfectly flat solid MAGENTA #ff00ff chroma key background for entire clip. Full character remains inside central60percent with margins. NO scene change, NO humans, NO text, NO speech bubbles, NO graphics, NO shadows. Animate open glossy eyes with a little blink, subtle happy bobbing, and expressive small mouth precisely lip-synchronized to speech. Friendly warm clear female receptionist voice, medium register upbeat American accent. It says exactly: 'Hi, Happy Paws Grooming. How can I help?' Natural conversational pace, no extra words. One-second listening smile before speaking, then mouth rests at end. No music or ambient sounds. Background stays pure magenta."
+      }
+    },
+    {
+      "index": 24,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "resolution": "1080p",
+        "aspect_ratio": "1:1",
+        "duration": 9,
+        "generate_audio": true,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "24f8e2ec-2a0f-43c4-bdc3-6cfbfe2a565e"
+          }
+        ],
+        "prompt": "Locked camera. Preserve EXACT supplied fuzzy mint speech-bubble mascot centered on perfectly flat solid MAGENTA #ff00ff chroma key background for entire clip. Full character remains inside central60percent with margins. NO scene change, NO humans, NO text, NO speech bubbles, NO graphics, NO shadows. Animate open glossy eyes with a little blink, subtle happy bobbing, and expressive small mouth precisely lip-synchronized to speech. Friendly warm clear female receptionist voice, medium register upbeat American accent. It says exactly: 'There’s a two o’clock appointment available on Thursday. Would you like that one?' Natural conversational pace, no extra words. One-second listening smile before speaking, then mouth rests at end. No music or ambient sounds. Background stays pure magenta."
+      }
+    },
+    {
+      "index": 26,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "resolution": "1080p",
+        "aspect_ratio": "1:1",
+        "duration": 9,
+        "generate_audio": true,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "24f8e2ec-2a0f-43c4-bdc3-6cfbfe2a565e"
+          }
+        ],
+        "prompt": "Locked camera. Preserve EXACT supplied fuzzy mint speech-bubble mascot centered on perfectly flat solid MAGENTA #ff00ff chroma key background for entire clip. Full character remains inside central60percent with margins. NO scene change, NO humans, NO text, NO speech bubbles, NO graphics, NO shadows. Animate open glossy eyes with a little blink, subtle happy bobbing, and expressive small mouth precisely lip-synchronized to speech. Friendly warm clear female receptionist voice, medium register upbeat American accent. It says exactly: 'You’re all set. Milo is booked for Thursday at two. See you then.' Natural conversational pace, no extra words. One-second listening smile before speaking, then mouth rests at end. No music or ambient sounds. Background stays pure magenta."
+      }
+    },
+    {
+      "index": 29,
+      "params": {
+        "model": "seedance_2_5",
+        "mode": "omni_reference",
+        "resolution": "1080p",
+        "aspect_ratio": "16:9",
+        "duration": 9,
+        "generate_audio": false,
+        "medias": [
+          {
+            "role": "start_image",
+            "value": "c9e0373e-d7af-4c1e-8e9a-c10f2c53af1f"
+          }
+        ],
+        "prompt": "ONE continuous natural live action shot. Same exact brunette high-bun woman in black shirt green apron gently towel dries the SAME white Samoyed in this green grooming shop. Dog smiles, breathes, woman rubs towel gently. Preserve identities. Locked camera, subtle life, no cuts, no overlays, no mascot, no text, no speaking. Woman and dog remain left of frame; right shop is clear for later overlay."
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "index": 22,
+      "job_id": "1c442b50-572a-482e-8c0e-8211f7f4ecda",
+      "status": "pending"
+    },
+    {
+      "index": 24,
+      "job_id": "d3974789-ed91-41ce-a06a-b3e32654ac1c",
+      "status": "pending"
+    },
+    {
+      "index": 26,
+      "job_id": "58ecc5b0-bda6-4e12-a192-8c9b6ac209fd",
+      "status": "pending"
+    },
+    {
+      "index": 29,
+      "job_id": "ed971cf0-1527-4f4e-8013-eac610a1bbbc",
+      "status": "pending"
+    }
+  ],
+  "availabilityRetry": [
+    {
+      "index": 14,
+      "job_id": "90983db8-badb-4fdc-beac-1035b1b70a30",
+      "status": "pending",
+      "adjustments": {
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      }
+    }
+  ]
+}

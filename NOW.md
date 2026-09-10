@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — film corner refinement (10 September 2026)
+
+- Removed the film wrapper’s side padding; video is edge to edge again.
+- Kept 24px rounding on the top corners only, with square bottom corners.
+- Cursor-following glass play pill remains intact. Verified the CSS change; separate industry work preserved.
+- Local commit only; previous public-push approval block remains.
+
 ## Current handoff — rounded film and cursor play pill (10 September 2026)
 
 - Added a parent wrapper with 8px left/right padding and 24px rounded film corners.

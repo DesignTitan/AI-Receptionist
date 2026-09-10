@@ -3,6 +3,14 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — clear homepage and dedicated Features page (10 September 2026)
+
+- Replaced the unclear callback positioning with “Your AI receptionist. Your day back.” on the actual homepage and preferred local V2 preview. The supporting copy explains online booking, optional confirmation calls and owner follow-up. Shortened both home stories and moved the detailed capability/benefit explanations into the new /features page.
+- Features now covers online booking, confirmation calls, incoming caller choices, scheduled answering, owner records and spending controls, with setup FAQs and shared plan values. Incoming booking and coverage remain clearly labeled pilots awaiting a tested connection. Removed unsupported callback timing, automatic rescheduling, no-show metrics and unconditional email/recording promises; aligned the website’s demo-call script and shared plan descriptions.
+- Reused the exact approved coastal hero and three existing Higgsfield campaign photos. Added visible Features links to the homepage, V2, demo navigation and footers, plus Features & benefits under Marketing in the local page index and dev bar. Updated docs/marketing-story.md; existing V2 visual studies and original campaign assets remain available.
+- Verified production build and development-tool exclusion, nine pricing/preview tests, all four marketing surfaces at 390px and 320px without horizontal overflow, feature images/anchors/FAQ, page-index navigation, pricing and signup destination. Signup reaches owner sign-in; local authentication still needs configuration. The local launcher was restarted to load the catalogue, current PID 28894, with private state/logs in .local/preview.
+- Next: review the revised story at / and /__dev/design/luxury-v2 and the detailed /features page before video production. No live deployment, new media generation, real calls or payments occurred. Work is committed locally; public GitHub push still awaits the earlier publication approval after automatic review rejected publishing to the public repository.
+
 ## Current handoff — full Higgsfield campaign image set (10 September 2026)
 
 - Bubs explicitly authorized all still images, superseding the previous media deferral. Generated ten images through Higgsfield: focused service, busy reception, away from desk, working-day break, vacation, closing time, customer call, online booking, owner review and optional phone evolution. Preserved the exact approved coastal hero and current V2 page.

@@ -16,7 +16,7 @@ const I = {
 const LINKS = [
   { id: "desk", label: PRODUCT_NAME, icon: <i className="rc-nav__dot" aria-hidden /> },
   { id: "features", label: "Features", icon: I.features },
-  { id: "proof", label: "Proof", icon: I.proof },
+  { id: "how-it-works", label: "How it works", icon: I.proof },
   { id: "industries", label: "Industries", icon: I.industries },
   { id: "terms", label: "Pricing", icon: I.terms },
 ];
@@ -40,7 +40,7 @@ export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; sim
       },
       { rootMargin: "-40% 0px -55% 0px" },
     );
-    [...LINKS.map((l) => l.id), "cost", "turn", "hear"].forEach((id) => {
+    [...LINKS.map((l) => l.id), "benefits", "incoming", "hear"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) io.observe(el);
     });
@@ -64,7 +64,7 @@ export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; sim
       <ul className="rc-nav__pill rc-nav__links">
         {LINKS.map((l) => (
           <li key={l.id}>
-            <a href={`#${l.id}`} aria-label={l.label} aria-current={current === l.id ? "true" : undefined}>{l.icon}<span>{l.label}</span></a>
+            <a href={l.id === "features" ? "/features" : `#${l.id}`} className={l.id === "features" ? "rc-nav__features" : undefined} aria-label={l.label} aria-current={current === l.id ? "true" : undefined}>{l.icon}<span>{l.label}</span></a>
           </li>
         ))}
       </ul>

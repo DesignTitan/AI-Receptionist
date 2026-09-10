@@ -13,8 +13,11 @@ export function getPages({ tenant = "", siteGate = "public" } = {}) {
   const selected = VERTICALS.find((vertical) => vertical.slug === tenant);
   const verticals = selected ? [selected] : VERTICALS;
   const pages = selected ? [] : [
-    page("marketing", "Original marketing site", "/", "Marketing", "app", "public",
+    page("marketing", "Marketing homepage", "/", "Marketing", "app", "public",
       "Product overview, benefits and pricing.", ["src/app/(marketing)/page.tsx", "src/lib/platform/pricing.ts"]),
+    page("features", "Features & benefits", "/features", "Marketing", "app", "public",
+      "Online booking, AI calls, owner controls, usage and guided setup.",
+      ["src/app/(marketing)/features/page.tsx", "src/components/marketing/core-features.tsx", "src/lib/platform/pricing.ts"]),
     page("demos", "Demo overview", "/demos", "Marketing", "app", "public",
       "Choose a medical, salon or studio example.", ["src/app/(marketing)/demos/page.tsx"]),
     page("start", "Sign up & pricing", "/start", "Customer", "app", "owner",

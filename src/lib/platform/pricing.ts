@@ -41,10 +41,10 @@ export const COMMON_FEATURES = [
   "Branded online booking page",
   "Dedicated confirmation-call number",
   "AI confirmation calls with recording notice",
-  "Call recordings, transcripts and summaries",
+  "Call summaries, with available transcripts and recordings",
   "Cancellation and reschedule requests flagged for your team",
   "24/7 online booking",
-  "Usage dashboard, email alerts and spending controls",
+  "Usage dashboard, notices and spending controls",
   "Email support",
 ];
 export function planFeatures(plan: Plan) {

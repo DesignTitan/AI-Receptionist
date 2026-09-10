@@ -17,7 +17,7 @@ export function ProductLogo() {
           {PRODUCT_NAME}
         </span>
         <span className="hidden text-[11px] font-medium uppercase tracking-[0.14em] text-subtle sm:block">
-          The front desk that calls back
+          Your AI receptionist. Your day back.
         </span>
       </span>
     </Link>
@@ -25,10 +25,11 @@ export function ProductLogo() {
 }
 
 const NAV = [
+  { label: "Features", href: "/features" },
   { label: "How it works", href: "/#how-it-works" },
   { label: "Industries", href: "/#industries" },
   { label: "Demos", href: "/demos" },
-  { label: "Questions", href: "/#questions" },
+  { label: "Pricing", href: "/#terms" },
 ];
 
 export function ProductHeader() {
@@ -44,9 +45,10 @@ export function ProductHeader() {
           ))}
         </nav>
         <div className="flex shrink-0 items-center gap-2">
-          <ThemeToggle />
+          <Link href="/features" className="p-2 text-sm text-ink md:hidden">Features</Link>
+          <span className="hidden lg:inline-flex"><ThemeToggle /></span>
           <Button href="/demos" size="sm" className="whitespace-nowrap">
-            See the demos
+            Try a demo
           </Button>
         </div>
       </div>
@@ -63,9 +65,8 @@ export function ProductFooter() {
           <div className="max-w-sm">
             <ProductLogo />
             <p className="mt-4 text-sm leading-relaxed text-muted">
-              A booking page and an AI front desk for any business that runs on appointments.
-              Clients book online; the assistant phones to confirm; every call is logged where
-              the owner can see it.
+              Online booking, AI confirmation calls and a clear view of what needs your attention.
+              Built for businesses that run on appointments.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-10 text-sm sm:grid-cols-3">

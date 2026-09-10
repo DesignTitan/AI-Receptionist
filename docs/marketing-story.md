@@ -1,49 +1,57 @@
-# Marketing V2 — copy and reading flow
+# Marketing story and features
 
-Updated 10 September 2026. The copy and page flow were built on 9 September using the approved existing opening image. Bubs has now requested the full Higgsfield still-image set; review it in the separate campaign gallery before final placement. Video remains a later step.
+Updated 10 September 2026. The homepage explains the product and the value of getting time back. The dedicated Features page holds the detailed capability, benefit and setup story.
 
-## Current preview
+## The first impression
 
-- Local page: `/__dev/design/luxury-v2`.
-- The user-facing copy lives in `design/hero-comparison/luxury-v2/index.html`.
-- The exact previous V2 page is retained at `design/hero-comparison/luxury-v2/visual-studies.html`, linked from the footer. Its embedded data and `docs/copy.json` remain historical study content.
-- The original application marketing page at `/` is unchanged. V2 stays under Marketing in the development page index, with the same address and development-only access.
+**For businesses that run on appointments**
 
-## Story order
+**Your AI receptionist. Your day back.**
 
-| Chapter | What the reader should understand |
+Let customers book online. Let AI make the confirmation calls. See what needs your attention, so you can get back to the people and work that matter.
+
+The category and everyday actions explain the product immediately. The promise connects those actions to more attention for clients and more freedom for the owner. It replaces the unclear “front desk that calls back” positioning. We make no universal conversion or business-outcome guarantee.
+
+## Pages and reading flow
+
+| Page | Purpose and sequence |
 | --- | --- |
-| Step away. Bookings keep moving. | This is an AI front desk for an appointment business, with online booking and optional confirmation calls. |
-| You can’t be at the desk all day. | The product fits a recognizable day: serving a customer, a ringing phone, booking follow-up and a break. |
-| Give the next customer a way to book. | Two distinct flows: incoming AI booking as a pilot preview; online booking followed by an optional outgoing confirmation call. Each has three clear steps. |
-| You decide who answers. | Caller choice, staff-first and AI-first answer different business needs. Incoming and outgoing calling are independent. |
-| Your day needs breathing room. | Temporary coverage, after-hours rules and vacation dates explain the practical value of the new controls. |
-| Know what happened. Know what needs you. | The owner sees outcomes and picks up requests needing a person. Clearly labeled fictional records show a confirmation and a reschedule request. |
-| Know your usage. Choose your limit. | The owner sees minutes and notices, chooses extra spending, and has a fallback when AI cannot admit more calls. |
-| Start with the way your business works. | Provider and appointment-system intake lead to setup and testing. Three FAQs address the current number, booking software and switching AI off. |
-| Make room for your customers. And for yourself. | A clear invitation to explore a demo or begin setup. |
+| `/` | Clear product promise → attention, less chasing and room to step away → online booking / optional confirmation / owner follow-up → incoming pilot introduction → industry fit → call demonstration or callback request → shared pricing → short buying questions → setup invitation. |
+| `/features` | Benefit-led overview → six feature stories → plan allowances and team limits → setup and compatibility questions → demo or signup. |
+| `/__dev/design/luxury-v2` | Preferred dark visual direction with the same hero message. The current online flow comes before the incoming pilot. Short benefit previews link to the full Features page; setup and the approved coastal image remain. |
+| `/demos` | Three fictional business examples, with shared navigation to Features, pricing and the homepage. |
 
-## Actions and destinations
+The development page index lists **Marketing homepage**, **Features & benefits**, and **Marketing site · V2** under Marketing. The original homepage design remains recoverable in Git; earlier V2 visual studies remain at `design/hero-comparison/luxury-v2/visual-studies.html`. This copy update does not deploy the site.
 
-- `Explore a booking demo` and the online booking demo link → `/demos`. These are existing online/outgoing examples, not an incoming-phone test.
-- `Get started` and `Start your setup` → `/start`. A logged-out visitor reaches owner sign-in before saving business details; no pricing selection is silently passed through the known sign-in plan issue.
-- `Compare plans and pricing` → `/#terms`, the existing pricing section. Reuse its catalogue rather than copying prices into this static preview.
-- Header links move to booking, controls and setup on the same V2 page. The development server rewrites fragment links to preserve the page address.
-- Footer links retain owner sign-in, the original site and the earlier V2 visual studies.
+## The six feature stories
 
-## Copy boundaries
+| Link | Customer-facing benefit | What supports it |
+| --- | --- | --- |
+| `/features#online-booking` | The next booking shouldn’t interrupt this one. | A branded page, team member choice, available times, business hours and appointment details. |
+| `/features#confirmation-calls` | Let the confirmation call happen while you work. | Optional outgoing calls after booking, recorded outcomes and staff follow-up. |
+| `/features#incoming-calls` | A booking can start with a conversation. | Pilot: new phone bookings, caller menu, staff-first, AI-first or staff-only answering. |
+| `/features#coverage` | Make room for a proper break. | Pilot: business and after-hours choices, holidays, vacations and temporary changes that expire. |
+| `/features#call-records` | Know what happened. See what needs you. | Appointment outcomes, summaries, available transcripts/recordings and requests for a person. |
+| `/features#usage-controls` | Keep control of what you spend. | Allowance, dashboard notices, renewal date, estimates, extra-minute rate and a chosen spending cap. |
 
-- Incoming booking is explicitly a pilot preview awaiting a tested connection. Saving preferences does not activate a phone line or change carrier forwarding.
-- The current appointment book belongs to AI Receptionist. External booking software does not automatically sync.
-- Confirmation calls are optional and require available call capacity. Staff handle change requests; no guaranteed bookings or no-show reduction is promised.
-- Phone hours govern answering, not appointment availability. Staff destinations and voicemail must be configured as part of the verified connection.
-- Usage notices are described in the dashboard. Extra spending defaults to $0; its limit is separate from the subscription and carrier charges.
-- The record example uses fictional names and explicitly says it is an example.
+The Features page reuses three completed Higgsfield campaign photographs: full attention, a proper break and owner review. The homepage reuses the exact approved coastal hero. Public copies are in `public/marketing`; originals and generation records remain in `design/hero-comparison/campaign-v4`. No new images or video were generated for the copy update.
 
-## Presentation and next review
+## Actions and offer
 
-Keep the existing coastal photograph, dark framing and restrained type. All other chapters use normal page flow and readable HTML; no animation or new media is required to understand the story. Native FAQ disclosures work without JavaScript. Reduced-motion preferences disable smooth anchor scrolling.
+- **See it in action / Try online booking** → `/demos`.
+- **Explore the features** → `/features`; its six chapter links go to the stories above.
+- **Get started / Set up my business** → `/start`; a logged-out visitor first reaches owner sign-in. Local sign-in still needs configuration, so completed onboarding is not claimed.
+- **Pricing** → `/#terms`; prices, allowance, team limits and setup terms come from `src/lib/platform/pricing.ts`. Homepage plan cards show the differences instead of repeating the full feature inventory.
+- **Features** is visible in the homepage navigation, V2 navigation, shared demo navigation and the development page index.
+- The website’s demo voice script uses the same product boundaries as the written marketing copy.
 
-Continue reviewing the headline sequence, clarity of the two booking paths and setup invitation alongside the separate campaign photographs at `/__dev/design/campaign-v4`. The photo/video brief supplies their scenarios and intended product evidence. New image generation does not replace this page or the approved coastal opening.
+## Product boundaries
 
-Verification: existing development-preview checks pass (four tests), local anchors and labels resolve, the original V2 archive is byte-for-byte preserved, and the existing photo loads. Desktop and 390px browser checks cover the story, FAQ and setup destination. Local owner sign-in currently displays a disabled form pending configuration, so signup completion has not been verified.
+- Incoming phone booking and answering schedules are a pilot awaiting a verified phone connection. Saving preferences does not activate a line or change carrier forwarding.
+- The current appointment book belongs to AI Receptionist. External booking software and calendars do not automatically synchronize.
+- Online customers choose a team member with an offered service and an available time, rather than a separate service-selection flow.
+- Confirmation calls require setup, activation, enabling and available call capacity. There is no one-minute callback guarantee.
+- Staff handle requests for a different appointment time; do not promise automatic rescheduling, reminders, waitlists, recovered bookings or fewer no-shows.
+- Transcripts and recordings depend on provider delivery. Usage notices work in the dashboard; email delivery requires configuration.
+- Extra spending defaults to $0. Extra minutes cost 49¢ per started minute, subject to the owner’s saved cap. The shared catalogue remains the source of truth. Subscription and carrier costs are separate.
+- Phone schedules govern answering; appointment availability is separate. Existing phone providers and booking tools require review during setup.

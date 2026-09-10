@@ -138,7 +138,7 @@ test("development preview exposes only allowed files and injects the navigation"
 
 test("page catalogue contains canonical routes for ordinary and tenant previews", () => {
   const pages = getPages();
-  assert.equal(pages.length, 20);
+  assert.equal(pages.length, 21);
   assert.equal(new Set(pages.map((entry) => entry.id)).size, pages.length);
   assert.equal(new Set(pages.map((entry) => entry.href)).size, pages.length);
   assert.deepEqual([...new Set(pages.map((entry) => entry.group))], [
@@ -160,7 +160,7 @@ test("page catalogue contains canonical routes for ordinary and tenant previews"
   assert.equal(marketingV2?.href, "/__dev/design/luxury-v2/");
   assert.equal(pages.filter((entry) => entry.kind === "study").length, 4);
   assert.deepEqual(getPages({ tenant: "unknown" }), pages);
-  assert.equal(getPages({ siteGate: "  LOCKED " }).length, 21);
+  assert.equal(getPages({ siteGate: "  LOCKED " }).length, 22);
   for (const tenant of ["medical", "salon", "studio"]) {
     const preview = getPages({ tenant });
     assert.equal(preview.length, 11);

@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(env.siteUrl),
   title: { default: "AI Receptionist", template: "%s · AI Receptionist" },
   description:
-    "An AI front desk for any business that takes bookings: online booking, a confirmation call within a minute, and every call logged where the owner can see it.",
+    "Online booking, AI confirmation calls and a clear view of what needs your attention. An AI receptionist for businesses that run on appointments.",
 };
 
 export const viewport: Viewport = {

@@ -533,3 +533,28 @@
 }
 
 .rc-home-hero .rc-kicker { color: #e6e9eb; }
+
+/* Approved overview: spacious editorial statement with inline brand imagery. */
+.rc-overview { background: #fff; color: #1e3a34; }
+.rc-overview__label { display: inline-block; margin: 0 0 clamp(36px, 4vw, 64px); padding: 10px 16px; border-radius: 16px; background: #e8f3ee; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+.rc .rc-overview__statement { margin: 0; max-width: 1200px; font-size: clamp(32px, 4.35vw, 72px); line-height: 1.2; letter-spacing: -.035em; font-weight: 400; text-wrap: pretty; }
+.rc-overview__statement strong { font-weight: 700; }
+.rc-overview__statement img { display: inline-block; vertical-align: middle; }
+.rc-overview__mascot { width: 1.45em; height: 1.45em; object-fit: contain; margin: -.18em .05em -.1em; }
+.rc-overview__photo { width: 1.9em; height: 1.1em; object-fit: cover; object-position: center 35%; border-radius: .2em; margin-inline: .06em; }
+.rc-overview__benefits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin: clamp(40px, 5vw, 76px) 0 0; }
+.rc-overview__benefits dt { margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: .045em; text-transform: uppercase; }
+.rc-overview__benefits dd { margin: 0; font-size: 16px; line-height: 1.65; color: #526b63; max-width: 32ch; }
+.rc-overview__footer { display: flex; align-items: center; justify-content: space-between; gap: 32px; margin-top: 40px; }
+.rc-overview__footer a { color: #1e3a34; text-decoration: underline; text-underline-offset: 5px; padding-block: 12px; font-size: 16px; }
+.rc-overview__footer a:focus-visible { outline: 2px solid #1e3a34; outline-offset: 5px; }
+.rc-overview__footer p { margin: 0; max-width: 48ch; font-size: 12px; line-height: 1.6; color: #526b63; }
+@media (max-width: 640px) {
+  .rc-overview__benefits { grid-template-columns: 1fr; gap: 24px; }
+  .rc-overview__benefits dd { max-width: none; }
+  .rc-overview__footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+@media (min-width: 1101px) {
+  /* Reserve the left margin for the existing chapter navigation. */
+  .rc-overview > .sc-wrap { width: calc(100% - 280px); max-width: 1200px; padding-inline: 0; margin-left: max(220px, calc((100% - 1200px) / 2)); margin-right: 60px; }
+}

@@ -3,6 +3,13 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — approved overview section and mascot (10 September 2026)
+
+- Replaced only homepage #benefits with the approved spacious white editorial overview: large forest-green statement, inline fuzzy mint chat-bubble mascot and existing service photograph, three supporting benefits and Features link.
+- Copy now says customer bookings and covers phone conversations, appointment management, call choices and spending controls. Incoming booking/answering schedules retain clear pilot status. Bubs selected the closed-eye fuzzy speech bubble as the working mascot; the standalone asset is public/marketing/receptionist-mascot.png.
+- Verified desktop/mobile fit, image loading, surrounding V1 video/card/rail interactions, reduced motion and production build/dev-tool exclusion. Kept the original hero and other sections; further sections require visual mockup review first.
+- Next: review #benefits in the workspace. Saved locally; public publishing remains pending the prior approval, with no deployment.
+
 ## Current handoff — forest and mint marketing identity (10 September 2026)
 
 - Applied the approved reference palette to the active homepage and Features/Coming Soon: white canvas, forest-green text/buttons, mint accents and deep-green contrast chapters. Existing V1 scroll sequence, coastal hero, copy and feature-status labels are preserved.

@@ -65,18 +65,25 @@ export default function HomePage() {
           </div>
           <p className="rc-home-hero__caption">Online booking. AI confirmation calls. One place to follow up.</p>
         </section>
-        <section id="benefits" className="rc-chapter" data-sc-act="flow">
-          <div className="sc-wrap rc-plates rc-plates--flip">
-            <figure className="rc-media" data-sc-in>
-              <img src="/scrollcraft/01-booking.jpg" width={1600} height={1000} alt="The booking page of the salon demo: a week of days and the open times under Sasha Reyes." />
-              <figcaption>The salon demo: choose a team member, find a time and book online.</figcaption>
-            </figure>
-            <div className="sc-stack" data-sc-in data-sc-stagger="60">
-              <h2 className="sc-display sc-display--md">The next booking shouldn’t interrupt this one.</h2>
-              <p className="sc-body">
-                Someone found your business and wants an appointment. Your online booking page lets them
-                choose a person and an available time while you stay focused on the client in front of you.
-              </p>
+        <section id="benefits" className="rc-chapter rc-overview" data-sc-act="flow" aria-labelledby="overview-title">
+          <div className="sc-wrap">
+            <p className="rc-overview__label" data-sc-in>Overview</p>
+            <h2 id="overview-title" className="rc-overview__statement" data-sc-in>
+              <strong>AI Receptionist</strong> brings customer bookings,{' '}
+              <img className="rc-overview__mascot" src="/marketing/receptionist-mascot.png" width={1024} height={1024} alt="" />{' '}
+              phone conversations, and appointment management together—so you can{' '}
+              <strong>focus on your business</strong>{' '}
+              <img className="rc-overview__photo" src="/marketing/full-attention.webp" width={2048} height={2048} alt="" />{' '}
+              and get more of your day back.
+            </h2>
+            <dl className="rc-overview__benefits" data-sc-in>
+              <div><dt>Make booking easy</dt><dd>Online booking, with AI phone booking in pilot.</dd></div>
+              <div><dt>Choose how calls are handled</dt><dd>Confirmation calls, plus caller choices and answering schedules in pilot.</dd></div>
+              <div><dt>Stay in control</dt><dd>Appointment updates, call summaries, and spending limits.</dd></div>
+            </dl>
+            <div className="rc-overview__footer" data-sc-in>
+              <a href="/features">Explore the features <span aria-hidden="true">↗</span></a>
+              <p>Incoming calls and answering schedules require a tested pilot connection.</p>
             </div>
           </div>
         </section>

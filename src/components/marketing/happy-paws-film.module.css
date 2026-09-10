@@ -44,10 +44,15 @@
 .section[data-paused="false"] .controls { opacity: .35; }
 .section[data-paused="false"] .controls:hover,
 .section[data-paused="false"] .controls:has(:focus-visible) { opacity: 1; }
-.prompt[data-hidden="true"] { visibility: hidden; }
-.section[data-playing="true"] .overlay { padding-bottom: 110px; }
+.section .play .prompt[data-hidden="true"] { opacity: 0; }
+.section .overlay { padding-bottom: 110px; }
 @media (prefers-reduced-motion: reduce) { .controls { transition: none; } }
 @media (max-width: 640px) {
-  .section[data-playing="true"] .overlay { padding-bottom: 200px; }
-  .section[data-playing="true"] .heading { margin-bottom: 20px; }
+  .section .overlay { padding-bottom: 200px; }
+  .section .heading { margin-bottom: 20px; }
 }
+
+.overlay { opacity: 1; transition: opacity .45s ease; }
+.section[data-paused="false"] .overlay { opacity: 0; }
+.prompt { transition: opacity .35s ease, transform .2s ease; }
+@media (prefers-reduced-motion: reduce) { .overlay, .prompt, .controls { transition: none; } }

@@ -63,9 +63,7 @@ export function HappyPawsFilm() {
         </div>
       )}
       {started && error && <p className={styles.error} role="alert">{error}</p>}
-      {paused && (
-        <>
-          <div className={styles.overlay}>
+          <div className={styles.overlay} aria-hidden={!paused}>
             <div className={styles.heading}>
               <p className={styles.eyebrow}>Your business keeps going. So can you.</p>
               <h2>Hands full?<br />We’ve got the call.</h2>
@@ -76,9 +74,7 @@ export function HappyPawsFilm() {
               <span>Illustrative scenario. Incoming AI booking requires a connected pilot.</span>
             </div>
           </div>
-          {error && <p className={styles.error} role="alert">{error}</p>}
-        </>
-      )}
+          {!started && error && <p className={styles.error} role="alert">{error}</p>}
           <button type="button" className={styles.play} onClick={() => { if (video.current?.paused) void play(); else video.current?.pause(); }} onPointerEnter={followPointer} onPointerMove={followPointer} onPointerLeave={(event) => { delete event.currentTarget.dataset.following; }} onBlur={(event) => { delete event.currentTarget.dataset.following; }} aria-label={paused ? "Play the Happy Paws film with sound" : "Pause the Happy Paws film"}>
             <span className={styles.prompt} data-hidden={!paused}><svg width="16" height="18" viewBox="0 0 16 18" fill="currentColor" aria-hidden="true"><path d="M2 1.5v15L15 9z" /></svg>Play me</span>
           </button>

@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — smooth film overlays (10 September 2026)
+
+- Headline and scrim remain mounted and fade over 450ms when playback changes; paused copy returns smoothly.
+- Play pill now fades instead of disappearing instantly; control bar retains its soft opacity transition. Overlay positioning is consistent across playback states.
+- Typecheck passed; browser verified intermediate and final fade opacity. Reduced motion skips transitions.
+- Local commit only; previous public-push approval block remains.
+
 ## Current handoff — industry stories over the imagery (10 September 2026)
 
 - Moved the example AI conversation and mascot onto each active industry card, with a layered glass bubble entrance. Cards explain what occupies the person and what AI handles.

@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — rounded film and cursor play pill (10 September 2026)
+
+- Added a parent wrapper with 8px left/right padding and 24px rounded film corners.
+- Glass Play me pill follows mouse movement, clamped inside the video; touch and keyboard retain a fixed prompt.
+- Typecheck passed; browser verified inset, corners, pointer tracking and keyboard playback.
+- Separate industry edits preserved. Local commit only; previous public-push approval block remains.
+
 ## Current handoff — full-section film (10 September 2026)
 
 - Made the homepage #turn film fill its section, with white overlay copy and a Play me hover prompt.

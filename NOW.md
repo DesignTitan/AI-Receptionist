@@ -3,6 +3,13 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — visual voice modal concepts (10 September 2026)
+
+- Created two image concepts for a simpler, more visual live AI demo: mascot-centered welcome and an active conversation with live captions/control dock.
+- Saved both images and exact built-in generation prompts in docs/design/voice-modal. These are design previews; the working live modal is unchanged.
+- Recommendation: welcome concept before connecting, conversation concept during the call. Sample captions in the image illustrate placement only; the product remains unscripted.
+- Next: Bubs reviews the concepts before implementation. Saved locally; public publishing remains pending the earlier approval review.
+
 ## Current handoff — live AI conversation modal (10 September 2026)
 
 - Rebuilt the #cost modal in the approved white/forest/mint direction with the fuzzy mascot. Bubs explicitly rejected scripted audio; all prerecorded players and scripts are removed from this modal. The “Meet your AI receptionist” button opens a real microphone conversation.

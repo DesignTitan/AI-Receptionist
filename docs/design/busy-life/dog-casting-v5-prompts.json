@@ -1,0 +1,29 @@
+[
+  {
+    "index": 1,
+    "params": {
+      "model": "soul_2",
+      "quality": "2k",
+      "aspect_ratio": "16:9",
+      "prompt": "A candid documentary photograph, genuine everyday moment photographed on a 35mm camera, neutral natural window daylight, true-to-life colors, ordinary imperfect surroundings, realistic fur and skin texture, modest depth of field. No illustration, no CGI, no commercial beauty retouching, no fantasy lighting, no text, no graphics, no collage. Inside a working dog grooming shop, medium close photograph of a beautiful adult white Samoyed standing securely inside a stainless steel wash tub. Its head is completely visible, fluffy dry white cheek ruff, small upright triangular ears, real dark almond eyes, black nose, natural open-mouthed Sammy smile with a small tongue peeking sideways; an endearingly goofy slight head tilt toward the camera. Its body coat is realistically wet and clumped, not a perfectly fluffy dry body in a bath. Female groomer in a practical forest green apron behind it, both wet hands visibly occupied washing its shoulders, sleeves rolled up. A phone rests out of reach on the counter in background. Funny because of its real expression, no exaggerated human expression or bulging eyes. Frame dog as the star; groomer's hands clearly busy."
+    }
+  },
+  {
+    "index": 4,
+    "params": {
+      "model": "soul_2",
+      "quality": "2k",
+      "aspect_ratio": "16:9",
+      "prompt": "A candid documentary photograph, genuine everyday moment photographed on a 35mm camera, neutral natural window daylight, true-to-life colors, ordinary imperfect surroundings, realistic fur and skin texture, modest depth of field. No illustration, no CGI, no commercial beauty retouching, no fantasy lighting, no text, no graphics, no collage. Scene from a real home. Medium shot at dog eye level: a comically shaggy adult Polish Lowland Sheepdog sits on the floor beside a woman seated on a sofa who holds a smartphone to her ear, looking fondly down at him while arranging a grooming appointment. The dog dominates foreground, entire face visible. Uneven long grey and white hair, overgrown tousled fringe partly covering one eye, natural black nose and scruffy beard, small curious head tilt as though he has just heard the word haircut. Funny everyday bedhead hair, healthy well-loved dog, natural anatomy. One real dark eye visible through the fringe; no giant cartoon eyes. Casual lived-in home, morning window light, woman in plain blue cotton shirt and jeans. No spotless designer showroom, no posing for an advertisement."
+    }
+  },
+  {
+    "index": 5,
+    "params": {
+      "model": "soul_2",
+      "quality": "2k",
+      "aspect_ratio": "16:9",
+      "prompt": "A candid documentary photograph, genuine everyday moment photographed on a 35mm camera, neutral natural window daylight, true-to-life colors, ordinary imperfect surroundings, realistic fur and skin texture, modest depth of field. No illustration, no CGI, no commercial beauty retouching, no fantasy lighting, no text, no graphics, no collage. Alternate casting photo for a funny dog in a grooming appointment advertisement: a real adult Old English Sheepdog with wonderfully unruly long grey and white shaggy hair and a black nose sits beside its owner's sofa in an ordinary home. Dog at eye level, close enough to see the whole shaggy head and shoulders, one dark eye just peeking through lopsided fringe, mouth gently open with tongue tip, subtle puzzled sideways head tilt. A woman in background on the sofa is holding her phone to her ear and smiling at the dog. Humour comes from the dog's massive naturally tousled hairdo. Real dog photograph, no cartoon expression, no inflated eyes, no artificially perfect fur. Authentic soft daylight, candid snapshot composition."
+    }
+  }
+]

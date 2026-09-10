@@ -1,5 +1,11 @@
 # NOW
 
+## Current handoff — photographic dog casting (10 September 2026)
+
+- Bubs rejected v4's AI-looking images. New direction: Samoyed grooming dog with a natural funny smile; shaggy caller dog in scene 4.
+- Researched Samoyed, Polish Lowland Sheepdog and Old English Sheepdog references; switched from GPT Image 2 to Higgsfield Soul 2.0 for three individual photographic casting frames. Prompts, sources and job IDs are in docs/design/busy-life/dog-casting-v5.md and its prompts JSON.
+- Review this new casting before rebuilding the remaining storyboard around consistent identities. Existing v4 archived; no new video or site changes. Public push remains blocked by prior approval review.
+
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 

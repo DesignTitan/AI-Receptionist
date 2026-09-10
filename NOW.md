@@ -3,6 +3,13 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — light Features page (10 September 2026)
+
+- Changed /features to a warm light palette with near-black headings, dark primary buttons, light surfaces and readable muted text. Layout, copy and existing campaign images are preserved; V2 keeps its own approved visual direction.
+- Checked all scoped colour pairs and verified the browser renders the light background and dark headline. The page explicitly uses a light colour scheme regardless of the global theme.
+- In progress: Bubs requested a Coming Soon roadmap at the bottom of Features, with durable upvotes and new-feature suggestions. Recovering the actual planned capabilities and building saved voting plus a staff suggestion-review queue.
+- Local preview now runs under the macOS session service from the previous handoff. Public GitHub publishing remains pending the earlier approval; no deployment occurred.
+
 ## Current handoff — workspace server recovery (10 September 2026)
 
 - The detached local launcher had exited again: no process and no listener remained on port 3101. The browser also retained a cached connection-error document. Restored the site and verified V2’s current headline, its loaded 1254px hero image, Features and the development page index.

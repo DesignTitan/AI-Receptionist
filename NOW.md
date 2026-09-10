@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — Booked accent detail (10 September 2026)
+
+- Added the three mint excitement lines beside the inline Booked badge to match the approved mockup, with reserved spacing before the following text.
+- Decorative SVG inherits the badge’s accessibility hiding and scales with the heading. Existing section content stays in place.
+- Next: continue visual section review. Local save only; public publishing remains pending the earlier approval.
+
 ## Current handoff — overview copy trim (10 September 2026)
 
 - Removed “For businesses built around appointments.” from #benefits and its unused styling at Bubs’s request.

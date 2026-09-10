@@ -74,7 +74,7 @@ export default function HomePage() {
               <img className="rc-overview__mascot" src="/marketing/receptionist-mascot.png" width={1024} height={1024} alt="" />{' '}
               phone conversations, and appointment management together—so you can{' '}
               <strong>focus on your business</strong>{' '}
-              <span className="rc-overview__booked" aria-hidden="true">Booked <span>✓</span></span>{' '}
+              <span className="rc-overview__booked" aria-hidden="true">Booked <span>✓</span><svg className="rc-booked-rays" viewBox="0 0 28 44" focusable="false"><path d="M5 10 13 3M9 22l12-2M7 34l10 6" /></svg></span>{' '}
               and get more of your day back.
             </h2>
             <OverviewBenefits />

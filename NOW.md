@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — simplified industry copy; alternative layout discussion (10 September 2026)
+
+- Removed top slogans, subcategory lists and bubble labels; cards retain industry, one short benefit and concise dialogue. Glass bubbles are more translucent.
+- Replaced white-backed mascot with verified alpha-transparent PNG; removed badge rounding/shadow. First generated background removal failed alpha validation; second passed.
+- Typecheck and browser copy check passed. User now wants contextual alternatives to the carousel; proposing industry selector, problem selector or compact directory before replacing layout.
+- Local commit only; earlier public-push approval block remains.
+
 ## Current handoff — pricing comparison implemented (10 September 2026)
 
 - Replaced homepage #terms pricing cards with the selected comparison-table layout: white/forest, mint Busy desk column, shared features and separate setup/overage details.

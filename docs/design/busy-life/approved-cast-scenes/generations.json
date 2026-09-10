@@ -1,0 +1,566 @@
+{
+  "reference": "1157be84-6bb9-4891-9d2c-9e85819a384b",
+  "dog": "894ef38c-089d-4fe4-82e5-ec50fe123ae9",
+  "requests": [
+    {
+      "index": 1,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "1157be84-6bb9-4891-9d2c-9e85819a384b"
+          }
+        ],
+        "prompt": "Create ONE full-frame cinematic photographic still, NOT a storyboard/collage. Use the supplied approved four-panel image as the EXACT human identity, environment, lighting and wardrobe reference. Preserve the woman's face, brunette messy high bun with loose strands, black short-sleeve T-shirt and dark forest-green apron. Do not replace her with a younger freckled woman or a low ponytail. Natural candid commercial photography, warm daylight, authentic skin texture. No captions, no UI, no mascot, no text. Recreate the TOP LEFT photograph as a full wide frame. Same woman, same stainless bathing tub, same dark green grooming shop, shelves and natural light. The ONLY subject change: replace the golden retriever with a beautiful white SAMOYED with a joyful funny smile, tongue out, huge fluffy head and wet soapy chest. Both her hands are washing its chest. Dog and groomer on left two thirds; real shop background at right. Keep her recognizable face exactly as reference."
+      }
+    },
+    {
+      "index": 4,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "894ef38c-089d-4fe4-82e5-ec50fe123ae9"
+          },
+          {
+            "role": "image",
+            "value": "1157be84-6bb9-4891-9d2c-9e85819a384b"
+          }
+        ],
+        "prompt": "Make a single candid photo of a customer at home calling a dog groomer, with the EXACT small Yorkshire terrier from reference 1 in the foreground. Preserve its small dark face, black nose, black collar, tan silky fur and absurdly wild fine flyaway hair: long strands sticking straight UP and FAR OUT sideways in ALL directions just as in reference. Do not tidy, groom, shorten, fluff into round ball or replace this dog. It sits on a pale blanket. Beside it is its customer, a natural woman about 40 in a plain cream knit sweater, shoulder-length dark brown hair, holding a phone to her ear, looking fondly amused at its crazy hair. She is a DIFFERENT person from the groomer in reference2. Warm realistic photographic light, lived-in room, no beauty retouch, no text, no collage. Prioritize matching the exact terrier over elaborate surroundings."
+      }
+    },
+    {
+      "index": 12,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "1157be84-6bb9-4891-9d2c-9e85819a384b"
+          }
+        ],
+        "prompt": "Create ONE full-frame cinematic photographic still, NOT a storyboard/collage. Use the supplied approved four-panel image as the EXACT human identity, environment, lighting and wardrobe reference. Preserve the woman's face, brunette messy high bun with loose strands, black short-sleeve T-shirt and dark forest-green apron. Do not replace her with a younger freckled woman or a low ponytail. Natural candid commercial photography, warm daylight, authentic skin texture. No captions, no UI, no mascot, no text. Recreate ONLY the BOTTOM RIGHT lakeside hiking photograph as a full wide16:9 image. EXACT same brunette woman with messy bun and sunglasses wearing olive-green zip fleece, EXACT same bearded dark-haired male partner with sunglasses olive hiking shirt backpack and tan trousers. They walk smiling at each other by sunny blue lake and forested hills. Replace golden retriever with beautiful white Samoyed walking at their side. Keep both faces recognizable and preserve the warm happy candid feeling and photographic realism. No UI, no writing. Leave top left sky/lake clear for later title."
+      }
+    },
+    {
+      "index": 2,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "6c242af1-e828-487d-898f-e33159b81790"
+          },
+          {
+            "role": "image",
+            "value": "1157be84-6bb9-4891-9d2c-9e85819a384b"
+          }
+        ],
+        "prompt": "Create ONE full-frame cinematic photographic still, NOT a storyboard/collage. Use the supplied approved four-panel image as the EXACT human identity, environment, lighting and wardrobe reference. Preserve the woman's face, brunette messy high bun with loose strands, black short-sleeve T-shirt and dark forest-green apron. Do not replace her with a younger freckled woman or a low ponytail. Natural candid commercial photography, warm daylight, authentic skin texture. No captions, no UI, no mascot, no text. Tight close-up of the white Samoyed's joyful smiling face and wet chest. The SAME woman's two soapy hands visibly washing it below its face. Her black T-shirt and green apron visible behind. Same shop, same light. A funny adorable genuine dog expression."
+      }
+    },
+    {
+      "index": 3,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "6c242af1-e828-487d-898f-e33159b81790"
+          },
+          {
+            "role": "image",
+            "value": "1157be84-6bb9-4891-9d2c-9e85819a384b"
+          }
+        ],
+        "prompt": "Create ONE full-frame cinematic photographic still, NOT a storyboard/collage. Use the supplied approved four-panel image as the EXACT human identity, environment, lighting and wardrobe reference. Preserve the woman's face, brunette messy high bun with loose strands, black short-sleeve T-shirt and dark forest-green apron. Do not replace her with a younger freckled woman or a low ponytail. Natural candid commercial photography, warm daylight, authentic skin texture. No captions, no UI, no mascot, no text. Medium-wide angle of same woman washing same Samoyed, her BOTH soapy hands remaining on dog. She briefly glances toward a ringing phone lying on far right counter but does NOT reach for it. Woman and dog on left half, negative shop space on right. Same face, high messy bun, black shirt, apron, shop."
+      }
+    },
+    {
+      "index": 5,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "6c242af1-e828-487d-898f-e33159b81790"
+          },
+          {
+            "role": "image",
+            "value": "1157be84-6bb9-4891-9d2c-9e85819a384b"
+          }
+        ],
+        "prompt": "Create ONE full-frame cinematic photographic still, NOT a storyboard/collage. Use the supplied approved four-panel image as the EXACT human identity, environment, lighting and wardrobe reference. Preserve the woman's face, brunette messy high bun with loose strands, black short-sleeve T-shirt and dark forest-green apron. Do not replace her with a younger freckled woman or a low ponytail. Natural candid commercial photography, warm daylight, authentic skin texture. No captions, no UI, no mascot, no text. Wider same washing moment, woman gently smiling down at Samoyed, BOTH hands busy on wet soapy fur. Keep woman and dog entirely in LEFT HALF of frame, right half is soft-focus green shop shelves and towels for later graphic. Same identity, high messy bun, black shirt, apron, daylight. No phone held."
+      }
+    },
+    {
+      "index": 9,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "6c242af1-e828-487d-898f-e33159b81790"
+          },
+          {
+            "role": "image",
+            "value": "1157be84-6bb9-4891-9d2c-9e85819a384b"
+          }
+        ],
+        "prompt": "Create ONE full-frame cinematic photographic still, NOT a storyboard/collage. Use the supplied approved four-panel image as the EXACT human identity, environment, lighting and wardrobe reference. Preserve the woman's face, brunette messy high bun with loose strands, black short-sleeve T-shirt and dark forest-green apron. Do not replace her with a younger freckled woman or a low ponytail. Natural candid commercial photography, warm daylight, authentic skin texture. No captions, no UI, no mascot, no text. Same woman now towel drying same beautiful white Samoyed in same tub, dark green towel draped around wet body. She smiles warmly looking at dog. Faces and hands wholly on LEFT HALF, right half clear blurry green grooming shop for overlay. Same high messy bun, black T shirt and apron."
+      }
+    },
+    {
+      "index": 10,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "6c242af1-e828-487d-898f-e33159b81790"
+          },
+          {
+            "role": "image",
+            "value": "1157be84-6bb9-4891-9d2c-9e85819a384b"
+          }
+        ],
+        "prompt": "Create ONE full-frame cinematic photographic still, NOT a storyboard/collage. Use the supplied approved four-panel image as the EXACT human identity, environment, lighting and wardrobe reference. Preserve the woman's face, brunette messy high bun with loose strands, black short-sleeve T-shirt and dark forest-green apron. Do not replace her with a younger freckled woman or a low ponytail. Natural candid commercial photography, warm daylight, authentic skin texture. No captions, no UI, no mascot, no text. Later after finishing work in SAME shop: same brunette messy-high-bun woman, same face, wearing black short-sleeved T-shirt with apron now removed. She neatly folds her dark green apron on counter and smiles, relieved work is finished. Natural candid scene, no dog necessary, no UI."
+      }
+    },
+    {
+      "index": 11,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "6c242af1-e828-487d-898f-e33159b81790"
+          },
+          {
+            "role": "image",
+            "value": "1157be84-6bb9-4891-9d2c-9e85819a384b"
+          }
+        ],
+        "prompt": "Create ONE full-frame cinematic photographic still, NOT a storyboard/collage. Use the supplied approved four-panel image as the EXACT human identity, environment, lighting and wardrobe reference. Preserve the woman's face, brunette messy high bun with loose strands, black short-sleeve T-shirt and dark forest-green apron. Do not replace her with a younger freckled woman or a low ponytail. Natural candid commercial photography, warm daylight, authentic skin texture. No captions, no UI, no mascot, no text. Same woman now leaving the same small grooming shop. Same messy high bun and face. She has put on the olive-green zip fleece from bottom-right panel of approved collage, black hiking leggings, small hiking backpack. She steps through shop doorway and smiles, one hand on door. Same face, not another person. No writing, no logos or signage."
+      }
+    },
+    {
+      "index": 6,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "d45f5e98-476b-4c11-86ac-905618464673"
+          }
+        ],
+        "prompt": "Continue this exact customer, not a new person. SAME middle aged woman, shoulder length dark brown hair, cream knit sweater, same room, on phone to her right ear. Tight candid closeup on her face as she speaks naturally requesting a grooming appointment. Dog is OUT OF FRAME. Warm natural light, real unretouched photographic skin, no text, no collage, no UI."
+      }
+    },
+    {
+      "index": 8,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "d45f5e98-476b-4c11-86ac-905618464673"
+          }
+        ],
+        "prompt": "Continue this exact customer, not a new person. SAME middle aged woman, shoulder length dark brown hair, cream knit sweater, same room, phone to her right ear. Medium closeup of her listening then smiling warmly in relief that she has booked a grooming appointment. Dog OUT OF FRAME. Natural warm light, candid photographic skin, no text, no collage, no UI."
+      }
+    },
+    {
+      "index": 14,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "d45f5e98-476b-4c11-86ac-905618464673"
+          },
+          {
+            "role": "image",
+            "value": "894ef38c-089d-4fe4-82e5-ec50fe123ae9"
+          }
+        ],
+        "prompt": "Precise edit of image1: keep same woman in cream sweater calling, same sofa and blanket. Replace ONLY dog with EXACT dog from image2. Preserve the original dog's small dark downward-facing face, partially hidden eyes, black collar, small body and original wildly uncombed hair silhouette. Long fine tangled hairs shoot irregularly upward and sideways, hanging over face, not a styled symmetrical mohawk. It MUST be as messy as image2, facial proportions and pose like image2. Do not beautify its fur. Preserve woman image1. Single photoreal still, no lettering."
+      }
+    },
+    {
+      "index": 22,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "1157be84-6bb9-4891-9d2c-9e85819a384b"
+          }
+        ],
+        "prompt": "Recreate only BOTTOM RIGHT photograph from supplied approved collage, as a single wide16:9 full photograph. Exactly same woman with messy bun sunglasses olive fleece black leggings, same bearded man sunglasses olive hiking shirt tan trousers. Full body wider environmental shot of them walking by lake smiling at each other. Replace golden retriever ONLY with NORMAL SIZED white Samoyed walking on ground beside them, its head no higher than their THIGHS, its feet on same ground plane. Dog must not be giant or foreground close-up. Same warm sunshine trees blue lake. Remove ALL overlays, numbers, letters, signs, logos. No 01, no panels. Leave blue sky across top for title. Photographic candid realism and same human faces."
+      }
+    },
+    {
+      "index": 23,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "d740c061-d8d8-4808-a3c6-70a5449f27c8"
+          }
+        ],
+        "prompt": "Minimal local edit: put realistic dark hiking shoes on the woman's two bare feet. Keep EVERYTHING else absolutely unchanged: exact same faces of woman and man, Samoyed size, framing, lighting, clothing, lake. No other edits. No text."
+      }
+    },
+    {
+      "index": 33,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "6c242af1-e828-487d-898f-e33159b81790"
+          }
+        ],
+        "prompt": "ONE SINGLE UNINTERRUPTED PHOTOGRAPH, no split screen, no white divider, no collage, no montage, no panels, no lettering. Preserve this exact woman's identity and high messy bun, same green grooming shop. Same woman washing same Samoyed with BOTH soapy hands on dog. She turns her head slightly to glance to her right at phone on counter, cannot answer. Wide single scene, dog and woman on left, shop on right. Cinematic natural warm daylight, authentic photographic texture. No UI or text."
+      }
+    },
+    {
+      "index": 35,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "6c242af1-e828-487d-898f-e33159b81790"
+          }
+        ],
+        "prompt": "ONE SINGLE UNINTERRUPTED PHOTOGRAPH, no split screen, no white divider, no collage, no montage, no panels, no lettering. Preserve this exact woman's identity and high messy bun, same green grooming shop. Same woman washing same Samoyed. Both hands soapy. Wide angle single uninterrupted photograph, camera pulls back to show dog and woman left of frame with open shop background at right. Cinematic natural warm daylight, authentic photographic texture. No UI or text."
+      }
+    },
+    {
+      "index": 39,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "6c242af1-e828-487d-898f-e33159b81790"
+          }
+        ],
+        "prompt": "ONE SINGLE UNINTERRUPTED PHOTOGRAPH, no split screen, no white divider, no collage, no montage, no panels, no lettering. Preserve this exact woman's identity and high messy bun, same green grooming shop. Same woman now towel drying same white Samoyed, dark green towel around wet dog. Both smile. Single uninterrupted wide photo, woman and dog left, shop visible right. Cinematic natural warm daylight, authentic photographic texture. No UI or text."
+      }
+    },
+    {
+      "index": 41,
+      "params": {
+        "model": "seedream_v4_5",
+        "aspect_ratio": "16:9",
+        "quality": "basic",
+        "medias": [
+          {
+            "role": "image",
+            "value": "6c242af1-e828-487d-898f-e33159b81790"
+          }
+        ],
+        "prompt": "ONE SINGLE UNINTERRUPTED PHOTOGRAPH, no split screen, no white divider, no collage, no montage, no panels, no lettering. Preserve this exact woman's identity and high messy bun, same green grooming shop. Same woman is NOW wearing olive green zip-up fleece, black leggings, hiking shoes and backpack and stepping OUT of this shop doorway. No apron. Same messy high bun and same face. One woman only. Full body. No dog in frame. Cinematic natural warm daylight, authentic photographic texture. No UI or text."
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "index": 1,
+      "job_id": "6c242af1-e828-487d-898f-e33159b81790",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 4,
+      "job_id": "d45f5e98-476b-4c11-86ac-905618464673",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        },
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 12,
+      "job_id": "fcbf470f-47e5-459e-b207-c10f1356e933",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 2,
+      "job_id": "e38e4aa9-5098-4ce6-bf32-c9e1f25951b9",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        },
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 3,
+      "job_id": "cd8e4a4c-466b-4e3f-81f2-22a35acee926",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        },
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 5,
+      "job_id": "e78b047c-c330-4223-a981-4df8e37cb128",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        },
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 9,
+      "job_id": "ce508503-6166-42cd-819f-cb9b8b96959a",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        },
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 10,
+      "job_id": "823e8930-cda5-4e11-abc8-c5810799ae0e",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        },
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 11,
+      "job_id": "f5ffd219-0001-4e3e-8380-d1385c1b11b6",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        },
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 6,
+      "job_id": "6fd56e0c-a1e7-478f-8130-d61ab4d171fb",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 8,
+      "job_id": "c53c1f78-a4b0-4528-9e31-bfd73a99cce3",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 14,
+      "job_id": "89503ea4-aa55-4541-8cd7-498721e9e487",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        },
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 22,
+      "job_id": "d740c061-d8d8-4808-a3c6-70a5449f27c8",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 23,
+      "job_id": "e685c4de-3232-4c78-9650-305e80ff16cd",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 33,
+      "job_id": "3348ebb2-96bc-4351-b641-684a0df326de",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 35,
+      "job_id": "5ac5209f-db29-4d5d-81c6-2c4b4b0471e2",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 39,
+      "job_id": "c9e0373e-d7af-4c1e-8e9a-c10f2c53af1f",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 41,
+      "job_id": "bfa4a66c-fa01-496c-a470-33f3ce7e3533",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Seedream 4.5 backend expects schema-key media roles"
+        }
+      }
+    }
+  ]
+}

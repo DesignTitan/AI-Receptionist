@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — restore approved characters (10 September 2026)
+
+- Bubs rejected the recast people in final-scenes; restored the supplied original brunette groomer and lakeside partner as character references using Higgsfield Seedream 4.5.
+- Built twelve corrected stills and gallery in docs/design/busy-life/approved-cast-scenes. Samoyed at grooming; crazy-haired terrier beside caller. Terrier is reference-based, not pixel-identical.
+- Corrected split-frame generation artifacts, dog scale and hiking footwear; checked finished exports and gallery navigation. No video or production-site changes.
+- Next: Bubs reviews this corrected cast and dog treatment before animation. Prior public-push review block remains; commit locally.
+
 ## Current handoff — darker core features and preview logos (10 September 2026)
 
 - Bubs confirmed #turn is reserved for the video being produced in the other task; the static confirmation concept is not replacing it.

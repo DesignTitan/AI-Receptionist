@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — pause overlay and quieter controls (10 September 2026)
+
+- Pausing restores the headline over the current video frame; clicking the video surface toggles pause/resume without resetting its position.
+- Compact controls fade to 35% while playing and brighten on hover or keyboard focus; controls remain above the clickable surface.
+- Typecheck and browser checks passed for preserved pause position, headline return, surface resume, control pause and opacity.
+- Local commit only; previous public-push approval block remains.
+
 ## Current handoff — card blur and industry movement (10 September 2026)
 
 - Proof cards now gain 0–18px Gaussian blur in step with their existing fade as the next card covers them; reduced motion disables the added blur.

@@ -35,7 +35,7 @@ export function HappyPawsFilm() {
     setStarted(true);
     try {
       await video.current.play();
-      playbackButton.current?.focus();
+
     } catch {
       setStarted(false);
       setError("The film couldn’t start. Please try again.");
@@ -44,7 +44,7 @@ export function HappyPawsFilm() {
 
   return (
     <div className={styles.frame}>
-    <section id="turn" className={styles.section} data-playing={started} data-sc-act="flow" aria-label="Hands full? We’ve got the call.">
+    <section id="turn" className={styles.section} data-playing={started} data-paused={paused} data-sc-act="flow" aria-label="Hands full? We’ve got the call.">
       <video ref={video} className={styles.video} onPlay={() => setPaused(false)} onPause={() => setPaused(true)} onTimeUpdate={(event) => setTime(event.currentTarget.currentTime)} onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)} onVolumeChange={(event) => setMuted(event.currentTarget.muted)} playsInline preload="none" tabIndex={started ? 0 : -1} poster="/marketing/happy-paws-poster.png" onEnded={() => setStarted(false)} aria-label="Happy Paws: an AI receptionist handles a booking while the groomer works">
         <source src="/marketing/happy-paws.mp4" type="video/mp4" />
         <track kind="captions" src="/marketing/happy-paws.vtt" srcLang="en" label="English" />
@@ -63,7 +63,7 @@ export function HappyPawsFilm() {
         </div>
       )}
       {started && error && <p className={styles.error} role="alert">{error}</p>}
-      {!started && (
+      {paused && (
         <>
           <div className={styles.overlay}>
             <div className={styles.heading}>
@@ -76,12 +76,12 @@ export function HappyPawsFilm() {
               <span>Illustrative scenario. Incoming AI booking requires a connected pilot.</span>
             </div>
           </div>
-          <button type="button" className={styles.play} onClick={play} onPointerEnter={followPointer} onPointerMove={followPointer} onPointerLeave={(event) => { delete event.currentTarget.dataset.following; }} onBlur={(event) => { delete event.currentTarget.dataset.following; }} aria-label="Play the Happy Paws film with sound">
-            <span className={styles.prompt}><svg width="16" height="18" viewBox="0 0 16 18" fill="currentColor" aria-hidden="true"><path d="M2 1.5v15L15 9z" /></svg>Play me</span>
-          </button>
           {error && <p className={styles.error} role="alert">{error}</p>}
         </>
       )}
+          <button type="button" className={styles.play} onClick={() => { if (video.current?.paused) void play(); else video.current?.pause(); }} onPointerEnter={followPointer} onPointerMove={followPointer} onPointerLeave={(event) => { delete event.currentTarget.dataset.following; }} onBlur={(event) => { delete event.currentTarget.dataset.following; }} aria-label={paused ? "Play the Happy Paws film with sound" : "Pause the Happy Paws film"}>
+            <span className={styles.prompt} data-hidden={!paused}><svg width="16" height="18" viewBox="0 0 16 18" fill="currentColor" aria-hidden="true"><path d="M2 1.5v15L15 9z" /></svg>Play me</span>
+          </button>
     </section>
     </div>
   );

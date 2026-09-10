@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — approved film on homepage (10 September 2026)
+
+- Bubs approved the Happy Paws cut; integrated it into the reserved homepage #turn section, replacing the old confirmation scroll-scrub clip.
+- Added on-demand native video controls, poster, English captions and connected-pilot note; chapter now reads Your day back. No autoplay audio or full video preload.
+- Typecheck passed; local video metadata/controls verified, no autoplay, and no mobile page overflow. Other in-progress industry changes preserved.
+- No deployment or public push; prior approval block remains.
+
 ## Current handoff — dimensional mascot correction (10 September 2026)
 
 - Bubs rejected both sleeping eyes and the first open-eye revision, whose glossy features looked pasted onto the 3D mascot. Created v3 examples with smaller recessed eyes and fur-integrated facial shading; awaiting review.

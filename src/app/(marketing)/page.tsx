@@ -1,3 +1,4 @@
+import { HappyPawsFilm } from "@/components/marketing/happy-paws-film";
 import { VoiceDemoTrigger } from "@/components/marketing/voice-example";
 import { BusySection } from "@/components/marketing/busy-section";
 import { OverviewBenefits } from "@/components/marketing/overview-benefits";
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
 const CHAPTERS = [
   { id: "desk", n: "01", title: "The front desk" },
   { id: "cost", n: "02", title: "When you’re busy" },
-  { id: "turn", n: "03", title: "Confirmation calls" },
+  { id: "turn", n: "03", title: "Your day back" },
   { id: "features", n: "04", title: "Core features" },
   { id: "proof", n: "05", title: "Proof" },
   { id: "industries", n: "06", title: "Your industry" },
@@ -89,25 +90,8 @@ export default function HomePage() {
 
         <BusySection />
 
-        {/* 03 · The turn. The one film chapter: the real confirmation page walking to confirmed. */}
         <div id="how-it-works" aria-hidden="true" />
-        <section id="turn" data-sc-act="scrub" data-sc-span="2.4" data-sc-dwell="0.32">
-          <div data-sc-stage>
-            <picture>
-              <source media="(max-width: 860px)" srcSet="/scrollcraft/03-turn-poster-p.jpg" />
-              <img className="sc-stage__poster" src="/scrollcraft/03-turn-poster.jpg" alt="" />
-            </picture>
-            <video data-sc-scrub data-sc-src="/scrollcraft/03-turn.mp4" data-sc-src-mobile="/scrollcraft/03-turn-p.mp4" muted playsInline />
-            <div className="sc-scrim sc-scrim--lead" aria-hidden="true" />
-            <div className="sc-copy sc-copy--lead" data-sc-cue="0 0.58 0">
-              <h2 className="sc-display sc-display--lg" data-sc-kinetic="lines">The booking is made. Let AI handle the confirmation.</h2>
-              <p className="sc-lede">After an online booking, your AI receptionist can call to confirm the details when calling is enabled and minutes are available. Requests for a new time go to your team.</p>
-            </div>
-            <div className="sc-copy sc-copy--trail" data-sc-cue="0.62 0.96">
-              <h2 className="sc-display sc-display--md">The outcome. The details. Ready for your team.</h2>
-            </div>
-          </div>
-        </section>
+        <HappyPawsFilm />
 
         {/* 04 · Proof. An iris into the real dashboard, then the record. */}
         <div className="rc-textured textured-section">

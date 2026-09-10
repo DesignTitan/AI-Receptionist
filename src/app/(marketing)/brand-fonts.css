@@ -1,0 +1,17 @@
+/* Original, self-hosted OFL fonts; see public/fonts/README.md. */
+@font-face { font-family: "Open Runde"; src: url("/fonts/open-runde/OpenRunde-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Open Runde"; src: url("/fonts/open-runde/OpenRunde-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Open Runde"; src: url("/fonts/open-runde/OpenRunde-Semibold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Open Runde"; src: url("/fonts/open-runde/OpenRunde-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Apfel Grotezk"; src: url("/fonts/apfel-grotezk/ApfelGrotezk-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Apfel Grotezk"; src: url("/fonts/apfel-grotezk/ApfelGrotezk-Mittel.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Apfel Grotezk"; src: url("/fonts/apfel-grotezk/ApfelGrotezk-Fett.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* Scope the new identity to the active marketing pages. */
+.rc, .features-page {
+  --font-display-marketing: "Apfel Grotezk";
+  --font-inter: "Open Runde";
+}
+.rc :is(h1, h2, h3), .features-page :is(h1, h2, h3) {
+  font-family: var(--font-display-marketing), system-ui, sans-serif;
+}

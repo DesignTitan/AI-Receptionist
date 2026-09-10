@@ -3,6 +3,13 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — forest and mint marketing identity (10 September 2026)
+
+- Applied the approved reference palette to the active homepage and Features/Coming Soon: white canvas, forest-green text/buttons, mint accents and deep-green contrast chapters. Existing V1 scroll sequence, coastal hero, copy and feature-status labels are preserved.
+- Added self-hosted Open Runde for marketing interface/body text and Apfel Grotezk for headings, with original OFL licenses and source credits in public/fonts/README.md. Other product/vertical themes and design studies remain separate.
+- Verified both fonts actually load, pure-white backgrounds, and 320/390/1440px layouts on / and /features. Existing video scrubbing, card stacking, horizontal scrolling, feature controls and reduced-motion checks pass. Production build and dev-tool exclusion pass; the workspace homepage is refreshed.
+- Next: review this typography/palette foundation before adapting more contextual brand elements or a mascot. No mascot, new imagery, feature claims or deployment added. Public push remains pending the earlier publication approval.
+
 ## Current handoff — original V1 scrolling homepage restored (10 September 2026)
 
 - Bubs rejected the simplified homepage layout. Restored the complete original V1 page structure from c3a9ef8 (d05aece's parent): flowing chapters, confirmation video scrubbing, tabbed parallax feature stage, pinned dashboard card stack, horizontal industry rail, call section and closing chapter.

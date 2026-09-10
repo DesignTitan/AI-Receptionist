@@ -1,6 +1,6 @@
 # Marketing story and features
 
-Updated 10 September 2026. The homepage explains the product and the value of getting time back. The dedicated Features page holds the detailed capability, benefit and setup story.
+Updated 10 September 2026. The homepage explains the product and the value of getting time back. The dedicated Features page holds the detailed capability, benefit and setup story. Light marketing backgrounds are pure white, including Features panels and the Coming Soon voting interface; the homepage retains its photographic hero and dark contrast sections.
 
 ## The first impression
 

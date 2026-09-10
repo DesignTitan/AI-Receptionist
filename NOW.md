@@ -3,6 +3,12 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — white marketing backgrounds (10 September 2026)
+
+- Replaced the beige homepage canvas and the warm Features/Coming Soon backgrounds with pure white, including panels, vote controls and the suggestion dialog. Features pilot badges, focus rings and hover fills now use neutral colours; roadmap errors retain a pale red treatment.
+- Verified the running workspace renders rgb(255, 255, 255) on both page backgrounds, the Features plan section, Coming Soon, its dialog and vote controls. Homepage text and shadows use neutral tones. Existing photography and dark contrast sections are preserved.
+- Next: continue marketing review on localhost. Feedback remains locally persistent; the live roadmap migration and deployment remain pending. This styling update is saved locally; public GitHub publishing still awaits the earlier approval after automatic review rejected the public push.
+
 ## Current handoff — Coming Soon roadmap and feature voting (10 September 2026)
 
 - Added Coming Soon at the very bottom of the light /features page, linked in its navigation. The 13 customer-facing roadmap items cover phone booking, calendar connections, team availability, owner editing, service durations, multiple locations/lines, reminders, reengagement, appointment changes, guided activation, voicemail and referrals. Pilot / Planned / Exploring labels avoid release-date promises; existing features remain in the main stories.

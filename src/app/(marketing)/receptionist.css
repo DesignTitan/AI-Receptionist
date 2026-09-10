@@ -1,21 +1,22 @@
-/* The product homepage: a chaptered editorial on paper. Tokens theme the vendored engine; everything else is this page's own markup. */
+/* The product homepage: a chaptered editorial on white. Tokens theme the vendored engine; everything else is this page's own markup. */
 .rc {
   /* one corner radius for every rectangle on this page */
   --sc-r-sm: 12px;
   --sc-r-md: 12px;
   --sc-r-lg: 12px;
-  --sc-canvas: #f6f4ef;
+  --sc-canvas: #ffffff;
   --sc-surface: #ffffff;
-  --sc-ink: #15130f;
-  --sc-ink-soft: #5d584f;
+  --sc-ink: #151719;
+  --sc-ink-soft: #5d6268;
   --sc-accent: #4b4fe0;
   --sc-accent-ink: #ffffff;
   --sc-font-display: var(--font-display-marketing), "Instrument Sans", system-ui, sans-serif;
   --sc-font-text: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --sc-shadow-color: 40 20% 10%;
+  --sc-shadow-color: 0 0% 10%;
   --sc-edge: inset 0 1px 0 rgb(255 255 255 / 0.7);
   background: var(--sc-canvas);
   color: var(--sc-ink);
+  color-scheme: light;
   font-family: var(--sc-font-text);
   line-height: var(--sc-leading-body);
   -webkit-font-smoothing: antialiased;

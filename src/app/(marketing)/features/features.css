@@ -1,19 +1,19 @@
 .features-page {
-  --features-background: #f8f7f3;
-  --features-surface: #efeee8;
-  --features-paper: #fffefa;
+  --features-background: #ffffff;
+  --features-surface: #ffffff;
+  --features-paper: #ffffff;
   --features-ink: #151719;
   --features-text: #3c4147;
   --features-muted: #5d6268;
   --features-subtle: #676c70;
-  --features-rule: #d8d8d3;
+  --features-rule: #d8d8d8;
   --features-rule-strong: #a4a8a8;
-  --features-pilot-ink: #655431;
-  --features-pilot-rule: #b6a88b;
-  --features-pilot-surface: #f1ece1;
-  --features-focus: #6a5322;
+  --features-pilot-ink: #5d6268;
+  --features-pilot-rule: #a4a8a8;
+  --features-pilot-surface: #ffffff;
+  --features-focus: #151719;
   --features-button-hover: #353b40;
-  --features-outline-hover: #e7e5df;
+  --features-outline-hover: #f4f4f4;
   --features-inset: clamp(22px, 5.2vw, 88px);
   background: var(--features-background);
   color: var(--features-ink);

@@ -17,7 +17,7 @@ The category and everyday actions explain the product immediately. The promise c
 | Page | Purpose and sequence |
 | --- | --- |
 | `/` | Clear product promise → attention, less chasing and room to step away → online booking / optional confirmation / owner follow-up → incoming pilot introduction → industry fit → call demonstration or callback request → shared pricing → short buying questions → setup invitation. |
-| `/features` | Benefit-led overview → six feature stories → plan allowances and team limits → setup and compatibility questions → demo or signup. |
+| `/features` | Light presentation → benefit-led overview → six feature stories → plan allowances and team limits → setup and compatibility questions → demo or signup → Coming soon roadmap, upvotes and new-feature suggestions. |
 | `/__dev/design/luxury-v2` | Preferred dark visual direction with the same hero message. The current online flow comes before the incoming pilot. Short benefit previews link to the full Features page; setup and the approved coastal image remain. |
 | `/demos` | Three fictional business examples, with shared navigation to Features, pricing and the homepage. |
 
@@ -43,6 +43,7 @@ The Features page reuses three completed Higgsfield campaign photographs: full a
 - **Get started / Set up my business** → `/start`; a logged-out visitor first reaches owner sign-in. Local sign-in still needs configuration, so completed onboarding is not claimed.
 - **Pricing** → `/#terms`; prices, allowance, team limits and setup terms come from `src/lib/platform/pricing.ts`. Homepage plan cards show the differences instead of repeating the full feature inventory.
 - **Features** is visible in the homepage navigation, V2 navigation, shared demo navigation and the development page index.
+- **Coming soon** in the Features navigation jumps to the public roadmap at the bottom. Its 13 team items distinguish pilots, plans and exploration; visitors can vote or suggest ideas for staff review. See `docs/feature-roadmap.md` for the source list and storage/release details.
 - The website’s demo voice script uses the same product boundaries as the written marketing copy.
 
 ## Product boundaries

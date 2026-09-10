@@ -3,6 +3,14 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — Coming Soon roadmap and feature voting (10 September 2026)
+
+- Added Coming Soon at the very bottom of the light /features page, linked in its navigation. The 13 customer-facing roadmap items cover phone booking, calendar connections, team availability, owner editing, service durations, multiple locations/lines, reminders, reengagement, appointment changes, guided activation, voicemail and referrals. Pilot / Planned / Exploring labels avoid release-date promises; existing features remain in the main stories.
+- Visitors can save/remove votes, sort by popularity and suggest features. Browser identity uses a random HttpOnly cookie and hashed database identifier; votes are unique per browser/feature, not verified people. Suggestions are private until review, with duplicate prevention and three submissions per visitor per 24 hours. Errors retain readable content and provide recovery without inventing counts.
+- Built the signed-in staff review queue at /admin/roadmap, linked as Ideas in the staff header and Feature suggestions in the development page index. Approval opens a community item as Exploring; hiding preserves vote history. Review requests are guarded against races and uncertain saves, with keyboard focus restored after decisions.
+- Feedback persists in ignored .local/roadmap.sqlite during development/test. Production uses Supabase only: migration supabase/migrations/20260910_feature_roadmap.sql and service-role-only functions are prepared and verified against an isolated PostgreSQL fixture. The migration has not been applied to live Supabase and no deployment occurred. See docs/feature-roadmap.md for release steps and sources.
+- Passed 14 targeted tests, production build/dev-tool exclusion, real-browser voting and suggestion/review flows, error recovery, keyboard review, long-title wrapping, and 320/390/1440px light layouts. Fixed Next's internal localhost versus browser Host origin mismatch. Restarted the session-managed localhost service to load the page index, verified a vote survived the restart, and removed temporary QA feedback. Next: review /features#coming-soon; apply the migration before any live release. Work is saved locally; public GitHub push remains pending the earlier publication approval after automatic review rejected the public push.
+
 ## Current handoff — light Features page (10 September 2026)
 
 - Changed /features to a warm light palette with near-black headings, dark primary buttons, light surfaces and readable muted text. Layout, copy and existing campaign images are preserved; V2 keeps its own approved visual direction.

@@ -6,7 +6,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 export function AdminHeader({ subtitle }: { subtitle?: string }) {
   return (
     <header className="sticky top-0 z-40 border-b border-line surface-blur">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-5">
+      <div className="mx-auto flex min-h-16 max-w-7xl flex-wrap items-center justify-between gap-x-4 gap-y-3 px-5 py-3 sm:flex-nowrap sm:py-0">
         <Link href="/admin" className="flex items-center gap-2.5">
           <span className="grid size-9 place-items-center rounded-xl bg-ink text-bg">
             <PulseMark width={19} height={19} strokeWidth={2} />
@@ -29,6 +29,7 @@ export function AdminHeader({ subtitle }: { subtitle?: string }) {
             View site
           </Link>
           <Link href="/admin/customers" className="px-3 text-sm">Customers</Link>
+          <Link href="/admin/roadmap" className="px-2 text-sm">Ideas</Link>
           <ThemeToggle />
           <form action={logout}>
             <button

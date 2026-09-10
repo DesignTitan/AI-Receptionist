@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CoreFeatures } from "@/components/marketing/core-features";
+import { RoadmapBoard } from "@/components/marketing/roadmap-board";
+import { ROADMAP } from "@/lib/roadmap/catalogue";
 import { PLANS, SETUP_OFFER, SETUP_SCOPE } from "@/lib/platform/pricing";
 import "./features.css";
 
@@ -28,6 +30,7 @@ export default function FeaturesPage() {
           <Link href="/features" aria-current="page">Features</Link>
           <Link href="/demos">Demos</Link>
           <Link href="/#terms">Pricing</Link>
+          <Link href="/features#coming-soon">Coming soon</Link>
         </nav>
         <Link href="/start" className="features-button features-button--header">Get started <span aria-hidden="true">↗</span></Link>
       </header>
@@ -126,6 +129,7 @@ export default function FeaturesPage() {
             <Link href="/demos" className="features-button features-button--outline">Try online booking</Link>
           </div>
         </section>
+        <RoadmapBoard seeds={ROADMAP} />
       </main>
 
       <footer className="features-footer">

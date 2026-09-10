@@ -270,6 +270,7 @@
   width: var(--card-w); height: var(--card-h);
   transform: translateY(calc((1 - var(--t)) * var(--rise) - var(--s) * 14px)) scale(calc(1 - var(--s) * 0.04));
   opacity: calc(1 - var(--s));
+  filter: blur(calc(var(--s) * 18px));
   /* Waiting cards: the next one on top (so its label is what peeks). A card that
      has started rising, or has settled, sits above everything that waited; each
      later card above the earlier. Browsers without round() keep DOM order. */
@@ -777,3 +778,10 @@
 
 /* Finish the dark feature/proof block with the same curve as the film. */
 .rc .rc-textured { border-radius: 0 0 48px 48px; clip-path: inset(0 round 0 0 48px 48px); }
+
+@media (prefers-reduced-motion: reduce) { .rc-card { filter: none; } }
+
+@media (min-width: 861px) and (prefers-reduced-motion: no-preference) {
+  .rc-industries__viewport { overflow: visible; }
+  .rc-industries__intro { will-change: transform; }
+}

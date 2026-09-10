@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — card blur and industry movement (10 September 2026)
+
+- Proof cards now gain 0–18px Gaussian blur in step with their existing fade as the next card covers them; reduced motion disables the added blur.
+- Industry intro now translates left at exactly the same rate as its card rail on desktop; removed the inner clipping boundary so cards no longer cut into the heading.
+- Mobile/reduced-motion native gallery stays intact. Typecheck passed; browser verified matching transforms and a constant 43px gap during scrolling, plus blur/fade progression.
+- Local commit only; previous public-push approval block remains.
+
 ## Current handoff — compact player and dark-section finish (10 September 2026)
 
 - Replaced full-width native controls with a centered 600px glass bar: pause/play, time, seek, mute, captions and fullscreen. Mobile fits within 16px side margins.

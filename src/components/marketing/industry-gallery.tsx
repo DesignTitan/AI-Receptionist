@@ -20,6 +20,7 @@ export function IndustryGallery() {
   const section = useRef<HTMLElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
   const rail = useRef<HTMLDivElement>(null);
+  const intro = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -34,6 +35,7 @@ export function IndustryGallery() {
       const progress = Math.max(0, Math.min(1, -rect.top / Math.max(1, root.offsetHeight - innerHeight)));
       const position = native.matches ? windowEl.scrollLeft : progress * travel;
       track.style.transform = native.matches ? "none" : `translate3d(${-position}px,0,0)`;
+      if (intro.current) intro.current.style.transform = native.matches ? "none" : `translate3d(${-position}px,0,0)`;
       // Follow the leading card, including the last cards as they approach the rail end.
       const nearest = native.matches
         ? cards.reduce((best, card, i) => Math.abs(card.offsetLeft - position) < Math.abs(cards[best].offsetLeft - position) ? i : best, 0)
@@ -71,7 +73,7 @@ export function IndustryGallery() {
   return (
     <section ref={section} id="industries" className="rc-industries" data-sc-act="flow" aria-labelledby="industry-title">
       <div className="rc-industries__sticky">
-        <div className="rc-industries__intro">
+        <div ref={intro} className="rc-industries__intro">
           <p className="rc-industries__eyebrow">Your industry</p>
           <h2 id="industry-title">Your business.<br />Your kind of busy.</h2>
           <p>Keep bookings and confirmation calls moving while you focus on your customers.</p>

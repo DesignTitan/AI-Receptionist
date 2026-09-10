@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — industry stories over the imagery (10 September 2026)
+
+- Moved the example AI conversation and mascot onto each active industry card, with a layered glass bubble entrance. Cards explain what occupies the person and what AI handles.
+- Combined medical/dental into one example; ten varied situations remain. Existing photos retained; copy now makes the interruption and benefit explicit.
+- Removed the white seam beneath the video by darkening the wrapper below its top corners and overlapping the join by 1px.
+- Typecheck passed; visually checked desktop/mobile overlays and confirmed no mobile overflow. Local commit only; previous public-push approval block remains.
+
 ## Current handoff — pause overlay and quieter controls (10 September 2026)
 
 - Pausing restores the headline over the current video frame; clicking the video surface toggles pause/resume without resetting its position.

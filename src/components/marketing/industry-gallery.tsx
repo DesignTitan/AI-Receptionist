@@ -3,17 +3,16 @@
 import { useEffect, useRef, useState } from "react";
 
 const INDUSTRIES = [
-  { key: "medical", title: "Doctors’ offices", detail: "Primary care · specialists · clinics", line: "More time for your patients.", quote: "Hi, Alex! I’m calling to confirm your appointment with Dr. Lee tomorrow at ten.", pilot: false },
-  { key: "dental", title: "Dental practices", detail: "Dentists · orthodontists · hygienists", line: "Keep your day running smoothly.", quote: "Hi, Jordan! Just confirming your dental cleaning on Thursday at two. Does that still work for you?", pilot: false },
-  { key: "healthcare", title: "Healthcare & wellness", detail: "Physio · mental health · chiropractic", line: "Give care your full attention.", quote: "Hello, Sam! I’m calling to confirm your physiotherapy session tomorrow at eleven.", pilot: false },
-  { key: "fitness", title: "Fitness & movement", detail: "Gyms · personal trainers · yoga · Pilates", line: "Stay with the session.", quote: "Your first training session? Lovely. What days tend to work for you?", pilot: true },
-  { key: "care", title: "Personal care", detail: "Salons · barbers · spas · nail studios", line: "More time with your clients.", quote: "A haircut and colour? Of course. Do you have a stylist you usually see?", pilot: true },
-  { key: "retail", title: "Retail & shops", detail: "Boutiques · showrooms · specialist shops", line: "Look after the customer in front of you.", quote: "You’d like to visit the showroom? I can help arrange an appointment. What day suits you?", pilot: true },
-  { key: "pets", title: "Pet services", detail: "Groomers · vets · trainers · boarding", line: "Busy hands. Bookings covered.", quote: "Let’s get Milo booked in. Is he coming for a bath or a full groom?", pilot: true },
-  { key: "studio", title: "Creative studios", detail: "Photography · video · design studios", line: "Stay focused on the shoot.", quote: "I’d love to help you book a portrait session. What did you have in mind?", pilot: true },
-  { key: "trades", title: "Home & auto services", detail: "Trades · cleaning · landscaping · mechanics", line: "Keep your attention on the job.", quote: "Hi, Taylor! I’m confirming your service appointment for Friday morning. Will you be available?", pilot: false },
-  { key: "professional", title: "Professional services", detail: "Accountants · lawyers · consultants", line: "Make room for the conversation.", quote: "Hi, Morgan! Just confirming your consultation on Tuesday at three. Does that still suit you?", pilot: false },
-  { key: "lessons", title: "Lessons & coaching", detail: "Tutors · music · driving · coaching", line: "Keep the lesson flowing.", quote: "Your first piano lesson? Lovely. What days tend to work for you?", pilot: true },
+  { key: "medical", problem: "A patient needs your full attention.", outcome: "AI handles the confirmation calls.", title: "Medical & dental", detail: "Doctors · dentists · clinics", line: "More time for your patients.", quote: "Hi, Alex! I’m calling to confirm your appointment with Dr. Lee tomorrow at ten.", pilot: false },
+  { key: "healthcare", problem: "You’re supporting every movement.", outcome: "AI follows up on tomorrow’s appointments.", title: "Healthcare & wellness", detail: "Physio · mental health · chiropractic", line: "Give care your full attention.", quote: "Hello, Sam! I’m calling to confirm your physiotherapy session tomorrow at eleven.", pilot: false },
+  { key: "fitness", problem: "You can’t stop halfway through a set.", outcome: "AI helps the next customer find a time.", title: "Fitness & movement", detail: "Gyms · personal trainers · yoga · Pilates", line: "Stay with the session.", quote: "Your first training session? Lovely. What days tend to work for you?", pilot: true },
+  { key: "care", problem: "Both hands. One customer. No interruptions.", outcome: "AI helps the next customer book.", title: "Personal care", detail: "Salons · barbers · spas · nail studios", line: "More time with your clients.", quote: "A haircut and colour? Of course. Do you have a stylist you usually see?", pilot: true },
+  { key: "retail", problem: "There’s a customer at the counter.", outcome: "AI arranges the next showroom visit.", title: "Retail & shops", detail: "Boutiques · showrooms · specialist shops", line: "Look after the customer in front of you.", quote: "You’d like to visit the showroom? I can help arrange an appointment. What day suits you?", pilot: true },
+  { key: "pets", problem: "Wet paws. Full hands. A ringing phone.", outcome: "AI helps book the next groom.", title: "Pet services", detail: "Groomers · vets · trainers · boarding", line: "Busy hands. Bookings covered.", quote: "Let’s get Milo booked in. Is he coming for a bath or a full groom?", pilot: true },
+  { key: "studio", problem: "The perfect moment won’t wait.", outcome: "AI handles the next session enquiry.", title: "Creative studios", detail: "Photography · video · design studios", line: "Stay focused on the shoot.", quote: "I’d love to help you book a portrait session. What did you have in mind?", pilot: true },
+  { key: "trades", problem: "You’re in the middle of a repair.", outcome: "AI calls to confirm the next job.", title: "Home & auto services", detail: "Trades · cleaning · landscaping · mechanics", line: "Keep your attention on the job.", quote: "Hi, Taylor! I’m confirming your service appointment for Friday morning. Will you be available?", pilot: false },
+  { key: "professional", problem: "You’re deep in a consultation.", outcome: "AI takes confirmation calls off your list.", title: "Professional services", detail: "Accountants · lawyers · consultants", line: "Make room for the conversation.", quote: "Hi, Morgan! Just confirming your consultation on Tuesday at three. Does that still suit you?", pilot: false },
+  { key: "lessons", problem: "Your student needs you right now.", outcome: "AI helps the next student find a time.", title: "Lessons & coaching", detail: "Tutors · music · driving · coaching", line: "Keep the lesson flowing.", quote: "Your first piano lesson? Lovely. What days tend to work for you?", pilot: true },
 ];
 
 export function IndustryGallery() {
@@ -68,7 +67,6 @@ export function IndustryGallery() {
       window.scrollTo({ top: scrollY + root.getBoundingClientRect().top + next / (INDUSTRIES.length - 1) * (root.offsetHeight - innerHeight), behavior });
     }
   }
-  const item = INDUSTRIES[active];
 
   return (
     <section ref={section} id="industries" className="rc-industries" data-sc-act="flow" aria-labelledby="industry-title">
@@ -92,21 +90,21 @@ export function IndustryGallery() {
               {INDUSTRIES.map((industry, index) => (
                 <article className="rc-industry" key={industry.key} data-active={index === active}>
                   <img src={`/marketing/industries/${industry.key}.webp`} alt="" width={900} height={1200} loading="lazy" />
-                  <div className="rc-industry__copy"><h3>{industry.title}</h3><p>{industry.line}</p><small>{industry.detail}</small></div>
+                  <p className="rc-industry__problem">{industry.problem}</p>
+                  <div className="rc-industry__moment" aria-hidden={index !== active}>
+                    <img src="/marketing/industries/mascot.webp" width={600} height={600} alt="" />
+                    <div className="rc-industry__bubble">
+                      <span className="rc-industry__ai">AI receptionist <span aria-hidden="true">· · ·</span></span>
+                      <p>“{industry.quote}”</p>
+                      <small>Illustrative conversation{industry.pilot ? " · Connected pilot" : ""}</small>
+                    </div>
+                  </div>
+                  <div className="rc-industry__copy"><h3>{industry.title}</h3><p>{industry.outcome}</p><small>{industry.detail}</small></div>
                 </article>
               ))}
             </div>
           </div>
-          <div className="rc-industry-conversation" key={item.key}>
-            <img className="rc-industry-conversation__mascot" src="/marketing/industries/mascot.webp" width={600} height={600} alt="" />
-            <div>
-              <div className="rc-industry-conversation__card">
-                <p className="rc-industry-conversation__label"><span aria-hidden="true" />Example conversation <span className="rc-industry-conversation__industry"> · {item.title}</span></p>
-                <p className="rc-industry-conversation__quote">“{item.quote}”</p>
-              </div>
-              <p className="rc-industry-conversation__note">{item.pilot ? "Incoming-call booking requires a connected pilot." : "Confirmation calls require completed setup and available minutes."}</p>
-            </div>
-          </div>
+          <p className="rc-industries__availability">Illustrative scenarios. Incoming-call booking requires a connected pilot. Confirmation calls require completed setup and available minutes.</p>
         </div>
       </div>
     </section>

@@ -785,3 +785,20 @@
   .rc-industries__viewport { overflow: visible; }
   .rc-industries__intro { will-change: transform; }
 }
+
+/* Show the interruption and the AI response together, in the same scene. */
+.rc-industries__gallery { --industry-card: clamp(320px, 29vw, 460px); }
+.rc-industry { height: clamp(530px, 65svh, 760px); }
+.rc-industry::after { inset: 0; background: linear-gradient(#081a1355, transparent 30%, #081a1333 55%, #081a13f5 100%); }
+.rc-industry__problem { position: absolute; z-index: 2; top: 24px; left: 24px; right: 24px; margin: 0; color: white; font-size: 20px; line-height: 1.2; font-weight: 500; text-shadow: 0 2px 12px #0007; max-width: 22ch; }
+.rc-industry__moment { position: absolute; z-index: 3; top: 43%; left: 16px; right: 16px; opacity: 0; transform: translateY(18px) rotate(-2deg) scale(.96); transition: opacity .4s ease, transform .5s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+.rc-industry[data-active="true"] .rc-industry__moment { opacity: 1; transform: none; }
+.rc-industry__moment > img { position: absolute; width: 68px; height: 68px; left: 0; top: -36px; z-index: 2; border-radius: 22px; transform: rotate(-8deg); box-shadow: 0 8px 20px #0002; }
+.rc-industry__bubble { margin-left: 24px; padding: 16px 18px 14px; border: 1px solid #ffffffb3; border-radius: 24px 24px 24px 5px; background: #ffffffe0; backdrop-filter: blur(18px); box-shadow: 0 14px 35px #0003; color: #1e3a34; }
+.rc-industry__ai { display: flex; justify-content: space-between; padding-left: 32px; font-size: 10px; font-weight: 600; margin-bottom: 10px; }
+.rc-industry__ai > span { color: #508874; letter-spacing: 3px; }
+.rc-industry__bubble p { font-size: 15px; line-height: 1.4; margin: 0 0 10px; }
+.rc-industry__bubble small { font-size: 9px; color: #526b60; }
+.rc-industries__availability { max-width: 640px; font-size: 11px; color: #667970; padding: 18px 24px 0 0; line-height: 1.5; }
+@media (max-width: 860px), (prefers-reduced-motion: reduce) { .rc-industries__gallery { --industry-card: min(86vw, 410px); } .rc-industry { height: 590px; } }
+@media (prefers-reduced-motion: reduce) { .rc-industry__moment { transition: none; transform: none; } }

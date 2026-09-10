@@ -1,5 +1,11 @@
 # NOW
 
+## Current handoff — dimensional mascot correction (10 September 2026)
+
+- Bubs rejected both sleeping eyes and the first open-eye revision, whose glossy features looked pasted onto the 3D mascot. Created v3 examples with smaller recessed eyes and fur-integrated facial shading; awaiting review.
+- Updated conversation cards to match the white/forest/mint site styling without cartoon speech tails. Saved three mascot-v3 images and direction notes in docs/design/industries; website unchanged.
+- Expanded industry coverage includes doctors, dental, broader healthcare, fitness, retail and other services. Next: approve a consistent mascot treatment before implementation. Prior public publishing approval block remains unresolved; commit locally.
+
 ## In progress — Happy Paws video (10 September 2026)
 
 - Bubs approved the storyboard and mischievous Milo; authorized moving video with talking mascot, narration and back-and-forth booking dialogue.

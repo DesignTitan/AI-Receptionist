@@ -802,3 +802,11 @@
 .rc-industries__availability { max-width: 640px; font-size: 11px; color: #667970; padding: 18px 24px 0 0; line-height: 1.5; }
 @media (max-width: 860px), (prefers-reduced-motion: reduce) { .rc-industries__gallery { --industry-card: min(86vw, 410px); } .rc-industry { height: 590px; } }
 @media (prefers-reduced-motion: reduce) { .rc-industry__moment { transition: none; transform: none; } }
+
+.rc-industry[data-more="true"] { background: #e3f1eb; border: 1px solid #d2e6dc; }
+.rc-industry[data-more="true"]::after { display: none; }
+.rc-industry[data-more="true"] .rc-industry__problem, .rc-industry[data-more="true"] .rc-industry__copy { color: #1e3a34; text-shadow: none; }
+.rc-industry[data-more="true"] .rc-industry__copy { top: 35%; bottom: auto; }
+.rc-industry[data-more="true"] h3 { font-size: clamp(38px, 4vw, 60px); }
+.rc-industry[data-more="true"] small { color: #526b60; }
+.rc-industry[data-more="true"] a { display: inline-block; border-bottom: 1px solid; margin-top: 28px; font-size: 16px; }

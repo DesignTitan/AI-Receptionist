@@ -169,8 +169,6 @@ export default function HomePage() {
 
         <IndustryGallery />
 
-        {/* Authored silence: one quiet screen before the peak. */}
-        <section className="rc-silence" aria-hidden="true" />
 
         {/* 06 · Hear it yourself. The peak, and the signature move. */}
         <section id="hear" data-sc-act="pin" data-sc-span="3">

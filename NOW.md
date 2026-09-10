@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — industry ending and callback concepts (10 September 2026)
+
+- Added an And many more end card linking to the callback section. Removed the intentionally empty rc-silence full-screen section after the gallery.
+- Generated two callback visual concepts for review: friendly mascot/form and glass handset/form; callback design has not been implemented.
+- Asked which unused section belongs here; the booking → call → outcome explainer is only a prior recommendation in the available handoff, so its placement remains pending clarification.
+- Typecheck and browser verified eleven gallery cards and direct transition to #hear. Local commit only; previous public-push approval block remains.
+
 ## Current handoff — smooth film overlays (10 September 2026)
 
 - Headline and scrim remain mounted and fade over 450ms when playback changes; paused copy returns smoothly.

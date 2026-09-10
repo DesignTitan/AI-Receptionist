@@ -13,6 +13,7 @@ const INDUSTRIES = [
   { key: "trades", problem: "You’re in the middle of a repair.", outcome: "AI calls to confirm the next job.", title: "Home & auto services", detail: "Trades · cleaning · landscaping · mechanics", line: "Keep your attention on the job.", quote: "Hi, Taylor! I’m confirming your service appointment for Friday morning. Will you be available?", pilot: false },
   { key: "professional", problem: "You’re deep in a consultation.", outcome: "AI takes confirmation calls off your list.", title: "Professional services", detail: "Accountants · lawyers · consultants", line: "Make room for the conversation.", quote: "Hi, Morgan! Just confirming your consultation on Tuesday at three. Does that still suit you?", pilot: false },
   { key: "lessons", problem: "Your student needs you right now.", outcome: "AI helps the next student find a time.", title: "Lessons & coaching", detail: "Tutors · music · driving · coaching", line: "Keep the lesson flowing.", quote: "Your first piano lesson? Lovely. What days tend to work for you?", pilot: true },
+  { key: "more", title: "And many more.", problem: "Built around appointments?", outcome: "Let’s find where AI could give you time back.", detail: "Your business could be next.", line: "", quote: "", pilot: false },
 ];
 
 export function IndustryGallery() {
@@ -88,10 +89,10 @@ export function IndustryGallery() {
           }}>
             <div ref={rail} className="rc-industries__rail">
               {INDUSTRIES.map((industry, index) => (
-                <article className="rc-industry" key={industry.key} data-active={index === active}>
-                  <img src={`/marketing/industries/${industry.key}.webp`} alt="" width={900} height={1200} loading="lazy" />
+                <article className="rc-industry" key={industry.key} data-active={index === active} data-more={industry.key === "more"}>
+                  {industry.key !== "more" && <img src={`/marketing/industries/${industry.key}.webp`} alt="" width={900} height={1200} loading="lazy" />}
                   <p className="rc-industry__problem">{industry.problem}</p>
-                  <div className="rc-industry__moment" aria-hidden={index !== active}>
+                  {industry.key !== "more" && <div className="rc-industry__moment" aria-hidden={index !== active}>
                     <img src="/marketing/industries/mascot.webp" width={600} height={600} alt="" />
                     <div className="rc-industry__bubble">
                       <span className="rc-industry__ai">AI receptionist <span aria-hidden="true">· · ·</span></span>
@@ -99,7 +100,8 @@ export function IndustryGallery() {
                       <small>Illustrative conversation{industry.pilot ? " · Connected pilot" : ""}</small>
                     </div>
                   </div>
-                  <div className="rc-industry__copy"><h3>{industry.title}</h3><p>{industry.outcome}</p><small>{industry.detail}</small></div>
+                  }
+                  <div className="rc-industry__copy"><h3>{industry.title}</h3><p>{industry.outcome}</p><small>{industry.detail}</small>{industry.key === "more" && <a href="#hear">Let’s talk <span aria-hidden="true">↗</span></a>}</div>
                 </article>
               ))}
             </div>

@@ -1,3 +1,4 @@
+import { OverviewBenefits } from "@/components/marketing/overview-benefits";
 import { PLANS as PRICING, planFeatures, PILOT_SETUP_CENTS, SETUP_CENTS, SETUP_OFFER, SETUP_SCOPE, type Plan } from "@/lib/platform/pricing";
 import type { Metadata } from "next";
 import { Folio } from "@/components/marketing/folio";
@@ -60,7 +61,7 @@ export default function HomePage() {
             <p>Let customers book online. Let AI make the confirmation calls. See what needs your attention, so you can get back to the people and work that matter.</p>
             <div className="rc-home-actions">
               <a className="rc-home-button" href="/demos">See it in action <span aria-hidden="true">↗</span></a>
-              <a className="rc-home-link" href="/features">Explore the features <span aria-hidden="true">↗</span></a>
+              <a className="rc-home-link" href="/features">Explore all features <span aria-hidden="true">↗</span></a>
             </div>
           </div>
           <p className="rc-home-hero__caption">Online booking. AI confirmation calls. One place to follow up.</p>
@@ -73,16 +74,13 @@ export default function HomePage() {
               <img className="rc-overview__mascot" src="/marketing/receptionist-mascot.png" width={1024} height={1024} alt="" />{' '}
               phone conversations, and appointment management together—so you can{' '}
               <strong>focus on your business</strong>{' '}
-              <img className="rc-overview__photo" src="/marketing/full-attention.webp" width={2048} height={2048} alt="" />{' '}
+              <span className="rc-overview__booked" aria-hidden="true">Booked <span>✓</span></span>{' '}
               and get more of your day back.
             </h2>
-            <dl className="rc-overview__benefits" data-sc-in>
-              <div><dt>Make booking easy</dt><dd>Online booking, with AI phone booking in pilot.</dd></div>
-              <div><dt>Choose how calls are handled</dt><dd>Confirmation calls, plus caller choices and answering schedules in pilot.</dd></div>
-              <div><dt>Stay in control</dt><dd>Appointment updates, call summaries, and spending limits.</dd></div>
-            </dl>
+            <p className="rc-overview__audience" data-sc-in>For businesses built around appointments.</p>
+            <OverviewBenefits />
             <div className="rc-overview__footer" data-sc-in>
-              <a href="/features">Explore the features <span aria-hidden="true">↗</span></a>
+              <a href="/features">Explore all features <span aria-hidden="true">↗</span></a>
               <p>Incoming calls and answering schedules require a tested pilot connection.</p>
             </div>
           </div>

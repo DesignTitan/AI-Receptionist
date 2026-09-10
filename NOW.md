@@ -3,6 +3,13 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — illustrated overview benefits (10 September 2026)
+
+- Built the approved revised #benefits mockup: replaced the salon photograph with an inline Booked detail and added the line “For businesses built around appointments.”
+- Replaced the small text-only benefits with three responsive product illustrations and larger headlines: booking times, AI/team call routing with the approved chat-bubble mascot, and appointment/call/spending activity. Illustrations are noninteractive HTML/CSS/SVG with decorative markup hidden from screen readers; the actual Features link remains accessible.
+- Preserved forest/mint/white styling, existing overview copy and clear incoming-call pilot labeling. Other sections remain unchanged.
+- Verified 320/390/1440px layouts, mascot loading, existing video/card/rail scrolling, reduced motion, and production build/dev-tool exclusion. Next: review #benefits before moving to another section. Local save only; public publishing still awaits the earlier approval.
+
 ## Current handoff — approved overview section and mascot (10 September 2026)
 
 - Replaced only homepage #benefits with the approved spacious white editorial overview: large forest-green statement, inline fuzzy mint chat-bubble mascot and existing service photograph, three supporting benefits and Features link.

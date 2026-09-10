@@ -3,6 +3,14 @@
 Handoff notes for the next session. Updated 2026-09-10. Launch is Thursday 1 October 2026;
 the dated plan is docs/ROADMAP.md.
 
+## Current handoff — live AI conversation modal (10 September 2026)
+
+- Rebuilt the #cost modal in the approved white/forest/mint direction with the fuzzy mascot. Bubs explicitly rejected scripted audio; all prerecorded players and scripts are removed from this modal. The “Meet your AI receptionist” button opens a real microphone conversation.
+- Created isolated OmniDimension practice agent 252341 with generated greetings/replies, Elena voice and English (American). Verified provider configuration has a 90-second duration limit, no booking integrations, files or post-call actions. Existing Ava remains unchanged. Private .env.local holds credentials and the new agent ID; it is ignored and mode 0600.
+- Verified a real browser session transcribed a spoken photography-studio/Thursday portrait request and generated a relevant spoken reply. Mute/unmute, socket close, Escape/focus, 320/390/1440px layouts, route security tests and production build/dev-tool exclusion pass. An earlier test used silent input; the final audible test passed.
+- Local preview is connected. Public session creation remains disabled until durable abuse/budget controls and public acceptance are complete; no deployment. The local limit is five session attempts per hour per process. Historical audio files are retained but unused.
+- Next: Bubs tries “Let’s talk” in the workspace. Refine voice/conversation after feedback, then prepare public activation. Saved locally; public publishing remains blocked by the earlier approval review. Details: docs/browser-voice-demo.md.
+
 ## Current handoff — three playable AI voice examples (10 September 2026)
 
 - Completed the busy-day section’s modal with Ainsley, Grady and Brielle voice choices, volume guidance, native playback controls, replay and the sample script. Visitors can compare the same receptionist-side dialogue; switching voices and closing stops playback. Samples do not autoplay.

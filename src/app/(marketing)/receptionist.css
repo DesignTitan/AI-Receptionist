@@ -631,19 +631,45 @@
 .rc-voice-dialog h2 { font-size: 36px; margin-block: 18px; }
 .rc-voice-dialog p { line-height: 1.6; }
 .rc-voice-close { position: absolute; right: 12px; top: 12px; width: 44px; height: 44px; border: 0; background: #eef5f1; border-radius: 50%; color: #1e3a34; font-size: 27px; cursor: pointer; }
-.rc-voice-dialog audio { width: 100%; margin-block: 20px; }
 .rc-voice-dialog .rc-voice-note { font-size: 12px; color: #526b63; margin-top: 18px; }
 .rc-voice-dialog details { margin-top: 22px; font-size: 14px; }
 .rc-voice-dialog summary { cursor: pointer; padding-block: 10px; }
 @media (min-width: 1101px) { .rc-busy > .sc-wrap { width: calc(100% - 280px); max-width: 1200px; padding-inline: 0; margin-left: max(220px, calc((100% - 1200px) / 2)); margin-right: 60px; } }
 @media (max-width: 900px) { .rc-busy__story, .rc-busy__options { grid-template-columns: 1fr; } .rc-busy__options > div + div { border-left: 0; border-top: 1px solid #d5e6dd; padding: 28px 0 0; } .rc-busy__photo > img { height: 420px; } }
 @media (max-width: 480px) { .rc-busy__photo > img { height: 320px; } .rc-busy__voice { gap: 10px; } .rc-busy__voice > img { width: 70px; height: 70px; } .rc-voice-dialog__content { padding: 25px; } }
-.rc-voice-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 24px; }
-.rc-voice-options button { min-height: 46px; padding: 10px 6px; border: 1px solid #b7cec2; border-radius: 12px; font: inherit; font-size: 13px; background: #fff; color: #1e3a34; cursor: pointer; }
-.rc-voice-options button[aria-pressed="true"] { background: #1e3a34; color: #fff; border-color: #1e3a34; }
-.rc-voice-options button:focus-visible, .rc-voice-replay:focus-visible { outline: 2px solid #1e3a34; outline-offset: 3px; }
-.rc-voice-dialog .rc-voice-current { font-size: 13px; margin: 20px 0 0; font-weight: 600; }
-.rc-voice-dialog audio { margin-block: 12px; }
-.rc-voice-replay { padding: 8px 0; min-height: 44px; border: 0; background: none; color: #1e3a34; font: inherit; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
 .rc-voice-choice-note { margin-top: 20px; padding: 18px; background: #eef6f1; border-radius: 14px; font-size: 14px; }
 .rc-voice-choice-note p { font-size: 13px; margin: 8px 0 0; color: #526b63; }
+
+/* Voice discovery: the approved white, forest and mint modal. */
+.rc-voice-dialog { width: min(920px, calc(100vw - 32px)); border-radius: 30px; }
+.rc-voice-dialog__content { padding: 42px; }
+.rc-voice-heading { display: flex; align-items: center; gap: 24px; padding-right: 18px; }
+.rc-voice-heading > div:first-child { flex: 1; }
+.rc-voice-dialog h2 { font-size: clamp(36px, 5vw, 60px); line-height: .98; letter-spacing: -.045em; margin: 20px 0; }
+.rc-voice-heading p:not(.rc-benefit-eyebrow) { font-size: 14px; color: #526b63; }
+.rc-voice-mascot { position: relative; flex-shrink: 0; transform: rotate(-9deg); }
+.rc-voice-mascot img { width: 150px; height: 150px; object-fit: contain; }
+.rc-voice-mascot span { position: absolute; right: -12px; top: -14px; color: #86bca5; font-size: 58px; }
+.rc-voice-live { margin-top: 26px; border: 1px solid #cfe3d9; border-radius: 20px; padding: 22px; background: #f6fcfa; }
+.rc-voice-dialog h3 { font-family: var(--sc-font-display); font-size: 22px; letter-spacing: -.025em; line-height: 1.15; margin: 8px 0; }
+.rc-voice-live p { font-size: 13px; margin: 8px 0; }
+.rc-voice-live__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; font-size: 13px; }
+.rc-voice-live__actions button { border: 0; background: #1e3a34; color: white; padding: 12px 22px; min-height: 44px; border-radius: 30px; font: inherit; cursor: pointer; }
+.rc-voice-live__actions button:disabled { opacity: .65; cursor: default; }
+.rc-voice-live__actions button:focus-visible { outline: 2px solid #1e3a34; outline-offset: 4px; }
+.rc-voice-timer { font-variant-numeric: tabular-nums; }
+.rc-voice-caption { border-top: 1px solid #cfe3d9; padding-top: 12px; max-height: 100px; overflow-y: auto; }
+.rc-voice-choice-note { padding: 18px 22px; background: #e5f2eb; }
+@media (max-width: 600px) {
+  .rc-voice-dialog__content { padding: 28px 18px 22px; }
+  .rc-voice-heading { gap: 4px; padding-right: 0; align-items: flex-start; }
+  .rc-voice-heading .rc-benefit-eyebrow { max-width: 165px; }
+  .rc-voice-mascot { position: absolute; top: 78px; right: 15px; }
+  .rc-voice-mascot img { width: 76px; height: 76px; }
+  .rc-voice-mascot span { font-size: 30px; right: 0; }
+  .rc-voice-dialog h2 { max-width: 220px; padding-right: 30px; }
+  .rc-voice-live { padding: 16px; }
+}
+
+.rc-voice-prompts { margin-top: 24px; }
+.rc-voice-prompts p { display: inline-block; margin: 10px 6px 0 0; padding: 9px 14px; border: 1px solid #d5e6dd; border-radius: 14px; font-size: 13px; }

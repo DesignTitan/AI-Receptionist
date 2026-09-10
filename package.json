@@ -19,6 +19,7 @@
     "dev:workspace:stop": "node scripts/dev-workspace.mjs stop"
   },
   "dependencies": {
+    "@omnidim-ai/client": "^0.1.0",
     "@supabase/supabase-js": "^2.58.0",
     "next": "16.3.4",
     "react": "^19.2.0",
@@ -29,8 +30,8 @@
     "@types/node": "^22.15.3",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "playwright-core": "^1.62.1",
     "tailwindcss": "^4.3.3",
-    "typescript": "^5.9.2",
-    "playwright-core": "^1.62.1"
+    "typescript": "^5.9.2"
   }
 }

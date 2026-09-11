@@ -1,0 +1,55 @@
+{
+  "job_id": "5610efd1-6199-49e5-bb1f-c5c1a6b7c9f4",
+  "emoji_reference": "https://unicode.org/emoji/charts/emoji-list.html",
+  "expressions": [
+    "Happy (approved closed-eye smile)",
+    "Soft smile",
+    "Big grin",
+    "Laughing",
+    "Tears of joy",
+    "Beaming",
+    "Affectionate (gentle soft eyes)",
+    "Grateful (eyes closed cheeks lifted)",
+    "Proud (small content smile)",
+    "Excited (bright open eyes open smile)",
+    "Relieved (relaxed closed eyes exhale mouth)",
+    "Reassuring (gentle warm smile)",
+    "Curious (one brow lifted)",
+    "Thinking (upward gaze pursed mouth NO hand)",
+    "Listening (attentive open eyes closed soft mouth)",
+    "Focused (slight concentrated brow)",
+    "Unsure (uneven brow small slanted mouth)",
+    "Confused (asymmetric brows tiny o mouth)",
+    "Surprised (round eyes small O mouth)",
+    "Amazed (round eyes large open mouth)",
+    "Worried (raised inner brows small frown)",
+    "Sad (drooping eyes downturned mouth)",
+    "Teary (one clear tear)",
+    "Determined (focused eyes firm mouth friendly not rage)",
+    "Wink left",
+    "Wink right",
+    "Tongue out (small pink tongue)",
+    "Playful squint (both eyes smiling tongue tip)",
+    "Shy (downward gaze tiny smile faint cheek blush)",
+    "Oops (wide eyes tight little mouth)",
+    "Sleepy (half closed eyes)",
+    "Sleeping (closed relaxed eyes tiny relaxed mouth)",
+    "Yawning (eyes squeezed shut tall open mouth)",
+    "Ooh (rounded pursed lips)",
+    "Ah (open speaking mouth)",
+    "Ee (wide narrow speaking smile)"
+  ],
+  "params": {
+    "model": "gpt_image_2_5",
+    "quality": "max",
+    "resolution": "4k",
+    "aspect_ratio": "1:1",
+    "medias": [
+      {
+        "role": "image",
+        "value": "62fde102-5b1f-4e78-ba52-a6b91061d8e9"
+      }
+    ],
+    "prompt": "Create a premium 36-expression character sheet of the EXACT Happy Little Pillow in the reference. Layout SIX columns x SIX rows = exactly36 separate complete full-body mint mascots, one in every cell, generous separation and readable caption BELOW each. Title HAPPY LITTLE PILLOW — 36 EXPRESSIONS. Warm offwhite background, subtle thin grid lines, dark forest clean sans labels.\nIDENTITY MUST MATCH REFERENCE: broad SQUARE rounded pillow body width approximately equal height; densely soft pale mint fur; prominent dimensional puffy cheek bulges either side mouth; single short fused rounded triangular speech-bubble tail at lower LEFT. NO feet arms ears nose costumes tuft props. Same shape proportions fur and scale for all36, same frontal camera. Do not stretch bodies. Expressions modify eyes eyelids brows cheeks and mouth ONLY. Dark forest green face features integrated into fur. All emotions retain lovable friendly cuddly identity, no scary rage, grotesque faces or giant doll eyes. Keep cheek VOLUME even for worried sad sleepy faces, not just smile lines. Slight blush only shy; all bodies original pale mint. Small pink tongue and clear tears where specified allowed. Emoji emotional vocabulary is INSPIRATION for expression readability only: do NOT draw yellow emoji icons, hands or graphic symbols.\nRow-major EXACT order, captions use short name before parentheses:\n1. Happy (approved closed-eye smile)\n2. Soft smile\n3. Big grin\n4. Laughing\n5. Tears of joy\n6. Beaming\n7. Affectionate (gentle soft eyes)\n8. Grateful (eyes closed cheeks lifted)\n9. Proud (small content smile)\n10. Excited (bright open eyes open smile)\n11. Relieved (relaxed closed eyes exhale mouth)\n12. Reassuring (gentle warm smile)\n13. Curious (one brow lifted)\n14. Thinking (upward gaze pursed mouth NO hand)\n15. Listening (attentive open eyes closed soft mouth)\n16. Focused (slight concentrated brow)\n17. Unsure (uneven brow small slanted mouth)\n18. Confused (asymmetric brows tiny o mouth)\n19. Surprised (round eyes small O mouth)\n20. Amazed (round eyes large open mouth)\n21. Worried (raised inner brows small frown)\n22. Sad (drooping eyes downturned mouth)\n23. Teary (one clear tear)\n24. Determined (focused eyes firm mouth friendly not rage)\n25. Wink left\n26. Wink right\n27. Tongue out (small pink tongue)\n28. Playful squint (both eyes smiling tongue tip)\n29. Shy (downward gaze tiny smile faint cheek blush)\n30. Oops (wide eyes tight little mouth)\n31. Sleepy (half closed eyes)\n32. Sleeping (closed relaxed eyes tiny relaxed mouth)\n33. Yawning (eyes squeezed shut tall open mouth)\n34. Ooh (rounded pursed lips)\n35. Ah (open speaking mouth)\n36. Ee (wide narrow speaking smile)\nFirstcell is faithful approved reference face. 36 expressions visually DISTINCT and legible, do not repeat same smile for multiple labels. Happyjoyeyes closed upwards crescents; sleepyeyes relaxed downwards, make distinct. Sleeping MUSTclosed, winks MUSTopposite eyes. Tongue visible in27,28. Eyes in open-eye studies modest and darkgreen inset with tiny highlights not gigantic shiny spheres. Never cover fur with emoji stickers. Fullbody same size in each square cell and shorttail always attached same lowerleft corner. Beautifully rendered consistent studio lighting and tinysoft shadows. All36 cells exactly6x6, no omissions."
+  }
+}

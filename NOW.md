@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — 36 Happy Little Pillow expressions
+
+- Replaced the old 24-expression image with a six-by-six 36-expression Happy Little Pillow sheet, keeping padded cheeks and mint fur.
+- Covers warmth, attention, uncertainty, surprise, sadness, winks, tongue, sleep and speech shapes; emoji choices guided by Unicode face list.
+- GPT Image 2.5 job 5610efd1-6199-49e5-bb1f-c5c1a6b7c9f4, actual image 2880x2880; accessible at character-sheets.html#expressions with download.
+- Pose, material and wardrobe sheets still await approved-identity updates.
+- Local commit only; prior public-push approval block remains.
+
+
 ## Current handoff — matching rear rotation sheet
 
 - Added the requested backside companion: five rows, nineteen columns, 95 views, center labelled BACK.

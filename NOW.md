@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — floral dress owner approved
+
+- User accepted the sister floral dress character sheet as good enough to proceed.
+- Approval recorded in owner casting brief; preserve this face, dress, hair and necklace direction.
+- Latest source photo remains likeness authority; earlier rejected generations remain archived.
+- Next: dedicated Loup-and-owner acting frames using approved cast.
+- Local commit only under existing public-push approval block.
+
 ## Current handoff — sister floral dress sheet
 
 - User requested original floral dress instead of denim and authorized full character sheet.

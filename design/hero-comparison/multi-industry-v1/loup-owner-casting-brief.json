@@ -1,6 +1,6 @@
 {
   "name": "Loup’s owner",
-  "status": "Floral dress character sheet generated from latest source photo at user request; likeness for review",
+  "status": "Approved by user: floral dress character sheet is good enough to proceed",
   "master": "assets/loup-owner-sister-latest-reference.png",
   "primary_reference": "assets/loup-owner-sister-latest-reference.png",
   "sheet": "assets/cast-loup-owner-sister-dress-v1.png",
@@ -12,6 +12,7 @@
     "assets/cast-loup-owner-sister-rejected-master-v1.png",
     "assets/cast-loup-owner-sister-rejected-sheet-v1.png"
   ],
-  "next": "Use latest real photo as facial authority for future scene work; do not reuse earlier generated denim faces.",
-  "interpretations": "Unseen dress back and standing hemline provisional. Turnaround angles are illustrative, not measured."
+  "next": "Build dedicated shared scenes using approved floral dress sheet and latest real photo for facial consistency.",
+  "interpretations": "Unseen dress back and standing hemline provisional. Turnaround angles are illustrative, not measured.",
+  "approved_sheet": "assets/cast-loup-owner-sister-dress-v1.png"
 }

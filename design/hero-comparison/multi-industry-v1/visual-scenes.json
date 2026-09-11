@@ -42,9 +42,9 @@
     "image": "assets/grooming.png",
     "x": 100,
     "y": 50,
-    "title": "Milo needs a groom.",
-    "action": "At home, the caller has a very unruly little companion.",
-    "audio": "\u201cMilo needs a groom. Thursday afternoon?\u201d"
+    "title": "Loop needs a groom.",
+    "action": "At home, the caller has Loop, Bubs\u2019s female Shih Tzu, beside her. Loop gives a small sideways glance. Earlier image is a placeholder; use the supplied Loop photos for the new frame.",
+    "audio": "\u201cLoop needs a groom. Thursday afternoon?\u201d"
   },
   {
     "number": 6,
@@ -52,7 +52,7 @@
     "x": 0,
     "y": 100,
     "title": "A time that works.",
-    "action": "The caller agrees while Milo makes himself the centre of attention.",
+    "action": "The caller agrees while Loop gently tilts her head. Keep her cream-and-white coat, dark muzzle and current haircut. Earlier image awaits replacement.",
     "audio": "\u201cI have two o\u2019clock.\u201d / \u201cPerfect.\u201d"
   },
   {
@@ -62,7 +62,7 @@
     "y": 100,
     "title": "Booked. Back to the dog.",
     "action": "She keeps working. The caller has her appointment.",
-    "audio": "\u201cMilo\u2019s booked for Thursday at two.\u201d"
+    "audio": "\u201cLoop\u2019s booked for Thursday at two.\u201d"
   },
   {
     "number": 8,

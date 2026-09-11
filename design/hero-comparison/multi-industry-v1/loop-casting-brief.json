@@ -1,0 +1,27 @@
+{
+  "name": "Loop",
+  "sex": "female",
+  "breed": "Shih Tzu",
+  "role": "Caller\u2019s dog in scenes 5\u20136; replaces Milo the Yorkie",
+  "references": [
+    "assets/loop-reference-01.png",
+    "assets/loop-reference-02.png"
+  ],
+  "observed_features": [
+    "Cream-and-white coat",
+    "Darker muzzle and ear fur",
+    "Short muzzle and black nose",
+    "Large dark eyes",
+    "Floppy fur-covered ears",
+    "Short legs and fluffy white paws",
+    "Current trimmed coat with fluffy head"
+  ],
+  "unknown": [
+    "Full back markings",
+    "Tail shape and markings",
+    "Exact measurements and age"
+  ],
+  "action": "Seated beside caller; natural side glance or gentle head tilt. No exaggerated static fur.",
+  "status": "Real supplied references saved; generated sheet pending. Higgsfield credits unresolved.",
+  "sheet_brief": "Use both supplied Loop photos as identity. Produce a realistic canine character sheet, preserving her actual proportions, current coat length, dark muzzle and floppy ears. Include large hero portrait, front and three-quarter studies, gentle head tilt, seated and standing pose studies and face/coat details. Mark unseen rear/tail design as provisional rather than inventing verified markings. No Yorkie features, upright pointed ears, long snout, static-hair gag or beautified doll face. Keep Loop female. Do not replace the separate adult Samoyed in the wash scene."
+}

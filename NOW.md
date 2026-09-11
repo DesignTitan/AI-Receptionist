@@ -1,5 +1,23 @@
 # NOW
 
+## Current handoff — Loop replaces Milo; human realism research
+
+- Bubs replaced Milo with her female Shih Tzu Loop. Saved two supplied photos as loop-reference-01/02.png and made them the current cast-page references; old Milo sheet/page archived.
+- Updated active storyboard dialogue, scene notes and production notes to Loop; old rendered scene images are explicitly marked pending replacement. Samoyed in the tub remains a separate dog.
+- Loop keeps cream-and-white coat, dark muzzle/ears, short legs and current haircut. Drop static/flyaway Yorkie gag; use natural sideways glance/head tilt. Rear/tail details are not established by the photos.
+- Completed online human-realism research and saved HUMAN-REALISM.md plus revised close-up-first prompts for groomer and caller. Current human sheets require realism revision.
+- No generation this block: Higgsfield credit issue/model-choice question still unresolved. Next: Loop sheet and revised realistic human masters, then cast/scene frames.
+- Local commit only under public-push block; unrelated research-reel notes untouched.
+
+## Current handoff — realistic human rendering direction
+
+- Bubs finds current realistic people too plastic and AI-looking; requires detailed complexion, wrinkles, eye colour and hair.
+- Researched Adobe photo/prompt guidance and Higgsfield skin-texture guidance; saved sources and a reusable standard in HUMAN-REALISM.md.
+- Prepared human-realism-prompts-v2.json for groomer and owner: individual close-up identity portraits before rebuilding dense sheets; specific age/skin/eyes/hair, natural light, no smoothing or exaggerated texture. Original submitted prompts/assets remain preserved.
+- Marked current human appearance as awaiting a realism revision on cast-sheets.html. No new generation or credit spending this turn.
+- Next: resolve Higgsfield credits/model preference, generate revised human masters, then consistent sheets and remaining cast.
+- Local commit only under the existing public-push approval block; unrelated research-reel notes untouched.
+
 ## Current handoff — opening film cast sheets
 
 - Bubs approved the Happy Little Pillow master and asked to move to the next phase; started the Happy Paws cast.

@@ -1,0 +1,41 @@
+{
+  "status": "Prepared, not submitted. Existing images preserved. Higgsfield credit issue unresolved.",
+  "source": "HUMAN-REALISM.md",
+  "sequence": "Individual close-up master first; use successful master to regenerate full sheet.",
+  "portraits": [
+    {
+      "slug": "groomer",
+      "identity_details": "Approximately 38, light-to-medium warm olive complexion with restrained pinkness at cheeks and nose; brown irises with subtle amber variation. Fine outer-eye smile lines and light under-eye folds, faint forehead creases that follow expression. Small nonuniform pores near nose and inner cheeks, softer texture elsewhere, fine peach fuzz and natural lip texture. Dark brown loose high bun with uneven natural highlights, temple flyaways and baby hairs. Preserve existing facial proportions; no randomly added permanent marks.",
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "4:5",
+        "medias": [
+          {
+            "role": "image",
+            "value": "c501ef16-9ae4-4b05-9f7c-df806075a7bc"
+          }
+        ],
+        "prompt": "Create ONE unretouched head-and-shoulders photographic identity portrait, not a sheet. Use only the bun-haired female groomer in upper reference panels as identity. Keep her the same person. Approximately 38, light-to-medium warm olive complexion with restrained pinkness at cheeks and nose; brown irises with subtle amber variation. Fine outer-eye smile lines and light under-eye folds, faint forehead creases that follow expression. Small nonuniform pores near nose and inner cheeks, softer texture elsewhere, fine peach fuzz and natural lip texture. Dark brown loose high bun with uneven natural highlights, temple flyaways and baby hairs. Preserve existing facial proportions; no randomly added permanent marks. Broad soft window light from camera left, gentle fill on the other side, restrained highlights, neutral colour, ordinary working-person appearance. 85mm-equivalent perspective, both eyes and cheeks readable, simple neutral background. Mild natural asymmetry. Eyes have natural sclera, normal pupils and one consistent window catchlight. Skin detail appropriate to portrait scale; no uniform pore overlay, waxy smoothing, beauty filter, plastic sheen, exaggerated wrinkles, over-sharpening, doll eyes or painted hair. No text."
+      }
+    },
+    {
+      "slug": "caller",
+      "identity_details": "Approximately 42, medium warm-neutral olive complexion, brown irises, faint under-eye shadow, gentle smile folds and fine outer-eye lines that deepen with smiling. Shoulder-length dark brown waves, center part, individual strands, modest natural frizz and a few subtle silver temple hairs. Natural lips, restrained forehead sheen. Preserve the established face, hair length and cream sweater; no randomly added permanent marks.",
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "4:5",
+        "medias": [
+          {
+            "role": "image",
+            "value": "c501ef16-9ae4-4b05-9f7c-df806075a7bc"
+          }
+        ],
+        "prompt": "Create ONE unretouched head-and-shoulders photographic identity portrait, not a sheet. Use only the cream-sweater caller in the middle-right reference panel as identity. Keep her the same person. Approximately 42, medium warm-neutral olive complexion, brown irises, faint under-eye shadow, gentle smile folds and fine outer-eye lines that deepen with smiling. Shoulder-length dark brown waves, center part, individual strands, modest natural frizz and a few subtle silver temple hairs. Natural lips, restrained forehead sheen. Preserve the established face, hair length and cream sweater; no randomly added permanent marks. Broad soft window light from camera left, gentle fill on the other side, restrained highlights, neutral colour, ordinary working-person appearance. 85mm-equivalent perspective, both eyes and cheeks readable, simple neutral background. Mild natural asymmetry. Eyes have natural sclera, normal pupils and one consistent window catchlight. Skin detail appropriate to portrait scale; no uniform pore overlay, waxy smoothing, beauty filter, plastic sheen, exaggerated wrinkles, over-sharpening, doll eyes or painted hair. No text."
+      }
+    }
+  ]
+}

@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — aligned calculator dropdown chevrons
+
+- All three calculator dropdowns use the same centered 16px chevron with a 14px right inset and reserved text space.
+- Native select behavior remains; forced-colors mode restores the native arrow.
+- Verified matching computed placement, working selections and mobile layout with no overflow; diff check passed.
+- Saved locally; public push remains blocked by prior approval review.
+
 ## Current handoff — no default industry
 
 - Industry dropdown starts at Choose your industry, with no prefilled business or sale value.

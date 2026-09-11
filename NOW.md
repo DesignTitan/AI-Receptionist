@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — call section and footer redesign
+
+- Created original mascot-and-telephone artwork and redesigned callback area as a warm split image/form card, preserving submission behavior and simulated/live wording.
+- Replaced oversized pinned colophon with an elegant forest-green footer, CTA and grouped navigation.
+- Verified desktop/mobile layout, image load, form presence and no horizontal overflow; typecheck passed.
+- Industry wardrobe assets are ready; next apply user-requested larger mascots, smaller bubbles and bright blurred card bottoms.
+- Local commit only under prior public-push approval block.
+
 ## Current handoff — natural brief click wink
 
 - Separated wink and greeting timers: click briefly closes eye then reopens (220ms hold plus fade), while text stays for one second.

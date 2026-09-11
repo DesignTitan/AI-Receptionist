@@ -168,8 +168,12 @@ export default function HomePage() {
 
         {/* 06 · Hear it yourself. The peak, and the signature move. */}
         <section id="hear" data-sc-act="flow" className="rc-callback">
-          <div className="rc-plate">
-            <div style={{ width: "min(44rem, 100%)" }}>
+          <div className="rc-callback__layout">
+            <div className="rc-callback__visual">
+              <img src="/marketing/receptionist-call-scene.webp" alt="Our mint receptionist beside a forest-green telephone on a sunlit desk" width={1024} height={1280} loading="lazy" />
+              <div className="rc-callback__intro"><p className="rc-callback__eyebrow">A little more time for you</p><h2>Your next chapter<br />starts with a hello.</h2></div>
+            </div>
+            <div className="rc-callback__form">
               <div className="rc-plate__head sc-stack">
                 <h2 className="sc-display sc-display--lg">{simulated ? "Ask for a call." : "Hear it yourself."}</h2>
                 <p className="sc-lede">{simulated ? "Leave your name and number. A person calls you back." : "Type your name and number. It calls you, now."}</p>
@@ -183,24 +187,18 @@ export default function HomePage() {
         <PricingComparison />
 
         {/* 08 · Colophon. The last act holds. */}
-        <section id="colophon" data-sc-act="pin" data-sc-span="1.15">
-          <div data-sc-stage className="rc-colophon">
-            <div className="rc-colophon__inner" data-sc-cue="0 1 0 0">
-              <p className="rc-run">
-                <a href="#hear">{simulated ? "Ask for a call" : "Have it call you"}</a>. Or <a href="/demos">open one of the three demos</a> and book something.
-              </p>
-              <hr className="rc-hair" />
-              <p>{PRODUCT_NAME}. A booking page and an AI front desk for businesses that run on appointments.</p>
-              <footer>
-                <a href="/features">Features &amp; benefits</a>
-                <a href="/features#coming-soon">Coming soon</a>
-                <a href="/account">Owner sign in</a>
-                <span>The three demo businesses are fictional.</span>
-                <span>© {new Date().getFullYear()}</span>
-              </footer>
-            </div>
+        <footer id="colophon" data-sc-act="flow" className="rc-footer">
+          <div className="rc-footer__top">
+            <div><p className="rc-footer__eyebrow">A little less busy. A little more you.</p><h2>Good things start<br />with a conversation.</h2></div>
+            <a className="rc-footer__hello" href="#hear">Let’s talk <span aria-hidden="true">↗</span></a>
           </div>
-        </section>
+          <div className="rc-footer__middle">
+            <div className="rc-footer__brand"><img src="/marketing/happy-pillow-mascot.png" width={72} height={72} alt="" /><p>{PRODUCT_NAME}</p><span>A booking page and an AI front desk.<br />More time for the work you love.</span></div>
+            <nav aria-label="Footer explore"><h3>Explore</h3><a href="/features">Features</a><a href="#industries">Industries</a><a href="#terms">Pricing</a><a href="/demos">Try a demo</a></nav>
+            <nav aria-label="Footer account"><h3>Your next step</h3><a href="#hear">Ask for a call</a><a href="/start">Get started</a><a href="/account/login">Log in</a><a href="/features#coming-soon">What’s coming</a></nav>
+          </div>
+          <div className="rc-footer__bottom"><span>© {new Date().getFullYear()} {PRODUCT_NAME}</span><span>The three demo businesses are fictional.</span><a href="#desk">Back to top ↑</a></div>
+        </footer>
       </main>
     </ScrollCraftMount>
   );

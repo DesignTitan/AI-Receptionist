@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
 import { appointmentValue, INDUSTRY_VALUE_EXAMPLES } from "@/lib/platform/appointment-value";
-import { PLANS, PILOT_SETUP_CENTS, SETUP_CENTS, OVERAGE_CENTS } from "@/lib/platform/pricing";
+import { PLANS, PILOT_SETUP_CENTS, SETUP_CENTS, OVERAGE_CENTS, recommendPlan, estimateOverage, MAX_BUDGET_CENTS } from "@/lib/platform/pricing";
 import styles from "./appointment-value.module.css";
 const money = (n: number) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
-export function AppointmentValue() {
+export function AppointmentValue({ onRequestCustom }: { onRequestCustom?: () => void }) {
+  const [team, setTeam] = useState(1);
+  const [locations, setLocations] = useState(1);
   const [industry, setIndustry] = useState(3);
   const [ticket, setTicket] = useState(77);
   const [margin, setMargin] = useState(60);
@@ -12,6 +14,10 @@ export function AppointmentValue() {
   const [recovered, setRecovered] = useState(5);
   const [minutes, setMinutes] = useState(300);
   const [setup, setSetup] = useState(0);
+  const recommended = recommendPlan(minutes, team);
+  const recommendedPlan = PLANS[recommended];
+  const custom = team > 20 || locations > 1 || estimateOverage(minutes, recommended) > MAX_BUDGET_CENTS;
+  const estimatedCost = recommendedPlan.monthly + estimateOverage(minutes, recommended) / 100;
   const selected = INDUSTRY_VALUE_EXAMPLES[industry];
   const example = appointmentValue({ ticket, margin, missed, recovered, monthlyCost: 0 });
   return <div className={styles.value}>
@@ -23,9 +29,17 @@ export function AppointmentValue() {
       <label>Unfilled missed bookings / month<input type="number" min="0" max="10000" step="1" value={missed} onChange={e=>setMissed(Math.max(0,Math.min(10000,Math.floor(Number(e.target.value)))))}/></label>
       <label>Additional bookings you might keep<input type="number" min="0" max={missed} step="1" value={Math.min(recovered,missed)} onChange={e=>setRecovered(Math.max(0,Math.min(missed,Math.floor(Number(e.target.value)))))}/></label>
       <label>Monthly billable call minutes<input type="number" min="0" max="100000" step="1" value={minutes} onChange={e=>setMinutes(Math.max(0,Math.min(100000,Math.ceil(Number(e.target.value)))))}/></label>
+      <label>Bookable team members<input type="number" min="1" max="10000" value={team} onChange={e=>setTeam(Math.max(1,Math.min(10000,Math.floor(Number(e.target.value)))))}/></label>
+      <label>Business locations<input type="number" min="1" max="10000" value={locations} onChange={e=>setLocations(Math.max(1,Math.min(10000,Math.floor(Number(e.target.value)))))}/></label>
       <label>Cost period<select value={setup} onChange={e=>setSetup(Number(e.target.value))}><option value={0}>Ongoing month — no setup fee</option><option value={PILOT_SETUP_CENTS / 100}>First month — pilot setup</option><option value={SETUP_CENTS / 100}>First month — standard setup</option></select></label>
     </div>
     <p className={styles.note}>{selected.note} {industry===3 && <a href="https://www.zenoti.com/thecheckin/no-show-revenue-calculator" target="_blank" rel="noreferrer">Source ↗</a>} All other inputs are editable examples, not measured product results. Use the same currency as the plans (USD).</p>
+    <section className={styles.recommendation} aria-label="Recommended pricing tier" aria-live="polite">
+      <div><span className={styles.eyebrow}>Based on your needs</span><h4>{custom ? "Let’s discuss a custom plan." : `We recommend ${recommendedPlan.name}.`}</h4>
+      <p>{custom ? "Your team, locations or call volume needs a tailored scope. Speak with us to confirm capacity, features and pricing." : `The lowest estimated monthly cost among plans that fit your ${team} bookable team member${team === 1 ? "" : "s"}, at ${minutes.toLocaleString()} billable call minutes: ${money(estimatedCost)} including estimated usage, before setup and tax.`}</p>
+      {!custom && <p className={styles.note}>{estimateOverage(minutes, recommended) > 0 ? "This estimate includes additional minutes. You’ll need to set a spending limit to allow that usage. " : ""}Review your plan and setup fee before paying. Your estimated appointment value is a scenario, not a guarantee.</p>}</div>
+      <a className={styles.continueButton} href={custom ? "#hear" : `/start?plan=${recommended}`} onClick={custom ? onRequestCustom : undefined}>{custom ? "Discuss your needs ↗" : `Continue with ${recommendedPlan.name} ↗`}</a>
+    </section>
     <div className={styles.summary} aria-live="polite"><p><strong>{money(example.revenueAtRisk)}</strong> monthly sales at risk</p><p><strong>{money(example.recoveredRevenue)}</strong> sales if {example.recovered} more bookings happen</p><p><strong>{money(example.recoveredContribution)}</strong> left after service costs, before the plan</p></div>
     <div className={styles.results} aria-live="polite">{Object.entries(PLANS).map(([id,plan])=>{const overage=Math.max(0,minutes-plan.minutes)*OVERAGE_CENTS/100;const cost=plan.monthly+setup+overage;const value=appointmentValue({ticket,margin,missed,recovered,monthlyCost:cost});return <div key={id}><h4>{plan.name}</h4><p className={styles.net}>{money(value.net)}</p><p>Estimated value after service and plan costs</p><dl><div><dt>Plan + usage{setup ? " + setup" : ""}</dt><dd>{money(cost)}</dd></div><div><dt>Extra bookings to cover that cost</dt><dd>{value.breakEven===null ? "Not reached at $0 contribution" : value.breakEven}</dd></div></dl></div>})}</div>
     <p className={styles.note}>Scenario only—not a return guarantee. Subtract deposits or cancellation fees already retained from losses; don’t count a reschedule twice. “Share left” should deduct costs of fulfilling an extra appointment. Taxes, other overhead, extra follow-up labor and future repeat purchases are excluded. Usage assumes the billable minutes you enter; setup availability and fees are confirmed at checkout. Custom / Enterprise is quoted separately.</p>

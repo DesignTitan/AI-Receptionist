@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — value modal and recommended plan funnel
+
+- Removed the large inline value calculator; each of four plan cards now has a small link opening one shared, scrollable modal.
+- Calculator recommends the lowest estimated-cost tier fitting team size and call minutes; its CTA passes the selected tier to the existing signup/checkout flow.
+- Multiple locations, teams above 20 and usage above the supported spending limit lead to a custom-plan conversation.
+- Verified four triggers, dynamic Busy desk recommendation, custom routing, Escape/close, focus restoration and mobile layout without page overflow; typecheck and eight pricing/value tests pass.
+- Annual offer still awaits the owner’s discount/setup decision. Public push remains blocked by earlier automatic approval review.
+
 ## Current handoff — pill buttons and pricing value
 
 - All shared buttons and CTA links use full pill corners; verified all 16 homepage buttons and mobile layout with no page overflow.

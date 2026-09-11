@@ -28,3 +28,9 @@
 .tableWrap small { display: block; font-weight: 400; color: #5b705f; margin-top: 5px; }
 @media(max-width:1000px) { .controls { grid-template-columns: 1fr 1fr; } }
 @media(max-width:650px) { .controls,.summary,.results { grid-template-columns: 1fr; } }
+
+.recommendation { padding: 24px; border-radius: 22px; background: #e5eee1; margin: 24px 0; }
+.recommendation h4 { font-size: 25px; font-weight: 500; margin: 8px 0; letter-spacing: -.025em; }
+.recommendation p { font-size: 14px; line-height: 1.6; }
+.recommendation .continueButton { display: inline-block; background: #1e3a34; color: #fff; padding: 14px 22px; border-radius: 9999px; font-size: 14px; text-decoration: none; margin-top: 12px; }
+.continueButton:hover { background: #2e5045; }

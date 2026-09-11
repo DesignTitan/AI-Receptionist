@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — untinted industry blur
+
+- Removed all industry-card dark and mint gradient overlay rules; disabled the overlay pseudo-element.
+- Kept only the progressively revealed Gaussian-blurred copy of each original image, preserving original colors.
+- Verified no overlay and active 16px blur/mask at desktop and mobile sizes.
+- Complete locally; public push remains blocked by prior automatic approval review.
+
 ## Current handoff — dressed mascots and bright industry cards
 
 - Applied seven wardrobe looks across ten industry cards: medical, apron, groomer, camera, tool belt, glasses and fitness sweatband, based on approved pillow and wardrobe references.

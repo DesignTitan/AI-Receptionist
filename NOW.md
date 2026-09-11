@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — opening film cast sheets
+
+- Bubs approved the Happy Little Pillow master and asked to move to the next phase; started the Happy Paws cast.
+- Generated detailed GPT Image 2.5 sheets for groomer, Samoyed and Milo the Yorkie. Added cast-sheets.html with downloads and scene continuity rules, linked from storyboard and mascot page.
+- Milo’s owner submission failed because Higgsfield reported out of credits. Exact prompt is saved; async question asks whether to use built-in generation or keep GPT Image 2.5. No answer yet, no automatic model switch.
+- Local storyboard upload was rejected by automatic review. Safely used a SHA256-verified existing Higgsfield generation for groomer/Samoyed; no local image exported. Milo is a new written-brief generation.
+- Next: finish owner reference when generation route is resolved, then salon/photography/workshop cast and new individual scene frames. Samoyed post-rinse pose looks too dry; use bottom coat strip and enforce wetness in final shots.
+- Chrome verified all three 3504px sheets, mobile navigation and no horizontal overflow. Previous assets preserved; local commit only under standing public-push approval block. Unrelated research-reel notes untouched.
+
 ## Current handoff — master portrait, refreshed sheets and motion tests
 
 - Created clean Happy Little Pillow master and transparent cutout with mint fur, padded cheeks and Ivory & Ink eyes.

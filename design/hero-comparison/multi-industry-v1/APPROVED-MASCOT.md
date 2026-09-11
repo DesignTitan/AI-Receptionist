@@ -3,7 +3,8 @@
 Approved by Bubs on 11 September 2026. This supersedes the original website portrait as the reference for future mascot generation.
 
 - Original approved body portrait (preserved): `assets/mascot-cuddle.png`.
-- Clean working master combining approved body and open-eye direction: `assets/happy-pillow-master.png` (job `128b3b7d-fb5a-4125-8394-ce13f269ee01`).
+- Bubs approved the clean master on 11 September 2026 after the refresh. Use it as the main reference moving forward.
+- Clean master combining approved body and open-eye direction: `assets/happy-pillow-master.png` (job `128b3b7d-fb5a-4125-8394-ce13f269ee01`).
 - Transparent derivative for layout/motion tests: `assets/happy-pillow-master-cutout.png`.
 - GPT Image 2.5 reference job: `62fde102-5b1f-4e78-ba52-a6b91061d8e9`.
 - Preserve pale mint colour, broad rounded-square pillow body, short lower-left speech tail, soft dense fur and prominent padded cheeks.

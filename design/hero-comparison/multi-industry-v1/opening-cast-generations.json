@@ -1,0 +1,193 @@
+{
+  "chapter": "Happy Paws",
+  "status": "Three sheets generated; owner blocked by Higgsfield credits",
+  "characters": [
+    {
+      "slug": "groomer",
+      "name": "The groomer",
+      "scenes": "2\u20134, 7 and 23",
+      "file": "cast-groomer-v1.png",
+      "reference": "c501ef16-9ae4-4b05-9f7c-df806075a7bc",
+      "description": "Dark hair in a loose high bun, black T-shirt, forest-green waterproof apron and black work shoes.",
+      "rule": "She stands outside the tub. Left hand steadies the dog; right hand washes or rinses. Both hands stay with the dog when the phone rings.",
+      "prompt": "Photorealistic film-production character reference sheet. Clean warm-white background, fine gray panel rules, small dark forest sans-serif section headings, clear readable short labels, generous but efficient spacing. Dense professionally organized multi-section board like a comprehensive casting bible, NOT a moodboard or a cinematic scene collage. Real skin, natural proportions, subtle studio lighting, consistent same individual in every panel. No logos, watermarks or promotional copy. Layout: large hero headshot upper left; FIVE full-body turnaround views across upper right (front, three-quarter, profile, three-quarter back, back) same outfit and scale; EIGHT facial expressions middle row (neutral, warm smile, focused, listening, curious, amused, mildly concerned, relieved); SIX task-specific full-body pose studies lower middle; SIX detail closeups along bottom (face, hair, hands, fabric, footwear, signature prop) plus five small labeled palette swatches. Include all sections at a readable size. Keep anatomy and identity stable; no impossible extra hands. Title HAPPY PAWS \u2014 THE GROOMER. Use ONLY the adult female groomer in the reference's upper panels for identity, not the caller or mascot. Same dark brown loose high bun, soft fringe, light olive skin, brown eyes, natural face, late30s, practical athletic build. Black crew-neck short-sleeve T-shirt, forest-green waterproof bib apron to knees tied at waist, black trousers, black nonslip lace-up shoes; no jewelry. Apron neck strap, same bun and outfit across every view. SIX poses: relaxed standing; feet planted and bending slightly forward with both arms reaching waist-height; left hand gently supporting dog's chest and right hand shampooing shoulder; glancing toward ringing phone while hands stay working; right hand holding rinse nozzle directed downward; soft satisfied smile after task. For any washing pose, include ONLY part of white Samoyed inside stainless waist-height tub and show woman's legs fully OUTSIDE tub on floor. No bathtub with human inside. Detail prop black rinse nozzle. No mascot, no caller in this sheet."
+    },
+    {
+      "slug": "samoyed",
+      "name": "The Samoyed",
+      "scenes": "2\u20134, 7 and 23",
+      "file": "cast-samoyed-v1.png",
+      "reference": "c501ef16-9ae4-4b05-9f7c-df806075a7bc",
+      "description": "Large white Samoyed with upright triangular ears, almond-dark eyes, black nose and a curled plume tail.",
+      "rule": "This is the dog already being washed. Its shoulder goes from shampooed to rinsed; its face stays dry. It never appears at the caller\u2019s home.",
+      "prompt": "Photorealistic film-production character reference sheet. Clean warm-white background, fine gray panel rules, small dark forest sans-serif section headings, clear readable short labels, generous but efficient spacing. Dense professionally organized multi-section board like a comprehensive casting bible, NOT a moodboard or a cinematic scene collage. Real skin, natural proportions, subtle studio lighting, consistent same individual in every panel. No logos, watermarks or promotional copy. Title HAPPY PAWS \u2014 SAMOYED. Use ONLY large WHITE SAMOYED IN TUB from reference upper panels. Do not use puppy in lower-left panel. Adult full-size dog, pure white double coat, upright triangular ears, dark almond eyes, black nose, curled white plume tail. One identity, realistic canine anatomy, no clothes or human features. Comprehensive sheet with large hero portrait; EIGHT full-body rotation views front/frontleft/left/backleft/back/backright/right/frontright; EIGHT head expression studies calm, interested, head tilt, relaxed pant, blink, sniff, curious glance, content; SIX pose studies standing side-on, sitting, looking up at groomer, sniffing a sleeve, steady stance on non-slip mat, relaxed post-rinse stand; THREE coat continuity strips dry reference coat, shampoo on shoulder and upper back only, rinsed damp shoulder and chest with face still dry. SIX detail crops eyes/nose/ears/pawpads/dense double coat/tail curl. White background, small neutral shadow. All adult same size and same anatomy, no Yorkie and no human full portraits. No distress, snarling or soaked submerged face."
+    },
+    {
+      "slug": "caller",
+      "name": "Milo\u2019s owner",
+      "scenes": "5\u20136",
+      "file": "cast-milo-owner-v1.png",
+      "reference": "c501ef16-9ae4-4b05-9f7c-df806075a7bc",
+      "description": "Shoulder-length dark hair, cream knit sweater, blue jeans and a phone kept in her right hand.",
+      "rule": "She stays at home, calling for Milo\u2019s appointment. Her face, sweater, phone and phone hand remain the same between shots.",
+      "prompt": "Photorealistic film-production character reference sheet. Clean warm-white background, fine gray panel rules, small dark forest sans-serif section headings, clear readable short labels, generous but efficient spacing. Dense professionally organized multi-section board like a comprehensive casting bible, NOT a moodboard or a cinematic scene collage. Real skin, natural proportions, subtle studio lighting, consistent same individual in every panel. No logos, watermarks or promotional copy. Layout: large hero headshot upper left; FIVE full-body turnaround views across upper right (front, three-quarter, profile, three-quarter back, back) same outfit and scale; EIGHT facial expressions middle row (neutral, warm smile, focused, listening, curious, amused, mildly concerned, relieved); SIX task-specific full-body pose studies lower middle; SIX detail closeups along bottom (face, hair, hands, fabric, footwear, signature prop) plus five small labeled palette swatches. Include all sections at a readable size. Keep anatomy and identity stable; no impossible extra hands. Title HAPPY PAWS \u2014 MILO'S OWNER. Use ONLY adult dark shoulder-length-haired woman in cream sweater in middle-right and bottom-left reference panels, NOT bun-haired groomer. Warm medium olive skin, brown almond eyes, shoulder-length dark brown loose waves, middle part, natural laugh lines, early40s. Cream textured crew-neck knit sweater, relaxed medium-blue straight jeans, simple beige indoor slippers. Same outfit and hair always. FIVE turnaround views fullbody. EIGHT expressions listed. SIX poses: seated listening on sofa with phone at RIGHT ear; right hand holds same silver phone in front as checking screen; free LEFT hand rests on lap; free LEFT hand gently steadies small tan Yorkie beside her; slight nod agreeing to booking with phone still RIGHT ear; amused side glance toward dog. Tiny dog may appear only as supporting context in one pose, a TAN YORKIE not a white Samoyed. The focus is this woman's identity. NO mascot. Hand detail shows natural five fingers holding phone. No glamour makeup, no changing hair length, no different sweater patterns."
+    },
+    {
+      "slug": "milo",
+      "name": "Milo the Yorkie",
+      "scenes": "5\u20136",
+      "file": "cast-milo-v1.png",
+      "reference": null,
+      "description": "Tiny tan-and-steel Yorkie with upright ears and long, comically flyaway facial hair.",
+      "rule": "Milo is dry and playful at home. Keep the same flyaway coat throughout the call. He is not the white dog in the tub.",
+      "prompt": "Photorealistic film-production character reference sheet. Clean warm-white background, fine gray panel rules, small dark forest sans-serif section headings, clear readable short labels, generous but efficient spacing. Dense professionally organized multi-section board like a comprehensive casting bible, NOT a moodboard or a cinematic scene collage. Real skin, natural proportions, subtle studio lighting, consistent same individual in every panel. No logos, watermarks or promotional copy. Title HAPPY PAWS \u2014 MILO THE YORKIE. Create one consistent photorealistic small adult Yorkshire terrier character. Toy-sized 3kg, fine tan face hair and legs, subtle dark steel-gray saddle on back, pointed upright ears with pink inner skin, dark glossy eyes, little black nose, long wispy golden facial fur and crest sticking out unevenly like static flyaways. Funny overgrown hair but healthy, comfortable and very endearing, NOT a monster. Natural small canine body, no clothes or human anatomy, no collar needed. Broad comprehensive sheet: large hero portrait; EIGHT fullbody rotation views front/frontleft/left/backleft/back/backright/right/frontright; EIGHT expression head studies curious, tiny tongue out, head tilt left, head tilt right, alert, relaxed pant, sleepy blink, innocent look; SIX pose studies seated sofa-height, standing, nosing a loose cotton sock, one paw gently resting on owner's forearm (arm only as context), curled resting, looking up toward owner; SIX detail crops flyaway tan fur/steel saddle/eyes/nose/upright ears/small paws; THREE coat studies front side back showing identical DRY overgrown coat, never suddenly groomed. Palette tan, honey, steel gray, nose black, warm pink tongue. Consistent same Yorkie not Samoyed, no white fluffy breed, no snarling/teeth/distress or exaggerated electrified lightning."
+    }
+  ],
+  "requests": [
+    {
+      "index": 1,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "3:2",
+        "medias": [
+          {
+            "role": "image",
+            "value": "c501ef16-9ae4-4b05-9f7c-df806075a7bc"
+          }
+        ],
+        "prompt": "Photorealistic film-production character reference sheet. Clean warm-white background, fine gray panel rules, small dark forest sans-serif section headings, clear readable short labels, generous but efficient spacing. Dense professionally organized multi-section board like a comprehensive casting bible, NOT a moodboard or a cinematic scene collage. Real skin, natural proportions, subtle studio lighting, consistent same individual in every panel. No logos, watermarks or promotional copy. Layout: large hero headshot upper left; FIVE full-body turnaround views across upper right (front, three-quarter, profile, three-quarter back, back) same outfit and scale; EIGHT facial expressions middle row (neutral, warm smile, focused, listening, curious, amused, mildly concerned, relieved); SIX task-specific full-body pose studies lower middle; SIX detail closeups along bottom (face, hair, hands, fabric, footwear, signature prop) plus five small labeled palette swatches. Include all sections at a readable size. Keep anatomy and identity stable; no impossible extra hands. Title HAPPY PAWS \u2014 THE GROOMER. Use ONLY the adult female groomer in the reference's upper panels for identity, not the caller or mascot. Same dark brown loose high bun, soft fringe, light olive skin, brown eyes, natural face, late30s, practical athletic build. Black crew-neck short-sleeve T-shirt, forest-green waterproof bib apron to knees tied at waist, black trousers, black nonslip lace-up shoes; no jewelry. Apron neck strap, same bun and outfit across every view. SIX poses: relaxed standing; feet planted and bending slightly forward with both arms reaching waist-height; left hand gently supporting dog's chest and right hand shampooing shoulder; glancing toward ringing phone while hands stay working; right hand holding rinse nozzle directed downward; soft satisfied smile after task. For any washing pose, include ONLY part of white Samoyed inside stainless waist-height tub and show woman's legs fully OUTSIDE tub on floor. No bathtub with human inside. Detail prop black rinse nozzle. No mascot, no caller in this sheet."
+      }
+    },
+    {
+      "index": 2,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "3:2",
+        "medias": [
+          {
+            "role": "image",
+            "value": "c501ef16-9ae4-4b05-9f7c-df806075a7bc"
+          }
+        ],
+        "prompt": "Photorealistic film-production character reference sheet. Clean warm-white background, fine gray panel rules, small dark forest sans-serif section headings, clear readable short labels, generous but efficient spacing. Dense professionally organized multi-section board like a comprehensive casting bible, NOT a moodboard or a cinematic scene collage. Real skin, natural proportions, subtle studio lighting, consistent same individual in every panel. No logos, watermarks or promotional copy. Title HAPPY PAWS \u2014 SAMOYED. Use ONLY large WHITE SAMOYED IN TUB from reference upper panels. Do not use puppy in lower-left panel. Adult full-size dog, pure white double coat, upright triangular ears, dark almond eyes, black nose, curled white plume tail. One identity, realistic canine anatomy, no clothes or human features. Comprehensive sheet with large hero portrait; EIGHT full-body rotation views front/frontleft/left/backleft/back/backright/right/frontright; EIGHT head expression studies calm, interested, head tilt, relaxed pant, blink, sniff, curious glance, content; SIX pose studies standing side-on, sitting, looking up at groomer, sniffing a sleeve, steady stance on non-slip mat, relaxed post-rinse stand; THREE coat continuity strips dry reference coat, shampoo on shoulder and upper back only, rinsed damp shoulder and chest with face still dry. SIX detail crops eyes/nose/ears/pawpads/dense double coat/tail curl. White background, small neutral shadow. All adult same size and same anatomy, no Yorkie and no human full portraits. No distress, snarling or soaked submerged face."
+      }
+    },
+    {
+      "index": 3,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "3:2",
+        "medias": [
+          {
+            "role": "image",
+            "value": "c501ef16-9ae4-4b05-9f7c-df806075a7bc"
+          }
+        ],
+        "prompt": "Photorealistic film-production character reference sheet. Clean warm-white background, fine gray panel rules, small dark forest sans-serif section headings, clear readable short labels, generous but efficient spacing. Dense professionally organized multi-section board like a comprehensive casting bible, NOT a moodboard or a cinematic scene collage. Real skin, natural proportions, subtle studio lighting, consistent same individual in every panel. No logos, watermarks or promotional copy. Layout: large hero headshot upper left; FIVE full-body turnaround views across upper right (front, three-quarter, profile, three-quarter back, back) same outfit and scale; EIGHT facial expressions middle row (neutral, warm smile, focused, listening, curious, amused, mildly concerned, relieved); SIX task-specific full-body pose studies lower middle; SIX detail closeups along bottom (face, hair, hands, fabric, footwear, signature prop) plus five small labeled palette swatches. Include all sections at a readable size. Keep anatomy and identity stable; no impossible extra hands. Title HAPPY PAWS \u2014 MILO'S OWNER. Use ONLY adult dark shoulder-length-haired woman in cream sweater in middle-right and bottom-left reference panels, NOT bun-haired groomer. Warm medium olive skin, brown almond eyes, shoulder-length dark brown loose waves, middle part, natural laugh lines, early40s. Cream textured crew-neck knit sweater, relaxed medium-blue straight jeans, simple beige indoor slippers. Same outfit and hair always. FIVE turnaround views fullbody. EIGHT expressions listed. SIX poses: seated listening on sofa with phone at RIGHT ear; right hand holds same silver phone in front as checking screen; free LEFT hand rests on lap; free LEFT hand gently steadies small tan Yorkie beside her; slight nod agreeing to booking with phone still RIGHT ear; amused side glance toward dog. Tiny dog may appear only as supporting context in one pose, a TAN YORKIE not a white Samoyed. The focus is this woman's identity. NO mascot. Hand detail shows natural five fingers holding phone. No glamour makeup, no changing hair length, no different sweater patterns."
+      }
+    },
+    {
+      "index": 4,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "3:2",
+        "prompt": "Photorealistic film-production character reference sheet. Clean warm-white background, fine gray panel rules, small dark forest sans-serif section headings, clear readable short labels, generous but efficient spacing. Dense professionally organized multi-section board like a comprehensive casting bible, NOT a moodboard or a cinematic scene collage. Real skin, natural proportions, subtle studio lighting, consistent same individual in every panel. No logos, watermarks or promotional copy. Title HAPPY PAWS \u2014 MILO THE YORKIE. Create one consistent photorealistic small adult Yorkshire terrier character. Toy-sized 3kg, fine tan face hair and legs, subtle dark steel-gray saddle on back, pointed upright ears with pink inner skin, dark glossy eyes, little black nose, long wispy golden facial fur and crest sticking out unevenly like static flyaways. Funny overgrown hair but healthy, comfortable and very endearing, NOT a monster. Natural small canine body, no clothes or human anatomy, no collar needed. Broad comprehensive sheet: large hero portrait; EIGHT fullbody rotation views front/frontleft/left/backleft/back/backright/right/frontright; EIGHT expression head studies curious, tiny tongue out, head tilt left, head tilt right, alert, relaxed pant, sleepy blink, innocent look; SIX pose studies seated sofa-height, standing, nosing a loose cotton sock, one paw gently resting on owner's forearm (arm only as context), curled resting, looking up toward owner; SIX detail crops flyaway tan fur/steel saddle/eyes/nose/upright ears/small paws; THREE coat studies front side back showing identical DRY overgrown coat, never suddenly groomed. Palette tan, honey, steel gray, nose black, warm pink tongue. Consistent same Yorkie not Samoyed, no white fluffy breed, no snarling/teeth/distress or exaggerated electrified lightning."
+      }
+    }
+  ],
+  "submission": {
+    "jobs": [
+      {
+        "index": 1,
+        "job_id": "b2b11855-d9c0-4e2c-8953-ec7d89ea578a",
+        "status": "pending",
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.5 backend expects schema-key media roles"
+          }
+        }
+      },
+      {
+        "index": 2,
+        "job_id": "ebe96b71-1a13-453e-b2e4-ca34cab12b5e",
+        "status": "pending",
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.5 backend expects schema-key media roles"
+          }
+        }
+      },
+      {
+        "index": 3,
+        "status": "submission_failed",
+        "error": "Out of credits on ultra (annual) plan in Private workspace.",
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.5 backend expects schema-key media roles"
+          }
+        }
+      },
+      {
+        "index": 4,
+        "job_id": "b0369e4f-77e2-465d-9b4a-b9a9ffa08575",
+        "status": "pending"
+      }
+    ],
+    "submitted_count": 3,
+    "failed_count": 1
+  },
+  "reference": {
+    "job": "c501ef16-9ae4-4b05-9f7c-df806075a7bc",
+    "note": "Already hosted Higgsfield generation; SHA256 matched existing grooming-consistent.png. No local storyboard uploaded. Milo generated independently from written Yorkie brief."
+  },
+  "results": {
+    "jobs": [
+      {
+        "index": 1,
+        "job_id": "b2b11855-d9c0-4e2c-8953-ec7d89ea578a",
+        "status": "completed",
+        "type": "image",
+        "model": "gpt_image_2_5",
+        "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260911_125356_b2b11855-d9c0-4e2c-8953-ec7d89ea578a.png"
+      },
+      {
+        "index": 2,
+        "job_id": "ebe96b71-1a13-453e-b2e4-ca34cab12b5e",
+        "status": "completed",
+        "type": "image",
+        "model": "gpt_image_2_5",
+        "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260911_125358_ebe96b71-1a13-453e-b2e4-ca34cab12b5e.png"
+      },
+      {
+        "index": 4,
+        "job_id": "b0369e4f-77e2-465d-9b4a-b9a9ffa08575",
+        "status": "completed",
+        "type": "image",
+        "model": "gpt_image_2_5",
+        "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260911_125356_b0369e4f-77e2-465d-9b4a-b9a9ffa08575.png"
+      }
+    ],
+    "summary": {
+      "total": 3,
+      "completed": 3,
+      "failed": 0,
+      "active": 0,
+      "errors": 0
+    },
+    "all_terminal": true
+  }
+}

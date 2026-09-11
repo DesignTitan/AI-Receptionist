@@ -1,6 +1,16 @@
 [
   {
     "number": 1,
+    "image": "/marketing/industries/mascot-transparent.png",
+    "x": 50,
+    "y": 50,
+    "intro": true,
+    "title": "Meet the little voice.",
+    "action": "Opening shot: the mascot sits dead center against near-black forest green, with generous space around it. Hold for about 1.5 seconds: a small blink, a friendly smile, then cut to the groomer as the phone rings. No headline or bubble.",
+    "audio": "A soft opening sound. The incoming ring begins just before the cut. No dialogue."
+  },
+  {
+    "number": 2,
     "image": "assets/grooming.png",
     "x": 0,
     "y": 0,
@@ -9,7 +19,7 @@
     "audio": "Natural room sound. No dialogue."
   },
   {
-    "number": 2,
+    "number": 3,
     "image": "assets/grooming.png",
     "x": 100,
     "y": 0,
@@ -18,7 +28,7 @@
     "audio": "Natural room sound. No dialogue."
   },
   {
-    "number": 3,
+    "number": 4,
     "image": "assets/grooming.png",
     "x": 0,
     "y": 50,
@@ -27,7 +37,7 @@
     "audio": "\u201cHi, Happy Paws. How can I help?\u201d"
   },
   {
-    "number": 4,
+    "number": 5,
     "image": "assets/grooming.png",
     "x": 100,
     "y": 50,
@@ -36,7 +46,7 @@
     "audio": "\u201cMilo needs a groom. Thursday afternoon?\u201d"
   },
   {
-    "number": 5,
+    "number": 6,
     "image": "assets/grooming.png",
     "x": 0,
     "y": 100,
@@ -45,7 +55,7 @@
     "audio": "\u201cI have two o\u2019clock.\u201d / \u201cPerfect.\u201d"
   },
   {
-    "number": 6,
+    "number": 7,
     "image": "assets/grooming.png",
     "x": 100,
     "y": 100,
@@ -54,7 +64,7 @@
     "audio": "\u201cMilo\u2019s booked for Thursday at two.\u201d"
   },
   {
-    "number": 7,
+    "number": 8,
     "image": "assets/salon.png",
     "x": 0,
     "y": 0,
@@ -63,7 +73,7 @@
     "audio": "Natural room sound. No dialogue."
   },
   {
-    "number": 8,
+    "number": 9,
     "image": "assets/salon.png",
     "x": 100,
     "y": 0,
@@ -72,7 +82,7 @@
     "audio": "\u201cHi, Studio June.\u201d"
   },
   {
-    "number": 9,
+    "number": 10,
     "image": "assets/salon.png",
     "x": 0,
     "y": 50,
@@ -81,7 +91,7 @@
     "audio": "\u201cA haircut Friday?\u201d"
   },
   {
-    "number": 10,
+    "number": 11,
     "image": "assets/salon.png",
     "x": 100,
     "y": 50,
@@ -90,7 +100,7 @@
     "audio": "\u201cWould three work?\u201d / \u201cYes, thank you.\u201d"
   },
   {
-    "number": 11,
+    "number": 12,
     "image": "assets/salon.png",
     "x": 0,
     "y": 100,
@@ -99,7 +109,7 @@
     "audio": "\u201cYou\u2019re booked for Friday at three.\u201d"
   },
   {
-    "number": 12,
+    "number": 13,
     "image": "assets/salon.png",
     "x": 100,
     "y": 100,
@@ -108,7 +118,7 @@
     "audio": "Natural room sound. No dialogue."
   },
   {
-    "number": 13,
+    "number": 14,
     "image": "assets/photography.png",
     "x": 0,
     "y": 0,
@@ -117,7 +127,7 @@
     "audio": "Natural room sound. No dialogue."
   },
   {
-    "number": 14,
+    "number": 15,
     "image": "assets/photography.png",
     "x": 100,
     "y": 0,
@@ -126,7 +136,7 @@
     "audio": "\u201cA family session on Saturday?\u201d"
   },
   {
-    "number": 15,
+    "number": 16,
     "image": "assets/photography.png",
     "x": 0,
     "y": 50,
@@ -135,7 +145,7 @@
     "audio": "\u201cTen o\u2019clock?\u201d / \u201cThat works.\u201d"
   },
   {
-    "number": 16,
+    "number": 17,
     "image": "assets/photography.png",
     "x": 100,
     "y": 50,
@@ -144,7 +154,7 @@
     "audio": "\u201cSaturday at ten. You\u2019re booked.\u201d"
   },
   {
-    "number": 17,
+    "number": 18,
     "image": "assets/photography.png",
     "x": 0,
     "y": 100,
@@ -153,7 +163,7 @@
     "audio": "Natural room sound. No dialogue."
   },
   {
-    "number": 18,
+    "number": 19,
     "image": "assets/photography.png",
     "x": 100,
     "y": 100,
@@ -162,7 +172,7 @@
     "audio": "Natural room sound. No dialogue."
   },
   {
-    "number": 19,
+    "number": 20,
     "image": "assets/mechanic.png",
     "x": 0,
     "y": 0,
@@ -171,7 +181,7 @@
     "audio": "\u201cHi, Oak Street Auto.\u201d"
   },
   {
-    "number": 20,
+    "number": 21,
     "image": "assets/mechanic.png",
     "x": 100,
     "y": 0,
@@ -180,7 +190,7 @@
     "audio": "\u201cCan I move tomorrow\u2019s appointment?\u201d"
   },
   {
-    "number": 21,
+    "number": 22,
     "image": "assets/mechanic.png",
     "x": 0,
     "y": 50,
@@ -189,7 +199,7 @@
     "audio": "\u201cI\u2019ll ask the team to call you back.\u201d"
   },
   {
-    "number": 22,
+    "number": 23,
     "image": "assets/mechanic.png",
     "x": 100,
     "y": 50,
@@ -198,7 +208,7 @@
     "audio": "\u201cStay with the customer in front of you.\u201d"
   },
   {
-    "number": 23,
+    "number": 24,
     "image": "assets/mechanic.png",
     "x": 0,
     "y": 100,
@@ -207,7 +217,7 @@
     "audio": "\u201cGive the next one a way to reach you.\u201d"
   },
   {
-    "number": 24,
+    "number": 25,
     "image": "assets/mechanic.png",
     "x": 100,
     "y": 100,

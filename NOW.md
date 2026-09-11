@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — centered mascot intro (10 September 2026)
+
+- Added scene 1: existing mint mascot centered on near-black forest green, no headline or bubble.
+- Notes specify a brief blink/smile, about 1.5 seconds, then incoming ring into the groomer. This is a storyboard frame, not rendered animation.
+- Viewer now has 25 scenes; character-sheet-first production workflow remains pending.
+- Local commit only; prior public-push approval block remains.
+
 ## Current handoff — restore scene viewer (10 September 2026)
 
 - Matched approved-cast-scenes storyboard layout: large scene, Previous/Next, thumbnail strip, action and dialogue; hash links and arrow keys supported.

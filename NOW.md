@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — sister floral dress sheet
+
+- User requested original floral dress instead of denim and authorized full character sheet.
+- Generated sheet from latest real photo and approved Loup reference: five angles, eight expressions, poses and six details.
+- Updated #caller and owner brief; earlier portrait and all previous work preserved.
+- Unseen dress back/standing hemline are provisional. Latest real photo remains facial authority.
+- Next: likeness review and dedicated shared scene frames in floral dress; local commit under existing public-push block.
+
 ## Current handoff — sister latest-photo portrait
 
 - User recast Loup owner as sister, rejected first generated sister likeness, supplied latest 11.03.39 AM photo as authority.

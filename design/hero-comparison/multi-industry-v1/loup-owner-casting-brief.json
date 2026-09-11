@@ -1,16 +1,17 @@
 {
   "name": "Loup’s owner",
-  "status": "Recast as user’s sister. First sister board rejected; latest-photo portrait v2 awaiting likeness review.",
-  "master": "assets/cast-loup-owner-sister-portrait-v2.png",
+  "status": "Floral dress character sheet generated from latest source photo at user request; likeness for review",
+  "master": "assets/loup-owner-sister-latest-reference.png",
   "primary_reference": "assets/loup-owner-sister-latest-reference.png",
-  "sheet": null,
+  "sheet": "assets/cast-loup-owner-sister-dress-v1.png",
   "shared_acting": null,
   "identity": "Latest supplied photograph is primary authority. Preserve actual face, smile, head angle and long highlighted hair; do not blend previous owner or rejected sister generations.",
-  "wardrobe": "Denim shirt and jeans, barefoot. Latest source necklace retained.",
+  "wardrobe": "Original pink floral sleeveless dress with narrow straps, lightweight ruffled hem, pink/yellow/orange flowers and darker leaves. Bright short necklace, black glasses hanging at neckline. Bare feet. No denim.",
   "continuity": "Phone right hand/right ear; Loup to her left with extra fluffy bedhead and fringe-shake behavior.",
   "archived_rejected": [
     "assets/cast-loup-owner-sister-rejected-master-v1.png",
     "assets/cast-loup-owner-sister-rejected-sheet-v1.png"
   ],
-  "next": "User likeness review of one portrait before propagating to multi-view sheets and shared scenes."
+  "next": "Use latest real photo as facial authority for future scene work; do not reuse earlier generated denim faces.",
+  "interpretations": "Unseen dress back and standing hemline provisional. Turnaround angles are illustrative, not measured."
 }

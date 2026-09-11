@@ -1,5 +1,11 @@
 # NOW
 
+## Current handoff — confirmation design concept
+
+- Created design/purchase/confirmation-and-receipt-concept.png with the current mascot, homepage palette, rounded navigation and a matching receipt email.
+- Design only: dashboard and email code have not been changed. Receipt values must come from the actual paid invoice, not the illustrative $488 shown in the concept.
+- New setup pricing and visual page-index cards are in progress; $89 applies to new Front/Busy purchases, Full desk remains $499 pending user direction.
+
 ## Current handoff — consistent sign-in link
 
 - Signup now asks for a secure sign-in link and shows a check-your-email screen; removed the misleading code field and obsolete OTP endpoint.

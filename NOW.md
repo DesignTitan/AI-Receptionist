@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — sister latest-photo portrait
+
+- User recast Loup owner as sister, rejected first generated sister likeness, supplied latest 11.03.39 AM photo as authority.
+- Created one portrait edit from latest photo only; source and portrait shown side by side at #caller.
+- Previous owner and rejected sister boards preserved; old shared scenes moved behind archive link.
+- Next: likeness review before full sheet and shared acting regeneration; use latest photo, not previous generated faces.
+- Local commit only under existing public-push approval block.
+
 ## Current handoff — restore correct owner face
 
 - User rejected v5 smile revision as warped and said previous face was correct.

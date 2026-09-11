@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — compact mascot greetings
+
+- Made hover wink explicit through pointer/mouse state so it does not depend on hover media detection.
+- Reduced greeting bubble to 11px text and 6px/10px padding; starts fading after one second.
+- Browser verified hover without click, 34x26px Hi bubble and automatic dismissal; typecheck passed.
+- Next: edge-to-edge film and paused-state bottom blur requested during this block.
+- Local commits only under existing public-push approval block.
+
 ## Current handoff — more visible mascot wink
 
 - Mascot now holds its winking eye closed for the full mouse hover instead of a brief animation that is easy to miss.

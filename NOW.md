@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — callback, pricing and navigation refinements
+
+- Mascot floats above a modern smartphone with a pointed speech tail; updated callback artwork and description.
+- Added sales callback intent and optional preferred time, saved in call summary and owner notification; requests never dispatch an AI call. Added direct signup.
+- Replaced pricing grid with rounded plan cards and soft detail panels; all plan data is unchanged. Removed numbered side navigation.
+- Passed typecheck and five pricing tests; checked desktop/mobile and mocked callback submission without sending calls or emails.
+- In progress: researched legal/security/social footer placeholders and lawyer review checklist. Public push remains blocked by prior approval review.
+
 ## Current handoff — distinct industry photography
 
 - Replaced all ten industry photos with new, distinct casts spanning ages and backgrounds; each business has a recognizable setting and its own palette.

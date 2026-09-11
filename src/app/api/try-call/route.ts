@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 /** POST /api/try-call  { name, phone, business?, turnstileToken?, company_website? (honeypot) } */
 export async function POST(request: Request) {
-  let body: { name?: string; phone?: string; business?: string; turnstileToken?: string; company_website?: string };
+  let body: { name?: string; phone?: string; business?: string; turnstileToken?: string; company_website?: string; intent?: string; preferredTime?: string };
   try {
     body = await request.json();
   } catch {
@@ -21,6 +21,8 @@ export async function POST(request: Request) {
     business: body.business,
     honeypot: body.company_website,
     turnstileToken: body.turnstileToken,
+    intent: body.intent === "sales" ? "sales" : "demo",
+    preferredTime: typeof body.preferredTime === "string" ? body.preferredTime : undefined,
     ip,
   });
   if (!result.ok) return NextResponse.json({ error: result.error }, { status: result.status });

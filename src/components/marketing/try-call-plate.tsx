@@ -86,6 +86,8 @@ export function TryCallPlate({ simulated, turnstileSiteKey, compact = false }: {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [business, setBusiness] = useState("");
+  const [sales, setSales] = useState(simulated);
+  const [preferredTime, setPreferredTime] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [call, setCall] = useState<Started | null>(null);
@@ -131,7 +133,7 @@ export function TryCallPlate({ simulated, turnstileSiteKey, compact = false }: {
       const r = await fetch("/api/try-call", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, business, turnstileToken, company_website: hp }),
+        body: JSON.stringify({ name, phone, business, turnstileToken, company_website: hp, intent: sales ? "sales" : "demo", preferredTime: sales ? preferredTime : undefined }),
       });
       const data = await r.json();
       if (!r.ok) {
@@ -167,6 +169,7 @@ export function TryCallPlate({ simulated, turnstileSiteKey, compact = false }: {
     >
       {!call ? (
         <form className="rc-try" onSubmit={submit}>
+          {!compact && !simulated && <label className="rc-try__field"><span>How would you like to connect?</span><select value={sales ? "sales" : "demo"} onChange={e => setSales(e.target.value === "sales")}><option value="demo">Try a real AI phone call now</option><option value="sales">Request a sales conversation</option></select></label>}
           <label className="rc-try__field">
             <span>Your name</span>
             <input value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" placeholder="Nadia" maxLength={60} required />
@@ -191,15 +194,16 @@ export function TryCallPlate({ simulated, turnstileSiteKey, compact = false }: {
               maxLength={80}
             />
           </label>
+          {!compact && sales && <label className="rc-try__field"><span>Preferred day &amp; time (optional)</span><input value={preferredTime} onChange={e => setPreferredTime(e.target.value)} placeholder="Tuesday afternoon, Eastern time" maxLength={160} /><small>Include your time zone. We’ll confirm availability with you.</small></label>}
           <input type="text" name="company_website" tabIndex={-1} autoComplete="off" className="rc-hp" aria-hidden="true" />
           {humanCheck && <HumanCheck siteKey={turnstileSiteKey!} widgetId={widgetId} />}
           <button type="submit" className="rc-cta" disabled={busy}>
-            {busy ? "Sending" : simulated ? "Ask for a call" : "Have it call you"}
+            {busy ? "Sending" : sales ? "Request a sales call" : "Call me now"}
           </button>
           {error && <p className="rc-try__error" role="alert">{error}</p>}
           <p className="rc-try__note">
-            {simulated
-              ? `This site isn't connected to a phone line yet, so Ava can't ring you from here. Leave your number and a person calls you back.${humanCheck ? " We check that you're a person first." : ""}`
+            {sales
+              ? "This requests a phone conversation with a person. Your preferred time is a request, not a confirmed booking."
               : "US and Canadian numbers. The call is recorded. Two calls per number a day. We check that you're a person before dialling."}
           </p>
         </form>
@@ -207,14 +211,13 @@ export function TryCallPlate({ simulated, turnstileSiteKey, compact = false }: {
         <div className="rc-track">
           <div className="rc-track__result">
             <p className="rc-track__summary">
-              <span>Not connected to a phone line yet</span>
-              Thanks, {call.name}. This page can&rsquo;t ring you.
+              <span>Callback requested</span>
+              Thanks, {call.name}. We’ve received your request.
             </p>
             <p className="rc-track__plain">
-              No voice line is connected to this site yet, so Ava did not call you and nothing was recorded. Your number is with a
-              person now, who will call you back. When Ava is connected, this is how she opens:
+              {sales ? "Our team will follow up to arrange a time to speak. No call has been placed yet." : "The AI call is unavailable right now. Your callback request has been saved for our team."}
             </p>
-            {call.opening && (
+            {!sales && call.opening && (
               <div className="rc-track__transcript">
                 <p>
                   <span className="rc-track__who">Ava</span>

@@ -946,3 +946,8 @@
 .rc-industry__moment > img { width: 156px; height: 156px; top: -130px; left: -4px; transform: rotate(-5deg); }
 .rc-industry__bubble { margin-left: 28px; padding: 13px 16px; border-radius: 20px; background: #f9fcf5e8; box-shadow: 0 6px 20px #173b3115; }
 .rc-industry__bubble p { font-size: 13px; line-height: 1.4; }
+
+.rc-callback__signup { margin: 24px 0 0; font-size: 14px; line-height: 1.6; color: #617872; }
+.rc-callback__signup a { color: #173b31; text-decoration: underline; text-underline-offset: 4px; white-space: nowrap; }
+.rc-try__field select { width: 100%; padding: 14px; border: 1px solid #d5e0d8; border-radius: 10px; background: #f7faf6; color: #173b31; font: inherit; }
+.rc-try__field small { color: #617872; font-size: 12px; line-height: 1.5; }

@@ -12,18 +12,18 @@ export function PricingComparison() {
           <h2 id="pricing-title">Plans for every stage.</h2>
           <p>Simple, transparent pricing. Room to grow when you’re ready.</p>
         </header>
-        <p className={styles.swipe}>Swipe to compare all three plans →</p>
-        <div className={styles.tableWrap} tabIndex={0} role="region" aria-label="Compare pricing plans">
-          <table className={styles.table}>
-            <thead><tr><th scope="col">Plan</th>{plans.map(([id, plan]) => <th scope="col" key={id} data-featured={id === "busy"}><span className={styles.plan}>{plan.name}</span><span className={styles.who}>{plan.who}</span></th>)}</tr></thead>
-            <tbody>
-              <tr><th scope="row">Monthly price</th>{plans.map(([id, plan]) => <td key={id} data-featured={id === "busy"}><strong className={styles.price}>${plan.monthly}</strong><span className={styles.month}> / month</span></td>)}</tr>
-              <tr><th scope="row">Monthly minutes</th>{plans.map(([id, plan]) => <td key={id} data-featured={id === "busy"}>{plan.minutes.toLocaleString()}</td>)}</tr>
-              <tr><th scope="row">Team members</th>{plans.map(([id, plan]) => <td key={id} data-featured={id === "busy"}>Up to {plan.teamLimit}</td>)}</tr>
-              <tr><th scope="row">Additional minutes</th>{plans.map(([id]) => <td key={id} data-featured={id === "busy"}>{extra} / minute</td>)}</tr>
-              <tr><th scope="row">Get started</th>{plans.map(([id, plan]) => <td key={id} data-featured={id === "busy"}><a className={styles.cta} href={`/start?plan=${id}`}>Choose {plan.name}</a></td>)}</tr>
-            </tbody>
-          </table>
+        <div className={styles.cards}>
+          {plans.map(([id, plan]) => <article className={styles.card} key={id} data-featured={id === "busy"} aria-labelledby={`plan-${id}`}>
+            <h3 id={`plan-${id}`} className={styles.plan}>{plan.name}</h3>
+            <p className={styles.who}>{plan.who}</p>
+            <p className={styles.rate}><strong className={styles.price}>${plan.monthly}</strong><span className={styles.month}> / month</span></p>
+            <dl className={styles.metrics}>
+              <div><dt>Monthly minutes</dt><dd>{plan.minutes.toLocaleString()}</dd></div>
+              <div><dt>Team members</dt><dd>Up to {plan.teamLimit}</dd></div>
+              <div><dt>Additional minutes</dt><dd>{extra} / minute</dd></div>
+            </dl>
+            <a className={styles.cta} href={`/start?plan=${id}`}>Choose {plan.name}<span aria-hidden="true"> ↗</span></a>
+          </article>)}
         </div>
         <div className={styles.included}>
           <h3>All plans include</h3>

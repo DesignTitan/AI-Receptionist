@@ -52,6 +52,8 @@ export async function startTryCall(input: {
   business?: string;
   honeypot?: string;
   turnstileToken?: string;
+  intent?: "sales" | "demo";
+  preferredTime?: string;
   ip: string;
 }): Promise<TryCallResult> {
   if (input.honeypot) return { ok: true, id: "", reference: "", simulated: true, name: "", opening: "" }; // bots think it worked
@@ -87,6 +89,11 @@ export async function startTryCall(input: {
 
   const call = await createDemoCall({ phone, business, name });
   const opening = demoFirstMessage(name);
+  if (input.intent === "sales") {
+    await updateCall(call.id, { provider: "demo", status: "failed", error: "sales_callback_requested", summary: `Sales conversation requested. Preferred time: ${(input.preferredTime ?? "").trim().slice(0, 160) || "Please arrange with the customer"}. Time is not yet confirmed.` });
+    await sendDemoCallEmail(call.id);
+    return { ok: true, id: call.id, reference: call.reference ?? "", simulated: true, name, opening: "" };
+  }
   if (!live) {
     // No voice line (or no human check) on this deployment: keep the lead, tell the owner to call back, and never pretend a call happened.
     await updateCall(call.id, { provider: "demo", status: "failed", error: "no_voice_line" });

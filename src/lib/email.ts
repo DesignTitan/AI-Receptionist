@@ -247,7 +247,7 @@ export async function sendDemoCallEmail(callId: string) {
   const noLine = call.error === "no_voice_line";
   const body = `
     <p style="margin:0 0 18px;font-size:15px;line-height:1.6;color:#334155">
-      ${noLine
+      ${call.error === "sales_callback_requested" ? "Someone requested a sales conversation. Please follow up to confirm their preferred time. No AI call was placed." : noLine
         ? "Someone on the product site asked to be called. No voice line is connected to this deployment, so Ava did not call them and nothing was recorded. <strong>Call them back.</strong>"
         : `Someone on the product site asked the receptionist to call them. Outcome: <strong>${escape(outcome)}</strong>${call.duration_seconds ? ` · ${escape(formatDuration(call.duration_seconds))}` : ""}.`}
     </p>

@@ -5,7 +5,6 @@ import { BusySection } from "@/components/marketing/busy-section";
 import { OverviewBenefits } from "@/components/marketing/overview-benefits";
 import { PricingComparison } from "@/components/marketing/pricing-comparison";
 import type { Metadata } from "next";
-import { Folio } from "@/components/marketing/folio";
 import { PRODUCT_NAME } from "@/components/marketing/product-chrome";
 import { ScrollCraftMount } from "@/components/marketing/scrollcraft-mount";
 import { ScrollingFeatures } from "@/components/marketing/scrolling-features";
@@ -23,24 +22,11 @@ export const metadata: Metadata = {
     "Online booking, AI confirmation calls and a clear view of what needs your attention. An AI receptionist for businesses that run on appointments.",
 };
 
-const CHAPTERS = [
-  { id: "desk", n: "01", title: "The front desk" },
-  { id: "cost", n: "02", title: "When you’re busy" },
-  { id: "turn", n: "03", title: "Your day back" },
-  { id: "features", n: "04", title: "Core features" },
-  { id: "proof", n: "05", title: "Proof" },
-  { id: "industries", n: "06", title: "Your industry" },
-  { id: "hear", n: "07", title: "Hear it yourself" },
-  { id: "terms", n: "08", title: "Terms" },
-  { id: "colophon", n: "09", title: "Colophon" },
-];
-
 export default function HomePage() {
   // Live only with a voice line AND the human check; otherwise the plate takes a callback request.
   const simulated = !isLiveCallReady();
   return (
     <ScrollCraftMount>
-      <Folio chapters={simulated ? CHAPTERS.map((c) => (c.id === "hear" ? { ...c, title: "Ask for a call" } : c)) : CHAPTERS} />
 
       <main id="main" className="rc-v1">
         <SiteNav cta={simulated ? "Ask for a call" : "Have it call you"} simulated={simulated} turnstileSiteKey={env.turnstile.siteKey ?? null} />
@@ -170,15 +156,16 @@ export default function HomePage() {
         <section id="hear" data-sc-act="flow" className="rc-callback">
           <div className="rc-callback__layout">
             <div className="rc-callback__visual">
-              <img src="/marketing/receptionist-call-scene.webp" alt="Our mint receptionist beside a forest-green telephone on a sunlit desk" width={1024} height={1280} loading="lazy" />
+              <img src="/marketing/receptionist-call-pointed.webp" alt="Our mint chat-bubble receptionist floating above a modern smartphone on a sunlit desk" width={1024} height={1280} loading="lazy" />
               <div className="rc-callback__intro"><p className="rc-callback__eyebrow">A little more time for you</p><h2>Your next chapter<br />starts with a hello.</h2></div>
             </div>
             <div className="rc-callback__form">
               <div className="rc-plate__head sc-stack">
-                <h2 className="sc-display sc-display--lg">{simulated ? "Ask for a call." : "Hear it yourself."}</h2>
-                <p className="sc-lede">{simulated ? "Leave your name and number. A person calls you back." : "Type your name and number. It calls you, now."}</p>
+                <h2 className="sc-display sc-display--lg">{simulated ? "Let’s talk." : "Hear it for yourself."}</h2>
+                <p className="sc-lede">{simulated ? "Request a real phone conversation with our sales team. Tell us when works for you, and we’ll confirm a time." : "Try a real phone call with our AI receptionist, or request a time to speak with our sales team."}</p>
               </div>
               <TryCallPlate simulated={simulated} turnstileSiteKey={env.turnstile.siteKey ?? null} />
+              <p className="rc-callback__signup">Prefer to get started on your own? <a href="/start">Sign up online ↗</a></p>
             </div>
           </div>
         </section>

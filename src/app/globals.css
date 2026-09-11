@@ -534,3 +534,32 @@ a[class*="button"],
 a[class*="btn"] {
   border-radius: 9999px !important;
 }
+
+/* A soft dissolve between pages, without moving their scroll position. */
+:root {
+  --page-transition-duration: 240ms;
+  --page-transition-ease: cubic-bezier(0.23, 1, 0.32, 1);
+}
+@view-transition { navigation: auto; }
+::view-transition { pointer-events: none; }
+::view-transition-group(*) {
+  animation-duration: var(--page-transition-duration);
+  animation-timing-function: var(--page-transition-ease);
+}
+::view-transition-old(root),
+::view-transition-old(.page-dissolve),
+::view-transition-old(.page-leave) {
+  animation: page-soft-out 160ms var(--page-transition-ease) both;
+}
+::view-transition-new(root),
+::view-transition-new(.page-dissolve),
+::view-transition-new(.page-arrive) {
+  animation: page-soft-in var(--page-transition-duration) var(--page-transition-ease) both;
+}
+@keyframes page-soft-out { to { opacity: 0; } }
+@keyframes page-soft-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation-duration: 1ms !important; }
+}

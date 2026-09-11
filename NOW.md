@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — soft site-wide page transitions
+
+- Added a shared route transition using the installed Next/React ViewTransition support plus native same-origin document transitions.
+- Pages dissolve with 160ms exit and 240ms entrance; no positional movement, navigation delay, or click interception.
+- Reduced-motion setting makes transitions effectively instant; unsupported browsers retain normal navigation.
+- Browser verified actual enter/exit animations for client and document navigation, retained selected-plan return position, mobile width and zero page errors. Typecheck and diff checks passed.
+- Both navigation tasks are complete locally. Public push remains blocked by earlier automatic approval review.
+
 ## Current handoff — retain pricing origin and selected plan
 
 - Checkout links retain the pricing source URL, including preview parameters, and chosen card; Back to plans and Change return there.

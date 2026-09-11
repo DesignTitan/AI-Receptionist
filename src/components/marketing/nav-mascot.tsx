@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 const GREETINGS = ["Hi!", "Lovely to see you.", "How’s your day?", "You rang?", "I’m all ears.", "You’ve got this.", "Tiny pillow. Big hello.", "Still here for you."];
 
 export function NavMascot() {
-  const [hovered, setHovered] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [greeting, setGreeting] = useState<number | null>(null);
   const nextGreeting = useRef(0);
@@ -17,7 +16,7 @@ export function NavMascot() {
     if (bubbleTimer.current) clearTimeout(bubbleTimer.current);
   }, []);
 
-  function winkAndNod() {
+  function nod() {
     if (nodTimer.current) clearTimeout(nodTimer.current);
     setAnimating(true);
     nodTimer.current = setTimeout(() => setAnimating(false), 850);
@@ -31,15 +30,12 @@ export function NavMascot() {
 
   return <div className="rc-nav__brand rc-nav-mascot">
     <button type="button" className="rc-nav-mascot__button" aria-label="Say hello to your receptionist"
-      onPointerEnter={event => { if (event.pointerType !== "touch") { setHovered(true); winkAndNod(); } }}
-      onPointerLeave={() => setHovered(false)}
-      onMouseEnter={() => { setHovered(true); winkAndNod(); }}
-      onMouseLeave={() => setHovered(false)}
-      onFocus={winkAndNod} onClick={sayHello}
+      onPointerEnter={event => { if (event.pointerType !== "touch") nod(); }}
+      onFocus={nod} onClick={sayHello}
       onKeyDown={event => { if (event.key === "Escape") { setGreeting(null); if (bubbleTimer.current) clearTimeout(bubbleTimer.current); } }}>
-      <span className="rc-nav-mascot__character" data-animating={animating} data-winking={hovered || animating}>
+      <span className="rc-nav-mascot__character" data-animating={animating} data-winking={greeting !== null}>
         <img className="rc-nav-mascot__rest" src="/marketing/happy-pillow-mascot.png" width={60} height={60} alt="" />
-        <img className="rc-nav-mascot__wink" style={{ opacity: hovered || animating ? 1 : 0, zIndex: 2, pointerEvents: "none" }} src="/marketing/happy-pillow-wink.png" width={60} height={60} alt="" />
+        <img className="rc-nav-mascot__wink" style={{ opacity: greeting !== null ? 1 : 0, zIndex: 2, pointerEvents: "none" }} src="/marketing/happy-pillow-wink.png" width={60} height={60} alt="" />
       </span>
     </button>
     <span className="rc-nav-mascot__speech" role="status" aria-live="polite" aria-atomic="true" data-visible={greeting !== null}>{greeting !== null ? GREETINGS[greeting] : ""}</span>

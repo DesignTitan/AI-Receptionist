@@ -882,7 +882,7 @@
 .rc-nav-mascot__character img { position: absolute; inset: 0; pointer-events: none; }
 .rc-nav-mascot__wink { opacity: 0; clip-path: ellipse(10% 9% at 64% 46%); transition: opacity .12s ease; }
 .rc-nav-mascot__character[data-animating="true"] { animation: rc-mascot-nod .85s ease-in-out; }
-/* Wink visibility is set directly from the same hover event that starts the nod. */
+/* Hover only nods. The click greeting controls wink visibility. */
 /* Only reveal the generated eyelid area; preserve the original silhouette and alpha. */
 .rc-nav-mascot__speech { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); width: max-content; max-width: min(180px, 80vw); white-space: normal; text-align: center; padding: 6px 10px; border-radius: 10px; background: #f0f8f2; color: #173b31; font-size: 11px; line-height: 1.3; box-shadow: 0 4px 12px #071b1520; pointer-events: none; }
 .rc-nav-mascot__speech::before { content: ""; position: absolute; top: -3px; left: calc(50% - 3px); width: 6px; height: 6px; background: inherit; transform: rotate(45deg); }

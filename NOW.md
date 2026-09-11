@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — confirmed mascot interaction
+
+- User explicitly confirmed: hover nods ONLY, click winks and shows a small greeting for one second. Earlier hover-wink interpretations are superseded.
+- Separated nod state from wink; wink now follows only the click greeting lifetime.
+- Browser assertions passed: hover nod/no wink, click wink/Hi, reset after one second, repeated-click greeting rotation. Typecheck passed.
+- Complete locally; public push remains blocked by prior automatic approval review.
+
 ## Current handoff — direct hover wink correction
 
 - User still saw nod-only hover in embedded browser; tied wink-layer visibility directly to React hover/nod state via inline style and explicit stacking.

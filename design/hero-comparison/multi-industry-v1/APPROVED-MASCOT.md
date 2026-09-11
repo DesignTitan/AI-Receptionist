@@ -19,3 +19,10 @@ Selected by Bubs on 11 September 2026 as the direction for now.
 - Warm ivory sclera, large rounded ink-black pupils and restrained cream catchlights. Preserve the illustrated eye size and spacing, padded cheeks and friendly gaze.
 - Use these eyes for open-eye expressions going forward. Closed eyes and winks still deform naturally; hearts and stars remain temporary expressive variants.
 - The existing expression sheets use earlier eye treatments and need updating for production consistency. The other five eye concepts are not selected.
+
+## Updated research boards
+
+- `assets/happy-pillow-research-ivory.png`: character and face construction research.
+- `assets/happy-pillow-poses-ivory.png`: 20 pose studies.
+- `assets/happy-pillow-grooming-ivory.png`: 12 grooming variations, fibre macros and face materials.
+- All three use approved cheeks and Ivory & Ink eyes. Grooming variations remain exploratory, not a change to canonical fur. Earlier expression/rotation sheets still need eye updates.

@@ -1,0 +1,117 @@
+{
+  "requests": [
+    {
+      "index": 1,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "3:2",
+        "medias": [
+          {
+            "role": "image",
+            "value": "62fde102-5b1f-4e78-ba52-a6b91061d8e9"
+          },
+          {
+            "role": "image",
+            "value": "e85ac099-4ce4-4c32-b161-d0eeb2dcedab"
+          }
+        ],
+        "prompt": "Use FIRST reference for exact approved Happy Little Pillow body: pale mint broad rounded square thick plush pillow with prominent puffy dimensional cheeks, short integrated rounded triangular lower-left speech tail, forest green open smiling mouth. Use ONLY OPTION5 BOTTOM CENTER of SECOND reference for open EYES: warm IVORY sclera with very LARGE INK-BLACK rounded pupils and small cream catchlights. NOT amber blue brown teal or allblack eyes. Same cheeks, eye spacing and proportions in every study. Closed eyes can be expressive crescents. No arms legs feet ears nose separateballtail or tuft. Never replace body with a pear or egg. High quality soft cuddly 3D, detailed silky mint fur. Clean warmoffwhite editorial reference board with thin gray dividers, darkforest readable short labels. Title HAPPY LITTLE PILLOW — CHARACTER RESEARCH. Comprehensive FOUR rows x FOUR columns16panels, each clear fullrender or closeup and label. Row1 identity: 1FRONT (large fullmascot open ivoryinkeyes), 2THREE-QUARTER LEFT, 3SIDE PROFILE (show thick pillow depth, face only on front), 4REAR (blankfur NO FACE, tail viewer-right). Row2 face detail macros: 5IVORY & INK EYES, 6PADDED CHEEKS, 7SMILE & MOUTH (forestgreen opening), 8TAIL CONNECTION (fused soft roundedcorner notball). Row3 facial acting: 9SOFT SMILE openeyes, 10JOYFUL closedcrescenteyes bigsmile, 11CURIOUS ivoryeyes lookslightlyup, 12SLEEPING closedeyes. Row4 construction: 13BASE SILHOUETTE front+side shadows, 14CHEEK VOLUME sculptural closeup, 15FUR DIRECTION cheekfurflowmacro, 16IDENTITY PALETTE mintfur ivorywhites inkpupils forestmouth swatches. All4rows4columns exactly, no extra mascotvariations. This is research into SAMEAPPROVEDcharacter, not alternate eye/silhouette/color designs. Include sufficient detail and full dimensional cheeks."
+      }
+    },
+    {
+      "index": 2,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "3:2",
+        "medias": [
+          {
+            "role": "image",
+            "value": "62fde102-5b1f-4e78-ba52-a6b91061d8e9"
+          },
+          {
+            "role": "image",
+            "value": "e85ac099-4ce4-4c32-b161-d0eeb2dcedab"
+          }
+        ],
+        "prompt": "Use FIRST reference for exact approved Happy Little Pillow body: pale mint broad rounded square thick plush pillow with prominent puffy dimensional cheeks, short integrated rounded triangular lower-left speech tail, forest green open smiling mouth. Use ONLY OPTION5 BOTTOM CENTER of SECOND reference for open EYES: warm IVORY sclera with very LARGE INK-BLACK rounded pupils and small cream catchlights. NOT amber blue brown teal or allblack eyes. Same cheeks, eye spacing and proportions in every study. Closed eyes can be expressive crescents. No arms legs feet ears nose separateballtail or tuft. Never replace body with a pear or egg. High quality soft cuddly 3D, detailed silky mint fur. Clean warmoffwhite editorial reference board with thin gray dividers, darkforest readable short labels. Title HAPPY LITTLE PILLOW — 20 POSE STUDIES. EXACTLY5columns4rows20 fullbody poses with shortlabelbelow. Same character same scale varied physics and expressiveness; keep healthy squashstretch and fullcheeks. Each cell distinct action:\n1RESTING settled happily openeyes\n2HOVERING level slight airgap\n3BOUNCING up happyclosedeyes\n4TAKEOFF squashedpreparation\n5LANDING softenedwidecompression\n6STRETCH tallinmidair butsamevolumetail\n7LEAN LEFT openeyesgazeleft\n8LEAN RIGHT openeyesgazeright\n9CURIOUS TILT anglewholebody15degree\n10PEEKING partlybehind slim neutral panel onlypropallowed\n11LOOK UP wholebodytiltback ivoryeyesup\n12LOOK DOWN wholebodytiltforward eyesdown\n13POLITE BOW forwardpitchclosedeyes\n14HAPPY WIGGLE curved slight squash\n15SPIN threequarterbody rotates withtail\n16TUMBLE upside-downwithface\n17SURPRISED RECOIL backwardlean wideivoryeyes\n18SLEEPY DROOP squashedclosedeyes\n19COZY REST restingonside closedeyes\n20CELEBRATORY HOP midair grin eyesclosed.\nNo limbs or hands invented for gestures. Use bodymotion and tiny tasteful motionlines whenhelpful. Eyes in everyOPENpose exactlyIVORYANDINKoption5. No teeth, no hugeglassmarbles. All20states lovingly rendered and distinctlydifferent."
+      }
+    },
+    {
+      "index": 3,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "3:2",
+        "medias": [
+          {
+            "role": "image",
+            "value": "62fde102-5b1f-4e78-ba52-a6b91061d8e9"
+          },
+          {
+            "role": "image",
+            "value": "e85ac099-4ce4-4c32-b161-d0eeb2dcedab"
+          }
+        ],
+        "prompt": "Use FIRST reference for exact approved Happy Little Pillow body: pale mint broad rounded square thick plush pillow with prominent puffy dimensional cheeks, short integrated rounded triangular lower-left speech tail, forest green open smiling mouth. Use ONLY OPTION5 BOTTOM CENTER of SECOND reference for open EYES: warm IVORY sclera with very LARGE INK-BLACK rounded pupils and small cream catchlights. NOT amber blue brown teal or allblack eyes. Same cheeks, eye spacing and proportions in every study. Closed eyes can be expressive crescents. No arms legs feet ears nose separateballtail or tuft. Never replace body with a pear or egg. High quality soft cuddly 3D, detailed silky mint fur. Clean warmoffwhite editorial reference board with thin gray dividers, darkforest readable short labels. Title HAPPY LITTLE PILLOW — MATERIAL & GROOMING RESEARCH. Dense professional three-tier research board. Top tier TWO rows of SIX fullbody portraits =12 grooming treatments; samefrontcamera, identical approvedcheeks/face/proportions, allopenIVORYANDINKEYES. Labels and looks: 1CLOSE TRIM shortvelvet,2SHORT PLUSH,3BRUSHED SOFT originalcanonical,4MEDIUM FLUFF,5LONG SILKY,6EXTRA PUFF,7SHAGGY natural,8SOFT WAVES,9FINE CURLS,10FLYAWAY EDGES,11COMBED DOWN,12CLOUD SOFT. Visibly different strand lengths/groom directions butNOheadtuft haircuts or costumes. Fur alwaysMINT; grooming never changes bodygeometry or eyeidentity. Cheek fur preservesvisible cheek volumes. DO NOT give any separate limbs, balltailorfeet.\nMiddle tier SIX detailed square macro swatches labeled STRAND DENSITY, ROOTS & TIPS, SOFT EDGE, CHEEK FLOW, TAIL FUR, PARTING. Show tactile fibers, genuine material detail no flatcolors.\nBottom tier FOUR large detail panels IVORY SCLERA, INK PUPIL & CATCHLIGHT, CHEEK & MOUTH EDGE, RIM-LIT FUR. Eye materials exactlyoption5reference, compare satinivory to glossyink, not different iriscolors. Clearsection headers GROOMING / FIBRE STUDIES / FACE MATERIALS. Fullrichboard no minimal reduction. These are visual grooming options not measuredrealmm samples. Softneutral lighting consistentacrossportraits."
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "index": 1,
+      "job_id": "5b9f9cbc-d051-4b08-864f-c5b2839d3fa0",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        },
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 2,
+      "job_id": "531cf30c-833d-4b42-b973-5e1070c500c6",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        },
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 3,
+      "job_id": "e40e9207-b969-4cd2-8b4b-ba7e0c5baaf7",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        },
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      }
+    }
+  ]
+}

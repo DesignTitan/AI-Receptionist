@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — updated character, pose and grooming boards
+
+- Replaced character research, 20 poses, and material/grooming boards using approved Happy Little Pillow cheeks and Ivory & Ink eyes.
+- Research has 16 panels; grooming has 12 fur treatments, six fibre macros and four face-material close-ups.
+- All three full-resolution boards are linked on character-sheets.html at #variations, #poses and #materials.
+- Earlier expression/rotation sheets predate eye selection; colour and wardrobe are historical explorations.
+- Local commit only; prior public-push approval block remains.
+
+
 ## Current handoff — Ivory & Ink eyes selected
 
 - Bubs chose eye option #5 Ivory & Ink for now: warm ivory sclera, large ink-black pupils.

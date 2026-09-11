@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — owner denim and barefoot styling
+
+- Generated v4 portrait/proportions, full character sheet and six shared acting frames internally.
+- Removed facial sunspots and softly rejuvenated complexion; denim shirt, jeans and bare feet replace cream knit/shoes.
+- Updated cast page and owner brief; v3 page and all earlier artwork preserved.
+- Next: user styling review, then individual production scenes; no finished video changes.
+- Local commit only; existing automatic-approval block prevents public repository push.
+
 ## Current handoff — owner body proportions revised
 
 - User rejected owner body and supplied five full photos plus two videos. Viewed photos and one frame from each video.

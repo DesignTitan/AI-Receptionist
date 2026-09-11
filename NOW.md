@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — reassurance clears fringe
+
+- User requested head petting and clearing hair from Loup’s eyes instead of hand on body.
+- Updated frame 6 in shared board v3: left hand on crown, eyes visible, owner looking down; right hand on phone.
+- Updated active page, acting notes and owner brief; previous versions preserved.
+- Next: use this interaction for production frames; local commit under existing public-push block.
+
 ## Current handoff — reassurance arm correction
 
 - Corrected frame 6 of floral-dress shared acting board: removed horizontal disconnected forearm across abdomen.

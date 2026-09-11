@@ -1,6 +1,6 @@
 {
   "status": "Storyboard studies, not generated video",
-  "board": "assets/cast-loup-sister-dress-interactions-v2.png",
+  "board": "assets/cast-loup-sister-dress-interactions-v3.png",
   "proposed_total_seconds": 7,
   "continuity": [
     "Owner source face and approved floral dress",
@@ -9,7 +9,7 @@
     "Same cream sofa, sage cushion, daylight from camera left",
     "Small extra-fluffy Shih Tzu, no coat or breed changes",
     "No repeated shake loop; fringe obstruction triggers one shake",
-    "Frame 6: left upper arm visibly descends from left shoulder; hand rests on Loup’s back. No disconnected forearm crossing abdomen. Exactly two arms."
+    "Frame 6: left hand above crown brushes fringe back, resting on fur surface. Dog eyes visible; no hand on or through torso. Right hand remains on phone."
   ],
   "beats": [
     {
@@ -46,7 +46,7 @@
       "frame": 6,
       "title": "A little reassurance",
       "suggested_seconds": 1.5,
-      "action": "Owner rests her left hand on Loup’s back with a clear shoulder-to-upper-arm connection, right hand remains on phone. Loup relaxes into touch."
+      "action": "Owner looks down and gently sweeps fringe upward from Loup’s eyes with left fingertips on crown. Maintain clear shoulder/elbow/wrist connection. Right hand remains on phone."
     }
   ]
 }

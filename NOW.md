@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — expanded mascot research pack (10 September 2026)
+
+- Added six detailed GPT Image 2.5 sheets: 12 rotation angles, 24 expressions, 20 poses, eight fur/material treatments, 12 colours and 16 design variations.
+- Includes open/closed eyes, winks, tongue, sleep, mouth shapes, long/shaggy/puffy fur and two-tone gradients. Existing costume and original identity sheets retained.
+- Expanded character-sheets.html into eight full-resolution sections; variants clearly exploratory, website baseline unchanged. Turnaround is an illustrated study, not a rigged geometry guarantee.
+- Other cast sheets and final animation remain pending. Local commit only; prior public push approval block remains.
+
 ## Current handoff — detailed mascot style and costume sheets (10 September 2026)
 
 - Generated two GPT Image 2.5 sheets using exact website mascot reference: detailed turnarounds/expressions/materials and six wardrobe portraits.

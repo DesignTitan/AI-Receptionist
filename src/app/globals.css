@@ -520,3 +520,17 @@ body {
      a scroll container, or the sticky stage stops pinning. */
   .textured-section:has(.sc-act--pinned) { overflow: visible; }
 }
+
+/* Shared button silhouette across marketing, account and booking surfaces. */
+button,
+input[type="submit"],
+input[type="button"],
+[role="button"],
+a.rc-cta,
+a[class*="__cta"],
+a[class*="__primary"],
+a[class*="__secondary"],
+a[class*="button"],
+a[class*="btn"] {
+  border-radius: 9999px !important;
+}

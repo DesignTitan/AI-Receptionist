@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — pill buttons and pricing value
+
+- All shared buttons and CTA links use full pill corners; verified all 16 homepage buttons and mobile layout with no page overflow.
+- Added researched, editable appointment-value comparison across three plans and ten industries; examples are explicitly illustrative except the sourced salon median.
+- Added Custom / Enterprise inquiry card and moved setup amounts into each paid plan with first-month totals.
+- Typecheck, eight pricing/value tests and diff checks passed.
+- Annual billing remains pending the owner’s discount and setup-fee decision; no annual prices or savings invented.
+- Saved locally; public push remains blocked by prior automatic approval review.
+
 ## Current handoff — explicit opt-out and footer legal comparison
 
 - Added a dedicated /do-not-sell-or-share-my-personal-information draft page and explicit footer link; preference control is clearly inactive.

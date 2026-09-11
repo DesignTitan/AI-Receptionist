@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — costumes and Our Little Receptionist updated
+
+- Updated six industry looks with Happy Little Pillow cheeks, mint fur and Ivory & Ink eyes.
+- Rebuilt Our Little Receptionist overview: hero portrait, orientations, expressions, poses, details and palette.
+- Replaced both older page images at #wardrobe and #identity, with full-resolution downloads.
+- Earlier expression/rotation sheets still predate eye selection.
+- Local commit only; prior public-push approval block remains.
+
+
 ## Current handoff — four mascot palettes
 
 - Updated colour board to original mint, cool aqua, minty forest and sage, with a solid and soft gradient each (eight portraits).

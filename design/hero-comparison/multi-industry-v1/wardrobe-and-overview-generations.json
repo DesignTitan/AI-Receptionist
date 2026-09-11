@@ -1,0 +1,80 @@
+{
+  "requests": [
+    {
+      "index": 1,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "3:2",
+        "medias": [
+          {
+            "role": "image",
+            "value": "62fde102-5b1f-4e78-ba52-a6b91061d8e9"
+          },
+          {
+            "role": "image",
+            "value": "5b9f9cbc-d051-4b08-864f-c5b2839d3fa0"
+          }
+        ],
+        "prompt": "Use first reference exact Happy Little Pillow BODY and puffy padded CHEEKS, pale original mint fur, broad roundedsquare with integrated short lowerlefttail. Use second reference for approved IVORY & INK eyes (seen in frontportrait): warmivorywhites, largeinkblackpupils smallcreamcatchlight, face spacing and cheekvolume. No coloredirises, nose, arms, legs, ears or cowlick. Same plumpbody and adorableface everypanel. Premium cuddly3D softstudio warmoffwhitebackground elegantforest sans typography thinneutraldividers. Create updated industry costume board. Title SAME LITTLE CHARACTER. DIFFERENT DAY. EXACTLY 3columns2rows SIX entiremascots, matching body scale and cheerfulfrontface, ALLopenIvoryInkeyes. Costume modifies accessories ONLY notbody. Tiny funny understatedaccessories, fullcheeksandface unobscured. Row1: CONTRACTOR tinyyellow hardhat leaning sideways on topcorner, no vest; SALON two smallpink/purple salonclips nestledinfurtop and short charcoal waistapron belowmouth; DOG GROOMER small ivory terrytowel drapedoveroneuppercorner and darkforest pawprintbandana belowmouth. Row2: PHOTOGRAPHER small retro silverblack camera hanging low on leatherstrap; MECHANIC navydenim apronbib atlowerbody brassbuttons and small redrag in pocket no overalllegs; EVERYDAY pureoriginalmint noaccessory. Sameapprovedpillowfaceandcheeks forallsix, eyeswarmivoryandlargeblackpupils notclosedeyes. Clothing conforms toleglessplushbubble. No captionsotherthan6industrylabels. Fine realisticaccessorymaterials andsoftfur. No toolsheldin inventedhands."
+      }
+    },
+    {
+      "index": 2,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "3:2",
+        "medias": [
+          {
+            "role": "image",
+            "value": "62fde102-5b1f-4e78-ba52-a6b91061d8e9"
+          },
+          {
+            "role": "image",
+            "value": "5b9f9cbc-d051-4b08-864f-c5b2839d3fa0"
+          }
+        ],
+        "prompt": "Use first reference exact Happy Little Pillow BODY and puffy padded CHEEKS, pale original mint fur, broad roundedsquare with integrated short lowerlefttail. Use second reference for approved IVORY & INK eyes (seen in frontportrait): warmivorywhites, largeinkblackpupils smallcreamcatchlight, face spacing and cheekvolume. No coloredirises, nose, arms, legs, ears or cowlick. Same plumpbody and adorableface everypanel. Premium cuddly3D softstudio warmoffwhitebackground elegantforest sans typography thinneutraldividers. Create complete updated masteroverview CHARACT ER STYLE SHEET titled OUR LITTLE RECEPTIONIST. EXACT organizedlayout: topthird hero portrait on LEFT30%width, RIGHT70%width five smallturnaround figures FRONT, THREE QUARTER, SIDE, THREE QUARTER BACK, BACK. Centerthird fiveexpressions REST, LISTEN, HAPPY, SPEAK, SURPRISED. Bottomthird threecolumns: POSE STUDIES with3posesFLOAT LEAN BOUNCE; MATERIAL & DETAILS with3macrosFUR TEXTURE PADDED CHEEKS IVORY & INK EYES; COLOUR PALETTE & IDENTITY withfour circular swatches labelled MINT FUR, IVORY WHITES, INK PUPILS, FOREST MOUTH plus smallfrontandsidesilhouettes. Exactlythesesections. LARGEhero hascheerfulopenIvoryInkeyes, fullpuffycheeksandhappyopenforestsmile. Turnaroundfronthasopeneyes, allbackviewsblankfur noface. Eyechoicesconsistent approvedivorywhiteblackpupils. Restclosedrelaxedeyes, Listenopeneyes, Happyclosedjoyeyes, Speakopeneyesandmouth, SurprisedroundivoryeyesO-mouth. Allfiguressameapprovedpillowshape, fullcheeks. Render furandcheekmacros beautifully. NO oldflatface genericchatbubble; makeexactapprovedcharacter throughout. Fullsoftleglesssquarebody shortfusedspeechpointtail, no ovalegg. Cleandetailed referenceboard readabletitleandsmalllabels. No hex codes needed."
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "index": 1,
+      "job_id": "3809c0a8-f223-4fd6-9f04-00d5c171eaaa",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        },
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 2,
+      "job_id": "c2260e99-d80b-4aed-b934-8fa649354235",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        },
+        "medias[1].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      }
+    }
+  ]
+}

@@ -33,3 +33,9 @@ Selected by Bubs on 11 September 2026 as the direction for now.
 - Explore each as a solid fur colour and a smooth gradient. No hard split two-tone patches.
 - Reference board: `assets/happy-pillow-colours-ivory.png` (job `67093132-93df-4fc7-92da-98bb934c7a73`).
 - Preserve approved cheeks, Ivory & Ink eyes and body proportions. Original mint remains the baseline; no single alternate has been selected as its replacement.
+
+## Updated wardrobe and overview
+
+- `assets/happy-pillow-costumes-ivory.png`: six industry looks, preserving approved cheeks and Ivory & Ink eyes.
+- `assets/happy-pillow-overview-ivory.png`: updated Our Little Receptionist overview with portrait, orientations, expressions, poses and materials.
+- Original sheets remain archived in assets; these replace their character-page presentations.

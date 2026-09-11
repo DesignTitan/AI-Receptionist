@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — Loup puffy bedhead variant
+
+- Created separate internal-imagegen puffy bedhead character sheet with same extensive panels and Loup identity.
+- Added cast-loup-bedhead-v1.png and download at cast-sheets.html#loup-bedhead; approved original and all earlier artwork retained.
+- Updated casting brief with both grooming variants. Keep chosen coat consistent within scenes; rear/tail still provisional.
+- Next: review variant, finish realistic human cast, then update individual scene frames.
+- Local commit only under existing public-push approval block.
+
 ## Current handoff — Loup spelling and approved sheet
 
 - Corrected dog’s name to Loup across active cast page, storyboard and briefs.

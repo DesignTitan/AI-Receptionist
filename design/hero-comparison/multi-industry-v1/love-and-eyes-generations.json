@@ -1,0 +1,64 @@
+{
+  "source": "https://home.unicode.org/emoji/emoji-frequency/",
+  "source_note": "Historical frequency reference, not a current popularity ranking.",
+  "requests": [
+    {
+      "index": 1,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "medias": [
+          {
+            "role": "image",
+            "value": "62fde102-5b1f-4e78-ba52-a6b91061d8e9"
+          }
+        ],
+        "aspect_ratio": "4:3",
+        "prompt": "EXACT approved Happy Little Pillow reference: broad soft SQUARE mint furry pillow, big padded dimensional cheeks, integrated short rounded triangular tail at lower LEFT. Same body/face placement/cheeks/fur/proportions in every portrait. Do not redesign silhouette. No limbs nose ears costumes or hair tuft. Premium cuddly 3D, soft warm-white studio, clean forest typography, subtle grid, full bodies uncropped. Create 12 additional expressive portraits in EXACTLY4columns x3rows. Title HAPPY LITTLE PILLOW — LOVE & REACTIONS. Rowmajor:\n1 HEART EYES: two coral-pink heart-shaped eyes and delighted open smile.\n2 BLOWING A KISS: one eye wink, puckered small lips blowing one tiny floating pink heart beside mouth.\n3 KISSING: both eyes open small friendly dark eyes and puckered kiss lips.\n4 CLOSED-EYE KISS: both closed smiling eyes puckered mouth, soft blush on padded cheeks.\n5 FEELING LOVED: closed joyful eyes gentle smile three tiny floating pink hearts around face.\n6 STARSTRUCK: two golden star-shaped eyes delighted smile.\n7 PLEASE: large watery pleading eyes inner brows raised tiny gentle mouth, still cute.\n8 HAPPY TEARS: warm smile glossy eyes one tear of grateful happiness.\n9 GIGGLING: squeezed happy eyes tilted body open laughing mouth little pink tongue.\n10 PHEW: relieved closed eyes small smile single forehead sweat drop.\n11 SILLY WINK: wink, open smile tongue sideways playful.\n12 CHEERING: delighted wide eyes open celebratory grin small tasteful confetti beside body, no hat/limbs.\nUse familiar emoji expression cues but adapt them into the mint character, never yellow emoji stickers or stockemoji faces pasted on. Shape-symbol eye variants hearts/stars are temporary expressions not permanent redesign. All12 clear distinct captions below each. Preserve cheek bulges even puckered kiss. Exact12 cells."
+      }
+    },
+    {
+      "index": 2,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "medias": [
+          {
+            "role": "image",
+            "value": "62fde102-5b1f-4e78-ba52-a6b91061d8e9"
+          }
+        ],
+        "aspect_ratio": "3:2",
+        "prompt": "EXACT approved Happy Little Pillow reference: broad soft SQUARE mint furry pillow, big padded dimensional cheeks, integrated short rounded triangular tail at lower LEFT. Same body/face placement/cheeks/fur/proportions in every portrait. Do not redesign silhouette. No limbs nose ears costumes or hair tuft. Premium cuddly 3D, soft warm-white studio, clean forest typography, subtle grid, full bodies uncropped. Make an EYE DESIGN comparison board EXACTLY3columns x2rows, six LARGE fullbody portraits same face identical gentle OPEN mouth smile same camera, only EYES change. Title HAPPY LITTLE PILLOW — EYE STUDIES. Need beautiful distinctive animated-film eyes that clearly stand out against pale mint fur, readable small yet cuddly not uncanny. Moderate eye size approx14%bodywidth each; generous space around cheeks. No eyelashes no eyebrows or alien/sinister features. Strong dark borders with controlled highlights; no huge glass marbles. SIX DISTINCT numbered labeled options:\n1 INK VELVET: soft vertical near-black charcoal oval eyes, small soft cream catchlight, tactile satin appearance. Maximum clean contrast.\n2 WARM AMBER: near-black soft oval outer eye, luminous honey-amber iris surrounding large black pupil, thin warm cream sclera crescent only, small cream reflection. Warm friendly contrast.\n3 MIDNIGHT BLUE: rounded near-black navy oval eyes with deep cobalt iris ring large black pupil and tiny bright catchlight, subtle colour not electric neon.\n4 COCOA: deep espresso oval eyes with chestnut iris and large black pupils, subtle cream highlight, soft warm approachable.\n5 IVORY & INK: small warm ivory sclera almond-rounded ovals with LARGE black rounded pupils taking70%width, very simple clean animated expression. No human-realistic iris details.\n6 TEAL HALO: nearly black oval eyes thin saturated deep teal iris ring large black pupil cream catchlight, dark rim strongly separates from mint fur.\nAll six renderings match original approved puffy cheeks and broad square shape EXACTLY. No body hue change. Only study eyes. Every option visibly different in MATERIAL/IRIS/COLOR not sameblackeyes relabeled. No other color accents anywhere. Clean tidy comparison sheet, labels below each portrait."
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "index": 1,
+      "job_id": "41cae6f3-1d31-4491-bc5e-36be58402a66",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 2,
+      "job_id": "e85ac099-4ce4-4c32-b161-d0eeb2dcedab",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      }
+    }
+  ]
+}

@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — hearts, kisses and eye options
+
+- Added 12 love/reaction studies including heart-eyes, blowing kisses, puckered kisses, loved and starstruck to the existing 36 expressions.
+- Added six eye comparisons: ink velvet, amber, midnight blue, cocoa, ivory/ink and teal. Eye direction remains unselected; canonical portrait unchanged.
+- Both GPT Image 2.5 sheets are on character-sheets.html#love-reactions and #eyes with full-resolution downloads.
+- Unicode historical frequency data informed familiar reactions; no claim of a current popularity ranking.
+- Local commit only; prior public-push approval block remains.
+
+
 ## Current handoff — 36 Happy Little Pillow expressions
 
 - Replaced the old 24-expression image with a six-by-six 36-expression Happy Little Pillow sheet, keeping padded cheeks and mint fur.

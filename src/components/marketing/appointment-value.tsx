@@ -28,9 +28,9 @@ export function AppointmentValue({ onRequestCustom }: { onRequestCustom?: () => 
     <div className={styles.flow}>
       <ol className={styles.steps} aria-label="Value and plan steps">
         <li className={styles.step} data-active="true">
-          <header className={styles.intro}><h3>Your business value</h3><p>Choose your industry and adjust your sales estimate.</p></header>
+          <header className={styles.intro}><h3>Your business value</h3></header>
       <label className={styles.industry}>Your industry<select value={industry} onChange={e => { const i = Number(e.target.value); setIndustry(i); setTicket(INDUSTRY_BENCHMARKS[i].ticket ?? ""); }}>{INDUSTRY_BENCHMARKS.map((v, i) => <option key={v.name} value={i}>{v.name}</option>)}</select></label>
-      <div className={styles.benchmark}><strong>{selected.basis}</strong><p>{selected.context}</p>{selected.source && <a href={selected.url} target="_blank" rel="noreferrer">{selected.source} ↗</a>}</div>
+      <div className={styles.benchmark} role="note" aria-label="Industry context"><span className={styles.noteIcon} aria-hidden="true">i</span><div><strong>{selected.basis}</strong><p>{selected.context}</p>{selected.source && <a href={selected.url} target="_blank" rel="noreferrer">{selected.source} ↗</a>}</div></div>
       <div className={styles.controls}>
         <label>Average sale value ($)<input type="number" min="0" max="100000" value={ticket} placeholder="Your actual average" onChange={e => setTicket(e.target.value === "" ? "" : Math.max(0, Math.min(100000, Number(e.target.value))))}/><small>{selected.ticket === null ? "Enter your own collected sale value." : "Prefilled from the benchmark; use your own if known."}</small></label>
         <label>Extra completed bookings / month<input type="number" min="0" max="10000" step="1" value={bookings} onChange={e => setBookings(Math.max(0, Math.min(10000, Math.floor(Number(e.target.value)))))}/><small>A what-if scenario, not a predicted recovery rate.</small></label>

@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — clearer industry heading and research note
+
+- Removed the repeated industry-selection instruction beneath Your business value; retained the accessible field label.
+- Styled industry context as a softly bordered rounded note with a small information icon and its existing source link.
+- Verified industry switching, source link, single note and no mobile overflow; typecheck and diff checks passed.
+- Saved locally; public push remains blocked by prior approval review.
+
 ## Current handoff — complete questions then live recommendations
 
 - Both left-side sections remain open; Find my plan now sits beneath the right-side sales preview and waits for all required answers.

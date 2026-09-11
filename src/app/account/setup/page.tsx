@@ -7,7 +7,7 @@ export default async function Setup() {
   const c = await ownedCustomer();
   if (!c) redirect("/start");
   if (c.status !== "paid" || c.billing_status !== "active") redirect("/account");
-  return <Frame eyebrow="Your dashboard · Business setup" title="Let’s make it yours." description="Your purchase is complete. Add your business details so we can prepare your booking page and phone line.">
+  return <Frame name={c.config.contactName} eyebrow="Your dashboard · Business setup" title="Let’s make it yours." description="Your purchase is complete. Add your business details so we can prepare your booking page and phone line.">
     <BusinessSetupForm customer={c} plan={c.plan} />
   </Frame>;
 }

@@ -16,6 +16,7 @@ import { getPages } from "/__dev/page-catalogue.mjs";
     }
 
     connectedCallback() {
+      document.documentElement.style.setProperty("--workspace-top-offset", "56px");
       this.events?.abort();
       this.events = new AbortController();
       const listen = (target, event, callback) => target.addEventListener(event, callback, { signal: this.events.signal });
@@ -160,6 +161,7 @@ import { getPages } from "/__dev/page-catalogue.mjs";
     }
 
     disconnectedCallback() {
+      document.documentElement.style.removeProperty("--workspace-top-offset");
       this.events?.abort();
       this.offsets?.remove();
     }

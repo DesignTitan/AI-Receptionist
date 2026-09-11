@@ -69,7 +69,7 @@ export default async function Account({ searchParams }: { searchParams: Promise<
     paused: "Your front desk is paused. Check billing or contact us to resume.",
   };
   return (
-    <Frame
+    <Frame name={c.config.contactName}
       eyebrow="Your front desk"
       title={c.business_name}
       description={next[c.status]}

@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — shared sticky application navigation
+
+- Shared account header now keeps the mascot far left, hamburger navigation beside a personalized initials avatar at the far right, and stays sticky while scrolling.
+- Overview, available Billing, help, Privacy, Terms, Contact and site return live in the hamburger menu. Avatar menu shows the name and sign-out. Removed the separate legal footer.
+- Applied to confirmation, setup and the owner dashboard; local toolbar supplies a sticky offset. TypeScript and browser checks passed for desktop/mobile, Escape/outside dismissal and scroll positioning.
+- Public GitHub push remains blocked by the earlier approval review. Published via Vercel (1vtksamf8); production build and development-asset exclusion passed.
+
 ## Current handoff — directly reviewable confirmation page
 
 - Added /account?preview=confirmation for local development only, rendering the actual PurchaseWelcome component with clearly labeled fictional payment details.

@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — film overlay removed
+
+- Removed the dark gradient over the Happy Paws film on desktop and mobile, keeping text and playback controls.
+- Browser verified transparent overlay background at 1440px and 390px.
+- In progress: making the mascot wink persist on hover so it is easier to see.
+- Local commit only under existing automatic-approval public-push block.
+
 ## Current handoff — playful navigation mascot
 
 - Center mascot now winks and nods on hover/focus; clicks cycle eight short greetings beginning with Hi!, with four-second dismissal and Escape support.

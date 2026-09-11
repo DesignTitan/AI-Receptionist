@@ -1,0 +1,26 @@
+[
+  {
+    "index": 2,
+    "job_id": "d2f90ca6-3f01-4e17-b2b5-35dffbd33089",
+    "status": "completed",
+    "type": "image",
+    "model": "gpt_image_2",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260911_011708_d2f90ca6-3f01-4e17-b2b5-35dffbd33089.png"
+  },
+  {
+    "index": 3,
+    "job_id": "56fdbb3b-6c28-4dc1-b6f6-a54f3a31c7c2",
+    "status": "completed",
+    "type": "image",
+    "model": "gpt_image_2",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260911_011708_56fdbb3b-6c28-4dc1-b6f6-a54f3a31c7c2.png"
+  },
+  {
+    "index": 4,
+    "job_id": "6ca341b4-98c2-46d6-b08c-f23b0de262fa",
+    "status": "completed",
+    "type": "image",
+    "model": "gpt_image_2",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260911_011708_6ca341b4-98c2-46d6-b08c-f23b0de262fa.png"
+  }
+]

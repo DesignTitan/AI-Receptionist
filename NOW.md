@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — restore scene viewer (10 September 2026)
+
+- Matched approved-cast-scenes storyboard layout: large scene, Previous/Next, thumbnail strip, action and dialogue; hash links and arrow keys supported.
+- Saved four earlier GPT Image 2 sheets as draft visuals only, explicitly not final character references; production brief moved behind a link.
+- Confirmed Higgsfield catalog has gpt_image_2_5 and seedance_2_5. User requires mascot sheet first, then every person/dog sheet, then scenes and video. Do not reuse unapproved draft mascot as identity reference.
+- Next: generate reference-based mascot sheet with requested 2.5 model, then full character roster. Port 55446 was offline; recovered original layout from saved approved-cast-scenes/index.html.
+- Local commit only; earlier public push approval block remains.
+
 ## Current handoff — video assets and multi-industry production plan (10 September 2026)
 
 - Added playable/downloadable Happy Paws first cut to Marketing assets, linked a new 24-shot, 65-second multi-industry storyboard.

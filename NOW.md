@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — Loop full character sheet requested
+
+- Prepared Loop sheet matching Milo: hero, eight angles, eight expressions, six poses, six details, three coat studies and palette.
+- Uploaded both user-supplied Loop photos as confirmed Higgsfield references; saved request and media IDs in loop-sheet-generation.json.
+- GPT Image 2.5 submission failed again with out-of-credits response. No generated image or page replacement claimed.
+- Next: generate with restored credits or user-approved built-in image generator; then inspect likeness and add sheet to cast page. Existing work preserved.
+- Local commit only under existing public-push block.
+
 ## Current handoff — Loop replaces Milo; human realism research
 
 - Bubs replaced Milo with her female Shih Tzu Loop. Saved two supplied photos as loop-reference-01/02.png and made them the current cast-page references; old Milo sheet/page archived.

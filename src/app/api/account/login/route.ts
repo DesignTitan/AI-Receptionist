@@ -1,3 +1,4 @@
+import { planReturnUrl } from "@/lib/platform/plan-navigation";
 import { NextResponse } from "next/server";
 import { authClient, checkOrigin } from "@/lib/platform/server";
 import { email, planOf, text } from "@/lib/platform/model";
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
     const { error } = await authClient().auth.signInWithOtp({
       email: address,
       options: {
-        emailRedirectTo: `${env.siteUrl}/account/callback${plan ? `?plan=${plan}` : ""}`,
+        emailRedirectTo: `${env.siteUrl}/account/callback${plan ? `?plan=${plan}&returnTo=${encodeURIComponent(planReturnUrl(typeof body.returnTo === "string" ? body.returnTo : undefined, plan))}` : ""}`,
         ...(name ? { data: { full_name: name } } : {}),
       },
     });

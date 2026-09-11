@@ -1,4 +1,5 @@
 "use client";
+import { PlanCheckoutLink } from "./plan-checkout-link";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { INDUSTRY_BENCHMARKS } from "@/lib/platform/industry-benchmarks";
 import { PLANS, recommendPlan, estimateOverage, MAX_BUDGET_CENTS, SETUP_OFFER } from "@/lib/platform/pricing";
@@ -74,7 +75,7 @@ export function AppointmentValue({ onRequestCustom }: { onRequestCustom?: () => 
           </>}
         </section> : <p className={styles.note}>Complete your sales estimate and plan-fit details to update the suggestion.</p>)}
         <div className={styles.previewAction}>
-          {step === "plan" && matched && ready ? <> <a className={styles.primary} href={custom ? "#hear" : `/start?plan=${recommended}`} onClick={custom ? onRequestCustom : undefined}>{custom ? "Discuss a custom plan ↗" : `Review ${plan.name} & sign up ↗`}</a><p className={styles.note}>Confirm your business details and exact charges before payment.</p> </> : <>
+          {step === "plan" && matched && ready ? <> {custom ? <a className={styles.primary} href="#hear" onClick={onRequestCustom}>Discuss a custom plan ↗</a> : <PlanCheckoutLink className={styles.primary} plan={recommended}>Review {plan.name} &amp; sign up ↗</PlanCheckoutLink>}<p className={styles.note}>Confirm your business details and exact charges before payment.</p> </> : <>
           <button type="button" className={styles.primary} disabled={!ready || !matched} onClick={() => changeStep("plan")}>Find my plan <span aria-hidden="true">→</span></button>
           {(!ready || !matched) && <p className={styles.note}>Complete your sales estimate and plan-fit questions first.</p>}
           </>}

@@ -22,7 +22,17 @@ export function ScrollCraftMount({ children }: { children: React.ReactNode }) {
       const engine = (window as unknown as { ScrollCraft?: Engine }).ScrollCraft;
       inst = engine?.mount(ref.current) as typeof inst;
       const relayout = () => dispatchEvent(new Event("resize"));
-      document.fonts?.ready.then(relayout);
+      document.fonts?.ready.then(() => {
+        if (cancelled) return;
+        relayout();
+        // The engine changes section heights. Restore pricing only after its
+        // font-dependent layout, instead of keeping the browser's early offset.
+        if (/^#plan-card-(front|busy|full)$/.test(location.hash)) {
+          const card = document.getElementById(location.hash.slice(1));
+          card?.scrollIntoView({ behavior: "instant", block: "start" });
+          card?.focus({ preventScroll: true });
+        }
+      });
       addEventListener("load", relayout, { once: true });
     })();
     return () => {

@@ -6,8 +6,8 @@ import { PILOT_SETUP_CENTS, SETUP_CENTS } from "@/lib/platform/pricing";
 import { HumanCheck } from "./human-check";
 import styles from "./signup.module.css";
 
-export function StartForm({ plan, signedIn, initialEmail, initialName, review, siteKey }: {
-  plan: Plan; signedIn: boolean; initialEmail: string; initialName: string; review: boolean; siteKey: string;
+export function StartForm({ plan, returnTo, signedIn, initialEmail, initialName, review, siteKey }: {
+  plan: Plan; returnTo: string; signedIn: boolean; initialEmail: string; initialName: string; review: boolean; siteKey: string;
 }) {
   const [name, setName] = useState(initialName);
   const [email, setEmail] = useState(initialEmail);
@@ -48,7 +48,7 @@ export function StartForm({ plan, signedIn, initialEmail, initialName, review, s
   async function verifyEmail() {
     setBusy(true); setError("");
     try {
-      const r = await fetch("/api/account/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, name, plan, token }) });
+      const r = await fetch("/api/account/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, name, plan, token, returnTo }) });
       const data = await r.json();
       if (!r.ok) throw Error(data.error);
       setStep("sent");
@@ -83,7 +83,7 @@ export function StartForm({ plan, signedIn, initialEmail, initialName, review, s
         {error && <p className={styles.error} role="alert">{error} <Link href="/account">Open dashboard</Link></p>}
       </section>
       <aside className={styles.summary} aria-label="Purchase summary">
-        <div className={styles.summaryTop}><span className={styles.eyebrow}>Your selected plan</span><Link href="/#terms">Change</Link></div>
+        <div className={styles.summaryTop}><span className={styles.eyebrow}>Your selected plan</span><Link href={returnTo}>Change</Link></div>
         <h2>{p.name}</h2><p className={styles.price}>${p.monthly}<span>/ month</span></p>
         <ul className={styles.features}><li>{p.minutes.toLocaleString()} call minutes each month</li><li>Up to {p.teamLimit} bookable team members</li><li>Branded online booking page</li><li>AI confirmation calls and call summaries</li></ul>
         <div className={styles.breakdown}>

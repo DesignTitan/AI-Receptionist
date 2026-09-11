@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — retain pricing origin and selected plan
+
+- Checkout links retain the pricing source URL, including preview parameters, and chosen card; Back to plans and Change return there.
+- Plan selection survives email verification; source URLs are restricted to local pricing surfaces.
+- Added card anchors/focus and restore after homepage scroll layout settles, avoiding stale pre-layout positions.
+- Verified desktop return positions and navigation helper tests; typecheck passed. Standalone /pricing is not currently a route, but the return helper preserves it when added.
+- Next: site-wide subtle page transitions requested while this fix was in progress. Public push remains blocked by prior approval review.
+
 ## Current handoff — purchase first, business setup after payment
 
 - Rebuilt /start as a white, rounded two-column signup: name/email → purchase review → existing Stripe Checkout; selected plan and transparent fees remain visible.

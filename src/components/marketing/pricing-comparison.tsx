@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { COMMON_FEATURES, OVERAGE_CENTS, PILOT_SETUP_CENTS, PLANS, SETUP_CENTS, SETUP_OFFER, SETUP_SCOPE, type Plan } from "@/lib/platform/pricing";
+import { PlanCheckoutLink } from "./plan-checkout-link";
 import { AppointmentValue } from "./appointment-value";
 import styles from "./pricing-comparison.module.css";
 
@@ -29,7 +30,7 @@ export function PricingComparison() {
           <p>Simple, transparent pricing. Room to grow when you’re ready.</p>
         </header>
         <div className={styles.cards}>
-          {plans.map(([id, plan]) => <article className={styles.card} key={id} data-featured={id === "busy"} aria-labelledby={`plan-${id}`}>
+          {plans.map(([id, plan]) => <article id={`plan-card-${id}`} tabIndex={-1} className={styles.card} key={id} data-featured={id === "busy"} aria-labelledby={`plan-${id}`}>
             <h3 id={`plan-${id}`} className={styles.plan}>{plan.name}</h3>
             <p className={styles.who}>{plan.who}</p>
             <p className={styles.rate}><strong className={styles.price}>${plan.monthly}</strong><span className={styles.month}> / month</span></p>
@@ -39,7 +40,7 @@ export function PricingComparison() {
               <div><dt>Team members</dt><dd>Up to {plan.teamLimit}</dd></div>
               <div><dt>Additional minutes</dt><dd>{extra} / minute</dd></div>
             </dl>
-            <a className={styles.cta} href={`/start?plan=${id}`}>Choose {plan.name}<span aria-hidden="true"> ↗</span></a>
+            <PlanCheckoutLink className={styles.cta} plan={id}>Choose {plan.name}<span aria-hidden="true"> ↗</span></PlanCheckoutLink>
             {valueLink}
           </article>)}
           <article className={`${styles.card} ${styles.custom}`} aria-labelledby="plan-custom">

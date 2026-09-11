@@ -1,4 +1,6 @@
 "use client";
+import { planReturnUrl } from "@/lib/platform/plan-navigation";
+import type { Plan } from "@/lib/platform/pricing";
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 export default function Callback() {
@@ -8,7 +10,7 @@ export default function Callback() {
     if (started.current) return;
     started.current = true;
     const plan = new URLSearchParams(location.search).get("plan");
-    const destination = plan && ["front", "busy", "full"].includes(plan) ? `/start?plan=${plan}&review=1` : "/account";
+    const destination = plan && ["front", "busy", "full"].includes(plan) ? `/start?plan=${plan}&review=1&returnTo=${encodeURIComponent(planReturnUrl(new URLSearchParams(location.search).get("returnTo") ?? undefined, plan as Plan))}` : "/account";
     const hash = new URLSearchParams(location.hash.slice(1));
     const token = hash.get("access_token");
     history.replaceState(null, "", "/account/callback");

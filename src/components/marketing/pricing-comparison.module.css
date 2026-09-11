@@ -55,3 +55,6 @@
 .dialogContent { overflow-y: auto; overscroll-behavior: contain; min-height: 0; }
 .dialogContent > div { border: 0; margin: 0; border-radius: 0; }
 @media(max-width:650px) { .valueDialog { max-height: calc(100dvh - 24px); width: calc(100vw - 24px); border-radius: 24px; } .dialogBar { padding: 12px 18px; } }
+
+.card { scroll-margin-top: 140px; }
+.card:target { outline: 2px solid #789e87; outline-offset: 5px; }

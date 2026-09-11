@@ -3,7 +3,7 @@ import { after } from "next/server";
 import { NextResponse } from "next/server";
 import { checkOrigin, requireStaff } from "@/lib/platform/server";
 import { serviceClient } from "@/lib/supabase";
-import { phone } from "@/lib/platform/model";
+import { phone, validateConfig } from "@/lib/platform/model";
 export async function POST(request: Request) {
   try {
     checkOrigin(request);
@@ -16,12 +16,16 @@ export async function POST(request: Request) {
     const db = serviceClient();
     const { data: c, error } = await db
       .from("customers")
-      .select("status,billing_status")
+      .select("status,billing_status,config")
       .eq("id", b.id)
       .single();
     if (error || !c) throw Error("Customer not found.");
     if (c.status === "draft")
       throw Error("Payment must be received before setup.");
+    if (b.status === "live" || b.status === "provisioning") {
+      if (c.config.setupPending) throw Error("The customer must complete business setup first.");
+      validateConfig(c.config);
+    }
     if (b.status === "live") {
       if (c.billing_status !== "active")
         throw Error("An active paid subscription is required.");

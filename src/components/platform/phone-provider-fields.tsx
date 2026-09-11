@@ -4,7 +4,7 @@ import { DEFAULT_PHONE_SETUP, PHONE_PROVIDERS, phoneSetupGuidance, type PhoneSet
 export function PhoneProviderFields({ initial }: { initial?: PhoneSetup }) {
   const [setup, setSetup] = useState(initial ?? DEFAULT_PHONE_SETUP);
   return <fieldset>
-    <legend>03 — Your phone and appointment book</legend>
+    <legend>02 — Your phone and appointment book</legend>
     <p>Tell us about the number your customers already call. We’ll prepare the right connection steps for your service.</p>
     <div className="platform-fields">
       <label>Phone provider

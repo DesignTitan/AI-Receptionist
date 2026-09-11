@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { authClient, checkOrigin } from "@/lib/platform/server";
-import { email } from "@/lib/platform/model";
+import { email, planOf, text } from "@/lib/platform/model";
 import { env } from "@/lib/env";
 import { verifyHuman } from "@/lib/turnstile";
 export async function POST(request: Request) {
@@ -8,6 +8,8 @@ export async function POST(request: Request) {
     checkOrigin(request);
     const body = await request.json();
     const address = email(body.email);
+    const plan = body.plan === undefined ? null : planOf(body.plan);
+    const name = plan ? text(body.name, "name") : undefined;
     const human = await verifyHuman(
       body.token,
       request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local",
@@ -19,7 +21,10 @@ export async function POST(request: Request) {
       );
     const { error } = await authClient().auth.signInWithOtp({
       email: address,
-      options: { emailRedirectTo: `${env.siteUrl}/account/callback` },
+      options: {
+        emailRedirectTo: `${env.siteUrl}/account/callback${plan ? `?plan=${plan}` : ""}`,
+        ...(name ? { data: { full_name: name } } : {}),
+      },
     });
     if (error)
       return NextResponse.json(

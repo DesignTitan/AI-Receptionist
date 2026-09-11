@@ -7,6 +7,8 @@ export default function Callback() {
   useEffect(() => {
     if (started.current) return;
     started.current = true;
+    const plan = new URLSearchParams(location.search).get("plan");
+    const destination = plan && ["front", "busy", "full"].includes(plan) ? `/start?plan=${plan}&review=1` : "/account";
     const hash = new URLSearchParams(location.hash.slice(1));
     const token = hash.get("access_token");
     history.replaceState(null, "", "/account/callback");
@@ -23,7 +25,7 @@ export default function Callback() {
     })
       .then(async (r) => {
         if (!r.ok) throw Error();
-        location.replace("/account");
+        location.replace(destination);
       })
       .catch(() =>
         setMessage("This link has expired. Please request a new sign-in link."),

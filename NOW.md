@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — purchase first, business setup after payment
+
+- Rebuilt /start as a white, rounded two-column signup: name/email → purchase review → existing Stripe Checkout; selected plan and transparent fees remain visible.
+- Preserved verified-email authentication, selected-plan return and same-browser name retention. Local preview is missing Turnstile configuration, so no verification bypass or live purchase was attempted.
+- Added identity-only customer creation; moved business/hours/phone/team fields into /account/setup after confirmed active payment. Dashboard and welcome emails now direct paid customers to setup.
+- Prevented unfinished business activation/provisioning and protected purchased plans from setup edits. Fixed development-only localhost/127.0.0.1 form-origin mismatch without relaxing production checks.
+- Verified desktop/mobile, editable review, isolated fake-data signup/payment-state/setup/callback checks, 16 focused tests and typecheck. Annual offer is still pending; existing Stripe payment guards are unchanged.
+- Saved locally. Public push remains blocked by the earlier automatic approval review. Next: review this page, configure email verification and test Stripe end to end, then refine the post-purchase dashboard.
+
 ## Current handoff — setup location and hours concept
 
 - Created design/signup-location-hours-concept.png and saved its built-in image-generation prompt.

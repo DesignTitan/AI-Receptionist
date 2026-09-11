@@ -23,6 +23,21 @@ export const dynamic = "force-dynamic";
 export default async function Account() {
   const c = await ownedCustomer();
   if (!c) redirect("/start");
+  if (c.config.setupPending) {
+    const paid = c.status === "paid" && c.billing_status === "active";
+    return <Frame eyebrow="Your dashboard" title={paid ? "Welcome to your front desk." : "Your purchase"} description={paid ? "Payment confirmed. Let’s get your business ready." : "Complete checkout to continue. If you have just paid, your payment confirmation may take a moment."}>
+      <section className="platform-panel">
+        <h2>{PLANS[c.plan].name}</h2>
+        <p>{paid ? "Add your business details, hours and team. We’ll then prepare your booking page and phone line and arrange a test with you." : "Your selected plan is saved. Business setup opens after Stripe confirms payment."}</p>
+        <div className="platform-actions">
+          {paid ? <Link className="platform-btn" href="/account/setup">Set up your business →</Link> : c.status === "draft" ? <RemoteAction url="/api/account/checkout" label="Continue Stripe Checkout →" /> : null}
+          {c.status !== "draft" && <RemoteAction url="/api/account/billing" label="Manage billing" secondary />}
+          <Link href="/account">Refresh payment status</Link>
+          <RemoteAction url="/api/account/session" method="DELETE" label="Sign out" secondary />
+        </div>
+      </section>
+    </Frame>;
+  }
   const bookings = await bookingsFor(c.id);
   const { period, notices } = await usageFor(c);
   const used = period?.used_minutes ?? 0;

@@ -51,7 +51,7 @@ async function send(job: Job, c: Customer, b: CustomerBooking | null) {
       : job.kind === "signup_alert"
         ? `New paid customer · ${c.business_name}`
         : job.kind === "welcome"
-          ? "Welcome — your front desk is being prepared"
+          ? (c.config.setupPending ? "Welcome — let’s set up your front desk" : "Welcome — your front desk is being prepared")
           : job.kind === "live"
             ? "Your front desk is live"
             : job.kind === "call_email"
@@ -63,9 +63,9 @@ async function send(job: Job, c: Customer, b: CustomerBooking | null) {
       : job.kind === "usage_email"
       ? (notice?.data?.message ?? "Open your dashboard for your usage update.")
       : job.kind === "signup_alert"
-        ? `${c.business_name} has paid and is ready for setup. Open your customer queue at ${env.siteUrl}/admin/customers.`
+        ? `${c.business_name} has paid. ${c.config.setupPending ? "Business details are still pending." : "Business details are ready for setup."} Open your customer queue at ${env.siteUrl}/admin/customers.`
         : job.kind === "welcome"
-          ? "Your payment is received. We will prepare your booking page and phone line, then arrange a test with you."
+          ? (c.config.setupPending ? "Your payment is received. Open your dashboard to add your business details, hours and team. We will then prepare your booking page and phone line and arrange a test with you." : "Your payment is received. We will prepare your booking page and phone line, then arrange a test with you.")
           : job.kind === "live"
             ? `Your booking page is ready: ${env.siteUrl}/b/${c.slug}`
             : job.kind === "call_email"

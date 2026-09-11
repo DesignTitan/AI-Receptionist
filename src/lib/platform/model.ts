@@ -15,6 +15,8 @@ export type TeamMember = {
   minutes: number;
 };
 export type BusinessConfig = {
+  setupPending?: boolean;
+  contactName?: string;
   phoneSetup?: PhoneSetup;
   trade: "salon" | "studio" | "other";
   timezone: string;

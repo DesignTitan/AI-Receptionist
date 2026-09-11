@@ -1,58 +1,29 @@
-import { Frame } from "@/components/platform/frame";
+import Link from "next/link";
 import { StartForm } from "@/components/platform/start-form";
-import { ownedCustomer } from "@/lib/platform/server";
+import { owner, ownedCustomer } from "@/lib/platform/server";
 import { planOf } from "@/lib/platform/model";
-import { SETUP_SCOPE } from "@/lib/platform/pricing";
 import { billingMode } from "@/lib/platform/billing-mode";
+import { env } from "@/lib/env";
 import { redirect } from "next/navigation";
+import styles from "@/components/platform/signup.module.css";
 export const dynamic = "force-dynamic";
-export default async function Start({
-  searchParams,
-}: {
-  searchParams: Promise<{ plan?: string }>;
-}) {
-  const c = await ownedCustomer();
+export default async function Start({ searchParams }: { searchParams: Promise<{ plan?: string; review?: string }> }) {
+  const user = await owner();
+  const c = user ? await ownedCustomer() : null;
   if (c && (c.status !== "draft" || c.checkout_attempt)) redirect("/account");
+  const query = await searchParams;
   let plan: "front" | "busy" | "full" = "busy";
-  try {
-    plan = planOf((await searchParams).plan ?? "busy");
-  } catch {}
-  return (
-    <Frame
-      eyebrow="Let’s make room for your work"
-      title="A front desk of your own."
-      description="Tell us how your business works. We’ll take care of the booking page, the phone line, and the first hello."
-    >
-      {billingMode() === "test" && (
-        <div className="platform-panel mb-6" role="note">
-          <strong>Test checkout — no real payment will be taken.</strong>
-        </div>
-      )}
-      <div className="platform-grid">
-        <StartForm customer={c} plan={plan} />
-        <aside className="platform-panel platform-aside">
-          <span className="platform-kicker">From signup to first call</span>
-          <h2 className="mt-4">We set it up with you.</h2>
-          <ol>
-            <li>Your business and team</li>
-            <li>Secure payment</li>
-            <li>We prepare your line</li>
-            <li>A test call together</li>
-            <li>You’re open for bookings</li>
-          </ol>
-          <hr />
-          <h3>Included in your one-time setup</h3>
-          <p>{SETUP_SCOPE}</p>
-          <p>
-            No calendar connection is included yet. Your booking page has its
-            own appointment book.
-          </p>
-          <p className="platform-note">
-            Have an existing booking system? Tell us before switching so we can
-            help avoid scheduling conflicts.
-          </p>
-        </aside>
-      </div>
-    </Frame>
-  );
+  try { plan = planOf(query.plan ?? c?.plan ?? "busy"); } catch {}
+  const contactName = c?.config.contactName ?? user?.user_metadata?.full_name;
+  return <div className={styles.page}>
+    <header className={styles.header}>
+      <Link href="/" className={styles.brand}><img src="/marketing/happy-pillow-mascot.png" alt="" width="42" height="42" />AI Receptionist</Link>
+      <Link href="/#terms">← Back to plans</Link>
+    </header>
+    <main id="main" className={styles.main}>
+      {billingMode() === "test" && <p className={styles.test} role="note">Test checkout · No real payment will be taken.</p>}
+      <StartForm plan={plan} signedIn={!!user} initialEmail={user?.email ?? ""} initialName={typeof contactName === "string" ? contactName : ""} review={query.review === "1"} siteKey={env.turnstile.siteKey ?? ""} />
+    </main>
+    <footer className={styles.footer}><span>A little more time for what matters.</span><div><Link href="/legal#terms">Terms</Link><Link href="/legal#privacy">Privacy</Link><Link href="/#hear">Need a hand?</Link></div></footer>
+  </div>;
 }

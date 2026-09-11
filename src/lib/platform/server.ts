@@ -1,3 +1,4 @@
+import { sameRequestOrigin } from "./request-origin";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
@@ -63,6 +64,6 @@ export async function bookingsFor(customerId: string) {
 }
 export function checkOrigin(request: Request) {
   const origin = request.headers.get("origin");
-  if (!origin || origin !== new URL(request.url).origin)
+  if (!sameRequestOrigin(origin, request.url, request.headers.get("host"), process.env.NODE_ENV === "development"))
     throw Error("Please submit this form from our website.");
 }

@@ -36,6 +36,8 @@ if (
   c.billing_status !== "active"
 )
   throw Error("Only paid, active customers can be provisioned.");
+if (c.config.setupPending || !c.config.team?.length || !c.config.areaCode)
+  throw Error("The customer must complete business setup before provisioning.");
 const apiKey = env("OMNIDIMENSION_API_KEY");
 async function omni(path, body, key) {
   const response = await fetch(`https://backend.omnidim.io/api/v1/${path}`, {

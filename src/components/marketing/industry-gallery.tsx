@@ -90,8 +90,8 @@ export function IndustryGallery() {
             <div ref={rail} className="rc-industries__rail">
               {INDUSTRIES.map((industry, index) => (
                 <article className="rc-industry" key={industry.key} data-active={index === active} data-more={industry.key === "more"}>
-                  {industry.key !== "more" && <img src={`/marketing/industries/${industry.key}.webp`} alt="" width={900} height={1200} loading="lazy" />}
-                  {industry.key !== "more" && <div className="rc-industry__soften" aria-hidden="true" style={{ maskImage: "linear-gradient(to bottom, transparent 30%, black 95%)" }}><img src={`/marketing/industries/${industry.key}.webp`} alt="" width={900} height={1200} loading="lazy" style={{ filter: "blur(16px)" }} /></div>}
+                  {industry.key !== "more" && <img src={`/marketing/industries/${industry.key}-v2.webp`} alt="" width={900} height={1200} loading="lazy" />}
+                  {industry.key !== "more" && <div className="rc-industry__soften" aria-hidden="true" style={{ maskImage: "linear-gradient(to bottom, transparent 30%, black 95%)" }}><img src={`/marketing/industries/${industry.key}-v2.webp`} alt="" width={900} height={1200} loading="lazy" style={{ filter: "blur(16px)" }} /></div>}
                   {industry.key === "more" && <p className="rc-industry__problem">{industry.problem}</p>}
                   {industry.key !== "more" && <div className="rc-industry__moment" aria-hidden={index !== active}>
                     <img src={`/marketing/mascot-wardrobe/${industry.outfit}.webp`} style={{ maskImage: "url(/marketing/happy-pillow-mascot.png)", maskSize: "94% 94%", maskPosition: "center", maskRepeat: "no-repeat" }} width={600} height={600} alt="" />

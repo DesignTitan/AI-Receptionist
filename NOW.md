@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — distinct industry photography
+
+- Replaced all ten industry photos with new, distinct casts spanning ages and backgrounds; each business has a recognizable setting and its own palette.
+- Added a real gym, styled salon, homewares shop, boutique grooming salon, editorial photography studio, dental clinic, physio clinic, auto workshop, office and music lesson.
+- New source photos have brighter lower areas, correcting the dark foregrounds that persisted after overlay removal; existing untinted blur and mascot interactions remain.
+- Verified all ten images load, inspected the full set and live desktop/mobile cards, and passed typecheck with no mobile page overflow.
+- Complete locally; public push remains blocked by prior automatic approval review.
+
 ## Current handoff — industry overlay verification
 
 - Inspected the live cards and source photos: no remaining dark or colored overlay is rendered.

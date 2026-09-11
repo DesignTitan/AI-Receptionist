@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — directly reviewable confirmation page
+
+- Added /account?preview=confirmation for local development only, rendering the actual PurchaseWelcome component with clearly labeled fictional payment details.
+- Added Payment confirmation to the Page Index so design review does not require owner sign-in. Normal account access remains authenticated; the production branch cannot render sample data.
+- Verified the real local URL without authentication, receipt total, setup link and mobile layout; TypeScript passed. Restarted the managed preview to load the catalogue.
+- No emails or payments sent. Public GitHub push remains blocked by earlier approval review.
+
 ## Current handoff — confirmation reference refinement
 
 - Matched the supplied confirmation reference with stronger Apfel headings, a larger floating mascot, pill navigation/buttons, tighter receipt spacing and a chat support icon.

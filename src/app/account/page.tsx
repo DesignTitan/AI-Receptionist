@@ -23,7 +23,16 @@ import { redirect } from "next/navigation";
 import { formatDateTime } from "@/lib/time";
 import { billingMode } from "@/lib/platform/billing-mode";
 export const dynamic = "force-dynamic";
-export default async function Account() {
+export default async function Account({ searchParams }: { searchParams: Promise<{ preview?: string }> }) {
+  // Local design review uses the real component with fictional data, never an owner record.
+  // The production build removes this branch; normal account access stays authenticated.
+  if (process.env.NODE_ENV === "development" && (await searchParams).preview === "confirmation") {
+    return <PurchaseWelcome name="Bubs" plan="busy" state="paid" preview receipt={{
+      number: "DESIGN-PREVIEW", paidAt: "2026-09-11T18:00:00Z", currency: "usd",
+      rows: [{ label: "Monthly plan", cents: 39900 }, { label: "One-time setup", cents: 8900 }],
+      amountPaid: 48800, url: null,
+    }} />;
+  }
   const c = await ownedCustomer();
   if (!c) redirect("/start");
   if (c.config.setupPending) {

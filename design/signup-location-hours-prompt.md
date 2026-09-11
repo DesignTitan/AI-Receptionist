@@ -1,0 +1,16 @@
+# Setup details: location and hours
+
+Concept only, generated with the built-in image tool. Live onboarding is unchanged. Next image: phone setup, followed by team/services, review/payment and dashboard setup status. These are separate screens to design one at a time.
+
+## Prompt
+
+Create the NEXT screen in the AI Receptionist signup flow, using the attached previous-screen image strictly as a visual style and layout reference. One crisp desktop UI mockup image, 1536x1024 landscape. Maintain the same pure white canvas, forest-green typography, refined sans serif, tiny mint chat-bubble logo, softly sage filled rounded right-hand card, thin borders, fully pill rounded CTAs, generous spacing. Do not reproduce the previous form; this is a new screen.
+
+Keep header logo AI Receptionist left and "Need a hand? Let’s talk" right. Main heading "Set up your front desk." Subtitle "Let’s start with where you work and when you’re open." Back link "← Your business".
+Top main progress: completed checkmark "Your business", dark active circle 2 "Setup details", muted circle 3 "Review & payment".
+Below progress, a smaller secondary progress strip: active "Location & hours", muted "Phone setup", muted "Team & services".
+Left column 60%, right column 35%. Left form title "Location & opening hours". Label "Business address", blank field placeholder "Street address, city, state and ZIP". Label "Timezone", blank dropdown placeholder "Choose your timezone" with aligned subtle chevron. Section label "Open days", seven compact round weekday controls Mon Tue Wed Thu Fri Sat Sun, Monday-Friday selected dark green and weekend outlined. Two side-by-side time dropdowns "Opens" showing "9:00 AM" and "Closes" showing "5:00 PM". Beneath hours place a small softly bordered note with an information icon and text "These hours apply to every selected day and your whole team." Below that a minimal quiet note "Clients can book up to 30 days ahead, with 90 minutes’ notice." No individual-day schedules, no service prices, no integrations; preserve the product's current capabilities.
+Below left form a dark-green pill CTA "Continue to phone setup →". Under it a small "You’ll review all details before payment."
+Right softly sage rounded card: small "YOUR SELECTED PLAN" with "Change" link. Heading "Busy desk", prominent "$399" with small "/ month". Three fine-separated rows "Included minutes" / "750", "Bookable team" / "Up to 10", "Additional minutes" / "$0.49 / minute". Under a divider a clear compact preparation checklist heading "Before you go live", with three thin outlined circle bullets: "Add your phone preferences", "Add your team and services", "Complete a test call with us". Quiet sentence "Your booking page and phone line go live after setup and testing." Bottom note "$499 standard setup, or $299 if eligible for the pilot. Final charges confirmed before payment." No claim of being live, no success badge, no fake security certifications.
+Footer tiny Privacy Terms left and Draft design right. Exact readable text. Match the previous image's design closely, but reduce repetitive pricing breakdown on this step to keep it airy. The screenshot should show the entire screen with CTA and footer, no crop.
+

@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — setup location and hours concept
+
+- Created design/signup-location-hours-concept.png and saved its built-in image-generation prompt.
+- Next flow screen covers address, timezone, selected opening days and shared team hours, matching supported onboarding fields.
+- Selected plan stays visible; setup is divided into location/hours, phone setup and team/services.
+- Concept only; live code unchanged. Next image: phone setup, then team/services, review/payment and dashboard, one at a time.
+- Saved locally; public push remains blocked by prior approval review.
+
 ## Current handoff — post-plan signup visual concept
 
 - Created design/signup-next-screen-concept.png using the built-in image tool; exact prompt saved alongside it.

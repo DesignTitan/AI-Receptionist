@@ -47,7 +47,7 @@
 .valueLink { display: block; width: 100%; margin-top: 14px; padding: 4px 0; background: none; border: 0; color: #506e60; font: inherit; font-size: 12px; line-height: 1.5; text-align: center; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
 .valueLink:hover { color: #193c32; }
 .valueLink:focus-visible, .dialogBar button:focus-visible { outline: 2px solid #527a6b; outline-offset: 4px; }
-.valueDialog { width: min(1040px, calc(100vw - 32px)); max-width: none; max-height: calc(100dvh - 48px); margin: auto; padding: 0; border: 1px solid #dce5d6; border-radius: 28px; background: #f5f8f1; color: #1e3a34; box-shadow: 0 24px 100px #173b3133; overflow: hidden; }
+.valueDialog { width: min(760px, calc(100vw - 32px)); max-width: none; max-height: calc(100dvh - 48px); margin: auto; padding: 0; border: 1px solid #dce5d6; border-radius: 28px; background: #fff; color: #1e3a34; box-shadow: 0 24px 100px #173b3133; overflow: hidden; }
 .valueDialog[open] { display: flex; flex-direction: column; }
 .valueDialog::backdrop { background: #193c3240; backdrop-filter: blur(6px); }
 .dialogBar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px; border-bottom: 1px solid #dce5d6; font-size: 12px; flex-shrink: 0; }

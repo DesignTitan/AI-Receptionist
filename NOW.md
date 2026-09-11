@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — simpler industry-first value flow
+
+- Rebuilt calculator on white with three first-view controls: industry, collected sale and extra completed bookings; one gross-sales result.
+- Added sourced salon, personal-training and photography benchmarks above the controls; other categories require actual fees rather than invented industry averages.
+- Plan matching is a separate step requiring explicit team, minutes and locations; CTA now says Review [plan] & sign up and retains selected-plan routing.
+- Removed old arbitrary ticket defaults and crowded comparison tables; research notes record scope, sources and limitations.
+- Verified scenarios, disabled incomplete estimates, Busy/custom routing, white background and mobile layout; annual offer remains pending.
+- Saved locally; public push remains blocked by prior automatic approval review.
+
 ## Current handoff — value modal and recommended plan funnel
 
 - Removed the large inline value calculator; each of four plan cards now has a small link opening one shared, scrollable modal.

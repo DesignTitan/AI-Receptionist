@@ -1,3 +1,23 @@
+## Updated calculator design — September 11, 2026
+
+The current UI supersedes the earlier illustrative ten-industry defaults below. It uses three initial inputs: industry, average collected sale and additional completed bookings. Output is gross incremental sales (sale × bookings), explicitly before all costs, not net return or a predicted recovery rate. The old arbitrary ticket defaults have been removed.
+
+Benchmarks displayed above the inputs:
+- Salon: $77 median per visit, Zenoti 2026 North American platform sample; 2% observed no-shows is context only, never used as a recovery assumption. https://www.zenoti.com/thecheckin/no-show-revenue-calculator
+- Personal training: $55/hour average, $40–$100/hour range, Thumbtack US marketplace guide. One-hour paid session only; not membership revenue. https://www.thumbtack.com/p/personal-trainer-cost
+- Photography: $358/job average with low/high averages $265–$483, Thumbtack US marketplace data. Service mix varies. https://www.thumbtack.com/p/photographer-prices
+
+Sources checked September 11, 2026. Prices are context and editable starting points, not universal local averages. The sources’ sample limitations are displayed.
+
+For medical/dental, actual collections are requested: ADA reports procedure/payer differences and discontinued its Dental Fees Survey. https://www.ada.org/resources/research/health-policy-institute/dental-care-market
+Retail uses the business’s own order value; linked Shopify sales-report definitions provide the basis. https://help.shopify.com/en/manual/reports-and-analytics/shopify-reports/report-types/default-reports/sales-report
+Healthcare/wellness, pet services, home/auto, professional services and lessons/coaching likewise ask for actual collected fees; no representative cross-category average was verified. Thumbtack therapy/lesson pages could not be fully read (verification challenge). A grooming provider’s 2025 Ames, Iowa price guide was reviewed but excluded as a national benchmark: https://toppawgroomspa.com/assets/price_guide.pdf
+
+Plan matching is a separate second step with no preselected usage/team/location values. It uses existing plan economics, not ticket size or presumed profit, and requires all three inputs. Multiple locations, teams above 20 or overages above the supported cap route to custom discussion. Standard CTA says “Review [plan] & sign up” and preserves the plan through /start?plan=. Setup and usage are disclosed before proceeding. No checkout/payment was submitted during testing.
+
+---
+Historical research and prior calculator design follow.
+
 # Appointment value and plan comparison
 
 Research checked 11 September 2026. Used for an adjustable scenario, not a performance promise.

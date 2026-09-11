@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { PLANS, type Plan } from "@/lib/platform/model";
-import { PILOT_SETUP_CENTS, SETUP_CENTS } from "@/lib/platform/pricing";
+import { setupCents } from "@/lib/platform/pricing";
 import { HumanCheck } from "./human-check";
 import styles from "./signup.module.css";
 
@@ -104,10 +104,9 @@ export function StartForm({ plan, returnTo, signedIn, initialEmail, initialName,
         <ul className={styles.features}><li>{p.minutes.toLocaleString()} call minutes each month</li><li>Up to {p.teamLimit} bookable team members</li><li>Branded online booking page</li><li>AI confirmation calls and call summaries</li></ul>
         <div className={styles.breakdown}>
           <div><span>First month</span><strong>${p.monthly}</strong></div>
-          <div><span>One-time setup</span><strong>${SETUP_CENTS / 100}</strong></div>
-          <div className={styles.total}><span>First payment · before tax</span><strong>${(p.monthly + SETUP_CENTS / 100).toLocaleString()}</strong></div>
+          <div><span>One-time setup</span><strong>${setupCents(plan) / 100}</strong></div>
+          <div className={styles.total}><span>First payment · before tax</span><strong>${(p.monthly + setupCents(plan) / 100).toLocaleString()}</strong></div>
         </div>
-        <p className={styles.offer}>Pilot offer: ${PILOT_SETUP_CENTS / 100} setup for the first 10 eligible customers. If available, your first payment is ${(p.monthly + PILOT_SETUP_CENTS / 100).toLocaleString()} before tax. Your exact offer is confirmed in Stripe.</p>
         <p className={styles.note}>Then ${p.monthly}/month. Setup does not repeat. USD. Extra minutes are $0.49 each, only within a spending limit you choose. Unused minutes expire at renewal. One business location.</p>
         <div className={styles.secure}>Payment handled by Stripe</div>
       </aside>

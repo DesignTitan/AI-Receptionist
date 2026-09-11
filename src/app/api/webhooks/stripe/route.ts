@@ -10,6 +10,7 @@ import {
   planFromPrice,
   usagePriceId,
 } from "@/lib/platform/billing";
+import { subscriptionItems } from "@/lib/platform/subscription-items";
 import { serviceClient } from "@/lib/supabase";
 export async function POST(request: Request) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -97,22 +98,16 @@ export async function POST(request: Request) {
       });
       paidSetup = true;
     }
-    const items = sub.items?.data ?? [];
-    const fixed = items.filter(
-      (i: { price: { recurring?: { usage_type: string } } }) =>
-        i.price.recurring?.usage_type === "licensed",
+    const { fixed, metered } = subscriptionItems(
+      sub.items?.data ?? [], sub.metadata?.checkout_version === "flat-v4",
     );
-    const metered = items.filter(
-      (i: { price: { recurring?: { usage_type: string } } }) =>
-        i.price.recurring?.usage_type === "metered",
-    );
-    if (fixed.length !== 1 || metered.length !== 1 || fixed[0].quantity !== 1)
-      throw Error("Unexpected subscription items");
-    const plan = planFromPrice(fixed[0].price.id);
-    if (metered[0].price.id !== usagePriceId(plan))
+    const plan = planFromPrice(fixed.price.id);
+    if (metered && metered.price.id !== usagePriceId(plan))
       throw Error("Incorrect usage price");
-    const start = fixed[0].current_period_start ?? sub.current_period_start;
-    const end = fixed[0].current_period_end ?? sub.current_period_end;
+    if (!metered && customer.overage_budget_cents > 0)
+      throw Error("Enabled extra spending requires usage billing");
+    const start = fixed.current_period_start ?? sub.current_period_start;
+    const end = fixed.current_period_end ?? sub.current_period_end;
     if (!start || !end) throw Error("Billing period missing");
     const { error } = await db.rpc("apply_environment_subscription", {
       expected_mode: billing.mode,

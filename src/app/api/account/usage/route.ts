@@ -2,6 +2,7 @@ import { NextResponse, after } from "next/server";
 import { owner, ownedCustomer, checkOrigin } from "@/lib/platform/server";
 import { serviceClient } from "@/lib/supabase";
 import { runJobs } from "@/lib/platform/jobs";
+import { enableUsageBilling } from "@/lib/platform/enable-usage";
 export async function POST(request: Request) {
   try {
     checkOrigin(request);
@@ -17,6 +18,7 @@ export async function POST(request: Request) {
       budgetCents > 50000
     )
       throw Error("Choose a monthly extra-minute limit between $0 and $500.");
+    if (budgetCents > 0) await enableUsageBilling(c);
     const { error } = await serviceClient().rpc("set_usage_budget", {
       c_id: c.id,
       user_id: user.id,

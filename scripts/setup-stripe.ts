@@ -8,9 +8,8 @@ import {
   PLANS,
   PRICING_VERSION,
   SETUP_CENTS,
-  PILOT_SETUP_CENTS,
+  SMALL_TEAM_SETUP_CENTS,
   SETUP_SCOPE,
-  SETUP_OFFER,
   OVERAGE_CENTS,
   planFeatures,
   type Plan,
@@ -190,8 +189,8 @@ async function price(lookup: string, data: Record<string, string>) {
 for (const [id, p] of Object.entries(PLANS) as [Plan, (typeof PLANS)[Plan]][]) {
   const prod = await product(
     `receptionist_${id}_v2`,
-    `${p.name} — AI Receptionist`,
-    `${p.minutes} minutes per billing month; up to ${p.teamLimit} bookable team members, one location. About ${p.estimatedCalls} calls at two minutes each; call count is an estimate. ${SETUP_OFFER} Extra minutes $0.49 each with your chosen spending limit.`,
+    p.name,
+    `${p.minutes.toLocaleString()} monthly call minutes. Up to ${p.teamLimit} team members. One location.`,
     planFeatures(id),
   );
   const fixed = await price(`receptionist_${id}_monthly_v2`, {
@@ -232,15 +231,15 @@ for (const [id, p] of Object.entries(PLANS) as [Plan, (typeof PLANS)[Plan]][]) {
   );
 }
 for (const [kind, amount, label] of [
-  ["pilot", PILOT_SETUP_CENTS, "Pilot setup — first 10 customers"],
-  ["standard", SETUP_CENTS, "Standard setup"],
+  ["small_team", SMALL_TEAM_SETUP_CENTS, "One-time setup"],
+  ["full", SETUP_CENTS, "One-time setup"],
 ] as const) {
   const prod = await product(
-    `receptionist_setup_${kind}_v3`,
+    `receptionist_setup_flat_${amount}_v4`,
     label,
     SETUP_SCOPE,
   );
-  const p = await price(`receptionist_setup_${kind}_v3`, {
+  const p = await price(`receptionist_setup_flat_${amount}_v4`, {
     product: prod.id,
     currency: "usd",
     unit_amount: String(amount),

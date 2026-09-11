@@ -19,3 +19,6 @@ next-env.d.ts
 scrollcraft/builds/*/out/
 scrollcraft/builds/*/node_modules/
 scrollcraft/builds/*/lab/
+
+# Supabase CLI local link metadata
+supabase/.temp/

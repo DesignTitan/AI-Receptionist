@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { COMMON_FEATURES, OVERAGE_CENTS, PILOT_SETUP_CENTS, PLANS, SETUP_CENTS, SETUP_OFFER, SETUP_SCOPE, type Plan } from "@/lib/platform/pricing";
+import { COMMON_FEATURES, OVERAGE_CENTS, PLANS, setupCents, SETUP_OFFER, SETUP_SCOPE, type Plan } from "@/lib/platform/pricing";
 import { PlanCheckoutLink } from "./plan-checkout-link";
 import { AppointmentValue } from "./appointment-value";
 import styles from "./pricing-comparison.module.css";
@@ -34,7 +34,7 @@ export function PricingComparison() {
             <h3 id={`plan-${id}`} className={styles.plan}>{plan.name}</h3>
             <p className={styles.who}>{plan.who}</p>
             <p className={styles.rate}><strong className={styles.price}>${plan.monthly}</strong><span className={styles.month}> / month</span></p>
-            <p className={styles.setup}>Plus ${PILOT_SETUP_CENTS / 100} pilot setup or ${SETUP_CENTS / 100} standard, once.<br />First month: ${(plan.monthly + PILOT_SETUP_CENTS / 100).toLocaleString()} pilot / ${(plan.monthly + SETUP_CENTS / 100).toLocaleString()} standard, before usage and tax.</p>
+            <p className={styles.setup}>One-time setup: ${setupCents(id) / 100}.<br />Due today: ${(plan.monthly + setupCents(id) / 100).toLocaleString()}, before tax.</p>
             <dl className={styles.metrics}>
               <div><dt>Monthly minutes</dt><dd>{plan.minutes.toLocaleString()}</dd></div>
               <div><dt>Team members</dt><dd>Up to {plan.teamLimit}</dd></div>

@@ -6,7 +6,7 @@ import {
   recommendPlan,
   OVERAGE_CENTS,
   PILOT_SETUP_CENTS,
-  SETUP_CENTS,
+  setupCents,
   SETUP_OFFER,
   SETUP_SCOPE,
 } from "@/lib/platform/pricing";
@@ -157,16 +157,8 @@ export default async function Account() {
               </p>
             ) : (
               <p>
-                First month + setup:{" "}
-                <strong>
-                  ${(plan.monthly + PILOT_SETUP_CENTS / 100).toFixed(2)}
-                </strong>{" "}
-                if pilot pricing is available, or{" "}
-                <strong>
-                  ${(plan.monthly + SETUP_CENTS / 100).toFixed(2)}
-                </strong>{" "}
-                with standard setup, before tax. Your exact setup price is
-                confirmed before payment.
+                First month + setup: <strong>${(plan.monthly + setupCents(c.plan) / 100).toFixed(2)}</strong> before tax.
+                Includes ${plan.monthly} for your plan and ${setupCents(c.plan) / 100} one-time setup.
               </p>
             )}
             <p>

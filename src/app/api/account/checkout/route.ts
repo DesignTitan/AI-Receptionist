@@ -10,12 +10,11 @@ import {
   priceId,
   verifyCheckoutPrices,
   verifyUsagePrice,
-  usagePriceId,
 } from "@/lib/platform/billing";
 import { serviceClient } from "@/lib/supabase";
 import type { Customer } from "@/lib/platform/model";
 import { releaseExpiredPilotCheckouts } from "@/lib/platform/setup-offer";
-import { PILOT_SETUP_CENTS, SETUP_CENTS } from "@/lib/platform/pricing";
+import { checkoutSetupPrice } from "@/lib/platform/checkout-offer";
 import { env } from "@/lib/env";
 export async function POST(request: Request) {
   try {
@@ -37,36 +36,16 @@ export async function POST(request: Request) {
           "Payment is being confirmed. Refresh your dashboard shortly.",
         );
     }
-    const pilot = process.env.STRIPE_PRICE_SETUP_PILOT;
-    const standard = process.env.STRIPE_PRICE_SETUP_STANDARD;
-    if (!pilot || !standard || !process.env.STRIPE_SECRET_KEY)
-      throw Error(
-        "Payments are not open yet. Your business details are saved.",
-      );
-    await Promise.all([
-      verifyCheckoutPrices(
-        original.plan,
-        priceId(original.plan),
-        pilot,
-        PILOT_SETUP_CENTS,
-      ),
-      verifyCheckoutPrices(
-        original.plan,
-        priceId(original.plan),
-        standard,
-        SETUP_CENTS,
-      ),
-      verifyUsagePrice(original.plan),
-    ]);
+    const setupPrice = await checkoutSetupPrice(original.plan);
+    await verifyUsagePrice(original.plan);
     await releaseExpiredPilotCheckouts();
     const db = serviceClient();
-    const claimed = await db.rpc("claim_environment_checkout", {
+    const claimed = await db.rpc("claim_flat_checkout", {
       expected_mode: billing.mode,
       expected_account: billing.account,
       c_id: original.id,
       user_id: user.id,
-      pilot_price: pilot,
-      standard_price: standard,
+      setup_price: setupPrice,
     });
     if (claimed.error)
       throw Error(
@@ -117,10 +96,10 @@ export async function POST(request: Request) {
       "line_items[0][quantity]": "1",
       "line_items[1][price]": setup,
       "line_items[1][quantity]": "1",
-      "line_items[2][price]": usagePriceId(c.plan),
       "subscription_data[metadata][pricing_version]": "minutes-v2",
+      "subscription_data[metadata][checkout_version]": "flat-v4",
       "custom_text[submit][message]":
-        "Extra minutes cost $0.49 per started minute after your included allowance. Extra spending starts disabled; choose a monthly limit in your dashboard. One location. Unused minutes expire at renewal.",
+        "Your monthly plan includes call minutes. Extra spending is off. You can enable extra minutes at $0.49 each with a spending limit in your dashboard. Setup is paid once.",
       success_url: `${env.siteUrl}/account?checkout=complete`,
       cancel_url: `${env.siteUrl}/account?checkout=cancelled`,
       expires_at: String(c.checkout_expires),

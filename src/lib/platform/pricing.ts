@@ -1,12 +1,16 @@
 /** Pricing v2: one source for the storefront, entitlement checks and Stripe catalogue. */
 export const PRICING_VERSION = "minutes-v2";
 export const SETUP_CENTS = 49900;
+export const SMALL_TEAM_SETUP_CENTS = 8900;
+export function setupCents(plan: Plan) {
+  return plan === "full" ? SETUP_CENTS : SMALL_TEAM_SETUP_CENTS;
+}
 export const PILOT_SETUP_CENTS = 29900;
 export const PILOT_CUSTOMERS = 10;
 export const SETUP_SCOPE =
   "One business, booking-page configuration, dedicated phone setup and one test session. Custom integrations and extra work are quoted separately.";
 export const SETUP_OFFER =
-  "$299 pilot setup for the first 10 customers; $499 standard setup afterward. Availability and your exact fee are confirmed at checkout.";
+  "$89 one-time setup for Front desk and Busy desk; $499 for Full desk. Custom and enterprise setup is quoted separately.";
 export const OVERAGE_CENTS = 49;
 export const MAX_CALL_MINUTES = 5;
 export const MAX_BUDGET_CENTS = 50000;

@@ -4,7 +4,7 @@ import { assertBillingEnvironment } from "@/lib/platform/billing-environment";
 import { stripe, priceId, usagePriceId } from "@/lib/platform/billing";
 import {
   PLANS,
-  PILOT_SETUP_CENTS,
+  SMALL_TEAM_SETUP_CENTS,
   SETUP_CENTS,
   type Plan,
 } from "@/lib/platform/pricing";
@@ -54,13 +54,13 @@ export async function GET() {
     );
     void catalogue;
     for (const [kind, cents] of [
-      ["PILOT", PILOT_SETUP_CENTS],
-      ["STANDARD", SETUP_CENTS],
+      ["SMALL_TEAM", SMALL_TEAM_SETUP_CENTS],
+      ["FULL", SETUP_CENTS],
     ] as const) {
-      const id = process.env[`STRIPE_PRICE_SETUP_${kind}`];
-      if (!id) throw Error("Setup price missing");
+      const prices = await stripe(`prices?lookup_keys[]=receptionist_setup_flat_${cents}_v4&active=true`);
+      if (!prices.data?.[0]) throw Error(`${kind} setup price will be created on first checkout or via stripe:setup.`);
       validateFixedPrice(
-        await stripe(`prices/${id}`),
+        prices.data[0],
         cents,
         false,
         config.mode,

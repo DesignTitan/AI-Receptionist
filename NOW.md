@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — simplified new checkout pricing
+
+- New Front/Busy setup is $89; Full desk remains $499. Storefront and review use one exact first-payment total. Historical paid/issued checkouts retain their agreed amounts.
+- New Stripe checkout includes only the monthly plan and one-time setup; optional metering is connected before enabling a positive spending limit. Existing metered subscriptions remain supported.
+- Applied tested flat-checkout reservation migration to the existing test-mode Supabase project. Versioned Stripe setup prices are created/reused at new checkout.
+- Pricing/subscription/invoice unit checks, disposable PostgreSQL owner/idempotency/payment checks and TypeScript passed. No payments were submitted by the agent.
+- Deployment is next. Mid-cycle extra-minute billing still needs a sandbox invoice acceptance test before live billing.
+
 ## Current handoff — confirmation design concept
 
 - Created design/purchase/confirmation-and-receipt-concept.png with the current mascot, homepage palette, rounded navigation and a matching receipt email.

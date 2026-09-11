@@ -37,3 +37,7 @@ and booking links use that tenant's routes.
 Every `npm run build` checks the generated client/server assets and route manifest
 and fails if the toolbar or preview rewrite leaked into production. After changing
 this boundary, also test production using `npm start`.
+
+## Visual page board
+
+The index uses rounded screenshot cards in a responsive, 1,600px-wide board. Regenerate public-page first-screen captures with `node scripts/capture-page-previews.mjs` while the local server runs on port 3101. Captures live in `dev/thumbnails`, served only through the development preview. The capture process uses an anonymous browser and skips redirects, unavailable pages and private owner/staff pages. It does not submit forms or create accounts. Screenshots indicate a saved preview, not a claim that a page is production-ready.

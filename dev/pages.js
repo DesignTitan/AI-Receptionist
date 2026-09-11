@@ -50,6 +50,16 @@ function dateLabel(page) {
 function row(page) {
   const link = element("a", "page-row");
   link.href = page.href;
+  if (page.thumbnail) {
+    const cover = element("img", "page-cover");
+    cover.src = page.thumbnail;
+    cover.alt = `${page.label} — page preview`;
+    cover.loading = "lazy";
+    cover.width = 1280; cover.height = 800;
+    cover.addEventListener("error", () => cover.remove());
+    link.append(cover);
+  }
+  const body = element("span", "page-content");
   const title = element("span", "page-title", page.label);
   if (page.href.replace(/\/$/, "") === location.pathname.replace(/\/$/, "")) {
     title.append(element("span", "here", "You are here"));
@@ -58,8 +68,8 @@ function row(page) {
   const arrow = element("span", "arrow", "↗");
   arrow.setAttribute("aria-hidden", "true");
   title.append(arrow);
-  link.append(title, element("span", "page-path", page.href));
-  if (page.description) link.append(element("span", "description", page.description));
+  body.append(title, element("span", "page-path", page.href));
+  if (page.description) body.append(element("span", "description", page.description));
   const status = recency(page);
   const meta = element("span", `page-meta ${status}`);
   const time = element("time", "", dateLabel(page));
@@ -71,7 +81,9 @@ function row(page) {
   if (page.workingCopy) meta.append(element("span", "working", "Working copy"));
   const access = { owner: "Owner sign-in", staff: "Staff sign-in", development: "Local only", "site-gate": "Site access" }[page.access];
   if (access) meta.append(element("span", "access", access));
-  link.append(meta);
+  body.append(meta);
+  if (!page.thumbnail && ["owner", "staff"].includes(page.access)) body.append(element("span", "preview-note", "Sign in to view this page"));
+  link.append(body);
   return link;
 }
 

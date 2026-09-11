@@ -131,7 +131,12 @@ async function pageData(root, options) {
       const times = modified.filter((time) => time !== null && Number.isFinite(time));
       if (times.length) updatedAt = new Date(Math.max(...times)).toISOString();
     }
-    return { ...entry, updatedAt, workingCopy: changedSources.length > 0 };
+    let thumbnail = null;
+    try {
+      const file = await readFileWithin(root, ["dev", "thumbnails", `${entry.id}.jpg`], true);
+      if (file) thumbnail = `/__dev/thumbnails/${entry.id}.jpg?v=${file.mtimeMs}`;
+    } catch { /* Pages without captures remain usable. */ }
+    return { ...entry, updatedAt, thumbnail, workingCopy: changedSources.length > 0 };
   }));
   return Buffer.from(JSON.stringify({ pages: datedPages, generatedAt: new Date().toISOString() }));
 }
@@ -181,7 +186,8 @@ export async function startDevPreview({ repoRoot, tenant = "", siteGate = "publi
         content = { data: Buffer.from(PHOTO_PAGE), size: Buffer.byteLength(PHOTO_PAGE) };
         type = TYPES.get(".html");
       } else {
-        const segments = DEV_FILES.get(path) ?? (path.startsWith("/design/")
+        const segments = DEV_FILES.get(path) ?? (/^\/thumbnails\/[a-z0-9-]+\.jpg$/.test(path)
+          ? ["dev", "thumbnails", parts[1]] : path.startsWith("/design/")
             ? ["design", "hero-comparison", ...parts.slice(1), ...(path.endsWith("/") ? ["index.html"] : [])]
             : null);
         if (!segments) return send(404, "Not found");

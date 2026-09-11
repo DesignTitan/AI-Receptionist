@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — visual page index
+
+- Page index is a responsive 1,600px board with rounded cards and actual first-screen screenshots above page titles.
+- Captured 12 anonymous public pages, including the marketing hero, signup, demo homepages and booking pages. Private pages keep sign-in labels; no private data was captured.
+- Search/sort/access metadata retained. Added reproducible capture script and development-only thumbnail routing.
+- Desktop/mobile browser checks and preview access tests passed; opened /__dev/pages in the workspace.
+- Sign-in and flat setup checkout changes are published at https://ai-receptionist-two-azure.vercel.app (deployment e3h8yyewj). Vercel build, TypeScript and development-asset exclusion checks passed. Dashboard/receipt redesign remains an image concept pending review.
+
 ## Current handoff — simplified new checkout pricing
 
 - New Front/Busy setup is $89; Full desk remains $499. Storefront and review use one exact first-payment total. Historical paid/issued checkouts retain their agreed amounts.

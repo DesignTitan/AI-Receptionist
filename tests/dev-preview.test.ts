@@ -26,7 +26,7 @@ test("development preview exposes only allowed files and injects the navigation"
   let preview: Awaited<ReturnType<typeof startDevPreview>> | undefined;
   t.after(async () => { await preview?.close(); await rm(root, { recursive: true, force: true }); });
   const gallery = join(root, "design", "hero-comparison");
-  for (const directory of ["dev", "design/hero-comparison/assets", "design/hero-comparison/docs",
+  for (const directory of ["dev", "dev/thumbnails", "design/hero-comparison/assets", "design/hero-comparison/docs",
     "design/hero-comparison/luxury-v2/docs", "design/hero-comparison/higgsfield-v3/assets", "design/hero-comparison/campaign-v4", "private"])
     await mkdir(join(root, directory), { recursive: true });
   const html = '<!doctype html><html><body class="gallery"><h1>Design fixture</h1></body></html>';
@@ -38,6 +38,7 @@ test("development preview exposes only allowed files and injects the navigation"
     writeFile(join(root, "dev/journey.html"), html.replace("Design fixture", "User journey fixture")),
     writeFile(join(root, "dev/journey.js"), 'document.title = "User journey";'),
     writeFile(join(root, "dev/page-catalogue.mjs"), 'export const fixture = true;'),
+    writeFile(join(root, "dev/thumbnails/salon-home.jpg"), photo),
     writeFile(join(root, "dev/private.json"), '{"secret":"fixture"}'),
     writeFile(join(gallery, "index.html"), html),
     writeFile(join(gallery, "luxury-v2/index.html"), html),
@@ -72,6 +73,12 @@ test("development preview exposes only allowed files and injects the navigation"
     assert.equal(Number(head.headers["content-length"]), page.body.length);
   }
   assert.equal((await get("/toolbar.js")).status, 200);
+  assert.equal((await get("/thumbnails/salon-home.jpg")).status, 200);
+  assert.equal((await get("/thumbnails/private.json")).status, 404);
+  assert.equal((await get("/thumbnails/%2e%2e/private.json")).status, 404);
+  const captures = JSON.parse((await get("/pages-data.json")).body.toString()).pages;
+  assert.match(captures.find((p: { id: string; thumbnail: string | null }) => p.id === "salon-home").thumbnail, /^\/__dev\/thumbnails\/salon-home\.jpg\?v=/);
+  assert.equal(captures.find((p: { id: string; thumbnail: string | null }) => p.id === "salon-booking").thumbnail, null);
   for (const path of ["/pages", "/pages/", "/journey", "/journey/"]) {
     const page = await get(path);
     assert.equal(page.status, 200);

@@ -811,10 +811,10 @@
 .rc-nav--traditional[data-past-hero="true"] { color: #173b31; }
 .rc-nav--traditional[data-hidden="true"] { transform: translateY(calc(-100% - 100px)); opacity: 0; pointer-events: none; }
 .rc-nav--traditional:focus-within { transform: none; opacity: 1; pointer-events: auto; }
-.rc-nav--traditional .rc-nav__brand { grid-column: 2; justify-self: center; display: block; width: 60px; height: 60px; }
+.rc-nav--traditional .rc-nav__brand { grid-column: 2; grid-row: 1; justify-self: center; display: block; width: 60px; height: 60px; }
 .rc-nav__brand img { width: 100%; height: 100%; object-fit: contain; }
-.rc-nav__right { grid-column: 3; display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
-.rc-nav__text-links { display: flex; align-items: center; gap: 18px; margin: 0; padding: 0; list-style: none; }
+.rc-nav__right { grid-column: 3; grid-row: 1; display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
+.rc-nav__text-links { grid-column: 1; grid-row: 1; display: flex; align-items: center; gap: 18px; margin: 0; padding: 0; list-style: none; }
 .rc-nav--traditional a { color: inherit; font-size: 13px; font-weight: 550; }
 .rc-nav__text-links a, .rc-nav__login { padding: 14px 0; }
 .rc-nav__text-links a:hover, .rc-nav__login:hover { text-decoration: underline; text-underline-offset: 5px; }
@@ -827,9 +827,9 @@
 .rc-nav--traditional a:focus-visible, .rc-nav__menu:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 .rc-nav--traditional .rc-nav__pop { left: auto; right: 0; translate: none; }
 .rc-home-hero { min-height: min(1040px, max(840px, 108svh)); }
-@media (max-width: 1250px) {
+@media (max-width: 900px) {
  .rc-nav__menu { display: block; grid-column: 1; grid-row: 1; justify-self: start; border: 0; background: none; color: inherit; font: inherit; font-size: 14px; padding: 12px 4px; cursor: pointer; }
- .rc-nav__text-links { display: none; position: absolute; top: calc(100% + 8px); right: 0; width: min(320px, 100%); padding: 16px 24px; border-radius: 20px; background: #eef4ef; color: #173b31; box-shadow: 0 12px 30px #071b1520; }
+ .rc-nav__text-links { display: none; position: absolute; top: calc(100% + 8px); left: 0; width: min(320px, 100%); padding: 16px 24px; border-radius: 20px; background: #eef4ef; color: #173b31; box-shadow: 0 12px 30px #071b1520; }
  .rc-nav--traditional[data-menu-open="true"] .rc-nav__text-links { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
  .rc-nav__text-links a { display: flex; padding: 14px 0; }
  .rc-nav__mobile-login { display: block; }
@@ -846,4 +846,30 @@
 }
 @media (prefers-reduced-motion: reduce) {
  .rc-nav.rc-nav--traditional, .rc-nav--traditional::before { transition: none; }
+}
+
+/* Account icon geometry lives in profile-icon.json; hover adds depth and mint shading. */
+.rc-nav--traditional .rc-nav__cta { width: auto; min-height: 44px; padding: 0 18px; display: flex; align-items: center; gap: 9px; border-radius: 999px; font: inherit; font-size: 13px; }
+.rc-nav__account { position: relative; perspective: 180px; }
+.rc-nav__profile { width: 44px; height: 44px; display: grid; place-items: center; padding: 6px; border: 1px solid currentColor; border-radius: 50%; color: inherit; background: transparent; cursor: pointer; transition: background .22s, box-shadow .22s, transform .22s; }
+.rc-nav__profile svg { width: 30px; height: 30px; overflow: visible; transition: transform .25s; }
+.rc-nav__profile-face { fill: transparent; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; transition: fill .2s; }
+.rc-nav__profile-depth { fill: #387360; opacity: 0; transition: opacity .2s; }
+.rc-nav__account[data-open="true"] .rc-nav__profile, .rc-nav__profile:focus-visible { background: #173b31; color: #d4f5e5; border-color: #94b8a9; box-shadow: inset 0 2px 2px #ffffff50, 0 5px 0 #09261d, 0 9px 18px #071b1538; transform: translateY(-2px); }
+.rc-nav__account[data-open="true"] svg { transform: rotateY(-18deg) rotateX(10deg); }
+.rc-nav__account[data-open="true"] .rc-nav__profile-face { fill: url(#rc-profile-mint); stroke: #d7f4e6; stroke-width: .6; }
+.rc-nav__account[data-open="true"] .rc-nav__profile-depth { opacity: 1; }
+.rc-nav__profile:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.rc-nav__account-options { position: absolute; top: 100%; right: 0; width: 180px; padding-top: 14px; }
+.rc-nav__account-options::before { content: ""; position: absolute; inset: 14px 0 0; background: #eef4ef; border: 1px solid #c7d8ce; border-radius: 16px; box-shadow: 0 14px 28px #071b1526; z-index: -1; }
+.rc-nav--traditional .rc-nav__account-options a { display: flex; justify-content: space-between; padding: 16px 20px; color: #173b31; border-radius: 16px; }
+.rc-nav__account-options a:hover, .rc-nav__account-options a:focus-visible { background: #dcece3; }
+@media (max-width: 600px) {
+ .rc-nav--traditional .rc-nav__cta { padding: 0 10px; min-height: 40px; font-size: 12px; }
+ .rc-nav--traditional .rc-nav__cta svg { display: none; }
+ .rc-nav__profile { width: 36px; height: 40px; padding: 4px; }
+ .rc-nav__profile svg { width: 26px; height: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+ .rc-nav__profile, .rc-nav__profile svg, .rc-nav__profile-face, .rc-nav__profile-depth { transition: none; }
 }

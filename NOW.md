@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — navigation placement and account icon
+
+- Moved page links left, kept mascot exactly centered, and changed phone action to Let’s talk.
+- Replaced login/signup buttons with a JSON-defined profile icon that gains mint shading and depth on hover; account dropdown supports hover, tap, keyboard and Escape.
+- Preserved hero height and scroll-hide/reveal behavior; mobile page menu now opens from left.
+- Verified desktop plus 390px/320px layouts, dropdown hover continuity, keyboard focus, call popup and typecheck.
+- Complete locally; public push remains blocked by prior automatic approval review.
+
 ## Current handoff — taller hero and scroll navigation
 
 - Increased hero height slightly on desktop and mobile.

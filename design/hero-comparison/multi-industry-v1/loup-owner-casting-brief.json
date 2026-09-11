@@ -1,10 +1,16 @@
 {
   "name": "Loup\u2019s owner",
-  "status": "Fictional casting proposal for review",
-  "master": "assets/cast-loup-owner-master.png",
-  "sheet": "assets/cast-loup-owner-v1.png",
-  "shared_acting": "assets/cast-loup-owner-interactions-v1.png",
-  "identity": "Approximately 42, warm-neutral olive complexion, brown eyes, natural smile folds and under-eye texture, shoulder-length dark waves with subtle silver strands. Cream knit sweater, blue jeans, beige slippers.",
+  "status": "User-selected woman from three supplied photos; generated likeness for review",
+  "master": "assets/cast-loup-owner-master-v2.png",
+  "sheet": "assets/cast-loup-owner-v2.png",
+  "shared_acting": "assets/cast-loup-owner-interactions-v2.png",
+  "identity": "Selected woman: elongated oval face, defined arched dark brows, dark brown almond-shaped eyes, distinctive nose, natural facial lines, warm medium complexion. First-photo hairstyle: dark roots with caramel/blonde lengths below shoulders. Cream sweater, jeans and slippers for scene continuity. Do not infer age or personal biography.",
   "continuity": "Right hand/right ear phone; left hand interacts with Loup on her left. Loup extra-fluffy approved coat reference remains authoritative; small companion poses render coat less full.",
-  "generation": "Internal image_gen; exact model version not exposed. Written owner brief establishes new master rather than claiming exact old storyboard likeness."
+  "generation": "Internal image_gen using all three supplied photos for new master, then master and approved Loup behavior sheet. Earlier fictional owner superseded; preserve archive.",
+  "references": [
+    "assets/loup-owner-reference-01.png",
+    "assets/loup-owner-reference-02.png",
+    "assets/loup-owner-reference-03.png"
+  ],
+  "review_notes": "Owner sheet seated-phone pose switches hands. Production must use anatomical right hand/right ear, as shared sequence. Three-quarter rotations approximate. Photos remain likeness authority."
 }

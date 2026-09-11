@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — selected woman replaces fictional owner
+
+- User supplied three photos selecting Loup’s owner. Saved originals; generated new portrait, full sheet and six shared acting frames internally.
+- First photo sets dark-rooted caramel-highlighted hair; all three guide facial likeness. Cream sweater/jeans retained as scene wardrobe.
+- Cast page now shows v2 owner and interactions. Previous owner page/artwork archived intact.
+- Owner sheet seated-phone pose swaps hands; caption flags this. Shared sequence and production rule keep phone right hand/right ear. Photos remain likeness authority.
+- Next: user likeness review, then final individual scenes and remaining cast. Local commit only under existing public-push block.
+
 ## Current handoff — Loup owner and shared acting
 
 - Created realistic fictional owner master, full character sheet and six shared acting frames with Loup using internal imagegen.

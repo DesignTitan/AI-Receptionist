@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — published to Vercel
+
+- Published production deployment ai-receptionist-ingb3r3re-bubs-1063s-projects.vercel.app, aliased to https://ai-receptionist-two-azure.vercel.app.
+- Vercel production build, TypeScript and development-toolbar exclusion checks passed. Added root-scoped upload exclusions for local references and secrets.
+- Existing SITE_GATE remains enabled; verified the live URL reaches the private preview gate. Production lists Turnstile keys, unlike local preview.
+- Live signup/email delivery remains unverified. Approval review blocked a login using the default preview password; obtain explicit authorization before attempting that login.
+- Approval review also rejected exporting production secrets; no export was performed. Supabase email-template configuration could not be accessed, and no remote auth settings were changed.
+- Direct Vercel publication succeeded without a public GitHub push. Next: authorized preview login and email-template/delivery verification.
+
 ## Current handoff — visible typing cursor
 
 - Form fields now use their text color for the caret instead of inheriting the pale scrollcraft accent.

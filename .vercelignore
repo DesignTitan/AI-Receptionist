@@ -1,0 +1,20 @@
+.git
+.next
+node_modules
+.vercel
+.env*
+.local
+.gstack
+.codex
+.agents
+.DS_Store
+*.tsbuildinfo
+out
+build
+/design/
+/scrollcraft/
+# Local design/reference files are not needed by the deployed app.
+/docs/
+/tests/
+NOW.md
+AGENTS.md

@@ -1,9 +1,9 @@
 {
   "name": "Loup’s owner",
-  "status": "Smile revised from four additional user photos; awaiting likeness review",
-  "master": "assets/cast-loup-owner-proportions-v5.png",
-  "sheet": "assets/cast-loup-owner-v5.png",
-  "shared_acting": "assets/cast-loup-owner-interactions-v5.png",
+  "status": "Previous v4 facial likeness restored at user request; v5 smile revision rejected as warped",
+  "master": "assets/cast-loup-owner-proportions-v4.png",
+  "sheet": "assets/cast-loup-owner-v4.png",
+  "shared_acting": "assets/cast-loup-owner-interactions-v4.png",
   "identity": "Selected woman: elongated oval face, defined arched dark brows, dark brown almond-shaped eyes, distinctive nose, warm medium complexion with sunspots removed and subtly softened lines; retain natural pores and recognizable facial geometry. First-photo hairstyle: dark roots with caramel/blonde lengths below shoulders. Medium-blue denim button-front collared shirt with two flap chest pockets, sleeves rolled to forearms, blue jeans and bare feet for scene continuity. Do not infer age or personal biography.",
   "continuity": "Right hand/right ear phone; left hand interacts with Loup on her left. Loup extra-fluffy approved coat reference remains authoritative; small companion poses render coat less full.",
   "generation": "Internal image_gen. Converted MPO-tagged JPG references to PNG without visual edits for tool compatibility; previous versions preserved.",
@@ -12,7 +12,7 @@
     "assets/loup-owner-reference-02.png",
     "assets/loup-owner-reference-03.png"
   ],
-  "review_notes": "v5 smile corrections across portrait, sheet and shared acting. Prior versions preserved. Denim shirt, barefoot styling and natural softly refreshed complexion retained. Still-image studies.",
+  "review_notes": "Active portrait, full sheet and shared acting restored to v4. Denim shirt, bare feet and softly refreshed complexion retained. v5 artwork preserved but rejected; do not use as identity reference.",
   "additional_sources": [
     "/Users/bubs2/Desktop/IMG_4750.jpg",
     "/Users/bubs2/Desktop/IMG_4979.JPG",
@@ -29,5 +29,5 @@
     "assets/loup-owner-smile-reference-03.png",
     "assets/loup-owner-smile-reference-04.png"
   ],
-  "smile_direction": "Use supplied smile photos for lip contour, corner lift, modest upper-teeth display, relaxed lower lip, gentle cheek lift and natural asymmetry. Avoid pursed smirk or exaggerated generic grin. Neutral/listening poses need not show teeth."
+  "smile_direction": "Preserve the v4 face and mouth geometry. User rejected v5 smile changes because they changed and warped her face. Additional smile photos remain reference only; do not apply the rejected generated facial changes."
 }

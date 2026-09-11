@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — restore correct owner face
+
+- User rejected v5 smile revision as warped and said previous face was correct.
+- Restored v4 portrait, full character sheet and shared acting on cast page; denim and bare feet retained.
+- Owner brief marks v5 rejected; files and additional source photos preserved.
+- Next: preserve v4 facial geometry in any future work; do not use v5 as identity reference.
+- Local commit only under existing automatic-approval public-push block.
+
 ## Current handoff — owner smile revision
 
 - Reviewed and saved four new smile photos; generated v5 portrait, full sheet and shared acting internally.

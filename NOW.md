@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — verify email within purchase step one
+
+- Name/email now sends a six-digit code within Your details. Verification stays on step one; step two is purchase review with Continue to payment.
+- Added server-side Supabase OTP verification and HTTP-only session cookie; invalid codes cannot advance or authenticate checkout. Selected plan, return destination and entered name are retained.
+- Added paste/autofill support, code focus, edit details and 60-second resend cooldown. Existing magic-link sign-in remains compatible.
+- Supplied docs/auth/passwordless-email.html and deployment instructions. Remote email template and Turnstile configuration still need applying; no live emails or payments were sent.
+- Typecheck/diff checks and isolated browser/server tests passed: invalid/valid codes, cookie, step labels, retained edits, mobile width, payment handoff and foreign-origin rejection.
+- Complete locally; public push remains blocked by earlier automatic approval review.
+
 ## Current handoff — soft site-wide page transitions
 
 - Added a shared route transition using the installed Next/React ViewTransition support plus native same-origin document transitions.

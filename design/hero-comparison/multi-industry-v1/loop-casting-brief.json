@@ -39,8 +39,21 @@
     {
       "name": "Extra fluffy bedhead",
       "file": "assets/cast-loup-bedhead-v2.png",
-      "status": "Current alternate concept for review",
+      "status": "Approved extra fluffy direction; companion behavior sheet added",
       "direction": "Fuller fuzzy silhouette and wild oversized crown tufts; preserve Loup face and markings."
     }
-  ]
+  ],
+  "personality": "Mildly confused, eager and gently pushy toward her owner; affectionate insistence, never fear or aggression.",
+  "signature_behavior": {
+    "sheet": "assets/cast-loup-behavior-v1.png",
+    "trigger": "Fringe slips over her eyes",
+    "sequence": [
+      "Brief confused pause/head dip",
+      "Quick left-right head shake",
+      "Fringe and ears follow with delayed motion",
+      "Fur settles, eyes clear",
+      "Attention returns to owner: nudge sleeve, paw on knee, lean and look up"
+    ],
+    "continuity": "Use when fringe obscures vision; do not repeat on a mechanical loop. Keep paws grounded during shake and maintain coat length."
+  }
 }

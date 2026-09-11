@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — Loup signature behavior
+
+- Bubs approved extra fluffy direction; added twelve visual acting studies at cast-sheets.html#loup-behavior.
+- Shows fringe hiding one/both eyes, brief shake clearing it, confused peek and eager owner-directed nudge/paw/lean.
+- Saved personality and trigger-driven movement sequence in casting brief; still-image keyframes only, not animation.
+- Original and all grooming variants preserved. Next: remaining cast and scene frames using this behavior.
+- Local commit only under existing public-push approval block.
+
 ## Current handoff — extra fluffy Loup
 
 - Generated stronger bedhead v2: much fuller coat and larger unruly crown tufts across the full sheet.

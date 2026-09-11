@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — owner body proportions revised
+
+- User rejected owner body and supplied five full photos plus two videos. Viewed photos and one frame from each video.
+- Generated v3 face/full-body comparison, character sheet and shared scenes using actual full-body references; lighter cream knit and flat shoes show proportions.
+- Cast page shows v3, previous page/artwork archived. Likeness and proportions remain for user review; no claim of exact reconstruction.
+- Source paths and direction recorded in owner brief; MPO JPGs converted to PNG for generation.
+- Next: user likeness/proportion review before video; local commit only under existing public-push block.
+
 ## Current handoff — selected woman replaces fictional owner
 
 - User supplied three photos selecting Loup’s owner. Saved originals; generated new portrait, full sheet and six shared acting frames internally.

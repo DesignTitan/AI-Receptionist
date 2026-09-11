@@ -1,16 +1,26 @@
 {
   "name": "Loup\u2019s owner",
-  "status": "User-selected woman from three supplied photos; generated likeness for review",
-  "master": "assets/cast-loup-owner-master-v2.png",
-  "sheet": "assets/cast-loup-owner-v2.png",
-  "shared_acting": "assets/cast-loup-owner-interactions-v2.png",
+  "status": "Proportions revised from additional full-body photos; awaiting user likeness review",
+  "master": "assets/cast-loup-owner-proportions-v3.png",
+  "sheet": "assets/cast-loup-owner-v3.png",
+  "shared_acting": "assets/cast-loup-owner-interactions-v3.png",
   "identity": "Selected woman: elongated oval face, defined arched dark brows, dark brown almond-shaped eyes, distinctive nose, natural facial lines, warm medium complexion. First-photo hairstyle: dark roots with caramel/blonde lengths below shoulders. Cream sweater, jeans and slippers for scene continuity. Do not infer age or personal biography.",
   "continuity": "Right hand/right ear phone; left hand interacts with Loup on her left. Loup extra-fluffy approved coat reference remains authoritative; small companion poses render coat less full.",
-  "generation": "Internal image_gen using all three supplied photos for new master, then master and approved Loup behavior sheet. Earlier fictional owner superseded; preserve archive.",
+  "generation": "Internal image_gen. Converted MPO-tagged JPG references to PNG without visual edits for tool compatibility; previous versions preserved.",
   "references": [
     "assets/loup-owner-reference-01.png",
     "assets/loup-owner-reference-02.png",
     "assets/loup-owner-reference-03.png"
   ],
-  "review_notes": "Owner sheet seated-phone pose switches hands. Production must use anatomical right hand/right ear, as shared sequence. Three-quarter rotations approximate. Photos remain likeness authority."
+  "review_notes": "Full-body revision and likeness not yet approved. Shared studies preserve right-ear phone rule; detail poses are exploration, not final shot instructions. Reviewed still frames at 5s and 4s from supplied videos; no claim of full motion review.",
+  "additional_sources": [
+    "/Users/bubs2/Desktop/IMG_4750.jpg",
+    "/Users/bubs2/Desktop/IMG_4979.JPG",
+    "/Users/bubs2/Desktop/IMG_1668.jpeg",
+    "/Users/bubs2/Desktop/IMG_0090.JPG",
+    "/Users/bubs2/Desktop/IMG_0432.JPG",
+    "/Users/bubs2/Desktop/IMG_5098.MOV",
+    "/Users/bubs2/Desktop/BEAT Gac-Int.mp4"
+  ],
+  "body_direction": "Use actual beach and denim photos for compact stature, shoulder width, arm thickness, waist/hip relationship and torso-leg proportions. No measured height inferred; do not use prior generated body as authority. Lightweight cream knit top and flat shoes reveal proportions."
 }

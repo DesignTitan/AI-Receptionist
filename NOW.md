@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — consistent sign-in link
+
+- Signup now asks for a secure sign-in link and shows a check-your-email screen; removed the misleading code field and obsolete OTP endpoint.
+- Clicking the existing email link verifies the account and returns to purchase review with the selected plan and details retained.
+- Typecheck and isolated browser/server verification passed, including step labels, resend cooldown, return link and mobile layout. No real emails or payments were sent.
+- Next: simplify Stripe checkout, change Front/Busy setup to $89, confirm Full desk setup, and publish. User is also checking sandbox card entry.
+
 ## Current handoff — published to Vercel
 
 - Published production deployment ai-receptionist-ingb3r3re-bubs-1063s-projects.vercel.app, aliased to https://ai-receptionist-two-azure.vercel.app.

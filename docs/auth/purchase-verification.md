@@ -1,17 +1,11 @@
 # Purchase verification
 
-Flow: name/email → six-digit email code (still step 1) → review purchase → Stripe → paid dashboard setup.
+Flow: name/email → emailed sign-in link (still step 1) → review purchase → Stripe → paid dashboard setup.
 
-The code is verified by Supabase on the server. Only a matching, confirmed user and valid session can set the HTTP-only account cookie. Checkout still requires authenticated ownership and Stripe still controls payment status.
+The screen matches the existing Supabase magic-link email. There is no code field. The callback verifies the session server-side before setting the HTTP-only account cookie. The selected plan and safe return destination are retained; checkout still requires authenticated ownership.
 
-## Configuration before live use
+The optional branded `passwordless-email.html` uses `{{ .ConfirmationURL }}` only. No change to remote email settings is required for the current link flow. Keep the existing approved callback URLs, production SMTP and authentication rate limits. Turnstile must remain configured for sending links.
 
-- Apply `passwordless-email.html` to Supabase Authentication → Email Templates → Magic Link. It includes both `{{ .Token }}` for inline verification and `{{ .ConfirmationURL }}` to preserve existing login links.
-- Configure a six-digit OTP and an appropriate short expiration, production SMTP, and Supabase authentication rate limits. Codes must remain single use.
-- Configure the existing Turnstile site/secret keys. Sending verification emails remains protected by the server human check.
-- Keep the existing approved callback URL configuration for the optional sign-in link, including pricing return parameters.
-- Test delivery, incorrect/expired/reused codes, resend cooldown, sign-in links and the Stripe test-mode purchase before enabling live payments.
-
-Template supplied locally; no remote authentication settings or emails were changed by this task.
+Verify expiry, resend cooldown, changed email, selected-plan return and Stripe test-mode checkout before accepting live payments. No real emails or payments were sent during the local mock verification.
 
 Reference: https://supabase.com/docs/guides/auth/auth-email-passwordless

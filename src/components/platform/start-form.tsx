@@ -12,21 +12,18 @@ export function StartForm({ plan, returnTo, signedIn, initialEmail, initialName,
   const [name, setName] = useState(initialName);
   const [email, setEmail] = useState(initialEmail);
   const [step, setStep] = useState<"details" | "review" | "sent">(signedIn && review && initialName ? "review" : "details");
-  const [verified, setVerified] = useState(signedIn);
-  const [code, setCode] = useState("");
+  const verified = signedIn;
   const [resendAfter, setResendAfter] = useState(0);
   const [token, setToken] = useState("");
   const [reset, setReset] = useState(0);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const codeField = useRef<HTMLInputElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const previousStep = useRef(step);
   const p = PLANS[plan];
   useEffect(() => {
     if (previousStep.current !== step) {
-      if (step === "sent") codeField.current?.focus();
-      else heading.current?.focus();
+      heading.current?.focus();
     }
     previousStep.current = step;
   }, [step]);
@@ -44,16 +41,6 @@ export function StartForm({ plan, returnTo, signedIn, initialEmail, initialName,
     const timer = setTimeout(() => setResendAfter(v => v - 1), 1000);
     return () => clearTimeout(timer);
   }, [resendAfter]);
-  async function confirmCode() {
-    setBusy(true); setError("");
-    try {
-      const response = await fetch("/api/account/verify-code", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, code }) });
-      const result = await response.json();
-      if (!response.ok) throw Error(result.error);
-      setVerified(true); setCode(""); setStep("review");
-    } catch (e) { setError(e instanceof Error ? e.message : "Please try again."); }
-    finally { setBusy(false); }
-  }
   async function checkout() {
     setBusy(true); setError("");
     try {
@@ -73,7 +60,7 @@ export function StartForm({ plan, returnTo, signedIn, initialEmail, initialName,
       const r = await fetch("/api/account/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, name, plan, token, returnTo }) });
       const data = await r.json();
       if (!r.ok) throw Error(data.error);
-      setCode(""); setResendAfter(60); setStep("sent");
+      setResendAfter(60); setStep("sent");
     } catch (e) { setError(e instanceof Error ? e.message : "Please try again."); }
     finally { setBusy(false); setToken(""); setReset(v => v + 1); }
   }
@@ -86,14 +73,14 @@ export function StartForm({ plan, returnTo, signedIn, initialEmail, initialName,
     <div className={styles.layout}>
       <section className={styles.form}>
         <p className={styles.eyebrow}>{step === "details" ? "A little more time for you" : "Your next step"}</p>
-        <h1 ref={heading} tabIndex={-1}>{step === "details" ? "Make room for your day." : step === "sent" ? "Verify your email." : "Everything look good?"}</h1>
-        <p className={styles.intro}>{step === "details" ? "Just your name and email to get started. You’ll set up your business after your purchase." : step === "sent" ? `Enter the six-digit code sent to ${email}. Your selected plan is saved.` : "Review your plan, then complete your payment securely with Stripe."}</p>
+        <h1 ref={heading} tabIndex={-1}>{step === "details" ? "Make room for your day." : step === "sent" ? "Check your email." : "Everything look good?"}</h1>
+        <p className={styles.intro}>{step === "details" ? "Just your name and email to get started. You’ll set up your business after your purchase." : step === "sent" ? `We sent a secure sign-in link to ${email}. Click the link to verify your email and return to purchase review.` : "Review your plan, then complete your payment securely with Stripe."}</p>
         {step === "details" && <form onSubmit={e => { e.preventDefault(); setError(""); try { sessionStorage.setItem("signup-details", JSON.stringify({ name, email })); } catch {} if (verified) setStep("review"); else void verifyEmail(); }}>
           <label className={styles.label}>Your name<input autoComplete="name" name="name" required maxLength={120} value={name} onChange={e => setName(e.target.value)} placeholder="Full name" pattern=".*\S.*" /></label>
           <label className={styles.label}>Email address<input autoComplete="email" name="email" type="email" required maxLength={254} value={email} readOnly={verified} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" /></label>
-          <p className={styles.note}>{verified ? "Your verified account email. Your receipt will go here." : "No password needed. We’ll email you a code to verify your account."}</p>
+          <p className={styles.note}>{verified ? "Your verified account email. Your receipt will go here." : "No password needed. We’ll email you a secure sign-in link."}</p>
           {!verified && <div className={styles.verification}>{siteKey ? <HumanCheck siteKey={siteKey} onToken={setToken} reset={reset} /> : <p role="status">Email verification is not available in this preview yet.</p>}</div>}
-          <button className={styles.primary} type="submit" disabled={busy || (!verified && (!token || resendAfter > 0))}>{busy ? "Sending your code…" : verified ? "Review purchase →" : resendAfter > 0 ? `Send another code in ${resendAfter}s` : "Send verification code →"}</button>
+          <button className={styles.primary} type="submit" disabled={busy || (!verified && (!token || resendAfter > 0))}>{busy ? "Sending your link…" : verified ? "Review purchase →" : resendAfter > 0 ? `Send another link in ${resendAfter}s` : "Email me a sign-in link →"}</button>
         </form>}
         {step === "review" && <>
           <div className={styles.identity}><div><strong>{name}</strong><span>{email}</span></div><button type="button" className={styles.textButton} disabled={busy} onClick={() => { setError(""); setStep("details"); }}>Edit details</button></div>
@@ -101,12 +88,14 @@ export function StartForm({ plan, returnTo, signedIn, initialEmail, initialName,
           <button className={styles.primary} disabled={busy || !verified} onClick={checkout}>{busy ? "Opening Stripe…" : "Continue to payment →"}</button>
           <p className={styles.note}>You’ll complete payment securely with Stripe. Review the final total there before paying. Nothing is charged on this page.</p>
         </>}
-        {step === "sent" && <form onSubmit={e => { e.preventDefault(); void confirmCode(); }}>
-          <label className={styles.label}>Verification code<input ref={codeField} name="code" type="text" inputMode="numeric" autoComplete="one-time-code" autoFocus required pattern="[0-9]{6}" maxLength={6} placeholder="6-digit code" value={code} onChange={e => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))} aria-describedby="code-help" /></label>
-          <p id="code-help" className={styles.note}>Check your spam folder if it hasn’t arrived. You can paste the full code here.</p>
-          <button className={styles.primary} disabled={busy || code.length !== 6}>{busy ? "Verifying…" : "Verify & review purchase →"}</button>
-          <button type="button" className={styles.textButton} disabled={busy} onClick={() => { setError(""); setCode(""); setStep("details"); }}>Change email or request a new code</button>
-        </form>}
+        {step === "sent" && <div className={styles.next}>
+          <span aria-hidden="true">✉</span>
+          <div><strong>Your {p.name} plan is saved.</strong>
+            <p>Open the email and click the sign-in link in the same browser. You’ll review your purchase before continuing to Stripe. No payment has been taken.</p>
+            <p>Check your spam folder if the email hasn’t arrived.</p>
+            <button type="button" className={styles.textButton} onClick={() => { setError(""); setStep("details"); }}>Change email or request another link</button>
+          </div>
+        </div>}
         {error && <p className={styles.error} role="alert">{error} <Link href="/account">Open dashboard</Link></p>}
       </section>
       <aside className={styles.summary} aria-label="Purchase summary">

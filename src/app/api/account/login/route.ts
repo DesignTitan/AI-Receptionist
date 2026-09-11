@@ -31,7 +31,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error:
-            plan ? "We could not send your verification email. Please wait a minute and try again." : "We could not send a sign-in link. Please wait a minute and try again.",
+            "We could not send a sign-in link. Please wait a minute and try again.",
         },
         { status: 429 },
       );

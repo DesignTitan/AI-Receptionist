@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — post-plan signup visual concept
+
+- Created design/signup-next-screen-concept.png using the built-in image tool; exact prompt saved alongside it.
+- White two-column business-details screen, three-step progress and selected Busy desk summary with current setup pricing.
+- Concept only; live signup code unchanged. Use approved mascot artwork when implementing.
+- Next: user reviews direction before further signup design work; annual pricing terms still pending.
+- Saved locally; public push remains blocked by prior approval review.
+
 ## Current handoff — recommendation styled as a pricing card
 
 - Suggested plan is now a separate rounded card below the sales preview, using the main pricing cards’ backgrounds, borders and type hierarchy.

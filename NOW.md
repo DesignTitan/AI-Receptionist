@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — extra fluffy Loup
+
+- Generated stronger bedhead v2: much fuller coat and larger unruly crown tufts across the full sheet.
+- Cast page #loup-bedhead now shows v2, with previous variant linked; approved original preserved.
+- Updated casting variants. Next: user review and remaining human cast/scene work.
+- Local commit only under existing public-push approval block.
+
 ## Current handoff — Loup puffy bedhead variant
 
 - Created separate internal-imagegen puffy bedhead character sheet with same extensive panels and Loup identity.

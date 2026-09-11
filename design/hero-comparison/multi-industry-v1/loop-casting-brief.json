@@ -35,6 +35,12 @@
       "file": "assets/cast-loup-bedhead-v1.png",
       "status": "Alternate concept for review",
       "direction": "Same Loup identity; fuller fuzzy coat and irregular tousled crown tufts. Keep eyes visible, floppy ears and short dark muzzle. Maintain chosen grooming across scene cuts."
+    },
+    {
+      "name": "Extra fluffy bedhead",
+      "file": "assets/cast-loup-bedhead-v2.png",
+      "status": "Current alternate concept for review",
+      "direction": "Fuller fuzzy silhouette and wild oversized crown tufts; preserve Loup face and markings."
     }
   ]
 }

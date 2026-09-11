@@ -16,13 +16,14 @@ export function receiptEmail({ receipt, name, planName, siteUrl, setupPending, t
   const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(subject)}</title><style>
 @font-face{font-family:'Open Runde';src:url('${site}/fonts/open-runde/OpenRunde-Regular.woff2') format('woff2');font-weight:400}
 @font-face{font-family:'Apfel Grotezk';src:url('${site}/fonts/apfel-grotezk/ApfelGrotezk-Mittel.woff2') format('woff2');font-weight:500}
+@font-face{font-family:'Apfel Grotezk';src:url('${site}/fonts/apfel-grotezk/ApfelGrotezk-Fett.woff2') format('woff2');font-weight:700}
 @media(max-width:480px){.email-pad{padding:24px!important}.email-heading{font-size:36px!important}}
 </style></head><body style="margin:0;padding:0;background:#f4f7f3;color:#1e3a34;font-family:'Open Runde',Arial,sans-serif">
 <div style="display:none;max-height:0;overflow:hidden">Payment confirmed. Your receipt and next step are inside.</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 12px">
 <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:100%;max-width:560px;background:#fff;border:1px solid #e2e9e1;border-radius:24px"><tr><td class="email-pad" style="padding:40px">
 <table role="presentation" width="100%"><tr><td align="center" style="padding:0 0 32px;border-bottom:1px solid #e2e9e1"><img src="cid:brand-mascot" width="88" height="88" alt="" style="display:block;border:0;margin:0 auto 8px"><span style="font-family:'Apfel Grotezk',Arial,sans-serif;font-size:22px;font-weight:500">AI Receptionist</span></td></tr></table>
-<p style="margin:32px 0 12px;font-size:17px">${escape(greeting)}</p><h1 class="email-heading" style="font-family:'Apfel Grotezk',Arial,sans-serif;font-size:44px;line-height:1.08;font-weight:500;letter-spacing:-1.5px;margin:0 0 16px">You’re all set.</h1>
+<p style="margin:32px 0 12px;font-size:17px">${escape(greeting)}</p><h1 class="email-heading" style="font-family:'Apfel Grotezk',Arial,sans-serif;font-size:44px;line-height:1.08;font-weight:700;letter-spacing:-1.5px;margin:0 0 16px">You’re all set.</h1>
 <p style="font-size:16px;line-height:1.6;margin:0 0 24px;color:#526b63">Your payment is confirmed. Here’s your receipt.</p>
 ${test ? '<p style="font-size:12px;color:#526b63">Sandbox payment · No real charge</p>' : ''}
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f1f5f1;border-radius:18px"><tr><td style="padding:24px"><p style="font-size:16px;font-weight:600;margin:0 0 16px">${escape(planName)} · Monthly</p>

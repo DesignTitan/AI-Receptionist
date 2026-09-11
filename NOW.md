@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — confirmation reference refinement
+
+- Matched the supplied confirmation reference with stronger Apfel headings, a larger floating mascot, pill navigation/buttons, tighter receipt spacing and a chat support icon.
+- Matching receipt email uses the bold brand heading; verified Stripe amounts and account/setup behavior are retained.
+- TypeScript, five receipt tests and desktop/mobile browser checks passed using fictional data. No emails or payments sent.
+- Published the refined page at https://ai-receptionist-two-azure.vercel.app (3ohto8se4); production build passed. Public GitHub push remains blocked by the earlier approval review.
+
 ## Current handoff — restored workspace preview
 
 - Canvas loading investigation found the local preview service stopped; both homepage and page index were unreachable.

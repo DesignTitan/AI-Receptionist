@@ -1,0 +1,20 @@
+{
+  "job_id": "71fec460-44f9-4031-9d50-aeecc2a5e966",
+  "params": {
+    "model": "gpt_image_2_5",
+    "quality": "max",
+    "resolution": "4k",
+    "aspect_ratio": "16:9",
+    "medias": [
+      {
+        "role": "image",
+        "value": "62fde102-5b1f-4e78-ba52-a6b91061d8e9"
+      },
+      {
+        "role": "image",
+        "value": "4ad4257b-9369-434a-bcfa-57356bb5c79d"
+      }
+    ],
+    "prompt": "Create an extremely precise character rotation style sheet. FIRST reference is the APPROVED CHARACTER: Happy Little Pillow, pale mint fuzzy rounded square speech bubble, single short lower-left tail, full padded CHEEKS, happy closed crescent eyes and open forest green smile. Maintain this exact character, proportions, cheeks, fur, color throughout. SECOND reference is LAYOUT ONLY. Replace every orange bird with the mint Happy Little Pillow. Absolutely no orange, beaks, feathers, feet, arms or hair tufts.\nMATCH SECOND REFERENCE EXACTLY in row count and column count. ONE header strip, EXACTLY FIVE character rows and EXACTLY NINETEEN character columns = 95 separate complete character renderings. Each cell contains exactly one entire mascot. No omissions, no merged cells, no cropped outer columns.\nTitle: \"HAPPY LITTLE PILLOW — 10° ROTATION STUDY\".\nColumns in this EXACT order: L90, L80, L70, L60, L50, L40, L30, L20, L10, CENTER, R10, R20, R30, R40, R50, R60, R70, R80, R90.\nRows top to bottom exactly: LOOKING UP, SLIGHTLY UP, LOOKING STRAIGHT, SLIGHTLY DOWN, LOOKING DOWN.\nYaw systematically progresses from left-facing full profile (-90 degrees) through straight frontal center to right-facing full profile (+90 degrees), 10 degree intervals. Profile means face at narrow side not pasted onto broad side. Mascot is a thick plush pillow shape, roughly 40% as deep as wide, with continuous rounded volume. Tail anchored on mascot's own lower-left side, rotates with body, never migrates or mirrors.\nPitch rows physically tilt WHOLE mascot up 30 degrees, up 15 degrees, neutral 0 degrees, down15 degrees, down30 degrees respectively. No separate neck/head. Smile and cheeks remain attached to front surface and appropriately foreshortened at oblique angles. The center column shows the clearest up/down tilt differences. Expression remains same warm closed-eye smile throughout; this is geometry rotation, not expression sheet.\nUse landscape grid proportions, light neutral gray background, fine subtle grid lines, black clean typography, generous left gutter for row labels, evenly spaced cells, identical apparent scale across all95views, soft consistent studio light, delicate grounded shadows. Readable at full resolution. Premium soft cuddly 3D rendering. Layout should mirror provided 5x19 sheet faithfully. Count cells before finishing."
+  }
+}

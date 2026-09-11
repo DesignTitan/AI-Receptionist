@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — 95-view Happy Little Pillow rotation study
+
+- Generated requested 5-row by 19-column layout, with L90 through R90 labels in 10-degree steps.
+- Three GPT Image 2.5 attempts; v3 is linked from character-sheets.html#turnaround and downloadable at 3840x2160.
+- Layout count matches, but generated geometry and identity still drift: cheeks, tail, proportions and exact angles need refinement. Page explicitly labels this a visual study, not a measured model turnaround.
+- Approved mascot-cuddle.png remains canonical. Other sheets still need updating.
+- Local commit only; prior public-push review block remains.
+
+
 ## Current handoff — Happy Little Pillow approved (11 September 2026)
 
 - Bubs selected Happy Little Pillow, specifically liking the padded cheeks.

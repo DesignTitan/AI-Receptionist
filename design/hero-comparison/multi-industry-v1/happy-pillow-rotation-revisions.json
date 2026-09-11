@@ -1,0 +1,38 @@
+{
+  "v2": {
+    "job_id": "dac50ff6-b479-4240-a1f7-419259aa79e0",
+    "params": {
+      "model": "gpt_image_2_5",
+      "quality": "max",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "medias": [
+        {
+          "role": "image",
+          "value": "62fde102-5b1f-4e78-ba52-a6b91061d8e9"
+        },
+        {
+          "role": "image",
+          "value": "71fec460-44f9-4031-9d50-aeecc2a5e966"
+        }
+      ],
+      "prompt": "CORRECT SECOND REFERENCE IMAGE, keep its exact 5 rows x19 columns grid, all labels and title. CRITICAL: the second image incorrectly STRETCHED this mascot into a tall oval and turned its tail into a separate ball. Replace ALL 95 characters with exact FIRST reference Happy Little Pillow. The FIRST reference has a BROAD SQUARE body, horizontal width about 1.05 times body height, soft inflated corners, full puffy CHEEKS on either side of happy mouth, integrated short lower-left speech-bubble tail. No separate ball, no feet, no limbs. Do NOT stretch mascot to fill cell height: render SMALLER characters with extra empty space ABOVE AND BELOW inside tall cells. Center frontal view must be a square, not an oval, not an egg, not a pear. Geometry dimensions width1.05 height1 depth0.40. Side profile naturally narrower, frontal view broad. Exact mint fine plush fur and same closed HAPPY crescent eyes open smile, preserve visible padded cheeks. Only 10 degree yaw changes across columns. L90 left profile, L80,L70,L60,L50,L40,L30,L20,L10,CENTER frontal,R10,R20,R30,R40,R50,R60,R70,R80,R90right profile. Five rows LOOKING UP +30degrees wholebody pitch, SLIGHTLY UP +15, LOOKING STRAIGHT0, SLIGHTLY DOWN-15, LOOKING DOWN-30. Camera consistent, pivot whole pillow (no neck). Up means face points upward, down face points downward, not just moving eyes. Exactly95views. Preserve layout, graybackground, finegrid and typography. CHARACTER PROPORTIONS FROM FIRST IMAGE MUST OVERRIDE THE WRONG TALL CHARACTERS IN SECOND IMAGE. Equal small scale, ample vertical whitespace, portrait cells contain small SQUARE mascots."
+    }
+  },
+  "v3": {
+    "job_id": "3e5881dc-49c7-4131-86c5-64b28c9dbaaa",
+    "params": {
+      "model": "gpt_image_2_5",
+      "quality": "max",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "medias": [
+        {
+          "role": "image",
+          "value": "62fde102-5b1f-4e78-ba52-a6b91061d8e9"
+        }
+      ],
+      "prompt": "Make a professional rotation reference chart of this EXACT mascot. Identity comes ONLY from supplied image. Critical visible traits: wide almost square puffy mint pillow with smiling cheek bulges, large warm open smile, closed joyful crescent eyes, integral lower-left short tapered speech-bubble point, dense fluffy fur. Preserve this exact face size relative to body. Render 95 small views in a landscape 19-column by 5-row grid. Each mascot occupies only 70% of its cell WIDTH and no more than 50% of cell HEIGHT; leave substantial whitespace above and below to avoid stretching. Frontal body WIDTH = HEIGHT, never tall. Small renderings of the exact provided character not a skinny tall different character. Tail must be fused triangular rounded corner extension, never a round ball or foot. No separate limbs.\nAt top title HAPPY LITTLE PILLOW — 10° ROTATION STUDY. Header labels exactly L90 L80 L70 L60 L50 L40 L30 L20 L10 CENTER R10 R20 R30 R40 R50 R60 R70 R80 R90. Five row labels LOOKING UP, SLIGHTLY UP, LOOKING STRAIGHT, SLIGHTLY DOWN, LOOKING DOWN. All19columns must exist.\nBody yaw from -90 left profile through0center to+90right profile. Body pitching upward30degrees in row1, upward15 row2, level row3, downward15 row4, downward30row5. This is real volumetric rotation; down rows show top surface, up rows show underside. Whole body rotates since mascot has no separate head. Facial features must rotate with body and progressively disappear behind profile. Center frontal render must be a faithful small version of supplied image with large soft smile and full cheeks, not an egg. Maintain original broad soft square silhouette. Grey studio backdrop, subtle thin gray grid, clean black labels, soft even studio lighting. Exactly5x19characters95total, all with identical approved shape and expression."
+    }
+  }
+}

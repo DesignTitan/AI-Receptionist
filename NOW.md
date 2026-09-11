@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — matching rear rotation sheet
+
+- Added the requested backside companion: five rows, nineteen columns, 95 views, center labelled BACK.
+- Generated with GPT Image 2.5 using approved mascot and front layout; job a9ecdac1-dd6a-44dc-8619-6a6152a7ebf8.
+- Full-resolution 3840x2160 sheet at assets/happy-pillow-rear-95.png, shown at character-sheets.html#rear-turnaround.
+- Tail positions and rotations still drift; visibly labelled as a study. Canonical portrait unchanged.
+- Local commit only; prior public-push approval block remains.
+
+
 ## Current handoff — 95-view Happy Little Pillow rotation study
 
 - Generated requested 5-row by 19-column layout, with L90 through R90 labels in 10-degree steps.

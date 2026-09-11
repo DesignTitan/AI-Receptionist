@@ -1,0 +1,20 @@
+{
+  "job_id": "a9ecdac1-dd6a-44dc-8619-6a6152a7ebf8",
+  "params": {
+    "model": "gpt_image_2_5",
+    "quality": "max",
+    "resolution": "4k",
+    "aspect_ratio": "16:9",
+    "medias": [
+      {
+        "role": "image",
+        "value": "62fde102-5b1f-4e78-ba52-a6b91061d8e9"
+      },
+      {
+        "role": "image",
+        "value": "3e5881dc-49c7-4131-86c5-64b28c9dbaaa"
+      }
+    ],
+    "prompt": "Create the BACKSIDE companion to reference2's rotation chart, same exact FIVE ROWS and NINETEEN COLUMNS (95 views), same gray grid typography and spacing. Reference1 is canonical character: Happy Little Pillow, soft pale mint furry broad rounded SQUARE pillow speech bubble with single fused short lower-left tail, plump volume. NOT tall egg, no limbs or ball feet. Reference2 is layout ONLY. This new sheet must show the REAR HALF of the rotation, never repeat the front sheet.\nTitle \"HAPPY LITTLE PILLOW — REAR ROTATION STUDY\".\n19 column labels exactly: L90 L80 L70 L60 L50 L40 L30 L20 L10 BACK R10 R20 R30 R40 R50 R60 R70 R80 R90.\nThe BACK center column directly faces the back of the mascot: completely blank continuous mint fur, NO EYES, NO MOUTH, NO FACE on its back. Character's front face is on the opposite side away from camera. The integrated tail on character's own lower-left appears at VIEWER'S LOWER RIGHT in the straight rear view. Tail stays physically attached to same corner through rotation.\nColumns travel around BACK semicircle from one pure SIDE PROFILE (L90), through rear three-quarter L60/L30, directly BACK center, then opposite rear three-quarter R30/R60, to opposite pure SIDE PROFILE R90. All intermediate back views are completely FACELESS. Only an infinitesimal face edge may be visible at outermost pure profile. Never stamp faces onto backs. This is a 180-degree BACKWARD-looking arc complementary to front sheet.\nRows exact labels LOOKING UP, SLIGHTLY UP, LOOKING STRAIGHT, SLIGHTLY DOWN, LOOKING DOWN. These retain the character's physical whole-body pitch from front sheet: up30, up15, neutral, down15, down30 degrees; camera now sees it from behind. Thus silhouette and visible top/bottom surface change coherently; no separate head or neck.\nPreserve original wide square body proportions (width1.05 height1 depth0.4). At BACK center body as wide as tall. Side profile thin padded rounded depth. Mascots small inside cells, occupy 70% cell WIDTH and less than55% cell HEIGHT, ample vertical empty space. No stretching to fill tall grid cells. Uniform soft short plush mint fur covering all surfaces, soft white-gray studio light, subtle consistent shadow. NO seam, zipper, buttons, costumes, props, ears or accessories. Exactly95 entire character views, no missing cells, all same character identity and scale. Render clearly and count all5x19cells. Match provided layout faithfully."
+  }
+}

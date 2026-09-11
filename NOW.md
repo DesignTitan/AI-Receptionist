@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — Loop character sheet completed
+
+- User requested internal image generation; generated Loop sheet from both supplied photos using internal image_gen (version label not exposed).
+- Added cast-loop-v1.png to cast page #loop with download; original photos and Milo archive retained.
+- Includes hero, eight rotation studies, eight expressions, six poses, six details, three coat studies and palette. Rotations approximate; rear/tail provisional.
+- Next: review Loop likeness, revise human masters and generate scene frames. User prefers internal image generation going forward.
+- Local commit only under existing public-push approval block.
+
 ## Current handoff — Loop full character sheet requested
 
 - Prepared Loop sheet matching Milo: hero, eight angles, eight expressions, six poses, six details, three coat studies and palette.

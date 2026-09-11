@@ -1,10 +1,11 @@
 "use client";
 
-import { useRef, useState, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 import styles from "./happy-paws-film.module.css";
 
 export function HappyPawsFilm() {
   const video = useRef<HTMLVideoElement>(null);
+  const pauseFrame = useRef<HTMLCanvasElement>(null);
   const [started, setStarted] = useState(false);
   const [paused, setPaused] = useState(true);
   const [time, setTime] = useState(0);
@@ -14,6 +15,16 @@ export function HappyPawsFilm() {
   const playbackButton = useRef<HTMLButtonElement>(null);
   const formatTime = (seconds: number) => `${Math.floor(seconds / 60)}:${Math.floor(seconds % 60).toString().padStart(2, "0")}`;
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!paused || !started || !video.current || !pauseFrame.current) return;
+    const film = video.current;
+    if (!film.videoWidth || !film.videoHeight) return;
+    const canvas = pauseFrame.current;
+    canvas.width = film.videoWidth;
+    canvas.height = film.videoHeight;
+    canvas.getContext("2d")?.drawImage(film, 0, 0);
+  }, [paused, started, time]);
 
   function followPointer(event: PointerEvent<HTMLButtonElement>) {
     if (event.pointerType !== "mouse" || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
@@ -50,6 +61,9 @@ export function HappyPawsFilm() {
         <track kind="captions" src="/marketing/happy-paws.vtt" srcLang="en" label="English" />
         Your browser cannot play this video. <a href="/marketing/happy-paws.mp4">Watch the film.</a>
       </video>
+      <div className={styles.pauseBlur} aria-hidden="true" style={{ maskImage: "linear-gradient(to bottom, transparent 35%, black 100%)" }}>
+        {started ? <canvas ref={pauseFrame} style={{ filter: "blur(14px)" }} /> : <img src="/marketing/happy-paws-poster.png" alt="" style={{ filter: "blur(14px)" }} />}
+      </div>
       {started && (
         <div className={styles.controls} role="group" aria-label="Video controls">
           <button ref={playbackButton} type="button" aria-label={paused ? "Resume film" : "Pause film"} onClick={() => { if (paused) void video.current?.play().catch(() => setError("Please try playing again.")); else video.current?.pause(); }}>

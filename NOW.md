@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — full-width film and paused blur
+
+- Removed playback contain rule so video fills the background edge to edge; fullscreen retains the complete frame.
+- Added soft bottom gradient blur while paused or showing poster, using the current paused frame so it stays aligned when seeking. Playback removes blur.
+- Verified cover sizing and blur states at 1967px and 390px, including play/pause; visually inspected smooth bottom blur.
+- Earlier mascot hover and small one-second bubble refinements are committed.
+- Complete locally; public push remains blocked by prior automatic approval review.
+
 ## Current handoff — compact mascot greetings
 
 - Made hover wink explicit through pointer/mouse state so it does not depend on hover media detection.

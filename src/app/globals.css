@@ -563,3 +563,13 @@ a[class*="btn"] {
   ::view-transition-old(*),
   ::view-transition-new(*) { animation-duration: 1ms !important; }
 }
+
+/* Keep typing cursors legible instead of inheriting the pale brand accent. */
+input,
+textarea,
+[contenteditable="true"] {
+  caret-color: currentColor;
+}
+@media (forced-colors: active) {
+  input, textarea, [contenteditable="true"] { caret-color: CanvasText; }
+}

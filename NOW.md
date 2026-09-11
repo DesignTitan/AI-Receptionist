@@ -1,5 +1,11 @@
 # NOW
 
+## Current handoff — visible typing cursor
+
+- Form fields now use their text color for the caret instead of inheriting the pale scrollcraft accent.
+- Verified dark green cursor against white in name/email fields; forced-color mode uses the system text color.
+- In progress: user requested publishing and reported the disabled verification button. Production has Turnstile keys; checking authentication delivery before deployment.
+
 ## Current handoff — verify email within purchase step one
 
 - Name/email now sends a six-digit code within Your details. Verification stays on step one; step two is purchase review with Continue to payment.

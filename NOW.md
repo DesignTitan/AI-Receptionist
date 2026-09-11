@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — playful navigation mascot
+
+- Center mascot now winks and nods on hover/focus; clicks cycle eight short greetings beginning with Hi!, with four-second dismissal and Escape support.
+- Added generated wink frame; CSS reveals only the eye region over approved master to preserve its exact silhouette and transparency. Full generated backdrop is not used.
+- Replaced glossy call pill with flat mint rounded-rectangle Let’s talk button; call behavior preserved.
+- Verified animation, greeting sequence, keyboard, dismissal, call popup and 320px layout in browser; typecheck passed.
+- Complete locally; public push remains blocked by prior automatic approval review.
+
 ## Current handoff — navigation placement and account icon
 
 - Moved page links left, kept mascot exactly centered, and changed phone action to Let’s talk.

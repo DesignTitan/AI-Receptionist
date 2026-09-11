@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { PRODUCT_NAME } from "@/components/marketing/product-chrome";
+import { NavMascot } from "@/components/marketing/nav-mascot";
 import profileIcon from "@/components/marketing/profile-icon.json";
 import { TryCallPlate } from "@/components/marketing/try-call-plate";
 
@@ -68,7 +68,7 @@ export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; sim
       <ul className="rc-nav__text-links" id="rc-site-links">
         {LINKS.map(link => <li key={link.href}><a href={link.href} onClick={() => setMenuOpen(false)}>{link.label}</a></li>)}
       </ul>
-      <a className="rc-nav__brand" href="#desk" aria-label={`${PRODUCT_NAME} — home`} onClick={() => setMenuOpen(false)}><img src="/marketing/happy-pillow-mascot.png" width={60} height={60} alt="" /></a>
+      <NavMascot />
       <div className="rc-nav__right">
         <div className="rc-nav__actions">
           <button ref={callButton} type="button" className="rc-nav__cta" aria-label="Let’s talk" title="Let’s talk" aria-expanded={open} aria-controls="rc-nav-pop" onClick={() => { setOpen(!open); setMenuOpen(false); setAccountOpen(false); }}>

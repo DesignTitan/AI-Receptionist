@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — reference-inspired guided value layout
+
+- Adapted the supplied reference into a two-step vertical timeline with left-side controls and a live right-side sales/plan preview.
+- White modal, fine borders, muted upcoming step and completed-step edit action; all entered values remain when moving between steps.
+- Retained sourced industry context and existing recommendation/signup logic; mobile stacks the preview below the form.
+- Verified live calculation, Busy desk route, retained edits, Escape dismissal and mobile widths; typecheck passed.
+- Saved locally; public push remains blocked by prior approval review. Annual pricing terms remain pending.
+
 ## Current handoff — simpler industry-first value flow
 
 - Rebuilt calculator on white with three first-view controls: industry, collected sale and extra completed bookings; one gross-sales result.

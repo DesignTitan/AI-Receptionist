@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { assertBillingEnvironment } from "./billing-environment";
 import { serviceClient } from "@/lib/supabase";
 import { env } from "@/lib/env";
@@ -7,6 +9,10 @@ import type { Customer, CustomerBooking } from "./model";
 import { releaseExpiredPilotCheckouts } from "./setup-offer";
 import { reportUsage } from "./usage";
 import { needsConfirmation } from "./booking";
+import { loadPurchaseReceipt } from "./load-purchase-receipt";
+import { receiptEmail } from "./receipt-email";
+import { PLANS } from "./pricing";
+import { billingMode } from "./billing-mode";
 type Job = {
   notice_id: string | null;
   id: string;
@@ -74,6 +80,11 @@ async function send(job: Job, c: Customer, b: CustomerBooking | null) {
   const recipient =
     job.kind === "signup_alert" ? env.ownerEmail : c.owner_email;
   if (!recipient) throw Error("Operator lead inbox is not configured.");
+  const receipt = job.kind === "welcome" ? receiptEmail({
+    receipt: await loadPurchaseReceipt(c), name: c.config.contactName ?? c.business_name,
+    planName: PLANS[c.plan].name, siteUrl: env.siteUrl, setupPending: !!c.config.setupPending,
+    test: billingMode() === "test",
+  }) : null;
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -84,8 +95,10 @@ async function send(job: Job, c: Customer, b: CustomerBooking | null) {
     body: JSON.stringify({
       from: env.emailFrom,
       to: [recipient],
-      subject,
-      html: `<div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:32px;color:#20343d"><p style="font-size:12px;letter-spacing:2px">${escape(c.business_name)}</p><h1>${escape(subject)}</h1><p style="line-height:1.7">${escape(message)}</p><p><a href="${env.siteUrl}/account">Open your private dashboard</a></p></div>`,
+      ...(receipt ? { attachments: [{ content: (await readFile(path.join(process.cwd(), "public/marketing/happy-pillow-mascot.png"))).toString("base64"), filename: "ai-receptionist.png", content_type: "image/png", content_id: "brand-mascot" }] } : {}),
+      subject: receipt?.subject ?? subject,
+      text: receipt?.text ?? message,
+      html: receipt?.html ?? `<div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:32px;color:#20343d"><p style="font-size:12px;letter-spacing:2px">${escape(c.business_name)}</p><h1>${escape(subject)}</h1><p style="line-height:1.7">${escape(message)}</p><p><a href="${env.siteUrl}/account">Open your private dashboard</a></p></div>`,
     }),
     signal: AbortSignal.timeout(15000),
   });

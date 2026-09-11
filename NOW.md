@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — branded purchase confirmation
+
+- Built the approved payment-confirmation dashboard with the homepage’s Apfel Grotezk/Open Runde fonts, centered current mascot, white background, soft corners and spacing; account/setup shares the same shell.
+- Receipt details come from the original verified Stripe invoice and preserve historical setup charges. Pending payments cannot open setup or display a paid receipt.
+- Paid welcome jobs now render a matching HTML/plain-text receipt email with an attached mascot; existing queue/idempotency remains. No test emails or payments were sent; inbox delivery is not yet verified. Email fonts fall back where remote fonts are blocked.
+- TypeScript, five receipt tests, isolated desktop/mobile dashboard checks and email rendering passed. Published to https://ai-receptionist-two-azure.vercel.app (du2pzs8a1); production build and development-asset exclusion passed.
+- Public GitHub push remains blocked by the earlier approval review; direct Vercel deployment is the authorized publishing route.
+
 ## Current handoff — mark pages done
 
 - Each page-index card now has a prominent outlined checkbox and a separate Mark as done control; checked cards show Done with green highlighting.

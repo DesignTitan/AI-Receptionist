@@ -11,7 +11,10 @@ import {
   SETUP_SCOPE,
 } from "@/lib/platform/pricing";
 import Link from "next/link";
-import { Frame } from "@/components/platform/frame";
+import { AccountFrame as Frame } from "@/components/platform/account-frame";
+import { PurchaseWelcome } from "@/components/platform/purchase-welcome";
+import { loadPurchaseReceipt } from "@/lib/platform/load-purchase-receipt";
+import type { PurchaseReceipt } from "@/lib/platform/purchase-receipt";
 import { RemoteAction } from "@/components/platform/remote-action";
 import { ownedCustomer, bookingsFor } from "@/lib/platform/server";
 import { PLANS } from "@/lib/platform/model";
@@ -24,19 +27,14 @@ export default async function Account() {
   const c = await ownedCustomer();
   if (!c) redirect("/start");
   if (c.config.setupPending) {
-    const paid = c.status === "paid" && c.billing_status === "active";
-    return <Frame eyebrow="Your dashboard" title={paid ? "Welcome to your front desk." : "Your purchase"} description={paid ? "Payment confirmed. Let’s get your business ready." : "Complete checkout to continue. If you have just paid, your payment confirmation may take a moment."}>
-      <section className="platform-panel">
-        <h2>{PLANS[c.plan].name}</h2>
-        <p>{paid ? "Add your business details, hours and team. We’ll then prepare your booking page and phone line and arrange a test with you." : "Your selected plan is saved. Business setup opens after Stripe confirms payment."}</p>
-        <div className="platform-actions">
-          {paid ? <Link className="platform-btn" href="/account/setup">Set up your business →</Link> : c.status === "draft" ? <RemoteAction url="/api/account/checkout" label="Continue Stripe Checkout →" /> : null}
-          {c.status !== "draft" && <RemoteAction url="/api/account/billing" label="Manage billing" secondary />}
-          <Link href="/account">Refresh payment status</Link>
-          <RemoteAction url="/api/account/session" method="DELETE" label="Sign out" secondary />
-        </div>
-      </section>
-    </Frame>;
+    const paid = c.status === "paid" && c.billing_status === "active" && !!c.setup_paid_at;
+    let receipt: PurchaseReceipt | null = null;
+    if (paid) {
+      try { receipt = await loadPurchaseReceipt(c); }
+      catch { /* Payment stays confirmed; unavailable receipt details never block setup. */ }
+    }
+    return <PurchaseWelcome name={c.config.contactName ?? ""} plan={c.plan} receipt={receipt}
+      state={paid ? "paid" : c.status === "draft" ? "pending" : "billing"} test={billingMode() === "test"} />;
   }
   const bookings = await bookingsFor(c.id);
   const { period, notices } = await usageFor(c);

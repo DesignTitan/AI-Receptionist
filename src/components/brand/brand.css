@@ -1,0 +1,22 @@
+@import "../../app/(marketing)/brand-fonts.css";
+
+.brand-surface {
+  --brand-display: "Apfel Grotezk", system-ui, sans-serif;
+  --brand-body: "Open Runde", system-ui, sans-serif;
+  --brand-ink: #1e3a34;
+  --brand-muted: #526b63;
+  --brand-line: #e2e9e1;
+  --brand-sage: #ebf0ec;
+  --brand-mint: #d5eee3;
+  --brand-space-1: 8px;
+  --brand-space-2: 16px;
+  --brand-space-3: 24px;
+  --brand-space-4: 32px;
+  --brand-space-5: 48px;
+  --brand-space-6: 64px;
+  font-family: var(--brand-body);
+  color: var(--brand-ink);
+  background: #fff;
+  color-scheme: light;
+}
+.brand-surface :is(h1,h2,h3) { font-family: var(--brand-display); }

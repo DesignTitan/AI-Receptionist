@@ -6,19 +6,21 @@ export function RemoteAction({
   body,
   method = "POST",
   secondary = false,
+  className,
 }: {
   url: string;
   label: string;
   body?: unknown;
   method?: string;
   secondary?: boolean;
+  className?: string;
 }) {
   const [busy, setBusy] = useState(false),
     [error, setError] = useState("");
   return (
     <>
       <button
-        className={secondary ? "secondary" : ""}
+        className={className ?? (secondary ? "secondary" : "")}
         disabled={busy}
         onClick={async () => {
           setBusy(true);

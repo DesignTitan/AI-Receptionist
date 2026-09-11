@@ -13,6 +13,7 @@ export default function nextConfig(phase: string): NextConfig {
     : "./src/components/development-tools.disabled.tsx";
 
   return {
+    outputFileTracingIncludes: { "/api/jobs": ["./public/marketing/happy-pillow-mascot.png"] },
     images: {
       remotePatterns: [
         { protocol: "https", hostname: "images.unsplash.com" },

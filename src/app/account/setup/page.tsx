@@ -1,4 +1,4 @@
-import { Frame } from "@/components/platform/frame";
+import { AccountFrame as Frame } from "@/components/platform/account-frame";
 import { BusinessSetupForm } from "@/components/platform/business-setup-form";
 import { ownedCustomer } from "@/lib/platform/server";
 import { redirect } from "next/navigation";

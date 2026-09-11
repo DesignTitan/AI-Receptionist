@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — Loup spelling and approved sheet
+
+- Corrected dog’s name to Loup across active cast page, storyboard and briefs.
+- Added corrected cast-loup-v1.png; original artwork preserved and #loop links remain compatible.
+- Bubs approved this sheet; next is a separate puffy, fuzzy bedhead variant, keeping the same identity.
+- Local commit only under existing public-push block.
+
 ## Current handoff — Loop character sheet completed
 
 - User requested internal image generation; generated Loop sheet from both supplied photos using internal image_gen (version label not exposed).

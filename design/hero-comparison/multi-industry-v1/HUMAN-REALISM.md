@@ -36,7 +36,7 @@ The following are our art-direction choices, informed by those references. They 
 
 Preserve the established face, loose high bun, black shirt and forest apron. Proposed close-up direction: approximately 38, light-to-medium complexion with warm olive undertone, slightly pinker cheeks and nose, brown irises with restrained amber variation; subtle outer-eye smile lines, light under-eye folds, faint forehead creases only when expressive. Dark brown hair with uneven natural highlights, a few loose temple strands and fine baby hairs. Real pores around nose and inner cheeks, softer texture elsewhere; slightly dry natural lip texture. No smooth plastic sheen or beauty retouching. Any new permanent marks require an intentional identity choice, not random noise.
 
-### Loop's caller
+### Loup's caller
 
 Preserve her distinct face, shoulder-length dark waves, center part and cream sweater. Proposed close-up direction: approximately 42, medium complexion with a warm-neutral olive undertone, brown irises, faint under-eye shadow, gentle smile folds and fine outer-eye lines that deepen with a smile. Dark brown hair with individual wavy strands, modest frizz at the part and a few subtle silver strands at the temples. Natural lips and light forehead sheen. Preserve complexion and face proportions across the listening and smiling views.
 
@@ -48,4 +48,4 @@ Preserve her distinct face, shoulder-length dark waves, center part and cream sw
 4. Check every sheet panel for drift; a dense sheet is not proof of identity consistency. Reference portraits carry the identity, while sheets communicate variations.
 5. Produce individual scene frames with the approved cast and match lighting, exposure, wetness, props and action across cuts.
 
-No new images were generated during this research update. The groomer needs a realism revision; Loop's caller remains ungenerated because the Higgsfield credit issue has not been resolved. The pending model-choice question remains unanswered.
+No new images were generated during this research update. The groomer needs a realism revision; Loup's caller remains ungenerated because the Higgsfield credit issue has not been resolved. The pending model-choice question remains unanswered.

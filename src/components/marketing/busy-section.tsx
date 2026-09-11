@@ -21,7 +21,7 @@ export function BusySection() {
           <p>Customers choose from your available times.</p>
         </div>
         <div className="rc-busy__voice">
-          <img src="/marketing/happy-pillow-mascot.png" width={150} height={150} alt="" />
+          <img src="/marketing/happy-pillow-listening.png" width={150} height={150} alt="" />
           <div><span className="rc-busy__pilot">Pilot</span><h3>A voice when you’re busy.</h3><p>AI phone booking, with a route to your team.</p><VoiceExample /></div>
         </div>
       </div>

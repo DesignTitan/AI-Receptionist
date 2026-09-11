@@ -93,7 +93,7 @@ export function IndustryGallery() {
                   {industry.key !== "more" && <img src={`/marketing/industries/${industry.key}.webp`} alt="" width={900} height={1200} loading="lazy" />}
                   {industry.key === "more" && <p className="rc-industry__problem">{industry.problem}</p>}
                   {industry.key !== "more" && <div className="rc-industry__moment" aria-hidden={index !== active}>
-                    <img src="/marketing/happy-pillow-mascot.png" width={600} height={600} alt="" />
+                    <img src={industry.pilot ? "/marketing/happy-pillow-listening.png" : "/marketing/happy-pillow-mascot.png"} width={600} height={600} alt="" />
                     <div className="rc-industry__bubble">
                       <p>“{industry.quote}”</p>
                     </div>

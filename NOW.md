@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — contextual mascot expressions
+
+- Added approved-style transparent listening and delighted Happy Little Pillow expressions.
+- Listening appears with call handling and live call states; delighted appears with booking success; welcoming master remains elsewhere.
+- Verified all three assets render on homepage; typecheck passed.
+- Next: finish the taller hero and centered navigation requested during this block.
+- Local commit only under existing automatic-approval public-push block.
+
 ## Current handoff — website mascot image update
 
 - Switched all seven mascot img references across five marketing components/pages to approved Happy Little Pillow cutout (mint, padded cheeks, Ivory & Ink eyes).

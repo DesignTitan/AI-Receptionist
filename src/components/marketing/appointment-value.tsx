@@ -57,10 +57,22 @@ export function AppointmentValue({ onRequestCustom }: { onRequestCustom?: () => 
         <div className={styles.previewHeader}><span className={styles.previewIcon} aria-hidden="true">↗</span><div><strong>Your business, with more room to grow.</strong><span>{selected?.name ?? "Choose your industry to get started"}</span></div></div>
         <div className={styles.result} aria-live="polite"><span>Potential additional monthly sales</span><strong>{ready ? money(Number(ticket) * Number(bookings)) : "—"}</strong><p>{ready ? `${bookings} extra completed bookings × ${money(Number(ticket))} per sale` : selected ? "Enter your average sale and extra bookings to see the estimate." : "Choose your industry to start your estimate."}</p></div>
         <p className={styles.note}>Sales, not profit. Before service costs, subscription, usage, setup and tax. Count only new paid bookings; exclude reschedules and money already retained. Scenarios, not guaranteed returns. USD.</p>
-        {step === "plan" ? <>
-      {matched && ready ? <section className={styles.recommendation} aria-live="polite"><span className={styles.eyebrow}>Your suggested next step</span><h4>{custom ? "A custom conversation." : `${plan.name} · ${money(cost)} / month`}</h4><p>{custom ? "Your requirements need a tailored scope and quote." : `Lowest estimated monthly cost among plans fitting your team and entered usage. Includes ${plan.minutes.toLocaleString()} minutes; estimated additional usage is ${money(estimateOverage(Number(minutes), recommended) / 100)}.`}</p>{!custom && <p className={styles.note}>{SETUP_OFFER} {estimateOverage(Number(minutes), recommended) > 0 && "Additional usage needs an enabled spending limit."} Before tax.</p>}</section> : <p className={styles.note}>Complete your sales estimate and plan-fit details to update the suggestion.</p>}
-        </> : <div className={styles.previewNext}><span className={styles.eyebrow}>Your plan</span><p>We’ll suggest a fit once you share your team and call needs.</p></div>}
         </div>
+        {step === "plan" && (matched && ready ? <section className={styles.recommendation} data-featured={!custom && recommended === "busy"} data-custom={custom} aria-label="Suggested pricing plan" aria-live="polite">
+          <span className={styles.eyebrow}>Suggested for your business</span>
+          <h4>{custom ? "Custom / Enterprise" : plan.name}</h4>
+          <p>{custom ? "A plan shaped around your requirements." : plan.who}</p>
+          <div className={styles.planRate}><strong>{custom ? "Let’s talk." : money(plan.monthly)}</strong><span>{custom ? "Pricing by scope" : "/ month"}</span></div>
+          {custom ? <p>Tell us about your volume, locations and workflow. We’ll confirm what’s possible and prepare a tailored proposal.</p> : <>
+            <dl className={styles.planMetrics}>
+              <div><dt>Included minutes</dt><dd>{plan.minutes.toLocaleString()}</dd></div>
+              <div><dt>Bookable team</dt><dd>Up to {plan.teamLimit}</dd></div>
+              <div><dt>Estimated extra usage</dt><dd>{money(estimateOverage(Number(minutes), recommended) / 100)}</dd></div>
+            </dl>
+            <p>Estimated monthly total: <strong>{money(cost)}</strong>. Lowest estimated cost among plans fitting your team and usage.</p>
+            <p className={styles.note}>{SETUP_OFFER} {estimateOverage(Number(minutes), recommended) > 0 && "Additional usage needs an enabled spending limit."} Before tax.</p>
+          </>}
+        </section> : <p className={styles.note}>Complete your sales estimate and plan-fit details to update the suggestion.</p>)}
         <div className={styles.previewAction}>
           {step === "plan" && matched && ready ? <> <a className={styles.primary} href={custom ? "#hear" : `/start?plan=${recommended}`} onClick={custom ? onRequestCustom : undefined}>{custom ? "Discuss a custom plan ↗" : `Review ${plan.name} & sign up ↗`}</a><p className={styles.note}>Confirm your business details and exact charges before payment.</p> </> : <>
           <button type="button" className={styles.primary} disabled={!ready || !matched} onClick={() => changeStep("plan")}>Find my plan <span aria-hidden="true">→</span></button>

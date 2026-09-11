@@ -24,8 +24,10 @@
 .primary:disabled { opacity: .45; cursor: not-allowed; }
 .value :is(input,select,a,button):focus-visible { outline: 2px solid #527a6b; outline-offset: 4px; }
 .scenario { font-size: 13px; line-height: 1.6; padding-bottom: 20px; border-bottom: 1px solid #e5eae6; margin-bottom: 22px; }
-.recommendation { border-top: 1px solid #e5eae6; padding-top: 22px; margin-top: 24px; }
-.recommendation h4 { font-size: 26px; font-weight: 500; margin: 10px 0; }
+.recommendation { padding: 28px; margin-top: 18px; border: 1px solid #e2e9e1; border-radius: 28px; background: #fbfcf8; box-shadow: 0 12px 32px -24px #173b3130; }
+.recommendation[data-featured="true"] { background: #e9f3ec; border-color: #d5e5d8; }
+.recommendation[data-custom="true"] { background: #f0f3ef; }
+.recommendation h4 { font-size: 24px; font-weight: 600; margin: 12px 0 10px; }
 .back { display: block; background: none; border: 0; color: #617872; text-decoration: underline; text-underline-offset: 4px; padding: 8px 0; font-size: 12px; cursor: pointer; margin-top: 16px; }
 @media(max-width:600px) { .controls, .planControls { grid-template-columns: 1fr; gap: 16px; } .primary { width: 100%; text-align: center; } }
 
@@ -50,7 +52,7 @@
 .previewNext p { font-size: 12px; line-height: 1.6; color: #617872; }
 .placeholder, .placeholderShort { display: block; height: 8px; border-radius: 999px; background: #f0f2f0; width: 85%; margin-top: 10px; }
 .placeholderShort { width: 60%; }
-.preview .recommendation h4 { font-size: 23px; }
+
 @media(max-width:720px) { .flow { grid-template-columns: 1fr; gap: 24px; } .steps { padding-left: 6px; } .step { padding-left: 22px; } .preview { position: static; margin-top: 0; padding: 22px; } }
 
 .previewColumn { position: sticky; top: 20px; margin-top: 78px; min-width: 0; }
@@ -74,3 +76,12 @@
 @media (forced-colors: active) {
   .value select { appearance: auto; background-image: none; }
 }
+
+.planRate { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; margin: 24px 0; }
+.planRate strong { font-size: clamp(34px, 3vw, 44px); letter-spacing: -.04em; line-height: 1.1; font-weight: 600; }
+.planRate span { font-size: 13px; color: #617872; }
+.recommendation[data-custom="true"] .planRate { flex-direction: column; gap: 10px; }
+.planMetrics { margin: 0 0 18px; }
+.planMetrics > div { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #173b3110; font-size: 13px; }
+.planMetrics dt { color: #617872; }
+.planMetrics dd { margin: 0; font-weight: 500; text-align: right; }

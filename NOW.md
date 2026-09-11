@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — recommendation styled as a pricing card
+
+- Suggested plan is now a separate rounded card below the sales preview, using the main pricing cards’ backgrounds, borders and type hierarchy.
+- Standard plans show base price, included minutes, team limit and estimated extra usage; Custom / Enterprise shows Let’s talk and pricing by scope.
+- Action remains beneath both cards; recommendation updates and signup/custom routing are unchanged.
+- Verified custom and Busy appearances, live changes and mobile widths; typecheck and diff checks passed.
+- Saved locally; public push remains blocked by prior approval review.
+
 ## Current handoff — keep result action beneath card
 
 - Generated plan signup and custom-plan actions now share the area beneath the preview card with the initial Find my plan button.

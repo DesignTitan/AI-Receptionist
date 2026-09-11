@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — Happy Little Pillow approved (11 September 2026)
+
+- Bubs selected Happy Little Pillow, specifically liking the padded cheeks.
+- Canonical reference is assets/mascot-cuddle.png, generation 62fde102-5b1f-4e78-ba52-a6b91061d8e9.
+- Character page now presents the approved portrait; earlier sheets labelled historical explorations. APPROVED-MASCOT.md records continuity rules.
+- Next: update robust sheets and storyboard shots against the approved portrait. Homepage unchanged.
+- Local commit only; earlier public-push approval block remains.
+
+
 ## Current handoff — cuddly mint refinements
 
 - Replaced rejected personality portraits on the character page with two new GPT Image 2.5 mint refinements.

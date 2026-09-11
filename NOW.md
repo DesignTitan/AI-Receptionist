@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — detailed mascot style and costume sheets (10 September 2026)
+
+- Generated two GPT Image 2.5 sheets using exact website mascot reference: detailed turnarounds/expressions/materials and six wardrobe portraits.
+- Wardrobe includes tilted yellow hard hat, salon clips/apron, grooming bandana/towel, camera, mechanic overalls, and plain original. Concepts not yet applied to film.
+- Added character-sheets.html with full-resolution viewing/downloads, linked from storyboard header; images load and mobile fits.
+- Other human/dog character sheets remain pending. Local commit only; prior public push approval block remains.
+
 ## Current handoff — appointment-inspired intro background (10 September 2026)
 
 - Replaced trees/sky in scene 1 with softly blurred frosted-glass appointment shapes in mint and forest green.

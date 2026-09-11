@@ -188,7 +188,7 @@ export default function HomePage() {
           <div className="rc-footer__trust">
             <div className="rc-footer__trust-heading"><h3>Legal, privacy &amp; trust</h3><span>Temporary placeholders · pending legal review</span></div>
             <div className="rc-footer__trust-links">
-              {LEGAL_GROUPS.map(group => <nav aria-label={`Footer ${group.title}`} key={group.title}><h3>{group.title}</h3>{group.items.map(item => <a href={`/legal#${item.id}`} key={item.id}>{item.title}</a>)}</nav>)}
+              {LEGAL_GROUPS.map(group => <nav aria-label={`Footer ${group.title}`} key={group.title}><h3>{group.title}</h3>{group.items.map(item => <a href={item.id === "do-not-sell" ? "/do-not-sell-or-share-my-personal-information" : `/legal#${item.id}`} key={item.id}>{item.title}</a>)}</nav>)}
               <nav aria-label="Footer social placeholders"><h3>Stay connected</h3>{SOCIAL_NAMES.map(name => <a key={name} href={`/legal#social-${name.toLowerCase()}`}>{name} <small>Coming soon</small></a>)}</nav>
             </div>
             <p className="rc-footer__draft">Legal documents and security information are drafts. No certification or compliance status is claimed.</p>

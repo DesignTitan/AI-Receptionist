@@ -92,3 +92,24 @@ These sources informed the review categories; counsel should verify current text
 - [FTC COPPA FAQs](https://www.ftc.gov/business-guidance/resources/complying-coppa-frequently-asked-questions): scope and minors' data considerations.
 - [European Commission AI transparency guidance](https://digital-strategy.ec.europa.eu/en/policies/guidelines-ai-transparency-obligations): Article 50 transparency review for applicable EU use.
 - [FTC ROSCA recap](https://www.ftc.gov/business-guidance/blog/2018/07/time-rosca-recap-ftc-says-risk-free-trial-was-risky-not-free) and [current negative-option rule docket](https://www.ftc.gov/legal-library/browse/rules/negative-option-rule): subscription disclosures, consent and cancellation review; verify rulemaking and litigation status rather than copying old announcements.
+
+## Explicit sale/sharing opt-out entry point
+
+Added `/do-not-sell-or-share-my-personal-information` with that exact footer label and a clearly disabled preference control. This remains a draft, not a working opt-out mechanism. Counsel and engineering must determine sale/sharing applicability, applicable Global Privacy Control handling, tracking/vendor suppression, request scope and persistence across accounts/devices, withdrawal and confirmation behavior before launch. Do not assume a cookie toggle alone covers all sale/sharing activity.
+
+Layout reference: [Lovable’s opt-out page](https://lovable.dev/do-not-sell-or-share-my-personal-information) offers a preferences control and privacy-policy link. It is a UI reference, not a policy or legal assessment for this product.
+
+## Follow-up: Lovable footer comparison
+
+Reviewed the linked footer on 11 September 2026. Its general terms, privacy, cookie settings, explicit sale/sharing opt-out, DPA, accessibility, platform rules and security reporting map to our existing placeholders. Added enterprise terms, copyright/takedown and abuse reporting because business contracts, uploaded content and unwanted/impersonated calls merit review for this product. This is a scoped comparison, not evidence that either site is compliant.
+
+Do not copy desktop-app terms, domain-registration terms or community rules unless those services are introduced. Enterprise terms are negotiated commercial documents, not a universally required standalone page. DMCA eligibility is conditional: a notice page alone does not establish safe-harbor protection. Counsel must assess the actual hosting activity, agent designation/registration, response procedures and repeat-infringer policy. See [US Copyright Office Section 512 resources](https://www.copyright.gov/512/).
+
+### Additional assurance options, not mandatory badges
+
+- **SOC 3:** Consider only if a suitable general-use assurance report is actually obtained. It is not a substitute for contractual/security review. [AICPA SOC 3 overview](https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-3).
+- **ISO/IEC 27701:2025:** A privacy-information-management standard to assess if customer requirements and organizational maturity justify it. Certification evidence and scope must be verified before any claim. [ISO standard](https://www.iso.org/standard/27701).
+- **CSA STAR:** Optional cloud assurance route. Distinguish Level 1 self-assessment from Level 2 independent certification/attestation; never call a self-assessment an independent audit. [CSA STAR](https://cloudsecurityalliance.org/star/) and [submission levels](https://cloudsecurityalliance.org/star/submit/).
+- Retain SOC 2, ISO/IEC 27001 and payment-security scope review as existing evaluation topics. Do not purchase or display a generic GDPR, CCPA, HIPAA or ADA badge as proof of legal compliance. Provider certifications do not automatically cover our application.
+
+Before activating this footer for launch, replace placeholders with counsel-approved content, implement and test the associated rights/consent/reporting processes, and verify each assurance statement against current evidence. No end-to-end legal or security audit has been performed by adding these pages.

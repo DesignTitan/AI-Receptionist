@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — explicit opt-out and footer legal comparison
+
+- Added a dedicated /do-not-sell-or-share-my-personal-information draft page and explicit footer link; preference control is clearly inactive.
+- Compared Lovable footer and added enterprise terms, copyright/takedown and abuse-reporting placeholders; omitted unrelated desktop/domain/community terms.
+- Expanded sourced lawyer checklist with conditional DMCA process and optional SOC 3, ISO 27701 and CSA STAR assurance review; no compliance or certification claims.
+- Typecheck, diff check and all 26 footer destinations verified; mobile opt-out has no overflow and is noindex.
+- Complete locally; approved policies, actual controls and evidence still need legal/operational review. Public push remains blocked by prior approval review.
+
 ## Current handoff — legal, trust and social placeholders
 
 - Added 18 legal/privacy/security topics and four social placeholders to the footer, linking to an explicitly temporary /legal hub with noindex.

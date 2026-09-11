@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — mark pages done
+
+- Each page-index card now has a prominent outlined checkbox and a separate Mark as done control; checked cards show Done with green highlighting.
+- Choices persist in this browser and can be unchecked. Card navigation remains separate from completion controls.
+- Browser verification passed for toggling without navigation, reload/search persistence, keyboard reversal and mobile layout.
+- Dashboard/receipt design remains a concept for review; no private receipt emails were sent.
+
 ## Current handoff — visual page index
 
 - Page index is a responsive 1,600px board with rounded cards and actual first-screen screenshots above page titles.

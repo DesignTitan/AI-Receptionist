@@ -5,6 +5,13 @@ let pages = [];
 let activeFilter = "all";
 let sort = "section";
 let loaded = false;
+const completionKey = "ai-receptionist-page-completion-v1";
+let completed = new Set();
+try {
+  const saved = JSON.parse(localStorage.getItem(completionKey) ?? "[]");
+  if (Array.isArray(saved)) completed = new Set(saved.filter(id => typeof id === "string"));
+} catch { /* The board remains usable if browser storage is unavailable. */ }
+const completionStatus = document.querySelector("#completion-status");
 const sections = [
   { key: "application", title: "Application", eyebrow: "Customer & staff workspace", description: "Accounts, bookings, business demos and staff tools. Sign-in still applies.", grouped: true },
   { key: "marketing", title: "Marketing Site", eyebrow: "The public-facing product", description: "The original site, V2 marketing preview, product pricing and demo directory." },
@@ -48,7 +55,9 @@ function dateLabel(page) {
 }
 
 function row(page) {
-  const link = element("a", "page-row");
+  const card = element("article", "page-row");
+  card.dataset.done = String(completed.has(page.id));
+  const link = element("a", "page-link");
   link.href = page.href;
   if (page.thumbnail) {
     const cover = element("img", "page-cover");
@@ -84,7 +93,29 @@ function row(page) {
   body.append(meta);
   if (!page.thumbnail && ["owner", "staff"].includes(page.access)) body.append(element("span", "preview-note", "Sign in to view this page"));
   link.append(body);
-  return link;
+  const control = element("label", "completion-control");
+  const checkbox = element("input", "completion-checkbox");
+  checkbox.type = "checkbox";
+  checkbox.checked = completed.has(page.id);
+  checkbox.setAttribute("aria-label", `Mark ${page.label} as done`);
+  const label = element("span", "completion-label", checkbox.checked ? "Done" : "Mark as done");
+  control.append(checkbox, label);
+  checkbox.addEventListener("change", () => {
+    const next = new Set(completed);
+    if (checkbox.checked) next.add(page.id); else next.delete(page.id);
+    try {
+      localStorage.setItem(completionKey, JSON.stringify([...next]));
+      completed = next;
+      card.dataset.done = String(checkbox.checked);
+      label.textContent = checkbox.checked ? "Done" : "Mark as done";
+      completionStatus.textContent = `${page.label} marked ${checkbox.checked ? "done" : "not done"}. Saved in this browser.`;
+    } catch {
+      checkbox.checked = completed.has(page.id);
+      completionStatus.textContent = "Could not save your change. Enable browser storage and try again.";
+    }
+  });
+  card.append(link, control);
+  return card;
 }
 
 function sortPages(items) {

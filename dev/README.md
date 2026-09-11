@@ -41,3 +41,5 @@ this boundary, also test production using `npm start`.
 ## Visual page board
 
 The index uses rounded screenshot cards in a responsive, 1,600px-wide board. Regenerate public-page first-screen captures with `node scripts/capture-page-previews.mjs` while the local server runs on port 3101. Captures live in `dev/thumbnails`, served only through the development preview. The capture process uses an anonymous browser and skips redirects, unavailable pages and private owner/staff pages. It does not submit forms or create accounts. Screenshots indicate a saved preview, not a claim that a page is production-ready.
+
+Each card has a manual completion checkbox. Choices are stored in this browser’s localStorage (`ai-receptionist-page-completion-v1`), independently of source-edit dates. They can be unchecked and are not synced to other browsers.

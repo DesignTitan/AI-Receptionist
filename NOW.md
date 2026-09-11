@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — website mascot image update
+
+- Switched all seven mascot img references across five marketing components/pages to approved Happy Little Pillow cutout (mint, padded cheeks, Ivory & Ink eyes).
+- Added public/marketing/happy-pillow-mascot.png as exact copy of approved master cutout; removed obsolete mascot multiply blending.
+- Typecheck passed; browser confirmed all 15 rendered mascot images loaded, checked mobile industry card and desktop voice dialog (no call started).
+- Scope only mascot image references/CSS; layouts, copy, cast sheets and existing dog video unchanged. Old mascot baked into video remains pending separate video update.
+- Local commit only under existing automatic-approval public-push block.
+
 ## Current handoff — reassurance clears fringe
 
 - User requested head petting and clearing hair from Loup’s eyes instead of hand on body.

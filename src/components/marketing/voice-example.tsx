@@ -123,7 +123,7 @@ export function VoiceExample() {
           <div className="rc-voice-visual">
             <div className="rc-voice-mascot" aria-hidden="true">
               <svg className="rc-voice-rays" viewBox="0 0 400 240" fill="none" stroke="#b2dccb" strokeWidth="9" strokeLinecap="round"><path d="m35 67 19 15M24 117h24m-13 50 19-15M365 67l-19 15m30 35h-24m13 50-19-15" /></svg>
-              <img src="/marketing/receptionist-mascot.png" width={300} height={300} alt="" />
+              <img src="/marketing/happy-pillow-mascot.png" width={300} height={300} alt="" />
               <div className="rc-voice-ripple" />
             </div>
             <div className="rc-voice-wave" data-active={status === "active" && !muted} aria-hidden="true">{[4,7,11,18,25,34,23,39,49,32,24,36,23,17,10,7,4].map((height, i) => <i key={i} style={{ height, animationDelay: `${i * -0.13}s` }} />)}</div>
@@ -134,7 +134,7 @@ export function VoiceExample() {
             <div className="rc-voice-captions" aria-label="Live captions" tabIndex={0}>
               {!captions.user && !captions.agent ? <div className="rc-voice-empty"><h3>{status === "connecting" ? "Getting ready to listen." : status === "active" ? "You’re connected." : "What would you like to ask?"}</h3><p>{status === "active" ? "Your live conversation will appear here." : "Try booking an appointment, or ask how it could help your business."}</p></div> : <>
                 {captions.user && <div className="rc-voice-message rc-voice-message--user"><span>You</span><p>{captions.user}</p></div>}
-                {captions.agent && <div className="rc-voice-message rc-voice-message--agent"><img src="/marketing/receptionist-mascot.png" width={38} height={38} alt="" /><div><span>AI receptionist</span><p>{captions.agent}</p></div></div>}
+                {captions.agent && <div className="rc-voice-message rc-voice-message--agent"><img src="/marketing/happy-pillow-mascot.png" width={38} height={38} alt="" /><div><span>AI receptionist</span><p>{captions.agent}</p></div></div>}
               </>}
             </div>
             <div className="rc-voice-dock">

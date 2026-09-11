@@ -36,7 +36,7 @@
 .step:not([data-active="true"]):not([data-complete="true"]) .intro { opacity: .55; }
 .step .back { margin-top: -10px; }
 .step .controls, .step .planControls { grid-template-columns: 1fr; gap: 16px; }
-.preview { position: sticky; top: 20px; border: 1px solid #e0e5e1; border-radius: 26px; padding: 26px; margin-top: 78px; background: #fff; box-shadow: 0 14px 34px -28px #193c3230; }
+.preview { border: 1px solid #e0e5e1; border-radius: 26px; padding: 26px; margin-top: 0; background: #fff; box-shadow: 0 14px 34px -28px #193c3230; }
 .previewHeader { display: flex; gap: 12px; align-items: center; padding-bottom: 20px; border-bottom: 1px solid #e5eae6; }
 .previewHeader strong { display: block; font-size: 13px; font-weight: 500; line-height: 1.5; }
 .previewHeader div > span { display: block; font-size: 12px; color: #617872; margin-top: 4px; }
@@ -49,3 +49,10 @@
 .placeholderShort { width: 60%; }
 .preview .recommendation h4 { font-size: 23px; }
 @media(max-width:720px) { .flow { grid-template-columns: 1fr; gap: 24px; } .steps { padding-left: 6px; } .step { padding-left: 22px; } .preview { position: static; margin-top: 0; padding: 22px; } }
+
+.previewColumn { position: sticky; top: 20px; margin-top: 78px; min-width: 0; }
+.previewColumn:focus { outline: none; }
+.previewAction { padding-top: 8px; }
+.previewAction .primary { width: 100%; }
+.previewAction .note { text-align: center; }
+@media(max-width:720px) { .previewColumn { position: static; margin-top: 0; } }

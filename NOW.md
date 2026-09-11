@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — complete questions then live recommendations
+
+- Both left-side sections remain open; Find my plan now sits beneath the right-side sales preview and waits for all required answers.
+- After generating once, every edit automatically updates sales, suggested plan, estimated cost and signup destination without another click.
+- Incomplete required inputs suppress the plan CTA until restored; no stale recommendation can be submitted.
+- Verified Front-to-Busy-to-Custom updates, sales changes, empty/restored inputs, mobile widths, typecheck and diff check.
+- Saved locally; public push remains blocked by prior approval review. Annual pricing terms remain pending.
+
 ## Current handoff — reference-inspired guided value layout
 
 - Adapted the supplied reference into a two-step vertical timeline with left-side controls and a live right-side sales/plan preview.

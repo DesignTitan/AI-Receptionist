@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — keep result action beneath card
+
+- Generated plan signup and custom-plan actions now share the area beneath the preview card with the initial Find my plan button.
+- Card contains only sales and recommendation information; payment reminder sits with the external action.
+- Verified signup/custom destinations and rendered card/action separation; typecheck and diff checks passed.
+- Saved locally; public push remains blocked by prior approval review.
+
 ## Current handoff — select and adjust calculator numbers
 
 - Double-click selects the entire value in all three numeric calculator fields for replacement.

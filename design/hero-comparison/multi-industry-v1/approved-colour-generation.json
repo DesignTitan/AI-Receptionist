@@ -1,0 +1,21 @@
+{
+  "job_id": "67093132-93df-4fc7-92da-98bb934c7a73",
+  "note": "Hex colours are visual generation targets, not sampled brand tokens.",
+  "params": {
+    "model": "gpt_image_2_5",
+    "quality": "max",
+    "resolution": "4k",
+    "aspect_ratio": "3:2",
+    "medias": [
+      {
+        "role": "image",
+        "value": "62fde102-5b1f-4e78-ba52-a6b91061d8e9"
+      },
+      {
+        "role": "image",
+        "value": "5b9f9cbc-d051-4b08-864f-c5b2839d3fa0"
+      }
+    ],
+    "prompt": "Create a polished character COLOR STUDY sheet of approved Happy Little Pillow. FIRST reference for originalmint body shape and prominent padded cheeks; SECOND reference for approved IVORY & INK eyes (allopeneyes warmivorywhites largeinkblackpupils smallcreamcatchlights). Exact same broadroundedSQUARE plushbody, short fused roundedtriangular lowerlefttail, facialspacing, puffycheeks, smilingforestmouth, fine mediumsoftfur in all8portraits. No limbs ears noses hats tufts.\nLayout exactly FOUR COLUMNS and TWO ROWS = EIGHT fullbody character portraits, consistent scale/camera/lighting. Title HAPPY LITTLE PILLOW — COLOUR STUDIES. Column headings ORIGINAL MINT / COOL AQUA / MINTY FOREST / SAGE. Row labels SOLID and SOFT GRADIENT.\nToprow SOLID: each entire furbody a uniformhue with natural3Dlight only.\n1 ORIGINAL MINT pale airy mint #C5E5CB.\n2 COOL AQUA soft cool turquoise aqua #8EDDD8, visibly bluerthanmint.\n3 MINTY FOREST rich forestmintgreen #4D977B, visibly deepergreen butnotnearlyblack.\n4 SAGE muted earthy graygreen #A9B59B, visibly desaturatedwarmersage.\nBottomrow SOFT GRADIENT: same4palettes with smooth gradual top-to-bottom COLOR transition in fur, nothardpatches. Palette1 pale minttop #E0F2DD tooriginalmintbottom #9ED1B0. Palette2 pale icy aquatop #CCF0E9 to richer aquabottom #56B9B9. Palette3 light minttop #B8DFCA todeepforestbottom #286853. Palette4 pale silversagetop #DBE2CC todeepmoss-sagebottom #7D9176. Smooth long blends acrosswholebody includingtail, no splitface no separatebellypatch no stripe.\nOriginalmint solid MUSTvisually match reference1 furcolor. Other colors changeFURONLY. All8 eyes ALWAYS warmivory andinkblack, sameface samecheeks noeyeiriscolorchange. Keep forestmouth darkreadableespeciallyonforestfur. Fullydisplaywholebodies no cropping. Beneath each portrait use shortcaption samecolumnname plus Solid or Gradient and two small color swatches for gradient / one for solid. Warmoffwhitebackground thinneutralgridlines elegantdarkforesttype, amplewhite space. Focus only these4palettefamilies8variants. No other hues, no costumes. Accurate visiblydistinctcolors and gradients withlovely realisticsoftfur andconsistent approved face."
+  }
+}

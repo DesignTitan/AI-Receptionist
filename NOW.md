@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — four mascot palettes
+
+- Updated colour board to original mint, cool aqua, minty forest and sage, with a solid and soft gradient each (eight portraits).
+- Preserves approved padded cheeks and Ivory & Ink eyes; hard split two-tone treatments removed from current board.
+- Full-resolution image at assets/happy-pillow-colours-ivory.png, shown at character-sheets.html#colour.
+- Recorded palette direction in APPROVED-MASCOT.md; original mint remains baseline.
+- Local commit only; prior public-push approval block remains.
+
+
 ## Current handoff — updated character, pose and grooming boards
 
 - Replaced character research, 20 poses, and material/grooming boards using approved Happy Little Pillow cheeks and Ivory & Ink eyes.

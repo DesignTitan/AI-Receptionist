@@ -26,3 +26,10 @@ Selected by Bubs on 11 September 2026 as the direction for now.
 - `assets/happy-pillow-poses-ivory.png`: 20 pose studies.
 - `assets/happy-pillow-grooming-ivory.png`: 12 grooming variations, fibre macros and face materials.
 - All three use approved cheeks and Ivory & Ink eyes. Grooming variations remain exploratory, not a change to canonical fur. Earlier expression/rotation sheets still need eye updates.
+
+## Colour direction
+
+- Selected families: original mint, cool aqua, minty forest and sage.
+- Explore each as a solid fur colour and a smooth gradient. No hard split two-tone patches.
+- Reference board: `assets/happy-pillow-colours-ivory.png` (job `67093132-93df-4fc7-92da-98bb934c7a73`).
+- Preserve approved cheeks, Ivory & Ink eyes and body proportions. Original mint remains the baseline; no single alternate has been selected as its replacement.

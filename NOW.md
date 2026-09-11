@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — Ivory & Ink eyes selected
+
+- Bubs chose eye option #5 Ivory & Ink for now: warm ivory sclera, large ink-black pupils.
+- Marked selection on character-sheets.html#eyes and recorded it in APPROVED-MASCOT.md.
+- Happy Little Pillow body, mint fur and padded cheeks remain approved; open-eye future work should use bottom-center portrait of happy-pillow-eye-studies.png.
+- Existing expression sheets still require eye updates before production use.
+- Local commit only; prior public-push approval block remains.
+
+
 ## Current handoff — hearts, kisses and eye options
 
 - Added 12 love/reaction studies including heart-eyes, blowing kisses, puckered kisses, loved and starstruck to the existing 36 expressions.

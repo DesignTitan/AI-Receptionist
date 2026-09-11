@@ -9,3 +9,13 @@ Approved by Bubs on 11 September 2026. This supersedes the original website port
 - No cowlick, curled tail, pear-shaped body or oversized glass eyes. Little Mischief, Curious Companion and Joyful Fluff were not selected.
 - Existing sheets and storyboard images predate approval. Regenerate against this portrait before treating them as production references. Retain the requested breadth of expressions, poses, fur studies and industry costumes.
 - The marketing website asset has not yet been replaced. The approved portrait has a white studio background; prepare suitable compositing assets before website integration.
+
+## Approved open eyes — Ivory & Ink #5
+
+Selected by Bubs on 11 September 2026 as the direction for now.
+
+- Reference: `assets/happy-pillow-eye-studies.png`, bottom-center portrait, option 5.
+- GPT Image 2.5 job: `e85ac099-4ce4-4c32-b161-d0eeb2dcedab`.
+- Warm ivory sclera, large rounded ink-black pupils and restrained cream catchlights. Preserve the illustrated eye size and spacing, padded cheeks and friendly gaze.
+- Use these eyes for open-eye expressions going forward. Closed eyes and winks still deform naturally; hearts and stars remain temporary expressive variants.
+- The existing expression sheets use earlier eye treatments and need updating for production consistency. The other five eye concepts are not selected.

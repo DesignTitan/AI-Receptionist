@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — master portrait, refreshed sheets and motion tests
+
+- Created clean Happy Little Pillow master and transparent cutout with mint fur, padded cheeks and Ivory & Ink eyes.
+- Updated 36 expressions, 12 love reactions, front/rear 5×19 rotation studies and eight wardrobe looks (aprons, tool belt, medical, glasses; no towel/hairpins). Rotation labels remain approximate, not a measured rig.
+- Preserved all previous assets and added character-sheets-before-master-v2.html archive; current character page links both archive and motion lab.
+- Added six original signature body-motion sketches, source references, 24–160px comparisons and adjustable overlay on the actual Happy Paws video at motion-lab.html. Facial rig/3D motion remains a future production step.
+- Chrome verified desktop/mobile, image loading, playback, controls, interruption, reduced motion and no horizontal overflow.
+- Local commit only; prior automatic review block on public GitHub publishing remains. Unrelated research-reel notes left untouched.
+
 ## Current handoff — costumes and Our Little Receptionist updated
 
 - Updated six industry looks with Happy Little Pillow cheeks, mint fur and Ivory & Ink eyes.

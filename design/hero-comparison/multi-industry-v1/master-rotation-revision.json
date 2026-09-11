@@ -1,0 +1,65 @@
+{
+  "requests": [
+    {
+      "index": 1,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "3:1",
+        "medias": [
+          {
+            "role": "image",
+            "value": "128b3b7d-fb5a-4125-8394-ce13f269ee01"
+          }
+        ],
+        "prompt": "Create a meticulous animation character contact sheet from reference image. EXACTLY 5 rows ×19 columns =95 character views. Landscape panoramic composition. CRITICAL anatomy: same MINT SQUARE PILLOW with very broad width equal to height, plump cheeks, short fused triangular corner speech tail. Each thumbnail fits inside a SQUARE area within its cell with ample whitespace above/below. Do NOT stretch character vertically to fill tall cells. No feet, no round ball appendage, no limbs. Fine mint fur same lighting. TITLE FRONT ROTATION. Columns L90,L80,L70,L60,L50,L40,L30,L20,L10,CENTER,R10,R20,R30,R40,R50,R60,R70,R80,R90. CENTER exactly matches frontal reference square face. L90 left side profile with front face oriented toward LEFT edge. R90 right side profile face oriented toward RIGHT edge. Never show back of character. All intermediate yaw smoothly interpolate from left profile to FRONT to right profile. Eyes have ivory whites and ink pupils, smile friendly cheeks. Row1 pitch up30deg, row2up15,row3neutral,row4down15,row5down30. Label rows Looking up/Slightly up/Looking straight/Slightly down/Looking down. Grid thin pale gray on white. Proportions ALWAYS broad and square."
+      }
+    },
+    {
+      "index": 2,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "3:1",
+        "medias": [
+          {
+            "role": "image",
+            "value": "128b3b7d-fb5a-4125-8394-ce13f269ee01"
+          }
+        ],
+        "prompt": "Create a meticulous animation character contact sheet from reference image. EXACTLY 5 rows ×19 columns =95 character views. Landscape panoramic composition. CRITICAL anatomy: same MINT SQUARE PILLOW with very broad width equal to height, plump cheeks, short fused triangular corner speech tail. Each thumbnail fits inside a SQUARE area within its cell with ample whitespace above/below. Do NOT stretch character vertically to fill tall cells. No feet, no round ball appendage, no limbs. Fine mint fur same lighting. TITLE REAR ROTATION. This is the BACK OF THE REFERENCE CHARACTER. NO EYES, NO MOUTH, NO EYEBROWS, NO FACE in ANY of the95cells. All95viewpoints see only rear fur, top/bottom/side of pillow. Center BACK is straight-on broad rounded-square back. Outercolumns L90 R90 side silhouettes still oriented away from viewer, no visible face. Intermediate angles gradual10degrees rear hemisphere. Columns L90,L80,L70,L60,L50,L40,L30,L20,L10,BACK,R10,R20,R30,R40,R50,R60,R70,R80,R90. Rows Looking up/Slightly up/Looking straight/Slightly down/Looking down correspond pitch30,15,0,-15,-30. Hint short fused corner speech tail, staying same anatomical corner. Plain furry BACKS ONLY in ALL95cells. No need any open eyes because strictly back study. Thin pale gray grid on white."
+      }
+    }
+  ],
+  "results": {
+    "jobs": [
+      {
+        "index": 1,
+        "job_id": "1c3a7fe9-21cd-45ad-a04c-d08840833360",
+        "status": "completed",
+        "type": "image",
+        "model": "gpt_image_2_5",
+        "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260911_123639_1c3a7fe9-21cd-45ad-a04c-d08840833360.png"
+      },
+      {
+        "index": 2,
+        "job_id": "3cf0c21f-f6ac-4b9d-9f50-7b45651d72e5",
+        "status": "completed",
+        "type": "image",
+        "model": "gpt_image_2_5",
+        "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260911_123639_3cf0c21f-f6ac-4b9d-9f50-7b45651d72e5.png"
+      }
+    ],
+    "summary": {
+      "total": 2,
+      "completed": 2,
+      "failed": 0,
+      "active": 0,
+      "errors": 0
+    },
+    "all_terminal": true
+  },
+  "note": "Second pass addresses tall proportions and face leakage on back; earlier draft retained."
+}

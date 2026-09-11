@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Little Pillow — movement & size tests</title>
+  <link rel="stylesheet" href="motion-lab.css">
+  <script src="motion-lab.js" defer></script>
+</head>
+<body><main>
+  <nav><a href="character-sheets.html#personality">← Character sheets</a><a href="#movement">Signature movements</a><a href="#small">Small sizes</a><a href="#video">On film</a><a href="#references">References</a></nav>
+  <header><span class="eyebrow">Our little receptionist</span><h1>A little movement.<br>A lot of character.</h1><p>One mint pillow, with his padded cheeks and Ivory &amp; Ink eyes. Try his movements, check him at small sizes, and place him over the Happy Paws film.</p></header>
+  <section id="movement"><div class="section-heading"><h2>His signature movements</h2><p>Warm, attentive and quietly delighted. Each movement happens once, then he settles.</p></div>
+    <div class="motion-layout"><div class="stage"><img class="actor hero-actor" src="assets/happy-pillow-master-cutout.png" alt="Happy Little Pillow, mint and smiling"><span class="stage-label">Original mint · Ivory &amp; Ink</span></div>
+    <div><div class="buttons" id="motion-buttons" aria-label="Choose a movement"></div><p id="motion-description">Choose a movement to preview it here and on the film below.</p><div class="options"><label><input type="checkbox" id="reduce-motion"> Reduce motion</label><button type="button" id="reset">Rest</button></div><p id="motion-status" role="status" aria-live="polite">Ready</p></div></div>
+    <p class="note">These are working body-motion sketches using the portrait cutout. Eye blinks, mouth animation and three-dimensional turns still need a character rig. The facial expression stays fixed in this preview.</p>
+  </section>
+  <section id="small"><div class="section-heading"><h2>Small, smaller, smallest</h2><p>Actual image widths in pixels. White and near-black forest backgrounds expose lost detail and edge halos.</p></div><div id="size-tests"></div><p class="note">At 24–32px, judge the silhouette and eye contrast. Use 64px or larger when cheeks, mouth and accessories need to carry the expression. A simplified small icon can follow if the tiny sizes feel too soft.</p></section>
+  <section id="video"><div class="section-heading"><h2>In the real film</h2><p>Move through the footage and compare busy, light and dark backgrounds. The original film is unchanged.</p></div>
+    <div class="film"><video id="film" controls playsinline muted preload="metadata" aria-label="Happy Paws film for mascot overlay testing"><source src="/marketing/happy-paws.mp4" type="video/mp4"></video><div class="film-overlay" id="film-overlay"><img class="actor film-actor" src="assets/happy-pillow-master-cutout.png" alt="New Happy Little Pillow overlay"><div class="bubble" id="bubble">Thursday at two? You're booked.</div></div></div>
+    <div class="film-controls"><label>Character width <input id="overlay-size" type="range" min="48" max="240" value="160" step="8"><output id="size-output" for="overlay-size">160px</output></label><label>Position <select id="overlay-position"><option value="right">Right</option><option value="left">Left</option></select></label><label><input type="checkbox" id="show-bubble" checked> Speech bubble</label><label><input type="checkbox" id="show-overlay" checked> Show new mascot</label></div>
+    <div class="buttons compact" id="video-motions" aria-label="Preview a movement over the film"></div>
+    <p class="note">Overlay and dialogue are a composition test, separate from the film's existing graphics. Size is capped on narrow screens. Select a movement above or here to replay it.</p>
+  </section>
+  <section id="references"><div class="section-heading"><h2>A reusable movement library</h2><p>The references supply principles and interaction patterns. These particular movements and timings are designed for our pillow.</p></div>
+    <div class="reference-grid"><article><h3>Character interaction</h3><p><a href="https://rive.app/marketplace/554-1038-my-avatar/" target="_blank" rel="noopener">My Avatar by JcToon · Rive</a> describes a hover reaction driven by a state machine, with a separate blink layer. That separation is useful for keeping attention, blinking and speaking from interfering with each other.</p></article><article><h3>Weight and softness</h3><p><a href="https://blog.nfb.ca/blog/2015/03/20/12-principles-animation/" target="_blank" rel="noopener">National Film Board · 12 principles</a> explains anticipation, squash and stretch, easing and follow-through. Our hop compresses first, rises, then lands softly.</p></article></div>
+    <p><a href="https://github.com/rive-app/rive-wasm" target="_blank" rel="noopener">Rive Web repository</a> provides the runtime and examples for interactive animations and state machines. It is a possible foundation for the later rigged version; this preview uses the original movement definitions linked below.</p>
+    <h3>Animation handoff</h3><p>Rest → listen → acknowledge → rest. Use the attention hop only for a new prompt; use the happy double-bounce for a completed action. No repeated bouncing while someone is reading. Interrupt the current action before starting another.</p>
+    <p>Next rig layers: body deformation; cheek follow-through; eyes and independent blink; mouth shapes; removable accessories. Tool belts and aprons follow the body; the hardhat settles a beat later. Preserve the same body volume through a squash.</p>
+    <p class="links"><a href="motion-lab.js" download>Download movement definitions ↓</a><a href="assets/happy-pillow-master-cutout.png" download>Download transparent mascot ↓</a><a href="character-sheets-before-master-v2.html">Previous character-page snapshot →</a></p>
+  </section>
+  <footer>Exploration for Happy Little Pillow · Reduced-motion preferences are respected.</footer>
+</main></body></html>

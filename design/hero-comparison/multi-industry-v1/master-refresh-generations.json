@@ -1,0 +1,155 @@
+{
+  "master": {
+    "job_id": "128b3b7d-fb5a-4125-8394-ce13f269ee01",
+    "file": "assets/happy-pillow-master.png",
+    "params": {
+      "model": "gpt_image_2_5",
+      "quality": "max",
+      "resolution": "4k",
+      "aspect_ratio": "1:1",
+      "medias": [
+        {
+          "role": "image",
+          "value": "5b9f9cbc-d051-4b08-864f-c5b2839d3fa0"
+        },
+        {
+          "role": "image",
+          "value": "62fde102-5b1f-4e78-ba52-a6b91061d8e9"
+        }
+      ],
+      "prompt": "Create ONE clean canonical master portrait of Happy Little Pillow. Use FIRSTreference FRONTpanel as exactface: warmIVORYwhite eyes with largeINKBLACKroundedpupils smallcreamcatchlights; huge softpaddedcheeks around warmforestgreensmile. Use SECONDreference exactoriginalmintfur and broadroundedSQUAREplushbody. ShortfusedroundedtriangularlowerLEFTspeechpointtail. Fullbody centered frontal upright symmetrical joyfulgentleface, armslegsnone, no noseearsaccessoriescostumetextlayoutlabels. ONE mascot only occupying75%frame with generousmargin. Luxurious softmintfur cleanedge finefluff, preserve exactcheeks and eyes. Neutralpurewhite backdrop no vignette, minimalshadow, cleanisolatedportrait forcompositing. Do not alter identity or create new character. Eyes open Ivory & Ink; moderateeye size, broadpillow ratherthanegg. Originalmintonly."
+    }
+  },
+  "sheets": [
+    {
+      "index": 1,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "1:1",
+        "medias": [
+          {
+            "role": "image",
+            "value": "128b3b7d-fb5a-4125-8394-ce13f269ee01"
+          }
+        ],
+        "prompt": "Use the attached master portrait as exact character identity. Happy Little Pillow is a broad rounded-square mint furry pillow speech-bubble, huge soft padded cheeks, warm ivory eye whites with large ink-black pupils and tiny cream catchlights, forest-green smiling mouth, short fused lower-left speech-point. NO arms, legs, feet, ears, nose or added tuft. Preserve width/height, cheek structure, eye spacing, fur and mint colour. White studio background, consistent soft lighting, clean professional character development board, readable short labels, generous separation. Do not redesign the mascot. Title: HAPPY LITTLE PILLOW — 36 EXPRESSIONS. Exactly 6 columns by 6 rows. All 36 named expressions in this row-major order: Happy, Soft smile, Big grin, Laugh, Tears of joy, Beaming, Affectionate, Grateful, Proud, Excited, Relieved, Reassuring, Curious, Thinking, Listening, Focused, Unsure, Confused, Surprised, Amazed, Worried, Sad, Teary, Determined, Wink left, Wink right, Tongue out, Playful squint, Shy, Oops, Sleepy, Sleeping, Yawning, Ooh, Ah, Ee. Make visibly differentiated face shapes and brow/eyelid moods. Open eyes must be Ivory & Ink; sleeping eyes closed, winks one closed, mouth vowels visibly different. Tongue out pink tongue. Keep adorable cheeks. Never replace expressions with colored emoji stickers."
+      },
+      "file": "assets/happy-pillow-expressions-ivory-36.png",
+      "result": {
+        "index": 1,
+        "job_id": "5b5d6ae7-c3de-4ada-b99f-4e746f461dda",
+        "status": "completed",
+        "type": "image",
+        "model": "gpt_image_2_5",
+        "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260911_123310_5b5d6ae7-c3de-4ada-b99f-4e746f461dda.png"
+      }
+    },
+    {
+      "index": 2,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "4:3",
+        "medias": [
+          {
+            "role": "image",
+            "value": "128b3b7d-fb5a-4125-8394-ce13f269ee01"
+          }
+        ],
+        "prompt": "Use the attached master portrait as exact character identity. Happy Little Pillow is a broad rounded-square mint furry pillow speech-bubble, huge soft padded cheeks, warm ivory eye whites with large ink-black pupils and tiny cream catchlights, forest-green smiling mouth, short fused lower-left speech-point. NO arms, legs, feet, ears, nose or added tuft. Preserve width/height, cheek structure, eye spacing, fur and mint colour. White studio background, consistent soft lighting, clean professional character development board, readable short labels, generous separation. Do not redesign the mascot. Title: LOVE & EVERYDAY REACTIONS. Exactly 4 columns by 3 rows, 12 full-body labeled reactions in order: Heart eyes, Blowing a kiss, Kissing, Closed-eye kiss, Feeling loved, Starstruck, Please, Happy tears, Giggling, Phew, Silly wink, Cheering. Heart eyes and starstruck can temporarily use heart/star pupils inside ivory whites; all other open eyes use approved ink pupils. Blowing kiss shows puckered mouth with tiny floating rose heart. Closed-eye kiss has clearly closed lids. Feeling loved has three small floating hearts. No limbs. Clear expressive variety."
+      },
+      "file": "assets/happy-pillow-love-ivory-12.png",
+      "result": {
+        "index": 2,
+        "job_id": "700c488e-9ae7-4db0-983d-0b565628dfd3",
+        "status": "completed",
+        "type": "image",
+        "model": "gpt_image_2_5",
+        "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260911_123310_700c488e-9ae7-4db0-983d-0b565628dfd3.png"
+      }
+    },
+    {
+      "index": 3,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "16:9",
+        "medias": [
+          {
+            "role": "image",
+            "value": "128b3b7d-fb5a-4125-8394-ce13f269ee01"
+          }
+        ],
+        "prompt": "Use the attached master portrait as exact character identity. Happy Little Pillow is a broad rounded-square mint furry pillow speech-bubble, huge soft padded cheeks, warm ivory eye whites with large ink-black pupils and tiny cream catchlights, forest-green smiling mouth, short fused lower-left speech-point. NO arms, legs, feet, ears, nose or added tuft. Preserve width/height, cheek structure, eye spacing, fur and mint colour. White studio background, consistent soft lighting, clean professional character development board, readable short labels, generous separation. Do not redesign the mascot. Title: FRONT ROTATION — 10° STEPS. Exactly FIVE rows and NINETEEN columns, 95 small full-body views, with thin light gray grid. Each cell contains one COMPLETE BROAD SQUARE pillow, never a tall upright rectangle. Row labels: LOOKING UP (+30 pitch), SLIGHTLY UP (+15), LOOKING STRAIGHT (0), SLIGHTLY DOWN (-15), LOOKING DOWN (-30). Column headers L90 L80 L70 L60 L50 L40 L30 L20 L10 CENTER R10 R20 R30 R40 R50 R60 R70 R80 R90. Distinct incremental 10-degree yaw orientations, same pitch within each row. Soft consistent mint fur. No decorative props.  CENTER faces the viewer, L90 left profile, R90 right profile. Entire front semicircle. Views looking straight have cheerful approved open eyes and same smile. Eyes and face disappear physically around side as appropriate; no face on back. Attached master determines broad pillow anatomy. Short tail is attached to same anatomical corner through rotation, never becomes a separate ball or foot."
+      },
+      "file": "assets/happy-pillow-front-ivory-95.png",
+      "result": {
+        "index": 3,
+        "job_id": "795ce827-ca12-426b-ad75-beb0ba18b1ef",
+        "status": "completed",
+        "type": "image",
+        "model": "gpt_image_2_5",
+        "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260911_123310_795ce827-ca12-426b-ad75-beb0ba18b1ef.png"
+      }
+    },
+    {
+      "index": 4,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "16:9",
+        "medias": [
+          {
+            "role": "image",
+            "value": "128b3b7d-fb5a-4125-8394-ce13f269ee01"
+          }
+        ],
+        "prompt": "Use the attached master portrait as exact character identity. Happy Little Pillow is a broad rounded-square mint furry pillow speech-bubble, huge soft padded cheeks, warm ivory eye whites with large ink-black pupils and tiny cream catchlights, forest-green smiling mouth, short fused lower-left speech-point. NO arms, legs, feet, ears, nose or added tuft. Preserve width/height, cheek structure, eye spacing, fur and mint colour. White studio background, consistent soft lighting, clean professional character development board, readable short labels, generous separation. Do not redesign the mascot. Title: REAR ROTATION — 10° STEPS. Exactly FIVE rows and NINETEEN columns, 95 small full-body views, with thin light gray grid. Each cell contains one COMPLETE BROAD SQUARE pillow, never a tall upright rectangle. Row labels: LOOKING UP (+30 pitch), SLIGHTLY UP (+15), LOOKING STRAIGHT (0), SLIGHTLY DOWN (-15), LOOKING DOWN (-30). Column headers L90 L80 L70 L60 L50 L40 L30 L20 L10 CENTER R10 R20 R30 R40 R50 R60 R70 R80 R90. Distinct incremental 10-degree yaw orientations, same pitch within each row. Soft consistent mint fur. No decorative props.  Replace CENTER header with BACK. Center is true back, yaw180; outward columns rotate 10° increments toward side profiles at90 and270. Strict REAR hemisphere: center shows entirely furry back with NO EYES NO MOUTH NO CHEEKS ON BACK. ONLY extreme side profiles may hint far edge of face. Broad puffy square body, shallow pillow depth; preserve original attached tail anatomical placement through all rotations, never two tails. Body not tall. Five rows keep respective viewing elevations."
+      },
+      "file": "assets/happy-pillow-rear-ivory-95.png",
+      "result": {
+        "index": 4,
+        "job_id": "1f097d51-55ea-4ee4-98cf-8bfe51255040",
+        "status": "completed",
+        "type": "image",
+        "model": "gpt_image_2_5",
+        "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260911_123310_1f097d51-55ea-4ee4-98cf-8bfe51255040.png"
+      }
+    },
+    {
+      "index": 5,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "max",
+        "resolution": "4k",
+        "aspect_ratio": "3:2",
+        "medias": [
+          {
+            "role": "image",
+            "value": "128b3b7d-fb5a-4125-8394-ce13f269ee01"
+          }
+        ],
+        "prompt": "Use the attached master portrait as exact character identity. Happy Little Pillow is a broad rounded-square mint furry pillow speech-bubble, huge soft padded cheeks, warm ivory eye whites with large ink-black pupils and tiny cream catchlights, forest-green smiling mouth, short fused lower-left speech-point. NO arms, legs, feet, ears, nose or added tuft. Preserve width/height, cheek structure, eye spacing, fur and mint colour. White studio background, consistent soft lighting, clean professional character development board, readable short labels, generous separation. Do not redesign the mascot. Title: OUR LITTLE RECEPTIONIST — WARDROBE. Exactly 4 columns by 2 rows, EIGHT labeled full-body looks with exact same approved face and body: 1 CONTRACTOR: tiny yellow hardhat tilted playfully to one side, no other costume. 2 SALON: small dark forest-green stylist apron around lower body, NO hairpins, clips, rollers or headwear. 3 DOG GROOMER: small mint-gray grooming apron with simple paw emblem, no towel on head, no collar, no bandana. 4 PHOTOGRAPHER: miniature black camera on slim neck strap resting below cheeks, no hands. 5 MECHANIC: compact tan leather TOOL BELT around lower body with tiny wrench and screwdriver in loops, NOT an apron. 6 MEDICAL: tiny teal scrub cap and simple small stethoscope around lower body, face clear, no white coat engulfing pillow. 7 GLASSES: thin softly rounded dark forest eyeglass frames, clear lenses showing Ivory & Ink eyes fully, no other costume. 8 EVERYDAY: undecorated original mint pillow. Accessories are small, funny and tactile, face fully visible, no humanoid limbs. Never add hairpins or towels anywhere."
+      },
+      "file": "assets/happy-pillow-wardrobe-v2.png",
+      "result": {
+        "index": 5,
+        "job_id": "eb674ad5-1588-45af-9fe6-b6378be131c6",
+        "status": "completed",
+        "type": "image",
+        "model": "gpt_image_2_5",
+        "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_2z2vu4dZcnLXNQJM8YgejJ9U2Uv/hf_20260911_123310_eb674ad5-1588-45af-9fe6-b6378be131c6.png"
+      }
+    }
+  ],
+  "cutout": {
+    "file": "assets/happy-pillow-master-cutout.png",
+    "tool": "image_gen",
+    "purpose": "transparent derivative of master portrait"
+  }
+}

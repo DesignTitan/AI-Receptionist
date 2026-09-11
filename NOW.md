@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — proof image frame repaired (10 September 2026)
+
+- Restored 8px green padding on all sides of proof images and rounded all desktop frame corners.
+- Removed the oversized blurred fill inside the image frame that was bleeding into its padding; preserved the separate Gaussian drop shadow outside the card.
+- Browser verified padding, radii and removed fill; visually checked the result.
+- Local commit only; previous public-push approval block remains.
+
 ## Current handoff — simplified industry copy; alternative layout discussion (10 September 2026)
 
 - Removed top slogans, subcategory lists and bubble labels; cards retain industry, one short benefit and concise dialogue. Glass bubbles are more translucent.

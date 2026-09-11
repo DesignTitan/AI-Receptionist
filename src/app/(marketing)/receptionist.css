@@ -304,17 +304,9 @@
 .rc-card__copy > p:not(.rc-card__eyebrow):not(.rc-card__foot) { margin: 0; color: #dcebe5; max-width: 34ch; }
 .rc-card__foot { margin: auto 0 0; padding-top: 1.25rem; font-size: var(--sc-t-sm); color: #b5ccc2; }
 .rc-card__foot::before { content: "— "; color: #c3e6d6; }
-/* the image sits fully inside its area, with a hair of inset; the ground
-   behind it matches the render's own edges so nothing letterboxes visibly */
-/* Flush against the copy on the left, 8px of air on the other three sides.
-   The slot's shape changes with the viewport, so the image is contained rather
-   than cropped, and the space around it is the same image blurred — no band,
-   no crop, at any width. */
-.rc-card__media { position: relative; margin: 0; min-width: 0; min-height: 0; padding: 8px 8px 8px 0; border-radius: 0 32px 32px 0; overflow: hidden; background: #0b1815; display: grid; }
-.rc-card__media::before {
-  content: ""; position: absolute; inset: 8px 8px 8px 0; border-radius: 24px;
-  background-image: var(--shot); background-size: cover; background-position: center;
-  filter: blur(28px) saturate(120%); transform: scale(1.12); }
+/* A clean green frame surrounds the clipped image; the separate card shadow
+   remains outside this frame so its blur cannot bleed into the padding. */
+.rc-card__media { position: relative; margin: 0; min-width: 0; min-height: 0; padding: 8px; border-radius: 32px; overflow: hidden; background: #0b1815; display: grid; }
 /* Two layers in one frame: the blurred desert at the back, the glass panel (an
    alpha PNG) in front. Both ride the act's own progress (--sc-p, inherited from
    the pinned section) for the whole scroll, not just the card's flight: the
@@ -338,7 +330,6 @@
   /* stacked on a phone, so the image rounds at the bottom, not the right */
   /* stacked: 8px all round, and room between the copy and the image */
   .rc-card__media { padding: 8px; border-radius: 0 0 32px 32px; }
-  .rc-card__media::before { inset: 8px; }
   .rc-card::before { right: 0; left: 0; top: auto; bottom: 0; width: 100%; height: 62%; }
   .rc-card { --card-pad: 1.15rem; top: calc(var(--i) * 12px); grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 1.25rem; }
   .rc-card__copy { padding: var(--card-pad) var(--card-pad) 0; gap: 0.15rem; }

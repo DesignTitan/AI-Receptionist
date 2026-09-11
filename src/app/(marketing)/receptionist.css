@@ -951,3 +951,17 @@
 .rc-callback__signup a { color: #173b31; text-decoration: underline; text-underline-offset: 4px; white-space: nowrap; }
 .rc-try__field select { width: 100%; padding: 14px; border: 1px solid #d5e0d8; border-radius: 10px; background: #f7faf6; color: #173b31; font: inherit; }
 .rc-try__field small { color: #617872; font-size: 12px; line-height: 1.5; }
+
+.rc-footer__trust { max-width: 1280px; margin: 0 auto 32px; padding-top: 30px; border-top: 1px solid #ffffff26; }
+.rc-footer__trust-heading { display: flex; justify-content: space-between; gap: 18px; align-items: center; margin-bottom: 28px; }
+.rc-footer__trust-heading h3 { font-size: 20px; margin: 0; }
+.rc-footer__trust-heading > span { padding: 7px 12px; background: #ffffff0d; border-radius: 99px; font-size: 11px; color: #c5d8ce; }
+.rc-footer__trust-links { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+.rc-footer__trust-links nav { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.rc-footer__trust-links h3 { margin: 0 0 6px; font-size: 13px; color: #eff7f0; }
+.rc-footer__trust-links a { font-size: 13px; line-height: 1.5; color: #c5d8ce; text-decoration: none; }
+.rc-footer__trust-links a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+.rc-footer__trust-links small { font-size: 10px; opacity: .8; margin-left: 4px; }
+.rc-footer__draft { font-size: 11px; color: #bdcfc4; margin: 28px 0 0; line-height: 1.6; }
+@media(max-width: 800px) { .rc-footer__trust-links { grid-template-columns: 1fr 1fr; } .rc-footer__trust-heading { align-items: flex-start; flex-direction: column; } }
+@media(max-width: 380px) { .rc-footer__trust-links { grid-template-columns: 1fr; } }

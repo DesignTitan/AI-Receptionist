@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — legal, trust and social placeholders
+
+- Added 18 legal/privacy/security topics and four social placeholders to the footer, linking to an explicitly temporary /legal hub with noindex.
+- No certification badges, fabricated contacts, functioning preference claims or approved legal terms; each placeholder states pending review.
+- Added docs/legal-security-launch-review.md with primary-source research, jurisdiction/applicability questions, operational checks and lawyer sign-off checklist.
+- Verified all 22 anchors, desktop/mobile layout and no horizontal overflow; typecheck and diff checks passed.
+- Complete locally. Next: lawyer/owner supplies approved policies, verified assurance, actual social profiles and operational contact/rights channels. Public push remains blocked by prior approval review.
+
 ## Current handoff — callback, pricing and navigation refinements
 
 - Mascot floats above a modern smartphone with a pointed speech tail; updated callback artwork and description.

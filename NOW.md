@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — two mint personality concepts
+
+- Generated Little Mischief and Curious Companion portraits with GPT Image 2.5 using the website mascot reference.
+- Added the two images at character-sheets.html#personality, with full-resolution links.
+- Exploratory choices only; original website mascot remains unchanged.
+- Local commit only; prior public push approval block remains.
+
+
 ## Current handoff — expanded mascot research pack (10 September 2026)
 
 - Added six detailed GPT Image 2.5 sheets: 12 rotation angles, 24 expressions, 20 poses, eight fur/material treatments, 12 colours and 16 design variations.

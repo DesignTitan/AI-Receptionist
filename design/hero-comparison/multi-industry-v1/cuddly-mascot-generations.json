@@ -1,0 +1,64 @@
+{
+  "model": "gpt_image_2_5",
+  "reference": "a34dabfc-027c-439c-b317-bc62b5375d9e",
+  "requests": [
+    {
+      "index": 1,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "1:1",
+        "medias": [
+          {
+            "role": "image",
+            "value": "a34dabfc-027c-439c-b317-bc62b5375d9e"
+          }
+        ],
+        "prompt": "{\"type\":\"Single mascot hero portrait refinement\",\"goal\":\"Make the EXACT supplied mint mascot much more cuddly, fun, friendly and beautifully rendered. Recognizably the same character, not a redesign into a creature.\",\"mascot\":{\"form\":\"Original rounded square speech bubble with one short soft lower-left tail. Broad pillow body, very rounded inflated corners, dimensional padded cheeks. Preserve proportions and face placement from reference.\",\"palette\":\"Exact original pale mint fur and dark forest green facial features.\",\"rendering\":\"Beautiful premium animated-film 3D, incredibly soft dense silky down fur with smooth direction and velvety clumps. Fur should feel like a luxurious stuffed animal you want to squeeze, not wiry grass or spiky fiber.\"},\"composition\":\"One single full character large centered, plain warm-white seamless studio, gentle grounded shadow, no text no layout.\",\"constraints\":[\"No cowlick or hairstyle\",\"No curled tail\",\"No pear shape\",\"No giant glass doll eyes\",\"No tongue sticking out\",\"No sneer or wink\",\"No costume, props, limbs, ears or nose\",\"No colour gradients\"],\"direction\":\"HAPPY LITTLE PILLOW. Extra plump marshmallow softness, compact brushed plush fur 8mm, squash body very slightly wider as if settling onto soft surface. Two small upturned CLOSED smiling crescent eyes and a warm delighted small open U smile, dark-green mouth no teeth. Subtle plush cheeks lift in smile. Frontal gentle symmetrical happy face, feeling of a warm hug.\"}"
+      }
+    },
+    {
+      "index": 2,
+      "params": {
+        "model": "gpt_image_2_5",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "1:1",
+        "medias": [
+          {
+            "role": "image",
+            "value": "a34dabfc-027c-439c-b317-bc62b5375d9e"
+          }
+        ],
+        "prompt": "{\"type\":\"Single mascot hero portrait refinement\",\"goal\":\"Make the EXACT supplied mint mascot much more cuddly, fun, friendly and beautifully rendered. Recognizably the same character, not a redesign into a creature.\",\"mascot\":{\"form\":\"Original rounded square speech bubble with one short soft lower-left tail. Broad pillow body, very rounded inflated corners, dimensional padded cheeks. Preserve proportions and face placement from reference.\",\"palette\":\"Exact original pale mint fur and dark forest green facial features.\",\"rendering\":\"Beautiful premium animated-film 3D, incredibly soft dense silky down fur with smooth direction and velvety clumps. Fur should feel like a luxurious stuffed animal you want to squeeze, not wiry grass or spiky fiber.\"},\"composition\":\"One single full character large centered, plain warm-white seamless studio, gentle grounded shadow, no text no layout.\",\"constraints\":[\"No cowlick or hairstyle\",\"No curled tail\",\"No pear shape\",\"No giant glass doll eyes\",\"No tongue sticking out\",\"No sneer or wink\",\"No costume, props, limbs, ears or nose\",\"No colour gradients\"],\"direction\":\"JOYFUL FLUFF. Same original square mascot, puffier soft down 20mm with beautifully feathered soft silhouette, absolutely no spiky tuft. Two small friendly dark-green oval eyes, small soft catchlights, not enormous shiny eyes. Broad joyful open smile with subtle rounded cheeks. A tiny 4 degree tilt and gentle airborne bounce, compact body slight squash, short normal speech tail. Looks like a happy friendly cuddly companion greeting someone it loves.\"}"
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "index": 1,
+      "job_id": "62fde102-5b1f-4e78-ba52-a6b91061d8e9",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 2,
+      "job_id": "38e3f117-e505-492e-9cdc-d20d3ede59b5",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      }
+    }
+  ]
+}

@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — cuddly mint refinements
+
+- Replaced rejected personality portraits on the character page with two new GPT Image 2.5 mint refinements.
+- Happy Little Pillow has smiling closed eyes and padded cheeks; Joyful Fluff has open eyes and a bounce.
+- Original shape retained; prior concepts archived in assets, no homepage mascot replacement.
+- Local commit only; earlier public-push approval block remains.
+
+
 ## Current handoff — two mint personality concepts
 
 - Generated Little Mischief and Curious Companion portraits with GPT Image 2.5 using the website mascot reference.

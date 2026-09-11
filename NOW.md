@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — reassurance arm correction
+
+- Corrected frame 6 of floral-dress shared acting board: removed horizontal disconnected forearm across abdomen.
+- Left upper arm now descends beside torso, left hand rests on Loup’s back; right hand holds phone.
+- Updated active image and continuity notes to v2; original v1 preserved.
+- Next: maintain readable limb connections in individual production frames. Local commit under existing public-push block.
+
 ## Current handoff — approved cast shared acting
 
 - Built six-frame Loup-and-sister acting board using approved floral dress and latest real facial reference.

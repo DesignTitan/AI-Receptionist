@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — select and adjust calculator numbers
+
+- Double-click selects the entire value in all three numeric calculator fields for replacement.
+- Up/Down changes values by one within existing bounds; wheel scrolling still never changes values.
+- Verified full selection, replacement typing, both arrow keys and wheel behavior in each field; typecheck and diff checks passed.
+- Saved locally; public push remains blocked by prior approval review.
+
 ## Current handoff — no scroll-based number changes
 
 - Calculator numeric fields now use text inputs with decimal/numeric mobile keyboards; scrolling and arrow keys do not increment values.

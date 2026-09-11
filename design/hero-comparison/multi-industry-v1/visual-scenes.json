@@ -1,13 +1,14 @@
 [
   {
     "number": 1,
-    "image": "/marketing/industries/mascot-transparent.png",
+    "image": "assets/intro-sky.png",
     "x": 50,
     "y": 50,
     "intro": true,
-    "title": "Meet the little voice.",
-    "action": "Opening shot: the mascot sits dead center against near-black forest green, with generous space around it. Hold for about 1.5 seconds: a small blink, a friendly smile, then cut to the groomer as the phone rings. No headline or bubble.",
-    "audio": "A soft opening sound. The incoming ring begins just before the cut. No dialogue."
+    "title": "A little calm before the call.",
+    "action": "Look straight up through sunlit trees into blue sky. The marketing website\u2019s mint speech-bubble mascot floats in the center, eyes gently closed and smiling. A brief, quiet hold, then the incoming ring leads into the groomer.",
+    "audio": "Soft breeze and rustling leaves. The phone ring begins just before the cut. No dialogue.",
+    "full": true
   },
   {
     "number": 2,
@@ -29,7 +30,7 @@
   },
   {
     "number": 4,
-    "image": "assets/grooming.png",
+    "image": "assets/grooming-consistent.png",
     "x": 0,
     "y": 50,
     "title": "Someone answers.",
@@ -74,7 +75,7 @@
   },
   {
     "number": 9,
-    "image": "assets/salon.png",
+    "image": "assets/salon-consistent.png",
     "x": 100,
     "y": 0,
     "title": "Mid-blow-dry.",
@@ -101,7 +102,7 @@
   },
   {
     "number": 12,
-    "image": "assets/salon.png",
+    "image": "assets/salon-consistent.png",
     "x": 0,
     "y": 100,
     "title": "Keep looking after the client.",
@@ -146,7 +147,7 @@
   },
   {
     "number": 17,
-    "image": "assets/photography.png",
+    "image": "assets/photography-consistent.png",
     "x": 100,
     "y": 50,
     "title": "The moment is still his.",
@@ -191,7 +192,7 @@
   },
   {
     "number": 22,
-    "image": "assets/mechanic.png",
+    "image": "assets/mechanic-consistent.png",
     "x": 0,
     "y": 50,
     "title": "A clear handoff.",
@@ -218,7 +219,7 @@
   },
   {
     "number": 25,
-    "image": "assets/mechanic.png",
+    "image": "assets/mechanic-consistent.png",
     "x": 100,
     "y": 100,
     "title": "Meet your AI receptionist.",

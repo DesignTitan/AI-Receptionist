@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — website mascot identity and sky opening (10 September 2026)
+
+- Source of truth is public/marketing/receptionist-mascot.png: rounded-square speech bubble, mint fur, closed crescent eyes, lower-left tail. Uploaded exact asset as Higgsfield reference a34dabfc-027c-439c-b317-bc62b5375d9e.
+- Generated sky/tree opening with GPT Image 2.5 using user screenshot only for setting; added 7-pose mascot sheet linked in viewer.
+- Corrected existing mascot appearances using GPT Image 2.5. Rejected collateral changes to non-mascot panels (including wrong dog); viewer uses original non-mascot panels and corrected mascot panels only.
+- Other people/dog character sheets and final scene generation still pending. Homepage assets unchanged.
+- Local commit only; prior public push approval block remains.
+
 ## Current handoff — centered mascot intro (10 September 2026)
 
 - Added scene 1: existing mint mascot centered on near-black forest green, no headline or bubble.

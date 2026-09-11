@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — no default industry
+
+- Industry dropdown starts at Choose your industry, with no prefilled business or sale value.
+- Industry callout is hidden until selection; preview prompts for an industry instead of displaying a default estimate.
+- Verified empty initial state, training benchmark/estimate after selection, and blank fee for custom-value categories; typecheck and diff checks passed.
+- Saved locally; public push remains blocked by prior approval review.
+
 ## Current handoff — clearer industry heading and research note
 
 - Removed the repeated industry-selection instruction beneath Your business value; retained the accessible field label.

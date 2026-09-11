@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — owner smile revision
+
+- Reviewed and saved four new smile photos; generated v5 portrait, full sheet and shared acting internally.
+- Revised lip shape, tooth display and cheek lift; denim shirt and bare feet retained.
+- Updated cast page and smile direction in owner brief; all previous artwork/page versions preserved.
+- Next: user smile/likeness review before production scenes.
+- Local commit only under existing automatic-approval public-push block.
+
 ## Current handoff — owner denim and barefoot styling
 
 - Generated v4 portrait/proportions, full character sheet and six shared acting frames internally.

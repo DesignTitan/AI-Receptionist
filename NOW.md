@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — video assets and multi-industry production plan (10 September 2026)
+
+- Added playable/downloadable Happy Paws first cut to Marketing assets, linked a new 24-shot, 65-second multi-industry storyboard.
+- Retrieved public X embed: second post demonstrates four-angle character references; full long prompt is truncated. Inspected film frames; distinguish observations from proposed transition/edit workflow.
+- Detailed cast/location reference requirements, exact dialogue, camera/action, mascot/graphics timing and per-shot rejection gates; no new footage generated.
+- Next: approved character/location sheets, timed dialogue and one difficult motion test before full generation. Existing homepage film unchanged.
+- Local commit only; prior public-push approval block remains.
+
 ## Current handoff — proof image frame repaired (10 September 2026)
 
 - Restored 8px green padding on all sides of proof images and rounded all desktop frame corners.

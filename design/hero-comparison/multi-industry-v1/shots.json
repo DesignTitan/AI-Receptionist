@@ -1,0 +1,218 @@
+[
+  [
+    "00\u201303",
+    "Grooming",
+    "Hands occupied",
+    "35mm waist-height three-quarter wide. Samoyed stands inside stainless tub; groomer stands outside, both shoes visible below the front panel. Her left hand steadies its chest; right hand works shampoo along its shoulder. Dry phone is on a wall shelf beyond splash range.",
+    "One ring at 00.8. Water and collar jingle; no narration.",
+    "Small brand mark only. No headline covering the spatial proof.",
+    "Start on action, not a posed smile. Reject any person in the tub, floating wrists or submerged dog face."
+  ],
+  [
+    "03\u201305",
+    "Grooming",
+    "The look",
+    "65mm face-and-hands medium from the same side of the tub. Groomer glances toward the shelf without moving her hands. Samoyed turns its nose toward her sleeve, one small comic beat.",
+    "Ring stops as call connects at 04.7.",
+    "Mint mascot rises beside the shelf over 8 frames; settle over 4.",
+    "Same wetness, apron, tub height and lighting. Neither hand reaches for the phone."
+  ],
+  [
+    "05\u201308",
+    "Grooming",
+    "A real greeting",
+    "Hold a new 50mm shelf-side composition with groomer and Samoyed in background. Mascot faces camera three-quarter, visibly volumetric; it does not become a flat sticker.",
+    "AI: \u201cHi, Happy Paws. How can I help?\u201d",
+    "Speech bubble displays the exact line at speech onset. Mouth opens on voiced sounds; blink after greeting.",
+    "Only AI speaks. No narrator or customer mouth moving underneath this line."
+  ],
+  [
+    "08\u201312",
+    "Grooming",
+    "Meet the caller",
+    "50mm living-room medium. Caller with dark shoulder-length hair, cream knit, phone in right hand. Milo the tiny tan Yorkie sits beside her; long flyaway strands radiate like the supplied reference. He noses a loose sock, then looks up.",
+    "Caller: \u201cMilo needs a groom. Thursday afternoon?\u201d",
+    "Greeting bubble clears before caller speaks. No new overlay needed; optional captions.",
+    "Milo belongs here, never in the Samoyed wash scene. Mischievous, not distressed; no snarling or exaggerated teeth."
+  ],
+  [
+    "12\u201315",
+    "Grooming",
+    "An actual choice",
+    "85mm new close composition on caller listening; Milo rests one paw on her forearm. Keep phone on same ear.",
+    "AI, on phone: \u201cI have two o\u2019clock.\u201d Caller: \u201cPerfect.\u201d Leave 0.3 seconds between speakers.",
+    "One glass bubble: \u201cThursday \u00b7 2:00 PM\u201d. No typing animation delaying information.",
+    "Availability is a fictional connected-pilot example. Do not show confirmation before her agreement."
+  ],
+  [
+    "15\u201318",
+    "Grooming",
+    "Resolved; keep working",
+    "Return in a NEW 50mm side shot: groomer moves rinse nozzle once down Samoyed\u2019s shoulder. Both remain in their established positions. Camera begins a rightward move after the outcome is readable.",
+    "AI: \u201cMilo\u2019s booked for Thursday at two.\u201d",
+    "\u201cMilo \u00b7 Groom \u00b7 Thu 2:00 PM\u201d with one restrained check. Hold at least 2 seconds, then clear before transition.",
+    "Fresh action and framing, not replay of shot 1. Rinse starts here; no magically dry coat."
+  ],
+  [
+    "18\u201319",
+    "Transition A",
+    "Towel passes the lens",
+    "An assistant carries a dry forest-green towel left-to-right close to lens. It covers the frame. Cut at full coverage into a dark salon cape passing in the same direction.",
+    "Short fabric swish; salon room tone starts 4 frames before reveal.",
+    "No text, faces or booking UI during the hidden cut.",
+    "Two separate shots. Match travel direction and exposure. Do not ask a generator to morph a dog into a salon client."
+  ],
+  [
+    "19\u201322",
+    "Salon",
+    "Cannot drop the brush",
+    "35mm mirror-side medium. Black woman stylist with cropped natural hair, black shirt and brass apron clip. Left hand holds a round brush lifting a client\u2019s hair; right hand directs dryer. Phone lights on station behind her.",
+    "Dryer bed fades under call connection. AI: \u201cHi, Studio June.\u201d",
+    "Same mascot and voice, smaller beside dry station.",
+    "Distinct cast and salon layout. Avoid duplicate groomer face. Brush and dryer have distinct hands throughout."
+  ],
+  [
+    "22\u201326",
+    "Salon",
+    "Caller needs a time",
+    "50mm cut to a man at a kitchen table, phone at left ear, blue work shirt. He closes a paper diary with his free hand.",
+    "Caller: \u201cA haircut Friday?\u201d AI: \u201cWould three work?\u201d",
+    "One bubble at a time. \u201cFriday \u00b7 3:00 PM\u201d appears when offered.",
+    "Keep dialogue at conversational pace. Same caller, phone and kitchen for next shot."
+  ],
+  [
+    "26\u201328",
+    "Salon",
+    "Agreement",
+    "65mm closer angle on caller giving a small nod.",
+    "Caller: \u201cYes, thank you.\u201d",
+    "Hold the offered time until yes; then checkmark.",
+    "No cheering, no instant wardrobe or location change."
+  ],
+  [
+    "28\u201331",
+    "Salon",
+    "Attention stays with client",
+    "50mm NEW salon angle. Stylist finishes one controlled brush pass; client smiles at the mirror.",
+    "AI: \u201cYou\u2019re booked for Friday at three.\u201d",
+    "\u201cHaircut \u00b7 Fri 3:00 PM\u201d holds through 30.5.",
+    "Hair remains consistent with an in-progress blow-dry, not a sudden finished transformation."
+  ],
+  [
+    "31\u201332",
+    "Transition B",
+    "Mirror-edge whip",
+    "Pan right off the salon mirror\u2019s dark vertical frame. On strongest directional blur cut to a photographic backdrop stand moving out of frame right. Settle into studio.",
+    "Dryer swish resolves into studio fan.",
+    "Clear all bubbles before pan.",
+    "Match rightward screen motion and horizon. Allow 12-frame motion handles on both clips. No flash or repeated strobe."
+  ],
+  [
+    "32\u201335",
+    "Photography",
+    "The moment cannot wait",
+    "35mm studio wide. South Asian male photographer, short curls, charcoal overshirt, camera raised in both hands. Family of three is mid-laugh on a warm paper backdrop; camera strap hangs naturally.",
+    "Two shutter clicks, family laughter. AI: \u201cHi, Northlight Studio.\u201d",
+    "Mascot beside unattended desk, outside sightline to family.",
+    "Tripod and light stands remain fixed. No phone in photographer\u2019s hands or impossible fingers around camera."
+  ],
+  [
+    "35\u201339",
+    "Photography",
+    "Book the next session",
+    "50mm new caller: older woman at home beside a framed family photograph. Phone right ear, burgundy cardigan.",
+    "Caller: \u201cA family session on Saturday?\u201d AI: \u201cTen o\u2019clock?\u201d",
+    "\u201cSaturday \u00b7 10:00 AM\u201d on spoken offer.",
+    "All booking details stay attached to this caller, not the salon caller."
+  ],
+  [
+    "39\u201342",
+    "Photography",
+    "Confirmed",
+    "65mm caller reaction, then NEW studio over-shoulder angle as photographer lowers camera slightly and directs family with a smile.",
+    "Caller: \u201cThat works.\u201d AI: \u201cSaturday at ten. You\u2019re booked.\u201d",
+    "Check appears only after agreement. Hold outcome to end of shot.",
+    "Cut between dialogue lines, not halfway through a word. Photographer does not mime AI speech."
+  ],
+  [
+    "42\u201343",
+    "Transition C",
+    "Follow the camera",
+    "Photographer steps right; camera pans behind a black softbox that fills the lens. Cut from that dark occlusion to a garage lift post revealing rightward.",
+    "Shutter tail into soft workshop clink.",
+    "No UI through occlusion.",
+    "Match black level, camera height and movement. Do not animate studio equipment transforming into a car."
+  ],
+  [
+    "43\u201346",
+    "Mechanic",
+    "Busy for a reason",
+    "35mm wide at shoulder height. Older East Asian woman mechanic, silver hair tied back, navy coveralls, stands beside an open hood. One gloved hand holds inspection lamp; other steadies a hose. Engine off.",
+    "Workshop room tone. AI: \u201cHi, Oak Street Auto.\u201d",
+    "Mascot floats near wall phone, outside engine bay.",
+    "Both feet on workshop floor. No loose parts moving, sparks, running engine or unsafe action introduced for drama."
+  ],
+  [
+    "46\u201350",
+    "Mechanic",
+    "A request that needs a person",
+    "50mm caller, young man standing in his driveway beside a parked blue hatchback, keys in free hand.",
+    "Caller: \u201cCan I move tomorrow\u2019s appointment?\u201d AI: \u201cI\u2019ll ask the team to call you back.\u201d",
+    "Bubble: \u201cCallback requested\u201d. No \u201cRescheduled\u201d claim.",
+    "Shows useful escalation instead of pretending AI handles every exception. No invented new appointment time."
+  ],
+  [
+    "50\u201353",
+    "Mechanic",
+    "The handoff is clear",
+    "65mm desk insert with readable short callback entry; mechanic remains working in soft background.",
+    "Caller: \u201cThanks.\u201d Room tone breathes; no narrator yet.",
+    "\u201cAppointment change \u00b7 Callback requested\u201d. Static, legible for all 3 seconds.",
+    "No fake private patient/customer data. This is a request captured for the team, not a completed change."
+  ],
+  [
+    "53\u201355",
+    "Payoff",
+    "Groomer stays present",
+    "NEW medium: rinsed, still-wet Samoyed leans chin on tub edge; groomer rubs its cheek with a towel while standing outside.",
+    "VO begins: \u201cStay with the customer in front of you.\u201d",
+    "No dialogue bubble.",
+    "New shot, later stage of same wash. Dog is not instantly dry. Do not reuse opening clip."
+  ],
+  [
+    "55\u201357",
+    "Payoff",
+    "Stylist stays present",
+    "NEW close angle: stylist gives client the hand mirror, client checks the back of finished hair. Simple hard cut on hand movement.",
+    "Continue same VO sentence; music stays below voice.",
+    "No extra slogan.",
+    "Hair completion is a later moment, made clear by finishing gesture. Keep same client and chair."
+  ],
+  [
+    "57\u201359",
+    "Payoff",
+    "Photographer gets the moment",
+    "NEW camera-side angle: family laughs together, photographer catches it. One shutter punctuates the cut.",
+    "VO: \u201cGive the next one a way to reach you.\u201d",
+    "No UI.",
+    "Same family, backdrop, wardrobe. Not a replay of earlier laugh or shutter animation."
+  ],
+  [
+    "59\u201361",
+    "Payoff",
+    "Mechanic carries on",
+    "NEW side angle: mechanic lowers lamp and makes a short note on job sheet. Calm competent gesture.",
+    "Finish VO by 60.8.",
+    "No solved-reschedule graphic; callback still awaiting team.",
+    "Maintain truthful contrast: routine bookings completed; exception passed on."
+  ],
+  [
+    "61\u201365",
+    "End",
+    "One clear invitation",
+    "Near-black forest background. Same fuzzy 3D mascot settles beside clean white type, then looks toward CTA. No new mascot design.",
+    "VO: \u201cMeet your AI receptionist.\u201d Music resolves.",
+    "\u201cYour business keeps going. So can you.\u201d CTA: \u201cMeet your AI receptionist\u201d. Small readable note: \u201cIllustrative scenarios. Incoming booking requires a connected pilot.\u201d",
+    "Hold CTA 4 seconds. No other sales claims, pop-ups or secondary button. End on stable image."
+  ]
+]

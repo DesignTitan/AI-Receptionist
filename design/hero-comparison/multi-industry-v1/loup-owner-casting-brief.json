@@ -4,7 +4,7 @@
   "master": "assets/loup-owner-sister-latest-reference.png",
   "primary_reference": "assets/loup-owner-sister-latest-reference.png",
   "sheet": "assets/cast-loup-owner-sister-dress-v1.png",
-  "shared_acting": null,
+  "shared_acting": "assets/cast-loup-sister-dress-interactions-v1.png",
   "identity": "Latest supplied photograph is primary authority. Preserve actual face, smile, head angle and long highlighted hair; do not blend previous owner or rejected sister generations.",
   "wardrobe": "Original pink floral sleeveless dress with narrow straps, lightweight ruffled hem, pink/yellow/orange flowers and darker leaves. Bright short necklace, black glasses hanging at neckline. Bare feet. No denim.",
   "continuity": "Phone right hand/right ear; Loup to her left with extra fluffy bedhead and fringe-shake behavior.",
@@ -12,7 +12,7 @@
     "assets/cast-loup-owner-sister-rejected-master-v1.png",
     "assets/cast-loup-owner-sister-rejected-sheet-v1.png"
   ],
-  "next": "Build dedicated shared scenes using approved floral dress sheet and latest real photo for facial consistency.",
+  "next": "Use shared acting board to prepare individual video frames. Keep identity, screen direction, floral wardrobe and dog fur volume consistent.",
   "interpretations": "Unseen dress back and standing hemline provisional. Turnaround angles are illustrative, not measured.",
   "approved_sheet": "assets/cast-loup-owner-sister-dress-v1.png"
 }

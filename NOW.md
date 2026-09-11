@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — approved cast shared acting
+
+- Built six-frame Loup-and-sister acting board using approved floral dress and latest real facial reference.
+- Added at #loup-owner-interactions, with downloads; previous acting board archived.
+- Added proposed seven-second sequence notes: waiting, nudge, fringe, shake, paw, reassurance.
+- These are still storyboard studies. Next: individual production frames and video preparation, preserving right-hand phone and screen direction.
+- Local commit only under existing public-push approval block.
+
 ## Current handoff — floral dress owner approved
 
 - User accepted the sister floral dress character sheet as good enough to proceed.

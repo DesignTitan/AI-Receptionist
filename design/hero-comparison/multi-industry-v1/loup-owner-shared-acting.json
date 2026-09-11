@@ -1,0 +1,51 @@
+{
+  "status": "Storyboard studies, not generated video",
+  "board": "assets/cast-loup-sister-dress-interactions-v1.png",
+  "proposed_total_seconds": 7,
+  "continuity": [
+    "Owner source face and approved floral dress",
+    "Phone right hand/right ear",
+    "Loup to owner left; keep screen direction",
+    "Same cream sofa, sage cushion, daylight from camera left",
+    "Small extra-fluffy Shih Tzu, no coat or breed changes",
+    "No repeated shake loop; fringe obstruction triggers one shake"
+  ],
+  "beats": [
+    {
+      "frame": 1,
+      "title": "Waiting for her turn",
+      "suggested_seconds": 1.5,
+      "action": "Medium two-shot; owner phone right ear; Loup eyes up. Small breath, no continuous bouncing."
+    },
+    {
+      "frame": 2,
+      "title": "A gentle nudge",
+      "suggested_seconds": 1.2,
+      "action": "Loup shifts weight and nudges left forearm once; owner glances down."
+    },
+    {
+      "frame": 3,
+      "title": "Where did you go?",
+      "suggested_seconds": 0.8,
+      "action": "Dog closeup; fringe settles over eyes. Hold briefly so obstruction reads."
+    },
+    {
+      "frame": 4,
+      "title": "One quick shake",
+      "suggested_seconds": 0.7,
+      "action": "Small head dip, short left-right shake; ears and fur lag then settle. Body stays supported on cushion."
+    },
+    {
+      "frame": 5,
+      "title": "Still here",
+      "suggested_seconds": 1.3,
+      "action": "Return two-shot; eyes now visible, single paw reaches left thigh; eager upward look."
+    },
+    {
+      "frame": 6,
+      "title": "A little reassurance",
+      "suggested_seconds": 1.5,
+      "action": "Owner strokes shoulder with free left hand, still on phone; Loup relaxes into touch."
+    }
+  ]
+}

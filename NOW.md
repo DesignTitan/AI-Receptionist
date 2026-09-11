@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — taller hero and scroll navigation
+
+- Increased hero height slightly on desktop and mobile.
+- Replaced icon navigation with centered mascot logo, right-side text links, phone, login and signup; narrow screens use a links menu.
+- Navigation has no backing over hero; after hero it hides scrolling down and reveals with rounded backing scrolling up.
+- Verified desktop/mobile rendering, scroll states, menu/Escape and expression sources in local browser; typecheck passed.
+- Complete locally; public push remains blocked by prior automatic approval review. Next: user visual review.
+
 ## Current handoff — contextual mascot expressions
 
 - Added approved-style transparent listening and delighted Happy Little Pillow expressions.

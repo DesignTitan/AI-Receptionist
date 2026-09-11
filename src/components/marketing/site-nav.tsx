@@ -4,82 +4,82 @@ import { useEffect, useRef, useState } from "react";
 import { PRODUCT_NAME } from "@/components/marketing/product-chrome";
 import { TryCallPlate } from "@/components/marketing/try-call-plate";
 
-const I = {
-  features: <svg viewBox="0 0 24 24" aria-hidden><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg>,
-  proof: <svg viewBox="0 0 24 24" aria-hidden><path d="M3 12h2l2-5 3 10 3-14 3 14 2-5h3"/></svg>,
-  industries: <svg viewBox="0 0 24 24" aria-hidden><path d="M4 10 5.2 5h13.6L20 10"/><path d="M4 10c0 1.4 1.1 2.5 2.5 2.5S9 11.4 9 10c0 1.4 1.1 2.5 2.5 2.5S14 11.4 14 10c0 1.4 1.1 2.5 2.5 2.5S20 11.4 20 10"/><path d="M5.5 12.5V20h13v-7.5M10 20v-5h4v5"/></svg>,
-  terms: <svg viewBox="0 0 24 24" aria-hidden><path d="M3.5 12.5V5a1.5 1.5 0 0 1 1.5-1.5h7.5l8 8-9 9-8-8Z"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>,
-  call: <svg viewBox="0 0 24 24" aria-hidden><path d="M5.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 7 7l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 3.5 5.5a2 2 0 0 1 2-2Z"/></svg>,
-  close: <svg viewBox="0 0 24 24" aria-hidden><path d="M6 6l12 12M18 6 6 18"/></svg>,
-};
-
 const LINKS = [
-  { id: "desk", label: PRODUCT_NAME, icon: <i className="rc-nav__dot" aria-hidden /> },
-  { id: "features", label: "Features", icon: I.features },
-  { id: "turn", label: "How it works", icon: I.proof },
-  { id: "industries", label: "Industries", icon: I.industries },
-  { id: "terms", label: "Pricing", icon: I.terms },
+  { href: "/features", label: "Features" },
+  { href: "#turn", label: "How it works" },
+  { href: "#industries", label: "Industries" },
+  { href: "#terms", label: "Pricing" },
 ];
 
-/**
- * The floating navigation: a soft pill of icon tabs (home, then four chapters)
- * where only the current one shows its label in a raised white tab, and beside
- * it a round accent button, the one call to action. The call button opens a small dropdown with the real "ask for a
- * call" form: name, number, what you run, the human check. Same form, same
- * server, same honesty as the plate in chapter six.
- */
 export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; simulated: boolean; turnstileSiteKey: string | null }) {
-  const [current, setCurrent] = useState<string>("desk");
   const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const root = useRef<HTMLElement | null>(null);
+  const callButton = useRef<HTMLButtonElement | null>(null);
+  const menuButton = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) if (e.isIntersecting) setCurrent(e.target.id);
-      },
-      { rootMargin: "-40% 0px -55% 0px" },
-    );
-    [...LINKS.map((l) => l.id), "cost", "proof", "hear"].forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) io.observe(el);
-    });
-    return () => io.disconnect();
+    const hero = document.getElementById("desk");
+    let previous = window.scrollY;
+    let frame = 0;
+    function update() {
+      frame = 0;
+      const y = Math.max(0, window.scrollY);
+      const past = hero ? hero.getBoundingClientRect().bottom <= 0 : true;
+      setPastHero(past);
+      if (!past) { setHidden(false); previous = y; }
+      else if (Math.abs(y - previous) > 8) {
+        setHidden(y > previous);
+        previous = y;
+      }
+    }
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    update();
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", schedule); window.removeEventListener("resize", schedule); };
   }, []);
 
   useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-    const onDown = (e: MouseEvent) => { if (root.current && !root.current.contains(e.target as Node)) setOpen(false); };
+    if (!open && !menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false); setMenuOpen(false);
+        (open ? callButton : menuButton).current?.focus();
+      }
+    };
+    const onDown = (e: MouseEvent) => {
+      if (root.current && !root.current.contains(e.target as Node)) { setOpen(false); setMenuOpen(false); }
+    };
     document.addEventListener("keydown", onKey);
     document.addEventListener("mousedown", onDown);
-    const first = root.current?.querySelector<HTMLInputElement>(".rc-nav__pop input");
-    first?.focus();
+    if (open) root.current?.querySelector<HTMLInputElement>(".rc-nav__pop input")?.focus();
     return () => { document.removeEventListener("keydown", onKey); document.removeEventListener("mousedown", onDown); };
-  }, [open]);
+  }, [open, menuOpen]);
 
   return (
-    <nav className="rc-nav" aria-label="Site" ref={root}>
-      {/* icon tabs; only the current chapter carries its label, in a raised white tab */}
-      <ul className="rc-nav__pill rc-nav__links">
-        {LINKS.map((l) => (
-          <li key={l.id}>
-            <a href={l.id === "features" ? "/features" : `#${l.id}`} className={l.id === "features" ? "rc-nav__features" : undefined} aria-label={l.label} aria-current={current === l.id ? "true" : undefined}>{l.icon}<span>{l.label}</span></a>
-          </li>
-        ))}
-      </ul>
-      <button type="button" className="rc-nav__cta" aria-label={cta} title={cta} aria-expanded={open} aria-controls="rc-nav-pop" onClick={() => setOpen((v) => !v)}>
-        {I.call}
-      </button>
-      {open && (
-        <div className="rc-nav__pop" id="rc-nav-pop" role="dialog" aria-label={cta}>
-          <div className="rc-nav__pop-head">
-            <p>{simulated ? "Ask for a call" : "Have it call you"}</p>
-            <button type="button" aria-label="Close" onClick={() => setOpen(false)}>{I.close}</button>
-          </div>
-          <TryCallPlate simulated={simulated} turnstileSiteKey={turnstileSiteKey} compact />
+    <nav className="rc-nav rc-nav--traditional" aria-label="Site" ref={root} data-past-hero={pastHero} data-hidden={hidden && !open && !menuOpen} data-menu-open={menuOpen}>
+      <button ref={menuButton} className="rc-nav__menu" aria-expanded={menuOpen} aria-controls="rc-site-links" onClick={() => { setMenuOpen(!menuOpen); setOpen(false); }}>Menu</button>
+      <a className="rc-nav__brand" href="#desk" aria-label={`${PRODUCT_NAME} — home`} onClick={() => setMenuOpen(false)}><img src="/marketing/happy-pillow-mascot.png" width={60} height={60} alt="" /></a>
+      <div className="rc-nav__right">
+        <ul className="rc-nav__text-links" id="rc-site-links">
+          {LINKS.map(link => <li key={link.href}><a href={link.href} onClick={() => setMenuOpen(false)}>{link.label}</a></li>)}
+          <li className="rc-nav__mobile-login"><a href="/account/login">Log in</a></li>
+        </ul>
+        <div className="rc-nav__actions">
+          <button ref={callButton} type="button" className="rc-nav__cta" aria-label={cta} title={cta} aria-expanded={open} aria-controls="rc-nav-pop" onClick={() => { setOpen(!open); setMenuOpen(false); }}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 7 7l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 3.5 5.5a2 2 0 0 1 2-2Z"/></svg>
+          </button>
+          <a className="rc-nav__login" href="/account/login">Log in</a>
+          <a className="rc-nav__signup" href="/start">Sign up</a>
         </div>
-      )}
+      </div>
+      {open && <div className="rc-nav__pop" id="rc-nav-pop" role="dialog" aria-label={cta}>
+        <div className="rc-nav__pop-head"><p>{simulated ? "Ask for a call" : "Have it call you"}</p><button type="button" aria-label="Close" onClick={() => { setOpen(false); callButton.current?.focus(); }}>×</button></div>
+        <TryCallPlate simulated={simulated} turnstileSiteKey={turnstileSiteKey} compact />
+      </div>}
     </nav>
   );
 }

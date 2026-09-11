@@ -15,7 +15,7 @@ export function AppointmentValue({ onRequestCustom }: { onRequestCustom?: () => 
   const heading = useRef<HTMLElement>(null);
   const selected = industry === "" ? null : INDUSTRY_BENCHMARKS[industry];
   const ready = selected !== null && ticket.trim() !== "" && Number.isFinite(Number(ticket)) && Number(ticket) > 0 && Number(ticket) <= 100000 && bookings.trim() !== "" && Number.isInteger(Number(bookings)) && Number(bookings) >= 0 && Number(bookings) <= 10000;
-  const matched = team !== "" && minutes !== "" && locations !== "";
+  const matched = team !== "" && minutes.trim() !== "" && Number.isInteger(Number(minutes)) && Number(minutes) >= 0 && Number(minutes) <= 100000 && locations !== "";
   const recommended = recommendPlan(Number(minutes), Number(team));
   const plan = PLANS[recommended];
   const custom = Number(team) > 20 || Number(locations) > 1 || estimateOverage(Number(minutes), recommended) > MAX_BUDGET_CENTS;
@@ -32,15 +32,15 @@ export function AppointmentValue({ onRequestCustom }: { onRequestCustom?: () => 
       <label className={styles.industry}>Your industry<select value={industry} onChange={e => { const i = Number(e.target.value); setIndustry(i); setTicket(""); }}><option value="" disabled>Choose your industry</option>{INDUSTRY_BENCHMARKS.map((v, i) => <option key={v.name} value={i}>{v.name}</option>)}</select></label>
       {selected && <div className={styles.benchmark} role="note" aria-label="Industry context"><span className={styles.noteIcon} aria-hidden="true">i</span><div><strong>{selected.basis}</strong><p>{selected.context}</p>{selected.source && <a href={selected.url} target="_blank" rel="noreferrer">{selected.source} ↗</a>}</div></div>}
       <div className={styles.controls}>
-        <label>Average sale value ($)<input type="number" min="0.01" max="100000" step="0.01" value={ticket} placeholder={selected?.ticket != null ? `e.g. ${selected.ticket}` : "e.g. 100"} onChange={e => setTicket(e.target.value)}/><small>{selected?.ticket == null ? "Enter your own collected sale value." : "Use your own average; the industry benchmark is a guide."}</small></label>
-        <label>Extra completed bookings / month<input type="number" min="0" max="10000" step="1" value={bookings} placeholder="e.g. 5" onChange={e => setBookings(e.target.value)}/><small>A what-if scenario, not a predicted recovery rate.</small></label>
+        <label>Average sale value ($)<input type="text" inputMode="decimal" value={ticket} placeholder={selected?.ticket != null ? `e.g. ${selected.ticket}` : "e.g. 100"} onChange={e => setTicket(e.target.value)}/><small>For example, $550 collected from 10 completed sales = $55 per sale.</small></label>
+        <label>Extra completed bookings / month<input type="text" inputMode="numeric" value={bookings} placeholder="e.g. 5" onChange={e => setBookings(e.target.value)}/><small>For example, 5 additional paid bookings completed in a month. A scenario, not a prediction.</small></label>
       </div>
         </li>
         <li className={styles.step} data-active="true">
           <header className={styles.intro}><h3>Your plan fit</h3><p>We match your plan to your team and call usage.</p></header>
       <div className={styles.planControls}>
         <label>Bookable team members<select value={team} onChange={e => setTeam(e.target.value)}><option value="" disabled>Select your team size</option><option value="3">1–3</option><option value="10">4–10</option><option value="20">11–20</option><option value="21">21 or more</option></select></label>
-        <label>Expected monthly call minutes<input type="number" min="0" max="100000" value={minutes} placeholder="e.g. 300" onChange={e => setMinutes(e.target.value === "" ? "" : String(Math.max(0, Math.min(100000, Math.ceil(Number(e.target.value))))))}/><small>For example, 150 calls × 2 minutes = 300 minutes.</small></label>
+        <label>Expected monthly call minutes<input type="text" inputMode="numeric" value={minutes} placeholder="e.g. 300" onChange={e => setMinutes(e.target.value)}/><small>For example, 150 calls × 2 minutes = 300 minutes.</small></label>
         <label>Business locations<select value={locations} onChange={e => setLocations(e.target.value)}><option value="" disabled>Select locations</option><option value="1">One location</option><option value="2">Multiple locations</option></select></label>
       </div>
         </li>

@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — no scroll-based number changes
+
+- Calculator numeric fields now use text inputs with decimal/numeric mobile keyboards; scrolling and arrow keys do not increment values.
+- Added worked examples beneath average sale and extra bookings, matching the call-minutes guidance.
+- Preserved numeric/range validation, including call minutes, without coercing partially typed values.
+- Verified wheel/arrow behavior on all three fields and valid/invalid plan gating; typecheck and diff checks passed.
+- Saved locally; public push remains blocked by prior approval review.
+
 ## Current handoff — blank editable sales inputs
 
 - Average sale and extra bookings now start blank; industry selection supplies only a placeholder hint, never a prefilled sale.

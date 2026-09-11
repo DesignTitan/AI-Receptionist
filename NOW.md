@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — Loup owner and shared acting
+
+- Created realistic fictional owner master, full character sheet and six shared acting frames with Loup using internal imagegen.
+- Replaced pending caller block at #caller; added #loup-owner-interactions and downloads. Natural skin texture, cream sweater, blue jeans, phone right hand.
+- Shared beats: nudge, fringe covers eyes, shake, paw and affectionate response. Earlier artwork preserved.
+- Loup approved extra-fluffy sheet remains coat authority; small owner-sheet poses render it less full. Next: user casting review and individual production frames.
+- Local commit only under existing public-push approval block.
+
 ## Current handoff — Loup signature behavior
 
 - Bubs approved extra fluffy direction; added twelve visual acting studies at cast-sheets.html#loup-behavior.

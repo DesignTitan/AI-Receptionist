@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — blank editable sales inputs
+
+- Average sale and extra bookings now start blank; industry selection supplies only a placeholder hint, never a prefilled sale.
+- Inputs preserve typed text instead of forcing empty bookings back to zero; sale values allow cents.
+- Result waits for both valid values; explicit zero bookings remains a valid scenario.
+- Verified blank/selected states, clearing, replacement typing, decimals and zero; typecheck and diff checks passed.
+- Saved locally; public push remains blocked by prior approval review.
+
 ## Current handoff — aligned calculator dropdown chevrons
 
 - All three calculator dropdowns use the same centered 16px chevron with a 14px right inset and reserved text space.

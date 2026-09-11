@@ -1,13 +1,13 @@
 [
   {
     "number": 1,
-    "image": "assets/intro-sky.png",
+    "image": "assets/intro-booking.png",
     "x": 50,
     "y": 50,
     "intro": true,
     "title": "A little calm before the call.",
-    "action": "Look straight up through sunlit trees into blue sky. The marketing website\u2019s mint speech-bubble mascot floats in the center, eyes gently closed and smiling. A brief, quiet hold, then the incoming ring leads into the groomer.",
-    "audio": "Soft breeze and rustling leaves. The phone ring begins just before the cut. No dialogue.",
+    "action": "The mint speech-bubble mascot floats at the center of a softly lit mint and forest-green space. Blurred frosted-glass appointment shapes frame it, suggesting an organized calendar. Hold briefly, then the incoming ring leads into the groomer.",
+    "audio": "A soft, warm opening tone. The incoming phone ring starts just before the cut. No dialogue.",
     "full": true
   },
   {

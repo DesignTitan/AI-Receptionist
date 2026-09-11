@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — appointment-inspired intro background (10 September 2026)
+
+- Replaced trees/sky in scene 1 with softly blurred frosted-glass appointment shapes in mint and forest green.
+- Preserved website mascot identity using both approved opening and website asset as GPT Image 2.5 references; job beec308b-7cba-4091-8fd9-99e00bd7fd68.
+- Updated opening action/audio notes; prior sky image retained as history. Character roster work remains pending.
+- Local commit only; prior public push approval block remains.
+
 ## Current handoff — website mascot identity and sky opening (10 September 2026)
 
 - Source of truth is public/marketing/receptionist-mascot.png: rounded-square speech bubble, mint fur, closed crescent eyes, lower-left tail. Uploaded exact asset as Higgsfield reference a34dabfc-027c-439c-b317-bc62b5375d9e.

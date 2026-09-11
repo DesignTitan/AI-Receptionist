@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — natural brief click wink
+
+- Separated wink and greeting timers: click briefly closes eye then reopens (220ms hold plus fade), while text stays for one second.
+- Hover still nods only; repeated clicks rotate short greetings.
+- Verified no hover wink, quick click wink, reopened eye with greeting still visible, then greeting dismissal; typecheck passed.
+- Complete locally; public push remains blocked by prior automatic approval review.
+
 ## Current handoff — confirmed mascot interaction
 
 - User explicitly confirmed: hover nods ONLY, click winks and shows a small greeting for one second. Earlier hover-wink interpretations are superseded.

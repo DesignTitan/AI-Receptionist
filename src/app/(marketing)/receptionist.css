@@ -936,3 +936,15 @@
  .rc-footer__middle { grid-template-columns: 1fr 1fr; gap: 36px; padding-block: 36px; }
  .rc-footer__brand { grid-column: 1 / -1; }
 }
+
+/* Bright industry portraits with soft, readable lower edges. */
+.rc-industry { border-radius: 30px; background: #edf4ee; }
+.rc-industry::after { background: linear-gradient(transparent 42%, #f0f5ed55 64%, #f0f5edf5 100%); }
+.rc-industry__soften { position: absolute; inset: 0; pointer-events: none; }
+.rc-industry__soften img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.rc-industry__copy { color: #183c31; }
+.rc-industry__copy small { color: #4d685c; }
+.rc-industry__moment { top: 47%; }
+.rc-industry__moment > img { width: 156px; height: 156px; top: -130px; left: -4px; transform: rotate(-5deg); }
+.rc-industry__bubble { margin-left: 28px; padding: 13px 16px; border-radius: 20px; background: #f9fcf5e8; box-shadow: 0 6px 20px #173b3115; }
+.rc-industry__bubble p { font-size: 13px; line-height: 1.4; }

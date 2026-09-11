@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — dressed mascots and bright industry cards
+
+- Applied seven wardrobe looks across ten industry cards: medical, apron, groomer, camera, tool belt, glasses and fitness sweatband, based on approved pillow and wardrobe references.
+- Rendered generated artwork through approved master alpha mask to keep the silhouette clean; web-optimized assets saved in public/marketing/mascot-wardrobe.
+- Enlarged mascots from 68px to 156px (2.3x), reduced callout text/padding and rounded every callout corner.
+- Replaced dark card gradients with a soft blurred image bottom, light tint and dark readable text.
+- Desktop/mobile checks passed, all ten outfit images load, no horizontal overflow; typecheck passed. Call-section image and elegant footer committed in preceding task.
+- Complete locally; public push remains blocked by prior automatic approval review.
+
 ## Current handoff — call section and footer redesign
 
 - Created original mascot-and-telephone artwork and redesigned callback area as a warm split image/form card, preserving submission behavior and simulated/live wording.

@@ -880,16 +880,17 @@
 .rc-nav-mascot__button:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 .rc-nav-mascot__character { position: relative; display: block; width: 100%; height: 100%; transform-origin: 50% 80%; }
 .rc-nav-mascot__character img { position: absolute; inset: 0; }
-.rc-nav-mascot__wink { opacity: 0; clip-path: ellipse(10% 9% at 64% 46%); }
+.rc-nav-mascot__wink { opacity: 0; clip-path: ellipse(10% 9% at 64% 46%); transition: opacity .12s ease; }
 .rc-nav-mascot__character[data-animating="true"] { animation: rc-mascot-nod .85s ease-in-out; }
-.rc-nav-mascot__character[data-animating="true"] .rc-nav-mascot__wink { animation: rc-mascot-wink .85s ease-in-out; }
+.rc-nav-mascot__character[data-animating="true"] .rc-nav-mascot__wink,
+.rc-nav-mascot__button:focus-visible .rc-nav-mascot__wink { opacity: 1; }
+@media (hover: hover) { .rc-nav-mascot__button:hover .rc-nav-mascot__wink { opacity: 1; } }
 /* Only reveal the generated eyelid area; preserve the original silhouette and alpha. */
 .rc-nav-mascot__speech { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); width: max-content; max-width: min(230px, 80vw); white-space: normal; text-align: center; padding: 12px 18px; border-radius: 17px; background: #f0f8f2; color: #173b31; font-size: 14px; line-height: 1.4; box-shadow: 0 8px 24px #071b1526; pointer-events: none; }
 .rc-nav-mascot__speech::before { content: ""; position: absolute; top: -5px; left: calc(50% - 5px); width: 10px; height: 10px; background: inherit; transform: rotate(45deg); }
 .rc-nav-mascot__speech { transition: opacity .18s ease, visibility .18s; }
 .rc-nav-mascot__speech[data-visible="false"] { visibility: hidden; opacity: 0; }
 @keyframes rc-mascot-nod { 0%,100% { transform: translateY(0) rotateX(0); } 35% { transform: translateY(4px) rotateX(18deg) rotate(-3deg); } 65% { transform: translateY(-1px) rotateX(-5deg); } }
-@keyframes rc-mascot-wink { 0%,100% { opacity: 0; } 20%,60% { opacity: 1; } }
 /* Flat call action: no bevel, gloss, or raised edge. */
 .rc-nav--traditional .rc-nav__cta, .rc-nav--traditional .rc-nav__cta[aria-expanded="true"] { background: #d6eee2; color: #173b31; border: 1px solid transparent; border-radius: 10px; box-shadow: none; font-weight: 550; transition: background .18s ease; }
 .rc-nav--traditional .rc-nav__cta::after { display: none; }

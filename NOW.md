@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — more visible mascot wink
+
+- Mascot now holds its winking eye closed for the full mouse hover instead of a brief animation that is easy to miss.
+- Entry nod, click greetings and touch reaction remain; keyboard focus also shows the wink.
+- Browser verified wink remains visible after 1.8 seconds and restores on pointer exit; visually checked the rendered 60px mascot.
+- Both requested fixes complete locally; public push remains blocked by prior automatic approval review.
+
 ## Current handoff — film overlay removed
 
 - Removed the dark gradient over the Happy Paws film on desktop and mobile, keeping text and playback controls.

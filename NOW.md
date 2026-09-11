@@ -1,5 +1,11 @@
 # NOW
 
+## Current handoff — restored workspace preview
+
+- Canvas loading investigation found the local preview service stopped; both homepage and page index were unreachable.
+- Restarted the existing managed workspace preview on port 3101 and verified both addresses return HTTP 200.
+- Existing browser tabs can be refreshed; no additional tabs were opened. The service lasts until stopped or logout.
+
 ## Current handoff — branded purchase confirmation
 
 - Built the approved payment-confirmation dashboard with the homepage’s Apfel Grotezk/Open Runde fonts, centered current mascot, white background, soft corners and spacing; account/setup shares the same shell.

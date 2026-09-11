@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — industry overlay verification
+
+- Inspected the live cards and source photos: no remaining dark or colored overlay is rendered.
+- Verified all 11 cards on desktop and mobile; the bottom blur layer is transparent.
+- Opened a fresh workspace preview at the industry section; natural shading remains in the original photos.
+- Complete locally; public push remains blocked by prior automatic approval review.
+
 ## Current handoff — untinted industry blur
 
 - Removed all industry-card dark and mint gradient overlay rules; disabled the overlay pseudo-element.

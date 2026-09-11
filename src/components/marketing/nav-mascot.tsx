@@ -24,7 +24,6 @@ export function NavMascot() {
   }
 
   function sayHello() {
-    winkAndNod();
     setGreeting(nextGreeting.current++ % GREETINGS.length);
     if (bubbleTimer.current) clearTimeout(bubbleTimer.current);
     bubbleTimer.current = setTimeout(() => setGreeting(null), 1000);
@@ -40,7 +39,7 @@ export function NavMascot() {
       onKeyDown={event => { if (event.key === "Escape") { setGreeting(null); if (bubbleTimer.current) clearTimeout(bubbleTimer.current); } }}>
       <span className="rc-nav-mascot__character" data-animating={animating} data-winking={hovered || animating}>
         <img className="rc-nav-mascot__rest" src="/marketing/happy-pillow-mascot.png" width={60} height={60} alt="" />
-        <img className="rc-nav-mascot__wink" src="/marketing/happy-pillow-wink.png" width={60} height={60} alt="" />
+        <img className="rc-nav-mascot__wink" style={{ opacity: hovered || animating ? 1 : 0, zIndex: 2, pointerEvents: "none" }} src="/marketing/happy-pillow-wink.png" width={60} height={60} alt="" />
       </span>
     </button>
     <span className="rc-nav-mascot__speech" role="status" aria-live="polite" aria-atomic="true" data-visible={greeting !== null}>{greeting !== null ? GREETINGS[greeting] : ""}</span>

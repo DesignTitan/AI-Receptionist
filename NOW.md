@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — direct hover wink correction
+
+- User still saw nod-only hover in embedded browser; tied wink-layer visibility directly to React hover/nod state via inline style and explicit stacking.
+- Disabled pointer events on mascot image layers so hover remains on the button.
+- Removed wink call from greeting click handler; hover starts wink/nod, clicking cycles greetings.
+- Typecheck and browser hover-before-click check passed; compact bubble still dismisses after one second.
+- Local commit only; prior public-push approval block remains.
+
 ## Current handoff — full-width film and paused blur
 
 - Removed playback contain rule so video fills the background edge to edge; fullscreen retains the complete frame.

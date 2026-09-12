@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — marketing page index
+
+- Confirmed Features & benefits and the public demo directory are in Marketing Site, with existing thumbnails.
+- Renamed the demo directory Explore demos and clarified the column description.
+- Individual interactive business and booking demos remain under Application.
+- Verified catalogue grouping, destination pages and thumbnail files.
+
 ## Current handoff — checkout header alignment
 
 - Centered the checkout mascot/name in the full-width header.

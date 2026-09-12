@@ -18,7 +18,7 @@ try {
 const completionStatus = document.querySelector("#completion-status");
 const sections = [
   { key: "application", title: "Application", eyebrow: "Customer & staff workspace", description: "Accounts, bookings, business demos and staff tools. Sign-in still applies.", grouped: true },
-  { key: "marketing", title: "Marketing Site", eyebrow: "The public-facing product", description: "The marketing homepage, product pricing, demo directory and marketing assets." },
+  { key: "marketing", title: "Marketing Site", eyebrow: "The public-facing product", description: "Homepage & plans, Features & benefits, Explore demos, and marketing images & videos." },
   { key: "study", title: "Design Studies", eyebrow: "Drafts & experiments", description: "Visual directions and imagery to review alongside the original site." },
   { key: "internal", title: "Internal Tools", eyebrow: "Workspace utilities", description: "The page index, user journey and access tools. Each page shows its access requirements." },
 ];

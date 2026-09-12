@@ -24,7 +24,6 @@ export function AccountShell({ children, billingAvailable = true, name = "", pre
             <Link href={preview?"/account/login?preview=settings":"/account/security"}>Sign-in &amp; security</Link>
             <Link href="/#hear">Get help</Link>
             <div className={styles.legal}><Link href="/legal#privacy">Privacy</Link><Link href="/legal#terms">Terms</Link><Link href="/#hear">Contact</Link></div>
-            <Link href="/">Back to the site</Link>
         </>}
         accountOptions={<>
           {name && <span className={styles.person}>{name}</span>}

@@ -27,6 +27,7 @@ const PAGES = [
 
 export function SiteNav({ cta, simulated, turnstileSiteKey, showCall = true, helpHref, accountOptions, applicationLinks }: { cta: string; simulated: boolean; turnstileSiteKey: string | null; showCall?: boolean; helpHref?: string; accountOptions?: ReactNode; applicationLinks?: ReactNode }) {
   const pathname = usePathname();
+  const isApplication = applicationLinks != null;
   const [internalPages, setInternalPages] = useState<{ href: string; label: string }[]>([]);
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -39,7 +40,7 @@ export function SiteNav({ cta, simulated, turnstileSiteKey, showCall = true, hel
   const menuButton = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    if (process.env.NODE_ENV !== "development") return;
+    if (isApplication || process.env.NODE_ENV !== "development") return;
     let cancelled = false;
     void fetch("/__dev/pages-data.json").then(r => r.json()).then(data => {
       if (cancelled || !Array.isArray(data.pages)) return;
@@ -47,7 +48,7 @@ export function SiteNav({ cta, simulated, turnstileSiteKey, showCall = true, hel
         page.access === "development" && ["internal", "study"].includes(page.kind)));
     }).catch(() => {});
     return () => { cancelled = true; };
-  }, []);
+  }, [isApplication]);
 
   useEffect(() => {
     const hero = document.getElementById("desk");
@@ -97,7 +98,7 @@ export function SiteNav({ cta, simulated, turnstileSiteKey, showCall = true, hel
       </ul>
       <div className="rc-nav__right">
         <div className="rc-nav__actions">
-          <button ref={menuButton} type="button" className="rc-nav__menu" aria-label="Browse site" aria-expanded={menuOpen} aria-controls="rc-site-menu" onClick={() => { setMenuOpen(!menuOpen); setOpen(false); setAccountOpen(false); }}>
+          <button ref={menuButton} type="button" className="rc-nav__menu" aria-label={isApplication ? "Application menu" : "Browse site"} aria-expanded={menuOpen} aria-controls="rc-site-menu" onClick={() => { setMenuOpen(!menuOpen); setOpen(false); setAccountOpen(false); }}>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d={menuOpen ? "m6 6 12 12M18 6 6 18" : "M4 6h16M4 12h16M4 18h16"} /></svg>
           </button>
           {showCall && <button ref={callButton} type="button" className="rc-nav__cta" aria-label="Let’s talk" title="Let’s talk" aria-expanded={open} aria-controls="rc-nav-pop" onClick={() => { setOpen(!open); setMenuOpen(false); setAccountOpen(false); }}>
@@ -124,14 +125,15 @@ export function SiteNav({ cta, simulated, turnstileSiteKey, showCall = true, hel
           </div>
         </div>
       </div>
-      <div id="rc-site-menu" className="rc-nav__site-menu" hidden={!menuOpen}>
-        {applicationLinks}
+      <div id="rc-site-menu" className="rc-nav__site-menu" hidden={!menuOpen} onClick={event => { if ((event.target as HTMLElement).closest("a")) setMenuOpen(false); }}>
+        {applicationLinks ?? <>
         <p>Explore the site</p>
         {PAGES.map(link => <a key={link.href} href={link.href} aria-current={link.href === pathname ? "page" : undefined} onClick={() => setMenuOpen(false)}>{link.label}<span aria-hidden="true">↗</span></a>)}
         <p>Staff · sign-in required</p>
         {STAFF_PAGES.map(link => <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>{link.label}<span aria-hidden="true">↗</span></a>)}
         {internalPages.length > 0 && <><p>Internal tools · local only</p>{internalPages.map(link => <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>{link.label}<span aria-hidden="true">↗</span></a>)}</>}
         <div className="rc-nav__menu-sections"><p>Homepage sections</p>{LINKS.map(link => <a key={link.href} href={pathname === "/" ? link.href.slice(1) : link.href} onClick={() => setMenuOpen(false)}>{link.label}<span aria-hidden="true">↓</span></a>)}</div>
+        </>}
       </div>
       {showCall && open && <div className="rc-nav__pop" id="rc-nav-pop" role="dialog" aria-label={cta}>
         <div className="rc-nav__pop-head"><p>{simulated ? "Ask for a call" : "Have it call you"}</p><button type="button" aria-label="Close" onClick={() => { setOpen(false); callButton.current?.focus(); }}>×</button></div>

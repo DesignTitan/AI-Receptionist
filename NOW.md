@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — account-only application menus (12 September 2026)
+
+- Application hamburger now shows only account/setup, support and legal links; removed marketing, staff, internal tools and Back to the site.
+- The avatar menu remains limited to the user’s name, Account settings and Sign out.
+- Marketing pages retain their existing menu; application pages no longer request the local internal-page list.
+- Typecheck and desktop/mobile menu checks passed, including Escape dismissal.
+
 ## Current handoff — full-width sticky setup navigation (12 September 2026)
 
 - Made setup navigation dark green and 100vw wide, sticky at the top of the usable viewport (below the local-only toolbar).

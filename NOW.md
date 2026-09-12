@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — burnt amber internal navigation
+
+- Changed the Internal tools bar from burgundy to burnt amber (#85451F).
+- Matched the menu, selected states, focus rings and supporting text to the warm palette.
+- Kept the existing navigation layout and site brand colours.
+- Next: continue visual review of the internal workspace.
+
+
 ## Current handoff — unified internal workspace
 
 - Combined marketing checklist and roadmap into six phases with 24 review tasks, per-phase progress and browser persistence; old checklist links still work.

@@ -1,5 +1,11 @@
 # NOW
 
+## Current handoff — authentication flow concepts (12 September 2026)
+
+- Created two matching image boards in `design/account-access/`: `security-flow-v2.png` covers the six main authentication states; `security-setup-recovery-v2.png` covers six additional setup, recovery, error and session-confirmation screens.
+- Preserved the existing identity and Plans-led signup. Saved both built-in image-generation prompts beside the images; QR/recovery-code graphics are illustrative only.
+- Next: implement and security-review the agreed authentication flow. These are design concepts; no live MFA, passkey, recovery or session functionality has been added in this work block.
+
 ## Current handoff — sign-in design concept (12 September 2026)
 
 - Created `design/account-access/sign-in-concept-v1.png`: an image proposal for email-link sign-in and plan-led signup, using the existing identity and mascot references.

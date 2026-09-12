@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { PLANS, type Plan } from "@/lib/platform/model";
 import { HumanCheck } from "@/components/platform/human-check";
 import { AuthShell } from "./auth-shell";
 import { ceremony } from "./webauthn";
@@ -62,11 +63,13 @@ const sample: State = {
   destination: "/account",
 };
 export function AuthFlow({
+  signup,
   initial = "signin",
   siteKey = "",
   passkeysEnabled = false,
   preview = false,
 }: {
+  signup?: { plan: Plan; returnTo: string };
   initial?: Screen;
   siteKey?: string;
   passkeysEnabled?: boolean;
@@ -230,7 +233,7 @@ export function AuthFlow({
       const r = await fetch("/api/account/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, token }),
+        body: JSON.stringify({ email, token, ...(signup ? { name, plan: signup.plan, returnTo: signup.returnTo } : {}) }),
       });
       const data = await r.json();
       setToken("");
@@ -255,7 +258,7 @@ export function AuthFlow({
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
   const titles: Record<Screen, string> = {
-    signin: "Welcome back.",
+    signin: signup ? "Create your account." : "Welcome back.",
     email: "Check your inbox.",
     verify: "Let’s make sure it’s you.",
     enroll: "Secure your account.",
@@ -282,6 +285,7 @@ export function AuthFlow({
   );
   const emailForm = (
     <form onSubmit={emailLink}>
+      {signup && <label>Your name<input required autoComplete="name" maxLength={120} pattern=".*\S.*" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" /></label>}
       <label>
         Email address
         <input
@@ -306,7 +310,7 @@ export function AuthFlow({
           ? "Sending…"
           : cooldown
             ? `Try again in ${cooldown}s`
-            : "Email me a sign-in link"}
+            : signup ? "Create account with email" : "Email me a sign-in link"}
       </button>
       {!siteKey && !preview && (
         <p className={styles.fine}>
@@ -363,6 +367,7 @@ export function AuthFlow({
   return (
     <AuthShell
       landing={screen === "signin"}
+      signup={!!signup}
       wide={screen === "settings" || screen === "devices"}
       preview={preview}
     >
@@ -379,22 +384,23 @@ export function AuthFlow({
               <p>
                 {screen === "expired"
                   ? "Request a fresh link and open it in this browser."
-                  : "Your front desk is ready when you are."}
+                  : signup ? "A little more time for you starts here. Verify your email, secure your account, then review your plan." : "Your front desk is ready when you are."}
               </p>
-              {(passkeysEnabled || preview) &&
+              {signup && <p className={styles.note}>Your plan: <strong>{PLANS[signup.plan].name}</strong> · <Link href={signup.returnTo}>Change plan</Link></p>}
+              {!signup && (passkeysEnabled || preview) &&
                 button("Continue with a passkey", () => passkey())}
-              {(passkeysEnabled || preview) && (
+              {!signup && (passkeysEnabled || preview) && (
                 <div className={styles.divider}>or use email</div>
               )}
               {emailForm}
               <p className={`${styles.fine} ${styles.status}`}>
-                Two-factor verification follows if you’ve secured your account.
+                {signup ? "No payment is taken here. You’ll set up account security after verifying your email." : "Two-factor verification follows if you’ve secured your account."}
               </p>
               <div className={styles.divider} />
               <p className={styles.fine}>
-                New here?{" "}
-                <Link className={styles.textButton} href="/#terms">
-                  Explore plans
+                {signup ? "Already have an account? " : "Need an account? "}
+                <Link className={styles.textButton} href={signup ? "/account/login" : "/#terms"}>
+                  {signup ? "Log in" : "Choose a plan to sign up"}
                 </Link>
               </p>
             </>
@@ -405,9 +411,8 @@ export function AuthFlow({
                 ✉
               </div>
               <p>
-                If an account exists for{" "}
-                <strong>{email || sample.email}</strong>, a sign-in link is on
-                its way. Open the newest email in this browser to continue.
+                {signup ? "We’ve requested a verification link for " : "If an account exists for "}
+                <strong>{email || sample.email}</strong>{signup ? "." : ", a sign-in link is on its way."} Open the newest email in this browser to continue.
               </p>
               <div className={styles.note}>
                 Check your spam folder too. The link is single use; requesting

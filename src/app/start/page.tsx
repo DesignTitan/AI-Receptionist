@@ -16,6 +16,7 @@ export default async function Start({ searchParams }: { searchParams: Promise<{ 
   let plan: "front" | "busy" | "full" = "busy";
   try { plan = planOf(query.plan ?? c?.plan ?? "busy"); } catch {}
   const returnTo = planReturnUrl(query.returnTo, plan);
+  if (!user) redirect(`/account/signup?plan=${plan}&returnTo=${encodeURIComponent(returnTo)}`);
   const contactName = c?.config.contactName ?? user?.user_metadata?.full_name;
   return <div className={styles.page}>
     <header className={styles.header}>

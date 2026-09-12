@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — separate login and signup (12 September 2026)
+
+- Added a dedicated `/account/signup` screen matching the login split layout, with name, email, selected plan and an existing-account login link.
+- Plan selection through `/start` now sends signed-out visitors to signup; verified customers continue to purchase review. Signup retains the existing verification and security flow, and never charges on the signup screen.
+- Added the signup screen and thumbnail to Page Index, refreshed login thumbnails, and checked 320–1920px layouts, email navigation and plan routing. TypeScript and all 97 tests passed.
+- Live authentication still needs the provider configuration and migration described below. Next: complete real-provider acceptance before production activation.
+
 ## Current handoff — login landing reference (12 September 2026)
 
 - Restyled `/account/login` to follow the user’s other-project reference at `localhost:3100/login`: compact left-hand form with branding above, outlined Back to site control, and a nearly full-height rounded photograph on the right.

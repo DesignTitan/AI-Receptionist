@@ -32,6 +32,8 @@ export function getPages({ tenant = "", siteGate = "public" } = {}) {
     page("setup-review", "Review & setup", "/account?preview=confirmation#review-setup", "Customer", "app", "development", "Working step 3: edit summaries and send for setup. Local sample data.", ["src/components/platform/business-setup-form.tsx"]),
     page("account", "Owner dashboard", "/account", "Customer", "app", "owner",
       "Bookings, call outcomes, usage and billing for the signed-in owner.", ["src/app/account/page.tsx"]),
+    page("owner-signup", "Create an account", "/account/signup?plan=busy&preview=signup", "Customer", "app", "development",
+      "Separate signup screen with name, email and selected plan. Continues to verification, account security and purchase review.", ["src/app/account/signup/page.tsx", "src/components/account-auth/auth-flow.tsx"]),
     page("owner-login", "Owner sign in", "/account/login", "Customer", "app", "public",
       "Secure email sign-in and passkeys. Enrollment, recovery and device controls are included below; live use requires configured account security.", ["src/app/account/login/page.tsx", "src/components/account-auth/auth-flow.tsx", "src/app/api/account/auth/route.ts"]),
   ];

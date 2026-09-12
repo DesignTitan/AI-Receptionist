@@ -6,17 +6,19 @@ export function AuthShell({
   wide = false,
   preview = false,
   landing = false,
+  signup = false,
 }: {
   children: React.ReactNode;
   wide?: boolean;
   preview?: boolean;
   landing?: boolean;
+  signup?: boolean;
 }) {
   if (landing) return (
     <div className={`brand-surface ${styles.page} ${styles.landing}`}>
       {preview && <div className={styles.preview}>Design preview · Example account. No security changes are made.</div>}
       <main id="main" className={styles.landingMain}>
-        <section className={styles.landingLeft} aria-label="Sign in">
+        <section className={styles.landingLeft} aria-label={signup ? "Sign up" : "Log in"}>
           <nav className={styles.landingBack} aria-label="Return to website"><Link href="/">← Back to the site</Link></nav>
           <div className={`${styles.content} ${styles.landingForm}`}>
             <Link href="/" className={`${styles.brand} ${styles.landingBrand}`}><img src="/marketing/happy-mascot-pointed.png" width="36" height="36" alt=""/>AI Receptionist</Link>

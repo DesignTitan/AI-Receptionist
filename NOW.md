@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — bubs navigation and production publish (12 September 2026)
+
+- Added the lowercase bubs wordmark beside the marketing navigation mascot and reused the tapered-nub asset from account screens.
+- Verified navigation at 320, 390, 768 and 1463px with no horizontal overflow; typecheck passed.
+- Publishing the committed site to bubs.ai while preserving the existing production password gate.
+- Account sign-in activation remains separate: authentication configuration and real-provider acceptance are still pending.
+
 ## Current handoff — bubs.ai connected (12 September 2026)
 
 - Following explicit user approval, moved `bubs.ai` from `lead-gen` to `ai-receptionist`. Vercel confirms the new mapping is verified and the old project no longer has it.

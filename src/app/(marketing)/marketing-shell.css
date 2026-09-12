@@ -4,7 +4,7 @@
 @media(max-width: 600px) { .marketing-content:not(:has(.rc-home-hero)) { padding-top: 84px; } }
 
 /* Section anchors are inline; separate pages live in the site menu. */
-.marketing-shell .rc-nav--traditional { grid-template-columns: 60px minmax(0,1fr) auto; column-gap: 28px; }
+.marketing-shell .rc-nav--traditional { grid-template-columns: auto minmax(0,1fr) auto; column-gap: 28px; }
 .marketing-shell .rc-nav--traditional .rc-nav__brand { grid-column: 1; justify-self: start; }
 .marketing-shell .rc-nav__text-links { grid-column: 2; justify-content: flex-start; }
 .marketing-shell .rc-nav__right { grid-column: 3; }
@@ -18,9 +18,9 @@
 .rc-nav__site-menu a:hover, .rc-nav__site-menu a[aria-current="page"] { background: #d5e8db; }
 .rc-nav__menu-sections { display: none; border-top: 1px solid #c7d8ce; margin-top: 10px; padding-top: 8px; }
 @media(max-width: 900px) {
- .marketing-shell .rc-nav--traditional { grid-template-columns: 60px 1fr; gap: 12px; }
+ .marketing-shell .rc-nav--traditional { grid-template-columns: auto 1fr; gap: 12px; }
  .marketing-shell .rc-nav__right { grid-column: 2; }
  .marketing-shell .rc-nav__text-links, .marketing-shell .rc-nav--traditional[data-menu-open="true"] .rc-nav__text-links { display: none; }
  .rc-nav__menu-sections { display: block; }
 }
-@media(max-width: 600px) { .marketing-shell .rc-nav--traditional { grid-template-columns: 48px 1fr; } }
+@media(max-width: 600px) { .marketing-shell .rc-nav--traditional { grid-template-columns: auto 1fr; } }

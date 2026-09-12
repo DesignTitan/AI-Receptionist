@@ -968,3 +968,14 @@
 @media(max-width: 380px) { .rc-footer__trust-links { grid-template-columns: 1fr; } }
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .rc-nav__glass { background: #ebf0ec; } }
+
+/* The marketing wordmark uses the same tapered mascot as account screens. */
+.rc-nav--traditional .rc-nav__brand { width: auto; }
+.rc-nav-mascot__button { display: flex; align-items: center; gap: 8px; color: inherit; font: inherit; }
+.rc-nav-mascot__character { width: 60px; height: 60px; flex: 0 0 60px; }
+.rc-nav-mascot__name { font-size: 25px; font-weight: 650; letter-spacing: -.04em; line-height: 1; }
+@media (max-width: 600px) {
+ .rc-nav-mascot__character { width: 44px; height: 44px; flex-basis: 44px; }
+ .rc-nav-mascot__button { gap: 5px; }
+ .rc-nav-mascot__name { font-size: 22px; }
+}

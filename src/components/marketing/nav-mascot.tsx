@@ -35,14 +35,15 @@ export function NavMascot() {
   }
 
   return <div className="rc-nav__brand rc-nav-mascot">
-    <button type="button" className="rc-nav-mascot__button" aria-label="Say hello to your receptionist"
+    <button type="button" className="rc-nav-mascot__button" aria-label="Say hello to bubs"
       onPointerEnter={event => { if (event.pointerType !== "touch") nod(); }}
       onFocus={nod} onClick={sayHello}
       onKeyDown={event => { if (event.key === "Escape") { setGreeting(null); if (bubbleTimer.current) clearTimeout(bubbleTimer.current); } }}>
       <span className="rc-nav-mascot__character" data-animating={animating} data-winking={winking}>
-        <img className="rc-nav-mascot__rest" src="/marketing/happy-pillow-mascot.png" width={60} height={60} alt="" />
+        <img className="rc-nav-mascot__rest" src="/marketing/happy-mascot-pointed.png" width={60} height={60} alt="" />
         <img className="rc-nav-mascot__wink" style={{ opacity: winking ? 1 : 0, zIndex: 2, pointerEvents: "none" }} src="/marketing/happy-pillow-wink.png" width={60} height={60} alt="" />
       </span>
+      <span className="rc-nav-mascot__name">bubs</span>
     </button>
     <span className="rc-nav-mascot__speech" role="status" aria-live="polite" aria-atomic="true" data-visible={greeting !== null}>{greeting !== null ? GREETINGS[greeting] : ""}</span>
   </div>;

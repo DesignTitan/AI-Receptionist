@@ -10,12 +10,55 @@ let activeFilter = "all";
 let sort = "section";
 let loaded = false;
 const completionKey = "ai-receptionist-page-completion-v1";
+const roadmapKey = "ai-receptionist-marketing-roadmap-v1";
 let completed = new Set();
-try {
-  const saved = JSON.parse(localStorage.getItem(completionKey) ?? "[]");
-  if (Array.isArray(saved)) completed = new Set(saved.filter(id => typeof id === "string"));
-} catch { /* The board remains usable if browser storage is unavailable. */ }
 const completionStatus = document.querySelector("#completion-status");
+
+/* Marks are saved to the workspace file (dev/progress.json, through the preview server) and
+   mirrored in this browser. On load the two are merged, so a mark made earlier in any browser
+   is kept and written back to the file. */
+const PROGRESS_URL = "/__dev/progress.json";
+const progress = { pages: new Set(), roadmap: new Set() };
+function localSet(key) {
+  try { const saved = JSON.parse(localStorage.getItem(key) ?? "[]"); return new Set(Array.isArray(saved) ? saved.filter(id => typeof id === "string") : []); }
+  catch { return new Set(); }
+}
+async function pushProgress() {
+  const body = JSON.stringify({ pages: [...progress.pages], roadmap: [...progress.roadmap] });
+  const response = await fetch(PROGRESS_URL, { method: "PUT", headers: { "Content-Type": "application/json" }, body, cache: "no-store" });
+  if (!response.ok) throw new Error(`progress ${response.status}`);
+}
+const progressReady = (async () => {
+  let fromFile = { pages: [], roadmap: [] };
+  let fileOk = false;
+  try {
+    const response = await fetch(PROGRESS_URL, { cache: "no-store" });
+    if (response.ok) { fromFile = await response.json(); fileOk = true; }
+  } catch { /* preview server unreachable: browser copy only */ }
+  const merged = {
+    pages: new Set([...(fromFile.pages ?? []), ...localSet(completionKey)]),
+    roadmap: new Set([...(fromFile.roadmap ?? []), ...localSet(roadmapKey)]),
+  };
+  progress.pages = merged.pages; progress.roadmap = merged.roadmap;
+  completed = new Set(progress.pages);
+  const grew = fileOk && (merged.pages.size !== (fromFile.pages ?? []).length || merged.roadmap.size !== (fromFile.roadmap ?? []).length);
+  if (grew) { try { await pushProgress(); } catch { /* reported on the next change */ } }
+  return fileOk;
+})();
+/** Save one mark everywhere it can be saved; tells the person exactly where it landed. */
+async function saveMark(kind, key, id, checked, label) {
+  const set = progress[kind];
+  if (checked) set.add(id); else set.delete(id);
+  try { localStorage.setItem(key, JSON.stringify([...set])); } catch { /* the file is the record */ }
+  try {
+    await pushProgress();
+    completionStatus.textContent = `${label} marked ${checked ? "done" : "not done"}. Saved to the workspace.`;
+    return true;
+  } catch {
+    completionStatus.textContent = `${label} marked ${checked ? "done" : "not done"}. Saved in this browser only: the workspace file could not be written. Is the preview server running?`;
+    return false;
+  }
+}
 const sections = [
   { key: "application", title: "Application", eyebrow: "Customer & staff workspace", description: "Accounts, bookings, business demos and staff tools. Sign-in still applies.", grouped: true },
   { key: "marketing", title: "Marketing Site", eyebrow: "The public-facing product", description: "Homepage & plans, Features & benefits, Explore demos, and marketing images & videos." },
@@ -105,18 +148,10 @@ function row(page) {
   const label = element("span", "completion-label", checkbox.checked ? "Done" : "Mark as done");
   control.append(checkbox, label);
   checkbox.addEventListener("change", () => {
-    const next = new Set(completed);
-    if (checkbox.checked) next.add(page.id); else next.delete(page.id);
-    try {
-      localStorage.setItem(completionKey, JSON.stringify([...next]));
-      completed = next;
-      card.dataset.done = String(checkbox.checked);
-      label.textContent = checkbox.checked ? "Done" : "Mark as done";
-      completionStatus.textContent = `${page.label} marked ${checkbox.checked ? "done" : "not done"}. Saved in this browser.`;
-    } catch {
-      checkbox.checked = completed.has(page.id);
-      completionStatus.textContent = "Could not save your change. Enable browser storage and try again.";
-    }
+    card.dataset.done = String(checkbox.checked);
+    label.textContent = checkbox.checked ? "Done" : "Mark as done";
+    saveMark("pages", completionKey, page.id, checkbox.checked, page.label);
+    completed = new Set(progress.pages);
   });
   card.append(link, control);
   return card;
@@ -203,6 +238,7 @@ function render() {
 async function load() {
   directory.setAttribute("aria-busy", "true");
   try {
+    await progressReady;
     const response = await fetch("/__dev/pages-data.json", { cache: "no-store" });
     if (!response.ok) throw new Error("Directory unavailable");
     const data = await response.json();
@@ -269,12 +305,13 @@ function renderRoadmap() {
       ["content", "Add useful examples and proof", "Build content from real customer needs and approved stories."],
       ["future", "Prioritize the next features", "Keep future releases separate from promises on the current site.", "/features#coming-soon"]]],
   ];
-  const key="ai-receptionist-marketing-roadmap-v1";
-  let done=new Set();
-  try {const saved=JSON.parse(localStorage.getItem(key)||"[]");if(Array.isArray(saved)) done=new Set(saved.filter(id=>typeof id==="string"));} catch {}
+  const key=roadmapKey;
+  let done=new Set(localSet(key));
+  const roadmapInputs=[];
+  progressReady.then(()=>{done=new Set(progress.roadmap);roadmapInputs.forEach(([id,input])=>{input.checked=done.has(id);});update();});
   document.querySelector(".controls").hidden=true;
   document.querySelector(".meta").hidden=true;
-  document.querySelector(".footnote").textContent="Completion is based on your review, not inferred from a page existing. Changes are saved in this browser. Page Index completion marks stay separate.";
+  document.querySelector(".footnote").textContent="Completion is based on your review, not inferred from a page existing. Changes are saved to the workspace file (dev/progress.json) and travel with the repo. Page Index completion marks stay separate.";
   directory.setAttribute("aria-busy","false");
   const summary=element("section","roadmap-summary");
   const summaryText=element("strong");
@@ -304,7 +341,8 @@ function renderRoadmap() {
       const label=element("label");const input=element("input","completion-checkbox");input.type="checkbox";input.checked=done.has(id);
       const text=element("span");text.append(element("strong","",title),element("small","",detail));label.append(input,text);row.append(label);
       if(href){const link=element("a","task-review","Review ↗");link.href=href;link.setAttribute("aria-label",`Review: ${title}`);row.append(link);}
-      input.addEventListener("change",()=>{const next=new Set(done);input.checked?next.add(id):next.delete(id);try{localStorage.setItem(key,JSON.stringify([...next]));done=next;update();completionStatus.textContent=`${title} marked ${input.checked?"complete":"incomplete"}. Saved in this browser.`;}catch{input.checked=done.has(id);completionStatus.textContent="Could not save your change. Enable browser storage and try again.";}});
+      roadmapInputs.push([id,input]);
+      input.addEventListener("change",()=>{saveMark("roadmap",key,id,input.checked,title);done=new Set(progress.roadmap);update();});
       section.append(row);
     });panels.append(section);
   });

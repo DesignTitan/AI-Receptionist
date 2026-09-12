@@ -1,12 +1,42 @@
 import { createServer } from "node:http";
 import { constants } from "node:fs";
-import { lstat, open, realpath } from "node:fs/promises";
+import { lstat, open, readFile, realpath, rename, writeFile } from "node:fs/promises";
 import { extname, join, relative, sep } from "node:path";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { getPages } from "../dev/page-catalogue.mjs";
 
 const execFileAsync = promisify(execFile);
+
+/* Review progress (Page Index "done" marks, roadmap ticks) lives in the repo, not the browser:
+   dev/progress.json, committed with the work, so a mark made in any browser or tab is there
+   for every other one and survives cleared site data. */
+const PROGRESS_FILE = ["dev", "progress.json"];
+const PROGRESS_KEYS = ["pages", "roadmap"];
+async function readProgress(root) {
+  const empty = Object.fromEntries(PROGRESS_KEYS.map((k) => [k, []]));
+  try {
+    const parsed = JSON.parse(await readFile(join(root, ...PROGRESS_FILE), "utf8"));
+    for (const k of PROGRESS_KEYS) if (Array.isArray(parsed?.[k])) empty[k] = parsed[k].filter((id) => typeof id === "string");
+  } catch { /* first run, or an unreadable file: start empty rather than fail */ }
+  return empty;
+}
+function validProgress(body) {
+  if (!body || typeof body !== "object" || Array.isArray(body)) return null;
+  const out = {};
+  for (const k of PROGRESS_KEYS) {
+    const list = body[k] ?? [];
+    if (!Array.isArray(list) || list.length > 2000 || list.some((id) => typeof id !== "string" || id.length > 120)) return null;
+    out[k] = [...new Set(list)].sort();
+  }
+  return out;
+}
+async function writeProgress(root, data) {
+  const target = join(root, ...PROGRESS_FILE);
+  const tmp = `${target}.${process.pid}.tmp`;
+  await writeFile(tmp, JSON.stringify(data, null, 2) + "\n", "utf8");
+  await rename(tmp, target);
+}
 
 const TYPES = new Map([
   [".html", "text/html; charset=utf-8"],
@@ -164,11 +194,36 @@ export async function startDevPreview({ repoRoot, tenant = "", siteGate = "publi
     };
     if (request.method !== "GET" && request.method !== "HEAD") {
       response.setHeader("Allow", "GET, HEAD");
+    const rawPath = (request.url ?? "").split(/[?#]/, 1)[0];
+    if (rawPath === "/progress.json") {
+      // The one writable route: review progress, loopback only, validated, written atomically.
+      try {
+        if (request.method === "PUT") {
+          const chunks = []; let size = 0;
+          for await (const chunk of request) { size += chunk.length; if (size > 65536) return send(413, "Too large"); chunks.push(chunk); }
+          const data = validProgress(JSON.parse(Buffer.concat(chunks).toString("utf8")));
+          if (!data) return send(400, "Expected { pages: string[], roadmap: string[] }");
+          await writeProgress(root, data);
+          const text = JSON.stringify(data);
+          response.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Content-Length": Buffer.byteLength(text) });
+          return response.end(text);
+        }
+        if (request.method === "GET" || request.method === "HEAD") {
+          const text = JSON.stringify(await readProgress(root));
+          response.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Content-Length": Buffer.byteLength(text) });
+          return response.end(request.method === "HEAD" ? undefined : text);
+        }
+        response.setHeader("Allow", "GET, HEAD, PUT");
+        return send(405, "Method not allowed");
+      } catch (error) {
+        return send(error instanceof SyntaxError ? 400 : 500, error instanceof SyntaxError ? "Bad JSON" : "Could not save progress");
+      }
+    }
       return send(405, "Method not allowed");
     }
     try {
       // Inspect before URL normalization so encoded and plain traversal are denied.
-      let path = decodeURIComponent((request.url ?? "").split(/[?#]/, 1)[0]);
+      let path = decodeURIComponent(rawPath);
       if (["/design/luxury-v2", "/design/luxury-v2/", "/design/luxury-v2/index.html"].includes(path)) return send(404, "Not found");
       const parts = path.split("/").filter(Boolean);
       if (!path.startsWith("/") || path.startsWith("//") || /[\\\0]/.test(path)

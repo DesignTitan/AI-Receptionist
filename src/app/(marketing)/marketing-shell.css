@@ -4,10 +4,10 @@
 @media(max-width: 600px) { .marketing-content:not(:has(.rc-home-hero)) { padding-top: 84px; } }
 
 /* Section anchors are inline; separate pages live in the site menu. */
-.marketing-shell .rc-nav--traditional { grid-template-columns: auto minmax(0,1fr) auto; column-gap: 28px; }
+.marketing-shell .rc-nav--traditional { grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); column-gap: 28px; }
 .marketing-shell .rc-nav--traditional .rc-nav__brand { grid-column: 1; justify-self: start; }
-.marketing-shell .rc-nav__text-links { grid-column: 2; justify-content: flex-start; }
-.marketing-shell .rc-nav__right { grid-column: 3; }
+.marketing-shell .rc-nav__text-links { grid-column: 2; justify-content: center; }
+.marketing-shell .rc-nav__right { grid-column: 3; justify-self: end; }
 .marketing-shell .rc-nav__menu { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: inherit; padding: 10px; cursor: pointer; }
 .marketing-shell .rc-nav__menu:hover { background: #ffffff20; }
 .marketing-shell .rc-nav__menu svg { width: 22px; height: 22px; }

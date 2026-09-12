@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — staging authentication prepared, approval pending (12 September 2026)
+
+- Created isolated Supabase `auth-staging` (`xrqfqwnkybknbevrenkn`) without production data; applied eight migrations and verified row security on all six authentication tables.
+- Configured staging callbacks, confirmed-email access, TOTP and short-lived email links. Created a dedicated managed Turnstile widget for the stable Vercel preview hostname.
+- Automatic approval review blocked transferring staging credentials to Vercel without explicit destination approval. Nothing has been uploaded to Preview yet; production credentials were not copied.
+- Next: obtain transfer approval, configure branch-scoped Vercel Preview variables, redeploy and test real email/MFA login. See `docs/security/STAGING-AUTHENTICATION.md`; email delivery remains unverified.
+
 ## Current handoff — marketing refinements and staging authentication (12 September 2026)
 
 - Industry mascots/messages now remain revealed after their card stops being active. Navigation uses a translucent glass layer with blur preserved through CSS compilation.

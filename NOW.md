@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — Brand intake dev form (12 September 2026)
+
+- Added a locked/dev brand intake form at `/account/brand`. It collects the must‑have fields for the phone AI: business name (read‑only), what you do, hours + timezone, phone to answer, escalate‑to name + number, top 3 call types, a simple book vs take‑message rule, FAQs we never invent (price, service area), and the greeting name. Optional website and socials are included for future enrich.
+- Persistence: saved to `customers.config.brand` (JSON) for the signed‑in owner. When provided, timezone and weekly hours are also updated on the existing business config. No status changes, no live publish.
+- Constraints held: SITE_GATE unchanged; Stripe remains test; no outbound calls or emails triggered by this UI.
+- Linked from the Account overview (`/account` → “Brand intake →”). You can also navigate directly to `/account/brand`.
+- Phase 1: JSON blob persistence only (no new tables). Production persistence can evolve later without breaking saved profiles.
+- Smoke: sign in to a test owner, open `/account/brand`, fill the required fields, Save. Reload the page to verify fields persist. Nothing goes live from this page.
+
 ## Current handoff — Blender soft-fur rendering (12 September 2026)
 
 - Researched Pixar RenderMan grooming and Blender hair scattering before rebuilding the fur. Sources and applied choices are in `design/mascot-3d/FUR-RESEARCH.md`.

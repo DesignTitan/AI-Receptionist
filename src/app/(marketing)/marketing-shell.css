@@ -2,3 +2,25 @@
 .marketing-shell > .rc-footer { font-family: var(--sc-font-text); }
 .marketing-shell > .rc-footer :is(h2,h3) { font-family: var(--sc-font-display); }
 @media(max-width: 600px) { .marketing-content:not(:has(.rc-home-hero)) { padding-top: 84px; } }
+
+/* Section anchors are inline; separate pages live in the site menu. */
+.marketing-shell .rc-nav--traditional { grid-template-columns: 60px minmax(0,1fr) auto; column-gap: 28px; }
+.marketing-shell .rc-nav--traditional .rc-nav__brand { grid-column: 1; justify-self: start; }
+.marketing-shell .rc-nav__text-links { grid-column: 2; justify-content: flex-start; }
+.marketing-shell .rc-nav__right { grid-column: 3; }
+.marketing-shell .rc-nav__menu { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: inherit; padding: 10px; cursor: pointer; }
+.marketing-shell .rc-nav__menu:hover { background: #ffffff20; }
+.marketing-shell .rc-nav__menu svg { width: 22px; height: 22px; }
+.rc-nav__site-menu { position: absolute; top: calc(100% + 10px); right: 0; width: 300px; max-width: 100%; max-height: calc(100dvh - 160px); overflow-y: auto; padding: 14px; border: 1px solid #c7d8ce; border-radius: 20px; background: #eef4ef; color: #173b31; box-shadow: 0 14px 32px #071b1526; }
+.rc-nav__site-menu[hidden] { display: none; }
+.rc-nav__site-menu p { margin: 8px 12px; font-size: 10px; text-transform: uppercase; letter-spacing: .09em; color: #526b63; }
+.marketing-shell .rc-nav__site-menu a { display: flex; justify-content: space-between; padding: 14px 12px; border-radius: 10px; color: #173b31; }
+.rc-nav__site-menu a:hover, .rc-nav__site-menu a[aria-current="page"] { background: #d5e8db; }
+.rc-nav__menu-sections { display: none; border-top: 1px solid #c7d8ce; margin-top: 10px; padding-top: 8px; }
+@media(max-width: 900px) {
+ .marketing-shell .rc-nav--traditional { grid-template-columns: 60px 1fr; gap: 12px; }
+ .marketing-shell .rc-nav__right { grid-column: 2; }
+ .marketing-shell .rc-nav__text-links, .marketing-shell .rc-nav--traditional[data-menu-open="true"] .rc-nav__text-links { display: none; }
+ .rc-nav__menu-sections { display: block; }
+}
+@media(max-width: 600px) { .marketing-shell .rc-nav--traditional { grid-template-columns: 48px 1fr; } }

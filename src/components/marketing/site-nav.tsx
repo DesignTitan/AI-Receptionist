@@ -7,10 +7,16 @@ import profileIcon from "@/components/marketing/profile-icon.json";
 import { TryCallPlate } from "@/components/marketing/try-call-plate";
 
 const LINKS = [
-  { href: "/features", label: "Features" },
   { href: "/#turn", label: "How it works" },
   { href: "/#industries", label: "Industries" },
   { href: "/#terms", label: "Pricing" },
+];
+
+const PAGES = [
+  { href: "/", label: "Home" },
+  { href: "/features", label: "Features" },
+  { href: "/demos", label: "Demos" },
+  { href: "/start", label: "Get started" },
 ];
 
 export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; simulated: boolean; turnstileSiteKey: string | null }) {
@@ -66,13 +72,15 @@ export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; sim
 
   return (
     <nav className="rc-nav rc-nav--traditional" aria-label="Site" ref={root} data-past-hero={pathname !== "/" || pastHero} data-hidden={hidden && !open && !menuOpen && !accountOpen} data-menu-open={menuOpen}>
-      <button ref={menuButton} className="rc-nav__menu" aria-expanded={menuOpen} aria-controls="rc-site-links" onClick={() => { setMenuOpen(!menuOpen); setOpen(false); setAccountOpen(false); }}>Menu</button>
-      <ul className="rc-nav__text-links" id="rc-site-links">
-        {LINKS.map(link => <li key={link.href}><a href={link.href} aria-current={link.href === pathname ? "page" : undefined} onClick={() => setMenuOpen(false)}>{link.label}</a></li>)}
-      </ul>
       <NavMascot />
+      <ul className="rc-nav__text-links" aria-label="Homepage sections">
+        {LINKS.map(link => <li key={link.href}><a href={pathname === "/" ? link.href.slice(1) : link.href}>{link.label}</a></li>)}
+      </ul>
       <div className="rc-nav__right">
         <div className="rc-nav__actions">
+          <button ref={menuButton} type="button" className="rc-nav__menu" aria-label="Browse site" aria-expanded={menuOpen} aria-controls="rc-site-menu" onClick={() => { setMenuOpen(!menuOpen); setOpen(false); setAccountOpen(false); }}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d={menuOpen ? "m6 6 12 12M18 6 6 18" : "M4 6h16M4 12h16M4 18h16"} /></svg>
+          </button>
           <button ref={callButton} type="button" className="rc-nav__cta" aria-label="Let’s talk" title="Let’s talk" aria-expanded={open} aria-controls="rc-nav-pop" onClick={() => { setOpen(!open); setMenuOpen(false); setAccountOpen(false); }}>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 7 7l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 3.5 5.5a2 2 0 0 1 2-2Z"/></svg>
             <span>Let’s talk</span>
@@ -96,6 +104,11 @@ export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; sim
             </div>
           </div>
         </div>
+      </div>
+      <div id="rc-site-menu" className="rc-nav__site-menu" hidden={!menuOpen}>
+        <p>Explore the site</p>
+        {PAGES.map(link => <a key={link.href} href={link.href} aria-current={link.href === pathname ? "page" : undefined} onClick={() => setMenuOpen(false)}>{link.label}<span aria-hidden="true">↗</span></a>)}
+        <div className="rc-nav__menu-sections"><p>Homepage sections</p>{LINKS.map(link => <a key={link.href} href={pathname === "/" ? link.href.slice(1) : link.href} onClick={() => setMenuOpen(false)}>{link.label}<span aria-hidden="true">↓</span></a>)}</div>
       </div>
       {open && <div className="rc-nav__pop" id="rc-nav-pop" role="dialog" aria-label={cta}>
         <div className="rc-nav__pop-head"><p>{simulated ? "Ask for a call" : "Have it call you"}</p><button type="button" aria-label="Close" onClick={() => { setOpen(false); callButton.current?.focus(); }}>×</button></div>

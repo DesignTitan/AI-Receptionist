@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — anchors and site menu
+
+- Moved the marketing mascot to the far left with How it works, Industries and Pricing anchors alongside it.
+- Added a hamburger menu for Home, Features, Demos and Get started across marketing pages.
+- Mobile includes homepage anchors in the menu; Escape and outside-click behavior retained.
+- Typecheck passed; browser verification covers placement, page navigation, Escape and mobile anchors.
+- Next: continue visual review. Prior publishing restriction remains.
+
+
 ## Current handoff — consistent marketing navigation
 
 - Marketing layout now shares the homepage navigation and footer across home, features, demos, legal and privacy opt-out pages.

@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — shared dropdown standard
+
+- Added a global native dropdown standard: 16px chevron, 14px inset, reserved text gutter, 44px minimum height and 12px corners. Removed the calculator-specific duplicate.
+- Retained surface colors, keyboard/native selection, high-contrast fallback and RTL placement. Widened team duration fields for the shared spacing.
+- TypeScript and browser checks passed across ten setup, homepage and Features dropdowns, plus mobile and forced-color modes.
+- Next: address suggestions, phone-field explanation and live brand-color placement preview. No publication attempted.
+
+
 ## Current handoff — simplified welcome content
 
 - Moved Get help alongside the welcome heading and removed the separate support strip.

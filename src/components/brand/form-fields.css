@@ -1,0 +1,43 @@
+/* Shared native dropdown contract. Important declarations protect the control
+   geometry from page-specific field/background shorthands and route CSS order.
+   Colors and font families continue to inherit each surface's theme. */
+:root {
+  --field-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='m4 6 4 4 4-4' stroke='%23617872' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.dark {
+  --field-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='m4 6 4 4 4-4' stroke='%23c9ddd4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+select:not([multiple]):not([size]), select[size="1"]:not([multiple]) {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  min-height: 44px !important;
+  padding: 10px 44px 10px 12px !important;
+  border-radius: 12px !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  font-size: 16px !important;
+  line-height: 1.4 !important;
+  background-image: var(--field-chevron) !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 16px 16px !important;
+  cursor: pointer;
+}
+select:focus-visible {
+  outline: 2px solid var(--brand-ink, var(--primary)) !important;
+  outline-offset: 3px !important;
+}
+select:disabled { cursor: not-allowed; opacity: .55; }
+select:dir(rtl):not([multiple]):not([size]), select:dir(rtl)[size="1"]:not([multiple]) {
+  padding-right: 12px !important;
+  padding-left: 44px !important;
+  background-position: left 14px center !important;
+}
+@media (forced-colors: active) {
+  select:not([multiple]):not([size]), select[size="1"]:not([multiple]) {
+    -webkit-appearance: auto !important;
+    appearance: auto !important;
+    background-image: none !important;
+  }
+  select:focus-visible { outline-color: Highlight !important; }
+}

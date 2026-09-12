@@ -1,5 +1,17 @@
 # NOW
 
+## Preview (11 September 2026)
+
+- The development server for this repo is the launchd-managed workspace preview on
+  http://127.0.0.1:3101 (`npm run dev:workspace`, status/stop variants; label
+  `local.ai-receptionist.preview.…`). It has keepalive: kill it and launchd restarts it within
+  seconds. Next allows one dev server per directory, so any other `next dev` here fails with
+  "Another next dev server is already running". The in-app preview's `dev` configuration now
+  attaches to that address instead of starting a second server; `dev-fresh` starts
+  `npm run dev` on 3101 only for when the workspace service is not running (after a reboot).
+- Twice this week an in-app preview on port 3000 collided with it; the fix each time was to
+  attach, not to kill. Do not kill the launchd job to make room for another server.
+
 ## Current handoff — marketing page index
 
 - Confirmed Features & benefits and the public demo directory are in Marketing Site, with existing thumbnails.

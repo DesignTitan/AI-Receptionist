@@ -3,12 +3,13 @@
   "configurations": [
     {
       "name": "dev",
+      "url": "http://127.0.0.1:3101"
+    },
+    {
+      "name": "dev-fresh",
       "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run",
-        "dev"
-      ],
-      "port": 3000
+      "runtimeArgs": ["run", "dev"],
+      "port": 3101
     }
   ]
 }

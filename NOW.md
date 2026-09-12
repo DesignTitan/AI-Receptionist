@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — bubs.ai domain reassignment pending (12 September 2026)
+
+- Verified `bubs.ai` belongs to the current Vercel team and presently serves the separate `lead-gen` project. Apex DNS already points to Vercel; `www` points to the apex.
+- Automatic approval review rejected reassignment because it would replace the existing site and the attempted command also included `www`. No domain or DNS changes occurred.
+- Next: obtain explicit approval to move `bubs.ai` from `lead-gen` to this `ai-receptionist` project, then verify HTTPS and routing.
+- Staging authentication credential-transfer approval remains separately pending; prepared resources are documented in `docs/security/STAGING-AUTHENTICATION.md`.
+
 ## Current handoff — bubs product identity (12 September 2026)
 
 - Renamed the visible product to lowercase **bubs** across marketing, account/admin screens, page titles, receipt branding and newly enrolled authenticators. Kept “AI receptionist” as a product description.

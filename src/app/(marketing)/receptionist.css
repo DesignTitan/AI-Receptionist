@@ -817,7 +817,7 @@
 .rc-nav--traditional a { color: inherit; font-size: 13px; font-weight: 550; }
 .rc-nav__text-links a, .rc-nav__login { padding: 14px 0; }
 .rc-nav__text-links a:hover, .rc-nav__login:hover { text-decoration: underline; text-underline-offset: 5px; }
-.rc-nav__actions { display: flex; align-items: center; gap: 16px; }
+.rc-nav__actions { display: flex; align-items: center; gap: 6px; }
 .rc-nav--traditional .rc-nav__cta { width: 40px; height: 40px; box-shadow: none; }
 .rc-nav--traditional .rc-nav__cta svg { width: 19px; height: 19px; }
 .rc-nav--traditional .rc-nav__signup { padding: 13px 18px; border-radius: 999px; background: #d6eee2; color: #173b31; }
@@ -847,17 +847,13 @@
  .rc-nav.rc-nav--traditional, .rc-nav__glass { transition: none; }
 }
 
-/* Account icon geometry lives in profile-icon.json; hover adds depth and mint shading. */
+/* Account icon shares the site menu’s quiet hover treatment. */
 .rc-nav--traditional .rc-nav__cta { width: auto; min-height: 44px; padding: 0 18px; display: flex; align-items: center; gap: 9px; border-radius: 999px; font: inherit; font-size: 13px; }
-.rc-nav__account { position: relative; perspective: 180px; }
-.rc-nav__profile { width: 44px; height: 44px; display: grid; place-items: center; padding: 6px; border: 1px solid currentColor; border-radius: 50%; color: inherit; background: transparent; cursor: pointer; transition: background .22s, box-shadow .22s, transform .22s; }
-.rc-nav__profile svg { width: 30px; height: 30px; overflow: visible; transition: transform .25s; }
+.rc-nav__account { position: relative; }
+.rc-nav__profile { width: 44px; height: 44px; display: grid; place-items: center; padding: 6px; border: 1px solid currentColor; border-radius: 50%; color: inherit; background: transparent; cursor: pointer; transition: background .18s ease; }
+.rc-nav__profile svg { width: 30px; height: 30px; overflow: visible; }
 .rc-nav__profile-face { fill: transparent; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; transition: fill .2s; }
-.rc-nav__profile-depth { fill: #387360; opacity: 0; transition: opacity .2s; }
-.rc-nav__account[data-open="true"] .rc-nav__profile, .rc-nav__profile:focus-visible { background: #173b31; color: #d4f5e5; border-color: #94b8a9; box-shadow: inset 0 2px 2px #ffffff50, 0 5px 0 #09261d, 0 9px 18px #071b1538; transform: translateY(-2px); }
-.rc-nav__account[data-open="true"] svg { transform: rotateY(-18deg) rotateX(10deg); }
-.rc-nav__account[data-open="true"] .rc-nav__profile-face { fill: url(#rc-profile-mint); stroke: #d7f4e6; stroke-width: .6; }
-.rc-nav__account[data-open="true"] .rc-nav__profile-depth { opacity: 1; }
+.rc-nav__profile:hover, .rc-nav__profile:focus-visible, .rc-nav__account[data-open="true"] .rc-nav__profile { background: #ffffff20; }
 .rc-nav__profile:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 .rc-nav__account-options { position: absolute; top: 100%; right: 0; width: 180px; padding-top: 14px; }
 .rc-nav__account-options::before { content: ""; position: absolute; inset: 14px 0 0; background: #eef4ef; border: 1px solid #c7d8ce; border-radius: 16px; box-shadow: 0 14px 28px #071b1526; z-index: -1; }

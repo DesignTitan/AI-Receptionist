@@ -3,7 +3,7 @@
 ## Current handoff — production published; navigation SVG (12 September 2026)
 
 - Published the committed site to bubs.ai; verified HTTPS and the updated bubs password-screen title. Existing site gate remains locked.
-- Replaced only the shared marketing navigation mascot with a compact single-color SVG (26px desktop, 23px mobile), tapered nub and smile only; removed eyes, winking and nodding. The bubble body aligns with the letter b. Tightened the logo-to-text gap to 2px. The wordmark is a plain home link; removed the greeting button and popup. Enlarged the smile and centered desktop section links in the navigation bar.
+- Replaced only the shared marketing navigation mascot with a compact single-color SVG (26px desktop, 23px mobile), tapered nub and smile only; removed eyes, winking and nodding. The bubble body aligns with the letter b. Tightened the logo-to-text gap to 2px. The wordmark is a plain home link; removed the greeting button and popup. Enlarged the smile and centered desktop section links in the navigation bar. Account control now matches the menu’s flat hover and click-to-toggle behavior; reduced action gaps to 6px.
 - Checked navigation at 320, 390, 768 and 1463px. Typecheck and all 97 tests passed for this release; production build excludes internal tools.
 - Deploying the SVG follow-up to the same production domain. Account authentication activation remains pending separately.
 

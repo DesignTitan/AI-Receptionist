@@ -85,15 +85,11 @@ export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; sim
             <span>Let’s talk</span>
           </button>
           <div className="rc-nav__account" data-open={accountOpen}
-            onPointerEnter={event => { if (event.pointerType === "mouse") { setAccountOpen(true); setMenuOpen(false); setOpen(false); } }}
-            onPointerLeave={event => { if (!event.currentTarget.contains(document.activeElement)) setAccountOpen(false); }}
             onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setAccountOpen(false); }}>
             <button ref={accountButton} type="button" className="rc-nav__profile" aria-label="Account" aria-expanded={accountOpen} aria-controls="rc-account-options"
-              onClick={() => { setAccountOpen(true); setMenuOpen(false); setOpen(false); }}
+              onClick={() => { setAccountOpen(!accountOpen); setMenuOpen(false); setOpen(false); }}
               onKeyDown={event => { if (event.key === "ArrowDown") { event.preventDefault(); setAccountOpen(true); requestAnimationFrame(() => root.current?.querySelector<HTMLAnchorElement>("#rc-account-options a")?.focus()); } }}>
               <svg viewBox={profileIcon.viewBox} aria-hidden="true">
-                <defs><linearGradient id="rc-profile-mint" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#f3fff9"/><stop offset=".5" stopColor="#bde8d5"/><stop offset="1" stopColor="#599f89"/></linearGradient></defs>
-                <g className="rc-nav__profile-depth" transform="translate(2 3)">{profileIcon.paths.map((d, i) => <path d={d} key={i}/>)}</g>
                 <g className="rc-nav__profile-face">{profileIcon.paths.map((d, i) => <path d={d} key={i}/>)}</g>
               </svg>
             </button>

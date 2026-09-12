@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — 3D mascot prototype (12 September 2026)
+
+- Built an editable Blender master with a pointed speech-bubble silhouette, separate facial controls, packed texture and 110,000-strand curve groom.
+- Exported a real animated GLB with a four-second idle/blink loop and lighter geometric fur; likeness and mobile performance still require production review.
+- Local studio: http://127.0.0.1:3101/__dev/design/mascot-3d/index.html — rotation, blink, greeting, cursor gaze and motion controls. Added its page-index card and thumbnail.
+- Focused verification passed: exported animation/controls, interactions, all viewing angles, mobile width, reduced motion, failure fallback and console checks.
+- Master, build script and handoff: design/mascot-3d/. Homepage mascot unchanged; After Effects integration and additional expression clips remain next steps.
+
 ## Current handoff — 12 September 2026
 
 - Latest completed UI work: centered checkout branding with Back to plans on the left; Marketing Site lists Features & benefits and Explore demos with thumbnails.

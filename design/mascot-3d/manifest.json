@@ -1,0 +1,34 @@
+{
+  "name": "AI Receptionist mascot",
+  "version": 1,
+  "status": "First editable 3D prototype; likeness review pending",
+  "source": "design/mascot-3d/mascot-master.blend",
+  "generator": "design/mascot-3d/build.py",
+  "reference": "public/marketing/happy-mascot-pointed.png",
+  "runtime": "public/mascot-3d/mascot.glb",
+  "renderGroomStrands": 110000,
+  "runtimeFurStrands": 40000,
+  "runtimeTriangles": 144886,
+  "animation": {
+    "name": "Idle",
+    "durationSeconds": 4,
+    "fps": 24,
+    "includes": [
+      "bob",
+      "tilt",
+      "blink"
+    ]
+  },
+  "controls": [
+    "MascotRoot",
+    "Eye_L",
+    "Eye_R",
+    "Gaze_L",
+    "Gaze_R"
+  ],
+  "limits": [
+    "Object-control rig, not a skinned skeleton",
+    "Browser fur approximates the master curve groom",
+    "After Effects import not yet verified"
+  ]
+}

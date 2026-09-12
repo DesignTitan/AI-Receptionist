@@ -163,7 +163,7 @@ export default function HomePage() {
                 <p className="sc-lede">{simulated ? "Request a real phone conversation with our sales team. Tell us when works for you, and we’ll confirm a time." : "Try a real phone call with our AI receptionist, or request a time to speak with our sales team."}</p>
               </div>
               <TryCallPlate simulated={simulated} turnstileSiteKey={env.turnstile.siteKey ?? null} />
-              <p className="rc-callback__signup">Prefer to get started on your own? <a href="/start">Sign up online ↗</a></p>
+              <p className="rc-callback__signup">Prefer to get started on your own? <a href="/#terms">Choose your plan ↗</a></p>
             </div>
           </div>
         </section>

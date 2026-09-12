@@ -32,7 +32,7 @@ export default function FeaturesPage() {
           <div className="features-hero__bottom">
             <p>An online booking page, AI confirmation calls and a clear view of what needs your attention. Built for businesses that run on appointments.</p>
             <div className="features-actions">
-              <Link href="/start" className="features-button">Get started <span aria-hidden="true">↗</span></Link>
+              <Link href="/#terms" className="features-button">View plans <span aria-hidden="true">↗</span></Link>
               <Link href="/demos" className="features-button features-button--outline">Try online booking</Link>
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function FeaturesPage() {
           <h2 id="features-close-title">Your next appointment.<br /><span>A little less to do.</span></h2>
           <p>See how it feels to give customers a simpler way to book, and your team a clearer way to follow up.</p>
           <div className="features-actions">
-            <Link href="/start" className="features-button">Get started <span aria-hidden="true">↗</span></Link>
+            <Link href="/#terms" className="features-button">View plans <span aria-hidden="true">↗</span></Link>
             <Link href="/demos" className="features-button features-button--outline">Try online booking</Link>
           </div>
         </section>

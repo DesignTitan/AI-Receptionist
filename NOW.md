@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — choose a plan before checkout
+
+- Removed Get started from the hamburger menu.
+- Account, footer and general marketing CTAs now lead to Plans instead of directly to /start.
+- Individual plan checkout links remain unchanged.
+- Typecheck and browser navigation checks passed; prior publishing restriction remains.
+
+
 ## Current handoff — anchors and site menu
 
 - Moved the marketing mascot to the far left with How it works, Industries and Pricing anchors alongside it.

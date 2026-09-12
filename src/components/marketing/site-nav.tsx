@@ -16,7 +16,6 @@ const PAGES = [
   { href: "/", label: "Home" },
   { href: "/features", label: "Features" },
   { href: "/demos", label: "Demos" },
-  { href: "/start", label: "Get started" },
 ];
 
 export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; simulated: boolean; turnstileSiteKey: string | null }) {
@@ -100,7 +99,7 @@ export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; sim
             </button>
             <div id="rc-account-options" className="rc-nav__account-options" hidden={!accountOpen}>
               <a href="/account/login">Log In <span aria-hidden="true">↗</span></a>
-              <a href="/start">Sign Up <span aria-hidden="true">↗</span></a>
+              <a href="/#terms">View plans <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </div>

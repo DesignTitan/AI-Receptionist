@@ -192,8 +192,6 @@ export async function startDevPreview({ repoRoot, tenant = "", siteGate = "publi
       response.setHeader("Content-Length", Buffer.byteLength(text));
       response.end(request.method === "HEAD" ? undefined : text);
     };
-    if (request.method !== "GET" && request.method !== "HEAD") {
-      response.setHeader("Allow", "GET, HEAD");
     const rawPath = (request.url ?? "").split(/[?#]/, 1)[0];
     if (rawPath === "/progress.json") {
       // The one writable route: review progress, loopback only, validated, written atomically.
@@ -219,6 +217,8 @@ export async function startDevPreview({ repoRoot, tenant = "", siteGate = "publi
         return send(error instanceof SyntaxError ? 400 : 500, error instanceof SyntaxError ? "Bad JSON" : "Could not save progress");
       }
     }
+    if (request.method !== "GET" && request.method !== "HEAD") {
+      response.setHeader("Allow", "GET, HEAD");
       return send(405, "Method not allowed");
     }
     try {

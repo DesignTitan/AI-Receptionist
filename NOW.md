@@ -31,6 +31,20 @@ Earlier dated handoffs below are history; this summary takes precedence where th
 - Verified catalogue grouping, destination pages and thumbnail files.
 
 ## Current handoff — checkout header alignment
+## Current handoff — review marks always save (12 September 2026)
+
+- Page Index "done" marks and marketing-roadmap ticks now save to the workspace file
+  `dev/progress.json` through the preview server (`PUT /__dev/progress.json`, loopback only,
+  validated, atomic write), mirrored in the browser as a fallback. On load the file and any
+  browser-only marks are merged and written back, so marks made earlier in one browser or on
+  the other origin (localhost vs 127.0.0.1, which never shared storage) are recovered, not lost.
+  The status line says where a mark landed ("Saved to the workspace" or browser-only with why).
+- The file is committed with the work, so progress travels with the repo. Restart the workspace
+  service after pulling a change to the preview server (`npm run dev:workspace:stop`, then
+  `npm run dev:workspace`).
+- Known: `tests/dev-preview.test.ts` expects 27 catalogue pages; the uncommitted Internal Ops
+  entry makes 28. That assertion belongs to that work, not to this change.
+
 
 - Centered the checkout mascot/name in the full-width header.
 - Moved Back to plans to the far left with an outlined control and consistent arrow icon; mobile uses an accessible icon-only button.

@@ -38,3 +38,11 @@ MASCOT_FINAL=1 /Applications/Blender.app/Contents/MacOS/Blender --background --f
 For an existing groom, load `mascot-film.blend` and run `render-film-final.py`; then run `create-film-review.py` to pack the final image and original reference into a separate split-view file.
 
 Outputs: `mascot-film.blend`, `renders/soft-fur-draft.png`, `renders/soft-fur-final.png`. Exact likeness remains subject to visual comparison; no Pixar-quality certification is implied.
+
+## User-supplied video and controlled audit
+
+Reviewed [The Software Pixar Artists Use For Hair & Fur — InspirationTuts](https://www.youtube.com/watch?v=TED87pzi078): the complete available captions and visual examples at 0:40, 1:20, 2:05, 2:35, 3:15 and 3:55. It is a historical overview, not a Blender settings tutorial. Its useful points are deliberate guide grooming, simulation driven from guides, and rendering that preserves translucency and self-shadowing. These inform the workflow; they do not certify this asset as matching Pixar's results.
+
+`audit-fur.py` renders the same forehead patch with prior light settings, restored glossy light response, and denoising disabled. Visual inspection showed that the raw and denoised images retained the same matted structure. Restoring light response helped shading but did not fix the groom. The previous eye-light workaround affected the coat and should not be used globally.
+
+The next swatch tests coherent guide lengths, increased root lift, reduced clumping and a separate dense undercoat. Keep the last full portrait until the swatch is inspected. `test-lifted-groom.py` forces swatch-only mode and does not overwrite the master Blender file. The test reduced visible blotchiness but still lacked the original reference’s distinct soft tufts; it was not promoted to the character.

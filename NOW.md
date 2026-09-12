@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — fur audit and supplied video (12 September 2026)
+
+- User rejected the soft-fur pass. Reviewed the supplied InspirationTuts video (TED87pzi078), full available captions and key visual examples; recorded takeaways in `design/mascot-3d/FUR-RESEARCH.md`.
+- Completed controlled forehead renders isolating light response and denoising. The raw image retained the same matted structure; grooming remains the main unresolved issue.
+- Added `audit-fur.py` and an isolated `test-lifted-groom.py` experiment. More coherent lengths, root lift and undercoat reduced blotchiness but still do not match the original’s soft tufts.
+- Kept the full Blender character and final portrait unchanged. Audit images are in `design/mascot-3d/renders/audit/`; no new look is approved.
+- Next: develop deliberate regional guide shapes and tuft structure before another full character render. Do not claim success from strand counts or shader settings alone.
+
 ## Current handoff — Blender soft-fur rendering (12 September 2026)
 
 - Researched Pixar RenderMan grooming and Blender hair scattering before rebuilding the fur. Sources and applied choices are in `design/mascot-3d/FUR-RESEARCH.md`.

@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — setup navigation transition (12 September 2026)
+
+- Setup navigation starts as a white outlined pill and expands into a dark 100vw surface within 16px of the top.
+- Scrolling back restores the pill; reduced-motion preferences disable the transition.
+- Typecheck and browser checks passed at desktop and two mobile widths, including section links and reverse transition.
+- Moving application links into the avatar menu is next.
+
 ## Current handoff — account-only application menus (12 September 2026)
 
 - Application hamburger now shows only account/setup, support and legal links; removed marketing, staff, internal tools and Back to the site.

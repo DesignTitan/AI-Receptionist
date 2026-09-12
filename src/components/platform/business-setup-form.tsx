@@ -35,12 +35,13 @@ function SetupFields({customer,preview=false,initialStep=1,embedded=false,draft}
  const [details,setDetails]=useState<Record<string,string>>(draft?.details??(preview?{business_name:"Willow Studio",trade:"salon",address:"123 Example Street, Detroit, MI",phone:"(313) 555-0142",areaCode:"313",color:"#1e3a34",phoneProvider:"unknown",phoneServiceType:"unknown",phoneServiceName:"",bookingSystem:"Paper calendar"}:{}));
  const autosave=useSetupAutosave({details,weeklyHours,days,opens,closes,timezone,team},preview,!busy&&(preview||!!customer?.config.setupPending));
  useEffect(()=>{setSaved(false);},[weeklyHours,timezone,team]);
+ const [docked,setDocked]=useState(false);
  const form=useRef<HTMLFormElement>(null),navigation=useRef<HTMLElement>(null);
  const readDetails=()=>Object.fromEntries(Array.from(new FormData(form.current!).entries()).map(([k,v])=>[k,String(v)]));
  const move=(n:number)=>{setStep(n);const section=document.getElementById(sections[n-1]);section?.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth",block:"start"});section?.focus({preventScroll:true});history.replaceState(null,"",`#${sections[n-1]}`);};
  useEffect(()=>{
   setDetails(readDetails());
-  const update=()=>{const edge=(navigation.current?.getBoundingClientRect().bottom??160)+40;let active=1;sections.forEach((id,i)=>{if((document.getElementById(id)?.getBoundingClientRect().top??Infinity)<=edge)active=i+1;});setStep(active);};
+  const update=()=>{const nav=navigation.current;if(nav){const top=parseFloat(getComputedStyle(nav).top)||0;setDocked(nav.getBoundingClientRect().top<=top+16);}const edge=(navigation.current?.getBoundingClientRect().bottom??160)+40;let active=1;sections.forEach((id,i)=>{if((document.getElementById(id)?.getBoundingClientRect().top??Infinity)<=edge)active=i+1;});setStep(active);};
   const frame=requestAnimationFrame(()=>{const hash=sections.indexOf(location.hash.slice(1));if(hash>=0||initialStep>1)move(hash>=0?hash+1:initialStep);else update();});
   let pending=0;const schedule=()=>{if(!pending)pending=requestAnimationFrame(()=>{pending=0;update();});};
   window.addEventListener("scroll",schedule,{passive:true});window.addEventListener("resize",schedule);
@@ -55,7 +56,7 @@ function SetupFields({customer,preview=false,initialStep=1,embedded=false,draft}
  const firstName=customer?.config.contactName?.trim().split(/\s+/)[0]??(preview?"Bubs":"");
  const content=<>
   {!embedded&&<header className={styles.heading}><h1>Set up your business</h1><p>Fill in your details, set your hours and review everything below.</p></header>}
-  <nav ref={navigation} className={styles.sectionNav} aria-label="Setup sections"><ol className={styles.progress}>{["Business details","Hours & availability","Review & setup"].map((label,i)=><li key={label}><a href={`#${sections[i]}`} aria-current={step===i+1?"location":undefined} onClick={e=>{e.preventDefault();move(i+1);}}><span>{i+1}</span>{label}</a></li>)}</ol><p className={styles.saveStatus} role="status">{autosave.status}{autosave.status.startsWith("Not saved")&&<button type="button" onClick={()=>void autosave.flush().catch(()=>{})}>Retry</button>}</p></nav>
+  <nav ref={navigation} className={styles.sectionNav} data-docked={docked} aria-label="Setup sections"><ol className={styles.progress}>{["Business details","Hours & availability","Review & setup"].map((label,i)=><li key={label}><a href={`#${sections[i]}`} aria-current={step===i+1?"location":undefined} onClick={e=>{e.preventDefault();move(i+1);}}><span>{i+1}</span>{label}</a></li>)}</ol><p className={styles.saveStatus} role="status">{autosave.status}{autosave.status.startsWith("Not saved")&&<button type="button" onClick={()=>void autosave.flush().catch(()=>{})}>Retry</button>}</p></nav>
   <form ref={form} onChange={()=>{setDetails(readDetails());setSaved(false);setError("");}} onSubmit={submit} noValidate className={styles.form}>
    <section id="business-details" tabIndex={-1} aria-labelledby="business-title" data-step="1" className={`${styles.section} ${styles.first}`}>
     <h2 id="business-title" className={styles.sectionTitle}>Business details</h2>

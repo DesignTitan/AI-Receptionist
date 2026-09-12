@@ -1,0 +1,4 @@
+.marketing-content:not(:has(.rc-home-hero)) { padding-top: 100px; }
+.marketing-shell > .rc-footer { font-family: var(--sc-font-text); }
+.marketing-shell > .rc-footer :is(h2,h3) { font-family: var(--sc-font-display); }
+@media(max-width: 600px) { .marketing-content:not(:has(.rc-home-hero)) { padding-top: 84px; } }

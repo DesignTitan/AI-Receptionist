@@ -23,17 +23,7 @@ const CHAPTERS = [
 export default function FeaturesPage() {
   return (
     <div className="features-page">
-      <header className="features-header">
-        <Link className="features-brand" href="/" aria-label="AI Receptionist home">AI RECEPTIONIST<span>Made for appointment businesses.</span></Link>
-        <nav className="features-navigation" aria-label="Marketing">
-          <Link href="/">Overview</Link>
-          <Link href="/features" aria-current="page">Features</Link>
-          <Link href="/demos">Demos</Link>
-          <Link href="/#terms">Pricing</Link>
-          <Link href="/features#coming-soon">Coming soon</Link>
-        </nav>
-        <Link href="/start" className="features-button features-button--header">Get started <span aria-hidden="true">↗</span></Link>
-      </header>
+
 
       <main id="main">
         <section className="features-hero" aria-labelledby="features-title">
@@ -132,11 +122,7 @@ export default function FeaturesPage() {
         <RoadmapBoard seeds={ROADMAP} />
       </main>
 
-      <footer className="features-footer">
-        <div><Link className="features-brand" href="/">AI RECEPTIONIST</Link><p>Online booking. AI confirmation. More room in your day.</p></div>
-        <nav aria-label="Footer"><Link href="/">Overview</Link><Link href="/features" aria-current="page">Features</Link><Link href="/demos">Demos</Link><Link href="/#terms">Pricing</Link><Link href="/account/login">Owner sign in</Link></nav>
-        <p className="features-footer__note">© {new Date().getFullYear()} AI Receptionist. Campaign imagery depicts fictional people and businesses.</p>
-      </footer>
+
     </div>
   );
 }

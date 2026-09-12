@@ -1,18 +1,20 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { NavMascot } from "@/components/marketing/nav-mascot";
 import profileIcon from "@/components/marketing/profile-icon.json";
 import { TryCallPlate } from "@/components/marketing/try-call-plate";
 
 const LINKS = [
   { href: "/features", label: "Features" },
-  { href: "#turn", label: "How it works" },
-  { href: "#industries", label: "Industries" },
-  { href: "#terms", label: "Pricing" },
+  { href: "/#turn", label: "How it works" },
+  { href: "/#industries", label: "Industries" },
+  { href: "/#terms", label: "Pricing" },
 ];
 
 export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; simulated: boolean; turnstileSiteKey: string | null }) {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
@@ -43,7 +45,7 @@ export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; sim
     window.addEventListener("resize", schedule);
     update();
     return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", schedule); window.removeEventListener("resize", schedule); };
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (!open && !menuOpen && !accountOpen) return;
@@ -63,10 +65,10 @@ export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; sim
   }, [open, menuOpen, accountOpen]);
 
   return (
-    <nav className="rc-nav rc-nav--traditional" aria-label="Site" ref={root} data-past-hero={pastHero} data-hidden={hidden && !open && !menuOpen && !accountOpen} data-menu-open={menuOpen}>
+    <nav className="rc-nav rc-nav--traditional" aria-label="Site" ref={root} data-past-hero={pathname !== "/" || pastHero} data-hidden={hidden && !open && !menuOpen && !accountOpen} data-menu-open={menuOpen}>
       <button ref={menuButton} className="rc-nav__menu" aria-expanded={menuOpen} aria-controls="rc-site-links" onClick={() => { setMenuOpen(!menuOpen); setOpen(false); setAccountOpen(false); }}>Menu</button>
       <ul className="rc-nav__text-links" id="rc-site-links">
-        {LINKS.map(link => <li key={link.href}><a href={link.href} onClick={() => setMenuOpen(false)}>{link.label}</a></li>)}
+        {LINKS.map(link => <li key={link.href}><a href={link.href} aria-current={link.href === pathname ? "page" : undefined} onClick={() => setMenuOpen(false)}>{link.label}</a></li>)}
       </ul>
       <NavMascot />
       <div className="rc-nav__right">

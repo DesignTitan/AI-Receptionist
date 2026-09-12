@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — consistent marketing navigation
+
+- Marketing layout now shares the homepage navigation and footer across home, features, demos, legal and privacy opt-out pages.
+- Removed separate page headers/footers and the Overview link; fixed cross-page homepage anchors.
+- Secondary pages reserve header space and render dark navigation text immediately.
+- Typecheck passed; verified identical navigation/footer destinations on all five pages, plus mobile menu and width.
+- Media canvas was completed and committed separately. Prior publishing restriction remains.
+
+
 ## Current handoff — simple media canvas
 
 - Replaced the campaign presentation with rows of 11 photos and one playable video, with short labels and original-file links.

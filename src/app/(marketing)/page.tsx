@@ -3,13 +3,11 @@ import { IndustryGallery } from "@/components/marketing/industry-gallery";
 import { VoiceDemoTrigger } from "@/components/marketing/voice-example";
 import { BusySection } from "@/components/marketing/busy-section";
 import { OverviewBenefits } from "@/components/marketing/overview-benefits";
-import { LEGAL_GROUPS, SOCIAL_NAMES } from "@/components/marketing/legal-topics";
 import { PricingComparison } from "@/components/marketing/pricing-comparison";
 import type { Metadata } from "next";
 import { PRODUCT_NAME } from "@/components/marketing/product-chrome";
 import { ScrollCraftMount } from "@/components/marketing/scrollcraft-mount";
 import { ScrollingFeatures } from "@/components/marketing/scrolling-features";
-import { SiteNav } from "@/components/marketing/site-nav";
 import { TryCallPlate } from "@/components/marketing/try-call-plate";
 import { env, isLiveCallReady } from "@/lib/env";
 import "./receptionist.css";
@@ -30,7 +28,6 @@ export default function HomePage() {
     <ScrollCraftMount>
 
       <main id="main" className="rc-v1">
-        <SiteNav cta={simulated ? "Ask for a call" : "Have it call you"} simulated={simulated} turnstileSiteKey={env.turnstile.siteKey ?? null} />
         <section id="desk" className="rc-home rc-home-hero" data-sc-act="flow" aria-labelledby="hero-title">
           <img className="rc-home-hero__image" src="/marketing/coastal-owner.png" width={1254} height={1254} fetchPriority="high" alt="A business owner enjoying a quiet coffee by the sea, with her phone set aside." />
           <div className="sc-wrap rc-home-hero__copy" data-sc-in data-sc-stagger="70">
@@ -175,26 +172,7 @@ export default function HomePage() {
         <PricingComparison />
 
         {/* 08 · Colophon. The last act holds. */}
-        <footer id="colophon" data-sc-act="flow" className="rc-footer">
-          <div className="rc-footer__top">
-            <div><p className="rc-footer__eyebrow">A little less busy. A little more you.</p><h2>Good things start<br />with a conversation.</h2></div>
-            <a className="rc-footer__hello" href="#hear">Let’s talk <span aria-hidden="true">↗</span></a>
-          </div>
-          <div className="rc-footer__middle">
-            <div className="rc-footer__brand"><img src="/marketing/happy-pillow-mascot.png" width={72} height={72} alt="" /><p>{PRODUCT_NAME}</p><span>A booking page and an AI front desk.<br />More time for the work you love.</span></div>
-            <nav aria-label="Footer explore"><h3>Explore</h3><a href="/features">Features</a><a href="#industries">Industries</a><a href="#terms">Pricing</a><a href="/demos">Try a demo</a></nav>
-            <nav aria-label="Footer account"><h3>Your next step</h3><a href="#hear">Ask for a call</a><a href="/start">Get started</a><a href="/account/login">Log in</a><a href="/features#coming-soon">What’s coming</a></nav>
-          </div>
-          <div className="rc-footer__trust">
-            <div className="rc-footer__trust-heading"><h3>Legal, privacy &amp; trust</h3><span>Temporary placeholders · pending legal review</span></div>
-            <div className="rc-footer__trust-links">
-              {LEGAL_GROUPS.map(group => <nav aria-label={`Footer ${group.title}`} key={group.title}><h3>{group.title}</h3>{group.items.map(item => <a href={item.id === "do-not-sell" ? "/do-not-sell-or-share-my-personal-information" : `/legal#${item.id}`} key={item.id}>{item.title}</a>)}</nav>)}
-              <nav aria-label="Footer social placeholders"><h3>Stay connected</h3>{SOCIAL_NAMES.map(name => <a key={name} href={`/legal#social-${name.toLowerCase()}`}>{name} <small>Coming soon</small></a>)}</nav>
-            </div>
-            <p className="rc-footer__draft">Legal documents and security information are drafts. No certification or compliance status is claimed.</p>
-          </div>
-          <div className="rc-footer__bottom"><span>© {new Date().getFullYear()} {PRODUCT_NAME}</span><span>The three demo businesses are fictional.</span><a href="#desk">Back to top ↑</a></div>
-        </footer>
+
       </main>
     </ScrollCraftMount>
   );

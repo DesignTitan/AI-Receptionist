@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Lock } from "@/components/icons";
 import { DemoCards } from "@/components/marketing/demo-cards";
-import { ProductFooter, ProductHeader } from "@/components/marketing/product-chrome";
 
 export const metadata: Metadata = {
   title: "Live demos",
@@ -12,7 +11,6 @@ export const metadata: Metadata = {
 export default function DemosPage() {
   return (
     <div className="min-h-dvh">
-    <ProductHeader />
     <main id="main" className="mx-auto max-w-6xl px-5 py-14">
       <header className="max-w-2xl">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">Live demos</p>
@@ -52,7 +50,6 @@ export default function DemosPage() {
         </Link>
       </section>
     </main>
-    <ProductFooter />
     </div>
   );
 }

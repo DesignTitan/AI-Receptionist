@@ -1,14 +1,14 @@
 {
   "name": "AI Receptionist mascot",
-  "version": 1,
-  "status": "First editable 3D prototype; likeness review pending",
+  "version": 2,
+  "status": "Likeness refinement v2; visual approval pending",
   "source": "design/mascot-3d/mascot-master.blend",
   "generator": "design/mascot-3d/build.py",
   "reference": "public/marketing/happy-mascot-pointed.png",
   "runtime": "public/mascot-3d/mascot.glb",
-  "renderGroomStrands": 110000,
+  "renderGroomStrands": 150000,
   "runtimeFurStrands": 40000,
-  "runtimeTriangles": 144886,
+  "runtimeTriangles": 307766,
   "animation": {
     "name": "Idle",
     "durationSeconds": 4,

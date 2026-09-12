@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — Blender model and render workspace (12 September 2026)
+
+- Opened and verified `design/mascot-3d/mascot-review.blend` in desktop Blender: editable model left, packed full render right. F12 makes a new render; select Render Result to display it.
+- Refined the mascot cheeks, eye placement, pointed nub and 150,000-strand curved groom; corrected texture mapping. Exact likeness and final visual approval are still pending.
+- Browser studio now compares Live 3D, Blender render and the original character. The 307,766-triangle model remains a review asset; optimize before putting it in website navigation.
+- Added a repeatable review-workspace builder and updated the mascot handoff. After Effects integration and additional expressions remain next steps.
+
 ## Current handoff — 3D mascot prototype (12 September 2026)
 
 - Built an editable Blender master with a pointed speech-bubble silhouette, separate facial controls, packed texture and 110,000-strand curve groom.

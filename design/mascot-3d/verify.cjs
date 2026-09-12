@@ -21,6 +21,16 @@ const url='http://127.0.0.1:3101/__dev/design/mascot-3d/index.html';
   p.on('pageerror',e=>errors.push(e.message));p.on('console',m=>{if(['error','warning'].includes(m.type()))errors.push(m.text())});
   await p.goto(url);await p.waitForFunction(()=>window.mascotStudio?.state.loaded);
   assert.equal(await p.locator('canvas').count(),1);
+  for(const [name,mode] of [['Blender render','blender'],['Original character','reference']]){
+   await p.getByRole('button',{name,exact:true}).click();
+   assert.equal(await p.evaluate(()=>window.mascotStudio.state.presentation),mode);
+   assert.equal(await p.locator('#fallback').isVisible(),true);
+   assert.equal(await p.locator('canvas').isVisible(),false);
+  }
+  await p.getByRole('button',{name:'Live 3D',exact:true}).click();
+  assert.equal(await p.locator('canvas').isVisible(),true);
+  assert.equal(await p.locator('#fallback').isVisible(),false);
+
   await p.getByRole('button',{name:'Pause motion',exact:true}).click();
   assert.equal(await p.evaluate(()=>window.mascotStudio.state.running),false);
   await p.getByRole('button',{name:'Blink',exact:true}).click();
@@ -46,6 +56,6 @@ const url='http://127.0.0.1:3101/__dev/design/mascot-3d/index.html';
   assert.equal(await quiet.evaluate(()=>window.mascotStudio.state.running),false);assert.equal(await quiet.evaluate(()=>window.mascotStudio.state.following),false);
   const failed=await browser.newPage();await failed.route('**/mascot.glb',r=>r.abort());await failed.goto(url);await failed.getByRole('status').filter({hasText:'could not load'}).waitFor();assert.equal(await failed.locator('#fallback').isVisible(),true);
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({result:'pass',runtimeBytes:file.length,animations:gltf.animations.map(a=>a.name),checks:['embedded textures','exported controls','blink and reset','greeting and reset','gaze toggle','front/back/sides','drag rotation','mobile width','reduced motion','load failure fallback','no console errors']},null,2));
+  console.log(JSON.stringify({result:'pass',runtimeBytes:file.length,animations:gltf.animations.map(a=>a.name),checks:['render/reference comparison','embedded textures','exported controls','blink and reset','greeting and reset','gaze toggle','front/back/sides','drag rotation','mobile width','reduced motion','load failure fallback','no console errors']},null,2));
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1});

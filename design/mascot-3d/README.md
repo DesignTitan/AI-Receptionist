@@ -2,6 +2,12 @@
 
 Second likeness study, 12 September 2026. The shape and likeness still need visual review against `public/marketing/happy-mascot-pointed.png`. This is a new modeled character, not a flat image mapped onto a plane.
 
+## Blender soft-fur pass
+
+The current Blender-only look-development pass is `mascot-film.blend`; `mascot-film-review.blend` keeps an editable modelling view beside the finished render. It uses native hair curves and a dedicated hair-scattering shader. The older web GLB and master below are a separate earlier study and were not regenerated in this pass.
+
+Research, rendering choices and source links: [FUR-RESEARCH.md](FUR-RESEARCH.md). Render: `renders/soft-fur-final.png`. Build with `build-film.py`; render the existing scene with `render-film-final.py`; create its split workspace with `create-film-review.py`. In Blender, the left solid modelling view intentionally does not show the final shader. Use the full render on the right for judging fur and lighting.
+
 ## Open and inspect
 
 - Local studio: http://127.0.0.1:3101/__dev/design/mascot-3d/index.html

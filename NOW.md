@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — Blender soft-fur rendering (12 September 2026)
+
+- Researched Pixar RenderMan grooming and Blender hair scattering before rebuilding the fur. Sources and applied choices are in `design/mascot-3d/FUR-RESEARCH.md`.
+- Added a Blender-only scene with 420,000 native tapered hairs, directional clumps/undercoat, Chiang hair shading, revised cheeks/eyes and studio lighting. Web GLB and Spline were not changed.
+- Rendered `design/mascot-3d/renders/soft-fur-final.png` at 1,800 × 1,800 with Cycles, up to 512 samples and denoising. Scene checks passed; exact reference likeness remains a visual refinement.
+- `mascot-film.blend` is the render master; `mascot-film-review.blend` packs the final render and original reference. Opened separately to preserve unsaved changes in the existing Blender window.
+- Next: review the new Blender render against the original, refine likeness as needed, then consider animation and web optimization only after the Blender look is settled.
+
 ## Current handoff — Blender model and render workspace (12 September 2026)
 
 - Opened and verified `design/mascot-3d/mascot-review.blend` in desktop Blender: editable model left, packed full render right. F12 makes a new render; select Render Result to display it.

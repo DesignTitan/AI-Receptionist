@@ -1,5 +1,15 @@
 # NOW
 
+## Current handoff — simpler onboarding and saved drafts
+
+- Simplified new onboarding to one business number and one shared appointment schedule; replaced team editing with appointment length and renamed Hours & availability.
+- Added AI answering preferences (always, after hours, backup, caller choice, confirmations only, no AI or undecided). Stored in configuration for setup review; does not activate live phone routing.
+- Added debounced, serialized account draft saves with status/retry and owner/origin/configuration guards. Incomplete drafts stay separate from final setup. Local preview restores from browser storage.
+- Added Photon/OpenStreetMap address suggestions with manual entry and failure fallback; clarified contact number versus dedicated AI area code, and showed the actual booking-card color accent live. Photon is a public best-effort service (https://github.com/komoot/photon#demo-server); replace with dedicated hosting if volume grows.
+- Phone/provider and appointment-book questions now allow unknown/no-service/no-system, with optional conditional details. No extra software purchase required to finish onboarding.
+- TypeScript, local browser restoration/validation/mobile checks, unsigned/cross-origin draft API guards, mocked signed-in failure/retry/submission ordering, and a public address-service/CORS check passed. No real account data or calls changed. Local only; publishing restrictions remain.
+
+
 ## Current handoff — shared dropdown standard
 
 - Added a global native dropdown standard: 16px chevron, 14px inset, reserved text gutter, 44px minimum height and 12px corners. Removed the calculator-specific duplicate.

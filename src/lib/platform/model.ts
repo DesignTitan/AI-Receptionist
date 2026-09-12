@@ -1,3 +1,4 @@
+import { ANSWERING_PREFERENCES, type AnsweringPreference } from "./answering-preference.ts";
 import { PLANS, type Plan } from "./pricing.ts";
 import type { PhoneSettings } from "./phone-settings.ts";
 import { validatePhoneSetup, type PhoneSetup } from "./phone-provider.ts";
@@ -16,6 +17,8 @@ export type TeamMember = {
 };
 export type BusinessConfig = {
   setupPending?: boolean;
+  answeringPreference?: AnsweringPreference;
+  setupDraft?: import("./setup-draft").SetupDraft;
   contactName?: string;
   phoneSetup?: PhoneSetup;
   trade: "salon" | "studio" | "other";
@@ -150,6 +153,7 @@ export function validateConfig(input: unknown): BusinessConfig {
     };
   });
   return {
+    answeringPreference: c.answeringPreference && Object.hasOwn(ANSWERING_PREFERENCES,c.answeringPreference) ? c.answeringPreference : "undecided",
     trade: c.trade,
     ...(c.phoneSetup ? { phoneSetup: validatePhoneSetup(c.phoneSetup) } : {}),
     timezone,

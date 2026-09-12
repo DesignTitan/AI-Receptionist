@@ -24,7 +24,7 @@ export function PurchaseWelcome({ name, state, test = false, preview = false, cu
     <section className={styles.setup} aria-labelledby="setup-title">
       <div className={styles.setupCopy}>
         <h2 id="setup-title">{paid ? "Let’s set up your business." : "Your next step"}</h2>
-        <p>{paid ? "Add your business details, opening hours and team. We’ll guide you through the rest." : "Your selected plan is saved. Business setup opens after payment is confirmed."}</p>
+        <p>{paid ? "Add your business details, booking hours and call preferences. We’ll guide you through the rest." : "Your selected plan is saved. Business setup opens after payment is confirmed."}</p>
         {paid ? <a className={styles.primary} href="#business-details" onClick={e=>{e.preventDefault();const section=document.getElementById("business-details");section?.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth",block:"start"});section?.focus({preventScroll:true});history.replaceState(null,"","#business-details");}}>Get started <span aria-hidden="true">↓</span></a> : <div className={styles.pendingActions}><RemoteAction url={state === "billing" ? "/api/account/billing" : "/api/account/checkout"} label={state === "billing" ? "Review billing →" : "Continue to payment →"} className={styles.primary}/><Link href="/account" className={styles.receiptLink}>Refresh payment status</Link></div>}
       </div>
       <div className={styles.character} aria-hidden="true"><img src="/marketing/happy-mascot-pointed.png" alt="" width="280" height="280"/><span/></div>

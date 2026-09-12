@@ -1,5 +1,6 @@
 export const PHONE_PROVIDERS = {
-  unknown: "Not sure yet",
+  unknown: "I’m not sure yet",
+  none: "I don’t have business phone service",
   comcast: "Comcast Business / Xfinity",
   tmobile: "T-Mobile",
   att: "AT&T",
@@ -31,6 +32,7 @@ export function validatePhoneSetup(value: unknown): PhoneSetup {
   return { provider: s.provider as PhoneProvider, serviceType: s.serviceType as PhoneSetup["serviceType"], serviceName: clean("serviceName"), bookingSystem: clean("bookingSystem") };
 }
 export function phoneSetupGuidance(setup: PhoneSetup) {
+  if (setup.provider === "none") return "That’s okay. We’ll help arrange your AI number and discuss how customers can reach you. You don’t need to choose a provider here.";
   if (setup.provider === "comcast") return "Check whether your account says Business VoiceEdge, Voice Mobility or Business Voice. The connection steps depend on that service.";
   if (setup.serviceType === "mobile" || setup.provider === "tmobile") return "We’ll test a separate AI answering number first, then help you choose which calls to forward from your mobile. A separate destination is needed to transfer callers to a person.";
   if (setup.provider === "unknown") return "You can continue. We’ll help identify your provider from your phone bill during setup.";

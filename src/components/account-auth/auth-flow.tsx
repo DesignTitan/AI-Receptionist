@@ -258,14 +258,14 @@ export function AuthFlow({
   function download() {
     const blob = new Blob(
       [
-        `AI Receptionist recovery codes\nKeep these private. Each code works once.\n\n${codes.join("\n")}\n`,
+        `bubs recovery codes\nKeep these private. Each code works once.\n\n${codes.join("\n")}\n`,
       ],
       { type: "text/plain" },
     );
     const url = URL.createObjectURL(blob),
       a = document.createElement("a");
     a.href = url;
-    a.download = "ai-receptionist-recovery-codes.txt";
+    a.download = "bubs-recovery-codes.txt";
     a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }

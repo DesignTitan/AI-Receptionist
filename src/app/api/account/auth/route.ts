@@ -221,7 +221,7 @@ export async function POST(request: Request) {
       const data = await providerRequest(i, "/factors", "POST", {
         factor_type: "totp",
         friendly_name: `Authenticator ${new Date().toISOString().slice(0, 10)}`,
-        issuer: "AI Receptionist",
+        issuer: "bubs",
       });
       await bind("enroll", data.id, i.user.id);
       const qr = data.totp.qr_code;

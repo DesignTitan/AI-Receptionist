@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — bubs product identity (12 September 2026)
+
+- Renamed the visible product to lowercase **bubs** across marketing, account/admin screens, page titles, receipt branding and newly enrolled authenticators. Kept “AI receptionist” as a product description.
+- Recorded **bubs.ai** as the intended domain in `docs/BRAND.md`; domain routing and production deployment are not changed. Staging callbacks remain on the isolated preview hostname.
+- Refreshed access-page thumbnails; browser layout checks, TypeScript and all 97 tests passed.
+- Staging authentication remains prepared but inactive: explicit approval to transfer its new credentials to Vercel Preview is still required by automatic approval review.
+
 ## Current handoff — staging authentication prepared, approval pending (12 September 2026)
 
 - Created isolated Supabase `auth-staging` (`xrqfqwnkybknbevrenkn`) without production data; applied eight migrations and verified row security on all six authentication tables.

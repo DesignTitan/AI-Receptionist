@@ -21,7 +21,7 @@ export function AuthShell({
         <section className={styles.landingLeft} aria-label={signup ? "Sign up" : "Log in"}>
           <nav className={styles.landingBack} aria-label="Return to website"><Link href="/">← Back to the site</Link></nav>
           <div key={signup ? "signup" : "login"} className={`${styles.content} ${styles.landingForm}`}>
-            <Link href="/" className={`${styles.brand} ${styles.landingBrand}`}><img src="/marketing/happy-mascot-pointed.png" width="36" height="36" alt=""/>AI Receptionist</Link>
+            <Link href="/" className={`${styles.brand} ${styles.landingBrand}`}><img src="/marketing/happy-mascot-pointed.png" width="36" height="36" alt=""/>bubs</Link>
             {children}
           </div>
             <nav className={styles.landingFooter} aria-label="Account support and legal"><Link href="/legal#privacy">Privacy</Link><Link href="/legal#terms">Terms</Link><Link href="/#hear">Get help</Link></nav>
@@ -49,7 +49,7 @@ export function AuthShell({
             height="36"
             alt=""
           />
-          AI Receptionist
+          bubs
         </Link>
         <Link href="/#hear">Get help</Link>
       </header>

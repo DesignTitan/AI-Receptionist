@@ -45,7 +45,7 @@ export default function HomePage() {
           <div className="sc-wrap">
             <p className="rc-overview__label" data-sc-in>Overview</p>
             <h2 id="overview-title" className="rc-overview__statement" data-sc-in>
-              <strong>AI Receptionist</strong> brings customer bookings,{' '}
+              <strong>bubs</strong> brings customer bookings,{' '}
               <img className="rc-overview__mascot" src="/marketing/happy-pillow-mascot.png" width={1024} height={1024} alt="" />{' '}
               phone conversations, and appointment management together—so you can{' '}
               <strong>focus on your business</strong>{' '}

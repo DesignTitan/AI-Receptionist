@@ -31,7 +31,7 @@ export default async function LoginPage({
             <PulseMark width={24} height={24} strokeWidth={2} />
           </span>
           <h1 className="mt-5 text-2xl font-semibold tracking-[-0.02em] text-ink">
-            {"AI Receptionist"}
+            {"bubs"}
           </h1>
           <p className="mt-1.5 text-[13.5px] text-muted">
             This preview is private. Enter the password to continue.

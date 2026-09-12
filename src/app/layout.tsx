@@ -49,7 +49,7 @@ const technical = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.siteUrl),
-  title: { default: "AI Receptionist", template: "%s · AI Receptionist" },
+  title: { default: "bubs", template: "%s · bubs" },
   description:
     "Online booking, AI confirmation calls and a clear view of what needs your attention. An AI receptionist for businesses that run on appointments.",
 };

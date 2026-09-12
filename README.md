@@ -1,4 +1,4 @@
-# AI Receptionist
+# bubs
 
 Customer-platform setup, routes, operational tools and launch limits are documented in [the customer platform runbook](docs/customer-platform.md). Read NOW.md for the current handoff. The original demo documentation follows.
 

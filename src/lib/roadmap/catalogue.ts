@@ -14,5 +14,5 @@ export const ROADMAP: RoadmapSeed[] = [
   { id: "appointment-changes-by-phone", title: "Change an appointment by phone", description: "Let callers request and complete an appointment change in the same conversation.", status: "exploring" },
   { id: "guided-self-serve-activation", title: "Get set up with fewer handoffs", description: "Move from signup to a working receptionist through a more complete guided setup.", status: "planned" },
   { id: "outgoing-voicemail-messages", title: "Leave a useful voicemail", description: "Leave an appointment message when a confirmation call reaches voicemail.", status: "planned" },
-  { id: "referral-rewards", title: "Recommend us and earn rewards", description: "Share AI Receptionist with another business and track referral rewards from your dashboard.", status: "planned" },
+  { id: "referral-rewards", title: "Recommend us and earn rewards", description: "Share bubs with another business and track referral rewards from your dashboard.", status: "planned" },
 ];

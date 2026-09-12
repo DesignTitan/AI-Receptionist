@@ -2,7 +2,7 @@ import { AuthFlow, type Screen } from "@/components/account-auth/auth-flow";
 import { env } from "@/lib/env";
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Sign in · AI Receptionist",
+  title: "Sign in · bubs",
   robots: { index: false, follow: false },
 };
 export default async function Login({

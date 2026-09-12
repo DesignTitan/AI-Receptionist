@@ -90,7 +90,7 @@ export default function FeaturesPage() {
             </details>
             <details>
               <summary>Will it work with my current booking software?</summary>
-              <p>Appointments are managed in AI Receptionist’s own appointment book. Calendar and practice-software synchronization are not available yet. Tell us which system you use during setup so we can check whether this workflow fits your business before activation.</p>
+              <p>Appointments are managed in bubs’s own appointment book. Calendar and practice-software synchronization are not available yet. Tell us which system you use during setup so we can check whether this workflow fits your business before activation.</p>
             </details>
             <details>
               <summary>Can the AI change or cancel an appointment?</summary>

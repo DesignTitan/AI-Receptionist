@@ -77,7 +77,7 @@ export const env = {
     return read("RESEND_API_KEY");
   },
   get emailFrom() {
-    return read("EMAIL_FROM") ?? "AI Receptionist <onboarding@resend.dev>";
+    return read("EMAIL_FROM") ?? "bubs <onboarding@resend.dev>";
   },
   /** Where "Talk to us" points on the product site; the CTA is omitted when unset. */
   get contactEmail() {

@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const v = await resolveVertical(params);
   const title = `${v.brand} · ${v.copy.meta.title}`;
   return {
-    // `absolute` stops the root layout's "· AI Receptionist" template wrapping the business name.
+    // `absolute` stops the root layout's "· bubs" template wrapping the business name.
     title: { absolute: title, template: `%s · ${v.brand}` },
     description: v.copy.meta.description,
     // Fictional demo businesses should never rank; a customer's own site should.

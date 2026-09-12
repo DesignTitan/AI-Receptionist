@@ -10,7 +10,7 @@ export function receiptEmail({ receipt, name, planName, siteUrl, setupPending, t
   const greeting = first ? `Thanks, ${first}.` : "Thank you.";
   const action = setupPending ? "Set up your business" : "Open your dashboard";
   const destination = `${site}${setupPending ? "/account/setup" : "/account"}`;
-  const subject = `${test ? "[Test] " : ""}Your AI Receptionist receipt · ${receipt.number}`;
+  const subject = `${test ? "[Test] " : ""}Your bubs receipt · ${receipt.number}`;
   const rows = receipt.rows.map(row => `<tr><td style="padding:8px 0;color:#526b63">${escape(row.label)}</td><td align="right" style="padding:8px 0;white-space:nowrap">${escape(money(row.cents,receipt.currency))}</td></tr>`).join("");
   const text = `${greeting}\nYour payment is confirmed.\n${test ? "Sandbox payment — no real charge.\n" : ""}Receipt ${receipt.number}\n${planName}\n${receipt.rows.map(row=>`${row.label}: ${money(row.cents,receipt.currency)}`).join("\n")}\nTotal paid: ${money(receipt.amountPaid,receipt.currency)}\n${receipt.url ? `View receipt: ${receipt.url}\n` : ""}${action}: ${destination}\nQuestions? ${site}/#hear`;
   const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(subject)}</title><style>
@@ -22,7 +22,7 @@ export function receiptEmail({ receipt, name, planName, siteUrl, setupPending, t
 <div style="display:none;max-height:0;overflow:hidden">Payment confirmed. Your receipt and next step are inside.</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 12px">
 <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:100%;max-width:560px;background:#fff;border:1px solid #e2e9e1;border-radius:24px"><tr><td class="email-pad" style="padding:40px">
-<table role="presentation" width="100%"><tr><td align="center" style="padding:0 0 32px;border-bottom:1px solid #e2e9e1"><img src="cid:brand-mascot" width="88" height="88" alt="" style="display:block;border:0;margin:0 auto 8px"><span style="font-family:'Apfel Grotezk',Arial,sans-serif;font-size:22px;font-weight:500">AI Receptionist</span></td></tr></table>
+<table role="presentation" width="100%"><tr><td align="center" style="padding:0 0 32px;border-bottom:1px solid #e2e9e1"><img src="cid:brand-mascot" width="88" height="88" alt="" style="display:block;border:0;margin:0 auto 8px"><span style="font-family:'Apfel Grotezk',Arial,sans-serif;font-size:22px;font-weight:500">bubs</span></td></tr></table>
 <p style="margin:32px 0 12px;font-size:17px">${escape(greeting)}</p><h1 class="email-heading" style="font-family:'Apfel Grotezk',Arial,sans-serif;font-size:44px;line-height:1.08;font-weight:700;letter-spacing:-1.5px;margin:0 0 16px">You’re all set.</h1>
 <p style="font-size:16px;line-height:1.6;margin:0 0 24px;color:#526b63">Your payment is confirmed. Here’s your receipt.</p>
 ${test ? '<p style="font-size:12px;color:#526b63">Sandbox payment · No real charge</p>' : ''}
@@ -33,7 +33,7 @@ ${receipt.url ? `<p style="margin:16px 0 24px"><a href="${escape(receipt.url)}" 
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:24px"><tr><td align="center" bgcolor="#1e3a34" style="border-radius:999px"><a href="${destination}" style="display:block;padding:16px 24px;color:#fff;text-decoration:none;font-size:15px;font-weight:600;border-radius:999px">${action} →</a></td></tr></table>
 <p style="font-size:13px;line-height:1.6;color:#526b63;margin:24px 0 0">${setupPending ? 'Next, add your business details, opening hours and team. We’ll guide you through the rest.' : 'Visit your dashboard to see how your setup is progressing.'}</p>
 <table role="presentation" width="100%" style="margin-top:32px;border-top:1px solid #e2e9e1"><tr><td style="padding-top:24px;font-size:13px;line-height:1.6">Questions? We’re here to help.<br><a href="${site}/#hear" style="color:#1e3a34">Contact us</a></td></tr></table>
-<p style="font-size:11px;color:#526b63;line-height:1.8;margin:24px 0 0">AI Receptionist &nbsp; · &nbsp; <a href="${site}/legal#privacy" style="color:#526b63">Privacy</a> &nbsp; <a href="${site}/legal#terms" style="color:#526b63">Terms</a></p>
+<p style="font-size:11px;color:#526b63;line-height:1.8;margin:24px 0 0">bubs &nbsp; · &nbsp; <a href="${site}/legal#privacy" style="color:#526b63">Privacy</a> &nbsp; <a href="${site}/legal#terms" style="color:#526b63">Terms</a></p>
 </td></tr></table></td></tr></table></body></html>`;
   return { subject, html, text };
 }

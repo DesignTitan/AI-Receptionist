@@ -83,7 +83,7 @@ export async function startTryCall(input: {
     return { ok: false, status: 429, error: "That number has been called today. Try another, or come back tomorrow." };
   }
   const cap = Number(env.tryCallDailyCap);
-  if ((await countDemoCallsToday()) >= cap) {
+  if (input.intent !== "sales" && (await countDemoCallsToday()) >= cap) {
     return { ok: false, status: 503, error: "The receptionist has hit today's demo-call limit. The three demos still work; try the call tomorrow." };
   }
 

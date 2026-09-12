@@ -39,17 +39,19 @@ const TURNSTILE_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?ren
  * they have been verified; a small interaction when Cloudflare is unsure. The token it yields is only worth
  * anything once the server verifies it, which the API does before dialling.
  */
-function HumanCheck({ siteKey, widgetId }: { siteKey: string; widgetId: React.MutableRefObject<string | null> }) {
+function HumanCheck({ siteKey, widgetId, onError }: { siteKey: string; widgetId: React.MutableRefObject<string | null>; onError: (message: string) => void }) {
   const host = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     let cancelled = false;
     function render() {
       if (cancelled || !host.current || !window.turnstile || widgetId.current) return;
-      widgetId.current = window.turnstile.render(host.current, { sitekey: siteKey, size: "flexible", appearance: "always", theme: "auto" });
+      widgetId.current = window.turnstile.render(host.current, { sitekey: siteKey, size: "flexible", appearance: "always", theme: "auto", "error-callback": () => { onError("The security check couldn’t load. Refresh the page or try another browser."); return true; }, "expired-callback": () => { if (widgetId.current) window.turnstile?.reset(widgetId.current); } });
     }
+    const loadError = () => onError("The security check couldn’t load. Check your connection and try again.");
+    let script: HTMLScriptElement | null = null;
     if (window.turnstile) render();
     else {
-      let script = document.querySelector<HTMLScriptElement>(`script[src="${TURNSTILE_SRC}"]`);
+      script = document.querySelector<HTMLScriptElement>(`script[src="${TURNSTILE_SRC}"]`);
       if (!script) {
         script = document.createElement("script");
         script.src = TURNSTILE_SRC;
@@ -57,9 +59,11 @@ function HumanCheck({ siteKey, widgetId }: { siteKey: string; widgetId: React.Mu
         document.head.appendChild(script);
       }
       script.addEventListener("load", render);
+      script.addEventListener("error", loadError);
     }
     return () => {
       cancelled = true;
+      script?.removeEventListener("load", render); script?.removeEventListener("error", loadError);
       if (widgetId.current && window.turnstile) {
         try {
           window.turnstile.remove(widgetId.current);
@@ -69,7 +73,7 @@ function HumanCheck({ siteKey, widgetId }: { siteKey: string; widgetId: React.Mu
       }
       widgetId.current = null;
     };
-  }, [siteKey, widgetId]);
+  }, [siteKey, widgetId, onError]);
   return <div ref={host} className="rc-try__human" />;
 }
 
@@ -132,10 +136,11 @@ export function TryCallPlate({ simulated, turnstileSiteKey, compact = false }: {
     try {
       const r = await fetch("/api/try-call", {
         method: "POST",
+        signal: AbortSignal.timeout(20_000),
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, business, turnstileToken, company_website: hp, intent: sales ? "sales" : "demo", preferredTime: sales ? preferredTime : undefined }),
       });
-      const data = await r.json();
+      const data = await r.json().catch(() => ({ error: "We couldn’t save your request. Please try again." }));
       if (!r.ok) {
         setError(data.error ?? "That didn't work. Try again.");
         if (humanCheck && widgetId.current) window.turnstile?.reset(widgetId.current);
@@ -144,7 +149,7 @@ export function TryCallPlate({ simulated, turnstileSiteKey, compact = false }: {
       setCall({ id: data.id, reference: data.reference, simulated: !!data.simulated, name: data.name ?? name, opening: data.opening ?? "" });
       if (!data.simulated) setLive({ status: "queued", outcome: null, transcript: null, summary: null, durationSeconds: null });
     } catch {
-      setError("Couldn't reach the server.");
+      setError("We couldn’t confirm your request was saved. Please check your connection and try again.");
     } finally {
       setBusy(false);
     }
@@ -196,7 +201,7 @@ export function TryCallPlate({ simulated, turnstileSiteKey, compact = false }: {
           </label>
           {!compact && sales && <label className="rc-try__field"><span>Preferred day &amp; time (optional)</span><input value={preferredTime} onChange={e => setPreferredTime(e.target.value)} placeholder="Tuesday afternoon, Eastern time" maxLength={160} /><small>Include your time zone. We’ll confirm availability with you.</small></label>}
           <input type="text" name="company_website" tabIndex={-1} autoComplete="off" className="rc-hp" aria-hidden="true" />
-          {humanCheck && <HumanCheck siteKey={turnstileSiteKey!} widgetId={widgetId} />}
+          {humanCheck && <HumanCheck siteKey={turnstileSiteKey!} widgetId={widgetId} onError={setError} />}
           <button type="submit" className="rc-cta" disabled={busy}>
             {busy ? "Sending" : sales ? "Request a sales call" : "Call me now"}
           </button>

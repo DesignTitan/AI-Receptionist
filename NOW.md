@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — mobile call handling (12 September 2026)
+
+- Voice audio now unlocks on the initial tap and reuses one microphone stream, with cleanup when cancelled.
+- Sales requests now show verification and server failures clearly; sales callbacks no longer consume the voice-demo daily cap.
+- Typecheck and mocked mobile browser checks passed; these checks did not place calls or send emails.
+- Production voice remains disabled. Live callback verification and email configuration remain unresolved; saved-credential Cloudflare inspection was rejected by automatic approval review.
+
 ## Current handoff — full-width welcome gradient (12 September 2026)
 
 - Extended the welcome background across the full width and behind the navigation without moving content.

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { VoiceAudio } from "./voice-audio";
 import type { WebSession } from "@omnidim-ai/client";
 
 function VoiceIcon({ kind }: { kind: "mic" | "muted" | "end" }) {
@@ -18,6 +19,7 @@ export function VoiceExample() {
   const trigger = useRef<HTMLButtonElement>(null);
   const session = useRef<WebSession | null>(null);
   const generation = useRef(0);
+  const audio = useRef<VoiceAudio | null>(null);
   const deadline = useRef(0);
   const [available, setAvailable] = useState<boolean | null>(null);
   const [status, setStatus] = useState<"idle" | "connecting" | "active" | "ended">("idle");
@@ -31,11 +33,12 @@ export function VoiceExample() {
     generation.current++;
     session.current?.stop();
     session.current = null;
+    audio.current?.stop(); audio.current = null;
     setStatus("ended");
     setMuted(false);
   }
   useEffect(() => {
-    const onLeave = () => { generation.current++; session.current?.stop(); };
+    const onLeave = () => { generation.current++; session.current?.stop(); audio.current?.stop(); };
     window.addEventListener("pagehide", onLeave);
     return () => { onLeave(); window.removeEventListener("pagehide", onLeave); };
   }, []);
@@ -75,10 +78,10 @@ export function VoiceExample() {
     setStatus("connecting"); setSeconds(90); deadline.current = Date.now() + 90_000;
     const run = ++generation.current;
     let current: WebSession | null = null;
+    let engine: VoiceAudio | null = null;
     try {
-      // Ask before reserving a paid session. Release this preflight stream immediately.
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      stream.getTracks().forEach(track => track.stop());
+      engine = new VoiceAudio(); audio.current = engine;
+      await engine.ready;
       if (run !== generation.current) return;
       const response = await fetch("/api/voice-demo/session", { method: "POST", signal: AbortSignal.timeout(15_000) });
       const data = await response.json();
@@ -86,7 +89,7 @@ export function VoiceExample() {
       if (!response.ok) throw new Error(data.error);
       const { WebSession } = await import("@omnidim-ai/client");
       if (run !== generation.current) return;
-      current = new WebSession(); session.current = current;
+      current = new WebSession({ audioEngine: engine }); session.current = current;
       current.on("status", value => {
         if (run !== generation.current) { if (value === "active") current?.stop(); return; }
         if (typeof value === "object") { setStatus("ended"); setMuted(false); }
@@ -101,11 +104,12 @@ export function VoiceExample() {
       await current.start({ wsUrl: data.wsUrl });
       if (run !== generation.current) current.stop();
     } catch (reason) {
-      current?.stop();
+      current?.stop(); engine?.stop();
       if (run !== generation.current) return;
       setStatus("ended");
       setError(reason instanceof Error && reason.name === "NotAllowedError"
         ? "Microphone access is off. Allow it in your browser to talk, then try again."
+        : reason instanceof Error && reason.message.startsWith("Microphone access requires HTTPS") ? reason.message
         : "We couldn’t start the conversation. Check your microphone and connection, then try again.");
     }
   }

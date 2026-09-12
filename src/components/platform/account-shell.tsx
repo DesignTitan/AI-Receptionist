@@ -9,10 +9,10 @@ import "@/app/(marketing)/marketing-shell.css";
 import "../brand/brand.css";
 import styles from "./account-shell.module.css";
 
-export function AccountShell({ children, billingAvailable = true, name = "", preview = false }: {
-  children: React.ReactNode; billingAvailable?: boolean; name?: string; preview?: boolean;
+export function AccountShell({ children, billingAvailable = true, name = "", preview = false, darkHero = false }: {
+  children: React.ReactNode; billingAvailable?: boolean; name?: string; preview?: boolean; darkHero?: boolean;
 }) {
-  return <div className={`brand-surface ${styles.shell}`}>
+  return <div className={`brand-surface ${styles.shell}`} data-dark-hero={darkHero}>
     <div className={`rc marketing-shell ${styles.navigation}`}>
       <SiteNav cta="Let’s talk" simulated turnstileSiteKey={null} showCall={false}
         applicationLinks={<><p>Your account</p>

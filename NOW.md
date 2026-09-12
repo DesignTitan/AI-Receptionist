@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — full-width welcome gradient (12 September 2026)
+
+- Extended the welcome background across the full width and behind the navigation without moving content.
+- Applied the exact typography-card gradient from the visual design system: 145 degrees, #1e3a34, #526b63, #a6bda9.
+- Navigation is transparent with light controls; the business form remains below the hero.
+- Typecheck and browser checks passed at 1463, 390 and 320px; menus work and there is no horizontal overflow.
+
 ## Current handoff — dark account welcome hero (12 September 2026)
 
 - Combined the welcome heading and setup introduction into a dark green hero with light text and a mint action button.

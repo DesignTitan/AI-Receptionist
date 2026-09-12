@@ -66,3 +66,7 @@
 .hero .primary:hover { background:#e7f5ed; }
 .hero .character>span { background:#071e17; opacity:.7; }
 @media(max-width:600px){.hero{width:calc(100vw - 24px);margin-left:calc(50% - 50vw + 12px);padding:28px 20px;border-radius:24px}.hero .setup{padding-top:8px}}
+
+/* Extend the existing hero paint behind the navigation without moving content. */
+.hero { position:relative; isolation:isolate; border-radius:0; background:transparent; }
+.hero::before { content:""; position:absolute; z-index:-1; top:calc(-1 * var(--welcome-top-space)); bottom:0; left:calc(50% - 50vw); width:100vw; background:linear-gradient(145deg,#1e3a34,#526b63,#a6bda9); pointer-events:none; }

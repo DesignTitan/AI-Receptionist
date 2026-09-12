@@ -15,7 +15,7 @@ export function PurchaseWelcome({ name, state, test = false, preview = false, cu
 }) {
   const paid = state === "paid";
   const firstName = name.trim().split(/\s+/)[0]?.slice(0,40);
-  return <AccountShell preview={preview} name={name} billingAvailable={state !== "pending" && !preview}>
+  return <AccountShell darkHero preview={preview} name={name} billingAvailable={state !== "pending" && !preview}>
     <div className={styles.hero}>
     <header className={styles.heading}>
       <span className={styles.badge}>{paid ? <><span aria-hidden="true">✓</span> Payment confirmed</> : state === "billing" ? "Billing needs attention" : "Your purchase"}</span>

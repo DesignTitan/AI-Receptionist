@@ -5,11 +5,31 @@ export function AuthShell({
   children,
   wide = false,
   preview = false,
+  landing = false,
 }: {
   children: React.ReactNode;
   wide?: boolean;
   preview?: boolean;
+  landing?: boolean;
 }) {
+  if (landing) return (
+    <div className={`brand-surface ${styles.page} ${styles.landing}`}>
+      {preview && <div className={styles.preview}>Design preview · Example account. No security changes are made.</div>}
+      <main id="main" className={styles.landingMain}>
+        <section className={styles.landingLeft} aria-label="Sign in">
+          <nav className={styles.landingBack} aria-label="Return to website"><Link href="/">← Back to the site</Link></nav>
+          <div className={`${styles.content} ${styles.landingForm}`}>
+            <Link href="/" className={`${styles.brand} ${styles.landingBrand}`}><img src="/marketing/happy-mascot-pointed.png" width="36" height="36" alt=""/>AI Receptionist</Link>
+            {children}
+            <nav className={styles.landingFooter} aria-label="Account support and legal"><Link href="/legal#privacy">Privacy</Link><Link href="/legal#terms">Terms</Link><Link href="/#hear">Get help</Link></nav>
+          </div>
+        </section>
+        <aside className={styles.landingPhoto} aria-label="More time for your business">
+          <img src="/marketing/owner-review.webp" width="2048" height="2048" fetchPriority="high" alt="A salon owner checking her bookings at the front desk"/>
+        </aside>
+      </main>
+    </div>
+  );
   return (
     <div className={`brand-surface ${styles.page}`}>
       {preview && (

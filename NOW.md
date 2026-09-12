@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — login landing reference (12 September 2026)
+
+- Restyled `/account/login` to follow the user’s other-project reference at `localhost:3100/login`: compact left-hand form with branding above, outlined Back to site control, and a nearly full-height rounded photograph on the right.
+- Reused the existing business-owner portrait and brand typography/colours. Mobile prioritizes the form; subsequent authentication screens and server security behavior are unchanged.
+- Checked 320–1920px layouts, TypeScript, landing/email navigation and the existing simulated authenticator/recovery/native WebAuthn interactions. Refreshed Owner sign in and Sign-in design thumbnails.
+- Authentication activation still requires the provider configuration and migration documented below. The design update is complete on the authentication branch.
+
 ## Current handoff — coded account authentication (12 September 2026)
 
 - Built all twelve account-access screens with Supabase PKCE email links, native passkey ceremonies, verified authenticator enrollment/challenges, recovery codes, recovery-request status and account security/device controls. Signup still returns to the selected plan before purchase.

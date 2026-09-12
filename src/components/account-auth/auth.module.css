@@ -460,3 +460,36 @@
 .content .status {
   margin-top: 16px;
 }
+
+/* Login landing: compact left-hand access form and an immersive business portrait. */
+.landingMain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  padding: 12px;
+  flex: 1;
+}
+.landingLeft { display: flex; flex-direction: column; min-width: 0; }
+.landingBack { padding: 16px; font-size: 14px; }
+.landingBack a { display: inline-flex; align-items: center; min-height: 42px; padding: 8px 16px; border: 1px solid var(--brand-line); border-radius: 99px; box-shadow: 0 1px 2px #1e3a3410; }
+.landingBack a:hover { background: #f4f6f3; }
+.landingForm { width: min(416px, calc(100% - 56px)); margin: clamp(40px, 7svh, 80px) auto auto; padding: 0 0 64px; }
+.landingBrand { margin-bottom: 40px; font-size: 18px; }
+.landingForm h1 { font-size: clamp(32px, 3vw, 40px); font-weight: 400; margin: 0 0 12px; }
+.landingForm input:not([type=checkbox]) { height: 48px; }
+.landingForm .primary, .landingForm .secondary { min-height: 48px; }
+.landingFooter { display: flex; gap: 24px; margin-top: 24px; font-size: 12px; color: var(--brand-muted); }
+.landingPhoto { position: sticky; top: calc(var(--workspace-top-offset, 0px) + 12px); height: calc(100svh - var(--workspace-top-offset, 0px) - 24px); min-height: 480px; overflow: hidden; border-radius: 24px; background: var(--brand-sage); }
+.landingPhoto img { width: 100%; height: 100%; object-fit: cover; object-position: 55% center; }
+@media(max-width:850px) {
+  .landingMain { gap: 12px; }
+  .landingForm { width: calc(100% - 40px); padding: 40px 0; }
+  .landingBack { padding: 12px 8px; }
+}
+@media(max-width:640px) {
+  .landingMain { display: block; padding: 0; }
+  .landingBack { padding: 20px; }
+  .landingForm { width: min(416px, calc(100% - 40px)); margin: 0 auto; padding: 32px 0 48px; }
+  .landingBrand { margin-bottom: 32px; }
+  .landingPhoto { display: none; }
+}

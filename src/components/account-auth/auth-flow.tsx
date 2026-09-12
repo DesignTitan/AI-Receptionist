@@ -362,10 +362,11 @@ export function AuthFlow({
   );
   return (
     <AuthShell
+      landing={screen === "signin"}
       wide={screen === "settings" || screen === "devices"}
       preview={preview}
     >
-      <p className={styles.eyebrow}>Your account · Your peace of mind</p>
+      {screen !== "signin" && <p className={styles.eyebrow}>Your account · Your peace of mind</p>}
       <h1 tabIndex={-1} ref={heading}>
         {loading ? "Opening your account…" : titles[screen]}
       </h1>

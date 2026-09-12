@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — simplified hamburger menu
+
+- Removed Home from the shared marketing hamburger menu.
+- Features and Demos remain; mobile retains the homepage section anchors.
+- Next: continue navigation review. Prior publishing restriction remains.
+
+
 ## Current handoff — choose a plan before checkout
 
 - Removed Get started from the hamburger menu.

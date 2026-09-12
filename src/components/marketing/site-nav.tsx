@@ -13,7 +13,6 @@ const LINKS = [
 ];
 
 const PAGES = [
-  { href: "/", label: "Home" },
   { href: "/features", label: "Features" },
   { href: "/demos", label: "Demos" },
 ];

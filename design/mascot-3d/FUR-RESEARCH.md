@@ -46,3 +46,13 @@ Reviewed [The Software Pixar Artists Use For Hair & Fur — InspirationTuts](htt
 `audit-fur.py` renders the same forehead patch with prior light settings, restored glossy light response, and denoising disabled. Visual inspection showed that the raw and denoised images retained the same matted structure. Restoring light response helped shading but did not fix the groom. The previous eye-light workaround affected the coat and should not be used globally.
 
 The next swatch tests coherent guide lengths, increased root lift, reduced clumping and a separate dense undercoat. Keep the last full portrait until the swatch is inspected. `test-lifted-groom.py` forces swatch-only mode and does not overwrite the master Blender file. The test reduced visible blotchiness but still lacked the original reference’s distinct soft tufts; it was not promoted to the character.
+
+## Editable regional guide implementation
+
+The next build is `build-groom-studio.py`, with separate `mascot-groom-studio.blend` and `mascot-groom-review.blend` outputs. The installed Blender 5.1 bundle already supplies hair interpolation, clumping, frizz, radius profiles and sculpting brushes; no additional tool installation was needed. Its asset license is CC0 and is copied alongside the scripts.
+
+Six authored regions cover the crown, forehead, cheeks, chin/point and back/sides. Each has topcoat and short-undercoat guides with surface UV attachment. Regions join before interpolation. The topcoat explicitly samples the nearest authored guide at the child's curve parameter and progressively converges toward it. The undercoat uses the bundled clumping asset at low strength. This avoids freezing all the generated fibers into the source mesh and makes guide edits propagate into the coat.
+
+Look-development checks included a frontal close-up, isolation of undercoat/clumping, full portraits and a three-quarter view. Corrections addressed overly flat/coarse tufts, excessive tip spread, uniform guide lengths, an artificial parting at the crown/sides, and long fibers crossing the pupils. Hair receives glossy light; eye sparkle is separately art-directed instead of disabling the light response for the entire coat.
+
+The verification script checks surface attachments, local strand lengths, and an actual guide deformation/restoration. These are functional checks, not proof of visual quality. The result has more deliberate tuft structure and editable controls, but the original mascot remains the likeness target and no exact-match or Pixar production-quality claim is made. Static appearance comes before dynamics or an animation pipeline.

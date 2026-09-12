@@ -1,0 +1,13 @@
+{
+  "regional_guide_objects": 12,
+  "editable_guide_curves": 32370,
+  "preview_topcoat_curves": 56070,
+  "points_changed_by_guide_edit": 1090,
+  "sampled_fibre_length_range": [
+    0.018206926461789213,
+    0.08461981924735404
+  ],
+  "guide_edit_restores_exactly": true,
+  "packed_assets": "Blender 5.1 bundled hair geometry nodes (CC0)",
+  "visual_approval": false
+}

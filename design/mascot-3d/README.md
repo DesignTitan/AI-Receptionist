@@ -2,9 +2,27 @@
 
 Second likeness study, 12 September 2026. The shape and likeness still need visual review against `public/marketing/happy-mascot-pointed.png`. This is a new modeled character, not a flat image mapped onto a plane.
 
+## Editable regional groom — current Blender study
+
+Open `mascot-groom-review.blend` for the editable model beside the packed Cycles render and original reference. `mascot-groom-studio.blend` is the editable source scene. This replaces the frozen full-coat approach with six authored guide regions, separate undercoat guides, surface UV attachment and live Geometry Nodes interpolation. The original remains the likeness target; this is not a claim of exact visual matching.
+
+Select a regional object in **GROOM • editable regional guides** and use Sculpt mode to comb or lengthen guides. Turn viewport overlays on to see the selection. Select **TOPCOAT • live controls** or **UNDERCOAT • live controls** and open its modifier panel for density, clumping, frizz and fibre radius. Generated viewport density is reduced to 7%; renders use full density. The guide-edit verification checks that changing guides changes generated fibers and that restoring guides restores the coat.
+
+The topcoat uses explicit nearest-guide convergence, tapered native fibers and restrained frizz. Regions are joined before interpolation to avoid independent patch edges. The short undercoat fills gaps. Blender's bundled hair node assets are embedded; their CC0 license is included in `BLENDER-ASSETS-LICENSE.txt`. No additional installation was needed.
+
+```sh
+MASCOT_FINAL=1 /Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --python design/mascot-3d/build-groom-studio.py
+/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --python design/mascot-3d/verify-groom-studio.py
+/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --python design/mascot-3d/create-groom-review.py
+```
+
+The builder loads the committed `mascot-film.blend` as its body/lighting starting point; it writes separate groom files and `renders/regional-groom.png`. Final settings are 1600 square, up to 384 Cycles samples, 0.008 adaptive threshold, Metal GPU, and denoising. `create-groom-review.py` packs the completed render; the saved image does not update automatically after editing. F12 renders edits, then choose **Render Result** in the image editor.
+
+Research and assessment: [FUR-RESEARCH.md](FUR-RESEARCH.md). No dynamics simulation, full expression rig or After Effects project is included. Those follow approval of the static character. Browser GLB and Spline were not changed.
+
 ## Blender soft-fur pass
 
-The current Blender-only look-development pass is `mascot-film.blend`; `mascot-film-review.blend` keeps an editable modelling view beside the finished render. It uses native hair curves and a dedicated hair-scattering shader. The older web GLB and master below are a separate earlier study and were not regenerated in this pass.
+The earlier, rejected Blender-only look-development pass is `mascot-film.blend`; `mascot-film-review.blend` keeps an editable modelling view beside the finished render. It uses native hair curves and a dedicated hair-scattering shader. The older web GLB and master below are a separate earlier study and were not regenerated in this pass.
 
 Research, rendering choices and source links: [FUR-RESEARCH.md](FUR-RESEARCH.md). Render: `renders/soft-fur-final.png`. Build with `build-film.py`; render the existing scene with `render-film-final.py`; create its split workspace with `create-film-review.py`. In Blender, the left solid modelling view intentionally does not show the final shader. Use the full render on the right for judging fur and lighting.
 

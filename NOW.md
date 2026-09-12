@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — editable Blender guide groom (12 September 2026)
+
+- Built `mascot-groom-studio.blend` with six editable guide regions, separate undercoat guides, surface attachment, live interpolation and explicit tuft convergence. Blender’s bundled tools were sufficient; no new add-on was needed.
+- Iterated against the original reference using full portraits, close-ups and a three-quarter render. Revised tuft shape, eye/cheek proportions and flow around the sides; exact likeness remains unapproved.
+- `mascot-groom-review.blend` packs the Cycles beauty render and original reference beside the editable model. The full render is `design/mascot-3d/renders/regional-groom.png`.
+- Live-deformation checks verify that editing guides changes the generated coat, restoring guides restores it, and strand lengths remain local. Results are in `groom-verification.json`.
+- Next: continue visual likeness refinement before dynamics, expressions or After Effects. This Blender pass does not replace the website or Spline assets.
+
 ## Current handoff — fur audit and supplied video (12 September 2026)
 
 - User rejected the soft-fur pass. Reviewed the supplied InspirationTuts video (TED87pzi078), full available captions and key visual examples; recorded takeaways in `design/mascot-3d/FUR-RESEARCH.md`.

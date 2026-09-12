@@ -28,3 +28,22 @@
 .support { display:flex; gap:16px; align-items:center; padding:16px 24px; margin-top:20px; background:#f1f5f1; border-radius:24px; }.support h2{font-family:var(--brand-body);font-size:14px;font-weight:500;line-height:1.4;margin:0 0 4px}.support p{font-size:13px;color:var(--brand-muted);margin:0}.support>a{margin-left:auto;border:1px solid #c9ded0;border-radius:999px;padding:8px 24px;font-size:13px;white-space:nowrap;background:#fff}.supportIcon{width:40px;height:40px;display:grid;place-items:center;flex-shrink:0;border-radius:50%;background:#e0eee5;font-size:21px}.pendingActions{display:flex;align-items:center;flex-wrap:wrap;gap:24px;margin-top:24px}
 @media(max-width:850px){.setup{grid-template-columns:minmax(0,1fr) 200px;padding:32px;gap:24px}.receipt{grid-template-columns:1fr 1fr;gap:24px}.receiptActions{grid-column:1/-1;border-left:0;border-top:1px solid var(--brand-line);padding:16px 0 0}.receiptActions p{margin-top:8px}}
 @media(max-width:600px){.heading{margin-bottom:24px}.heading h1{font-size:42px}.test{display:block;margin:12px 0 0}.setup{display:flex;flex-direction:column-reverse;align-items:stretch;padding:24px}.character{padding:0}.character img{max-width:140px;transform:none}.character>span{width:90px;height:8px;margin-top:0}.steps{gap:12px;margin:24px 0}.steps li{font-size:11px}.steps li:not(:last-child)::after{left:45px}.primary{width:100%;font-size:13px}.receipt{grid-template-columns:1fr;padding:24px;gap:24px}.receiptActions{grid-column:auto}.support{padding:20px;flex-wrap:wrap;gap:12px}.supportIcon{display:none}.support>a{margin:4px 0 0}.support>div{flex-basis:100%}}
+
+/* Keep the short welcome screen in view on laptop displays, without clipping content. */
+@media(min-width:851px) and (max-height:900px){
+  .heading{margin-bottom:24px}
+  .heading h1{font-size:52px;margin-top:16px;margin-bottom:0}
+  .setup{padding:24px 32px;grid-template-columns:minmax(0,1fr) 240px}
+  .setup h2{font-size:34px;margin-bottom:12px}
+  .character img{max-width:220px}
+  .steps{margin:24px 0}
+  .support{margin-top:16px;padding:12px 24px}
+}
+@media(min-width:851px) and (max-height:720px){
+  .heading{margin-bottom:16px}
+  .heading h1{font-size:44px;margin-top:12px}
+  .setup{padding:20px 24px}
+  .setup h2{font-size:30px}
+  .steps{margin:16px 0}
+  .character img{max-width:190px}
+}

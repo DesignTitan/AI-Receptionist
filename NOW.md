@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — welcome viewport fit
+
+- Account shell now subtracts the local toolbar height from its minimum viewport height, removing artificial overflow.
+- Welcome spacing and mascot size adapt to shorter laptop heights; content is never hidden or clipped.
+- Browser checks passed with the toolbar loaded at 1462×1167, 1440×900, 1366×768, 1280×720 and 1280×650: document height equals viewport height. Mobile remains scrollable and accessible without horizontal overflow.
+- Published via Vercel (11esvgm33); production build passed. Public GitHub push remains blocked by the earlier approval review.
+
 ## Current handoff — simplified welcome screen
 
 - Replaced the large setup mascot with a generated pointed speech-tail variant, preserving the existing original asset.

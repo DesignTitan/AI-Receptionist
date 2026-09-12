@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — clear practice setup submission
+
+- Local setup preview now says Finish preview and explains before clicking that nothing is sent.
+- Completion confirms device-only storage and links to real account sign-in; real setup submission remains unchanged.
+- Typecheck passed; browser verified completion and no account submission request.
+- Production was published in the prior block; this change clarifies the local preview.
+
+
 ## Current handoff — production published
 
 - User explicitly authorized production publishing; Vercel deployment succeeded for commit 579bff3.

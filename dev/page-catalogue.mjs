@@ -33,8 +33,22 @@ export function getPages({ tenant = "", siteGate = "public" } = {}) {
     page("account", "Owner dashboard", "/account", "Customer", "app", "owner",
       "Bookings, call outcomes, usage and billing for the signed-in owner.", ["src/app/account/page.tsx"]),
     page("owner-login", "Owner sign in", "/account/login", "Customer", "app", "public",
-      "Sign in to a business owner account.", ["src/app/account/login/page.tsx"]),
+      "Secure email sign-in and passkeys. Enrollment, recovery and device controls are included below; live use requires configured account security.", ["src/app/account/login/page.tsx", "src/components/account-auth/auth-flow.tsx", "src/app/api/account/auth/route.ts"]),
   ];
+  if (!selected) {
+    const states = [
+      ["signin", "Sign-in design"], ["email", "Check your email"], ["verify", "Verify your identity"],
+      ["enroll", "Secure your account"], ["passkey", "Add a passkey"], ["authenticator", "Connect an authenticator"],
+      ["codes", "Save recovery codes"], ["recovery", "Use a recovery code"], ["pending", "Recovery request"],
+      ["expired", "Expired sign-in link"], ["settings", "Sign-in & security"], ["devices", "Sign out other devices"],
+    ];
+    for (const [state, label] of states) pages.push(page(`auth-${state}`, label, `/account/login?preview=${state}`, "Customer", "app", "development",
+      "Authentication screen preview with example details. Real security changes require sign-in and configured Supabase authentication.",
+      ["src/components/account-auth/auth-flow.tsx", "src/components/account-auth/auth.module.css", "src/app/api/account/auth/route.ts"]));
+    pages.push(page("account-security", "Account security (signed in)", "/account/security", "Customer", "app", "owner",
+      "Manage verified sign-in methods, one-time recovery codes and revocable sessions.", ["src/app/account/security/page.tsx", "src/app/api/account/auth/route.ts"]));
+
+  }
   for (const vertical of verticals) {
     pages.push(page(`${vertical.slug}-home`, `${vertical.label} homepage`, selected ? "/" : `/demo/${vertical.slug}`,
       "Business demos", "app", "public", `Example ${vertical.slug} business homepage and provider directory.`,
@@ -54,6 +68,8 @@ export function getPages({ tenant = "", siteGate = "public" } = {}) {
       "Staff customer setup, billing and usage controls.", ["src/app/admin/customers/page.tsx"]),
     page("staff-roadmap", "Feature suggestions", "/admin/roadmap", "Staff", "app", "staff",
       "Review ideas before opening them for public roadmap voting.", ["src/app/admin/roadmap/page.tsx", "src/components/admin/roadmap-review.tsx"]),
+    page("account-recovery-queue", "Account recovery requests", "/admin/account-recovery", "Staff", "app", "staff",
+      "Review recovery requests. Reviewing or closing a request never unlocks an account or resets a sign-in method.", ["src/app/admin/account-recovery/page.tsx"]),
     page("staff-login", "Staff sign in", "/admin/login", "Staff", "app", "public",
       "Sign in to the staff area.", ["src/app/admin/login/page.tsx"]),
     page("mascot-studio", "3D mascot studio", "/__dev/design/mascot-3d/index.html", "Design studies", "study", "development",

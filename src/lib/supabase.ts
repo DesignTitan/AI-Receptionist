@@ -18,7 +18,7 @@ export function serviceClient(): SupabaseClient {
   }
   if (!cached) {
     cached = createClient(env.supabaseUrl!, env.supabaseServiceKey!, {
-      auth: { persistSession: false, autoRefreshToken: false },
+      auth: { persistSession: false, autoRefreshToken: false, experimental: { passkey: true } },
     });
   }
   return cached;

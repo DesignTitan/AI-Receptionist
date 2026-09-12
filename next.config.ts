@@ -13,6 +13,12 @@ export default function nextConfig(phase: string): NextConfig {
     : "./src/components/development-tools.disabled.tsx";
 
   return {
+    headers: async () => ["/account/:path*", "/api/account/:path*"].map(source => ({source, headers:[
+      {key:"X-Frame-Options",value:"DENY"},
+      {key:"X-Content-Type-Options",value:"nosniff"},
+      {key:"Referrer-Policy",value:"no-referrer"},
+      {key:"Cache-Control",value:"private, no-store"},
+    ]})),
     outputFileTracingIncludes: { "/api/jobs": ["./public/marketing/happy-pillow-mascot.png"] },
     images: {
       remotePatterns: [

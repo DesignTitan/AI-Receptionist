@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — coded account authentication (12 September 2026)
+
+- Built all twelve account-access screens with Supabase PKCE email links, native passkey ceremonies, verified authenticator enrollment/challenges, recovery codes, recovery-request status and account security/device controls. Signup still returns to the selected plan before purchase.
+- Owner APIs now require an approved, revocable database session; provider tokens are encrypted, production cookies are host-only, recovery codes are hashed/one-use, and email alone cannot bypass enrolled security. Lost-method recovery stays restricted until replacement enrollment succeeds.
+- Added security links to Account settings, a staff recovery-request queue that cannot unlock accounts, and twelve preview cards with compressed screenshots in Page Index. Removed the obsolete email-only form.
+- Verification: 97 automated tests, TypeScript, isolated PostgreSQL security checks, 48 responsive screen checks, simulated-flow native WebAuthn ceremonies and an isolated production build passed. See `docs/security/ACCOUNT-AUTHENTICATION.md` for exact scope.
+- Activation remains: apply `20260912_account_security.sql`, configure Supabase/Turnstile and the separate session encryption key, then complete real-provider acceptance. None of those credentials is loaded locally; passkeys default off until configured. Pushed on a separate authentication branch, not deployed to production.
+
 ## Current handoff — authentication flow concepts (12 September 2026)
 
 - Created two matching image boards in `design/account-access/`: `security-flow-v2.png` covers the six main authentication states; `security-setup-recovery-v2.png` covers six additional setup, recovery, error and session-confirmation screens.

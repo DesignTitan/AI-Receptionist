@@ -1,44 +1,45 @@
 "use client";
-import { planReturnUrl } from "@/lib/platform/plan-navigation";
-import type { Plan } from "@/lib/platform/pricing";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { AuthShell } from "@/components/account-auth/auth-shell";
 import Link from "next/link";
+import styles from "@/components/account-auth/auth.module.css";
 export default function Callback() {
-  const [message, setMessage] = useState("Finishing sign-in…");
-  const started = useRef(false);
+  const started = useRef(false),
+    [error, setError] = useState("");
   useEffect(() => {
     if (started.current) return;
     started.current = true;
-    const plan = new URLSearchParams(location.search).get("plan");
-    const destination = plan && ["front", "busy", "full"].includes(plan) ? `/start?plan=${plan}&review=1&returnTo=${encodeURIComponent(planReturnUrl(new URLSearchParams(location.search).get("returnTo") ?? undefined, plan as Plan))}` : "/account";
-    const hash = new URLSearchParams(location.hash.slice(1));
-    const token = hash.get("access_token");
+    const code = new URLSearchParams(location.search).get("code");
     history.replaceState(null, "", "/account/callback");
-    if (!token) {
-      setMessage(
-        "This link is missing or expired. Please request a new sign-in link.",
+    if (!code) {
+      setError(
+        "This sign-in link is missing or expired. Request a fresh link and open it in this browser.",
       );
       return;
     }
     fetch("/api/account/session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ access_token: token }),
+      body: JSON.stringify({ code }),
     })
       .then(async (r) => {
-        if (!r.ok) throw Error();
-        location.replace(destination);
+        const data = await r.json();
+        if (!r.ok) throw Error(data.error);
+        location.replace("/account/security");
       })
-      .catch(() =>
-        setMessage("This link has expired. Please request a new sign-in link."),
-      );
+      .catch((e) => setError(e.message));
   }, []);
   return (
-    <main id="main" className="mx-auto max-w-xl px-6 py-24">
-      <h1 className="text-3xl">{message}</h1>
-      <Link className="mt-6 inline-block underline" href="/account/login">
-        Back to sign in
-      </Link>
-    </main>
+    <AuthShell>
+      <h1>{error ? "Let’s try a fresh link." : "Finishing sign-in…"}</h1>
+      <p role={error ? "alert" : "status"}>
+        {error || "Checking your email link securely."}
+      </p>
+      {error && (
+        <Link className={styles.primary} href="/account/login">
+          Request a new sign-in link
+        </Link>
+      )}
+    </AuthShell>
   );
 }

@@ -1,36 +1,64 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { authClient, checkOrigin, OWNER_COOKIE } from "@/lib/platform/server";
+import { checkOrigin } from "@/lib/platform/server";
+import {
+  PKCE_COOKIE,
+  DESTINATION_COOKIE,
+  emailProvider,
+  startSession,
+  revokeCurrent,
+  AuthError,
+} from "@/lib/account-auth/server";
 export async function POST(request: Request) {
   try {
     checkOrigin(request);
-    const { access_token } = await request.json();
-    if (typeof access_token !== "string" || access_token.length > 8192)
-      throw Error("Invalid sign-in.");
-    const { data, error } = await authClient().auth.getUser(access_token);
-    if (error || !data.user?.email_confirmed_at)
-      throw Error("This sign-in link has expired. Please request another.");
-    (await cookies()).set(OWNER_COOKIE, access_token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      maxAge: 3600,
-    });
-    return NextResponse.json({ ok: true });
-  } catch {
+    const { code } = await request.json();
+    if (
+      typeof code !== "string" ||
+      code.length > 2048 ||
+      !(await cookies()).get(PKCE_COOKIE)
+    )
+      throw new AuthError(
+        "Open the newest sign-in link in the browser where you requested it.",
+        401,
+      );
+    const { data, error } = await (
+      await emailProvider()
+    ).auth.exchangeCodeForSession(code);
+    if (error || !data.session)
+      throw new AuthError(
+        "This sign-in link has expired. Please request another.",
+        401,
+      );
+    const jar = await cookies(),
+      destination = jar.get(DESTINATION_COOKIE)?.value;
+    await startSession(data.session.access_token, request, destination);
+    jar.delete(DESTINATION_COOKIE);
     return NextResponse.json(
-      { error: "This sign-in link has expired. Please request another." },
-      { status: 401 },
+      { ok: true, url: "/account/security" },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  } catch (e) {
+    return NextResponse.json(
+      {
+        error:
+          e instanceof AuthError
+            ? e.message
+            : "This sign-in link has expired. Please request another.",
+      },
+      { status: e instanceof AuthError ? e.status : 401 },
     );
   }
 }
 export async function DELETE(request: Request) {
   try {
     checkOrigin(request);
-    (await cookies()).delete(OWNER_COOKIE);
-    return NextResponse.json({ ok: true });
+    await revokeCurrent();
+    return NextResponse.json({ ok: true, url: "/account/login" });
   } catch {
-    return NextResponse.json({ error: "Invalid request." }, { status: 403 });
+    return NextResponse.json(
+      { error: "Could not sign out. Please try again." },
+      { status: 403 },
+    );
   }
 }

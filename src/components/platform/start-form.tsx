@@ -74,7 +74,7 @@ export function StartForm({ plan, returnTo, signedIn, initialEmail, initialName,
       <section className={styles.form}>
         <p className={styles.eyebrow}>{step === "details" ? "A little more time for you" : "Your next step"}</p>
         <h1 ref={heading} tabIndex={-1}>{step === "details" ? "Make room for your day." : step === "sent" ? "Check your email." : "Everything look good?"}</h1>
-        <p className={styles.intro}>{step === "details" ? "Just your name and email to get started. You’ll set up your business after your purchase." : step === "sent" ? `We sent a secure sign-in link to ${email}. Click the link to verify your email and return to purchase review.` : "Review your plan, then complete your payment securely with Stripe."}</p>
+        <p className={styles.intro}>{step === "details" ? "Just your name and email to get started. You’ll set up your business after your purchase." : step === "sent" ? `We sent a secure sign-in link to ${email}. Open the link to verify your email, secure your account, and return to purchase review.` : "Review your plan, then complete your payment securely with Stripe."}</p>
         {step === "details" && <form onSubmit={e => { e.preventDefault(); setError(""); try { sessionStorage.setItem("signup-details", JSON.stringify({ name, email })); } catch {} if (verified) setStep("review"); else void verifyEmail(); }}>
           <label className={styles.label}>Your name<input autoComplete="name" name="name" required maxLength={120} value={name} onChange={e => setName(e.target.value)} placeholder="Full name" pattern=".*\S.*" /></label>
           <label className={styles.label}>Email address<input autoComplete="email" name="email" type="email" required maxLength={254} value={email} readOnly={verified} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" /></label>
@@ -91,7 +91,7 @@ export function StartForm({ plan, returnTo, signedIn, initialEmail, initialName,
         {step === "sent" && <div className={styles.next}>
           <span aria-hidden="true">✉</span>
           <div><strong>Your {p.name} plan is saved.</strong>
-            <p>Open the email and click the sign-in link in the same browser. You’ll review your purchase before continuing to Stripe. No payment has been taken.</p>
+            <p>Open the email and click the sign-in link in the same browser. After securing your account, you’ll review your purchase before continuing to Stripe. No payment has been taken.</p>
             <p>Check your spam folder if the email hasn’t arrived.</p>
             <button type="button" className={styles.textButton} onClick={() => { setError(""); setStep("details"); }}>Change email or request another link</button>
           </div>

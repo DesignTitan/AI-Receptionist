@@ -1,8 +1,9 @@
+import { authenticatedOwner } from "@/lib/account-auth/server";
 import { sameRequestOrigin } from "./request-origin";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
-import { env, isSupabaseConfigured } from "@/lib/env";
+import { env } from "@/lib/env";
 import { serviceClient } from "@/lib/supabase";
 import { ADMIN_COOKIE, verifySessionToken } from "@/lib/auth";
 import type { Customer, CustomerBooking } from "./model";
@@ -16,10 +17,7 @@ export function authClient() {
   });
 }
 export async function owner() {
-  const token = (await cookies()).get(OWNER_COOKIE)?.value;
-  if (!token || !isSupabaseConfigured()) return null;
-  const { data, error } = await authClient().auth.getUser(token);
-  return error ? null : data.user;
+  return authenticatedOwner();
 }
 export async function requireOwner() {
   const user = await owner();

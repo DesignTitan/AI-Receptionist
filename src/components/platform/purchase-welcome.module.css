@@ -53,3 +53,16 @@
 .headingRow{display:flex;align-items:center;justify-content:space-between;gap:20px}.helpLink{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid #c9ded0;border-radius:999px;padding:10px 24px;font-size:13px;background:#fff;color:var(--brand-ink)}.setupCopy>.primary{margin-top:24px}@media(max-width:600px){.headingRow{gap:12px}.headingRow h1{font-size:clamp(28px,7vw,42px)}.helpLink{padding:10px 16px}}
 .headingRow h1{min-width:0;overflow-wrap:anywhere}
 @media(max-width:360px){.headingRow{align-items:flex-start;flex-direction:column}.setup{padding:20px}}
+
+/* A single dark welcome region above the business setup form. */
+.hero { width:calc(100vw - 48px); margin-left:calc(50% - 50vw + 24px); padding:40px max(32px, calc((100vw - 1120px) / 2)); border-radius:32px; background:#153d33; color:#f4faf6; }
+.hero .heading h1,.hero .setup h2 { color:#f4faf6; }
+.hero .heading>p,.hero .setupCopy>p,.hero .test { color:#c1d6cc; }
+.hero .badge { background:#d4ece0; color:#173b31; }
+.hero .setup { padding:24px 0 0; border:0; border-radius:0; box-shadow:none; }
+.hero .helpLink { color:#f4faf6; background:transparent; border-color:#78988b; }
+.hero .helpLink:hover { background:#ffffff12; }
+.hero .primary { background:#d4ece0; color:#153d33!important; }
+.hero .primary:hover { background:#e7f5ed; }
+.hero .character>span { background:#071e17; opacity:.7; }
+@media(max-width:600px){.hero{width:calc(100vw - 24px);margin-left:calc(50% - 50vw + 12px);padding:28px 20px;border-radius:24px}.hero .setup{padding-top:8px}}

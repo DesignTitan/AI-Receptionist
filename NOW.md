@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — dark account welcome hero (12 September 2026)
+
+- Combined the welcome heading and setup introduction into a dark green hero with light text and a mint action button.
+- Used the existing transparent mascot asset so the image blends into the dark background.
+- Typecheck and desktop/mobile browser checks passed at 1463, 390 and 320px, with no horizontal overflow.
+- Hero styling is complete; business setup remains below it.
+
 ## Current handoff — internal menu and character sheets (12 September 2026)
 
 - Added a staff-page list to the hamburger and local-only internal/design links sourced from the page index; inventory is in docs/INTERNAL-PAGES.md.

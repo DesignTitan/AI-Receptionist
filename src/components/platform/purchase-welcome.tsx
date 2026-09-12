@@ -16,6 +16,7 @@ export function PurchaseWelcome({ name, state, test = false, preview = false, cu
   const paid = state === "paid";
   const firstName = name.trim().split(/\s+/)[0]?.slice(0,40);
   return <AccountShell preview={preview} name={name} billingAvailable={state !== "pending" && !preview}>
+    <div className={styles.hero}>
     <header className={styles.heading}>
       <span className={styles.badge}>{paid ? <><span aria-hidden="true">✓</span> Payment confirmed</> : state === "billing" ? "Billing needs attention" : "Your purchase"}</span>
       {test && <span className={styles.test}>Sandbox · No real charge</span>}
@@ -28,8 +29,9 @@ export function PurchaseWelcome({ name, state, test = false, preview = false, cu
         <p>{paid ? "Add your business details, booking hours and call preferences. We’ll guide you through the rest." : "Your selected plan is saved. Business setup opens after payment is confirmed."}</p>
         {paid ? <a className={styles.primary} href="#business-details" onClick={e=>{e.preventDefault();const section=document.getElementById("business-details");section?.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth",block:"start"});section?.focus({preventScroll:true});history.replaceState(null,"","#business-details");}}>Get started <span aria-hidden="true">↓</span></a> : <div className={styles.pendingActions}><RemoteAction url={state === "billing" ? "/api/account/billing" : "/api/account/checkout"} label={state === "billing" ? "Review billing →" : "Continue to payment →"} className={styles.primary}/><Link href="/account" className={styles.receiptLink}>Refresh payment status</Link></div>}
       </div>
-      <div className={styles.character} aria-hidden="true"><Image src="/marketing/happy-mascot-pointed.png" alt="" width={280} height={280} sizes="(max-width:600px) 140px, (max-width:850px) 200px, 300px" loading="eager"/><span/></div>
+      <div className={styles.character} aria-hidden="true"><Image src="/marketing/industries/mascot-transparent.png" alt="" width={280} height={280} sizes="(max-width:600px) 140px, (max-width:850px) 200px, 300px" loading="eager"/><span/></div>
     </section>
+    </div>
     {paid && <div className={styles.onboarding}><BusinessSetupForm customer={customer??null} plan={customer?.plan??"busy"} preview={preview} embedded /></div>}
   </AccountShell>;
 }

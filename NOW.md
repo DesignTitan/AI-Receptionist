@@ -1,5 +1,11 @@
 # NOW
 
+## Current handoff — full-width app header
+
+- Removed the shared app header width cap and outer shell gutters; header now spans the browser with inner control padding.
+- Main content stays centered; preserved mobile content gutters and sticky navigation.
+- Browser checks passed at 1920, 1462 and 390 pixels: header begins at zero, matches viewport width and introduces no horizontal overflow.
+
 ## Current handoff — account settings
 
 - Added /account/settings with Profile, Sign-in & Security, Billing, Notifications, and Privacy & Account sections, sharing the app header/fonts. Linked from avatar/hamburger and Page Index.

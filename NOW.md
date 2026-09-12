@@ -1,5 +1,16 @@
 # NOW
 
+## Current handoff — 12 September 2026
+
+- Latest completed UI work: centered checkout branding with Back to plans on the left; Marketing Site lists Features & benefits and Explore demos with thumbnails.
+- Preview attaches to the existing launchd service at http://127.0.0.1:3101; do not start a competing server. See the preview notes below.
+- Pending: clarify what the user wants separated between navigation characters and the actual logo in the Application column; no change was made for that request.
+- Last manually verified production deployment was commit 579bff3, behind the existing site password gate. Later commits were pushed; their production deployment has not been verified here. Production publishing is authorized; older restrictions below are historical.
+- Updated README, local tools documentation, customer platform notes and roadmap to reflect current navigation, onboarding and pricing references.
+- Next: continue page-index review and real-account testing; local practice setup saves only on the device. Untracked research and operations documents belong to other work and remain untouched.
+
+Earlier dated handoffs below are history; this summary takes precedence where they differ.
+
 ## Preview (11 September 2026)
 
 - The development server for this repo is the launchd-managed workspace preview on

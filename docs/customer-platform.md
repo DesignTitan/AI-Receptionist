@@ -2,13 +2,21 @@
 
 The product now has a separate customer platform. Existing medical/salon/studio demonstrations and their data remain unchanged. Real customer data lives in `customers`, `customer_bookings`, and `customer_jobs`; every owner operation verifies a Supabase user and scopes the query to that user's customer. One business per owner account is supported at launch.
 
+## Current interface and deployment notes — 12 September 2026
+
+- `/start` collects name and email after plan selection, then purchase review and Stripe Checkout. Its header centers the brand and places Back to plans at the left.
+- Paid-owner onboarding sits on `/account`: Welcome above one sticky progress navigation, with Business details, Hours & availability and Review & setup as scrolling sections. Drafts autosave. Launch setup uses one business phone/shared schedule; team configuration and customer brand-colour controls are deferred.
+- `/account/settings` contains account settings. The local `?preview=settings` and `/account?preview=confirmation` examples are development-only. Practice setup saves on the device; Finish preview does not submit a customer setup request.
+- The last deployment verified in this task was commit 579bff3 on 11 September at https://ai-receptionist-two-azure.vercel.app, behind the existing site gate. Later pushed changes have not been independently verified in production here.
+- Current setup pricing is $89 for Front desk and Busy desk, $499 for Full desk, and quoted for custom/enterprise. Follow [flat setup and simplified checkout](checkout-flat-setup.md) for current Stripe configuration and migration behavior. Older pilot-price instructions and economics below describe historical checkouts, not new purchases; preserve issued price snapshots.
+
 ## Installation status — 8 September 2026
 
 Application e4a9251 is deployed at https://ai-receptionist-two-azure.vercel.app (still locked). The production operator queue loads successfully from Supabase. The customer migration is installed in production Supabase. The Supabase Site URL is updated to the production domain; the exact production /account/callback URL is now allowlisted with Bubs’s approval. Unit and disposable-database tests pass. Live Stripe, email and dedicated customer calls are awaiting provider configuration. Bubs approved both previously blocked settings on 8 September; CRON_SECRET is saved as a sensitive Production variable and vercel.json enables daily queue recovery at 09:00 UTC.
 
 ## Routes
 
-- `/start`: authenticated business intake and plan selection.
+- `/start`: name/email verification and purchase review for the selected plan.
 - `/account/login` and `/account/callback`: Supabase email-link sign-in; the verified access token is stored in an HTTP-only cookie. Sessions expire after one hour; request a fresh sign-in link when needed.
 - `/account`: that owner's setup progress, bookings, calls, usage estimates and Stripe billing portal.
 - `/admin/customers`: existing staff gate protects the operator setup queue and failed-job monitor.

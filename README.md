@@ -28,7 +28,10 @@ Patient books ──▶ POST /api/bookings ──▶ POST /api/webhooks/new-book
 
 Run `npm run dev:workspace` to keep the preview available at <http://127.0.0.1:3101> during your Mac login session. The command returns after startup; macOS manages the server independently of temporary terminals and restarts it if it exits.
 
-- Marketing V2: <http://127.0.0.1:3101/__dev/design/luxury-v2>
+- Marketing homepage: <http://127.0.0.1:3101/>
+- Explore demos: <http://127.0.0.1:3101/demos>
+- Visual design system: <http://127.0.0.1:3101/__dev/design-system>
+- Marketing roadmap/checklist: <http://127.0.0.1:3101/__dev/pages?view=roadmap>
 - Features: <http://127.0.0.1:3101/features>
 - Page index: <http://127.0.0.1:3101/__dev/pages>
 - Check: `npm run dev:workspace:status`
@@ -48,7 +51,7 @@ mode**: an in-memory store seeded with six doctors and four appointments, a simu
 that walks through queued → ringing → on-call → confirmed over about fifty seconds, and
 emails rendered and logged to the console instead of sent.
 
-- Booking site: <http://127.0.0.1:3101>
+- Medical demonstration booking site: <http://127.0.0.1:3101/demo/medical>
 - Staff dashboard: <http://127.0.0.1:3101/admin> — password `demo1234`
 
 Book something and watch the confirmation screen: the call really does progress, the

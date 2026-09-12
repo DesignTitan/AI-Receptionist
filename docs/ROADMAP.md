@@ -1,7 +1,10 @@
 # Roadmap (launch Thursday 1 October 2026)
 
-Visual, tickable version: the "Receptionist Launch Roadmap" artifact. Weekly scorecard at the
-end. Companion docs: pricing-economics.md, voice-platforms.md, omnidimension.md.
+Visual marketing roadmap/checklist: `/__dev/pages?view=roadmap` in the local workspace preview. Phases appear on the left and their checklist on the right; completion is stored in the current browser. This document retains the broader launch plan and weekly scorecard. Companion docs: customer-platform.md, checkout-flat-setup.md, voice-platforms.md, omnidimension.md.
+
+## Current interface status — 12 September
+
+Marketing pages share navigation and footer. Features and Explore demos are listed in Marketing Site; individual interactive demos are in Application. The visual design system, media canvas and phase checklist are available through Internal tools. Customer setup is a single scrolling page with autosaved business details, weekly hours and review sections. Team configuration and brand-colour controls are deferred. The production site was deployed for testing behind its existing password gate; this is not a public launch or confirmation of live provider readiness. The older week-by-week scope below is planning history where it conflicts with these decisions.
 
 ## Current build status — 8 September
 Owner sign-in, intake, hosted Stripe checkout, customer booking pages/dashboard, staff setup queue, dedicated-line provisioning and delivery jobs are implemented. The customer schema is installed in Supabase. Provider setup and complete live acceptance testing remain; this is not a public launch. See customer-platform.md for the configuration checklist and supported launch scope.

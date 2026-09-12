@@ -1,25 +1,18 @@
 # Local page navigation
 
-Run `npm run dev` and open the local URL printed by Next. The burgundy DEV bar
-offers a searchable Pages dropdown, the current page, and a local path field.
-Command/Ctrl K opens the dropdown; arrow keys move through results; Escape closes it.
+Use the existing workspace preview at http://127.0.0.1:3101. Run `npm run dev:workspace:status` to check it, or `npm run dev:workspace` if it is not running. The in-app preview attaches to this service; do not start a competing Next server in the same directory.
 
-The menu includes the original marketing site, customer and staff screens,
-three business demos and booking pages, plus all three design studies. Staff
-and customer pages keep their normal sign-in requirements. Individual records
-and confirmation pages are reached through their lists and booking flows.
+The compact burnt-amber **Internal tools** bar links to Page index, Marketing website, Application, Visual design system, Images & videos, Roadmap and User journey. The old Pages dropdown, path field and Command/Ctrl K shortcut have been removed. The page index is the complete directory.
 
-The **Page index** link beside the dropdown opens `/__dev/pages`. This full
-directory groups internal tools, application pages and design studies, with
-search, recency filters and newest/oldest sorting. Both navigation views use
-`dev/page-catalogue.mjs` so their destinations stay consistent. Source dates
-come from Git history and uncommitted file edits, and refresh on page reload.
-They describe the listed source files, not a deployment or a health check.
+## Page index and roadmap
 
-The design studies are served from `design/hero-comparison` without editing
-them. The marketing homepage is
-still `/`. The same toolbar appears on both. In single-tenant mode the business
-and booking links use that tenant's routes.
+`/__dev/pages` groups screenshot cards into Application, Marketing Site, Design Studies and Internal Tools. Marketing Site includes the homepage, Features & benefits, Explore demos and Images & videos. Individual business and booking demos stay in Application. Customer and staff screens retain their sign-in requirements.
+
+The index reads `dev/page-catalogue.mjs`, with search, recency filters and sorting. Source dates come from Git history and working-copy edits, refreshed on reload; they are not deployment dates or health checks. Marketing V2 has been removed; shared imagery remains available to pages that use it.
+
+`/__dev/pages?view=roadmap` combines the marketing roadmap and checklist: phases on the left, selected phase tasks on the right. The older `?view=checklist` URL opens the same view. Task completion is stored per browser under `ai-receptionist-marketing-roadmap-v1`, separately from page completion.
+
+`/__dev/design-system` documents the current brand and components. `/__dev/design/campaign-v4/` is the Images & videos canvas. The original studies remain under `design/hero-comparison`. These internal views and local account previews are excluded from production.
 
 ## Production exclusion
 

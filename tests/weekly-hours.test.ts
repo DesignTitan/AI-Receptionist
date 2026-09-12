@@ -1,0 +1,12 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {weeklyHoursFor,validateWeeklyHours} from '../src/lib/platform/weekly-hours.ts';
+import {slotsFor} from '../src/lib/platform/slots.ts';
+import {validateConfig,type BusinessConfig} from '../src/lib/platform/model.ts';
+import {validateSetupDraft} from '../src/lib/platform/setup-draft.ts';
+const base:BusinessConfig={trade:'salon',timezone:'UTC',days:[1,2,3,4,5],opens:'09:00',closes:'17:00',color:'#123456',areaCode:'313',address:'123 Example Street',phone:'+13135550142',team:[{id:'member-1',name:'Example',service:'Appointment',minutes:60}]};
+test('legacy schedules expand into seven independent days',()=>{const week=weeklyHoursFor(base);assert.equal(week.length,7);assert.equal(week[0].enabled,false);assert.equal(week[2].opens,'09:00');});
+test('per-day hours control actual slots and closed days',()=>{const week=weeklyHoursFor(base);week[2]={day:2,enabled:true,opens:'13:00',closes:'15:00'};const c={...base,weeklyHours:week};const slots=slotsFor(c,base.team[0],'2026-09-15',[],new Date('2026-09-14T00:00:00Z'));assert.deepEqual(slots.map(s=>s.start),['2026-09-15T13:00:00.000Z','2026-09-15T14:00:00.000Z']);week[2].enabled=false;assert.equal(slotsFor(c,base.team[0],'2026-09-15',[],new Date('2026-09-14')).length,0);});
+test('all-day slots end at the following midnight',()=>{const week=weeklyHoursFor(base);week[2]={day:2,enabled:true,opens:'00:00',closes:'24:00'};const c=validateConfig({...base,weeklyHours:week});const slots=slotsFor(c,base.team[0],'2026-09-15',[],new Date('2026-09-14'));assert.equal(slots.length,24);assert.equal(slots.at(-1)?.end,'2026-09-16T00:00:00.000Z');});
+test('rejects reversed hours, duplicate days and entirely closed final schedule',()=>{const week=weeklyHoursFor(base);assert.throws(()=>validateWeeklyHours(week.map(d=>({...d,opens:'17:00',closes:'09:00'}))));assert.throws(()=>validateWeeklyHours(week.map(d=>({...d,day:1}))));assert.throws(()=>validateWeeklyHours(week.map(d=>({...d,enabled:false}))));});
+test('drafts can retain all-closed unfinished schedule',()=>{const week=weeklyHoursFor(base).map(d=>({...d,enabled:false}));const draft=validateSetupDraft({details:{},...base,weeklyHours:week});assert.deepEqual(draft.weeklyHours,week);});

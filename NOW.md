@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — editable weekly schedule
+
+- Replaced the duplicated hours controls/static preview with a full-width weekly editor: day checkboxes, All day, draggable opening/closing handles and manual time fields.
+- Each day saves independently in 15-minute increments; All day is 00:00–24:00. Keyboard sliders and horizontally scrollable mobile week retain manual access.
+- Added validated weekly hours to final configuration and autosaved drafts, with legacy schedule fallback. Booking slots, customer hours, admin summaries and initial phone schedules now read per-day hours.
+- Browser checks passed for dragging, keyboard/manual edits, closed days, all-day, reload restoration and mobile width. TypeScript plus 24 schedule/platform/phone tests passed, including midnight boundaries.
+- Changes committed locally; no live account, phone routing or deployment changed. Prior publication restrictions remain.
+
+
 ## Current handoff — simpler onboarding and saved drafts
 
 - Simplified new onboarding to one business number and one shared appointment schedule; replaced team editing with appointment length and renamed Hours & availability.

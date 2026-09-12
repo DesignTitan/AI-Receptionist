@@ -1,3 +1,4 @@
+import {weeklyHoursFor,DAY_NAMES} from "@/lib/platform/weekly-hours";
 import {
   economics,
   PILOT_CUSTOMERS,
@@ -200,8 +201,7 @@ export default async function Customers() {
                   <p>
                     {c.config.address} · {c.config.phone} · {c.config.timezone}
                     <br />
-                    {c.config.opens}–{c.config.closes}, days{" "}
-                    {c.config.days.join(", ")}
+                    {weeklyHoursFor(c.config).filter(d=>d.enabled).map(d=>`${DAY_NAMES[d.day]} ${d.opens}–${d.closes}`).join("; ")}
                   </p>
                   <ul>
                     {c.config.team.map((t) => (

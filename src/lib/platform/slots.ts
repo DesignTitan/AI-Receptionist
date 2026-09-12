@@ -1,3 +1,4 @@
+import {weeklyHoursFor} from "./weekly-hours.ts";
 import {
   addDaysToKey,
   dayOfWeek,
@@ -18,10 +19,11 @@ export function slotsFor(
   const calendarDate = new Date(`${date}T12:00:00Z`);
   if (Number.isNaN(+calendarDate) || calendarDate.toISOString().slice(0, 10) !== date) return [];
   const today = toDateKey(now, config.timezone);
+  const hours=weeklyHoursFor(config).find(d=>d.day===dayOfWeek(date));
   if (
     date < today ||
     date > addDaysToKey(today, 30) ||
-    !config.days.includes(dayOfWeek(date))
+    !hours?.enabled
   )
     return [];
   const { year, month, day } = parseDateKey(date);
@@ -29,8 +31,8 @@ export function slotsFor(
     Number(s.slice(0, 2)) * 60 + Number(s.slice(3));
   const results = [];
   for (
-    let m = minutes(config.opens);
-    m + member.minutes <= minutes(config.closes);
+    let m = minutes(hours.opens);
+    m + member.minutes <= minutes(hours.closes);
     m += member.minutes
   ) {
     const start = zonedTimeToUtc(

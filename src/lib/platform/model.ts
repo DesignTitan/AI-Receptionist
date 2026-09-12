@@ -1,3 +1,4 @@
+import { validateWeeklyHours, type DayHours } from "./weekly-hours.ts";
 import { ANSWERING_PREFERENCES, type AnsweringPreference } from "./answering-preference.ts";
 import { PLANS, type Plan } from "./pricing.ts";
 import type { PhoneSettings } from "./phone-settings.ts";
@@ -23,6 +24,7 @@ export type BusinessConfig = {
   phoneSetup?: PhoneSetup;
   trade: "salon" | "studio" | "other";
   timezone: string;
+  weeklyHours?: DayHours[];
   days: number[];
   opens: string;
   closes: string;
@@ -126,7 +128,7 @@ export function validateConfig(input: unknown): BusinessConfig {
     throw Error("Choose working days.");
   if (
     !/^([01]\d|2[0-3]):[0-5]\d$/.test(c.opens) ||
-    !/^([01]\d|2[0-3]):[0-5]\d$/.test(c.closes) ||
+    !/^(([01]\d|2[0-3]):[0-5]\d|24:00)$/.test(c.closes) ||
     c.opens >= c.closes
   )
     throw Error("Closing time must be after opening time.");
@@ -157,6 +159,7 @@ export function validateConfig(input: unknown): BusinessConfig {
     trade: c.trade,
     ...(c.phoneSetup ? { phoneSetup: validatePhoneSetup(c.phoneSetup) } : {}),
     timezone,
+    ...(c.weeklyHours ? {weeklyHours:validateWeeklyHours(c.weeklyHours)} : {}),
     days: [...new Set(c.days)],
     opens: c.opens,
     closes: c.closes,

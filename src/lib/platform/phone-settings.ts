@@ -1,3 +1,4 @@
+import {weeklyHoursFor} from "./weekly-hours.ts";
 import type { BusinessConfig } from "./model.ts";
 
 export const PHONE_MODES = ["menu", "staff_first", "ai_first", "staff_only"] as const;
@@ -48,7 +49,7 @@ export const PHONE_MODE_LABELS: Record<PhoneMode | "off", string> = {
   staff_only: "Staff only — no AI",
   off: "Incoming-call routing is off",
 };
-type ScheduleConfig = Pick<BusinessConfig, "timezone" | "days" | "opens" | "closes">;
+type ScheduleConfig = Pick<BusinessConfig, "timezone" | "days" | "opens" | "closes" | "weeklyHours">;
 
 function timezoneValid(timezone: string) {
   if (typeof timezone !== "string" || !timezone.trim() || timezone !== timezone.trim()) throw Error("Choose a valid business timezone.");
@@ -97,7 +98,7 @@ export function defaultPhoneSettings(config: ScheduleConfig): PhoneSettings {
   return {
     confirmationCalls: true, inboundEnabled: false,
     businessHoursMode: "menu", afterHoursMode: "ai_first",
-    weeklyHours: Array.from({ length: 7 }, (_, day) => ({ day, enabled: config.days.includes(day), opens: config.opens, closes: config.closes })),
+    weeklyHours: weeklyHoursFor(config),
     staffNumber: null, ringSeconds: 20, noAnswerAction: "voicemail", fallback: "voicemail",
     holidays: [], override: null,
   };

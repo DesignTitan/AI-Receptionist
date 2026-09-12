@@ -1,3 +1,4 @@
+import {weeklyHoursFor,DAY_NAMES} from "@/lib/platform/weekly-hours";
 import { notFound } from "next/navigation";
 import { Frame } from "@/components/platform/frame";
 import { CustomerBookingForm } from "@/components/platform/booking-form";
@@ -35,25 +36,7 @@ export default async function Business({
         >
           <h2>We’ll see you soon.</h2>
           <p>{c.config.address}</p>
-          <p className="mt-4">
-            {c.config.opens}–{c.config.closes}
-          </p>
-          <p className="platform-note">
-            {c.config.days
-              .map(
-                (d) =>
-                  [
-                    "Sunday",
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday",
-                  ][d],
-              )
-              .join(", ")}
-          </p>
+          <dl className="mt-4">{[1,2,3,4,5,6,0].map(day=>{const hours=weeklyHoursFor(c.config).find(d=>d.day===day)!;return <div key={day} className="flex justify-between gap-4"><dt>{DAY_NAMES[day]}</dt><dd>{!hours.enabled?"Closed":hours.opens==="00:00"&&hours.closes==="24:00"?"All day":`${hours.opens}–${hours.closes==="24:00"?"Midnight":hours.closes}`}</dd></div>})}</dl>
           <hr />
           <p>Have a question?</p>
           <a href={`tel:${c.config.phone}`}>{c.config.phone}</a>

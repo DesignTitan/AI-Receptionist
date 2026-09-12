@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
+import { Headset } from "@/components/icons";
 import { NavMascot } from "@/components/marketing/nav-mascot";
 import profileIcon from "@/components/marketing/profile-icon.json";
 import { TryCallPlate } from "@/components/marketing/try-call-plate";
@@ -104,7 +105,7 @@ export function SiteNav({ cta, simulated, turnstileSiteKey, showCall = true, hel
             <span>Let’s talk</span>
           </button>}
           {helpHref && <a href={helpHref} className="rc-nav__cta" aria-label="Get help">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 1.5-2.5 1.5-2.5 3M12 16h.01"/></svg>
+            <Headset />
             <span>Get help</span>
           </a>}
           <div className="rc-nav__account" data-open={accountOpen}

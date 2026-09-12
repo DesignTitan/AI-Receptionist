@@ -210,3 +210,11 @@ export const Layers = (props: IconProps) => (
     <path d="m3.5 12 8.5 4.5 8.5-4.5M3.5 16l8.5 4.5 8.5-4.5" />
   </svg>
 );
+
+export const Headset = (props: IconProps) => (
+  <svg {...base(props)}>
+    <path d="M4 13v-2a8 8 0 0 1 16 0v2M20 16v1a4 4 0 0 1-4 4h-3" />
+    <rect x="3" y="11" width="4" height="7" rx="2" />
+    <rect x="17" y="11" width="4" height="7" rx="2" />
+  </svg>
+);

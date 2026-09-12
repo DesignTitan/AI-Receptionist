@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — help icon and welcome action cleanup (12 September 2026)
+
+- Replaced the navigation help symbol with a rounded headset from the shared outline icon set.
+- Removed the Get started button from the paid welcome hero; business setup remains immediately below.
+- Preserved pending-payment and billing actions. Typecheck passed; the navigation button still matches the marketing button dimensions on desktop and mobile.
+- These requested refinements are complete.
+
 ## Current handoff — welcome layout, original mascot and navigation help (12 September 2026)
 
 - Grouped the welcome, setup copy and primary action into a compact left column with the original pointed mascot beside it.

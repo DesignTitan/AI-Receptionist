@@ -1,7 +1,7 @@
-const checklistView=new URLSearchParams(location.search).get("view")==="checklist";
-document.body.classList.toggle("checklist",checklistView);
-document.querySelector(`[data-tool="${checklistView?"checklist":"pages"}"]`)?.setAttribute("aria-current","page");
-if(checklistView){document.querySelector("h1").textContent="Page checklist";document.querySelector(".lede").textContent="Track completion across the project. These checkboxes share the same saved status as the Page Index.";}
+const checklistView=["checklist","roadmap"].includes(new URLSearchParams(location.search).get("view"));
+document.body.classList.toggle("roadmap",checklistView);
+document.querySelector(`[data-tool="${checklistView?"roadmap":"pages"}"]`)?.setAttribute("aria-current","page");
+if(checklistView){document.title="Marketing roadmap · AI Receptionist";document.querySelector("h1").textContent="Marketing roadmap";document.querySelector(".lede").textContent="One plan, broken into phases. Check off the work as you review it and see what remains before launch.";}
 const directory = document.querySelector("#directory");
 const search = document.querySelector(".search");
 const resultCount = document.querySelector("#results-count");
@@ -234,4 +234,70 @@ document.querySelectorAll("[data-sort]").forEach(button => button.addEventListen
   render();
 }));
 search.addEventListener("input", render);
-load();
+if(checklistView) renderRoadmap(); else load();
+
+function renderRoadmap() {
+  const phases = [
+    ["Foundation", "Agree on the story before polishing the pages.", [
+      ["audience", "Define the audience and main customer problem", "Make the intended business types and single-location scope clear."],
+      ["promise", "Confirm the headline and product promise", "Explain what the receptionist does in plain language.", "/"],
+      ["scope", "Separate available features from future ideas", "Check that the site reflects what customers can use today.", "/features"],
+      ["voice", "Agree on brand voice and visual direction", "Review the logo, character, typography and colours.", "/__dev/design-system"]]],
+    ["Pages & content", "Build a complete, consistent marketing experience.", [
+      ["home", "Review the marketing homepage", "Check the story, hero imagery and calls to action.", "/"],
+      ["features", "Review features and product explanations", "Use clear examples and avoid repeated content.", "/features"],
+      ["demos", "Review the demo experience", "Make it easy to understand and try the product.", "/demos"],
+      ["responsive", "Check layouts on mobile and desktop", "Review spacing, navigation, images and readable text."]]],
+    ["Plans & purchase", "Make the decision and purchase easy to understand.", [
+      ["pricing", "Confirm plan prices and included usage", "Keep setup fees, recurring charges and optional extras clear.", "/#terms"],
+      ["estimate", "Review the plan finder", "Check editable estimates, recommendations and the return to plans.", "/#terms"],
+      ["checkout", "Review checkout and email verification", "Ask for minimal information and describe the secure link accurately.", "/start"],
+      ["payment", "Test payment success, cancellation and failure", "Verify the receipt and the handoff into business setup.", "/account?preview=confirmation"]]],
+    ["Quality & trust", "Check the details that make the site dependable.", [
+      ["accessibility", "Check keyboard access and contrast", "Review focus states, field labels, menus and error messages."],
+      ["forms", "Test forms and saved progress", "Check validation, corrections, autosave and recovery."],
+      ["links", "Check navigation and page links", "Make sure back links return to the expected section.", "/__dev/pages"],
+      ["legal", "Review contact, privacy and terms", "Confirm the published details match the service being offered."]]],
+    ["Launch", "Confirm readiness before making the site public.", [
+      ["metadata", "Check search and sharing previews", "Review page titles, descriptions, share images and indexing."],
+      ["performance", "Check loading speed and image sizes", "Try the key pages on a phone and a slower connection."],
+      ["production", "Verify production services", "Confirm the domain, email delivery and payment configuration."],
+      ["release", "Approve and verify the release", "After publishing, walk through the live customer journey."]]],
+    ["After launch", "Keep improvements in the same plan.", [
+      ["feedback", "Gather customer feedback", "Record confusing moments and recurring support questions."],
+      ["conversion", "Review where visitors drop off", "Use the findings to prioritize page and checkout improvements."],
+      ["content", "Add useful examples and proof", "Build content from real customer needs and approved stories."],
+      ["future", "Prioritize the next features", "Keep future releases separate from promises on the current site.", "/features#coming-soon"]]],
+  ];
+  const key="ai-receptionist-marketing-roadmap-v1";
+  let done=new Set();
+  try {const saved=JSON.parse(localStorage.getItem(key)||"[]");if(Array.isArray(saved)) done=new Set(saved.filter(id=>typeof id==="string"));} catch {}
+  document.querySelector(".controls").hidden=true;
+  document.querySelector(".meta").hidden=true;
+  document.querySelector(".footnote").textContent="Completion is based on your review, not inferred from a page existing. Changes are saved in this browser. Page Index completion marks stay separate.";
+  directory.setAttribute("aria-busy","false");
+  const summary=element("section","roadmap-summary");
+  const summaryText=element("strong");
+  const overall=element("progress");overall.max=phases.flatMap(p=>p[2]).length;overall.setAttribute("aria-label","Overall marketing progress");
+  summary.append(element("span","eyebrow","Marketing website"),summaryText,overall);
+  const board=element("div","phase-grid");
+  const updates=[];
+  const update=()=>{const count=phases.flatMap(p=>p[2]).filter(t=>done.has(t[0])).length;summaryText.textContent=`${count} of ${overall.max} tasks complete`;overall.value=count;updates.forEach(fn=>fn());};
+  phases.forEach(([title,description,tasks],index)=>{
+    const section=element("section","phase-card");
+    const heading=element("header","phase-heading");
+    const count=element("span","phase-count");
+    heading.append(element("p","eyebrow",`Phase ${String(index+1).padStart(2,"0")}`),element("h2","",title),element("p","",description),count);
+    const progress=element("progress");progress.max=tasks.length;progress.setAttribute("aria-label",`${title} progress`);heading.append(progress);section.append(heading);
+    updates.push(()=>{const n=tasks.filter(t=>done.has(t[0])).length;count.textContent=`${n} / ${tasks.length} complete`;progress.value=n;section.dataset.complete=String(n===tasks.length);});
+    tasks.forEach(([id,title,detail,href])=>{
+      const row=element("div","roadmap-task");
+      const label=element("label");const input=element("input","completion-checkbox");input.type="checkbox";input.checked=done.has(id);
+      const text=element("span");text.append(element("strong","",title),element("small","",detail));label.append(input,text);row.append(label);
+      if(href){const link=element("a","task-review","Review ↗");link.href=href;link.setAttribute("aria-label",`Review: ${title}`);row.append(link);}
+      input.addEventListener("change",()=>{const next=new Set(done);input.checked?next.add(id):next.delete(id);try{localStorage.setItem(key,JSON.stringify([...next]));done=next;update();completionStatus.textContent=`${title} marked ${input.checked?"complete":"incomplete"}. Saved in this browser.`;}catch{input.checked=done.has(id);completionStatus.textContent="Could not save your change. Enable browser storage and try again.";}});
+      section.append(row);
+    });board.append(section);
+  });
+  directory.replaceChildren(summary,board);update();
+}

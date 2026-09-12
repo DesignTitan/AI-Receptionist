@@ -1,5 +1,15 @@
 # NOW
 
+## Current handoff — unified internal workspace
+
+- Combined marketing checklist and roadmap into six phases with 24 review tasks, per-phase progress and browser persistence; old checklist links still work.
+- Built /__dev/design-system with shared brand fonts, colours and dropdown styles, plus interactive examples and the current mascot.
+- Moved workspace shortcuts into the thin Internal tools bar across local pages; added design system and roadmap to the Page Index.
+- Verified fonts, tokens, toolbar links, saved progress and mobile width in Chrome; all four preview tests passed.
+- Reference URLs on port 3035 rendered blank; used the supplied navigation screenshot and the existing brand styles.
+- Committed locally. Publishing remains blocked by the earlier automatic approval review.
+
+
 ## Current handoff — Page Index refresh
 
 - Added workspace shortcuts and a compact checklist view sharing page completion status.

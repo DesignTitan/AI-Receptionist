@@ -103,7 +103,7 @@ test("development preview exposes only allowed files and injects the navigation"
   assert.equal(data.headers["content-type"], "application/json; charset=utf-8");
   assert.equal(data.headers["cache-control"], "no-store");
   const snapshot = JSON.parse(data.body.toString());
-  assert.equal(snapshot.pages.length, 12);
+  assert.equal(snapshot.pages.length, 14);
   assert.ok(snapshot.pages.every((entry: { updatedAt: string | null; workingCopy: boolean }) => entry.updatedAt === null && !entry.workingCopy));
   assert.ok(Number.isFinite(Date.parse(snapshot.generatedAt)));
   assert.equal(snapshot.pages.find((entry: { id: string }) => entry.id === "salon-home").href, "/");
@@ -146,7 +146,7 @@ test("development preview exposes only allowed files and injects the navigation"
 
 test("page catalogue contains canonical routes for ordinary and tenant previews", () => {
   const pages = getPages();
-  assert.equal(pages.length, 25);
+  assert.equal(pages.length, 27);
   assert.equal(new Set(pages.map((entry) => entry.id)).size, pages.length);
   assert.equal(new Set(pages.map((entry) => entry.href)).size, pages.length);
   assert.deepEqual([...new Set(pages.map((entry) => entry.group))], [
@@ -163,10 +163,10 @@ test("page catalogue contains canonical routes for ordinary and tenant previews"
   assert.ok(!pages.some((entry) => entry.id === "study-luxury"));
   assert.equal(pages.filter((entry) => entry.kind === "study").length, 3);
   assert.deepEqual(getPages({ tenant: "unknown" }), pages);
-  assert.equal(getPages({ siteGate: "  LOCKED " }).length, 26);
+  assert.equal(getPages({ siteGate: "  LOCKED " }).length, 28);
   for (const tenant of ["medical", "salon", "studio"]) {
     const preview = getPages({ tenant });
-    assert.equal(preview.length, 11);
+    assert.equal(preview.length, 13);
     assert.equal(preview.find((entry) => entry.id === `${tenant}-home`)?.href, "/");
     assert.match(preview.find((entry) => entry.id === `${tenant}-booking`)!.href, /^\/book\/[^/]+$/);
     assert.ok(!preview.some((entry) => entry.id === "study-luxury"));

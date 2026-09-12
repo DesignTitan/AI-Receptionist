@@ -21,6 +21,11 @@ const STUDY_NOTES = new Set([
   "/design/luxury-v2/docs/copy.json",
 ]);
 const DEV_FILES = new Map([
+  ["/design-system", ["dev", "design-system.html"]],
+  ["/design-system/", ["dev", "design-system.html"]],
+  ["/components/brand/brand.css", ["src", "components", "brand", "brand.css"]],
+  ["/components/brand/form-fields.css", ["src", "components", "brand", "form-fields.css"]],
+  ["/app/(marketing)/brand-fonts.css", ["src", "app", "(marketing)", "brand-fonts.css"]],
   ["/toolbar.js", ["dev", "toolbar.js"]],
   ["/pages", ["dev", "pages.html"]],
   ["/pages/", ["dev", "pages.html"]],

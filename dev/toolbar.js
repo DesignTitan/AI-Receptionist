@@ -67,12 +67,15 @@ import { getPages } from "/__dev/page-catalogue.mjs";
           @media(max-width:850px){.current{display:none}.panel{left:16px}.local{margin-left:auto}}
           @media(max-width:580px){.bar{gap:8px;padding-inline:10px}.badge{padding-inline:9px}.pages{padding-inline:10px}.panel{left:12px;width:430px}.local{font-size:9px;letter-spacing:.06em}.shortcut{padding-left:3px}.footer{font-size:9px}}
           @media(max-width:680px){.local{display:none}.index{margin-left:auto}} @media(max-width:380px){.shortcut{display:none}.index{padding-inline:9px}.bar{gap:6px}}
+          .tool-links{display:flex;gap:3px;align-items:center;overflow-x:auto;min-width:0;scrollbar-width:none}.tool-links a{flex:none;font-size:12px;padding:7px 9px;border-radius:5px;white-space:nowrap}.tool-links a:hover{background:#ffffff20}.tool-links a[aria-current=page]{background:#973659}.local{flex:none}@media(max-width:1100px){.local,.shortcut{display:none}.index{margin-left:0}.tool-links{flex:1}}@media(max-width:580px){.badge{display:none}.bar{gap:4px}.tool-links a{font-size:11px;padding-inline:8px}.index{font-size:11px;padding-inline:7px}.pages{font-size:11px}}
         </style>
         <nav class="bar" aria-label="Development navigation">
           <div class="badge">Internal tools</div>
           <button class="pages" type="button" aria-expanded="false" aria-controls="dev-pages">${listIcon} Pages ${chevron}</button>
           <a class="index" href="/__dev/pages">Page index <span aria-hidden="true">↗</span></a>
-          <div class="current"><span class="current-name"></span></div>
+          <div class="tool-links">
+            <a href="/">Marketing website</a><a href="/account?preview=confirmation">Application</a><a href="/__dev/design-system">Visual design system</a><a href="/__dev/design/campaign-v4/">Images & videos</a><a href="/__dev/pages?view=roadmap">Roadmap</a><a href="/__dev/journey">User journey</a>
+          </div><div class="current" hidden><span class="current-name"></span></div>
           <span class="local">LOCAL ONLY</span>
           <button class="shortcut" type="button" aria-label="Find a page" title="Find a page (Command or Control K)">⌘K</button>
         </nav>
@@ -153,9 +156,13 @@ import { getPages } from "/__dev/page-catalogue.mjs";
       const current = this.groups.flatMap(([, pages]) => pages).find(([, href]) => normalize(href) === normalize(this.currentPathname));
       this.shadowRoot.querySelector(".current-name").textContent = current?.[0] || this.currentPathname;
       this.shadowRoot.querySelector(".current-name").title = this.currentPathname;
-      const indexLink = this.shadowRoot.querySelector(".index");
-      if (normalize(this.currentPathname) === "/__dev/pages") indexLink.setAttribute("aria-current", "page");
-      else indexLink.removeAttribute("aria-current");
+      const roadmap = ["roadmap", "checklist"].includes(new URLSearchParams(location.search).get("view"));
+      for (const link of this.shadowRoot.querySelectorAll(".index,.tool-links a")) {
+        const url = new URL(link.href, location.origin);
+        const samePath = normalize(url.pathname) === normalize(this.currentPathname);
+        const selected = samePath && (url.pathname === "/__dev/pages" ? Boolean(url.search) === roadmap : true);
+        if (selected) link.setAttribute("aria-current", "page"); else link.removeAttribute("aria-current");
+      }
       this.setOpen(false);
       this.renderPages();
     }

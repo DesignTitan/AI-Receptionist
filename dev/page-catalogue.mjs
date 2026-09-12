@@ -28,6 +28,8 @@ export function getPages({ tenant = "", siteGate = "public" } = {}) {
       ["src/components/platform/purchase-welcome.tsx", "src/components/platform/purchase-welcome.module.css"]),
     page("account-settings", "Account settings", "/account/settings?preview=settings", "Customer", "app", "development",
       "Profile, sign-in, billing, notifications and account controls. Local preview uses example details.", ["src/app/account/settings/page.tsx", "src/components/platform/account-settings.tsx"]),
+    page("setup-hours-team", "Hours & team", "/account/setup?preview=setup&step=2", "Customer", "app", "development", "Working step 2: opening schedule, team editor and weekly preview.", ["src/components/platform/business-setup-form.tsx"]),
+    page("setup-review", "Review & setup", "/account/setup?preview=setup&step=3", "Customer", "app", "development", "Working step 3: edit summaries and send for setup. Local sample data.", ["src/components/platform/business-setup-form.tsx"]),
     page("account", "Owner dashboard", "/account", "Customer", "app", "owner",
       "Bookings, call outcomes, usage and billing for the signed-in owner.", ["src/app/account/page.tsx"]),
     page("owner-login", "Owner sign in", "/account/login", "Customer", "app", "public",

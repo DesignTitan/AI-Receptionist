@@ -1,13 +1,14 @@
-import { AccountFrame as Frame } from "@/components/platform/account-frame";
 import { BusinessSetupForm } from "@/components/platform/business-setup-form";
 import { ownedCustomer } from "@/lib/platform/server";
 import { redirect } from "next/navigation";
 export const dynamic = "force-dynamic";
-export default async function Setup() {
+export default async function Setup({searchParams}:{searchParams:Promise<{preview?:string;step?:string}>}) {
+  if(process.env.NODE_ENV === "development") {
+    const query=await searchParams;
+    if(query.preview==="setup")return <BusinessSetupForm customer={null} plan="busy" preview initialStep={query.step==="3"?3:query.step==="2"?2:1}/>;
+  }
   const c = await ownedCustomer();
   if (!c) redirect("/start");
   if (c.status !== "paid" || c.billing_status !== "active") redirect("/account");
-  return <Frame name={c.config.contactName} eyebrow="Your dashboard · Business setup" title="Let’s make it yours." description="Your purchase is complete. Add your business details so we can prepare your booking page and phone line.">
-    <BusinessSetupForm customer={c} plan={c.plan} />
-  </Frame>;
+  return <BusinessSetupForm customer={c} plan={c.plan} />;
 }

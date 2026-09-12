@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — built setup steps 2 and 3
+
+- Built Hours & Team with selectable days, hours, time zone, editable team members and a live weekly preview using the application fonts and spacing.
+- Built Review & Setup with editable summaries, preparation/testing guidance and the existing authenticated submission endpoint. Back/Edit preserves entered details.
+- Added local step previews to the Page Index and connected the welcome preview to the wizard. Preview submissions do not write account data.
+- TypeScript and browser checks passed for validation, edit persistence, team limits, review, preview submission and mobile layout. Local preview refreshed. Production deployment was rejected by automatic approval review because this turn authorized building rather than publishing to Vercel.
+- Public GitHub push remains blocked by prior approval review; direct Vercel publication is the authorized path.
+
+
 ## Current handoff — hours/team and review concepts
 
 - Reviewed the existing combined business setup form; hours/team fields exist but a separate review step does not.

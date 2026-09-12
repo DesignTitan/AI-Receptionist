@@ -25,7 +25,7 @@ export function PurchaseWelcome({ name, state, test = false, preview = false }: 
         {paid && <ol className={styles.steps} aria-label="Business setup steps">
           <li><span>1</span>Business details</li><li><span>2</span>Hours & team</li><li><span>3</span>Review & setup</li>
         </ol>}
-        {paid ? <Link className={styles.primary} href="/account/setup">Set up your business <span aria-hidden="true">→</span></Link> : <div className={styles.pendingActions}><RemoteAction url={state === "billing" ? "/api/account/billing" : "/api/account/checkout"} label={state === "billing" ? "Review billing →" : "Continue to payment →"} className={styles.primary}/><Link href="/account" className={styles.receiptLink}>Refresh payment status</Link></div>}
+        {paid ? <Link className={styles.primary} href={preview?"/account/setup?preview=setup":"/account/setup"}>Set up your business <span aria-hidden="true">→</span></Link> : <div className={styles.pendingActions}><RemoteAction url={state === "billing" ? "/api/account/billing" : "/api/account/checkout"} label={state === "billing" ? "Review billing →" : "Continue to payment →"} className={styles.primary}/><Link href="/account" className={styles.receiptLink}>Refresh payment status</Link></div>}
       </div>
       <div className={styles.character} aria-hidden="true"><img src="/marketing/happy-mascot-pointed.png" alt="" width="280" height="280"/><span/></div>
     </section>

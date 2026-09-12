@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — hours/team and review concepts
+
+- Reviewed the existing combined business setup form; hours/team fields exist but a separate review step does not.
+- Created two visual concepts in design/purchase/onboarding: Hours & Team with a weekly preview, and Review & Setup with editable summaries and a preparation/testing explanation.
+- Added implementation notes mapping the designs to existing fields, plan limits, payment guards and concierge setup flow. No automatic-launch claims or application changes.
+- Next: implement the chosen direction with preserved form state and the existing submission endpoint. Public GitHub push remains blocked by prior approval review.
+
 ## Current handoff — full-width app header
 
 - Removed the shared app header width cap and outer shell gutters; header now spans the browser with inner control padding.

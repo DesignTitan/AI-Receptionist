@@ -14,20 +14,17 @@ export function AccountShell({ children, billingAvailable = true, name = "", pre
 }) {
   return <div className={`brand-surface ${styles.shell}`} data-dark-hero={darkHero}>
     <div className={`rc marketing-shell ${styles.navigation}`}>
-      <SiteNav cta="Let’s talk" simulated turnstileSiteKey={null} showCall={false} helpHref="/#hear"
-        applicationLinks={<><p>Your account</p>
-            <Link href={preview ? "/account?preview=confirmation" : "/account"}>Overview</Link>
-            <Link href={preview ? "/account/settings?preview=settings" : "/account/settings"}>Account settings</Link>
-            <Link href={`${preview ? "/account/settings?preview=settings" : "/account/settings"}#business-details`}>Business details</Link>
-            <Link href={`${preview ? "/account/settings?preview=settings" : "/account/settings"}#hours-availability`}>Hours & availability</Link>
-            {billingAvailable && <RemoteAction url="/api/account/billing" label="Billing" className={styles.navAction} />}
-            <Link href={preview?"/account/login?preview=settings":"/account/security"}>Sign-in &amp; security</Link>
-            <Link href="/#hear">Get help</Link>
-            <div className={styles.legal}><Link href="/legal#privacy">Privacy</Link><Link href="/legal#terms">Terms</Link><Link href="/#hear">Contact</Link></div>
-        </>}
+      <SiteNav cta="Let’s talk" simulated turnstileSiteKey={null} showCall={false} showMenu={false} helpHref="/#hear"
         accountOptions={<>
           {name && <span className={styles.person}>{name}</span>}
+          <Link href={preview ? "/account?preview=confirmation" : "/account"}>Overview</Link>
           <Link href={preview ? "/account/settings?preview=settings" : "/account/settings"}>Account settings</Link>
+          <Link href={`${preview ? "/account/settings?preview=settings" : "/account/settings"}#business-details`}>Business details</Link>
+          <Link href={`${preview ? "/account/settings?preview=settings" : "/account/settings"}#hours-availability`}>Hours & availability</Link>
+          {billingAvailable && <RemoteAction url="/api/account/billing" label="Billing" className={styles.navAction} />}
+          <Link href={preview?"/account/login?preview=settings":"/account/security"}>Sign-in &amp; security</Link>
+          <Link href="/#hear">Get help</Link>
+          <div className={styles.legal}><Link href="/legal#privacy">Privacy</Link><Link href="/legal#terms">Terms</Link><Link href="/#hear">Contact</Link></div>
           <RemoteAction url="/api/account/session" method="DELETE" label="Sign out" className={styles.navAction} />
         </>}
       />

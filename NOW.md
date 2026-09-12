@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — consolidated avatar menu (12 September 2026)
+
+- Moved overview, account settings, business details, availability, billing, security, support and legal links into the avatar dropdown with Sign out.
+- Removed the redundant application hamburger; marketing navigation retains its menu.
+- Widened and height-limited the avatar dropdown for desktop and mobile.
+- Typecheck and browser checks passed at 1463, 390 and 320px, including Escape dismissal and menu bounds.
+
 ## Current handoff — setup navigation transition (12 September 2026)
 
 - Setup navigation starts as a white outlined pill and expands into a dark 100vw surface within 16px of the top.

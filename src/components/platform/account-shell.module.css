@@ -22,3 +22,6 @@
 /* Match the original call label's width as well as its shared button height. */
 .navigation :global(.rc-nav__cta > span)::after { content:"Let’s talk"; display:block; height:0; overflow:hidden; visibility:hidden; }
 .navigation :global(.rc-nav__cta > span) { text-align:center; }
+
+.navigation :global(.rc-nav__account-options) { width:260px; max-width:calc(100vw - 32px); max-height:calc(100dvh - 130px); overflow-y:auto; }
+.navigation :global(.rc-nav__account-options a) { padding:12px 20px; }

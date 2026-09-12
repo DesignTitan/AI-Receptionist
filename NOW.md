@@ -1,5 +1,11 @@
 # NOW
 
+## Current handoff — clean application thumbnails (12 September 2026)
+
+- Refreshed Account settings, Welcome & business setup, Hours & availability and Review & setup with actual example screens; internal toolbar and development badges are excluded from captures.
+- All four images use matching 1440 × 900 crops and compressed JPEGs (about 61–73 KB each). Verified that existing Page Index cards load the new images and point to the correct screen or section.
+- Thumbnail work is complete. Previous signed-in production acceptance remains next; application behavior and the parked mascot work are unchanged.
+
 ## Current handoff — responsive onboarding and editable account settings (12 September 2026)
 
 - Added persistent Business details, Hours & availability and Phone preferences in Account settings, reachable from the dashboard/menu. Owner saves preserve bookings, provider IDs, phone connections and billing, with stale-save protection.

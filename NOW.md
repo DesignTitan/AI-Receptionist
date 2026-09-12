@@ -1,5 +1,11 @@
 # NOW
 
+## Current handoff — sign-in design concept (12 September 2026)
+
+- Created `design/account-access/sign-in-concept-v1.png`: an image proposal for email-link sign-in and plan-led signup, using the existing identity and mascot references.
+- Saved the built-in image-generation prompt and concept status in `design/account-access/README.md`. Authentication implementation and existing page-index screenshots are unchanged.
+- Next: review the sign-in visual direction before implementing it. The 3D mascot remains parked.
+
 ## Current handoff — clean application thumbnails (12 September 2026)
 
 - Refreshed Account settings, Welcome & business setup, Hours & availability and Review & setup with actual example screens; internal toolbar and development badges are excluded from captures.

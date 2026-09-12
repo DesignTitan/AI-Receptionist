@@ -10,7 +10,7 @@ const sections=["business-details","hours-team","review-setup"];
 const weekdays=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const zones=["America/New_York","America/Detroit","America/Chicago","America/Denver","America/Los_Angeles","America/Phoenix","America/Anchorage","Pacific/Honolulu"];
 const clock=(value:string)=>{if(!value)return "—";const [h,m]=value.split(":").map(Number);return `${h%12||12}:${String(m).padStart(2,"0")} ${h<12?"AM":"PM"}`;};
-export function BusinessSetupForm({customer,plan,preview=false,initialStep=1}:{customer:Customer|null;plan:Plan;preview?:boolean;initialStep?:number}) {
+export function BusinessSetupForm({customer,plan,preview=false,initialStep=1,embedded=false}:{customer:Customer|null;plan:Plan;preview?:boolean;initialStep?:number;embedded?:boolean}) {
  const chosen=customer?.plan??plan;
  const c=customer?.config.setupPending?undefined:customer?.config;
  const [step,setStep]=useState(initialStep),[team,setTeam]=useState(c?.team??(preview?[{id:"member-1",name:"Jordan Davis",service:"Haircut",minutes:45},{id:"member-2",name:"Morgan Lee",service:"Colour consultation",minutes:30}]:[{id:"member-1",name:"",service:"",minutes:30}]));
@@ -34,8 +34,8 @@ export function BusinessSetupForm({customer,plan,preview=false,initialStep=1}:{c
   const d=readDetails();setDetails(d);
   try{validateConfig(config(d));if(team.length>PLANS[chosen].teamLimit)throw Error(`Your plan supports up to ${PLANS[chosen].teamLimit} people.`);setBusy(true);if(preview){setSaved(true);return;}const r=await fetch("/api/account/business",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({business_name:d.business_name,config:config(d)})});const data=await r.json();if(!r.ok)throw Error(data.error??"We couldn’t save your setup.");location.assign("/account");}catch(e){setError(e instanceof Error?e.message:"Please check your details.");}finally{setBusy(false);}}
  const firstName=customer?.config.contactName?.trim().split(/\s+/)[0]??(preview?"Bubs":"");
- return <AccountShell name={firstName} preview={preview} billingAvailable={!preview}>
-  <header className={styles.heading}><h1>Set up your business</h1><p>Fill in your details, set your hours and review everything below.</p></header>
+ const content=<>
+  {!embedded&&<header className={styles.heading}><h1>Set up your business</h1><p>Fill in your details, set your hours and review everything below.</p></header>}
   <nav ref={navigation} className={styles.sectionNav} aria-label="Setup sections"><ol className={styles.progress}>{["Business details","Hours & team","Review & setup"].map((label,i)=><li key={label}><a href={`#${sections[i]}`} aria-current={step===i+1?"location":undefined} onClick={e=>{e.preventDefault();move(i+1);}}><span>{i+1}</span>{label}</a></li>)}</ol></nav>
   <form ref={form} onChange={()=>{setDetails(readDetails());setSaved(false);setError("");}} onSubmit={submit} noValidate className={styles.form}>
    <section id="business-details" tabIndex={-1} aria-labelledby="business-title" data-step="1" className={`${styles.section} ${styles.first}`}>
@@ -129,5 +129,6 @@ export function BusinessSetupForm({customer,plan,preview=false,initialStep=1}:{c
    <div className={styles.actions}><Link href={preview?"/account?preview=confirmation":"/account"} className={styles.secondary}>Back to overview</Link><div><button className={styles.primary} disabled={busy}>{busy?"Sending…":"Send for setup →"}</button><p>Your service is not live until setup and testing are complete.</p></div></div>
    </section>
   </form>
- </AccountShell>;
+ </>;
+ return embedded?content:<AccountShell name={firstName} preview={preview} billingAvailable={!preview}>{content}</AccountShell>;
 }

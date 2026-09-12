@@ -31,7 +31,7 @@ export default async function Account({ searchParams }: { searchParams: Promise<
   if (!c) redirect("/start");
   if (c.config.setupPending) {
     const paid = c.status === "paid" && c.billing_status === "active" && !!c.setup_paid_at;
-    return <PurchaseWelcome name={c.config.contactName ?? ""}
+    return <PurchaseWelcome customer={c} name={c.config.contactName ?? ""}
       state={paid ? "paid" : c.status === "draft" ? "pending" : "billing"} test={billingMode() === "test"} />;
   }
   const bookings = await bookingsFor(c.id);

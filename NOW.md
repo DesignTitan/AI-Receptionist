@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — setup lives on the welcome page
+
+- Embedded all three setup sections directly below the welcome information on /account, sharing one application shell and one sticky section stepper.
+- The welcome CTA now scrolls to Business details on the same URL; Next and Edit scroll between sections. Removed the duplicate decorative step list.
+- Paid customers receive their own plan/configuration in the embedded form; pending/billing states do not expose setup. Older setup preview URLs redirect to the matching welcome-page anchor.
+- TypeScript and browser checks passed for one main/heading, same-page CTA, section navigation, live summaries, validation, preview submission and mobile overflow.
+- Changes are local and committed; publishing remains subject to the prior approval restriction.
+
+
 ## Current handoff — continuous anchored setup
 
 - Replaced separate setup screens with one continuous form and sticky section links for Business details, Hours & team and Review & setup.

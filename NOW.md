@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — reference-led visual system
+
+- Inspected the ZERO reference screenshot and source; its content was inside an iframe, not blank.
+- Rebuilt the visual system around its full-height editorial hero, slim rail, muted two-tone headings and numbered sections.
+- Retained AI Receptionist fonts, green palette, character and working controls; added large glyph specimens, navigation, motion, accessibility and token sections.
+- Verified all 13 section targets, sidebar clicks, and no horizontal overflow at 390, 768 and 1440 px.
+- Next: user visual review. Prior publishing restriction remains.
+
+
 ## Current handoff — Page Index is the page directory
 
 - Removed the Pages dropdown, its search panel and keyboard shortcut from the Internal tools bar.

@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — compact setup header
+
+- Compacted the sticky setup stepper to a 52px desktop row, with smaller step markers and inline save status; reduced the gap before content.
+- Adjusted anchor clearance and retained mobile wrapping, keyboard targets and save feedback.
+- Removed the brand-color picker and visual preview from onboarding; retained the existing/default color internally for configuration compatibility.
+- TypeScript and browser checks passed for desktop/mobile height, section clearance, removed color controls and no horizontal overflow. Local only.
+
+
 ## Current handoff — time controls and location timezone
 
 - Replaced browser time spinners with editable AM/PM fields and a compact branded 15-minute picker, including keyboard navigation, Escape, validation and end-of-day midnight.

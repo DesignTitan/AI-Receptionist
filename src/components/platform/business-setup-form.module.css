@@ -9,3 +9,14 @@
 .answering{margin-top:16px}
 
 .zone{max-width:300px;width:300px;flex-shrink:0}.zone small{font-size:10px;line-height:1.5;color:var(--brand-muted)}@media(max-width:600px){.zone{width:100%;max-width:none}}
+
+/* Compact sticky progress: one row, including the save status. */
+.sectionNav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:6px 0;margin-bottom:20px;min-height:52px}
+.sectionNav .progress{justify-content:flex-start;gap:16px;flex:1;min-width:0}
+.sectionNav .progress li{gap:16px}
+.sectionNav .progress li:not(:last-child)::after{width:24px}
+.sectionNav .progress a{font-size:12px;gap:8px;min-height:40px;padding:4px}
+.sectionNav .progress span{width:26px;height:26px;font-size:11px}
+.sectionNav .saveStatus{margin:0;min-height:0;flex-shrink:0;font-size:10px}
+.section{scroll-margin-top:calc(var(--workspace-top-offset,0px) + 136px)}
+@media(max-width:720px){.sectionNav{gap:8px;flex-wrap:wrap;padding:4px 0}.sectionNav .progress{gap:4px;flex-basis:100%;justify-content:space-between}.sectionNav .progress li{gap:0}.sectionNav .progress li::after{display:none}.sectionNav .progress a{flex-direction:row;font-size:10px;gap:5px}.sectionNav .progress span{width:20px;height:20px;font-size:10px}.sectionNav .saveStatus{margin-left:auto;font-size:9px;line-height:12px}.section{scroll-margin-top:calc(var(--workspace-top-offset,0px) + 148px)}}

@@ -95,15 +95,7 @@ function SetupFields({customer,plan,preview=false,initialStep=1,embedded=false,d
               aria-describedby="area-purpose"
             /><small id="area-purpose">Your AI receptionist gets a dedicated number for confirmation calls. Choose its local area code; availability is confirmed during setup.</small>
           </label>
-          <div><label>
-            Brand color
-            <input
-              type="color"
-              name="color"
-              defaultValue={draft?.details.color??c?.color ?? "#234d59"}
-              className="mt-3 h-11 w-24"
-            />
-          </label><small>This accent appears at the top of your business information card on the customer booking page.</small><div className={styles.colorPreview} style={{borderTopColor:details.color||c?.color||"#234d59"}} aria-label="Booking page color preview"><small>BOOKING PAGE PREVIEW</small><strong>We’ll see you soon.</strong><span>{details.business_name||"Your business"}</span><span>{details.address||"Your address and opening hours"}</span></div></div>
+          <input type="hidden" name="color" value={draft?.details.color??c?.color??"#234d59"}/>
         </div>
         <p className="platform-note">
           We start with non-medical businesses. Medical workflows need a

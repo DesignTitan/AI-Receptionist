@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — account settings
+
+- Added /account/settings with Profile, Sign-in & Security, Billing, Notifications, and Privacy & Account sections, sharing the app header/fonts. Linked from avatar/hamburger and Page Index.
+- Profile name saves through an owner-scoped, same-origin endpoint with optimistic configuration comparison; avatar initials update. Email changes, data copies and closure are explicitly support requests; essential notices stay enabled.
+- Existing Stripe portal and sign-out remain the real controls. Local /account/settings?preview=settings allows design review; preview edits do not write account data.
+- TypeScript, browser navigation/profile-preview/mobile checks and unsigned/cross-origin API rejection passed. No real account data modified. Published via Vercel (2ph0txrc9); production build passed. Public GitHub push remains blocked by prior approval review.
+
 ## Current handoff — welcome viewport fit
 
 - Account shell now subtracts the local toolbar height from its minimum viewport height, removing artificial overflow.

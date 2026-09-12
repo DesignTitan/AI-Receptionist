@@ -26,6 +26,8 @@ export function getPages({ tenant = "", siteGate = "public" } = {}) {
     page("payment-confirmation", "Payment confirmation", "/account?preview=confirmation", "Customer", "app", "development",
       "Working payment-confirmation page with illustrative details. No sign-in needed for this local design preview.",
       ["src/components/platform/purchase-welcome.tsx", "src/components/platform/purchase-welcome.module.css"]),
+    page("account-settings", "Account settings", "/account/settings?preview=settings", "Customer", "app", "development",
+      "Profile, sign-in, billing, notifications and account controls. Local preview uses example details.", ["src/app/account/settings/page.tsx", "src/components/platform/account-settings.tsx"]),
     page("account", "Owner dashboard", "/account", "Customer", "app", "owner",
       "Bookings, call outcomes, usage and billing for the signed-in owner.", ["src/app/account/page.tsx"]),
     page("owner-login", "Owner sign in", "/account/login", "Customer", "app", "public",

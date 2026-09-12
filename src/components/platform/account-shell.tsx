@@ -7,8 +7,8 @@ import { RemoteAction } from "./remote-action";
 import "../brand/brand.css";
 import styles from "./account-shell.module.css";
 
-export function AccountShell({ children, billingAvailable = true, name = "" }: {
-  children: React.ReactNode; billingAvailable?: boolean; name?: string;
+export function AccountShell({ children, billingAvailable = true, name = "", preview = false }: {
+  children: React.ReactNode; billingAvailable?: boolean; name?: string; preview?: boolean;
 }) {
   const header = useRef<HTMLElement>(null);
   const initials = name.trim().split(/\s+/).filter(Boolean).map(part => part[0]).slice(0,2).join("").toUpperCase();
@@ -33,7 +33,8 @@ export function AccountShell({ children, billingAvailable = true, name = "" }: {
         <details className={styles.navigation}>
           <summary aria-label="Application menu"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></summary>
           <nav className={styles.menu} aria-label="Application navigation" onClick={event => { if ((event.target as HTMLElement).closest("a")) event.currentTarget.closest("details")?.removeAttribute("open"); }}>
-            <Link href="/account">Overview</Link>
+            <Link href={preview ? "/account?preview=confirmation" : "/account"}>Overview</Link>
+            <Link href={preview ? "/account/settings?preview=settings" : "/account/settings"}>Account settings</Link>
             {billingAvailable && <RemoteAction url="/api/account/billing" label="Billing" className={styles.navAction} />}
             <Link href="/#hear">Get help</Link>
             <div className={styles.legal}><Link href="/legal#privacy">Privacy</Link><Link href="/legal#terms">Terms</Link><Link href="/#hear">Contact</Link></div>
@@ -44,7 +45,7 @@ export function AccountShell({ children, billingAvailable = true, name = "" }: {
           <summary aria-label={name ? `Account menu for ${name}` : "Account menu"} title={name || "Your account"}>
             {initials ? <span className={styles.initials}>{initials}</span> : <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20z"/></svg>}
           </summary>
-          <div className={styles.menu}>{name && <span className={styles.person}>{name}</span>}<RemoteAction url="/api/account/session" method="DELETE" label="Sign out" className={styles.navAction} /></div>
+          <div className={styles.menu}>{name && <span className={styles.person}>{name}</span>}<Link href={preview ? "/account/settings?preview=settings" : "/account/settings"}>Account settings</Link><RemoteAction url="/api/account/session" method="DELETE" label="Sign out" className={styles.navAction} /></div>
         </details>
       </div>
     </header>

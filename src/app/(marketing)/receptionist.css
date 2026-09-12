@@ -979,3 +979,8 @@
  .rc-nav-mascot__button { gap: 5px; }
  .rc-nav-mascot__name { font-size: 22px; }
 }
+/* Trim the source image's white canvas to the mascot silhouette. */
+.rc-nav-mascot__rest {
+ mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1254 1254'%3E%3Cpath fill='black' d='M185 928C131 865 129 746 130 628C121 424 139 294 262 218C387 143 641 133 835 148C1015 164 1111 237 1120 393C1131 530 1153 785 1107 919C1062 1050 916 1093 738 1094C578 1098 451 1073 391 1044L174 1117L190 980Z'/%3E%3C/svg%3E");
+ mask-size: contain; mask-repeat: no-repeat;
+}

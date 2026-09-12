@@ -543,3 +543,12 @@
 .required { color: var(--brand-muted); font-size: 11px; font-weight: 400; }
 .content label:has(> .required) { display: block; }
 .content label:has(> .required) > input { display: block; width: 100%; margin-top: 8px; }
+
+/* Keep legal links at the foot of the white access panel. */
+.landingFooter { width: min(416px, calc(100% - 56px)); margin: auto auto 0; padding: 16px 0 20px; flex-shrink: 0; }
+.landingFooter a { display: inline-flex; align-items: center; min-height: 32px; }
+@media(max-width:850px) { .landingFooter { width: calc(100% - 40px); } }
+@media(max-width:640px) {
+  .landingLeft { min-height: calc(100svh - var(--workspace-top-offset, 0px)); }
+  .landingFooter { width: min(416px, calc(100% - 40px)); padding-bottom: max(20px, env(safe-area-inset-bottom)); }
+}

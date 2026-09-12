@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — access-page legal footer (12 September 2026)
+
+- Moved Privacy, Terms and Get help out of the form and to the bottom of the white panel on both login and signup.
+- Footer follows the white panel when switching sides and stays below form content on smaller screens, with mobile safe-area spacing.
+- Verified bottom alignment on desktop and mobile; TypeScript passed. Refreshed all three access-page thumbnails.
+- UI change complete; authentication activation requirements remain unchanged.
+
 ## Current handoff — consistent pricing cards and required signup (12 September 2026)
 
 - Signup modal now reuses storefront pricing-card styles, including the featured Busy desk treatment, metric rows, buttons and shared included-features section.

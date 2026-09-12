@@ -70,6 +70,9 @@ export default async function Account({ searchParams }: { searchParams: Promise<
       )}
       <div className="platform-actions">
         <span className="platform-badge">{c.status}</span>
+        <Link className="platform-btn" href="/account/brand">
+          Brand intake →
+        </Link>
         {c.status === "draft" ? (
           c.checkout_attempt ? (
             <RemoteAction

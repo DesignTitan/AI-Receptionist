@@ -3,6 +3,7 @@ import { ANSWERING_PREFERENCES, type AnsweringPreference } from "./answering-pre
 import { PLANS, type Plan } from "./pricing.ts";
 import type { PhoneSettings } from "./phone-settings.ts";
 import { validatePhoneSetup, type PhoneSetup } from "./phone-provider.ts";
+import type { BrandProfile } from "./brand-profile";
 export { PLANS, type Plan } from "./pricing.ts";
 export type CustomerStatus =
   | "draft"
@@ -22,6 +23,8 @@ export type BusinessConfig = {
   setupDraft?: import("./setup-draft").SetupDraft;
   contactName?: string;
   phoneSetup?: PhoneSetup;
+  /** Optional: brand intake profile for phone AI behavior */
+  brand?: BrandProfile;
   trade: "salon" | "studio" | "other";
   timezone: string;
   weeklyHours?: DayHours[];

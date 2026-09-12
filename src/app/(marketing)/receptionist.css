@@ -850,7 +850,7 @@
 /* Account icon shares the site menu’s quiet hover treatment. */
 .rc-nav--traditional .rc-nav__cta { width: auto; min-height: 44px; padding: 0 18px; display: flex; align-items: center; gap: 9px; border-radius: 999px; font: inherit; font-size: 13px; }
 .rc-nav__account { position: relative; }
-.rc-nav__profile { width: 44px; height: 44px; display: grid; place-items: center; padding: 6px; border: 1px solid currentColor; border-radius: 50%; color: inherit; background: transparent; cursor: pointer; transition: background .18s ease; }
+.rc-nav__profile { width: 44px; height: 44px; display: grid; place-items: center; padding: 6px; border: 1px solid color-mix(in srgb, currentColor 18%, transparent); border-radius: 50%; color: inherit; background: transparent; cursor: pointer; transition: background .18s ease; }
 .rc-nav__profile svg { width: 30px; height: 30px; overflow: visible; }
 .rc-nav__profile-face { fill: transparent; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; transition: fill .2s; }
 .rc-nav__profile:hover, .rc-nav__profile:focus-visible, .rc-nav__account[data-open="true"] .rc-nav__profile { background: #ffffff20; }
@@ -871,9 +871,9 @@
 
 .rc-nav-mascot__character svg { display: block; width: 100%; height: 100%; }
 /* Flat call action: no bevel, gloss, or raised edge. */
-.rc-nav--traditional .rc-nav__cta, .rc-nav--traditional .rc-nav__cta[aria-expanded="true"] { background: #d6eee2; color: #173b31; border: 1px solid transparent; border-radius: 10px; box-shadow: none; font-weight: 550; transition: background .18s ease; }
+.rc-nav--traditional .rc-nav__cta, .rc-nav--traditional .rc-nav__cta[aria-expanded="true"] { background: #f7f7f2; color: #173b31; border: 1px solid transparent; border-radius: 10px; box-shadow: none; font-weight: 550; transition: background .18s ease; }
 .rc-nav--traditional .rc-nav__cta::after { display: none; }
-.rc-nav--traditional .rc-nav__cta:hover { background: #edf8f1; transform: none; }
+.rc-nav--traditional .rc-nav__cta:hover { background: #fff; transform: none; }
 @media (prefers-reduced-motion: reduce) {
  .rc-nav--traditional .rc-nav__cta { transition: none; }
 }
@@ -904,7 +904,7 @@
 .rc-footer__middle { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; padding-block: 56px; }
 .rc-footer__brand img { display: block; margin-bottom: 14px; }
 .rc-footer__brand p { font-size: 21px; color: #fff; margin: 0 0 12px; }
-.rc-footer__brand span { color: #b7cec1; font-size: 14px; line-height: 1.7; }
+.rc-footer__brand > span { color: #b7cec1; font-size: 14px; line-height: 1.7; }
 .rc-footer nav { display: flex; align-items: start; flex-direction: column; gap: 15px; font-size: 14px; }
 .rc-footer h3 { margin: 0 0 9px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; color: #a5c4b4; }
 .rc-footer__bottom { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-top: 1px solid #ffffff26; padding-top: 24px; color: #b7cec1; font-size: 11px; }
@@ -960,3 +960,5 @@
  .rc-nav-mascot__wordmark { gap: 2px; }
  .rc-nav-mascot__name { font-size: 22px; }
 }
+
+.rc-footer__brand .rc-nav-mascot { margin-bottom: 12px; }

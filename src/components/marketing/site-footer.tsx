@@ -1,4 +1,5 @@
 import { LEGAL_GROUPS, SOCIAL_NAMES } from "./legal-topics";
+import { NavMascot } from "./nav-mascot";
 import { PRODUCT_NAME } from "./product-chrome";
 
 export function SiteFooter() {
@@ -9,7 +10,7 @@ export function SiteFooter() {
             <a className="rc-footer__hello" href="/#hear">Let’s talk <span aria-hidden="true">↗</span></a>
           </div>
           <div className="rc-footer__middle">
-            <div className="rc-footer__brand"><img src="/marketing/happy-pillow-mascot.png" width={72} height={72} alt="" /><p>{PRODUCT_NAME}</p><span>A booking page and an AI front desk.<br />More time for the work you love.</span></div>
+            <div className="rc-footer__brand"><NavMascot /><span>A booking page and an AI front desk.<br />More time for the work you love.</span></div>
             <nav aria-label="Footer explore"><h3>Explore</h3><a href="/features">Features</a><a href="/#industries">Industries</a><a href="/#terms">Pricing</a><a href="/demos">Try a demo</a></nav>
             <nav aria-label="Footer account"><h3>Your next step</h3><a href="/#hear">Ask for a call</a><a href="/#terms">View plans</a><a href="/account/login">Log in</a><a href="/features#coming-soon">What’s coming</a></nav>
           </div>

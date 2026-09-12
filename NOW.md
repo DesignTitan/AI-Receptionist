@@ -1,5 +1,11 @@
 # NOW
 
+## Current handoff — navigation polish and call investigation (12 September 2026)
+
+- Softened the account circle to 18% opacity and changed the navigation call button to soft white. Footer now reuses the exact navigation wordmark.
+- Investigating mobile voice and sales callbacks: production voice endpoint currently reports unavailable because it is restricted to local development.
+- Checking microphone/audio startup and sales submission/notification failures before calling either flow operational.
+
 ## Current handoff — production published; navigation SVG (12 September 2026)
 
 - Published the committed site to bubs.ai; verified HTTPS and the updated bubs password-screen title. Existing site gate remains locked.

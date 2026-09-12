@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — simple media canvas
+
+- Replaced the campaign presentation with rows of 11 photos and one playable video, with short labels and original-file links.
+- Verified all images load, video metadata loads and mobile has no horizontal overflow.
+- In progress: standardizing marketing headers and footers across pages.
+
+
 ## Current handoff — reference-led visual system
 
 - Inspected the ZERO reference screenshot and source; its content was inside an iframe, not blank.

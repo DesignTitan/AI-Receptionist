@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — full-width sticky setup navigation (12 September 2026)
+
+- Made setup navigation dark green and 100vw wide, sticky at the top of the usable viewport (below the local-only toolbar).
+- Updated active steps, dividers and save status for the dark background; adjusted section scroll offsets.
+- Typecheck passed. Browser checks at 1463, 390 and 320px confirmed full width, top sticking, visible destination headings and no horizontal overflow.
+- Requested navigation change is complete.
+
 ## Current handoff — floating mascot cleanup (12 September 2026)
 
 - Removed the circular frame and restored the mascot’s visible pointed corner.

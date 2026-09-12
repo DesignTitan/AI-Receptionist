@@ -24,3 +24,15 @@
 .form :is(input,select){font-size:16px}.card :is(h2,h3,p),.first legend{overflow-wrap:anywhere}
 .actions{flex-wrap:wrap}.actions>div{min-width:0;max-width:100%}.primary,.secondary{white-space:normal;text-align:center}
 @media(max-width:600px){.first fieldset{padding:16px}.summary{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.actions{gap:12px}.actions>div{width:100%;text-align:left}.actions>div .primary{width:100%}.actions p{max-width:none}.sectionNav .progress a{min-height:44px}.sectionNav .saveStatus{font-size:11px;line-height:16px}}
+
+/* Full-width setup navigation docks to the top of the usable viewport. */
+.sectionNav { top:var(--workspace-top-offset,0px); z-index:60; width:100vw; margin-left:calc(50% - 50vw); padding:8px max(24px,calc((100vw - 1072px)/2)); background:#1e3a34; color:#f4faf6; border-bottom:1px solid #ffffff20; }
+.sectionNav .progress a { color:#c5d8ce; }
+.sectionNav .progress a[aria-current=location] { color:#fff; }
+.sectionNav .progress span { background:#ffffff14; color:#d5e7dd; }
+.sectionNav .progress a[aria-current=location] span { background:#d4ece0; color:#173b31; }
+.sectionNav .progress li:not(:last-child)::after { background:#ffffff26; }
+.sectionNav .progress a:focus-visible { outline-color:#d4ece0; }
+.sectionNav .saveStatus { color:#c5d8ce; }
+.section { scroll-margin-top:calc(var(--workspace-top-offset,0px) + 84px); }
+@media(max-width:720px){.sectionNav{padding:8px 16px}.section{scroll-margin-top:calc(var(--workspace-top-offset,0px) + 112px)}}

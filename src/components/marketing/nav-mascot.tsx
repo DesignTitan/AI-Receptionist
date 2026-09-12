@@ -40,19 +40,13 @@ export function NavMascot() {
       onFocus={nod} onClick={sayHello}
       onKeyDown={event => { if (event.key === "Escape") { setGreeting(null); if (bubbleTimer.current) clearTimeout(bubbleTimer.current); } }}>
       <span className="rc-nav-mascot__character" data-animating={animating} data-winking={winking}>
-        <svg viewBox="0 0 64 64" width="60" height="60" aria-hidden="true" focusable="false">
-          <path fill="#B9DDB7" d="M32 7C15 7 8 12 8 28v8c0 7 1 11 5 15L9 59l14-6c3 1 6 1 9 1 17 0 24-5 24-20v-6C56 12 49 7 32 7Z" />
-          <ellipse cx="23" cy="29" rx="6.5" ry="7.5" fill="#FFFCEE" />
-          <ellipse cx="24" cy="30" rx="4.2" ry="5.2" fill="#173B31" />
-          <circle cx="25.4" cy="27.8" r="1.6" fill="#FFFCEE" />
-          {winking ? <path d="M37 30q4-5 8 0" fill="none" stroke="#173B31" strokeWidth="3" strokeLinecap="round" /> : <>
-            <ellipse cx="41" cy="29" rx="6.5" ry="7.5" fill="#FFFCEE" />
-            <ellipse cx="40" cy="30" rx="4.2" ry="5.2" fill="#173B31" />
-            <circle cx="41.4" cy="27.8" r="1.6" fill="#FFFCEE" />
-          </>}
-          <path d="M26 40q6 3 12 0c-1 9-11 9-12 0Z" fill="#173B31" />
-          <ellipse cx="17" cy="38" rx="3.5" ry="2" fill="#8CBE93" />
-          <ellipse cx="47" cy="38" rx="3.5" ry="2" fill="#8CBE93" />
+        <svg viewBox="0 0 64 64" width="36" height="36" aria-hidden="true" focusable="false">
+          <path fill="currentColor" fillRule="evenodd" d={
+            "M32 7C15 7 8 12 8 28v8c0 7 1 11 5 15L9 59l14-6c3 1 6 1 9 1 17 0 24-5 24-20v-6C56 12 49 7 32 7Z " +
+            "M26 28a3 4 0 1 0-6 0a3 4 0 1 0 6 0Z " +
+            (winking ? "M37 27h7v3h-7Z " : "M44 28a3 4 0 1 0-6 0a3 4 0 1 0 6 0Z ") +
+            "M25 38q7 4 14 0c-1 10-13 10-14 0Z"
+          } />
         </svg>
       </span>
       <span className="rc-nav-mascot__name">bubs</span>

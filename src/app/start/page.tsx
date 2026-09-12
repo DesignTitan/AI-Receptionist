@@ -20,7 +20,7 @@ export default async function Start({ searchParams }: { searchParams: Promise<{ 
   return <div className={styles.page}>
     <header className={styles.header}>
       <Link href="/" className={styles.brand}><img src="/marketing/happy-pillow-mascot.png" alt="" width="42" height="42" />AI Receptionist</Link>
-      <Link href={returnTo}>← Back to plans</Link>
+      <Link href={returnTo} className={styles.backToPlans} aria-label="Back to plans"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" /></svg><span>Back to plans</span></Link>
     </header>
     <main id="main" className={styles.main}>
       {billingMode() === "test" && <p className={styles.test} role="note">Test checkout · No real payment will be taken.</p>}

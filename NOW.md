@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — checkout header alignment
+
+- Centered the checkout mascot/name in the full-width header.
+- Moved Back to plans to the far left with an outlined control and consistent arrow icon; mobile uses an accessible icon-only button.
+- Verified centering, left spacing and selected-plan return link on desktop and mobile; typecheck passed.
+- Next: continue checkout visual review.
+
+
 ## Current handoff — clear practice setup submission
 
 - Local setup preview now says Finish preview and explains before clicking that nothing is sent.

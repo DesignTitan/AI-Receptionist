@@ -956,11 +956,11 @@
 
 /* The marketing wordmark uses the same tapered mascot as account screens. */
 .rc-nav--traditional .rc-nav__brand { width: auto; height: auto; }
-.rc-nav-mascot__wordmark { display: flex; align-items: center; gap: 6px; min-height: 44px; color: inherit; text-decoration: none; border-radius: 0; }
+.rc-nav-mascot__wordmark { display: flex; align-items: center; gap: 2px; min-height: 44px; color: inherit; text-decoration: none; border-radius: 0; }
 .rc-nav-mascot__character { width: 26px; height: 26px; flex: 0 0 26px; transform: translateY(1px); }
 .rc-nav-mascot__name { font-size: 25px; font-weight: 650; letter-spacing: -.04em; line-height: 1; }
 @media (max-width: 600px) {
  .rc-nav-mascot__character { width: 23px; height: 23px; flex-basis: 23px; }
- .rc-nav-mascot__wordmark { gap: 5px; }
+ .rc-nav-mascot__wordmark { gap: 2px; }
  .rc-nav-mascot__name { font-size: 22px; }
 }

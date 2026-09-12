@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — simplified welcome screen
+
+- Replaced the large setup mascot with a generated pointed speech-tail variant, preserving the existing original asset.
+- Moved the sticky application header to the top and removed its green pill background, border and shadow.
+- Greeting is now Welcome plus first name; removed local preview banner, paid-plan subtitle and purchase card. Removed the unused dashboard invoice fetch; receipt email/Billing remain available.
+- TypeScript and browser checks passed for the actual local page, new image, removed content, plain header, mobile layout and menu. Published via Vercel (rhvs6y9qx); production build passed. Public GitHub push remains blocked by prior approval review.
+
 ## Current handoff — shared sticky application navigation
 
 - Shared account header now keeps the mascot far left, hamburger navigation beside a personalized initials avatar at the far right, and stays sticky while scrolling.

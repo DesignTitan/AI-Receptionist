@@ -13,8 +13,6 @@ import {
 import Link from "next/link";
 import { AccountFrame as Frame } from "@/components/platform/account-frame";
 import { PurchaseWelcome } from "@/components/platform/purchase-welcome";
-import { loadPurchaseReceipt } from "@/lib/platform/load-purchase-receipt";
-import type { PurchaseReceipt } from "@/lib/platform/purchase-receipt";
 import { RemoteAction } from "@/components/platform/remote-action";
 import { ownedCustomer, bookingsFor } from "@/lib/platform/server";
 import { PLANS } from "@/lib/platform/model";
@@ -27,22 +25,13 @@ export default async function Account({ searchParams }: { searchParams: Promise<
   // Local design review uses the real component with fictional data, never an owner record.
   // The production build removes this branch; normal account access stays authenticated.
   if (process.env.NODE_ENV === "development" && (await searchParams).preview === "confirmation") {
-    return <PurchaseWelcome name="Bubs" plan="busy" state="paid" preview receipt={{
-      number: "DESIGN-PREVIEW", paidAt: "2026-09-11T18:00:00Z", currency: "usd",
-      rows: [{ label: "Monthly plan", cents: 39900 }, { label: "One-time setup", cents: 8900 }],
-      amountPaid: 48800, url: null,
-    }} />;
+    return <PurchaseWelcome name="Bubs" state="paid" preview />;
   }
   const c = await ownedCustomer();
   if (!c) redirect("/start");
   if (c.config.setupPending) {
     const paid = c.status === "paid" && c.billing_status === "active" && !!c.setup_paid_at;
-    let receipt: PurchaseReceipt | null = null;
-    if (paid) {
-      try { receipt = await loadPurchaseReceipt(c); }
-      catch { /* Payment stays confirmed; unavailable receipt details never block setup. */ }
-    }
-    return <PurchaseWelcome name={c.config.contactName ?? ""} plan={c.plan} receipt={receipt}
+    return <PurchaseWelcome name={c.config.contactName ?? ""}
       state={paid ? "paid" : c.status === "draft" ? "pending" : "billing"} test={billingMode() === "test"} />;
   }
   const bookings = await bookingsFor(c.id);

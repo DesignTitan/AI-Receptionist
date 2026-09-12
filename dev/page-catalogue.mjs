@@ -27,7 +27,7 @@ export function getPages({ tenant = "", siteGate = "public" } = {}) {
       "Welcome, business details, weekly hours and setup review in one page. Working local preview with autosaved example data.",
       ["src/components/platform/purchase-welcome.tsx", "src/components/platform/purchase-welcome.module.css"]),
     page("account-settings", "Account settings", "/account/settings?preview=settings", "Customer", "app", "development",
-      "Profile, sign-in, billing, notifications and account controls. Local preview uses example details.", ["src/app/account/settings/page.tsx", "src/components/platform/account-settings.tsx"]),
+      "Editable business details, weekly availability and phone preferences, plus profile, sign-in and billing. Preview shares saved setup details.", ["src/app/account/settings/page.tsx", "src/components/platform/account-settings.tsx", "src/components/platform/business-preferences-form.tsx", "src/components/platform/weekly-hours-editor.tsx"]),
     page("setup-hours-team", "Hours & availability", "/account?preview=confirmation#hours-team", "Customer", "app", "development", "Weekly hours editor with draggable handles, manual times and all-day controls.", ["src/components/platform/business-setup-form.tsx"]),
     page("setup-review", "Review & setup", "/account?preview=confirmation#review-setup", "Customer", "app", "development", "Working step 3: edit summaries and send for setup. Local sample data.", ["src/components/platform/business-setup-form.tsx"]),
     page("account", "Owner dashboard", "/account", "Customer", "app", "owner",

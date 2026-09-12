@@ -35,6 +35,8 @@ export function AccountShell({ children, billingAvailable = true, name = "", pre
           <nav className={styles.menu} aria-label="Application navigation" onClick={event => { if ((event.target as HTMLElement).closest("a")) event.currentTarget.closest("details")?.removeAttribute("open"); }}>
             <Link href={preview ? "/account?preview=confirmation" : "/account"}>Overview</Link>
             <Link href={preview ? "/account/settings?preview=settings" : "/account/settings"}>Account settings</Link>
+            <Link href={`${preview ? "/account/settings?preview=settings" : "/account/settings"}#business-details`}>Business details</Link>
+            <Link href={`${preview ? "/account/settings?preview=settings" : "/account/settings"}#hours-availability`}>Hours & availability</Link>
             {billingAvailable && <RemoteAction url="/api/account/billing" label="Billing" className={styles.navAction} />}
             <Link href="/#hear">Get help</Link>
             <div className={styles.legal}><Link href="/legal#privacy">Privacy</Link><Link href="/legal#terms">Terms</Link><Link href="/#hear">Contact</Link></div>

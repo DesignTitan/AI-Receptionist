@@ -20,3 +20,7 @@
 .sectionNav .saveStatus{margin:0;min-height:0;flex-shrink:0;font-size:10px}
 .section{scroll-margin-top:calc(var(--workspace-top-offset,0px) + 136px)}
 @media(max-width:720px){.sectionNav{gap:8px;flex-wrap:wrap;padding:4px 0}.sectionNav .progress{gap:4px;flex-basis:100%;justify-content:space-between}.sectionNav .progress li{gap:0}.sectionNav .progress li::after{display:none}.sectionNav .progress a{flex-direction:row;font-size:10px;gap:5px}.sectionNav .progress span{width:20px;height:20px;font-size:10px}.sectionNav .saveStatus{margin-left:auto;font-size:9px;line-height:12px}.section{scroll-margin-top:calc(var(--workspace-top-offset,0px) + 148px)}}
+
+.form :is(input,select){font-size:16px}.card :is(h2,h3,p),.first legend{overflow-wrap:anywhere}
+.actions{flex-wrap:wrap}.actions>div{min-width:0;max-width:100%}.primary,.secondary{white-space:normal;text-align:center}
+@media(max-width:600px){.first fieldset{padding:16px}.summary{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.actions{gap:12px}.actions>div{width:100%;text-align:left}.actions>div .primary{width:100%}.actions p{max-width:none}.sectionNav .progress a{min-height:44px}.sectionNav .saveStatus{font-size:11px;line-height:16px}}

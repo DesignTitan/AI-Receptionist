@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — responsive onboarding and editable account settings (12 September 2026)
+
+- Added persistent Business details, Hours & availability and Phone preferences in Account settings, reachable from the dashboard/menu. Owner saves preserve bookings, provider IDs, phone connections and billing, with stale-save protection.
+- Preview settings share setup drafts; initial setup autosaves. Mobile schedules now use day cards, time controls remain readable, and landscape dropdown opening/validation were repaired.
+- Verified setup/settings at 320–1920px, signup at three widths, saved selections, schedule interactions and completion. 81 tests, TypeScript and isolated production build passed; see `docs/ONBOARDING-VERIFICATION.md`.
+- Updated page-index settings description, completion and thumbnails. Real signed-in deployed-database acceptance remains next; this pass used isolated previews and simulated endpoint persistence.
+- The 3D mascot is still parked. No further rendering work is active.
+
 ## Current handoff — 3D mascot parked (12 September 2026)
 
 - User rejected the latest Blender mascot and explicitly paused the work; its appearance is not right.

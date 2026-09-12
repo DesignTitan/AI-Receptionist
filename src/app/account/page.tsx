@@ -69,6 +69,8 @@ export default async function Account({ searchParams }: { searchParams: Promise<
         </div>
       )}
       <div className="platform-actions">
+        <a href="/account/settings#business-details">Edit business details</a>
+        <a href="/account/settings#hours-availability">Edit hours & availability</a>
         <span className="platform-badge">{c.status}</span>
         {c.status === "draft" ? (
           c.checkout_attempt ? (

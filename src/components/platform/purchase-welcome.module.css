@@ -49,3 +49,5 @@
 }
 
 .onboarding{margin-top:48px}
+
+.headingRow{display:flex;align-items:center;justify-content:space-between;gap:20px}.helpLink{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid #c9ded0;border-radius:999px;padding:10px 24px;font-size:13px;background:#fff;color:var(--brand-ink)}.setupCopy>.primary{margin-top:24px}@media(max-width:600px){.headingRow{gap:12px}.headingRow h1{font-size:clamp(28px,7vw,42px)}.helpLink{padding:10px 16px}}

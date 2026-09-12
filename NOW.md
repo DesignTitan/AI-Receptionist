@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — simplified welcome content
+
+- Moved Get help alongside the welcome heading and removed the separate support strip.
+- Changed the introductory CTA to Get started to avoid repeating the setup heading.
+- Restarted the managed preview and verified one application main/heading with the embedded setup flow, rather than the duplicated shell shown in the screenshot.
+- TypeScript and browser checks passed for same-page navigation, review updates, validation and mobile layout. Local changes only; prior publishing restrictions remain.
+
+
 ## Current handoff — setup lives on the welcome page
 
 - Embedded all three setup sections directly below the welcome information on /account, sharing one application shell and one sticky section stepper.

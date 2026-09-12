@@ -240,6 +240,8 @@ export function AuthFlow({
         go("email");
         return;
       }
+      if (!siteKey) throw Error("Sign-in is not connected in this local preview yet. No email was sent. Account authentication needs to be configured before you can log in.");
+      if (!token) throw Error("Complete the human check to continue.");
       const r = await fetch("/api/account/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -315,7 +317,7 @@ export function AuthFlow({
       )}
       <button
         className={styles.primary}
-        disabled={busy || cooldown > 0 || (signupMode && !selectedPlan) || (!preview && (!siteKey || !token))}
+        disabled={busy || cooldown > 0 || (signupMode && !selectedPlan)}
       >
         {busy
           ? "Sending…"

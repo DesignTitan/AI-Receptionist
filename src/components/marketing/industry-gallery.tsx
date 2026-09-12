@@ -22,6 +22,7 @@ export function IndustryGallery() {
   const rail = useRef<HTMLDivElement>(null);
   const intro = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const [revealed, setRevealed] = useState(() => new Set([0]));
 
   useEffect(() => {
     const root = section.current!, windowEl = viewport.current!, track = rail.current!;
@@ -41,6 +42,7 @@ export function IndustryGallery() {
         ? cards.reduce((best, card, i) => Math.abs(card.offsetLeft - position) < Math.abs(cards[best].offsetLeft - position) ? i : best, 0)
         : Math.min(cards.length - 1, Math.round(progress * (cards.length - 1)));
       setActive(nearest);
+      setRevealed(previous => previous.has(nearest) ? previous : new Set([...previous, nearest]));
     }
     function schedule() { if (!frame) frame = requestAnimationFrame(update); }
     addEventListener("scroll", schedule, { passive: true });
@@ -89,7 +91,7 @@ export function IndustryGallery() {
           }}>
             <div ref={rail} className="rc-industries__rail">
               {INDUSTRIES.map((industry, index) => (
-                <article className="rc-industry" key={industry.key} data-active={index === active} data-more={industry.key === "more"}>
+                <article className="rc-industry" key={industry.key} data-active={index === active} data-revealed={revealed.has(index)} data-more={industry.key === "more"}>
                   {industry.key !== "more" && <img src={`/marketing/industries/${industry.key}-v2.webp`} alt="" width={900} height={1200} loading="lazy" />}
                   {industry.key !== "more" && <div className="rc-industry__soften" aria-hidden="true" style={{ maskImage: "linear-gradient(to bottom, transparent 30%, black 95%)" }}><img src={`/marketing/industries/${industry.key}-v2.webp`} alt="" width={900} height={1200} loading="lazy" style={{ filter: "blur(16px)" }} /></div>}
                   {industry.key === "more" && <p className="rc-industry__problem">{industry.problem}</p>}

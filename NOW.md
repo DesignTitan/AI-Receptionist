@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — marketing refinements and staging authentication (12 September 2026)
+
+- Industry mascots/messages now remain revealed after their card stops being active. Navigation uses a translucent glass layer with blur preserved through CSS compilation.
+- An attempted unconfigured login now explains why no email was sent instead of silently disabling the button. Browser checks and TypeScript passed.
+- Staging authentication activation is in progress: Vercel Preview has no environment variables; the linked Supabase project exists but has no preview database branch yet.
+- Next: connect isolated staging authentication, validate the hosted login flow and report any external setup blockers.
+
 ## Current handoff — access-page legal footer (12 September 2026)
 
 - Moved Privacy, Terms and Get help out of the form and to the bottom of the white panel on both login and signup.

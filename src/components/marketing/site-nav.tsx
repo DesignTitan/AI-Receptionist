@@ -70,6 +70,7 @@ export function SiteNav({ cta, simulated, turnstileSiteKey }: { cta: string; sim
 
   return (
     <nav className="rc-nav rc-nav--traditional" aria-label="Site" ref={root} data-past-hero={pathname !== "/" || pastHero} data-hidden={hidden && !open && !menuOpen && !accountOpen} data-menu-open={menuOpen}>
+      <span className="rc-nav__glass" aria-hidden="true" style={{ backdropFilter: "blur(24px) saturate(150%)", WebkitBackdropFilter: "blur(24px) saturate(150%)" }} />
       <NavMascot />
       <ul className="rc-nav__text-links" aria-label="Homepage sections">
         {LINKS.map(link => <li key={link.href}><a href={pathname === "/" ? link.href.slice(1) : link.href}>{link.label}</a></li>)}

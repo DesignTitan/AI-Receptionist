@@ -1,5 +1,7 @@
 # AI Receptionist — editable 3D mascot
 
+**PARKED — 12 September 2026.** The user rejected the latest Blender result and asked to stop for now. All scenes and renders here are preserved experiments, not approved or production-ready assets. Do not continue modeling, fur refinement, rendering, animation or integration until the user explicitly revisits the project. The workflow and next-step notes below are historical, not active assignments.
+
 Second likeness study, 12 September 2026. The shape and likeness still need visual review against `public/marketing/happy-mascot-pointed.png`. This is a new modeled character, not a flat image mapped onto a plane.
 
 ## Editable regional groom — current Blender study

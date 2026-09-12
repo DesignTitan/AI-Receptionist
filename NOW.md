@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — 3D mascot parked (12 September 2026)
+
+- User rejected the latest Blender mascot and explicitly paused the work; its appearance is not right.
+- No further modeling, grooming, rendering, animation or integration work is active. Resume only when the user brings this project back.
+- Preserve existing Blender scenes, renders and research as unapproved experiments; they are not production-ready or accepted design references.
+- The original generated mascot remains the visual target. Previous mascot “next” actions below are historical and suspended.
+
 ## Current handoff — editable Blender guide groom (12 September 2026)
 
 - Built `mascot-groom-studio.blend` with six editable guide regions, separate undercoat guides, surface attachment, live interpolation and explicit tuft convergence. Blender’s bundled tools were sufficient; no new add-on was needed.

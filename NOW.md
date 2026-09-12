@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — thinner internal toolbar
+
+- Reduced the toolbar from 56px to 40px, renamed the badge Internal tools and removed the path field/Go action.
+- Updated sticky offsets and menu position; Pages search, Page Index and keyboard navigation remain.
+- Browser checks passed for height, removed controls and menu search/Escape.
+- In progress: Page Index shortcuts and fresh screenshots for the completed setup screens.
+
+
 ## Current handoff — compact setup header
 
 - Compacted the sticky setup stepper to a 52px desktop row, with smaller step markers and inline save status; reduced the gap before content.

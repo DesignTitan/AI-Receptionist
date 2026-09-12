@@ -16,7 +16,7 @@ import { getPages } from "/__dev/page-catalogue.mjs";
     }
 
     connectedCallback() {
-      document.documentElement.style.setProperty("--workspace-top-offset", "56px");
+      document.documentElement.style.setProperty("--workspace-top-offset", "40px");
       this.events?.abort();
       this.events = new AbortController();
       const listen = (target, event, callback) => target.addEventListener(event, callback, { signal: this.events.signal });
@@ -29,31 +29,25 @@ import { getPages } from "/__dev/page-catalogue.mjs";
 
       this.shadowRoot.innerHTML = `
         <style>
-          :host{display:block;height:56px;position:relative;z-index:2147483000;color-scheme:dark;font:14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#fff0f4;text-align:left;letter-spacing:normal}
+          :host{display:block;height:40px;position:relative;z-index:2147483000;color-scheme:dark;font:14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#fff0f4;text-align:left;letter-spacing:normal}
           *{box-sizing:border-box} [hidden]{display:none!important}
           button,input,a{font:inherit} button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
           button{color:inherit;cursor:pointer} a{color:inherit;text-decoration:none}
           button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #ffc2dd;outline-offset:3px}
           svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
-          .bar{position:fixed;inset:0 0 auto;height:56px;display:flex;align-items:center;gap:10px;padding:7px 16px;background:#713245;border-bottom:1px solid #ad6178;box-shadow:0 1px 0 #0004}
-          .badge{height:36px;display:flex;align-items:center;gap:6px;border-radius:7px;background:#ffffff1d;padding:0 11px;font-size:12px;letter-spacing:.1em;font-weight:750;flex:none}
-          .badge span{font-size:17px;font-weight:400}
-          .pages{display:flex;align-items:center;gap:8px;height:40px;padding:0 13px;border:1px solid #ffffff16;border-radius:8px;background:#ffffff17;white-space:nowrap}
+          .bar{position:fixed;inset:0 0 auto;height:40px;display:flex;align-items:center;gap:8px;padding:4px 12px;background:#713245;border-bottom:1px solid #ad6178;box-shadow:0 1px 0 #0004}
+          .badge{display:flex;align-items:center;padding:0 4px;font-size:9px;letter-spacing:.06em;font-weight:650;flex:none;white-space:nowrap;color:#efdce3}
+          .pages{display:flex;align-items:center;gap:8px;height:30px;padding:0 10px;border:1px solid #ffffff16;border-radius:8px;background:#ffffff17;white-space:nowrap}
           .pages:hover{background:#ffffff28}.pages[aria-expanded="true"]{background:#973659;border-color:#f278ad}
-          .index{display:flex;align-items:center;gap:7px;height:40px;padding:0 12px;border:1px solid #ffffff16;border-radius:8px;background:#ffffff10;white-space:nowrap;font-size:12px}.index:hover{background:#ffffff25}.index[aria-current="page"]{background:#973659;border-color:#f278ad}
+          .index{display:flex;align-items:center;gap:7px;height:30px;padding:0 10px;border:1px solid #ffffff16;border-radius:8px;background:#ffffff10;white-space:nowrap;font-size:12px}.index:hover{background:#ffffff25}.index[aria-current="page"]{background:#973659;border-color:#f278ad}
           .chevron{width:15px;height:15px;margin-left:5px}.pages[aria-expanded="true"] .chevron{transform:rotate(180deg)}
           .current{display:flex;align-items:center;gap:10px;min-width:0;margin-left:9px;font-size:12px;color:#ead3da}
           .current::before{content:"";width:1px;height:18px;background:#ffffff26;margin-right:7px}
           .current-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
           .local{font-size:10px;letter-spacing:.1em;font-weight:650;color:#f4dce4;white-space:nowrap;display:flex;align-items:center;gap:7px;margin-left:auto}
           .local::before{content:"";width:5px;height:5px;background:#e5acbf;border-radius:50%}
-          .jump{display:flex;align-items:center;gap:6px;margin-left:12px}
-          .jump input{width:clamp(145px,17vw,260px);height:38px;border:1px solid #ffffff1e;border-radius:7px;padding:0 12px;background:#421b2b66;color:#fff0f4;font-size:12px}
-          input::placeholder{color:#d5afbccc;opacity:1}
-          .go{height:38px;padding:0 12px;border:1px solid #ffffff12;border-radius:7px;background:#ffffff1c;font-weight:550;font-size:12px}
-          .go:hover{background:#ffffff2b}
           .shortcut{border:0;background:none;color:#eac6d2;font-size:12px;padding:8px 2px 8px 6px}
-          .panel{position:fixed;top:63px;left:104px;width:430px;max-width:calc(100vw - 24px);max-height:calc(100dvh - 76px);display:flex;flex-direction:column;overflow:hidden;border:1px solid #875266;border-radius:12px;background:#2a1922;box-shadow:0 18px 60px #08020866}
+          .panel{position:fixed;top:47px;left:104px;width:430px;max-width:calc(100vw - 24px);max-height:calc(100dvh - 60px);display:flex;flex-direction:column;overflow:hidden;border:1px solid #875266;border-radius:12px;background:#2a1922;box-shadow:0 18px 60px #08020866}
           .search-wrap{padding:15px 15px 12px;border-bottom:1px solid #ffffff10;flex:none}
           .panel-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-size:12px;font-weight:650}
           .total{color:#c4a4b2;font-size:11px;font-weight:400}
@@ -70,20 +64,16 @@ import { getPages } from "/__dev/page-catalogue.mjs";
           .page-link:not([aria-current="page"]) .marker{display:none}
           .empty{font-size:13px;color:#d4bdc7;padding:22px 10px;margin:0}
           .footer{border-top:1px solid #ffffff10;padding:11px 16px;font-size:10px;color:#c4a4b2;flex:none;display:flex;justify-content:space-between;gap:10px}
-          @media(max-width:850px){.current{display:none}.panel{left:16px}.local{margin-left:auto}.jump{margin-left:3px}.jump input{width:160px}}
-          @media(max-width:580px){.bar{gap:8px;padding-inline:10px}.badge{padding-inline:9px}.pages{padding-inline:10px}.jump{display:none}.panel{left:12px;width:430px}.local{font-size:9px;letter-spacing:.06em}.shortcut{padding-left:3px}.footer{font-size:9px}}
+          @media(max-width:850px){.current{display:none}.panel{left:16px}.local{margin-left:auto}}
+          @media(max-width:580px){.bar{gap:8px;padding-inline:10px}.badge{padding-inline:9px}.pages{padding-inline:10px}.panel{left:12px;width:430px}.local{font-size:9px;letter-spacing:.06em}.shortcut{padding-left:3px}.footer{font-size:9px}}
           @media(max-width:680px){.local{display:none}.index{margin-left:auto}} @media(max-width:380px){.shortcut{display:none}.index{padding-inline:9px}.bar{gap:6px}}
         </style>
         <nav class="bar" aria-label="Development navigation">
-          <div class="badge"><span aria-hidden="true">✦</span> DEV</div>
+          <div class="badge">Internal tools</div>
           <button class="pages" type="button" aria-expanded="false" aria-controls="dev-pages">${listIcon} Pages ${chevron}</button>
           <a class="index" href="/__dev/pages">Page index <span aria-hidden="true">↗</span></a>
           <div class="current"><span class="current-name"></span></div>
           <span class="local">LOCAL ONLY</span>
-          <form class="jump" aria-label="Open a local page">
-            <input name="path" aria-label="Page path" placeholder="go to /path…" autocomplete="off" spellcheck="false" required>
-            <button type="submit" class="go">Go →</button>
-          </form>
           <button class="shortcut" type="button" aria-label="Find a page" title="Find a page (Command or Control K)">⌘K</button>
         </nav>
         <section id="dev-pages" class="panel" aria-label="Pages" hidden>
@@ -137,26 +127,11 @@ import { getPages } from "/__dev/page-catalogue.mjs";
           links[0]?.click();
         }
       });
-      const jump = this.shadowRoot.querySelector(".jump");
-      const pathInput = jump.querySelector("input");
-      listen(pathInput, "input", () => pathInput.setCustomValidity(""));
-      listen(jump, "submit", (event) => {
-        event.preventDefault();
-        const value = pathInput.value.trim();
-        let url;
-        try { url = new URL(value, location.origin); } catch { /* handled below */ }
-        if (!value.startsWith("/") || value.startsWith("//") || /[\\\u0000-\u001f]/.test(value) || url?.origin !== location.origin) {
-          pathInput.setCustomValidity("Use a local page path, like /demos.");
-          pathInput.reportValidity();
-          return;
-        }
-        location.assign(url.href);
-      });
       listen(window, "popstate", () => this.updateLocation());
       listen(window, "hashchange", () => this.updateLocation());
       // Keep fixed/sticky site navigation below the dev bar without changing site CSS.
       this.offsets = document.createElement("style");
-      this.offsets.textContent = `html{scroll-padding-top:76px!important} .rc-nav{top:calc(var(--nav-top) + 56px)!important} header.sticky.top-0,.control-bar{top:56px!important} .platform-aside{top:80px!important} body>a.sr-only:focus,.skip:focus,.skip-link:focus{top:66px!important}`;
+      this.offsets.textContent = `html{scroll-padding-top:60px!important} .rc-nav{top:calc(var(--nav-top) + 40px)!important} header.sticky.top-0,.control-bar{top:40px!important} .platform-aside{top:64px!important} body>a.sr-only:focus,.skip:focus,.skip-link:focus{top:50px!important}`;
       document.head.append(this.offsets);
     }
 

@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — time controls and location timezone
+
+- Replaced browser time spinners with editable AM/PM fields and a compact branded 15-minute picker, including keyboard navigation, Escape, validation and end-of-day midnight.
+- Time zone is now labeled Location time zone with regional labels and per-location guidance; stored timezone identifiers still handle daylight saving.
+- Browser checks passed for typing, picker selection, invalid input, keyboard controls, autosave restoration and mobile width; TypeScript passed.
+- Next: remove brand-color customization from current onboarding. No publishing attempted.
+
+
 ## Current handoff — editable weekly schedule
 
 - Replaced the duplicated hours controls/static preview with a full-width weekly editor: day checkboxes, All day, draggable opening/closing handles and manual time fields.

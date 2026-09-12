@@ -7,3 +7,5 @@
 .saveStatus{min-height:18px;margin:8px 0 0;text-align:right;font-size:11px;color:var(--brand-muted)}.saveStatus button{margin-left:8px;text-decoration:underline;cursor:pointer}.first input[type=hidden]{display:none}
 
 .answering{margin-top:16px}
+
+.zone{max-width:300px;width:300px;flex-shrink:0}.zone small{font-size:10px;line-height:1.5;color:var(--brand-muted)}@media(max-width:600px){.zone{width:100%;max-width:none}}

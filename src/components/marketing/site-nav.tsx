@@ -24,7 +24,7 @@ const PAGES = [
   { href: "/demos", label: "Demos" },
 ];
 
-export function SiteNav({ cta, simulated, turnstileSiteKey, showCall = true, accountOptions, applicationLinks }: { cta: string; simulated: boolean; turnstileSiteKey: string | null; showCall?: boolean; accountOptions?: ReactNode; applicationLinks?: ReactNode }) {
+export function SiteNav({ cta, simulated, turnstileSiteKey, showCall = true, helpHref, accountOptions, applicationLinks }: { cta: string; simulated: boolean; turnstileSiteKey: string | null; showCall?: boolean; helpHref?: string; accountOptions?: ReactNode; applicationLinks?: ReactNode }) {
   const pathname = usePathname();
   const [internalPages, setInternalPages] = useState<{ href: string; label: string }[]>([]);
   const [open, setOpen] = useState(false);
@@ -103,6 +103,10 @@ export function SiteNav({ cta, simulated, turnstileSiteKey, showCall = true, acc
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 7 7l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 3.5 5.5a2 2 0 0 1 2-2Z"/></svg>
             <span>Let’s talk</span>
           </button>}
+          {helpHref && <a href={helpHref} className="rc-nav__cta" aria-label="Get help">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 1.5-2.5 1.5-2.5 3M12 16h.01"/></svg>
+            <span>Get help</span>
+          </a>}
           <div className="rc-nav__account" data-open={accountOpen}
             onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setAccountOpen(false); }}>
             <button ref={accountButton} type="button" className="rc-nav__profile" aria-label="Account" aria-expanded={accountOpen} aria-controls="rc-account-options"

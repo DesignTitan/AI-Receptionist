@@ -17,10 +17,11 @@ export function PurchaseWelcome({ name, state, test = false, preview = false, cu
   const firstName = name.trim().split(/\s+/)[0]?.slice(0,40);
   return <AccountShell darkHero preview={preview} name={name} billingAvailable={state !== "pending" && !preview}>
     <div className={styles.hero}>
+    <div className={styles.welcomeCopy}>
     <header className={styles.heading}>
       <span className={styles.badge}>{paid ? <><span aria-hidden="true">✓</span> Payment confirmed</> : state === "billing" ? "Billing needs attention" : "Your purchase"}</span>
       {test && <span className={styles.test}>Sandbox · No real charge</span>}
-      <div className={styles.headingRow}><h1>{paid ? `Welcome${firstName ? `, ${firstName}` : ""}` : state === "billing" ? "Let’s check your billing." : "You’re almost there."}</h1><Link className={styles.helpLink} href="/#hear">Get help</Link></div>
+      <div className={styles.headingRow}><h1>{paid ? `Welcome${firstName ? `, ${firstName}` : ""}` : state === "billing" ? "Let’s check your billing." : "You’re almost there."}</h1></div>
       {!paid && <p>{state === "billing" ? "Review your billing to continue setting up your business." : "Complete payment to start setup. If you’ve just paid, your confirmation may take a moment."}</p>}
     </header>
     <section className={styles.setup} aria-labelledby="setup-title">
@@ -29,8 +30,9 @@ export function PurchaseWelcome({ name, state, test = false, preview = false, cu
         <p>{paid ? "Add your business details, booking hours and call preferences. We’ll guide you through the rest." : "Your selected plan is saved. Business setup opens after payment is confirmed."}</p>
         {paid ? <a className={styles.primary} href="#business-details" onClick={e=>{e.preventDefault();const section=document.getElementById("business-details");section?.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth",block:"start"});section?.focus({preventScroll:true});history.replaceState(null,"","#business-details");}}>Get started <span aria-hidden="true">↓</span></a> : <div className={styles.pendingActions}><RemoteAction url={state === "billing" ? "/api/account/billing" : "/api/account/checkout"} label={state === "billing" ? "Review billing →" : "Continue to payment →"} className={styles.primary}/><Link href="/account" className={styles.receiptLink}>Refresh payment status</Link></div>}
       </div>
-      <div className={styles.character} aria-hidden="true"><Image src="/marketing/industries/mascot-transparent.png" alt="" width={280} height={280} sizes="(max-width:600px) 140px, (max-width:850px) 200px, 300px" loading="eager"/><span/></div>
     </section>
+    </div>
+    <div className={styles.character} aria-hidden="true"><Image src="/marketing/happy-mascot-pointed.png" alt="" width={360} height={360} sizes="(max-width:600px) 180px, (max-width:850px) 240px, 360px" loading="eager"/></div>
     </div>
     {paid && <div className={styles.onboarding}><BusinessSetupForm customer={customer??null} plan={customer?.plan??"busy"} preview={preview} embedded /></div>}
   </AccountShell>;

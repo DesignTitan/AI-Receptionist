@@ -70,3 +70,19 @@
 /* Extend the existing hero paint behind the navigation without moving content. */
 .hero { position:relative; isolation:isolate; border-radius:0; background:transparent; }
 .hero::before { content:""; position:absolute; z-index:-1; top:calc(-1 * var(--welcome-top-space)); bottom:0; left:calc(50% - 50vw); width:100vw; background:linear-gradient(145deg,#1e3a34,#526b63,#a6bda9); pointer-events:none; }
+
+/* Keep the greeting and next action together, balanced by the original mascot. */
+.hero { display:grid; grid-template-columns:minmax(0,1fr) 360px; align-items:center; gap:64px; padding-top:36px; padding-bottom:64px; }
+.welcomeCopy { min-width:0; }
+.hero .heading { margin:0 0 20px; }
+.hero .heading h1 { margin:24px 0 0; font-size:clamp(42px,4.6vw,64px); }
+.hero .setup { display:block; padding:0; }
+.hero .setup h2 { font-size:clamp(25px,2.5vw,34px); margin:0 0 16px; }
+.hero .setupCopy>p { max-width:440px; color:#f0f5f1; line-height:1.65; }
+.hero .setupCopy>.primary { margin-top:28px; }
+.hero .helpLink { display:inline-flex; gap:8px; margin-top:20px; padding:0; border:0; border-radius:0; font-size:13px; }
+.hero .helpLink:hover { background:transparent; text-decoration:underline; }
+.hero .character { padding:0; border-radius:50%; overflow:hidden; background:#fff; box-shadow:0 24px 64px #153d3318; }
+.hero .character img { max-width:none; width:100%; height:auto; transform:none; }
+@media(max-width:850px){.hero{grid-template-columns:minmax(0,1fr) 240px;gap:32px}.hero .heading h1{font-size:44px}}
+@media(max-width:600px){.hero{grid-template-columns:1fr;gap:32px;padding-top:20px;padding-bottom:40px}.hero .heading h1{font-size:clamp(36px,9vw,48px)}.hero .character{width:180px;justify-self:center}.hero .setup h2{font-size:25px}.hero .heading{margin-bottom:16px}}

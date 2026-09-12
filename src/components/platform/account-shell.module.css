@@ -18,3 +18,7 @@
 .shell[data-dark-hero="true"] :global(.rc-nav__glass) { background:transparent; border-color:transparent; box-shadow:none; opacity:0; }
 @media(max-width:600px){.shell[data-dark-hero="true"]{--welcome-top-space:124px}}
 @media(min-width:851px) and (max-height:900px){.shell[data-dark-hero="true"]{--welcome-top-space:124px}}
+
+/* Match the original call label's width as well as its shared button height. */
+.navigation :global(.rc-nav__cta > span)::after { content:"Let’s talk"; display:block; height:0; overflow:hidden; visibility:hidden; }
+.navigation :global(.rc-nav__cta > span) { text-align:center; }

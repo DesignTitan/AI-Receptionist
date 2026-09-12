@@ -14,7 +14,7 @@ export function AccountShell({ children, billingAvailable = true, name = "", pre
 }) {
   return <div className={`brand-surface ${styles.shell}`} data-dark-hero={darkHero}>
     <div className={`rc marketing-shell ${styles.navigation}`}>
-      <SiteNav cta="Let’s talk" simulated turnstileSiteKey={null} showCall={false}
+      <SiteNav cta="Let’s talk" simulated turnstileSiteKey={null} showCall={false} helpHref="/#hear"
         applicationLinks={<><p>Your account</p>
             <Link href={preview ? "/account?preview=confirmation" : "/account"}>Overview</Link>
             <Link href={preview ? "/account/settings?preview=settings" : "/account/settings"}>Account settings</Link>

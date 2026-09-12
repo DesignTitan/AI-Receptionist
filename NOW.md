@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — welcome layout, original mascot and navigation help (12 September 2026)
+
+- Grouped the welcome, setup copy and primary action into a compact left column with the original pointed mascot beside it.
+- Retained the exact original image in a circular white frame; generated background removal did not produce actual transparency and was not used.
+- Moved Get help into the navigation call-button position using the shared button styling and matching label width.
+- Kept the approved full-width gradient. Typecheck and desktop/mobile layout and menu checks passed.
+
 ## Current handoff — mobile call handling (12 September 2026)
 
 - Voice audio now unlocks on the initial tap and reuses one microphone stream, with cleanup when cancelled.

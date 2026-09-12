@@ -1,11 +1,12 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { PLANS, validateConfig, type Customer, type Plan } from "@/lib/platform/model";
 import { PHONE_PROVIDERS } from "@/lib/platform/phone-provider";
 import { PhoneProviderFields } from "./phone-provider-fields";
 import { AccountShell } from "./account-shell";
 import styles from "./business-setup-form.module.css";
+const sections=["business-details","hours-team","review-setup"];
 const weekdays=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const zones=["America/New_York","America/Detroit","America/Chicago","America/Denver","America/Los_Angeles","America/Phoenix","America/Anchorage","Pacific/Honolulu"];
 const clock=(value:string)=>{if(!value)return "—";const [h,m]=value.split(":").map(Number);return `${h%12||12}:${String(m).padStart(2,"0")} ${h<12?"AM":"PM"}`;};
@@ -16,21 +17,31 @@ export function BusinessSetupForm({customer,plan,preview=false,initialStep=1}:{c
  const [days,setDays]=useState(c?.days??[1,2,3,4,5]),[opens,setOpens]=useState(c?.opens??"09:00"),[closes,setCloses]=useState(c?.closes??"17:00"),[timezone,setTimezone]=useState(c?.timezone??"America/New_York");
  const [busy,setBusy]=useState(false),[error,setError]=useState(""),[saved,setSaved]=useState(false);
  const [details,setDetails]=useState<Record<string,string>>(preview?{business_name:"Willow Studio",trade:"salon",address:"123 Example Street, Detroit, MI",phone:"(313) 555-0142",areaCode:"313",color:"#1e3a34",phoneProvider:"unknown",phoneServiceType:"unknown",phoneServiceName:"",bookingSystem:"Paper calendar"}:{});
- const form=useRef<HTMLFormElement>(null),title=useRef<HTMLHeadingElement>(null);
- const move=(n:number)=>{setError("");setStep(n);window.scrollTo({top:0,behavior:"instant"});requestAnimationFrame(()=>title.current?.focus());};
+ const form=useRef<HTMLFormElement>(null),navigation=useRef<HTMLElement>(null);
  const readDetails=()=>Object.fromEntries(Array.from(new FormData(form.current!).entries()).map(([k,v])=>[k,String(v)]));
+ const move=(n:number)=>{setStep(n);const section=document.getElementById(sections[n-1]);section?.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth",block:"start"});section?.focus({preventScroll:true});history.replaceState(null,"",`#${sections[n-1]}`);};
+ useEffect(()=>{
+  setDetails(readDetails());
+  const update=()=>{const edge=(navigation.current?.getBoundingClientRect().bottom??160)+40;let active=1;sections.forEach((id,i)=>{if((document.getElementById(id)?.getBoundingClientRect().top??Infinity)<=edge)active=i+1;});setStep(active);};
+  const frame=requestAnimationFrame(()=>{const hash=sections.indexOf(location.hash.slice(1));if(hash>=0||initialStep>1)move(hash>=0?hash+1:initialStep);else update();});
+  window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);
+  return()=>{cancelAnimationFrame(frame);window.removeEventListener("scroll",update);window.removeEventListener("resize",update);};
+ },[initialStep]);
  const config=(d:Record<string,string>)=>({trade:d.trade,address:d.address,phone:d.phone,areaCode:d.areaCode,color:d.color,days,opens,closes,timezone,team,phoneSetup:{provider:d.phoneProvider,serviceType:d.phoneServiceType,serviceName:d.phoneServiceName,bookingSystem:d.bookingSystem}});
- const validateVisible=()=>{const inputs=form.current?.querySelectorAll<HTMLInputElement|HTMLSelectElement>(`[data-step="${step}"] input,[data-step="${step}"] select`)??[];for(const input of inputs){if(!input.reportValidity())return false;}return true;};
- async function submit(e:React.FormEvent){e.preventDefault();if(busy)return;if(!validateVisible())return;const d=readDetails();setDetails(d);if(step===1){move(2);return;}try{validateConfig(config(d));if(team.length>PLANS[chosen].teamLimit)throw Error(`Your plan supports up to ${PLANS[chosen].teamLimit} people.`);if(step===2){move(3);return;}setBusy(true);setError("");if(preview){setSaved(true);return;}const r=await fetch("/api/account/business",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({business_name:d.business_name,config:config(d)})});const data=await r.json();if(!r.ok)throw Error(data.error??"We couldn’t save your setup.");location.assign("/account");}catch(e){setError(e instanceof Error?e.message:"Please check your details.");}finally{setBusy(false);}}
+ async function submit(e:React.FormEvent){e.preventDefault();if(busy)return;setError("");setSaved(false);
+  const inputs=form.current?.querySelectorAll<HTMLInputElement|HTMLSelectElement>("input,select")??[];
+  for(const input of inputs){if(!input.checkValidity()){move(Number(input.closest("[data-step]")?.getAttribute("data-step")??1));input.focus({preventScroll:true});input.reportValidity();return;}}
+  const d=readDetails();setDetails(d);
+  try{validateConfig(config(d));if(team.length>PLANS[chosen].teamLimit)throw Error(`Your plan supports up to ${PLANS[chosen].teamLimit} people.`);setBusy(true);if(preview){setSaved(true);return;}const r=await fetch("/api/account/business",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({business_name:d.business_name,config:config(d)})});const data=await r.json();if(!r.ok)throw Error(data.error??"We couldn’t save your setup.");location.assign("/account");}catch(e){setError(e instanceof Error?e.message:"Please check your details.");}finally{setBusy(false);}}
  const firstName=customer?.config.contactName?.trim().split(/\s+/)[0]??(preview?"Bubs":"");
- if(saved)return <AccountShell name={firstName} preview={preview} billingAvailable={!preview}><div className={styles.success}><img src="/marketing/happy-mascot-pointed.png" alt="" width="140" height="140"/><h1>Ready for setup.</h1><p>This is a local preview. Your example details have not been submitted.</p><button onClick={()=>setSaved(false)} className={styles.primary}>Back to review</button></div></AccountShell>;
  return <AccountShell name={firstName} preview={preview} billingAvailable={!preview}>
-  <nav aria-label="Setup progress"><ol className={styles.progress}>{["Business details","Hours & team","Review & setup"].map((label,i)=><li key={label} aria-current={step===i+1?"step":undefined}><button type="button" disabled={busy||i+1>step} onClick={()=>move(i+1)}><span>{step>i+1?"✓":i+1}</span>{label}</button></li>)}</ol></nav>
-  <header className={styles.heading}><h1 ref={title} tabIndex={-1}>{step===1?"Let’s meet your business.":step===2?"Make room for your customers.":`Looking good${firstName?`, ${firstName}`:""}.`}</h1><p>{step===1?"A few details to make your front desk feel like you.":step===2?"Set your opening hours and the people customers can book.":"Check the details below. We’ll take it from here."}</p></header>
-  <form ref={form} onSubmit={submit} noValidate className={styles.form}>
-   <div hidden={step!==1} data-step="1" className={styles.first}>
+  <header className={styles.heading}><h1>Set up your business</h1><p>Fill in your details, set your hours and review everything below.</p></header>
+  <nav ref={navigation} className={styles.sectionNav} aria-label="Setup sections"><ol className={styles.progress}>{["Business details","Hours & team","Review & setup"].map((label,i)=><li key={label}><a href={`#${sections[i]}`} aria-current={step===i+1?"location":undefined} onClick={e=>{e.preventDefault();move(i+1);}}><span>{i+1}</span>{label}</a></li>)}</ol></nav>
+  <form ref={form} onChange={()=>{setDetails(readDetails());setSaved(false);setError("");}} onSubmit={submit} noValidate className={styles.form}>
+   <section id="business-details" tabIndex={-1} aria-labelledby="business-title" data-step="1" className={`${styles.section} ${styles.first}`}>
+    <h2 id="business-title" className={styles.sectionTitle}>Business details</h2>
       <fieldset>
-        <legend>01 — Meet your business</legend>
+        <legend>Your business</legend>
         <div className="platform-fields">
           <label>
             Business name
@@ -88,8 +99,9 @@ export function BusinessSetupForm({customer,plan,preview=false,initialStep=1}:{c
         </p>
       </fieldset>
       <PhoneProviderFields initial={c?.phoneSetup??(preview?{provider:"unknown",serviceType:"unknown",serviceName:"",bookingSystem:"Paper calendar"}:undefined)} />
-   </div>
-   <div hidden={step!==2} data-step="2">
+   <div className={styles.actions}><button type="button" className={styles.secondary} onClick={()=>move(2)}>Next: Hours & team ↓</button></div>
+   </section>
+   <section id="hours-team" tabIndex={-1} aria-labelledby="hours-title" data-step="2" className={styles.section}><h2 id="hours-title" className={styles.sectionTitle}>Hours & team</h2>
     <div className={styles.columns}>
      <div className={styles.stack}>
       <section className={styles.card}><div className={styles.cardHeader}><div><h2>When you’re open</h2><p>One schedule for your whole team.</p></div><label className={styles.zone}>Time zone<select aria-label="Time zone" value={timezone} onChange={e=>setTimezone(e.target.value)}>{Array.from(new Set([...zones,timezone])).map(z=><option key={z} value={z}>{z.replace("America/","").replaceAll("_"," ")}</option>)}</select></label></div>
@@ -102,17 +114,20 @@ export function BusinessSetupForm({customer,plan,preview=false,initialStep=1}:{c
      </div>
      <aside className={`${styles.card} ${styles.week}`}><h2>Your week, at a glance</h2><p>Here’s when customers can book.</p><div className={styles.weekBars}>{[1,2,3,4,5,6,0].map(d=><div key={d}><span>{weekdays[d].slice(0,3)}</span><div data-open={days.includes(d)}>{days.includes(d)?<>{clock(opens)}<br/>–<br/>{clock(closes)}</>:"Closed"}</div></div>)}</div><div className={styles.booking}><p>Booking preview</p><div><span className={styles.avatar} aria-hidden="true">◷</span><div><strong>{team[0]?.service||"Your service"} · {team[0]?.minutes} min</strong><p>with {team[0]?.name||"your team member"}</p></div></div></div><p className={styles.note}>Booking rules and availability still apply.</p></aside>
     </div>
-   </div>
-   <div hidden={step!==3} data-step="3"><div className={styles.columns}>
+   <div className={styles.actions}><button type="button" className={styles.secondary} onClick={()=>move(3)}>Next: Review & setup ↓</button></div>
+   </section>
+   <section id="review-setup" tabIndex={-1} aria-labelledby="review-title" data-step="3" className={styles.section}><h2 id="review-title" className={styles.sectionTitle}>Review & setup</h2><div className={styles.columns}>
     <div className={styles.stack}>
      <section className={styles.card}><div className={styles.cardHeader}><h2>Your business</h2><button type="button" className={styles.edit} onClick={()=>move(1)}>Edit business</button></div><h3>{details.business_name}</h3><p>{details.trade==='salon'?"Salon, spa or wellness":details.trade==='studio'?"Creative studio":"Appointment business"}</p><p>{details.address}</p><p>Business phone: {details.phone}</p></section>
      <section className={styles.card}><div className={styles.cardHeader}><h2>Hours & team</h2><button type="button" className={styles.edit} onClick={()=>move(2)}>Edit hours & team</button></div><p>{[1,2,3,4,5,6,0].filter(d=>days.includes(d)).map(d=>weekdays[d].slice(0,3)).join(", ")} · {clock(opens)}–{clock(closes)}</p><p>{timezone.replaceAll("_"," ")}</p><div className={styles.summaryTeam}>{team.map(m=><div key={m.id}><span className={styles.avatar}>{m.name.trim().split(/\s+/).map(n=>n[0]).slice(0,2).join("")}</span><strong>{m.name}</strong><span>{m.service} · {m.minutes} min</span></div>)}</div></section>
      <section className={styles.card}><div className={styles.cardHeader}><h2>Phone & appointment book</h2><button className={styles.edit} type="button" onClick={()=>move(1)}>Edit phone details</button></div><dl className={styles.summary}><dt>Phone provider</dt><dd>{PHONE_PROVIDERS[details.phoneProvider as keyof typeof PHONE_PROVIDERS]??"Not sure yet"}</dd><dt>Current booking</dt><dd>{details.bookingSystem||"Not specified"}</dd><dt>Preferred area code</dt><dd>{details.areaCode}</dd></dl><p className={styles.note}>We’ll confirm connection options with you.</p></section>
     </div>
     <aside className={`${styles.card} ${styles.next}`}><img src="/marketing/happy-mascot-pointed.png" alt="" width="96" height="96"/><h2>What happens next</h2><p>Here’s what we’ll do after you send this.</p><ol>{[["We prepare your front desk","Your booking page and phone setup."],["We test it together","We’ll contact you to arrange a test."],["You’re ready to welcome bookings","We’ll email you when it’s live."]].map(([h,p],i)=><li key={h}><span>{i+1}</span><div><h3>{h}</h3><p>{p}</p></div></li>)}</ol><p className={styles.callout}>Need to change something? You can edit before sending.</p></aside>
-   </div></div>
+   </div>
    {error&&<p role="alert" className={styles.error}>{error}</p>}
-   <div className={styles.actions}>{step===1?<Link href={preview?"/account?preview=confirmation":"/account"} className={styles.secondary}>← Back</Link>:<button type="button" className={styles.secondary} disabled={busy} onClick={()=>move(step-1)}>← Back</button>}<div><button className={styles.primary} disabled={busy}>{busy?"Sending…":step===1?"Hours & team →":step===2?"Review my setup →":"Send for setup →"}</button>{step===3&&<p>Your service is not live until setup and testing are complete.</p>}</div></div>
+   {saved&&<p role="status" className={styles.callout}>Your example setup is ready. This local preview has not submitted any account data.</p>}
+   <div className={styles.actions}><Link href={preview?"/account?preview=confirmation":"/account"} className={styles.secondary}>Back to overview</Link><div><button className={styles.primary} disabled={busy}>{busy?"Sending…":"Send for setup →"}</button><p>Your service is not live until setup and testing are complete.</p></div></div>
+   </section>
   </form>
  </AccountShell>;
 }

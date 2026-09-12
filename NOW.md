@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — continuous anchored setup
+
+- Replaced separate setup screens with one continuous form and sticky section links for Business details, Hours & team and Review & setup.
+- Section links and Next/Edit buttons scroll with header clearance; the active section follows scrolling, with reduced-motion support.
+- Review updates as fields change; final submission validates all sections and focuses missing fields. Existing account submission and preview safeguards remain.
+- TypeScript and browser checks passed for anchors, live review, validation focus, preview submission and mobile overflow. Changes available locally; no deployment attempted.
+- Public GitHub push and Vercel publication remain subject to the previously recorded approval restrictions.
+
+
 ## Current handoff — built setup steps 2 and 3
 
 - Built Hours & Team with selectable days, hours, time zone, editable team members and a live weekly preview using the application fonts and spacing.

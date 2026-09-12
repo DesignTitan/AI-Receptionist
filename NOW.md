@@ -1,5 +1,15 @@
 # NOW
 
+## Current handoff — production published
+
+- User explicitly authorized production publishing; Vercel deployment succeeded for commit 579bff3.
+- Production URL: https://ai-receptionist-two-azure.vercel.app (deployment 4kPeZsXdijqKtUwxAd2UmmLHKfRf).
+- Production build and all 74 automated tests passed; internal tools excluded.
+- Live routes respond through the existing site password gate; local credentials unavailable for authenticated smoke testing.
+- Application commits synced to GitHub; two unrelated research documents remain untracked and were excluded from deployment.
+- Next: user testing through the normal sign-in/account flow; preview-only screens remain local.
+
+
 ## Current handoff — roadmap phase sidebar
 
 - Replaced roadmap cards with phases on the left and the selected checklist on the right.

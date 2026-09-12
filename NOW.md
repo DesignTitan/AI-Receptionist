@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — Page Index is the page directory
+
+- Removed the Pages dropdown, its search panel and keyboard shortcut from the Internal tools bar.
+- Kept the Page Index link and workspace shortcuts in the burnt amber navigation.
+- Verified that every catalogue entry appears in the Page Index.
+- Next: continue internal workspace review; earlier publishing restriction remains.
+
+
 ## Current handoff — burnt amber internal navigation
 
 - Changed the Internal tools bar from burgundy to burnt amber (#85451F).

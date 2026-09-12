@@ -280,11 +280,20 @@ function renderRoadmap() {
   const summaryText=element("strong");
   const overall=element("progress");overall.max=phases.flatMap(p=>p[2]).length;overall.setAttribute("aria-label","Overall marketing progress");
   summary.append(element("span","eyebrow","Marketing website"),summaryText,overall);
-  const board=element("div","phase-grid");
+  const board=element("div","roadmap-layout");
+  const rail=element("div","phase-rail");rail.setAttribute("role","tablist");rail.setAttribute("aria-label","Roadmap phases");rail.setAttribute("aria-orientation","vertical");
+  const panels=element("div","phase-panels");board.append(rail,panels);
+  const tabs=[];const phasePanels=[];
+  const selectPhase=(selected,focus=false)=>{tabs.forEach((tab,i)=>{tab.setAttribute("aria-selected",String(i===selected));tab.tabIndex=i===selected?0:-1;phasePanels[i].hidden=i!==selected;});if(focus)tabs[selected].focus();};
   const updates=[];
   const update=()=>{const count=phases.flatMap(p=>p[2]).filter(t=>done.has(t[0])).length;summaryText.textContent=`${count} of ${overall.max} tasks complete`;overall.value=count;updates.forEach(fn=>fn());};
   phases.forEach(([title,description,tasks],index)=>{
-    const section=element("section","phase-card");
+    const tab=element("button","phase-tab");tab.type="button";tab.id=`phase-tab-${index}`;tab.setAttribute("role","tab");tab.setAttribute("aria-controls",`phase-panel-${index}`);
+    const tabCount=element("small");tab.append(element("span","phase-number",String(index+1).padStart(2,"0")),element("strong","",title),tabCount);rail.append(tab);tabs.push(tab);
+    tab.addEventListener("click",()=>selectPhase(index));
+    tab.addEventListener("keydown",event=>{let next=index;if(event.key==="ArrowDown")next=(index+1)%phases.length;else if(event.key==="ArrowUp")next=(index+phases.length-1)%phases.length;else if(event.key==="Home")next=0;else if(event.key==="End")next=phases.length-1;else return;event.preventDefault();selectPhase(next,true);});
+    const section=element("section","phase-card");section.id=`phase-panel-${index}`;section.setAttribute("role","tabpanel");section.setAttribute("aria-labelledby",tab.id);section.tabIndex=0;phasePanels.push(section);
+    updates.push(()=>{tabCount.textContent=`${tasks.filter(t=>done.has(t[0])).length} / ${tasks.length}`;});
     const heading=element("header","phase-heading");
     const count=element("span","phase-count");
     heading.append(element("p","eyebrow",`Phase ${String(index+1).padStart(2,"0")}`),element("h2","",title),element("p","",description),count);
@@ -297,7 +306,7 @@ function renderRoadmap() {
       if(href){const link=element("a","task-review","Review ↗");link.href=href;link.setAttribute("aria-label",`Review: ${title}`);row.append(link);}
       input.addEventListener("change",()=>{const next=new Set(done);input.checked?next.add(id):next.delete(id);try{localStorage.setItem(key,JSON.stringify([...next]));done=next;update();completionStatus.textContent=`${title} marked ${input.checked?"complete":"incomplete"}. Saved in this browser.`;}catch{input.checked=done.has(id);completionStatus.textContent="Could not save your change. Enable browser storage and try again.";}});
       section.append(row);
-    });board.append(section);
+    });panels.append(section);
   });
-  directory.replaceChildren(summary,board);update();
+  directory.replaceChildren(summary,board);update();selectPhase(0);
 }

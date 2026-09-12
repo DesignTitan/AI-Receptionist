@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — roadmap phase sidebar
+
+- Replaced roadmap cards with phases on the left and the selected checklist on the right.
+- Kept existing saved checkbox progress and per-phase counts.
+- Verified phase selection, keyboard navigation, saved progress and mobile width.
+- Next: continue visual review. Prior publishing restriction remains.
+
+
 ## Current handoff — simplified hamburger menu
 
 - Removed Home from the shared marketing hamburger menu.

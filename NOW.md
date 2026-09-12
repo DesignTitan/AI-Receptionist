@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — sliding login/signup panels (12 September 2026)
+
+- Login’s Sign up control now slides the photograph left and crossfades to the client-service image, revealing signup on the right. Log in reverses the transition without leaving the page.
+- Preserves entered name/email and selected plan while switching; visitors coming from login choose a plan before signup. Existing plan-led signup remains supported.
+- Verified both slide directions, signup email navigation, 320–1440px layouts and reduced-motion behavior; TypeScript passed. Refreshed the signup thumbnail.
+- Provider activation requirements remain unchanged; the animation and screen transition are complete.
+
 ## Current handoff — separate login and signup (12 September 2026)
 
 - Added a dedicated `/account/signup` screen matching the login split layout, with name, email, selected plan and an existing-account login link.

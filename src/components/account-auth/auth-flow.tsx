@@ -63,7 +63,7 @@ const sample: State = {
   destination: "/account",
 };
 export function AuthFlow({
-  signup,
+  signup: initialSignup,
   initial = "signin",
   siteKey = "",
   passkeysEnabled = false,
@@ -75,6 +75,13 @@ export function AuthFlow({
   passkeysEnabled?: boolean;
   preview?: boolean;
 }) {
+  const [signupMode, setSignupMode] = useState(!!initialSignup);
+  const [selectedPlan, setSelectedPlan] = useState<Plan | "">(initialSignup?.plan ?? "");
+  const signup = signupMode ? { plan: selectedPlan, returnTo: initialSignup?.returnTo ?? "/#terms" } : undefined;
+  function switchAccess() {
+    setSignupMode((value) => !value);
+    setError(""); setMessage(""); setToken(""); setReset((value) => value + 1);
+  }
   const [screen, setScreen] = useState<Screen>(initial),
     [state, setState] = useState<State | null>(preview ? sample : null),
     [email, setEmail] = useState(""),
@@ -105,7 +112,7 @@ export function AuthFlow({
   }
   useEffect(() => {
     heading.current?.focus();
-  }, [screen]);
+  }, [screen, signupMode]);
   useEffect(() => {
     if (!cooldown) return;
     const t = setTimeout(() => setCooldown((c) => c - 1), 1000);
@@ -226,6 +233,7 @@ export function AuthFlow({
   async function emailLink(e: React.FormEvent) {
     e.preventDefault();
     await run(async () => {
+      if (signup && !signup.plan) throw Error("Choose your plan to continue.");
       if (preview) {
         go("email");
         return;
@@ -285,6 +293,7 @@ export function AuthFlow({
   );
   const emailForm = (
     <form onSubmit={emailLink}>
+      {signup && !initialSignup && <label>Your plan<select required value={selectedPlan} onChange={(e) => setSelectedPlan(e.target.value as Plan | "")}><option value="" disabled>Choose a plan</option>{(Object.keys(PLANS) as Plan[]).map((plan) => <option key={plan} value={plan}>{PLANS[plan].name} · ${PLANS[plan].monthly}/month</option>)}</select></label>}
       {signup && <label>Your name<input required autoComplete="name" maxLength={120} pattern=".*\S.*" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" /></label>}
       <label>
         Email address
@@ -304,7 +313,7 @@ export function AuthFlow({
       )}
       <button
         className={styles.primary}
-        disabled={busy || cooldown > 0 || (!preview && (!siteKey || !token))}
+        disabled={busy || cooldown > 0 || (signupMode && !selectedPlan) || (!preview && (!siteKey || !token))}
       >
         {busy
           ? "Sending…"
@@ -386,7 +395,7 @@ export function AuthFlow({
                   ? "Request a fresh link and open it in this browser."
                   : signup ? "A little more time for you starts here. Verify your email, secure your account, then review your plan." : "Your front desk is ready when you are."}
               </p>
-              {signup && <p className={styles.note}>Your plan: <strong>{PLANS[signup.plan].name}</strong> · <Link href={signup.returnTo}>Change plan</Link></p>}
+              {signup && initialSignup && signup.plan && <p className={styles.note}>Your plan: <strong>{PLANS[signup.plan].name}</strong> · <Link href={signup.returnTo}>Change plan</Link></p>}
               {!signup && (passkeysEnabled || preview) &&
                 button("Continue with a passkey", () => passkey())}
               {!signup && (passkeysEnabled || preview) && (
@@ -399,9 +408,9 @@ export function AuthFlow({
               <div className={styles.divider} />
               <p className={styles.fine}>
                 {signup ? "Already have an account? " : "Need an account? "}
-                <Link className={styles.textButton} href={signup ? "/account/login" : "/#terms"}>
-                  {signup ? "Log in" : "Choose a plan to sign up"}
-                </Link>
+                <button type="button" className={styles.textButton} disabled={busy} onClick={switchAccess}>
+                  {signup ? "Log in" : "Sign up"}
+                </button>
               </p>
             </>
           )}

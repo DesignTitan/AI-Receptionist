@@ -23,6 +23,7 @@ export type BusinessConfig = {
   contactName?: string;
   phoneSetup?: PhoneSetup;
   trade: "salon" | "studio" | "other";
+  customTrade?: string;
   timezone: string;
   weeklyHours?: DayHours[];
   days: number[];
@@ -157,6 +158,7 @@ export function validateConfig(input: unknown): BusinessConfig {
   return {
     answeringPreference: c.answeringPreference && Object.hasOwn(ANSWERING_PREFERENCES,c.answeringPreference) ? c.answeringPreference : "undecided",
     trade: c.trade,
+    ...(c.trade === "other" && c.customTrade !== undefined ? { customTrade: text(c.customTrade, "business type", 120) } : {}),
     ...(c.phoneSetup ? { phoneSetup: validatePhoneSetup(c.phoneSetup) } : {}),
     timezone,
     ...(c.weeklyHours ? {weeklyHours:validateWeeklyHours(c.weeklyHours)} : {}),

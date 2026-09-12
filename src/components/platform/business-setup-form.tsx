@@ -35,11 +35,15 @@ function SetupFields({customer,preview=false,initialStep=1,embedded=false,draft}
  const [details,setDetails]=useState<Record<string,string>>(draft?.details??(preview?{business_name:"Willow Studio",trade:"salon",address:"123 Example Street, Detroit, MI",phone:"(313) 555-0142",areaCode:"313",color:"#1e3a34",phoneProvider:"unknown",phoneServiceType:"unknown",phoneServiceName:"",bookingSystem:"Paper calendar"}:{}));
  const autosave=useSetupAutosave({details,weeklyHours,days,opens,closes,timezone,team},preview,!busy&&(preview||!!customer?.config.setupPending));
  useEffect(()=>{setSaved(false);},[weeklyHours,timezone,team]);
+ const areaCodeChosen=useRef(Boolean(draft?.details.areaCode||c?.areaCode));
  const [docked,setDocked]=useState(false);
  const form=useRef<HTMLFormElement>(null),navigation=useRef<HTMLElement>(null);
  const readDetails=()=>Object.fromEntries(Array.from(new FormData(form.current!).entries()).map(([k,v])=>[k,String(v)]));
  const move=(n:number)=>{setStep(n);const section=document.getElementById(sections[n-1]);section?.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth",block:"start"});section?.focus({preventScroll:true});history.replaceState(null,"",`#${sections[n-1]}`);};
  useEffect(()=>{
+  const area=form.current?.elements.namedItem("areaCode") as HTMLInputElement|null;
+  const initialPhone=(readDetails().phone??"").replace(/\D/g,"").replace(/^1(?=\d{10}$)/,"");
+  if(area&&!area.value&&/^[2-9]\d{9}$/.test(initialPhone))area.value=initialPhone.slice(0,3);
   setDetails(readDetails());
   const update=()=>{const nav=navigation.current;if(nav){const top=parseFloat(getComputedStyle(nav).top)||0;setDocked(nav.getBoundingClientRect().top<=top+16);}const edge=(navigation.current?.getBoundingClientRect().bottom??160)+40;let active=1;sections.forEach((id,i)=>{if((document.getElementById(id)?.getBoundingClientRect().top??Infinity)<=edge)active=i+1;});setStep(active);};
   const frame=requestAnimationFrame(()=>{const hash=sections.indexOf(location.hash.slice(1));if(hash>=0||initialStep>1)move(hash>=0?hash+1:initialStep);else update();});
@@ -47,7 +51,7 @@ function SetupFields({customer,preview=false,initialStep=1,embedded=false,draft}
   window.addEventListener("scroll",schedule,{passive:true});window.addEventListener("resize",schedule);
   return()=>{cancelAnimationFrame(frame);cancelAnimationFrame(pending);window.removeEventListener("scroll",schedule);window.removeEventListener("resize",schedule);};
  },[initialStep]);
- const config=(d:Record<string,string>)=>({answeringPreference:d.answeringPreference,trade:d.trade,address:d.address,phone:d.phone,areaCode:d.areaCode,color:d.color,weeklyHours,days,opens,closes,timezone,team:[{id:"member-1",name:d.business_name,service:"Appointment",minutes:team[0]?.minutes??30}],phoneSetup:{provider:d.phoneProvider,serviceType:d.phoneServiceType,serviceName:d.phoneServiceName,bookingSystem:d.bookingSystem}});
+ const config=(d:Record<string,string>)=>({answeringPreference:d.answeringPreference,trade:d.trade,customTrade:d.customTrade,address:d.address,phone:d.phone,areaCode:d.areaCode,color:d.color,weeklyHours,days,opens,closes,timezone,team:[{id:"member-1",name:d.business_name,service:"Appointment",minutes:team[0]?.minutes??30}],phoneSetup:{provider:d.phoneProvider,serviceType:d.phoneServiceType,serviceName:d.phoneServiceName,bookingSystem:d.bookingSystem}});
  async function submit(e:React.FormEvent){e.preventDefault();if(busy)return;setError("");setSaved(false);
   const inputs=form.current?.querySelectorAll<HTMLInputElement|HTMLSelectElement>("input,select")??[];
   for(const input of inputs){if(!input.checkValidity()){move(Number(input.closest("[data-step]")?.getAttribute("data-step")??1));input.scrollIntoView({behavior:"instant",block:"center"});input.focus({preventScroll:true});input.reportValidity();return;}}
@@ -57,14 +61,14 @@ function SetupFields({customer,preview=false,initialStep=1,embedded=false,draft}
  const content=<>
   {!embedded&&<header className={styles.heading}><h1>Set up your business</h1><p>Fill in your details, set your hours and review everything below.</p></header>}
   <nav ref={navigation} className={styles.sectionNav} data-docked={docked} aria-label="Setup sections"><ol className={styles.progress}>{["Business details","Hours & availability","Review & setup"].map((label,i)=><li key={label}><a href={`#${sections[i]}`} aria-current={step===i+1?"location":undefined} onClick={e=>{e.preventDefault();move(i+1);}}><span>{i+1}</span>{label}</a></li>)}</ol><p className={styles.saveStatus} role="status">{autosave.status}{autosave.status.startsWith("Not saved")&&<button type="button" onClick={()=>void autosave.flush().catch(()=>{})}>Retry</button>}</p></nav>
-  <form ref={form} onChange={()=>{setDetails(readDetails());setSaved(false);setError("");}} onSubmit={submit} noValidate className={styles.form}>
+  <form ref={form} onChange={event=>{const input=event.target as unknown as HTMLInputElement;if(input.name==="areaCode")areaCodeChosen.current=Boolean(input.value);if(input.name==="phone"&&!areaCodeChosen.current){const digits=input.value.replace(/\D/g,"").replace(/^1(?=\d{10}$)/,"");const area=form.current?.elements.namedItem("areaCode") as HTMLInputElement|null;if(area&&/^[2-9]\d{9}$/.test(digits))area.value=digits.slice(0,3);}setDetails(readDetails());setSaved(false);setError("");}} onSubmit={submit} noValidate className={styles.form}>
    <section id="business-details" tabIndex={-1} aria-labelledby="business-title" data-step="1" className={`${styles.section} ${styles.first}`}>
-    <h2 id="business-title" className={styles.sectionTitle}>Business details</h2>
+    <h2 id="business-title" className={styles.sectionTitle}>Get started here.</h2>
       <fieldset>
         <legend>Your business</legend>
         <div className="platform-fields">
           <label>
-            Business name
+            Legal business name
             <input
               name="business_name"
               required
@@ -72,21 +76,24 @@ function SetupFields({customer,preview=false,initialStep=1,embedded=false,draft}
               defaultValue={draft?.details.business_name??(preview?details.business_name:customer?.config.setupPending ? "" : customer?.business_name)}
             />
           </label>
+          <div>
           <label>
             Business type
             <select name="trade" defaultValue={draft?.details.trade??c?.trade ?? "salon"}>
               <option value="salon">Salon, spa or wellness</option>
               <option value="studio">Creative studio</option>
-              <option value="other">Other appointment business</option>
+              <option value="other">Other</option>
             </select>
           </label>
+          {(details.trade??c?.trade)==="other" && <label className={styles.customTrade}>Your business type<input name="customTrade" required maxLength={120} placeholder="Enter your business type" defaultValue={draft?.details.customTrade??c?.customTrade??""}/></label>}
+          </div>
           <AddressField defaultValue={c?.address??details.address}/>
           <label>
             Business or contact phone number
             <input name="phone" type="tel" required defaultValue={c?.phone??details.phone} aria-describedby="phone-purpose"/><small id="phone-purpose">Use a number customers can reach you on, including a mobile if you don’t have a business line. It appears on your booking page.</small>
           </label>
           <label>
-            Area code for your new AI number
+            Area code for your AI receptionist
             <input
               name="areaCode"
               required
@@ -96,7 +103,7 @@ function SetupFields({customer,preview=false,initialStep=1,embedded=false,draft}
               maxLength={3}
               defaultValue={c?.areaCode??details.areaCode}
               aria-describedby="area-purpose"
-            /><small id="area-purpose">Your AI receptionist gets a dedicated number for confirmation calls. Choose its local area code; availability is confirmed during setup.</small>
+            /><small id="area-purpose">This is for your AI receptionist’s new number. We start with your business phone’s area code. You can choose another local area code; number availability is confirmed during setup.</small>
           </label>
           <input type="hidden" name="color" value={draft?.details.color??c?.color??"#234d59"}/>
         </div>
@@ -118,7 +125,7 @@ function SetupFields({customer,preview=false,initialStep=1,embedded=false,draft}
    </section>
    <section id="review-setup" tabIndex={-1} aria-labelledby="review-title" data-step="3" className={styles.section}><h2 id="review-title" className={styles.sectionTitle}>Review & setup</h2><div className={styles.columns}>
     <div className={styles.stack}>
-     <section className={styles.card}><div className={styles.cardHeader}><h2>Your business</h2><button type="button" className={styles.edit} onClick={()=>move(1)}>Edit business</button></div><h3>{details.business_name}</h3><p>{details.trade==='salon'?"Salon, spa or wellness":details.trade==='studio'?"Creative studio":"Appointment business"}</p><p>{details.address}</p><p>Business phone: {details.phone}</p></section>
+     <section className={styles.card}><div className={styles.cardHeader}><h2>Your business</h2><button type="button" className={styles.edit} onClick={()=>move(1)}>Edit business</button></div><h3>{details.business_name}</h3><p>{details.trade==='salon'?"Salon, spa or wellness":details.trade==='studio'?"Creative studio":details.customTrade||"Other"}</p><p>{details.address}</p><p>Business phone: {details.phone}</p></section>
      <section className={styles.card}><div className={styles.cardHeader}><h2>Hours & availability</h2><button type="button" className={styles.edit} onClick={()=>move(2)}>Edit hours</button></div><dl className={styles.summary}>{[1,2,3,4,5,6,0].map(day=>{const d=weeklyHours.find(h=>h.day===day)!;return <div key={day} style={{display:"contents"}}><dt>{weekdays[day]}</dt><dd>{d.enabled?d.opens==="00:00"&&d.closes==="24:00"?"All day":`${clock(d.opens)}–${d.closes==="24:00"?"Midnight":clock(d.closes)}`:"Closed"}</dd></div>})}</dl><p>{zoneLabel(timezone)}</p><p>Appointment length: {team[0]?.minutes??30} minutes · One shared schedule</p></section>
      <section className={styles.card}><div className={styles.cardHeader}><h2>Phone & appointment book</h2><button className={styles.edit} type="button" onClick={()=>move(1)}>Edit phone details</button></div><dl className={styles.summary}><dt>AI answering preference</dt><dd>{ANSWERING_PREFERENCES[(details.answeringPreference||"undecided") as AnsweringPreference]?.label}</dd><dt>Phone provider</dt><dd>{PHONE_PROVIDERS[details.phoneProvider as keyof typeof PHONE_PROVIDERS]??"Not sure yet"}</dd><dt>Current booking</dt><dd>{details.bookingSystem||"Not specified"}</dd><dt>Preferred area code</dt><dd>{details.areaCode}</dd></dl><p className={styles.note}>We’ll confirm connection options with you.</p></section>
     </div>

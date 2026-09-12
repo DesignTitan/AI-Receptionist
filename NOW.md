@@ -1,5 +1,13 @@
 # NOW
 
+## Current handoff — business setup fields and AI area code (12 September 2026)
+
+- Changed the first section heading to Get started here. and the name label to Legal business name.
+- Other business type now reveals a custom text field; customTrade is retained in drafts, review and validated business configuration.
+- Confirmed live address suggestions and manual address edits that persist after reload; clarified the hint.
+- Clarified that the area code belongs to the AI receptionist’s new number; defaults from the business phone and preserves a manual override.
+- Typecheck, 11 relevant tests and browser checks for persistence, suggestions, area-code overrides and responsive layout passed.
+
 ## Current handoff — consolidated avatar menu (12 September 2026)
 
 - Moved overview, account settings, business details, availability, billing, security, support and legal links into the avatar dropdown with Sign out.

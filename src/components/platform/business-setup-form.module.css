@@ -40,3 +40,5 @@
 .section { scroll-margin-top:calc(var(--workspace-top-offset,0px) + 84px); }
 @media(max-width:720px){.sectionNav{padding:8px 12px}.sectionNav::before{border-radius:28px}.section{scroll-margin-top:calc(var(--workspace-top-offset,0px) + 112px)}}
 @media(prefers-reduced-motion:reduce){.sectionNav::before,.sectionNav .progress a,.sectionNav .saveStatus{transition:none}}
+
+.customTrade { display:block; margin-top:12px; }

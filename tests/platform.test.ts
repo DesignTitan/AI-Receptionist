@@ -82,3 +82,11 @@ test("Stripe rejects expired, malformed and tampered callbacks but accepts signe
     true,
   );
 });
+
+test("custom business types are retained only for Other and validated", () => {
+  assert.equal(validateConfig({ ...config(), trade: "other", customTrade: "  Pet grooming  " }).customTrade, "Pet grooming");
+  assert.equal(validateConfig({ ...config(), customTrade: "Pet grooming" }).customTrade, undefined);
+  assert.throws(() => validateConfig({ ...config(), trade: "other", customTrade: " " }));
+  assert.throws(() => validateConfig({ ...config(), trade: "other", customTrade: "x".repeat(121) }));
+  assert.equal(validateConfig({ ...config(), trade: "other" }).trade, "other");
+});

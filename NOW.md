@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — consistent pricing cards and required signup (12 September 2026)
+
+- Signup modal now reuses storefront pricing-card styles, including the featured Busy desk treatment, metric rows, buttons and shared included-features section.
+- Added smooth modal/backdrop entry and exit transitions, with reduced-motion support.
+- Marked plan, name and email required; confirmed missing plans, blank/whitespace names and invalid emails cannot continue. Checked keyboard/modal behavior and mobile sizing; TypeScript passed and thumbnails refreshed.
+- This UI refinement is complete; real-provider authentication activation remains outstanding as documented below.
+
 ## Current handoff — signup plan modal and cleaner access screens (12 September 2026)
 
 - Replaced the signup plan dropdown with a CTA and accessible comparison modal, using shared plan prices, setup fees and feature lists. Existing selected plans can also be changed in the modal.

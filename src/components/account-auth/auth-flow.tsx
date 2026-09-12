@@ -235,6 +235,7 @@ export function AuthFlow({
     e.preventDefault();
     await run(async () => {
       if (signup && !signup.plan) throw Error("Choose your plan to continue.");
+      if (signup && !name.trim()) throw Error("Enter your name to continue.");
       if (preview) {
         go("email");
         return;
@@ -295,9 +296,9 @@ export function AuthFlow({
   const emailForm = (
     <form onSubmit={emailLink}>
       {signup && <PlanPicker value={selectedPlan} onChange={setSelectedPlan} />}
-      {signup && <label>Your name<input required autoComplete="name" maxLength={120} pattern=".*\S.*" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" /></label>}
+      {signup && <label>Your name <span className={styles.required}>(required)</span><input required autoComplete="name" maxLength={120} pattern=".*\S.*" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" /></label>}
       <label>
-        Email address
+        Email address <span className={styles.required}>(required)</span>
         <input
           type="email"
           required

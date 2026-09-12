@@ -525,15 +525,21 @@
 .planHeader p { margin: 0; }
 .planClose { flex-shrink: 0; width: 44px; height: 44px; border: 1px solid var(--brand-line); border-radius: 50%; background: white; font-size: 28px; cursor: pointer; }
 .planGrid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
-.planCard { display: flex; flex-direction: column; padding: 24px; border: 1px solid var(--brand-line); border-radius: 16px; background: white; }
-.planCard.selectedPlan { border-color: #265b4b; background: #eef7f1; }
-.planCard h3 { margin: 0 0 8px; font-size: 24px; }
-.planCard p { font-size: 14px; line-height: 1.5; margin: 0 0 16px; }
-.planPrice { font-size: 38px; margin: 8px 0; }
-.planPrice span { font-size: 13px; margin-left: 6px; }
-.planCard .planSetup { font-size: 12px; }
-.planCard ul { padding-left: 18px; margin: 8px 0 24px; font-size: 13px; line-height: 1.6; }
-.planCard li { margin-bottom: 8px; }
-.planCard .primary { margin-top: auto; }
+.selectedPlan { outline: 2px solid #527a6b; outline-offset: 3px; }
 .planDialog .planDisclaimer { font-size: 12px; margin: 20px 0 0; }
 @media(max-width:760px) { .planGrid { grid-template-columns: 1fr; } .planDialog { padding: 20px; } .planHeader h2 { font-size: 27px; } }
+
+/* Share storefront card styles; isolate them from the surrounding auth form. */
+.planGrid > article { display: flex; flex-direction: column; }
+.planGrid > article > p:first-of-type { min-height: 42px; }
+.planGrid > article > button { width: 100%; margin-top: auto; cursor: pointer; color: inherit; }
+.planGrid > article[data-featured="true"] > button { color: white; }
+.planDialog { opacity: 0; transform: translateY(16px) scale(.98); transition: opacity 240ms ease, transform 300ms cubic-bezier(.2,.8,.2,1), overlay 300ms allow-discrete, display 300ms allow-discrete; }
+.planDialog[open] { opacity: 1; transform: none; }
+.planDialog::backdrop { background: #102e3400; backdrop-filter: blur(0); transition: background 240ms ease, backdrop-filter 240ms ease, overlay 300ms allow-discrete, display 300ms allow-discrete; }
+.planDialog[open]::backdrop { background: #102e3466; backdrop-filter: blur(6px); }
+@starting-style { .planDialog[open] { opacity: 0; transform: translateY(16px) scale(.98); } .planDialog[open]::backdrop { background: #102e3400; backdrop-filter: blur(0); } }
+@media(prefers-reduced-motion:reduce) { .planDialog, .planDialog::backdrop { transition: none; transform: none; } }
+.required { color: var(--brand-muted); font-size: 11px; font-weight: 400; }
+.content label:has(> .required) { display: block; }
+.content label:has(> .required) > input { display: block; width: 100%; margin-top: 8px; }

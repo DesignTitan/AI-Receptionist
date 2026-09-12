@@ -60,7 +60,8 @@ test("development preview exposes only allowed files and injects the navigation"
   function get(path: string, method = "GET") {
     return getAt(preview!.port, path, method);
   }
-  for (const path of ["/design/", "/design", "/design/luxury-v2/", "/design/luxury-v2", "/design/higgsfield-v3/", "/design/higgsfield-v3", "/design/campaign-v4/", "/design/campaign-v4"]) {
+  assert.equal((await get("/design/luxury-v2/")).status, 404);
+  for (const path of ["/design/", "/design", "/design/higgsfield-v3/", "/design/higgsfield-v3", "/design/campaign-v4/", "/design/campaign-v4"]) {
     const page = await get(path);
     assert.equal(page.status, 200, path);
     assert.equal(page.headers["cache-control"], "no-store");
@@ -102,7 +103,7 @@ test("development preview exposes only allowed files and injects the navigation"
   assert.equal(data.headers["content-type"], "application/json; charset=utf-8");
   assert.equal(data.headers["cache-control"], "no-store");
   const snapshot = JSON.parse(data.body.toString());
-  assert.equal(snapshot.pages.length, 13);
+  assert.equal(snapshot.pages.length, 12);
   assert.ok(snapshot.pages.every((entry: { updatedAt: string | null; workingCopy: boolean }) => entry.updatedAt === null && !entry.workingCopy));
   assert.ok(Number.isFinite(Date.parse(snapshot.generatedAt)));
   assert.equal(snapshot.pages.find((entry: { id: string }) => entry.id === "salon-home").href, "/");
@@ -145,7 +146,7 @@ test("development preview exposes only allowed files and injects the navigation"
 
 test("page catalogue contains canonical routes for ordinary and tenant previews", () => {
   const pages = getPages();
-  assert.equal(pages.length, 22);
+  assert.equal(pages.length, 25);
   assert.equal(new Set(pages.map((entry) => entry.id)).size, pages.length);
   assert.equal(new Set(pages.map((entry) => entry.href)).size, pages.length);
   assert.deepEqual([...new Set(pages.map((entry) => entry.group))], [
@@ -159,21 +160,16 @@ test("page catalogue contains canonical routes for ordinary and tenant previews"
   assert.equal(journey?.kind, "internal");
   assert.equal(journey?.access, "development");
   assert.deepEqual(journey?.sources, ["dev/journey.html", "dev/journey.js"]);
-  const marketingV2 = pages.find((entry) => entry.id === "study-luxury");
-  assert.equal(marketingV2?.label, "Marketing site · V2");
-  assert.equal(marketingV2?.group, "Marketing");
-  assert.equal(marketingV2?.kind, "study");
-  assert.equal(marketingV2?.access, "development");
-  assert.equal(marketingV2?.href, "/__dev/design/luxury-v2/");
-  assert.equal(pages.filter((entry) => entry.kind === "study").length, 4);
+  assert.ok(!pages.some((entry) => entry.id === "study-luxury"));
+  assert.equal(pages.filter((entry) => entry.kind === "study").length, 3);
   assert.deepEqual(getPages({ tenant: "unknown" }), pages);
-  assert.equal(getPages({ siteGate: "  LOCKED " }).length, 23);
+  assert.equal(getPages({ siteGate: "  LOCKED " }).length, 26);
   for (const tenant of ["medical", "salon", "studio"]) {
     const preview = getPages({ tenant });
-    assert.equal(preview.length, 12);
+    assert.equal(preview.length, 11);
     assert.equal(preview.find((entry) => entry.id === `${tenant}-home`)?.href, "/");
     assert.match(preview.find((entry) => entry.id === `${tenant}-booking`)!.href, /^\/book\/[^/]+$/);
-    assert.deepEqual(preview.find((entry) => entry.id === "study-luxury"), marketingV2);
+    assert.ok(!preview.some((entry) => entry.id === "study-luxury"));
     assert.ok(!preview.some((entry) => entry.kind === "app" && ["Marketing", "Customer"].includes(entry.group)));
     assert.ok(!preview.some((entry) => ["marketing", "demos", "start", "account", "owner-login"].includes(entry.id)));
     assert.ok(!preview.some((entry) => entry.href.startsWith("/demo/")));

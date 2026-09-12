@@ -17,7 +17,7 @@ come from Git history and uncommitted file edits, and refresh on page reload.
 They describe the listed source files, not a deployment or a health check.
 
 The design studies are served from `design/hero-comparison` without editing
-them. The current comparison is `/__dev/design/luxury-v2`; the original site is
+them. The marketing homepage is
 still `/`. The same toolbar appears on both. In single-tenant mode the business
 and booking links use that tenant's routes.
 

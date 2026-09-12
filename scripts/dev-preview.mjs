@@ -164,6 +164,7 @@ export async function startDevPreview({ repoRoot, tenant = "", siteGate = "publi
     try {
       // Inspect before URL normalization so encoded and plain traversal are denied.
       let path = decodeURIComponent((request.url ?? "").split(/[?#]/, 1)[0]);
+      if (["/design/luxury-v2", "/design/luxury-v2/", "/design/luxury-v2/index.html"].includes(path)) return send(404, "Not found");
       const parts = path.split("/").filter(Boolean);
       if (!path.startsWith("/") || path.startsWith("//") || /[\\\0]/.test(path)
         || parts.some((p) => p.startsWith(".") || (p.toLowerCase() === "docs" && !STUDY_NOTES.has(path))))

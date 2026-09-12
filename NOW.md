@@ -1,5 +1,14 @@
 # NOW
 
+## Current handoff — Page Index refresh
+
+- Added workspace shortcuts and a compact checklist view sharing page completion status.
+- Added real screenshots for welcome/setup, hours and review cards; refreshed their labels and anchors.
+- Deleted the Marketing V2 page, removed its catalogue entry and replaced campaign links with the homepage. Shared imagery is retained.
+- Preview tests: all four passed; toolbar height and menu search/Escape checked in Chrome.
+- Changes stay local; earlier automatic approval review blocked publishing.
+
+
 ## Current handoff — thinner internal toolbar
 
 - Reduced the toolbar from 56px to 40px, renamed the badge Internal tools and removed the path field/Go action.

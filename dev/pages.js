@@ -1,3 +1,7 @@
+const checklistView=new URLSearchParams(location.search).get("view")==="checklist";
+document.body.classList.toggle("checklist",checklistView);
+document.querySelector(`[data-tool="${checklistView?"checklist":"pages"}"]`)?.setAttribute("aria-current","page");
+if(checklistView){document.querySelector("h1").textContent="Page checklist";document.querySelector(".lede").textContent="Track completion across the project. These checkboxes share the same saved status as the Page Index.";}
 const directory = document.querySelector("#directory");
 const search = document.querySelector(".search");
 const resultCount = document.querySelector("#results-count");
@@ -14,7 +18,7 @@ try {
 const completionStatus = document.querySelector("#completion-status");
 const sections = [
   { key: "application", title: "Application", eyebrow: "Customer & staff workspace", description: "Accounts, bookings, business demos and staff tools. Sign-in still applies.", grouped: true },
-  { key: "marketing", title: "Marketing Site", eyebrow: "The public-facing product", description: "The original site, V2 marketing preview, product pricing and demo directory." },
+  { key: "marketing", title: "Marketing Site", eyebrow: "The public-facing product", description: "The marketing homepage, product pricing, demo directory and marketing assets." },
   { key: "study", title: "Design Studies", eyebrow: "Drafts & experiments", description: "Visual directions and imagery to review alongside the original site." },
   { key: "internal", title: "Internal Tools", eyebrow: "Workspace utilities", description: "The page index, user journey and access tools. Each page shows its access requirements." },
 ];

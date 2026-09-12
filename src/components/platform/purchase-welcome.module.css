@@ -82,7 +82,8 @@
 .hero .setupCopy>.primary { margin-top:28px; }
 .hero .helpLink { display:inline-flex; gap:8px; margin-top:20px; padding:0; border:0; border-radius:0; font-size:13px; }
 .hero .helpLink:hover { background:transparent; text-decoration:underline; }
-.hero .character { padding:0; border-radius:50%; overflow:hidden; background:#fff; box-shadow:0 24px 64px #153d3318; }
-.hero .character img { max-width:none; width:100%; height:auto; transform:none; }
+.hero .character { position:relative; padding:0; overflow:visible; background:transparent; }
+.hero .character img { max-width:none; width:100%; height:auto; transform:translateY(-12px); mask:url("/marketing/happy-mascot-silhouette.svg") center / contain no-repeat; }
+.hero .character>span { position:absolute; bottom:0; width:44%; height:16px; margin:0; border-radius:50%; background:#102d24; filter:blur(9px); opacity:.42; }
 @media(max-width:850px){.hero{grid-template-columns:minmax(0,1fr) 240px;gap:32px}.hero .heading h1{font-size:44px}}
 @media(max-width:600px){.hero{grid-template-columns:1fr;gap:32px;padding-top:20px;padding-bottom:40px}.hero .heading h1{font-size:clamp(36px,9vw,48px)}.hero .character{width:180px;justify-self:center}.hero .setup h2{font-size:25px}.hero .heading{margin-bottom:16px}}

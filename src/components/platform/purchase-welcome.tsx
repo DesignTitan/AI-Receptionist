@@ -32,7 +32,7 @@ export function PurchaseWelcome({ name, state, test = false, preview = false, cu
       </div>
     </section>
     </div>
-    <div className={styles.character} aria-hidden="true"><Image src="/marketing/happy-mascot-pointed.png" alt="" width={360} height={360} sizes="(max-width:600px) 180px, (max-width:850px) 240px, 360px" loading="eager"/></div>
+    <div className={styles.character} aria-hidden="true"><Image src="/marketing/happy-mascot-pointed.png" alt="" width={360} height={360} sizes="(max-width:600px) 180px, (max-width:850px) 240px, 360px" loading="eager"/><span/></div>
     </div>
     {paid && <div className={styles.onboarding}><BusinessSetupForm customer={customer??null} plan={customer?.plan??"busy"} preview={preview} embedded /></div>}
   </AccountShell>;

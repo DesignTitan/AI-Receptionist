@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — floating mascot cleanup (12 September 2026)
+
+- Removed the circular frame and restored the mascot’s visible pointed corner.
+- Added an SVG display mask around the original artwork to hide its white background without replacing the source image.
+- Restored a soft oval shadow below the mascot. Typecheck and browser checks passed at 1463, 390 and 320px.
+- Requested mascot cleanup is complete.
+
 ## Current handoff — help icon and welcome action cleanup (12 September 2026)
 
 - Replaced the navigation help symbol with a rounded headset from the shared outline icon set.

@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254">
+  <defs><filter id="soft-edge" x="-2%" y="-2%" width="104%" height="104%"><feMorphology operator="erode" radius="12"/><feGaussianBlur stdDeviation="1.2"/></filter></defs>
+  <path fill="white" filter="url(#soft-edge)" d="M630 151C844 151 1016 183 1080 295C1126 376 1128 504 1128 650C1128 804 1126 931 1051 1013C998 1070 927 1084 808 1086L591 1087C501 1088 440 1073 389 1044L174 1113C169 1071 184 1004 201 960C151 910 134 846 133 737L132 603C133 480 137 365 180 292C246 181 425 149 630 151Z"/>
+</svg>

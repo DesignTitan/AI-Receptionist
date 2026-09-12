@@ -513,3 +513,27 @@
   .landingPhoto, .landingPhoto img { transition: none; }
   .landingForm { animation: none; }
 }
+
+.planPicker { display: grid; gap: 8px; font-size: 13px; }
+.planTrigger { display: flex; justify-content: space-between; align-items: center; gap: 12px; width: 100%; min-height: 52px; padding: 12px 16px; border: 1px solid var(--brand-line); border-radius: 12px; background: #f2f7f3; color: var(--brand-ink); font: inherit; text-align: left; cursor: pointer; }
+.planTrigger > span:last-child { font-size: 12px; white-space: nowrap; }
+.planTrigger:hover { background: var(--brand-mint, #d5eee3); }
+.planDialog { width: min(1080px, calc(100vw - 32px)); max-height: calc(100dvh - 48px); margin: auto; padding: 32px; border: 1px solid var(--brand-line); border-radius: 24px; background: #fafbf8; color: var(--brand-ink); box-shadow: 0 24px 100px #102e3430; overscroll-behavior: contain; }
+.planDialog::backdrop { background: #102e3466; backdrop-filter: blur(6px); }
+.planHeader { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+.planHeader h2 { margin: 0 0 8px; font-size: 32px; }
+.planHeader p { margin: 0; }
+.planClose { flex-shrink: 0; width: 44px; height: 44px; border: 1px solid var(--brand-line); border-radius: 50%; background: white; font-size: 28px; cursor: pointer; }
+.planGrid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+.planCard { display: flex; flex-direction: column; padding: 24px; border: 1px solid var(--brand-line); border-radius: 16px; background: white; }
+.planCard.selectedPlan { border-color: #265b4b; background: #eef7f1; }
+.planCard h3 { margin: 0 0 8px; font-size: 24px; }
+.planCard p { font-size: 14px; line-height: 1.5; margin: 0 0 16px; }
+.planPrice { font-size: 38px; margin: 8px 0; }
+.planPrice span { font-size: 13px; margin-left: 6px; }
+.planCard .planSetup { font-size: 12px; }
+.planCard ul { padding-left: 18px; margin: 8px 0 24px; font-size: 13px; line-height: 1.6; }
+.planCard li { margin-bottom: 8px; }
+.planCard .primary { margin-top: auto; }
+.planDialog .planDisclaimer { font-size: 12px; margin: 20px 0 0; }
+@media(max-width:760px) { .planGrid { grid-template-columns: 1fr; } .planDialog { padding: 20px; } .planHeader h2 { font-size: 27px; } }

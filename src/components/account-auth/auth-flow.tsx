@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { PLANS, type Plan } from "@/lib/platform/model";
+import { type Plan } from "@/lib/platform/model";
 import { HumanCheck } from "@/components/platform/human-check";
 import { AuthShell } from "./auth-shell";
+import { PlanPicker } from "./plan-picker";
 import { ceremony } from "./webauthn";
 import styles from "./auth.module.css";
 type Screen =
@@ -293,7 +294,7 @@ export function AuthFlow({
   );
   const emailForm = (
     <form onSubmit={emailLink}>
-      {signup && !initialSignup && <label>Your plan<select required value={selectedPlan} onChange={(e) => setSelectedPlan(e.target.value as Plan | "")}><option value="" disabled>Choose a plan</option>{(Object.keys(PLANS) as Plan[]).map((plan) => <option key={plan} value={plan}>{PLANS[plan].name} · ${PLANS[plan].monthly}/month</option>)}</select></label>}
+      {signup && <PlanPicker value={selectedPlan} onChange={setSelectedPlan} />}
       {signup && <label>Your name<input required autoComplete="name" maxLength={120} pattern=".*\S.*" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" /></label>}
       <label>
         Email address
@@ -321,11 +322,7 @@ export function AuthFlow({
             ? `Try again in ${cooldown}s`
             : signup ? "Create account with email" : "Email me a sign-in link"}
       </button>
-      {!siteKey && !preview && (
-        <p className={styles.fine}>
-          Email sign-in is being prepared. Please try again later.
-        </p>
-      )}
+
     </form>
   );
   const verificationForm = (
@@ -395,16 +392,13 @@ export function AuthFlow({
                   ? "Request a fresh link and open it in this browser."
                   : signup ? "A little more time for you starts here. Verify your email, secure your account, then review your plan." : "Your front desk is ready when you are."}
               </p>
-              {signup && initialSignup && signup.plan && <p className={styles.note}>Your plan: <strong>{PLANS[signup.plan].name}</strong> · <Link href={signup.returnTo}>Change plan</Link></p>}
+
               {!signup && (passkeysEnabled || preview) &&
                 button("Continue with a passkey", () => passkey())}
               {!signup && (passkeysEnabled || preview) && (
                 <div className={styles.divider}>or use email</div>
               )}
               {emailForm}
-              <p className={`${styles.fine} ${styles.status}`}>
-                {signup ? "No payment is taken here. You’ll set up account security after verifying your email." : "Two-factor verification follows if you’ve secured your account."}
-              </p>
               <div className={styles.divider} />
               <p className={styles.fine}>
                 {signup ? "Already have an account? " : "Need an account? "}

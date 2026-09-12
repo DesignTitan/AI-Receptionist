@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — signup plan modal and cleaner access screens (12 September 2026)
+
+- Replaced the signup plan dropdown with a CTA and accessible comparison modal, using shared plan prices, setup fees and feature lists. Existing selected plans can also be changed in the modal.
+- Removed the requested email-preparation, two-factor and signup reassurance notes from the login/signup forms. Authentication guards remain unchanged.
+- Checked selection, Escape dismissal/focus restoration, signup continuation and mobile modal sizing; TypeScript passed. Refreshed login and signup thumbnails.
+- Live provider activation remains the next authentication milestone; these interface changes are complete.
+
 ## Current handoff — sliding login/signup panels (12 September 2026)
 
 - Login’s Sign up control now slides the photograph left and crossfades to the client-service image, revealing signup on the right. Log in reverses the transition without leaving the page.

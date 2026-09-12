@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — shared account navigation (12 September 2026)
+
+- Account pages now reuse the marketing SiteNav and its styles, with the call button hidden.
+- Preserved account settings, billing, security, help and sign-out in the shared menus.
+- Typecheck and browser checks passed at 1463, 390 and 320px; no horizontal overflow.
+- This navigation task is complete; existing voice and internal-tools work remains in progress separately.
+
 ## Current handoff — navigation polish and call investigation (12 September 2026)
 
 - Softened the account circle to 18% opacity and changed the navigation call button to soft white. Footer now reuses the exact navigation wordmark.
@@ -177,6 +184,14 @@
 - Focused verification passed: exported animation/controls, interactions, all viewing angles, mobile width, reduced motion, failure fallback and console checks.
 - Master, build script and handoff: design/mascot-3d/. Homepage mascot unchanged; After Effects integration and additional expression clips remain next steps.
 
+## Current handoff — Internal Ops hub (12 September 2026)
+
+- Built a local Internal Ops home at `/__dev/ops` with clear sections: Products, Pages, Journeys, Roadmaps, Design, Assets and Growth stubs (Social, Email, Other). All links are local-only; owner/staff routes still require sign-in, and nothing posts or sends.
+- Wired the burnt-amber toolbar: the first shortcut is now “Internal Ops”; kept one-click links to Page index, User journey, Visual design system and Images & videos. The marketing roadmap remains under the Page index view toggle.
+- Added “Internal Ops home” to the page catalogue; existing `/__dev` URLs remain unchanged and reachable from the hub.
+- Wrote `docs/internal-ops.md` describing the map for humans/agents.
+- How to open: run `npm run dev` and visit `http://127.0.0.1:3101/__dev/ops`.
+
 ## Current handoff — 12 September 2026
 
 - Latest completed UI work: centered checkout branding with Back to plans on the left; Marketing Site lists Features & benefits and Explore demos with thumbnails.
@@ -200,14 +215,6 @@ Earlier dated handoffs below are history; this summary takes precedence where th
 - Twice this week an in-app preview on port 3000 collided with it; the fix each time was to
   attach, not to kill. Do not kill the launchd job to make room for another server.
 
-## Current handoff — marketing page index
-
-- Confirmed Features & benefits and the public demo directory are in Marketing Site, with existing thumbnails.
-- Renamed the demo directory Explore demos and clarified the column description.
-- Individual interactive business and booking demos remain under Application.
-- Verified catalogue grouping, destination pages and thumbnail files.
-
-## Current handoff — checkout header alignment
 ## Current handoff — review marks always save (12 September 2026)
 
 - Page Index "done" marks and marketing-roadmap ticks now save to the workspace file
@@ -222,6 +229,14 @@ Earlier dated handoffs below are history; this summary takes precedence where th
 - Known: `tests/dev-preview.test.ts` expects 27 catalogue pages; the uncommitted Internal Ops
   entry makes 28. That assertion belongs to that work, not to this change.
 
+## Current handoff — marketing page index
+
+- Confirmed Features & benefits and the public demo directory are in Marketing Site, with existing thumbnails.
+- Renamed the demo directory Explore demos and clarified the column description.
+- Individual interactive business and booking demos remain under Application.
+- Verified catalogue grouping, destination pages and thumbnail files.
+
+## Current handoff — checkout header alignment
 
 - Centered the checkout mascot/name in the full-width header.
 - Moved Back to plans to the far left with an outlined control and consistent arrow icon; mobile uses an accessible icon-only button.

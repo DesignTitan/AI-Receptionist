@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — bubs.ai connected (12 September 2026)
+
+- Following explicit user approval, moved `bubs.ai` from `lead-gen` to `ai-receptionist`. Vercel confirms the new mapping is verified and the old project no longer has it.
+- Verified HTTPS routing to the receptionist site. Its existing production password gate remains active, so visitors first reach `/login`.
+- No DNS/nameserver or `www` mapping changes were needed/performed. This change uses the current production deployment; the authentication branch was not promoted.
+- Domain task complete. Staging authentication credential-transfer approval and real-provider acceptance remain separately pending.
+
 ## Current handoff — bubs.ai domain reassignment pending (12 September 2026)
 
 - Verified `bubs.ai` belongs to the current Vercel team and presently serves the separate `lead-gen` project. Apex DNS already points to Vercel; `www` points to the apex.

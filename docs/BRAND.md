@@ -14,6 +14,8 @@ Repository names, infrastructure resource IDs, existing calendar product identif
 
 ## Domain connection status — 12 September 2026
 
-`bubs.ai` is owned by the current Vercel team but is assigned to the separate `lead-gen` project. Its apex DNS already points to Vercel (`76.76.21.21`); `www.bubs.ai` is a CNAME to the apex.
+After explicit user approval, `bubs.ai` was moved from `lead-gen` to `ai-receptionist` using Vercel’s project-domain move API. Verified the destination mapping (HTTP 200, verified true), removal from the old project (HTTP 404), and HTTPS access to the receptionist site.
 
-No mapping or DNS changes were made. Automatic approval review rejected a forced reassignment because it would displace the existing live project and the attempted command included `www`. Explicit user approval to move `bubs.ai` from `lead-gen` to `ai-receptionist` is pending. Any `www` reassignment requires its own authorized scope.
+The existing production deployment remains password-protected: the apex routes to `/login`, and `/account/login` routes through the site password gate. This domain transfer did not deploy the authentication branch or change production authentication settings. Staging activation remains a separate pending task.
+
+Apex DNS already pointed to Vercel, so no registrar/nameserver changes were needed. No `www` reassignment was performed.

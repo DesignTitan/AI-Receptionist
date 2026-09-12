@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — internal menu and character sheets (12 September 2026)
+
+- Added a staff-page list to the hamburger and local-only internal/design links sourced from the page index; inventory is in docs/INTERNAL-PAGES.md.
+- Added existing mascot and Happy Paws cast sheets to the page index and linked them from the 3D studio. The parked 3D work was not restarted.
+- Rounded the hero’s bottom corners. Verified footer wordmark, soft-white CTA, faint account circle and menu at phone/desktop sizes.
+- Call fixes are in progress separately: production voice remains disabled and Cloudflare widget inspection was blocked by automatic approval review.
+
 ## Current handoff — shared account navigation (12 September 2026)
 
 - Account pages now reuse the marketing SiteNav and its styles, with the call button hidden.

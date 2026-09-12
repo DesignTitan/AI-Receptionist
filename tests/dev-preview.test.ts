@@ -163,7 +163,7 @@ test("page catalogue contains canonical routes for ordinary and tenant previews"
   assert.equal(journey?.access, "development");
   assert.deepEqual(journey?.sources, ["dev/journey.html", "dev/journey.js"]);
   assert.ok(!pages.some((entry) => entry.id === "study-luxury"));
-  assert.equal(pages.filter((entry) => entry.kind === "study").length, 4);
+  assert.equal(pages.filter((entry) => entry.kind === "study").length, 6);
   assert.deepEqual(getPages({ tenant: "unknown" }), pages);
   assert.equal(getPages({ siteGate: "  LOCKED " }).length, pages.length + 1);
   for (const tenant of ["medical", "salon", "studio"]) {

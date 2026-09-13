@@ -400,3 +400,9 @@ top, 44px corners at the bottom, so the bar reads as a tab pulled down from the 
 
 Nav dropdown (3 Sep): the call dialog is the same frosted glass as the feature panels, a
 62%→50% white face over a 26px backdrop blur, bright top rim, hairline, glass inputs.
+
+Proof deck inset, settled in Figma (12 Sep): the owner rebuilt the card in Figma
+(figma.com/design/mi5gQTLj5joCpA8ETH06g5). The media box sits 16px inside the card on the top,
+right and bottom, flush against the copy; 16px corners on all four sides; the photo and the
+glass panel fill it edge to edge; no glow band. The 8px inset and the blurred ::before are gone.
+

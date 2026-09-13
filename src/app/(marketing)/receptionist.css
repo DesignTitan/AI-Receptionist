@@ -308,9 +308,10 @@
 .rc-card__foot::before { content: "— "; color: #c3e6d6; }
 /* A clean green frame surrounds the clipped image; the separate card shadow
    remains outside this frame so its blur cannot bleed into the padding. */
-/* flush against the copy on the left; 8px of card ground on the right, and the same on top
-   and bottom so the photo's 24px corners sit concentric inside the card's 32px ones */
-.rc-card__media { position: relative; margin: 0; min-width: 0; min-height: 0; padding: 8px 8px 8px 0; border-radius: 0 32px 32px 0; overflow: hidden; background: #0b1815; display: grid; }
+/* what the owner built in Figma: the media box sits 16px inside the card on the top, right and
+   bottom, flush against the copy on the left; the photo and panel fill it edge to edge and the
+   box itself has 16px corners on all four sides */
+.rc-card__media { position: relative; margin: 0; min-width: 0; min-height: 0; padding: 16px 16px 16px 0; border-radius: 0 32px 32px 0; overflow: hidden; background: #0b1815; display: grid; }
 /* Two layers in one frame: the blurred desert at the back, the glass panel (an
    alpha PNG) in front. Both ride the act's own progress (--sc-p, inherited from
    the pinned section) for the whole scroll, not just the card's flight: the
@@ -318,11 +319,7 @@
    about 36px, so while a card sits still under the reader's scroll the panel
    visibly floats over the scene. The ground carries a little scale so its edges
    never show. */
-/* the inset is the photo itself, blurred and pushed out past the edges, so the 8px band reads
-   as the image's own glow rather than a stroke of card colour */
-.rc-card__media::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background: url(/scrollcraft/04-bg.jpg) center / cover no-repeat; filter: blur(22px) saturate(120%); transform: scale(1.15); }
-.rc-card__media picture { position: relative; z-index: 1; display: block; min-width: 0; min-height: 0; grid-area: 1 / 1; overflow: hidden; border-radius: 0 24px 24px 0; }
+.rc-card__media picture { position: relative; z-index: 1; display: block; min-width: 0; min-height: 0; grid-area: 1 / 1; overflow: hidden; border-radius: 16px; }
 .rc-card__media img { position: relative; display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: cover; object-position: 50% 50%; border-radius: inherit; }
 .rc-card__bg img { transform: translate3d(0, calc((var(--sc-p) - 0.5) * 36px), 0) scale(1.1); will-change: transform; }
 .rc-card__panel { z-index: 2; }
@@ -337,8 +334,8 @@
   .rc-deck__lede { display: none; }
   /* stacked on a phone, so the image rounds at the bottom, not the right */
   /* stacked: 8px all round, and room between the copy and the image */
-  .rc-card__media { padding: 0 8px 8px; border-radius: 0 0 32px 32px; }
-  .rc-card__media picture { border-radius: 0 0 24px 24px; }
+  .rc-card__media { padding: 0 16px 16px; border-radius: 0 0 32px 32px; }
+  .rc-card__media picture { border-radius: 16px; }
   .rc-card::before { right: 0; left: 0; top: auto; bottom: 0; width: 100%; height: 62%; }
   .rc-card { --card-pad: 1.15rem; top: calc(var(--i) * 12px); grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 1.25rem; }
   .rc-card__copy { padding: var(--card-pad) var(--card-pad) 0; gap: 0.15rem; }

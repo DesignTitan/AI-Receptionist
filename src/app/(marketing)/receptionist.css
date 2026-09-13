@@ -302,7 +302,7 @@
    outside the card as its shadow and the inside is one flat colour with no seam */
 .rc-card::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: #0b1815; border-radius: inherit; }
 @media (prefers-reduced-motion: reduce) { .rc-card::before { transform: translateY(24px); } }
-.rc-card__copy { display: flex; flex-direction: column; min-width: 0; padding: var(--card-pad) 0 var(--card-pad) var(--card-pad); }
+.rc-card__copy { position: relative; z-index: 1; display: flex; flex-direction: column; min-width: 0; padding: var(--card-pad) 0 var(--card-pad) var(--card-pad); }
 .rc-card__eyebrow { margin: 0; font-size: var(--sc-t-sm); color: #b5ccc2; display: flex; align-items: center; gap: 0.6rem; }
 .rc-card__eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: #c3e6d6; }
 .rc-card__copy h3 { font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(1.8rem, 2.8vw, 2.5rem); line-height: 1.05; letter-spacing: -0.01em; margin: clamp(1rem, 4vh, 2.5rem) 0 1rem; text-wrap: balance; }
@@ -314,7 +314,13 @@
 /* what the owner built in Figma: the media box sits 16px inside the card on the top, right and
    bottom, flush against the copy on the left; the photo and panel fill it edge to edge and the
    box itself has 16px corners on all four sides */
-.rc-card__media { position: relative; margin: 0; min-width: 0; min-height: 0; padding: 16px 16px 16px 0; border-radius: 0 32px 32px 0; overflow: hidden; background: transparent; display: grid; }
+.rc-card__media { position: relative; margin: 0 0 0 -72px; min-width: 0; min-height: 0; padding: 16px 16px 16px 72px; border-radius: 0 32px 32px 0; overflow: hidden; background: transparent; display: grid; }
+/* the glow: the photo again, blurred and enlarged, behind the picture. It fills the 16px band and
+   the 72px the box reaches back toward the copy, fading to nothing on that side so it reads as
+   light coming from behind the image rather than a second frame */
+.rc-card__media::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: url(/scrollcraft/04-bg.jpg) center / cover no-repeat; filter: blur(28px) saturate(130%); transform: scale(1.12); opacity: 0.9;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 96px); mask-image: linear-gradient(to right, transparent 0, #000 96px); }
 /* Two layers in one frame: the blurred desert at the back, the glass panel (an
    alpha PNG) in front. Both ride the act's own progress (--sc-p, inherited from
    the pinned section) for the whole scroll, not just the card's flight: the
@@ -337,7 +343,11 @@
   .rc-deck__lede { display: none; }
   /* stacked on a phone, so the image rounds at the bottom, not the right */
   /* stacked: 8px all round, and room between the copy and the image */
-  .rc-card__media { padding: 0 16px 16px; border-radius: 0 0 32px 32px; }
+  /* stacked: the image is flush at the top of its box, so the glow only fills the side and
+     bottom bands and fades in from the top edge; it never reaches the copy */
+  .rc-card__media { margin: 0; padding: 0 16px 16px; border-radius: 0 0 32px 32px; }
+  .rc-card__media::before { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 40px); mask-image: linear-gradient(to bottom, transparent 0, #000 40px); }
+  .rc-card__media picture { border-radius: 16px; }
   .rc-card__media picture { border-radius: 16px; }
   .rc-card::before { right: 0; left: 0; top: auto; bottom: 0; width: 100%; height: 62%; }
   .rc-card { --card-pad: 1.15rem; top: calc(var(--i) * 12px); grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 1.25rem; }

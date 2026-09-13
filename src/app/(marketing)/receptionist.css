@@ -318,10 +318,14 @@
    about 36px, so while a card sits still under the reader's scroll the panel
    visibly floats over the scene. The ground carries a little scale so its edges
    never show. */
-.rc-card__media picture { position: relative; display: block; min-width: 0; min-height: 0; grid-area: 1 / 1; overflow: hidden; border-radius: 0 24px 24px 0; }
+/* the inset is the photo itself, blurred and pushed out past the edges, so the 8px band reads
+   as the image's own glow rather than a stroke of card colour */
+.rc-card__media::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: url(/scrollcraft/04-bg.jpg) center / cover no-repeat; filter: blur(22px) saturate(120%); transform: scale(1.15); }
+.rc-card__media picture { position: relative; z-index: 1; display: block; min-width: 0; min-height: 0; grid-area: 1 / 1; overflow: hidden; border-radius: 0 24px 24px 0; }
 .rc-card__media img { position: relative; display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: cover; object-position: 50% 50%; border-radius: inherit; }
 .rc-card__bg img { transform: translate3d(0, calc((var(--sc-p) - 0.5) * 36px), 0) scale(1.1); will-change: transform; }
-.rc-card__panel { z-index: 1; }
+.rc-card__panel { z-index: 2; }
 .rc-card__panel img { transform: translate3d(0, calc((0.5 - var(--sc-p)) * 100px), 0); will-change: transform; }
 @media (prefers-reduced-motion: reduce) { .rc-card__bg img, .rc-card__panel img { transform: none; } }
 @media (max-width: 1024px) { .rc-card__bg img { transform: translate3d(0, calc((var(--sc-p) - 0.5) * 24px), 0) scale(1.08); } .rc-card__panel img { transform: translate3d(0, calc((0.5 - var(--sc-p)) * 64px), 0); } }

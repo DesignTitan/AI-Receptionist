@@ -1,5 +1,7 @@
 /* The product homepage: a chaptered editorial on white. Tokens theme the vendored engine; everything else is this page's own markup. */
 .rc {
+  /* Shared centered content edge for every homepage chapter. */
+  --rc-page-edge: max(var(--sc-gutter), calc((100% - var(--sc-maxw)) / 2 + var(--sc-gutter)));
   /* one corner radius for every rectangle on this page */
   --sc-r-sm: 12px;
   --sc-r-md: 12px;
@@ -251,7 +253,7 @@
   --head-h: clamp(120px, 17svh, 190px);
   --deck-top: calc(var(--deck-pad) + var(--head-h));
   --peek: 84px;
-  --card-w: min(1120px, 92vw);
+  --card-w: calc(100% - 2 * var(--rc-page-edge));
   /* 80% of the room between header and peek: the owner found full-height cards too tall */
   --card-h: calc((100svh - var(--deck-top) - var(--peek) - 20px) * 0.8);
   --rise: calc(100svh - var(--deck-top) - var(--peek));
@@ -323,7 +325,7 @@
 @media (max-width: 1024px) { .rc-card__bg img { transform: translate3d(0, calc((var(--sc-p) - 0.5) * 24px), 0) scale(1.08); } .rc-card__panel img { transform: translate3d(0, calc((0.5 - var(--sc-p)) * 64px), 0); } }
 
 @media (max-width: 1024px) {
-  .rc-deckact { --deck-pad: 5svh; --head-h: clamp(96px, 14svh, 140px); --peek: 64px; --card-w: 94vw; }
+  .rc-deckact { --deck-pad: 5svh; --head-h: clamp(96px, 14svh, 140px); --peek: 64px; }
   .rc-deck__head { grid-template-columns: 1fr; padding-bottom: 0.75rem; }
   .rc-deck__head h2 { font-size: var(--sc-t-xl); }
   .rc-deck__lede { display: none; }
@@ -339,7 +341,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .rc-deckstage { position: static; height: auto; padding: var(--sc-8) 0; }
-  .rc-deck__head { position: static; translate: none; width: min(1120px, 92vw); height: auto; margin: 0 auto var(--sc-6); }
+  .rc-deck__head { position: static; translate: none; width: var(--card-w); height: auto; margin: 0 auto var(--sc-6); }
   
   .rc-deck { position: static; display: grid; gap: var(--sc-5); justify-items: center; }
   .rc-card { position: relative; left: auto; top: auto; translate: none; transform: none !important; opacity: 1 !important; height: auto; min-height: 420px; }
@@ -545,11 +547,6 @@
   .rc-overview__benefits { grid-template-columns: 1fr; gap: 24px; }
   .rc-overview__footer { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
-@media (min-width: 1101px) {
-  /* Reserve the left margin for the existing chapter navigation. */
-  .rc-overview > .sc-wrap { width: calc(100% - 280px); max-width: 1200px; padding-inline: 0; margin-left: max(220px, calc((100% - 1200px) / 2)); margin-right: 60px; }
-}
-
 .rc-overview__booked { position: relative; display: inline-flex; align-items: center; gap: .5em; padding: .45em .7em; margin-inline: .15em; vertical-align: middle; border-radius: .7em; background: #e0f0e8; box-shadow: 0 8px 18px -12px #1e3a3450; font-family: var(--font-inter), sans-serif; font-size: .31em; line-height: 1.2; letter-spacing: -.02em; font-weight: 500; }
 .rc-overview__booked > span { font-size: 1.45em; }
 .rc-overview__benefits { gap: 0; margin-top: 48px; }
@@ -617,7 +614,6 @@
 .rc-busy__voice { display: flex; align-items: center; gap: 16px; }
 .rc-busy__voice > img { width: 110px; height: 110px; object-fit: contain; }
 .rc-busy__pilot { display: inline-block; background: #c3e6d6; border-radius: 30px; padding: 6px 15px; text-transform: uppercase; font-size: 10px; letter-spacing: .15em; }
-@media (min-width: 1101px) { .rc-busy > .sc-wrap { width: calc(100% - 280px); max-width: 1200px; padding-inline: 0; margin-left: max(220px, calc((100% - 1200px) / 2)); margin-right: 60px; } }
 @media (max-width: 900px) { .rc-busy__story, .rc-busy__options { grid-template-columns: 1fr; } .rc-busy__options > div + div { border-left: 0; border-top: 1px solid #d5e6dd; padding: 28px 0 0; } .rc-busy__photo > img { height: 420px; } }
 @media (max-width: 480px) { .rc-busy__photo > img { height: 320px; } .rc-busy__voice { gap: 10px; } .rc-busy__voice > img { width: 70px; height: 70px; } }
 
@@ -717,7 +713,7 @@
 
 /* Industry gallery: one example conversation follows the active business. */
 .rc-industries { height: 650vh; background: #fff; color: #1e3a34; }
-.rc-industries__sticky { position: sticky; top: 0; height: 100svh; display: grid; grid-template-columns: minmax(260px, 27%) minmax(0, 1fr); align-items: center; gap: clamp(28px, 3vw, 56px); padding: 110px 0 34px max(6vw, 32px); overflow: hidden; }
+.rc-industries__sticky { position: sticky; top: 0; height: 100svh; display: grid; grid-template-columns: minmax(260px, 27%) minmax(0, 1fr); align-items: center; gap: clamp(28px, 3vw, 56px); padding: 110px 0 34px var(--rc-page-edge); overflow: hidden; }
 .rc-industries__intro { padding-bottom: 70px; }
 .rc-industries__eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: 12px; font-weight: 600; color: #527a6b; margin: 0 0 24px; }
 .rc-industries__intro h2 { font-family: "Apfel Grotezk", sans-serif; font-weight: 500; font-size: clamp(38px, 4.1vw, 68px); line-height: 1.02; letter-spacing: -.045em; margin: 0 0 28px; }
@@ -750,11 +746,11 @@
 @media (max-width: 860px), (prefers-reduced-motion: reduce) {
   .rc-industries { height: auto; }
   .rc-industries__sticky { height: auto; position: relative; display: block; padding: 130px 0 48px; }
-  .rc-industries__intro { padding: 0 24px 30px; max-width: 600px; }
+  .rc-industries__intro { padding: 0 var(--rc-page-edge) 30px; }
   .rc-industries__intro h2 { font-size: clamp(38px, 7vw, 58px); }
   .rc-industries__intro > p:not(.rc-industries__eyebrow) { max-width: 40ch; }
   .rc-industries__controls { margin-top: 22px; }
-  .rc-industries__gallery { --industry-card: min(76vw, 360px); padding-left: 24px; }
+  .rc-industries__gallery { --industry-card: min(76vw, 360px); padding-left: var(--rc-page-edge); }
   .rc-industries__viewport { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: #b5ccc2 transparent; padding-bottom: 12px; }
   .rc-industries__rail { transform: none !important; will-change: auto; gap: 16px; }
   .rc-industry { height: 410px; scroll-snap-align: start; }
@@ -764,7 +760,7 @@
 }
 @media (max-width: 380px) { .rc-industry-conversation { grid-template-columns: 58px minmax(0, 1fr); } .rc-industry-conversation__card { padding: 13px; } .rc-industry-conversation__label { font-size: 9px; padding: 5px 7px; } }
 @media (prefers-reduced-motion: reduce) { .rc-industry-conversation { animation: none; } }
-@media (min-width: 1101px) { .rc-industries__sticky { padding-left: max(190px, 12vw); grid-template-columns: minmax(255px, 26%) minmax(0, 1fr); } }
+@media (min-width: 1101px) { .rc-industries__sticky { grid-template-columns: minmax(255px, 26%) minmax(0, 1fr); } }
 
 /* Finish the dark feature/proof block with the same curve as the film. */
 .rc .rc-textured { border-radius: 0 0 48px 48px; clip-path: inset(0 round 0 0 48px 48px); }
@@ -879,7 +875,7 @@
 }
 
 /* A warm introduction and a composed closing to the page. */
-.rc-callback { padding: clamp(48px, 7vw, 112px) max(24px, 7vw); background: #f7f8f4; }
+.rc-callback { padding: clamp(48px, 7vw, 112px) var(--rc-page-edge); background: #f7f8f4; }
 .rc-callback__layout { max-width: 1280px; margin: auto; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #dce5dc; border-radius: 28px; overflow: hidden; background: #fff; }
 .rc-callback__visual { position: relative; min-height: 680px; background: #eaece2; }
 .rc-callback__visual > img { position: absolute; width: 100%; height: 100%; object-fit: cover; }
@@ -893,7 +889,7 @@
 .rc-callback__form .rc-try__field input { border: 1px solid #d5e0d8; border-radius: 10px; background: #f7faf6; padding: 14px 16px; font-size: 16px; }
 .rc-callback__form .rc-cta { width: 100%; border-radius: 10px; padding: 15px 20px; text-align: center; }
 .rc-callback__form .rc-try__note { font-size: 12px; line-height: 1.6; color: #64766e; }
-.rc-footer { padding: clamp(48px, 6vw, 96px) max(24px, 7vw) 24px; background: #12382e; color: #eff7f0; border-radius: 36px 36px 0 0; }
+.rc-footer { padding: clamp(48px, 6vw, 96px) var(--rc-page-edge) 24px; background: #12382e; color: #eff7f0; border-radius: 36px 36px 0 0; }
 .rc-footer__top, .rc-footer__middle, .rc-footer__bottom { max-width: 1280px; margin: auto; }
 .rc-footer__top { display: flex; justify-content: space-between; align-items: end; gap: 32px; padding-bottom: 64px; border-bottom: 1px solid #ffffff26; }
 .rc-footer h2 { margin: 0; font-size: clamp(38px, 5vw, 72px); line-height: 1.08; letter-spacing: -.045em; font-weight: 450; color: inherit; }

@@ -1,4 +1,4 @@
-.section { background: #fff; color: #1e3a34; padding: clamp(64px, 8vw, 120px) clamp(24px, 5vw, 80px); }
+.section { background: #fff; color: #1e3a34; padding: clamp(64px, 8vw, 120px) var(--rc-page-edge, clamp(24px, 5vw, 80px)); }
 .wrap { max-width: 1320px; margin-inline: auto; }
 .header { margin-bottom: 36px; }
 .header h2 { font-family: var(--sc-font-display); font-size: clamp(40px, 5vw, 72px); line-height: 1.05; letter-spacing: -.045em; margin: 0 0 16px; font-weight: 500; }

@@ -1,5 +1,12 @@
 # NOW
 
+## Current handoff — centered homepage sections (12 September 2026)
+
+- Removed obsolete left-side navigation offsets from overview and busy sections.
+- Unified feature panels, industry intro, pricing, callback and footer edges with the existing centered content wrapper.
+- Verified equal main-section margins at 320, 390, 900, 1102, 1304 and 1463px with no horizontal page overflow; visually checked the overview.
+- Spacing task is complete in the local preview; production call configuration remains a separate pending task.
+
 ## Current handoff — business setup fields and AI area code (12 September 2026)
 
 - Changed the first section heading to Get started here. and the name label to Legal business name.

@@ -215,13 +215,14 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
         const text = value.text.trim();
         if (!text) return;
         if (value.role === "agent") {
-          // Bubs's speech arrives in fragments; keep one bubble per turn.
+          // Bubs's speech arrives as a growing transcript of the same turn: replace the bubble, don't stack it.
           setLines(l => {
             const id = agentTurn.current;
             if (id !== null && l.length && l[l.length - 1].id === id) {
-              const joined = `${l[l.length - 1].text} ${text}`.replace(/\s+/g, " ");
-              lastAgentLine.current = joined;
-              return [...l.slice(0, -1), { ...l[l.length - 1], text: joined }];
+              const prev = l[l.length - 1].text;
+              const next = text.startsWith(prev) ? text : prev.startsWith(text) ? prev : `${prev} ${text}`.replace(/\s+/g, " ");
+              lastAgentLine.current = next;
+              return next === prev ? l : [...l.slice(0, -1), { ...l[l.length - 1], text: next }];
             }
             const fresh = line("bubs", text);
             agentTurn.current = fresh.id;

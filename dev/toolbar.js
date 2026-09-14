@@ -28,18 +28,21 @@
           .index{display:flex;align-items:center;gap:7px;height:30px;padding:0 10px;border:1px solid #ffffff16;border-radius:8px;background:#ffffff10;white-space:nowrap;font-size:12px}.index:hover{background:#ffffff25}.index[aria-current="page"]{background:#a65a26;border-color:#efb36e}
           .local{font-size:10px;letter-spacing:.1em;font-weight:650;color:#f8e6cc;white-space:nowrap;display:flex;align-items:center;gap:7px;margin-left:auto}
           .local::before{content:"";width:5px;height:5px;background:#e8b97c;border-radius:50%}
-          .tool-links{display:flex;gap:3px;align-items:center;overflow-x:auto;min-width:0;scrollbar-width:none}.tool-links a{flex:none;font-size:12px;padding:7px 9px;border-radius:5px;white-space:nowrap}.tool-links a:hover{background:#ffffff20}.tool-links a[aria-current=page]{background:#a65a26}.local{flex:none}@media(max-width:1100px){.local{display:none}.index{margin-left:0}.tool-links{flex:1}}@media(max-width:580px){.badge{display:none}.bar{gap:4px}.tool-links a{font-size:11px;padding-inline:8px}.index{font-size:11px;padding-inline:7px}}
+          .tool-links{display:flex;gap:3px;align-items:center;overflow-x:auto;min-width:0;scrollbar-width:none}.tool-links a{flex:none;font-size:12px;padding:7px 9px;border-radius:5px;white-space:nowrap}.tool-links a:hover{background:#ffffff20}.tool-links a[aria-current=page]{background:#a65a26}.menu{position:relative;flex:none}.menu summary{list-style:none;cursor:pointer;font-size:12px;padding:7px 9px;border-radius:5px;white-space:nowrap;display:flex;gap:6px;align-items:center}.menu summary::-webkit-details-marker{display:none}.menu summary:hover,.menu[open] summary{background:#ffffff20}.menu[aria-current=page] summary{background:#a65a26}.menu-list{position:absolute;top:calc(100% + 6px);left:0;min-width:250px;display:grid;padding:6px;background:#6e3716;border:1px solid #b87539;border-radius:10px;box-shadow:0 12px 30px -10px #0008}.menu-list a{font-size:12px;padding:8px 10px;border-radius:6px;white-space:nowrap}.menu-list a:hover{background:#ffffff20}.menu-list a[aria-current=page]{background:#a65a26}.local{flex:none}@media(max-width:1100px){.local{display:none}.index{margin-left:0}.tool-links{flex:1}}@media(max-width:580px){.badge{display:none}.bar{gap:4px}.tool-links a{font-size:11px;padding-inline:8px}.index{font-size:11px;padding-inline:7px}}
         </style>
         <nav class="bar" aria-label="Development navigation">
           <div class="badge">Internal tools</div>
           <a class="index" href="/__dev/pages">Page index <span aria-hidden="true">↗</span></a>
           <div class="tool-links">
-            <a href="/">Marketing website</a><a href="/account?preview=confirmation">Application</a><a href="/__dev/design-system">Visual design system</a><a href="/__dev/design/campaign-v4/">Images & videos</a><a href="/__dev/pages?view=roadmap">Roadmap</a><a href="/__dev/journey">User journey</a>
+            <a href="/">Marketing website</a><a href="/account?preview=confirmation">Application</a><a href="/__dev/design-system">Visual design system</a><a href="/__dev/design/campaign-v4/">Images & videos</a><details class="menu"><summary>Roadmap <span aria-hidden="true">▾</span></summary><div class="menu-list"><a href="/__dev/pages?view=roadmap">Marketing roadmap</a><a href="https://claude.ai/code/artifact/0a4ee2ad-e2b2-4998-9a5d-796e3097cd1a" target="_blank" rel="noopener noreferrer">Receptionist Launch Roadmap ↗</a><a href="https://claude.ai/code/artifact/631ce6b1-a6d1-46aa-a3dd-f00f83425a49" target="_blank" rel="noopener noreferrer">Receptionist Runbook ↗</a><a href="https://claude.ai/code/artifact/2d6057be-84b8-4ae8-8239-cc29a19859e3" target="_blank" rel="noopener noreferrer">Receptionist Unit Economics ↗</a></div></details><a href="/__dev/journey">User journey</a>
           </div>
           <span class="local">LOCAL ONLY</span>
         </nav>`;
       this.updateLocation();
       listen(window, "popstate", () => this.updateLocation());
+      // the Roadmap menu closes on a click elsewhere or on Escape
+      listen(document, "pointerdown", (event) => { const open = this.shadowRoot.querySelector(".menu[open]"); if (open && !event.composedPath().includes(open)) open.removeAttribute("open"); });
+      listen(document, "keydown", (event) => { if (event.key === "Escape") this.shadowRoot.querySelector(".menu[open]")?.removeAttribute("open"); });
       listen(window, "hashchange", () => this.updateLocation());
       // Keep fixed/sticky site navigation below the dev bar without changing site CSS.
       this.offsets = document.createElement("style");
@@ -63,11 +66,15 @@
       this.currentPathname = this.getAttribute("pathname") || location.pathname;
       const normalize = (path) => path.replace(/\/$/, "") || "/";
       const roadmap = ["roadmap", "checklist"].includes(new URLSearchParams(location.search).get("view"));
+      // the Roadmap menu lights up when any of its pages is the current one
+      const menu = this.shadowRoot.querySelector(".menu");
+      if (menu) menu.removeAttribute("aria-current");
       for (const link of this.shadowRoot.querySelectorAll(".index,.tool-links a")) {
         const url = new URL(link.href, location.origin);
         const samePath = normalize(url.pathname) === normalize(this.currentPathname);
         const selected = samePath && (url.pathname === "/__dev/pages" ? Boolean(url.search) === roadmap : true);
         if (selected) link.setAttribute("aria-current", "page"); else link.removeAttribute("aria-current");
+        if (selected && menu && menu.contains(link)) menu.setAttribute("aria-current", "page");
       }
     }
   }

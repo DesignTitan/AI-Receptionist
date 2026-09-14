@@ -30,6 +30,7 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
   const session = useRef<WebSession | null>(null);
   const audio = useRef<VoiceAudio | null>(null);
   const lastAgentLine = useRef("");
+  const agentTurn = useRef<number | null>(null); // the bubble Bubs is currently speaking into
   const answersRef = useRef(answers); answersRef.current = answers;
   const promptRef = useRef(prompt); promptRef.current = prompt;
   const log = useRef<HTMLDivElement>(null);
@@ -211,9 +212,27 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
       current.on("transcript", value => {
         if (!value.final) { setCaption(value.role === "user" ? value.text : ""); return; }
         setCaption("");
-        if (!value.text.trim()) return;
-        if (value.role === "agent") { lastAgentLine.current = value.text; setLines(l => [...l, line("bubs", value.text)]); }
-        else { setLines(l => [...l, line("you", value.text)]); void absorb(value.text); }
+        const text = value.text.trim();
+        if (!text) return;
+        if (value.role === "agent") {
+          // Bubs's speech arrives in fragments; keep one bubble per turn.
+          setLines(l => {
+            const id = agentTurn.current;
+            if (id !== null && l.length && l[l.length - 1].id === id) {
+              const joined = `${l[l.length - 1].text} ${text}`.replace(/\s+/g, " ");
+              lastAgentLine.current = joined;
+              return [...l.slice(0, -1), { ...l[l.length - 1], text: joined }];
+            }
+            const fresh = line("bubs", text);
+            agentTurn.current = fresh.id;
+            lastAgentLine.current = text;
+            return [...l, fresh];
+          });
+        } else {
+          agentTurn.current = null;
+          setLines(l => [...l, line("you", text)]);
+          void absorb(text);
+        }
       });
       current.on("error", () => { stopVoice("ended"); setVoiceNote("The voice connection dropped. You can keep typing, or start voice again."); });
       await current.start({ wsUrl: data.wsUrl });

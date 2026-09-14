@@ -82,7 +82,7 @@ export function SetupJourney() {
     <p className={styles.srOnly} aria-live="polite">Step {index + 1} of {STEPS.length}: {STEPS[index].label}</p>
 
     <div key={step} className={styles.stagePane} data-leaving={leaving || undefined}>
-      {step === "welcome" && <Welcome answers={answers} complete={done} onStart={() => go("talk")} onContinue={() => go("hear")} />}
+      {step === "welcome" && <Welcome answers={answers} complete={done} onContinue={() => go("talk")} />}
       {step === "talk" && <SetupConversation onChange={setAnswers} onDone={() => go("hear")} />}
       {step === "hear" && <Hear answers={answers} onBack={() => go("talk")} onNext={() => go("live")} />}
       {step === "live" && <Live answers={answers} provider={provider} onProvider={setProvider} onBack={() => go("hear")} />}
@@ -90,7 +90,8 @@ export function SetupJourney() {
   </div>;
 }
 
-function Welcome({ answers, complete, onStart, onContinue }: { answers: InterviewAnswers; complete: boolean; onStart: () => void; onContinue: () => void }) {
+/** Continue always goes to step 2. The copy changes with what we already know; the destination never does. */
+function Welcome({ answers, complete, onContinue }: { answers: InterviewAnswers; complete: boolean; onContinue: () => void }) {
   const started = Object.keys(answers).length > 0;
   return <section className={styles.welcome} aria-labelledby="v2-welcome">
     <div>
@@ -101,7 +102,7 @@ function Welcome({ answers, complete, onStart, onContinue }: { answers: Intervie
         <button type="button" className={styles.primary} onClick={onContinue}>Continue</button>
       </> : started ? <>
         <p className={styles.lede}>You’d started telling us about your business. Your answers are saved; carry on from where you stopped.</p>
-        <button type="button" className={styles.primary} onClick={onStart}>Continue</button>
+        <button type="button" className={styles.primary} onClick={onContinue}>Continue</button>
       </> : <>
         <p className={styles.lede}>Setting up takes about two minutes. Bubs asks a few questions, you answer, and everything stays on screen for you to change.</p>
         <ol className={styles.plan}>
@@ -109,7 +110,7 @@ function Welcome({ answers, complete, onStart, onContinue }: { answers: Intervie
           <li><strong>Preview your front desk.</strong> Your greeting, your booking page, your hours.</li>
           <li><strong>Go live.</strong> Get your Bubs number, forward your line, and Bubs confirms it works.</li>
         </ol>
-        <button type="button" className={styles.primary} onClick={onStart}>Continue</button>
+        <button type="button" className={styles.primary} onClick={onContinue}>Continue</button>
       </>}
       <p className={styles.fine}>Busy plan · change it any time from your account.</p>
     </div>

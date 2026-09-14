@@ -147,6 +147,16 @@ export function heuristicExtract(said: string, a: InterviewAnswers, stepId: stri
   const cmd = applyCommand(said, a);
   if (cmd && cmd.answers !== a) return cmd.answers;
   const t = said.toLowerCase();
+  // Spoken numbers arrive as digits with spaces ("so 3 0 17 6 00 4 5 0"); ten of them is a phone number.
+  const digits = said.replace(/\D/g, "");
+  if ((stepId === "phone" || !a.phone) && /^[2-9]\d{2}[2-9]\d{6}$/.test(digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits)) {
+    const d = digits.length === 11 ? digits.slice(1) : digits;
+    return { ...a, phone: `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}` };
+  }
+  const spokenValue = said.trim().replace(/^(it’s|it's|it is|that’s|that's|the name is|we’re called|we're called|we are|i’m|i'm|my business is|our address is|the address is|we’re at|we're at|it’s at|it's at)\s+/i, "").replace(/[.!]+$/, "").trim();
+  if (stepId === "name" && spokenValue.length >= 2 && spokenValue.length <= 120 && !/\?$/.test(said)) return { ...a, businessName: spokenValue };
+  if (stepId === "address" && spokenValue.length >= 5 && spokenValue.length <= 300 && /\d/.test(spokenValue)) return { ...a, address: spokenValue };
+  if (stepId === "customTrade" && spokenValue.length >= 2 && spokenValue.length <= 120) return { ...a, customTrade: spokenValue, trade: "other" };
   if (stepId === "trade" || !a.trade) {
     if (/salon|spa|barber|nail|lash|brow|massage|wellness|hair|beauty/.test(t)) return { ...a, trade: "salon" };
     if (/studio|photograph|record|dance|tattoo|art\b/.test(t)) return { ...a, trade: "studio" };

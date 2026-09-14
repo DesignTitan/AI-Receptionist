@@ -30,7 +30,9 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
   const session = useRef<WebSession | null>(null);
   const audio = useRef<VoiceAudio | null>(null);
   const lastAgentLine = useRef("");
-  const agentTurn = useRef<number | null>(null); // the bubble Bubs is currently speaking into
+  const turnLine = useRef<number | null>(null); // the bubble the current speaker is still filling
+  const pendingSaid = useRef("");
+  const absorbTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const answersRef = useRef(answers); answersRef.current = answers;
   const promptRef = useRef(prompt); promptRef.current = prompt;
   const log = useRef<HTMLDivElement>(null);
@@ -178,6 +180,9 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
   }
 
   function stopVoice(reason: "ended" | "off" = "ended") {
+    clearTimeout(absorbTimer.current);
+    if (pendingSaid.current) { const said = pendingSaid.current; pendingSaid.current = ""; void absorb(said); }
+    turnLine.current = null;
     session.current?.stop(); session.current = null;
     audio.current?.stop(); audio.current = null;
     setCaption(""); setMuted(false);
@@ -214,25 +219,29 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
         setCaption("");
         const text = value.text.trim();
         if (!text) return;
-        if (value.role === "agent") {
-          // Bubs's speech arrives as a growing transcript of the same turn: replace the bubble, don't stack it.
-          setLines(l => {
-            const id = agentTurn.current;
-            if (id !== null && l.length && l[l.length - 1].id === id) {
-              const prev = l[l.length - 1].text;
-              const next = text.startsWith(prev) ? text : prev.startsWith(text) ? prev : `${prev} ${text}`.replace(/\s+/g, " ");
-              lastAgentLine.current = next;
-              return next === prev ? l : [...l.slice(0, -1), { ...l[l.length - 1], text: next }];
-            }
-            const fresh = line("bubs", text);
-            agentTurn.current = fresh.id;
-            lastAgentLine.current = text;
-            return [...l, fresh];
-          });
-        } else {
-          agentTurn.current = null;
-          setLines(l => [...l, line("you", text)]);
-          void absorb(text);
+        const who = value.role === "agent" ? "bubs" : "you";
+        // Both sides stream a growing transcript of the current turn; grow the last bubble when it's the same speaker.
+        setLines(l => {
+          const last = l[l.length - 1];
+          if (last && last.who === who && last.id === turnLine.current) {
+            const next = text.startsWith(last.text) ? text : last.text.startsWith(text) ? last.text : `${last.text} ${text}`.replace(/\s+/g, " ");
+            if (who === "bubs") lastAgentLine.current = next;
+            return next === last.text ? l : [...l.slice(0, -1), { ...last, text: next }];
+          }
+          const fresh = line(who, text);
+          turnLine.current = fresh.id;
+          if (who === "bubs") lastAgentLine.current = text;
+          return [...l, fresh];
+        });
+        if (who === "you") {
+          // Extract once the sentence has settled, not on every fragment.
+          pendingSaid.current = text;
+          clearTimeout(absorbTimer.current);
+          absorbTimer.current = setTimeout(() => { const said = pendingSaid.current; pendingSaid.current = ""; if (said) void absorb(said); }, 900);
+        } else if (pendingSaid.current) {
+          clearTimeout(absorbTimer.current);
+          const said = pendingSaid.current; pendingSaid.current = "";
+          void absorb(said);
         }
       });
       current.on("error", () => { stopVoice("ended"); setVoiceNote("The voice connection dropped. You can keep typing, or start voice again."); });

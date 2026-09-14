@@ -65,3 +65,11 @@ test("voice patches merge into the card and the heuristic extractor covers the c
   const untouched = { businessName: "x" };
   assert.equal(heuristicExtract("hmm let me think", untouched, "address"), untouched);
 });
+
+test("spoken answers without a model: digits become a phone number, plain phrases become name and address", async () => {
+  const { heuristicExtract } = await import("../src/lib/platform/setup-help.ts");
+  assert.equal(heuristicExtract("So 3 0 17 6 00 4 5 0.", {}, "phone").phone, "(301) 760-0450");
+  assert.equal(heuristicExtract("It’s Willow Studio.", {}, "name").businessName, "Willow Studio");
+  assert.equal(heuristicExtract("We’re at 123 Example Street, Detroit.", {}, "address").address, "123 Example Street, Detroit");
+  assert.equal(heuristicExtract("what do you mean?", {}, "name").businessName, undefined);
+});

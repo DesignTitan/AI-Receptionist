@@ -62,7 +62,10 @@
 @media(prefers-reduced-motion:reduce){.progress a span::before,.progress li:not(:last-child)::after{transition:none}}
 .form :global(.platform-fieldbox){position:relative;display:block;margin:0;padding:13px 12px 12px;border:1px solid #bfcfc5;border-radius:10px;background:#fff;font-size:16px;line-height:1.35;color:var(--brand-ink);cursor:text;transition:border-color .15s ease,box-shadow .15s ease}
 .form :global(.platform-fieldbox):focus-within{border-color:#527a6b;box-shadow:0 0 0 2px #527a6b33}
-.form :global(.platform-fieldbox)>span,.form :global(.platform-fieldbox)>label{position:absolute;top:0;left:9px;transform:translateY(-50%);margin:0;padding:0 4px;max-width:calc(100% - 26px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;line-height:1.3;letter-spacing:.01em;color:var(--brand-muted);background:#fff;border-radius:4px;cursor:text;pointer-events:none}
+.form :global(.platform-fieldbox){margin-top:8px}
+.form :global(.platform-fieldbox)>span,.form :global(.platform-fieldbox)>label{position:absolute;top:-1px;left:9px;transform:translateY(-100%);margin:0;padding:2px 7px 1px;max-width:calc(100% - 26px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;line-height:1.3;letter-spacing:.01em;color:var(--brand-muted);background:#fff;border:1px solid #bfcfc5;border-bottom:0;border-radius:7px 7px 0 0;cursor:text;pointer-events:none;transition:border-color .15s ease}
+.form :global(.platform-fieldbox)>span::after,.form :global(.platform-fieldbox)>label::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#fff}
+.form :global(.platform-fieldbox):focus-within>span,.form :global(.platform-fieldbox):focus-within>label{border-color:#527a6b}
 .form :global(.platform-fieldbox) input,.form :global(.platform-fieldbox) select{display:block;width:100%;margin:0;padding:0;min-height:0;border:0;border-radius:0;background:transparent;font-size:16px;line-height:1.35;color:var(--brand-ink)}
 .form :global(.platform-fieldbox) input:focus-visible,.form :global(.platform-fieldbox) select:focus-visible{outline:none}
 .form :global(.platform-fieldbox) select{min-height:0!important;padding:0 28px 0 0!important;border-width:0!important;border-radius:0!important;line-height:1.35!important;background-position:right 0 center!important;margin-left:-4px;width:calc(100% + 4px);cursor:pointer}

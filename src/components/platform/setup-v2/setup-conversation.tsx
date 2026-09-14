@@ -134,7 +134,7 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
   return <div className={styles.layout} data-loaded={loaded}>
     <aside className={styles.card} aria-label="What Bubs knows">
       <header className={styles.cardHead}>
-        <div><h2>What Bubs knows</h2><p>Fills in as you talk. Change anything here. <button type="button" className={styles.linkish} onClick={restart}>Start over</button></p></div>
+        <div><h2>What Bubs™ knows</h2><p>Fills in as you talk. Change anything here. <button type="button" className={styles.linkish} onClick={restart}>Start over</button></p></div>
         <div className={styles.meter} role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress * 100)} aria-label="Setup progress" style={{ "--p": progress } as React.CSSProperties}><span>{Math.round(progress * 100)}%</span></div>
       </header>
       <p className={styles.status} role="status">{status === "Saving…" && <span className={styles.spinner} aria-hidden="true" />}{status}</p>
@@ -146,10 +146,10 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
       <Field label="Address" value={answers.address ?? ""} placeholder="123 Example Street, Detroit, MI" onChange={v => edit({ address: v || undefined })} />
       <HoursField value={answers.weeklyHours} onChange={weeklyHours => edit({ weeklyHours, hoursPreset: "custom" })} />
       <SelectField label="Appointment length" value={answers.minutes ? String(answers.minutes) : ""} onChange={v => edit({ minutes: v ? Number(v) : undefined })} options={[["", "Not answered yet"], ...[15, 30, 45, 60, 90, 120].map(n => [String(n), `${n} minutes`] as [string, string])]} />
-      <SelectField label="When Bubs answers the phone" value={answers.answering ?? ""} onChange={v => edit({ answering: (v || undefined) as AnsweringPreference | undefined })} options={[["", "Not answered yet"], ...ANSWERING_CHIPS.map(c => [c.value, c.label] as [string, string]), ...(Object.keys(ANSWERING_PREFERENCES) as AnsweringPreference[]).filter(k => k !== "undecided" && !ANSWERING_CHIPS.some(c => c.value === k)).map(k => [k, ANSWERING_PREFERENCES[k].label] as [string, string])]} hint={answeringHint(answers.answering) ?? (answers.answering ? ANSWERING_PREFERENCES[answers.answering]?.description : undefined)} />
+      <SelectField label="When Bubs™ answers the phone" value={answers.answering ?? ""} onChange={v => edit({ answering: (v || undefined) as AnsweringPreference | undefined })} options={[["", "Not answered yet"], ...ANSWERING_CHIPS.map(c => [c.value, c.label] as [string, string]), ...(Object.keys(ANSWERING_PREFERENCES) as AnsweringPreference[]).filter(k => k !== "undecided" && !ANSWERING_CHIPS.some(c => c.value === k)).map(k => [k, ANSWERING_PREFERENCES[k].label] as [string, string])]} hint={answeringHint(answers.answering) ?? (answers.answering ? ANSWERING_PREFERENCES[answers.answering]?.description : undefined)} />
 
       {answers.lookup?.website && <p className={styles.note}>Listing website: <a href={answers.lookup.website} target="_blank" rel="noreferrer">{answers.lookup.website.replace(/^https?:\/\//, "")}</a></p>}
-      {answers.lookup === null && answers.phone && <p className={styles.note}>No Google listing matched this number, so Bubs asked instead.</p>}
+      {answers.lookup === null && answers.phone && <p className={styles.note}>No Google listing matched this number, so Bubs™ asked instead.</p>}
     </aside>
     <div className={styles.chatWrap}><section className={styles.chat} aria-label="Setup conversation with Bubs">
       <div ref={log} className={styles.log} role="log" aria-live="polite">
@@ -216,7 +216,7 @@ function HoursField({ value, onChange }: { value?: DayHours[]; onChange: (v: Day
       <TimeCombo label="Opens" value={open?.opens ?? "09:00"} min={0} max={timeMinutes(open?.closes ?? "17:00") - 15} onChange={t => set(x => ({ ...x, opens: t }))} />
       <TimeCombo label="Closes" value={open?.closes ?? "17:00"} min={timeMinutes(open?.opens ?? "09:00") + 15} max={1440} assumePm onChange={t => set(x => ({ ...x, closes: t }))} />
     </div>
-    <small>{value ? "When customers can book. When Bubs answers the phone is set separately below." : "Not answered yet"}</small>
+    <small>{value ? "When customers can book. When Bubs™ answers the phone is set separately below." : "Not answered yet"}</small>
   </div>;
 }
 

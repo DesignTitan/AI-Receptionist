@@ -4,7 +4,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { env } from "@/lib/env";
 
-export const PRODUCT_NAME = "bubs";
+export const PRODUCT_NAME = "bubs™";
 
 export function ProductLogo() {
   return (

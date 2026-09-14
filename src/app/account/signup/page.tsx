@@ -5,7 +5,7 @@ import { planOf } from "@/lib/platform/model";
 import { planReturnUrl } from "@/lib/platform/plan-navigation";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Sign up · bubs", robots: { index: false, follow: false } };
+export const metadata = { title: "Sign up · bubs™", robots: { index: false, follow: false } };
 
 export default async function Signup({ searchParams }: {
   searchParams: Promise<{ plan?: string; returnTo?: string; preview?: string }>;

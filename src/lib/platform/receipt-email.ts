@@ -10,7 +10,7 @@ export function receiptEmail({ receipt, name, planName, siteUrl, setupPending, t
   const greeting = first ? `Thanks, ${first}.` : "Thank you.";
   const action = setupPending ? "Set up your business" : "Open your dashboard";
   const destination = `${site}${setupPending ? "/account/setup" : "/account"}`;
-  const subject = `${test ? "[Test] " : ""}Your bubs receipt · ${receipt.number}`;
+  const subject = `${test ? "[Test] " : ""}Your bubs™ receipt · ${receipt.number}`;
   const rows = receipt.rows.map(row => `<tr><td style="padding:8px 0;color:#526b63">${escape(row.label)}</td><td align="right" style="padding:8px 0;white-space:nowrap">${escape(money(row.cents,receipt.currency))}</td></tr>`).join("");
   const text = `${greeting}\nYour payment is confirmed.\n${test ? "Sandbox payment — no real charge.\n" : ""}Receipt ${receipt.number}\n${planName}\n${receipt.rows.map(row=>`${row.label}: ${money(row.cents,receipt.currency)}`).join("\n")}\nTotal paid: ${money(receipt.amountPaid,receipt.currency)}\n${receipt.url ? `View receipt: ${receipt.url}\n` : ""}${action}: ${destination}\nQuestions? ${site}/#hear`;
   const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(subject)}</title><style>
@@ -33,7 +33,7 @@ ${receipt.url ? `<p style="margin:16px 0 24px"><a href="${escape(receipt.url)}" 
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:24px"><tr><td align="center" bgcolor="#1e3a34" style="border-radius:999px"><a href="${destination}" style="display:block;padding:16px 24px;color:#fff;text-decoration:none;font-size:15px;font-weight:600;border-radius:999px">${action} →</a></td></tr></table>
 <p style="font-size:13px;line-height:1.6;color:#526b63;margin:24px 0 0">${setupPending ? 'Next, add your business details, opening hours and team. We’ll guide you through the rest.' : 'Visit your dashboard to see how your setup is progressing.'}</p>
 <table role="presentation" width="100%" style="margin-top:32px;border-top:1px solid #e2e9e1"><tr><td style="padding-top:24px;font-size:13px;line-height:1.6">Questions? We’re here to help.<br><a href="${site}/#hear" style="color:#1e3a34">Contact us</a></td></tr></table>
-<p style="font-size:11px;color:#526b63;line-height:1.8;margin:24px 0 0">bubs &nbsp; · &nbsp; <a href="${site}/legal#privacy" style="color:#526b63">Privacy</a> &nbsp; <a href="${site}/legal#terms" style="color:#526b63">Terms</a></p>
+<p style="font-size:11px;color:#526b63;line-height:1.8;margin:24px 0 0">bubs™ &nbsp; · &nbsp; <a href="${site}/legal#privacy" style="color:#526b63">Privacy</a> &nbsp; <a href="${site}/legal#terms" style="color:#526b63">Terms</a></p>
 </td></tr></table></td></tr></table></body></html>`;
   return { subject, html, text };
 }

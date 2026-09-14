@@ -52,10 +52,10 @@ export const TRADE_LABELS: Record<Trade, string> = { salon: "Salon, spa or welln
 
 /** The answering options worth offering in conversation, each with what actually happens. The rest stay in settings. */
 export const ANSWERING_CHIPS: Chip[] = [
-  { label: "Bubs answers every call", value: "always", hint: "Any time, day or night. Your team never has to pick up." },
-  { label: "Bubs answers only after hours", value: "after_hours", hint: "Your team takes calls while you’re open. Bubs covers when you’re closed." },
-  { label: "Bubs answers when your team can’t", value: "backup", hint: "Your phone rings first. If nobody picks up after a few rings, Bubs does." },
-  { label: "Callers choose", value: "choice", hint: "Callers press 1 to talk to Bubs or 2 for your team." },
+  { label: "Bubs™ answers every call", value: "always", hint: "Any time, day or night. Your team never has to pick up." },
+  { label: "Bubs™ answers only after hours", value: "after_hours", hint: "Your team takes calls while you’re open. Bubs™ covers when you’re closed." },
+  { label: "Bubs™ answers when your team can’t", value: "backup", hint: "Your phone rings first. If nobody picks up after a few rings, Bubs™ does." },
+  { label: "Callers choose", value: "choice", hint: "Callers press 1 to talk to Bubs™ or 2 for your team." },
 ];
 export const answeringHint = (value: string | undefined) => ANSWERING_CHIPS.find(c => c.value === value)?.hint;
 
@@ -92,7 +92,7 @@ export function promptFor(step: StepId, a: InterviewAnswers): Prompt {
   const name = a.businessName ? ` at ${a.businessName}` : "";
   switch (step) {
     case "phone":
-      return { id: step, text: "Hi, I’m Bubs. I’ll have your front desk set up in a couple of minutes. What’s your business phone number?", input: "phone", placeholder: "(313) 555-0142" };
+      return { id: step, text: "Hi, I’m Bubs™. I’ll have your front desk set up in a couple of minutes. What’s your business phone number?", input: "phone", placeholder: "(313) 555-0142" };
     case "confirm": {
       const l = a.lookup!;
       return { id: step, text: `I found a listing for that number: ${l.name}, ${l.address}. Is that you?`, input: "chips", chips: [{ label: "Yes, that’s us", value: "yes" }, { label: "Not quite", value: "no" }] };
@@ -112,7 +112,7 @@ export function promptFor(step: StepId, a: InterviewAnswers): Prompt {
     case "answering":
       return { id: step, text: "Last one. When should I answer the phone? This can be any time, whatever your business hours are.", input: "chips", chips: ANSWERING_CHIPS };
     case "done":
-      return { id: step, text: `That’s everything I need${name}. It’s all under What Bubs knows; change anything there and I’ll keep up.`, input: "none" };
+      return { id: step, text: `That’s everything I need${name}. It’s all under What Bubs™ knows; change anything there and I’ll keep up.`, input: "none" };
   }
 }
 

@@ -258,7 +258,7 @@ export function AuthFlow({
   function download() {
     const blob = new Blob(
       [
-        `bubs recovery codes\nKeep these private. Each code works once.\n\n${codes.join("\n")}\n`,
+        `bubs™ recovery codes\nKeep these private. Each code works once.\n\n${codes.join("\n")}\n`,
       ],
       { type: "text/plain" },
     );

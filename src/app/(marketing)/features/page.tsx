@@ -9,7 +9,7 @@ import "./features.css";
 
 export const metadata: Metadata = {
   title: "Features and benefits",
-  description: "Everything bubs does for a business that runs on appointments: online booking, AI confirmation calls, records and follow-up, usage controls, and the incoming-call pilot. Each feature marked as included, pilot or coming soon.",
+  description: "Everything bubs™ does for a business that runs on appointments: online booking, AI confirmation calls, records and follow-up, usage controls, and the incoming-call pilot. Each feature marked as included, pilot or coming soon.",
 };
 
 const CHAPTERS = [
@@ -126,7 +126,7 @@ export default function FeaturesPage() {
             </details>
             <details>
               <summary>Will it work with my current booking software?</summary>
-              <p>Appointments are managed in bubs’s own appointment book. Calendar and practice-software synchronization are not available yet. Tell us which system you use during setup so we can check whether this workflow fits your business before activation.</p>
+              <p>Appointments are managed in the bubs™ appointment book. Calendar and practice-software synchronization are not available yet. Tell us which system you use during setup so we can check whether this workflow fits your business before activation.</p>
             </details>
             <details>
               <summary>Can the AI change or cancel an appointment?</summary>

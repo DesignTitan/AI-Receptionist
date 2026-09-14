@@ -16,7 +16,7 @@ export function AdminHeader({ subtitle }: { subtitle?: string }) {
               Front desk
             </span>
             <span className="block text-[11px] font-medium uppercase tracking-[0.14em] text-subtle">
-              {subtitle ?? "bubs"}
+              {subtitle ?? "bubs™"}
             </span>
           </span>
         </Link>

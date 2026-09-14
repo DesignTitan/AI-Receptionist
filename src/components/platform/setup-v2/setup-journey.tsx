@@ -104,11 +104,11 @@ function Welcome({ answers, complete, onContinue }: { answers: InterviewAnswers;
         <p className={styles.lede}>You’d started telling us about your business. Your answers are saved; carry on from where you stopped.</p>
         <button type="button" className={styles.primary} onClick={onContinue}>Continue</button>
       </> : <>
-        <p className={styles.lede}>Setting up takes about two minutes. Bubs asks a few questions, you answer, and everything stays on screen for you to change.</p>
+        <p className={styles.lede}>Setting up takes about two minutes. Bubs™ asks a few questions, you answer, and everything stays on screen for you to change.</p>
         <ol className={styles.plan}>
-          <li><strong>Tell us about your business.</strong> Start with your phone number; Bubs fills in what it can find.</li>
+          <li><strong>Tell us about your business.</strong> Start with your phone number; Bubs™ fills in what it can find.</li>
           <li><strong>Preview your front desk.</strong> Your greeting, your booking page, your hours.</li>
-          <li><strong>Go live.</strong> Get your Bubs number, forward your line, and Bubs confirms it works.</li>
+          <li><strong>Go live.</strong> Get your Bubs™ number, forward your line, and Bubs™ confirms it works.</li>
         </ol>
         <button type="button" className={styles.primary} onClick={onContinue}>Continue</button>
       </>}
@@ -127,7 +127,7 @@ function Hear({ answers, onBack, onNext }: { answers: InterviewAnswers; onBack: 
         <h3>What callers hear first</h3>
         <blockquote className={styles.script}>{greetingScript(answers)}</blockquote>
         <button type="button" className={styles.secondary} disabled aria-describedby="v2-voice-note">▶ Play greeting</button>
-        <p id="v2-voice-note" className={styles.note}>Voice is switched off in this build, so there’s no audio yet. When it’s on, this plays in Bubs’s voice; nothing is pre-recorded.</p>
+        <p id="v2-voice-note" className={styles.note}>Voice is switched off in this build, so there’s no audio yet. When it’s on, this plays in Bubs™’s voice; nothing is pre-recorded.</p>
       </article>
       <article className={styles.stageCard}>
         <h3>Your booking page</h3>
@@ -137,7 +137,7 @@ function Hear({ answers, onBack, onNext }: { answers: InterviewAnswers; onBack: 
       </article>
       <article className={`${styles.stageCard} ${styles.stageCardWide}`}>
         <h3>You be the caller</h3>
-        <p>This is the part that makes it real: you ring Bubs, ask for an appointment, and watch it appear on your booking page. It needs voice, which isn’t on in this build.</p>
+        <p>This is the part that makes it real: you ring Bubs™, ask for an appointment, and watch it appear on your booking page. It needs voice, which isn’t on in this build.</p>
         <button type="button" className={styles.secondary} disabled>Call me now</button>
       </article>
     </div>
@@ -150,12 +150,12 @@ function Hear({ answers, onBack, onNext }: { answers: InterviewAnswers; onBack: 
 
 function Live({ answers, provider, onProvider, onBack }: { answers: InterviewAnswers; provider: PhoneProvider; onProvider: (p: PhoneProvider) => void; onBack: () => void }) {
   const area = answers.phone?.replace(/\D/g, "").slice(0, 3) ?? "";
-  const fwd = forwardingSteps(provider, area ? `your (${area}) Bubs number` : undefined);
+  const fwd = forwardingSteps(provider, area ? `your (${area}) Bubs™ number` : undefined);
   return <section className={styles.stage} aria-labelledby="v2-live">
     <header className={styles.stageHead}><h2 id="v2-live">Go live.</h2><p>Three things happen here, in order. Each one is checked before the next.</p></header>
     <ol className={styles.liveSteps}>
       <li>
-        <h3>1. Your Bubs number</h3>
+        <h3>1. Your Bubs™ number</h3>
         <p>{area ? <>A local <strong>({area})</strong> number, reserved the moment you go live. Callers see your business, not a call centre.</> : "A local number in your area code, reserved when you go live."}</p>
         <p className={styles.note}>Number provisioning isn’t wired in this build.</p>
       </li>
@@ -168,11 +168,11 @@ function Live({ answers, provider, onProvider, onBack }: { answers: InterviewAns
         <ol className={styles.fwd}>{fwd.steps.map(s => <li key={s}>{s}</li>)}</ol>
         {fwd.off && <p className={styles.note}>{fwd.off}</p>}
         {fwd.note && <p className={styles.note}>{fwd.note}</p>}
-        <p className={styles.note}>When you go live, Bubs checks your carrier from the number itself, so this dropdown becomes optional.</p>
+        <p className={styles.note}>When you go live, Bubs™ checks your carrier from the number itself, so this dropdown becomes optional.</p>
       </li>
       <li>
         <h3>3. Prove it works</h3>
-        <p>Bubs calls your business line. If the call reaches Bubs, forwarding is confirmed and your front desk is live.</p>
+        <p>Bubs™ calls your business line. If the call reaches Bubs™, forwarding is confirmed and your front desk is live.</p>
         <button type="button" className={styles.secondary} disabled>Test forwarding</button>
         <p className={styles.note}>Needs voice; not on in this build.</p>
       </li>

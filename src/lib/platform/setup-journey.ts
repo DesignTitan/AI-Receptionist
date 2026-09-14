@@ -71,7 +71,7 @@ export function openingsPreview(hours: DayHours[] | undefined, minutes: number |
 export type Forwarding = { title: string; steps: string[]; off?: string; note?: string };
 
 /** Forwarding steps by carrier. Codes vary by plan, which is why go-live ends with a test call. */
-export function forwardingSteps(provider: PhoneProvider | undefined, bubsNumber = "your Bubs number"): Forwarding {
+export function forwardingSteps(provider: PhoneProvider | undefined, bubsNumber = "your Bubs™ number"): Forwarding {
   switch (provider) {
     case "verizon":
       return { title: "Forward your Verizon line", steps: [`From your business phone, dial *72 then ${bubsNumber}.`, "Wait for the confirmation tone, then hang up."], off: "Dial *73 to turn forwarding off." };
@@ -82,11 +82,11 @@ export function forwardingSteps(provider: PhoneProvider | undefined, bubsNumber 
     case "comcast":
       return { title: "Forward your Comcast Business line", steps: [`Dial *72 then ${bubsNumber}, wait for the tone.`, "Or set it in Comcast Business → Voice → Call Forwarding."], off: "Dial *73 to turn it off." };
     case "ringcentral": case "nextiva": case "vonage": case "zoom": case "google":
-      return { title: "Forward from your phone system", steps: ["Open your admin portal and find Call handling or Call forwarding.", `Add ${bubsNumber} as the forward-to number for the times Bubs should answer.`], note: "Bubs can also answer only when you don’t pick up; set that as the “unanswered” rule." };
+      return { title: "Forward from your phone system", steps: ["Open your admin portal and find Call handling or Call forwarding.", `Add ${bubsNumber} as the forward-to number for the times Bubs™ should answer.`], note: "Bubs™ can also answer only when you don’t pick up; set that as the “unanswered” rule." };
     case "none":
-      return { title: "No forwarding needed", steps: ["Your Bubs number is your business line.", "Put it on your website, Google listing and cards."] };
+      return { title: "No forwarding needed", steps: ["Your Bubs™ number is your business line.", "Put it on your website, Google listing and cards."] };
     default:
-      return { title: "We’ll find your carrier", steps: ["When you go live, Bubs checks which carrier your number is on and shows the exact steps."], note: "You can also pick your carrier above to see the steps now." };
+      return { title: "We’ll find your carrier", steps: ["When you go live, Bubs™ checks which carrier your number is on and shows the exact steps."], note: "You can also pick your carrier above to see the steps now." };
   }
 }
 
@@ -101,7 +101,7 @@ export function resumeMessage(a: InterviewAnswers, complete: boolean): string {
   if (a.weeklyHours && open) facts.push(spokenHours(a.weeklyHours));
   if (a.minutes) facts.push(`${a.minutes}-minute appointments`);
   const name = a.businessName ? ` for ${a.businessName}` : "";
-  if (complete) return `Welcome back. I still have everything${name}${facts.length ? `: ${facts.join("; ")}` : ""}. Change anything under What Bubs knows, or carry on.`;
+  if (complete) return `Welcome back. I still have everything${name}${facts.length ? `: ${facts.join("; ")}` : ""}. Change anything under What Bubs™ knows, or carry on.`;
   const have = [a.phone && "your phone number", a.businessName && "your business name", a.trade && "what you do", a.address && "your address", a.weeklyHours && "your hours", a.minutes && "your appointment length"].filter(Boolean) as string[];
   return `Welcome back. So far I have ${have.length ? have.join(", ") : "nothing yet"}. Let’s carry on.`;
 }

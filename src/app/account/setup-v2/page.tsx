@@ -17,7 +17,7 @@ export default function SetupV2() {
     <main id="main" className={styles.page}>
       <header className={styles.head}>
         <p className={styles.eyebrow}>Version 2 · experiment</p>
-        <h1>Set up by talking to Bubs.</h1>
+        <h1>Set up by talking to Bubs™.</h1>
         <p>The whole setup, from payment confirmed to going live. Same data as the current setup, different way in. <Link href="/account?preview=confirmation">Open the current version</Link> to compare.</p>
       </header>
       <SetupJourney />

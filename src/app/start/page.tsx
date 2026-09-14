@@ -20,7 +20,7 @@ export default async function Start({ searchParams }: { searchParams: Promise<{ 
   const contactName = c?.config.contactName ?? user?.user_metadata?.full_name;
   return <div className={styles.page}>
     <header className={styles.header}>
-      <Link href="/" className={styles.brand}><img src="/marketing/happy-pillow-mascot.png" alt="" width="42" height="42" />bubs</Link>
+      <Link href="/" className={styles.brand}><img src="/marketing/happy-pillow-mascot.png" alt="" width="42" height="42" />bubs™</Link>
       <Link href={returnTo} className={styles.backToPlans} aria-label="Back to plans"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" /></svg><span>Back to plans</span></Link>
     </header>
     <main id="main" className={styles.main}>

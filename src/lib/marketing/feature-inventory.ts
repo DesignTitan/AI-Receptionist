@@ -85,7 +85,7 @@ export const FEATURE_GROUPS: FeatureGroup[] = [
       { name: "Update your team and hours yourself", detail: "Change details as your business changes.", status: "soon", roadmapId: "owner-business-editing" },
       { name: "More than one location", detail: "Reception for several locations in one account.", status: "soon", roadmapId: "multiple-locations" },
       { name: "More than one phone line", detail: "A line for each job.", status: "soon", roadmapId: "multiple-phone-lines" },
-      { name: "Referral rewards", detail: "Recommend bubs and track rewards from your dashboard.", status: "soon", roadmapId: "referral-rewards" },
+      { name: "Referral rewards", detail: "Recommend bubs™ and track rewards from your dashboard.", status: "soon", roadmapId: "referral-rewards" },
     ],
   },
 ];

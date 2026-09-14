@@ -30,7 +30,7 @@ export function Frame({
         {children}
       </main>
       <footer className="platform-footer">
-        <span>bubs · A little more room in your day.</span>
+        <span>bubs™ · A little more room in your day.</span>
         <Link href="/">Back to the site</Link>
       </footer>
     </div>

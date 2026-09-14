@@ -34,7 +34,7 @@ export default async function AdminLoginPage({
           <h1 className="mt-5 text-2xl font-semibold tracking-[-0.02em] text-ink">
             Staff dashboard
           </h1>
-          <p className="mt-1.5 text-[13.5px] text-muted">{"bubs"}</p>
+          <p className="mt-1.5 text-[13.5px] text-muted">{"bubs™"}</p>
         </div>
 
         <form action={login} className="card space-y-4 p-6">

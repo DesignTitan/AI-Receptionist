@@ -52,7 +52,7 @@
 .fieldbox input,.fieldbox select{display:block;width:100%;margin:0;padding:0;min-height:0;border:0;border-radius:0;background:transparent;font:inherit;font-size:16px;line-height:1.35;color:var(--brand-ink)}
 .fieldbox input:focus-visible,.fieldbox select:focus-visible{outline:none}
 /* Specificity matches the global select rule in brand/form-fields.css, which also uses !important. */
-.card .fieldbox select,.liveSteps .fieldbox select{min-height:0!important;padding:0 28px 0 0!important;border-width:0!important;border-radius:0!important;line-height:1.35!important;background-position:right 0 center!important;margin-left:-4px;width:calc(100% + 4px);cursor:pointer}
+.card .fieldbox select,.liveSteps .fieldbox select{min-height:0!important;padding:0 28px 0 0!important;border-width:0!important;border-radius:0!important;line-height:1.35!important;background-position:right 0 center!important;margin-left:-1px;width:calc(100% + 1px);cursor:pointer}
 .card .fieldbox select:focus-visible,.liveSteps .fieldbox select:focus-visible{outline:none!important}
 .fieldbox input::placeholder{color:#9fb2a8}
 .fieldbox[data-hours]{gap:10px;cursor:default}

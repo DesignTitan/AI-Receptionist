@@ -227,12 +227,17 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
 
   function toggleMute() { const m = !muted; session.current?.mute(m); setMuted(m); }
 
-  const [micTest, setMicTest] = useState<{ state: "idle" | "testing" | "ok" | "silent" | "blocked" | "none"; device?: string }>({ state: "idle" });
+  const [micTest, setMicTest] = useState<{ state: "idle" | "testing" | "ok" | "silent" | "blocked" | "none" | "changed"; device?: string }>({ state: "idle" });
   const [level, setLevel] = useState(0);
   const MIC_KEY = "receptionist-setup-mic";
   const [mics, setMics] = useState<Array<{ id: string; label: string }>>([]);
   const [micId, setMicId] = useState<string>(() => { try { return localStorage.getItem(MIC_KEY) ?? ""; } catch { return ""; } });
-  function chooseMic(id: string) { setMicId(id); try { if (id) localStorage.setItem(MIC_KEY, id); else localStorage.removeItem(MIC_KEY); } catch {} }
+  function chooseMic(id: string) {
+    setMicId(id);
+    try { if (id) localStorage.setItem(MIC_KEY, id); else localStorage.removeItem(MIC_KEY); } catch {}
+    // A different microphone has to prove itself before Bubs uses it.
+    setMicTest({ state: "changed", device: mics.find(m => m.id === id)?.label ?? "Default microphone" });
+  }
   async function listMics() {
     try {
       const all = await navigator.mediaDevices.enumerateDevices();
@@ -290,7 +295,17 @@ export function ChatPanel({ chat }: { chat: SetupChat }) {
   const talking = voice === "connecting" || voice === "active";
   const interviewing = stage === "talk" && prompt?.id !== "done";
   const placeholder = !interviewing ? (stage === "hear" ? "Ask about the greeting, the confirmation call or the booking page" : "Ask about any field on the card") : prompt?.placeholder ?? (prompt?.input === "chips" ? "Or type your answer, or ask a question" : "Type your answer, or ask a question");
-  const micText = { idle: "", testing: "Say something…", ok: "Microphone ready.", silent: `“${micTest.device}” heard nothing. Pick another microphone in the pill and test again.`, blocked: "Chrome blocked the microphone for this site. Click the lock icon in the address bar → Microphone → Allow.", none: "No microphone found by the browser." }[micTest.state];
+  const micText = {
+    idle: "",
+    testing: "Say something out loud…",
+    ok: "All set. Want a different microphone? Pick it on the right and test again.",
+    silent: `Heard nothing from “${micTest.device}”. Make sure your microphone is set up: pick the one you’re speaking into on the right, then test again.`,
+    changed: `Switched to “${micTest.device}”. Test again to make sure it works.`,
+    blocked: "Chrome blocked the microphone for this site. Click the lock icon in the address bar → Microphone → Allow, then test again.",
+    none: "No microphone found by the browser. Plug one in or connect your headphones, then test again.",
+  }[micTest.state];
+  const needsRetest = micTest.state === "silent" || micTest.state === "changed" || micTest.state === "blocked" || micTest.state === "none";
+  const attention = micTest.state === "silent" || micTest.state === "none";
   return <div className={styles.chatWrap}><section className={styles.chat} aria-label="Setup conversation with Bubs">
     <div ref={log} className={styles.log} role="log" aria-live="polite">
       {lines.map(l => <div key={l.id} className={styles.line} data-who={l.who}>
@@ -306,11 +321,11 @@ export function ChatPanel({ chat }: { chat: SetupChat }) {
         <button type="button" className={styles.secondary} onClick={toggleMute} disabled={voice !== "active"} aria-pressed={muted}>{muted ? "Unmute" : "Mute"}</button>
         <button type="button" className={styles.secondary} onClick={() => stopVoice("ended")}>End voice</button>
       </> : <>
-        <button type="button" className={styles.micTestBtn} data-state={micTest.state} onClick={testMic} disabled={micTest.state === "testing"}>
-          {micTest.state === "ok" ? "✓ Microphone ready" : micTest.state === "testing" ? "Listening…" : "Test microphone"}
+        <button type="button" className={styles.micTestBtn} data-state={micTest.state} data-retest={needsRetest || undefined} onClick={testMic} disabled={micTest.state === "testing"}>
+          {micTest.state === "ok" ? "✓ All set" : micTest.state === "testing" ? "Listening…" : needsRetest ? "Test again" : "Test microphone"}
           {micTest.state === "testing" && <span className={styles.level} aria-hidden="true"><i style={{ transform: `scaleX(${level})` }} /></span>}
         </button>
-        {mics.length > 0 && <label className={styles.micPick} title="Change microphone">
+        {mics.length > 0 && <label className={styles.micPick} data-attention={attention || undefined} title="Change microphone">
           <span className={styles.micName}>{currentMicLabel}</span><span aria-hidden="true">▾</span>
           <select aria-label="Microphone" value={micId} onChange={e => chooseMic(e.target.value)}><option value="">Default microphone</option>{mics.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}</select>
         </label>}

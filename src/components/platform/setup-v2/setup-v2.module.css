@@ -229,3 +229,9 @@
 .micPick select{position:absolute;inset:0;width:100%;opacity:0;cursor:pointer;min-height:0!important;padding:0!important;border:0!important}
 .level{position:absolute;left:0;right:0;bottom:0;height:3px;background:#e2eee7}
 .level i{display:block;height:100%;background:#2f8f5b;transform-origin:left;transition:transform .06s linear}
+
+.micTestBtn[data-retest]{background:var(--brand-ink);color:#fff;border-color:var(--brand-ink)}
+.micTestBtn[data-state=changed]{border-color:var(--brand-ink)}
+.micPick[data-attention]{border-color:#c98a7a;box-shadow:0 0 0 3px #c98a7a33;animation:v2attention 1.2s ease-in-out 3}
+@keyframes v2attention{0%,100%{box-shadow:0 0 0 3px #c98a7a33}50%{box-shadow:0 0 0 6px #c98a7a22}}
+@media(prefers-reduced-motion:reduce){.micPick[data-attention]{animation:none}}

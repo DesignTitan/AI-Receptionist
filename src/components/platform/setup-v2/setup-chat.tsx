@@ -269,7 +269,7 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
     } finally { stream?.getTracks().forEach(t => t.stop()); }
   }
 
-  return { lines, prompt, draft, setDraft, busy, submit, edit, restart, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute, micTest, testMic, mics, micId, chooseMic };
+  return { lines, prompt, draft, setDraft, busy, submit, edit, restart, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute, micTest, setMicTest, testMic, mics, micId, chooseMic };
 }
 
 export type SetupChat = ReturnType<typeof useSetupChat>;
@@ -279,7 +279,7 @@ function previewIntro(a: InterviewAnswers): string {
 }
 
 export function ChatPanel({ chat }: { chat: SetupChat }) {
-  const { lines, prompt, draft, setDraft, busy, submit, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute, micTest, testMic, mics, micId, chooseMic } = chat;
+  const { lines, prompt, draft, setDraft, busy, submit, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute, micTest, setMicTest, testMic, mics, micId, chooseMic } = chat;
   const micText = { idle: "", testing: "Listening for three seconds… say something.", ok: `Microphone works: ${micTest.device}.`, silent: `Chrome is using “${micTest.device}” but heard nothing. Check it’s the right device in Chrome → Site settings → Microphone.`, blocked: "Chrome blocked the microphone for this site. Click the lock icon in the address bar → Microphone → Allow.", none: "No microphone found by the browser." }[micTest.state];
   const talking = voice === "connecting" || voice === "active";
   const interviewing = stage === "talk" && prompt?.id !== "done";
@@ -299,10 +299,10 @@ export function ChatPanel({ chat }: { chat: SetupChat }) {
         <button type="button" className={styles.secondary} onClick={toggleMute} disabled={voice !== "active"} aria-pressed={muted}>{muted ? "Unmute" : "Mute"}</button>
         <button type="button" className={styles.secondary} onClick={() => stopVoice("ended")}>End voice</button>
       </> : <>
-        <button type="button" className={styles.primary} onClick={startVoice} disabled={voice === "unavailable"}>{voice === "ended" ? "Talk to Bubs™ again" : "Talk to Bubs™"}</button>
-        <button type="button" className={styles.secondary} onClick={testMic} disabled={micTest.state === "testing"}>Test microphone</button>
-        {mics.length > 1 && <select className={styles.micPick} aria-label="Microphone" value={micId} onChange={e => chooseMic(e.target.value)}><option value="">Default microphone</option>{mics.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}</select>}
-        <span className={styles.voiceStatus}>{micText || (voice === "unavailable" ? "Voice isn’t connected in this build; typing works." : "Say your answers out loud; the card fills in as you talk.")}</span>
+        <button type="button" className={micTest.state === "ok" ? styles.secondary : styles.primary} onClick={testMic} disabled={micTest.state === "testing"}>{micTest.state === "ok" ? "Test again" : "1. Test microphone"}</button>
+        {mics.length > 1 && <select className={styles.micPick} aria-label="Microphone" value={micId} onChange={e => { chooseMic(e.target.value); setMicTest({ state: "idle" }); }}><option value="">Default microphone</option>{mics.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}</select>}
+        <button type="button" className={styles.primary} onClick={startVoice} disabled={voice === "unavailable" || micTest.state !== "ok"} title={micTest.state !== "ok" ? "Test your microphone first" : undefined}>{voice === "ended" ? "2. Talk to Bubs™ again" : "2. Talk to Bubs™"}</button>
+        <span className={styles.voiceStatus}>{micText || (voice === "unavailable" ? "Voice isn’t connected in this build; typing works." : "Test your microphone first, then talk to Bubs™. Or just type below.")}</span>
       </>}
     </div>
     {voiceNote && <p className={styles.voiceNote} role="alert">{voiceNote}</p>}

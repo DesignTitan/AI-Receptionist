@@ -1,3 +1,12 @@
+## Holding site (14 September 2026, not deployed)
+
+- A hero-only "coming soon" homepage lives at /coming-soon: the same copy, photo and logo, a
+  Coming soon pill above the kicker, no navigation links and no actions. Exactly one viewport
+  tall (100vh; 100svh under 760px), scaled for desktop, tablet and phone. Files:
+  src/app/(holding)/. In production it takes over "/" when COMING_SOON=true is set on Vercel
+  (src/proxy.ts), and it is public even while SITE_GATE stays locked. Preview locally at
+  http://127.0.0.1:3101/coming-soon. Owner review pending before any deploy.
+
 # NOW
 
 Updated 14 September 2026. Read this first at the start of a work session.

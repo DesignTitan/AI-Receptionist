@@ -40,6 +40,12 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // The holding site. With COMING_SOON=true the homepage is the hero alone, public even while
+  // the rest of the site stays behind the password gate. Everything else is unchanged.
+  if (process.env.COMING_SOON === "true" && (pathname === "/" || pathname === "/coming-soon")) {
+    return pathname === "/" ? NextResponse.rewrite(new URL("/coming-soon", request.url)) : NextResponse.next();
+  }
+
   if (env.siteGate === "locked") {
     const unlocked = await verifySiteToken(request.cookies.get(SITE_COOKIE)?.value);
 

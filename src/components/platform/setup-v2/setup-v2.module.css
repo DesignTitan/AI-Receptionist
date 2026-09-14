@@ -217,4 +217,15 @@
 .voiceNote{margin:0;padding:8px 24px 12px;font-size:12px;color:#923d2c;background:#fff}
 .caption{opacity:.6;font-style:italic}
 @media(prefers-reduced-motion:reduce){.voiceDot{animation:none}}
-.micPick{max-width:220px;min-height:36px!important;padding:6px 28px 6px 10px!important;border-radius:10px!important;font-size:12px!important;border:1px solid #cddfd3!important;background-color:#fff}
+
+/* One pill: test the mic, and see (or change) which mic, in the same place. */
+.micPill{position:relative;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px 0 0;border:1px solid #b8cfc2;border-radius:999px;background:#fff;color:var(--brand-ink);font-size:14px;font-weight:600;overflow:hidden}
+.micPill>button{border:0;background:none;padding:10px 0 10px 16px;font:inherit;color:inherit;cursor:pointer}
+.micPill>button:disabled{cursor:default}
+.micPill[data-state=ok]{border-color:#2f8f5b;background:#eef8f2}
+.micPill[data-state=silent],.micPill[data-state=blocked],.micPill[data-state=none]{border-color:#c98a7a}
+.micChoice{position:relative;display:inline-flex;align-items:center;gap:6px;font-weight:400;color:var(--brand-muted);cursor:pointer;max-width:220px}
+.micName{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.micChoice select{position:absolute;inset:0;width:100%;opacity:0;cursor:pointer;min-height:0!important;padding:0!important;border:0!important}
+.level{position:absolute;left:0;right:0;bottom:0;height:3px;background:#e2eee7}
+.level i{display:block;height:100%;background:#2f8f5b;transform-origin:left;transition:transform .06s linear}

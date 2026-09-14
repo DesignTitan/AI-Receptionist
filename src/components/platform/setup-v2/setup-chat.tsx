@@ -228,6 +228,7 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
   function toggleMute() { const m = !muted; session.current?.mute(m); setMuted(m); }
 
   const [micTest, setMicTest] = useState<{ state: "idle" | "testing" | "ok" | "silent" | "blocked" | "none"; device?: string }>({ state: "idle" });
+  const [level, setLevel] = useState(0);
   const MIC_KEY = "receptionist-setup-mic";
   const [mics, setMics] = useState<Array<{ id: string; label: string }>>([]);
   const [micId, setMicId] = useState<string>(() => { try { return localStorage.getItem(MIC_KEY) ?? ""; } catch { return ""; } });
@@ -240,9 +241,13 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
       if (micId && !inputs.some(m => m.id === micId)) chooseMic("");
     } catch {}
   }
-  /** Proves the microphone alone: which device Chrome chose and whether it hears anything in three seconds. No session, no cost. */
+  // If the site already has permission, show the device names before any test.
+  useEffect(() => { if (loaded) void listMics(); }, [loaded]); // eslint-disable-line react-hooks/exhaustive-deps
+  const currentMicLabel = mics.find(m => m.id === micId)?.label ?? (mics.length ? "Default microphone" : "");
+
+  /** Listens until it hears you (up to ten seconds), showing the level as it goes. No session, no cost. */
   async function testMic() {
-    setMicTest({ state: "testing" });
+    setMicTest({ state: "testing" }); setLevel(0);
     let stream: MediaStream | null = null;
     try {
       if (!navigator.mediaDevices?.getUserMedia) { setMicTest({ state: "none" }); return; }
@@ -250,26 +255,28 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
       const device = stream.getAudioTracks()[0]?.label || "Default microphone";
       void listMics();
       const ctx = new AudioContext();
-      const src = ctx.createMediaStreamSource(stream);
       const analyser = ctx.createAnalyser(); analyser.fftSize = 512;
-      src.connect(analyser);
+      ctx.createMediaStreamSource(stream).connect(analyser);
       const buf = new Uint8Array(analyser.fftSize);
-      let peak = 0;
-      const until = Date.now() + 3000;
+      let hits = 0;
+      const until = Date.now() + 10_000;
       while (Date.now() < until) {
         analyser.getByteTimeDomainData(buf);
-        for (const v of buf) peak = Math.max(peak, Math.abs(v - 128));
-        await new Promise(r => setTimeout(r, 100));
+        let peak = 0; for (const v of buf) peak = Math.max(peak, Math.abs(v - 128));
+        setLevel(Math.min(1, peak / 40));
+        if (peak > 8) hits++; else hits = Math.max(0, hits - 1);
+        if (hits >= 3) { await ctx.close(); setMicTest({ state: "ok", device }); setLevel(0); return; }
+        await new Promise(r => setTimeout(r, 60));
       }
       await ctx.close();
-      setMicTest({ state: peak > 6 ? "ok" : "silent", device });
+      setMicTest({ state: "silent", device }); setLevel(0);
     } catch (e) {
       const name = e instanceof Error ? e.name : "";
-      setMicTest({ state: name === "NotAllowedError" || name === "SecurityError" ? "blocked" : name === "NotFoundError" ? "none" : "blocked" });
+      setMicTest({ state: name === "NotFoundError" ? "none" : "blocked" }); setLevel(0);
     } finally { stream?.getTracks().forEach(t => t.stop()); }
   }
 
-  return { lines, prompt, draft, setDraft, busy, submit, edit, restart, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute, micTest, setMicTest, testMic, mics, micId, chooseMic };
+  return { lines, prompt, draft, setDraft, busy, submit, edit, restart, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute, micTest, testMic, mics, micId, chooseMic, currentMicLabel, level };
 }
 
 export type SetupChat = ReturnType<typeof useSetupChat>;
@@ -279,11 +286,11 @@ function previewIntro(a: InterviewAnswers): string {
 }
 
 export function ChatPanel({ chat }: { chat: SetupChat }) {
-  const { lines, prompt, draft, setDraft, busy, submit, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute, micTest, setMicTest, testMic, mics, micId, chooseMic } = chat;
-  const micText = { idle: "", testing: "Listening for three seconds… say something.", ok: `Microphone works: ${micTest.device}.`, silent: `Chrome is using “${micTest.device}” but heard nothing. Check it’s the right device in Chrome → Site settings → Microphone.`, blocked: "Chrome blocked the microphone for this site. Click the lock icon in the address bar → Microphone → Allow.", none: "No microphone found by the browser." }[micTest.state];
+  const { lines, prompt, draft, setDraft, busy, submit, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute, micTest, testMic, mics, micId, chooseMic, currentMicLabel, level } = chat;
   const talking = voice === "connecting" || voice === "active";
   const interviewing = stage === "talk" && prompt?.id !== "done";
   const placeholder = !interviewing ? (stage === "hear" ? "Ask about the greeting, the confirmation call or the booking page" : "Ask about any field on the card") : prompt?.placeholder ?? (prompt?.input === "chips" ? "Or type your answer, or ask a question" : "Type your answer, or ask a question");
+  const micText = { idle: "", testing: "Say something…", ok: "Microphone ready.", silent: `“${micTest.device}” heard nothing. Pick another microphone in the pill and test again.`, blocked: "Chrome blocked the microphone for this site. Click the lock icon in the address bar → Microphone → Allow.", none: "No microphone found by the browser." }[micTest.state];
   return <div className={styles.chatWrap}><section className={styles.chat} aria-label="Setup conversation with Bubs">
     <div ref={log} className={styles.log} role="log" aria-live="polite">
       {lines.map(l => <div key={l.id} className={styles.line} data-who={l.who}>
@@ -299,10 +306,15 @@ export function ChatPanel({ chat }: { chat: SetupChat }) {
         <button type="button" className={styles.secondary} onClick={toggleMute} disabled={voice !== "active"} aria-pressed={muted}>{muted ? "Unmute" : "Mute"}</button>
         <button type="button" className={styles.secondary} onClick={() => stopVoice("ended")}>End voice</button>
       </> : <>
-        <button type="button" className={micTest.state === "ok" ? styles.secondary : styles.primary} onClick={testMic} disabled={micTest.state === "testing"}>{micTest.state === "ok" ? "Test again" : "1. Test microphone"}</button>
-        {mics.length > 1 && <select className={styles.micPick} aria-label="Microphone" value={micId} onChange={e => { chooseMic(e.target.value); setMicTest({ state: "idle" }); }}><option value="">Default microphone</option>{mics.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}</select>}
-        <button type="button" className={styles.primary} onClick={startVoice} disabled={voice === "unavailable" || micTest.state !== "ok"} title={micTest.state !== "ok" ? "Test your microphone first" : undefined}>{voice === "ended" ? "2. Talk to Bubs™ again" : "2. Talk to Bubs™"}</button>
-        <span className={styles.voiceStatus}>{micText || (voice === "unavailable" ? "Voice isn’t connected in this build; typing works." : "Test your microphone first, then talk to Bubs™. Or just type below.")}</span>
+        <div className={styles.micPill} data-state={micTest.state}>
+          <button type="button" onClick={testMic} disabled={micTest.state === "testing"}>{micTest.state === "ok" ? "✓ Microphone ready" : micTest.state === "testing" ? "Listening…" : "Test microphone"}</button>
+          {mics.length > 0 && <label className={styles.micChoice}><span aria-hidden="true">·</span><span className={styles.micName}>{currentMicLabel}</span><span aria-hidden="true">▾</span>
+            <select aria-label="Microphone" value={micId} onChange={e => chooseMic(e.target.value)}><option value="">Default microphone</option>{mics.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}</select>
+          </label>}
+          {micTest.state === "testing" && <span className={styles.level} aria-hidden="true"><i style={{ transform: `scaleX(${level})` }} /></span>}
+        </div>
+        <button type="button" className={styles.primary} onClick={startVoice} disabled={voice === "unavailable" || micTest.state !== "ok"} title={micTest.state !== "ok" ? "Test your microphone first" : undefined}>{voice === "ended" ? "Talk to Bubs™ again" : "Talk to Bubs™"}</button>
+        <span className={styles.voiceStatus} role="status">{micText || (voice === "unavailable" ? "Voice isn’t connected in this build; typing works." : "Test your microphone, then talk to Bubs™. Or just type below.")}</span>
       </>}
     </div>
     {voiceNote && <p className={styles.voiceNote} role="alert">{voiceNote}</p>}

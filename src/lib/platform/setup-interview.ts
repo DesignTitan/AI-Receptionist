@@ -38,7 +38,7 @@ export type InterviewAnswers = {
 
 export type StepId = "phone" | "confirm" | "name" | "trade" | "customTrade" | "address" | "hours" | "minutes" | "answering" | "done";
 
-export type Chip = { label: string; value: string };
+export type Chip = { label: string; value: string; hint?: string };
 export type Prompt = { id: StepId; text: string; input: "phone" | "text" | "chips" | "none"; chips?: Chip[]; placeholder?: string; allowText?: boolean };
 
 export const HOURS_PRESETS: Record<Exclude<HoursPreset, "custom">, { label: string; days: number[]; opens: string; closes: string }> = {
@@ -50,13 +50,14 @@ export const HOURS_PRESETS: Record<Exclude<HoursPreset, "custom">, { label: stri
 
 export const TRADE_LABELS: Record<Trade, string> = { salon: "Salon, spa or wellness", studio: "Creative studio", other: "Something else" };
 
-/** The answering options worth offering in conversation; the rest stay in settings. */
+/** The answering options worth offering in conversation, each with what actually happens. The rest stay in settings. */
 export const ANSWERING_CHIPS: Chip[] = [
-  { label: "Every call, any time", value: "always" },
-  { label: "Only after hours", value: "after_hours" },
-  { label: "When my team can't pick up", value: "backup" },
-  { label: "Let callers choose", value: "choice" },
+  { label: "Bubs answers every call", value: "always", hint: "Any time, day or night. Your team never has to pick up." },
+  { label: "Bubs answers only after hours", value: "after_hours", hint: "Your team takes calls while you’re open. Bubs covers when you’re closed." },
+  { label: "Bubs answers when your team can’t", value: "backup", hint: "Your phone rings first. If nobody picks up after a few rings, Bubs does." },
+  { label: "Callers choose", value: "choice", hint: "Callers press 1 to talk to Bubs or 2 for your team." },
 ];
+export const answeringHint = (value: string | undefined) => ANSWERING_CHIPS.find(c => c.value === value)?.hint;
 
 export function weeklyHoursForPreset(preset: Exclude<HoursPreset, "custom">): DayHours[] {
   const p = HOURS_PRESETS[preset];

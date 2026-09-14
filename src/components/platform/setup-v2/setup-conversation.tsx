@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { ANSWERING_PREFERENCES, type AnsweringPreference } from "@/lib/platform/answering-preference";
-import { applyAnswer, interviewProgress, nextStep, normalizePhone, promptFor, TRADE_LABELS, type BusinessLookup, type InterviewAnswers, type Prompt, type StepId, type Trade } from "@/lib/platform/setup-interview";
+import { ANSWERING_CHIPS, answeringHint, applyAnswer, interviewProgress, nextStep, normalizePhone, promptFor, TRADE_LABELS, type BusinessLookup, type InterviewAnswers, type Prompt, type StepId, type Trade } from "@/lib/platform/setup-interview";
 import { resumeMessage } from "@/lib/platform/setup-journey";
 import { formatTime, parseTimeText, timeOptions } from "@/lib/platform/time-text";
 import { DAY_NAMES, minuteTime, timeMinutes, type DayHours } from "@/lib/platform/weekly-hours";
@@ -14,8 +14,7 @@ export const V2_DRAFT_KEY = "receptionist-setup-v2-draft";
 type Line = { id: number; who: "bubs" | "you"; text: string };
 type Saved = { answers: InterviewAnswers };
 
-let lineId = 0;
-const line = (who: Line["who"], text: string): Line => ({ id: ++lineId, who, text });
+/* Ids are per mounted conversation (a ref), so React StrictMode's double effects and step remounts can't hand two lines the same key. */
 
 /**
  * Version 2 setup: Bubs interviews the owner and the front-desk card fills
@@ -34,6 +33,8 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
   const log = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const nextId = useRef(0);
+  const line = (who: Line["who"], text: string): Line => ({ id: ++nextId.current, who, text });
 
   // Answers persist; the transcript doesn't. Someone coming back gets one line
   // that proves Bubs remembers them, then the next question (or the way on).
@@ -42,7 +43,7 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
     try { const raw = localStorage.getItem(V2_DRAFT_KEY); if (raw) saved = JSON.parse(raw) as Saved; } catch {}
     const a = saved?.answers ?? {};
     const step = nextStep(a);
-    lineId = 0;
+    nextId.current = 0;
     if (Object.keys(a).length) {
       setAnswers(a);
       const p = promptFor(step, a);
@@ -121,7 +122,7 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
 
   function restart() {
     try { localStorage.removeItem(V2_DRAFT_KEY); } catch {}
-    lineId = 0;
+    nextId.current = 0;
     const first = promptFor("phone", {});
     setAnswers({}); setLines([line("bubs", first.text)]); setPrompt(first); setDraft("");
   }
@@ -145,7 +146,7 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
       <Field label="Address" value={answers.address ?? ""} placeholder="123 Example Street, Detroit, MI" onChange={v => edit({ address: v || undefined })} />
       <HoursField value={answers.weeklyHours} onChange={weeklyHours => edit({ weeklyHours, hoursPreset: "custom" })} />
       <SelectField label="Appointment length" value={answers.minutes ? String(answers.minutes) : ""} onChange={v => edit({ minutes: v ? Number(v) : undefined })} options={[["", "Not answered yet"], ...[15, 30, 45, 60, 90, 120].map(n => [String(n), `${n} minutes`] as [string, string])]} />
-      <SelectField label="When Bubs answers" value={answers.answering ?? ""} onChange={v => edit({ answering: (v || undefined) as AnsweringPreference | undefined })} options={[["", "Not answered yet"], ...(Object.keys(ANSWERING_PREFERENCES) as AnsweringPreference[]).filter(k => k !== "undecided").map(k => [k, ANSWERING_PREFERENCES[k].label] as [string, string])]} />
+      <SelectField label="When Bubs answers the phone" value={answers.answering ?? ""} onChange={v => edit({ answering: (v || undefined) as AnsweringPreference | undefined })} options={[["", "Not answered yet"], ...ANSWERING_CHIPS.map(c => [c.value, c.label] as [string, string]), ...(Object.keys(ANSWERING_PREFERENCES) as AnsweringPreference[]).filter(k => k !== "undecided" && !ANSWERING_CHIPS.some(c => c.value === k)).map(k => [k, ANSWERING_PREFERENCES[k].label] as [string, string])]} hint={answeringHint(answers.answering) ?? (answers.answering ? ANSWERING_PREFERENCES[answers.answering]?.description : undefined)} />
 
       {answers.lookup?.website && <p className={styles.note}>Listing website: <a href={answers.lookup.website} target="_blank" rel="noreferrer">{answers.lookup.website.replace(/^https?:\/\//, "")}</a></p>}
       {answers.lookup === null && answers.phone && <p className={styles.note}>No Google listing matched this number, so Bubs asked instead.</p>}
@@ -159,8 +160,8 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
         {busy === "lookup" && <div className={styles.line} data-who="bubs"><Image src="/marketing/happy-mascot-pointed.png" alt="" width={36} height={36} className={styles.avatar} /><p className={`${styles.bubble} ${styles.thinking}`}><span className={styles.spinner} aria-hidden="true" />Checking that number for a listing…</p></div>}
       </div>
       {prompt && !done && <form className={styles.composer} onSubmit={e => { e.preventDefault(); if (draft.trim()) void answer(draft); }}>
-        {prompt.input === "chips" && <div className={styles.chips} role="group" aria-label="Quick answers">
-          {prompt.chips!.map(c => <button key={c.value} type="button" className={styles.chip} disabled={Boolean(busy)} onClick={() => void answer(c.value, c.label)}>{c.label}</button>)}
+        {prompt.input === "chips" && <div className={prompt.chips!.some(c => c.hint) ? styles.optionList : styles.chips} role="group" aria-label="Quick answers">
+          {prompt.chips!.map(c => <button key={c.value} type="button" className={c.hint ? styles.optionCard : styles.chip} disabled={Boolean(busy)} onClick={() => void answer(c.value, c.label)}>{c.hint ? <><strong>{c.label}</strong><span>{c.hint}</span></> : c.label}</button>)}
         </div>}
         {(showText || prompt.input === "chips") && <div className={styles.inputRow}>
           <input ref={input} value={draft} onChange={e => setDraft(e.target.value)} disabled={Boolean(busy)} inputMode={prompt.input === "phone" ? "tel" : undefined} autoComplete="off" placeholder={prompt.placeholder ?? (prompt.input === "chips" ? "Or type your answer" : "Type your answer")} aria-label="Your answer" />
@@ -198,8 +199,8 @@ function Field({ label, value, placeholder, onChange }: { label: string; value: 
   return <label className={styles.fieldbox}><span>{label}</span><input value={draft} placeholder={placeholder ?? " "} onChange={e => { dirty.current = true; setDraft(e.target.value); }} onBlur={commit} onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); commit(); } }} /></label>;
 }
 
-function SelectField({ label, value, options, onChange }: { label: string; value: string; options: [string, string][]; onChange: (v: string) => void }) {
-  return <label className={styles.fieldbox}><span>{label}</span><select value={value} onChange={e => onChange(e.target.value)}>{options.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select></label>;
+function SelectField({ label, value, options, hint, onChange }: { label: string; value: string; options: [string, string][]; hint?: string; onChange: (v: string) => void }) {
+  return <div className={styles.selectWrap}><label className={styles.fieldbox}><span>{label}</span><select value={value} onChange={e => onChange(e.target.value)}>{options.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select></label>{hint && <small className={styles.fieldHint}>{hint}</small>}</div>;
 }
 
 function HoursField({ value, onChange }: { value?: DayHours[]; onChange: (v: DayHours[]) => void }) {

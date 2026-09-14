@@ -153,3 +153,14 @@
 /* No widows: body text never ends on a lone word; headings balance their lines. */
 .lede,.plan li,.stageHead p,.stageCard p,.liveSteps p,.done p,.bubble,.script,.note,.cardHead p,.fwd li{text-wrap:pretty}
 .welcome h2,.stageHead h2,.stageCard h3,.liveSteps h3,.cardHead h2{text-wrap:balance}
+
+/* Options that need explaining: a stacked list of cards instead of chips. */
+.optionList{display:grid;gap:8px}
+.optionCard{display:grid;gap:3px;text-align:left;padding:12px 14px;border:1px solid #b8cfc2;border-radius:14px;background:#fff;color:var(--brand-ink);font:inherit;cursor:pointer;transition:background .15s ease,border-color .15s ease}
+.optionCard strong{font-size:14px;font-weight:600}
+.optionCard span{font-size:13px;line-height:1.45;color:var(--brand-muted);text-wrap:pretty}
+.optionCard:hover{background:var(--brand-mint);border-color:var(--brand-mint)}
+.optionCard:focus-visible{outline:2px solid #527a6b;outline-offset:2px}
+.optionCard:disabled{opacity:.5;cursor:default}
+.selectWrap{display:grid;gap:6px}
+.fieldHint{font-size:12px;line-height:1.45;color:var(--brand-muted);padding:0 2px;text-wrap:pretty}

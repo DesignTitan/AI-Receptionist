@@ -118,3 +118,44 @@ export function applyCommand(text: string, a: InterviewAnswers): Command | null 
   if (addr) return { answers: { ...a, address: addr[1].trim() }, reply: `Done. Address is now ${addr[1].trim()}.` };
   return null;
 }
+
+/** Merge an extractor patch (voice) into the answers; nulls mean "not said". */
+export function applyExtractedPatch(a: InterviewAnswers, p: { phone?: string | null; businessName?: string | null; trade?: "salon" | "studio" | "other" | null; customTrade?: string | null; address?: string | null; days?: number[] | null; opens?: string | null; closes?: string | null; minutes?: number | null; answering?: "always" | "after_hours" | "backup" | "choice" | null }): InterviewAnswers {
+  const next: InterviewAnswers = { ...a };
+  if (p.phone) next.phone = p.phone;
+  if (p.businessName) next.businessName = p.businessName;
+  if (p.trade) { next.trade = p.trade; if (p.trade !== "other") next.customTrade = undefined; }
+  if (p.customTrade) { next.customTrade = p.customTrade; next.trade = next.trade ?? "other"; }
+  if (p.address) next.address = p.address;
+  if (p.days || p.opens || p.closes) {
+    const base = next.weeklyHours ?? weeklyHoursForPreset("weekdays");
+    next.weeklyHours = base.map(d => ({
+      ...d,
+      enabled: p.days ? p.days.includes(d.day) : d.enabled,
+      opens: p.opens ?? d.opens,
+      closes: p.closes ?? d.closes,
+    }));
+    next.hoursPreset = "custom";
+  }
+  if (p.minutes) next.minutes = p.minutes;
+  if (p.answering) next.answering = p.answering;
+  return next;
+}
+
+/** Without a model: the interview parser for the current question, then the command parser. */
+export function heuristicExtract(said: string, a: InterviewAnswers, stepId: string): InterviewAnswers {
+  const cmd = applyCommand(said, a);
+  if (cmd && cmd.answers !== a) return cmd.answers;
+  const t = said.toLowerCase();
+  if (stepId === "trade" || !a.trade) {
+    if (/salon|spa|barber|nail|lash|brow|massage|wellness|hair|beauty/.test(t)) return { ...a, trade: "salon" };
+    if (/studio|photograph|record|dance|tattoo|art\b/.test(t)) return { ...a, trade: "studio" };
+  }
+  if (stepId === "answering" || !a.answering) {
+    if (/every call|any ?time|all calls|always/.test(t)) return { ...a, answering: "always" };
+    if (/after hours|when (we|i)'?re? closed|only after/.test(t)) return { ...a, answering: "after_hours" };
+    if (/can'?t (pick up|answer)|nobody picks|no one picks|few rings|backup|if (we|i) miss/.test(t)) return { ...a, answering: "backup" };
+    if (/press (one|1)|callers? choose|let them choose|choice/.test(t)) return { ...a, answering: "choice" };
+  }
+  return a;
+}

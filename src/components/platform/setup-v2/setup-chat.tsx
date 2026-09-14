@@ -1,8 +1,11 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { applyCommand, guideMessage, isQuestion, localHelp, missingFields } from "@/lib/platform/setup-help";
-import { applyAnswer, nextStep, normalizePhone, promptFor, type BusinessLookup, type InterviewAnswers, type Prompt } from "@/lib/platform/setup-interview";
+import { applyCommand, applyExtractedPatch, guideMessage, heuristicExtract, isQuestion, localHelp, missingFields } from "@/lib/platform/setup-help";
+import type { WebSession } from "@omnidim-ai/client";
+import { VoiceAudio } from "@/components/marketing/voice-audio";
+import { applyAnswer, nextStep, normalizePhone, promptFor, TRADE_LABELS, type BusinessLookup, type InterviewAnswers, type Prompt } from "@/lib/platform/setup-interview";
+import { spokenHours } from "@/lib/platform/setup-journey";
 import styles from "./setup-v2.module.css";
 
 export const V2_DRAFT_KEY = "receptionist-setup-v2-draft";
@@ -20,6 +23,15 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
   const [prompt, setPrompt] = useState<Prompt | null>(null);
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState<"" | "lookup" | "help">("");
+  const [voice, setVoice] = useState<"off" | "unavailable" | "connecting" | "active" | "ended">("off");
+  const [voiceNote, setVoiceNote] = useState("");
+  const [caption, setCaption] = useState("");
+  const [muted, setMuted] = useState(false);
+  const session = useRef<WebSession | null>(null);
+  const audio = useRef<VoiceAudio | null>(null);
+  const lastAgentLine = useRef("");
+  const answersRef = useRef(answers); answersRef.current = answers;
+  const promptRef = useRef(prompt); promptRef.current = prompt;
   const log = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const nextId = useRef(0);
@@ -46,6 +58,14 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
     if (stage === "hear") setLines(l => [...l, line("bubs", previewIntro(answers))]);
     else setLines(l => [...l, line("bubs", "Back to your details. Change anything on the card, or ask me.")]);
   }, [stage, loaded]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!loaded) return;
+    fetch("/api/setup/voice-session", { cache: "no-store" }).then(r => r.json()).then(d => setVoice(d.available ? "off" : "unavailable")).catch(() => setVoice("unavailable"));
+    const leave = () => { session.current?.stop(); audio.current?.stop(); };
+    window.addEventListener("pagehide", leave);
+    return () => { window.removeEventListener("pagehide", leave); leave(); };
+  }, [loaded]);
 
   const painted = useRef(false);
   useEffect(() => {
@@ -137,7 +157,72 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
     setAnswers({}); setLines([line("bubs", first.text)]); setPrompt(first); setDraft("");
   }
 
-  return { lines, prompt, draft, setDraft, busy, submit, edit, restart, log, input, stage };
+  /** What the owner said, spoken → card. Claude when configured; the local parsers otherwise. Nothing is guessed. */
+  async function absorb(said: string) {
+    const a = answersRef.current;
+    const p = promptRef.current;
+    let next = a;
+    try {
+      const known = { phone: a.phone, businessName: a.businessName, trade: a.trade, address: a.address, minutes: a.minutes, answering: a.answering };
+      const r = await fetch("/api/setup/extract", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ said, asked: lastAgentLine.current, known }) });
+      const data = (await r.json()) as { configured?: boolean; patch?: Parameters<typeof applyExtractedPatch>[1] | null };
+      if (r.ok && data.configured && data.patch) next = applyExtractedPatch(a, data.patch);
+      else next = heuristicExtract(said, a, p?.id ?? "");
+    } catch { next = heuristicExtract(said, a, p?.id ?? ""); }
+    if (next !== a) {
+      setAnswers(next);
+      const step = nextStep(next);
+      if (p && step !== p.id) setPrompt(promptFor(step, next));
+    }
+  }
+
+  function stopVoice(reason: "ended" | "off" = "ended") {
+    session.current?.stop(); session.current = null;
+    audio.current?.stop(); audio.current = null;
+    setCaption(""); setMuted(false);
+    setVoice(v => v === "unavailable" ? v : reason);
+  }
+
+  async function startVoice() {
+    if (voice === "connecting" || voice === "active" || voice === "unavailable") return;
+    setVoiceNote(""); setVoice("connecting");
+    let current: WebSession | null = null; let engine: VoiceAudio | null = null;
+    try {
+      engine = new VoiceAudio(); audio.current = engine;
+      await engine.ready;
+      const a = answersRef.current;
+      const knownBits = [a.phone && `phone ${a.phone}`, a.businessName && `name ${a.businessName}`, a.trade && `type ${a.trade === "other" ? a.customTrade ?? "other" : TRADE_LABELS[a.trade]}`, a.address && `address ${a.address}`, a.weeklyHours?.some(d => d.enabled) && `hours ${spokenHours(a.weeklyHours)}`, a.minutes && `appointments ${a.minutes} minutes`, a.answering && `answering ${a.answering}`].filter(Boolean) as string[];
+      const known = knownBits.length ? knownBits.join("; ") : "nothing yet";
+      const missing = missingFields(a).join(", ") || "nothing";
+      const r = await fetch("/api/setup/voice-session", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ known, missing }), signal: AbortSignal.timeout(15_000) });
+      const data = await r.json();
+      if (!r.ok) throw new Error(typeof data.error === "string" ? data.error : "Voice couldn’t connect.");
+      const { WebSession: Session } = await import("@omnidim-ai/client");
+      current = new Session({ audioEngine: engine }); session.current = current;
+      current.on("status", value => {
+        if (typeof value === "object") { stopVoice("ended"); setLines(l => [...l, line("bubs", "Voice ended. Keep going here by typing, or start voice again.")]); }
+        else setVoice(value);
+      });
+      current.on("transcript", value => {
+        if (!value.final) { setCaption(value.role === "user" ? value.text : ""); return; }
+        setCaption("");
+        if (!value.text.trim()) return;
+        if (value.role === "agent") { lastAgentLine.current = value.text; setLines(l => [...l, line("bubs", value.text)]); }
+        else { setLines(l => [...l, line("you", value.text)]); void absorb(value.text); }
+      });
+      current.on("error", () => { stopVoice("ended"); setVoiceNote("The voice connection dropped. You can keep typing, or start voice again."); });
+      await current.start({ wsUrl: data.wsUrl });
+    } catch (reason) {
+      current?.stop(); engine?.stop(); session.current = null; audio.current = null;
+      setVoice("off");
+      const message = reason instanceof Error ? reason.message : "";
+      setVoiceNote(/permission|NotAllowed|denied/i.test(message) ? "Microphone access was blocked. Allow it in the browser, or keep typing." : message || "Voice couldn’t connect. You can keep typing.");
+    }
+  }
+
+  function toggleMute() { const m = !muted; session.current?.mute(m); setMuted(m); }
+
+  return { lines, prompt, draft, setDraft, busy, submit, edit, restart, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute };
 }
 
 export type SetupChat = ReturnType<typeof useSetupChat>;
@@ -147,7 +232,8 @@ function previewIntro(a: InterviewAnswers): string {
 }
 
 export function ChatPanel({ chat }: { chat: SetupChat }) {
-  const { lines, prompt, draft, setDraft, busy, submit, log, input, stage } = chat;
+  const { lines, prompt, draft, setDraft, busy, submit, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute } = chat;
+  const talking = voice === "connecting" || voice === "active";
   const interviewing = stage === "talk" && prompt?.id !== "done";
   const placeholder = !interviewing ? (stage === "hear" ? "Ask about the greeting, the confirmation call or the booking page" : "Ask about any field on the card") : prompt?.placeholder ?? (prompt?.input === "chips" ? "Or type your answer, or ask a question" : "Type your answer, or ask a question");
   return <div className={styles.chatWrap}><section className={styles.chat} aria-label="Setup conversation with Bubs">
@@ -157,7 +243,19 @@ export function ChatPanel({ chat }: { chat: SetupChat }) {
         <p className={styles.bubble}>{l.text}</p>
       </div>)}
       {busy && <div className={styles.line} data-who="bubs"><Image src="/marketing/happy-mascot-pointed.png" alt="" width={36} height={36} className={styles.avatar} /><p className={`${styles.bubble} ${styles.thinking}`}><span className={styles.spinner} aria-hidden="true" />{busy === "lookup" ? "Checking that number for a listing…" : "Thinking…"}</p></div>}
+      {caption && <div className={styles.line} data-who="you"><p className={`${styles.bubble} ${styles.caption}`}>{caption}</p></div>}
     </div>
+    <div className={styles.voiceBar} data-state={voice}>
+      {talking ? <>
+        <span className={styles.voiceDot} aria-hidden="true" /><span className={styles.voiceStatus} role="status">{voice === "connecting" ? "Connecting…" : muted ? "Muted" : "Bubs™ is listening"}</span>
+        <button type="button" className={styles.secondary} onClick={toggleMute} disabled={voice !== "active"} aria-pressed={muted}>{muted ? "Unmute" : "Mute"}</button>
+        <button type="button" className={styles.secondary} onClick={() => stopVoice("ended")}>End voice</button>
+      </> : <>
+        <button type="button" className={styles.primary} onClick={startVoice} disabled={voice === "unavailable"}>{voice === "ended" ? "Talk to Bubs™ again" : "Talk to Bubs™"}</button>
+        <span className={styles.voiceStatus}>{voice === "unavailable" ? "Voice isn’t connected in this build; typing works." : "Say your answers out loud; the card fills in as you talk."}</span>
+      </>}
+    </div>
+    {voiceNote && <p className={styles.voiceNote} role="alert">{voiceNote}</p>}
     {prompt && <form className={styles.composer} onSubmit={e => { e.preventDefault(); if (draft.trim()) void submit(draft); }}>
       {interviewing && prompt.input === "chips" && <div className={prompt.chips!.some(c => c.hint) ? styles.optionList : styles.chips} role="group" aria-label="Quick answers">
         {prompt.chips!.map(c => <button key={c.value} type="button" className={c.hint ? styles.optionCard : styles.chip} disabled={Boolean(busy)} onClick={() => void submit(c.value, c.label)}>{c.hint ? <><strong>{c.label}</strong><span>{c.hint}</span></> : c.label}</button>)}

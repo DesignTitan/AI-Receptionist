@@ -50,3 +50,18 @@ test("plain requests change the card: days, times, appointment length, name", as
   assert.equal(applyCommand("What are business hours for?", base), null);
   assert.equal(applyCommand("close every day", base)!.answers, base, "refuses to leave no open days");
 });
+
+test("voice patches merge into the card and the heuristic extractor covers the chip questions", async () => {
+  const { applyExtractedPatch, heuristicExtract } = await import("../src/lib/platform/setup-help.ts");
+  const merged = applyExtractedPatch({ businessName: "Willow Studio" }, { phone: "(313) 555-0142", businessName: null, trade: "salon", customTrade: null, address: null, days: [2, 3, 4, 5, 6], opens: "09:00", closes: "18:00", minutes: 45, answering: "backup" });
+  assert.equal(merged.phone, "(313) 555-0142");
+  assert.equal(merged.businessName, "Willow Studio", "null never clears a field");
+  assert.deepEqual(merged.weeklyHours!.filter(d => d.enabled).map(d => d.day), [2, 3, 4, 5, 6]);
+  assert.equal(merged.weeklyHours![2].closes, "18:00");
+  assert.equal(merged.answering, "backup");
+  assert.equal(heuristicExtract("we're a hair salon", {}, "trade").trade, "salon");
+  assert.equal(heuristicExtract("only when nobody picks up after a few rings", {}, "answering").answering, "backup");
+  assert.equal(heuristicExtract("close sundays", { weeklyHours: weeklyHoursForPreset("everyday") }, "hours").weeklyHours![0].enabled, false);
+  const untouched = { businessName: "x" };
+  assert.equal(heuristicExtract("hmm let me think", untouched, "address"), untouched);
+});

@@ -43,13 +43,16 @@ export async function proxy(request: NextRequest) {
   const comingSoon = process.env.COMING_SOON === "true";
   const unlocked = env.siteGate === "locked" ? await verifySiteToken(request.cookies.get(SITE_COOKIE)?.value) : true;
 
-  // The holding site. With COMING_SOON=true a visitor sees the hero alone at "/", and nothing
-  // else: every other page sends them back to "/". The owner, once through the password gate,
-  // still gets the full homepage and every page, so work on the real site can carry on.
+  // The holding site. With COMING_SOON=true "/" is the hero alone for everyone, unlocked or
+  // not, and a visitor can reach nothing else: every other page sends them back to "/". The
+  // owner, once through the password gate, can still open the other pages, and the full
+  // homepage is at /home, so work on the real site can carry on.
   if (comingSoon) {
-    if (pathname === "/coming-soon") return NextResponse.next();
+    if (pathname === "/" || pathname === "/coming-soon") {
+      return pathname === "/" ? NextResponse.rewrite(new URL("/coming-soon", request.url)) : NextResponse.next();
+    }
+    if (unlocked && pathname === "/home") return NextResponse.rewrite(new URL("/", request.url));
     if (!unlocked) {
-      if (pathname === "/") return NextResponse.rewrite(new URL("/coming-soon", request.url));
       if (pathname === "/login") return NextResponse.next();
       if (pathname.startsWith("/api/")) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
       return NextResponse.redirect(new URL("/", request.url));

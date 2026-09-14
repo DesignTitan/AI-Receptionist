@@ -10,13 +10,13 @@ import { ScriptEditor } from "./script-editor";
 import { SetupConversation, V2_DRAFT_KEY } from "./setup-conversation";
 import styles from "./setup-v2.module.css";
 
+/** The numbered steps. Welcome sits before them: payment confirmed, one button, no stepper. */
 const STEPS = [
-  { id: "welcome", label: "Welcome" },
   { id: "talk", label: "Tell us about your business" },
   { id: "hear", label: "Preview your front desk" },
   { id: "live", label: "Go live" },
 ] as const;
-type StepKey = (typeof STEPS)[number]["id"];
+type StepKey = "welcome" | (typeof STEPS)[number]["id"];
 
 const readHash = (): StepKey => {
   const h = typeof location !== "undefined" ? location.hash.slice(1) : "";
@@ -70,18 +70,18 @@ export function SetupJourney() {
   }
 
   const index = STEPS.findIndex(s => s.id === step);
-  const unlocked = (i: number) => i <= 1 || done;
+  const unlocked = (i: number) => i === 0 || done;
 
   return <div className={styles.journey}>
-    <nav ref={stepper} className={styles.stepper} aria-label="Setup steps">
+    {step !== "welcome" && <nav ref={stepper} className={styles.stepper} aria-label="Setup steps">
       <ol>
         {STEPS.map((s, i) => <li key={s.id} data-state={i < index ? "done" : i === index ? "current" : "todo"}>
           <button type="button" disabled={!unlocked(i)} aria-current={i === index ? "step" : undefined} onClick={() => go(s.id)}><span>{i + 1}</span>{s.label}</button>
         </li>)}
       </ol>
       <Link href="/account?preview=confirmation" className={styles.compare}>Compare with current setup</Link>
-    </nav>
-    <p className={styles.srOnly} aria-live="polite">Step {index + 1} of {STEPS.length}: {STEPS[index].label}</p>
+    </nav>}
+    {index >= 0 && <p className={styles.srOnly} aria-live="polite">Step {index + 1} of {STEPS.length}: {STEPS[index].label}</p>}
 
     <div key={step} className={styles.stagePane} data-leaving={leaving || undefined}>
       {step === "welcome" && <Welcome answers={answers} complete={done} onContinue={() => go("talk")} />}
@@ -107,11 +107,6 @@ function Welcome({ answers, complete, onContinue }: { answers: InterviewAnswers;
         <button type="button" className={styles.primary} onClick={onContinue}>Continue</button>
       </> : <>
         <p className={styles.lede}>Setting up takes about two minutes. Bubs™ asks a few questions, you answer, and everything stays on screen for you to change.</p>
-        <ol className={styles.plan}>
-          <li><strong>Tell us about your business.</strong> Start with your phone number; Bubs™ fills in what it can find.</li>
-          <li><strong>Preview your front desk.</strong> Your greeting, your booking page, your hours.</li>
-          <li><strong>Go live.</strong> Get your Bubs™ number, forward your line, and Bubs™ confirms it works.</li>
-        </ol>
         <button type="button" className={styles.primary} onClick={onContinue}>Continue</button>
       </>}
     </div>

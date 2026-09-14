@@ -288,7 +288,8 @@ function renderRoadmap() {
       ["pricing", "Confirm plan prices and included usage", "Keep setup fees, recurring charges and optional extras clear.", "/#terms"],
       ["estimate", "Review the plan finder", "Check editable estimates, recommendations and the return to plans.", "/#terms"],
       ["checkout", "Review checkout and email verification", "Ask for minimal information and describe the secure link accurately.", "/start"],
-      ["payment", "Test payment success, cancellation and failure", "Verify the receipt and the handoff into business setup.", "/account?preview=confirmation"]]],
+      ["payment", "Test payment success, cancellation and failure", "Verify the receipt and the handoff into business setup.", "/account?preview=confirmation"],
+      ["setup-v2", "Compare setup version 2 (Bubs interviews you)", "Same fields as the current setup, filled by conversation. Experiment for a side-by-side decision.", "/account/setup-v2"]]],
     ["Quality & trust", "Check the details that make the site dependable.", [
       ["accessibility", "Check keyboard access and contrast", "Review focus states, field labels, menus and error messages."],
       ["forms", "Test forms and saved progress", "Check validation, corrections, autosave and recovery."],

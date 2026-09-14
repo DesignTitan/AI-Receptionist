@@ -64,7 +64,13 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
 
   // First paint lands at the latest message without motion; only later messages glide.
   const painted = useRef(false);
-  useEffect(() => { log.current?.scrollTo({ top: log.current.scrollHeight, behavior: painted.current ? "smooth" : "instant" }); painted.current = true; }, [lines, busy]);
+  useEffect(() => {
+    const el = log.current;
+    if (!el || !loaded) return;
+    // Wait a frame so the panel has its final height (it takes it from the card) before measuring scrollHeight.
+    const frame = requestAnimationFrame(() => { el.scrollTo({ top: el.scrollHeight, behavior: painted.current ? "smooth" : "instant" }); painted.current = true; });
+    return () => cancelAnimationFrame(frame);
+  }, [lines, busy, loaded]);
   useEffect(() => { if (loaded) onChange?.(answers); }, [answers, loaded, onChange]);
 
   /** Focus only moves to the chat when the answer came from the chat; card edits keep the user's cursor where it is. */
@@ -119,7 +125,7 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
   const showText = prompt && (prompt.input === "text" || prompt.input === "phone" || prompt.allowText);
 
   return <div className={styles.layout} data-loaded={loaded}>
-    <section className={styles.chat} aria-label="Setup conversation with Bubs">
+    <div className={styles.chatWrap}><section className={styles.chat} aria-label="Setup conversation with Bubs">
       <div ref={log} className={styles.log} role="log" aria-live="polite">
         {lines.map(l => <div key={l.id} className={styles.line} data-who={l.who}>
           {l.who === "bubs" && <Image src="/marketing/happy-mascot-pointed.png" alt="" width={36} height={36} className={styles.avatar} />}
@@ -144,7 +150,7 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
         </div>
       </div>}
       <p className={styles.foot}>Bubs types for now. Voice comes next, using the same questions. <button type="button" className={styles.linkish} onClick={restart}>Start over</button></p>
-    </section>
+    </section></div>
 
     <aside className={styles.card} aria-label="What Bubs knows">
       <header className={styles.cardHead}>

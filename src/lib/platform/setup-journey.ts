@@ -11,6 +11,7 @@ import { DAY_NAMES, timeMinutes, type DayHours } from "./weekly-hours.ts";
 
 /** "09:00" → "9", "18:30" → "6:30" (am/pm is added by the caller when it matters). */
 export function spokenTime(t: string): string {
+  if (t === "24:00" || t === "00:00") return "midnight";
   const [h, m] = t.split(":").map(Number);
   const hour12 = h % 12 === 0 ? 12 : h % 12;
   const suffix = h < 12 ? " am" : " pm";
@@ -28,11 +29,19 @@ export function spokenDays(hours: DayHours[]): string {
   return names.length === 1 ? names[0] : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
 }
 
+/** "Tuesday to Saturday, 9 am to 6 pm", or "24 hours, every day". */
+export function spokenHours(hours: DayHours[]): string {
+  const open = hours.find(d => d.enabled);
+  if (!open) return "";
+  const allDay = open.opens === "00:00" && open.closes === "24:00";
+  return allDay ? `24 hours, ${spokenDays(hours)}` : `${spokenDays(hours)}, ${spokenTime(open.opens)} to ${spokenTime(open.closes)}`;
+}
+
 /** The first thing a caller hears. Plain text; the voice agent reads it. */
 export function greetingScript(a: InterviewAnswers): string {
   const name = a.businessName?.trim() || "the front desk";
   const open = a.weeklyHours?.find(d => d.enabled);
-  const hours = a.weeklyHours && open ? ` We’re open ${spokenDays(a.weeklyHours)}, ${spokenTime(open.opens)} to ${spokenTime(open.closes)}.` : "";
+  const hours = a.weeklyHours && open ? ` We’re open ${spokenHours(a.weeklyHours)}.` : "";
   return `Thanks for calling ${name}, this is Bubs.${hours} Would you like to book an appointment, or is there something else I can help with?`;
 }
 
@@ -89,7 +98,7 @@ export function resumeMessage(a: InterviewAnswers, complete: boolean): string {
   const facts: string[] = [];
   if (a.address) facts.push(a.address);
   const open = a.weeklyHours?.find(d => d.enabled);
-  if (a.weeklyHours && open) facts.push(`${spokenDays(a.weeklyHours)}, ${spokenTime(open.opens)} to ${spokenTime(open.closes)}`);
+  if (a.weeklyHours && open) facts.push(spokenHours(a.weeklyHours));
   if (a.minutes) facts.push(`${a.minutes}-minute appointments`);
   const name = a.businessName ? ` for ${a.businessName}` : "";
   if (complete) return `Welcome back. I still have everything${name}${facts.length ? `: ${facts.join("; ")}` : ""}. Change anything under What Bubs knows, or carry on.`;

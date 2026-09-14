@@ -144,7 +144,7 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
       {answers.trade === "other" && <Field label="What you do" value={answers.customTrade ?? ""} placeholder="Dog grooming" onChange={v => edit({ customTrade: v || undefined })} />}
       <Field label="Address" value={answers.address ?? ""} placeholder="123 Example Street, Detroit, MI" onChange={v => edit({ address: v || undefined })} />
       <HoursField value={answers.weeklyHours} onChange={weeklyHours => edit({ weeklyHours, hoursPreset: "custom" })} />
-      <SelectField label="Typical appointment" value={answers.minutes ? String(answers.minutes) : ""} onChange={v => edit({ minutes: v ? Number(v) : undefined })} options={[["", "Not answered yet"], ...[15, 30, 45, 60, 90, 120].map(n => [String(n), `${n} minutes`] as [string, string])]} />
+      <SelectField label="Appointment length" value={answers.minutes ? String(answers.minutes) : ""} onChange={v => edit({ minutes: v ? Number(v) : undefined })} options={[["", "Not answered yet"], ...[15, 30, 45, 60, 90, 120].map(n => [String(n), `${n} minutes`] as [string, string])]} />
       <SelectField label="When Bubs answers" value={answers.answering ?? ""} onChange={v => edit({ answering: (v || undefined) as AnsweringPreference | undefined })} options={[["", "Not answered yet"], ...(Object.keys(ANSWERING_PREFERENCES) as AnsweringPreference[]).filter(k => k !== "undecided").map(k => [k, ANSWERING_PREFERENCES[k].label] as [string, string])]} />
 
       {answers.lookup?.website && <p className={styles.note}>Listing website: <a href={answers.lookup.website} target="_blank" rel="noreferrer">{answers.lookup.website.replace(/^https?:\/\//, "")}</a></p>}
@@ -207,7 +207,7 @@ function HoursField({ value, onChange }: { value?: DayHours[]; onChange: (v: Day
   const open = hours.find(d => d.enabled);
   const set = (patch: (d: DayHours) => DayHours) => onChange(hours.map(patch));
   return <div className={styles.fieldbox} data-hours>
-    <span>Hours</span>
+    <span>Business hours</span>
     <div className={styles.days} role="group" aria-label="Open days">
       {hours.map(d => <button key={d.day} type="button" className={styles.day} aria-pressed={d.enabled} onClick={() => set(x => x.day === d.day ? { ...x, enabled: !x.enabled } : x)}>{DAY_NAMES[d.day].slice(0, 3)}</button>)}
     </div>
@@ -215,7 +215,7 @@ function HoursField({ value, onChange }: { value?: DayHours[]; onChange: (v: Day
       <TimeCombo label="Opens" value={open?.opens ?? "09:00"} min={0} max={timeMinutes(open?.closes ?? "17:00") - 15} onChange={t => set(x => ({ ...x, opens: t }))} />
       <TimeCombo label="Closes" value={open?.closes ?? "17:00"} min={timeMinutes(open?.opens ?? "09:00") + 15} max={1440} assumePm onChange={t => set(x => ({ ...x, closes: t }))} />
     </div>
-    {!value && <small>Not answered yet</small>}
+    <small>{value ? "When customers can book. When Bubs answers the phone is set separately below." : "Not answered yet"}</small>
   </div>;
 }
 

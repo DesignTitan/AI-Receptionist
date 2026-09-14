@@ -10,7 +10,7 @@ import type { DayHours } from "./weekly-hours.ts";
  */
 
 export type Trade = "salon" | "studio" | "other";
-export type HoursPreset = "weekdays" | "tue_sat" | "everyday" | "custom";
+export type HoursPreset = "weekdays" | "tue_sat" | "everyday" | "always" | "custom";
 
 export type BusinessLookup = {
   name: string;
@@ -45,6 +45,7 @@ export const HOURS_PRESETS: Record<Exclude<HoursPreset, "custom">, { label: stri
   weekdays: { label: "Mon–Fri, 9 to 5", days: [1, 2, 3, 4, 5], opens: "09:00", closes: "17:00" },
   tue_sat: { label: "Tue–Sat, 9 to 6", days: [2, 3, 4, 5, 6], opens: "09:00", closes: "18:00" },
   everyday: { label: "Every day, 9 to 5", days: [0, 1, 2, 3, 4, 5, 6], opens: "09:00", closes: "17:00" },
+  always: { label: "Open 24 hours", days: [0, 1, 2, 3, 4, 5, 6], opens: "00:00", closes: "24:00" },
 };
 
 export const TRADE_LABELS: Record<Trade, string> = { salon: "Salon, spa or wellness", studio: "Creative studio", other: "Something else" };
@@ -104,11 +105,11 @@ export function promptFor(step: StepId, a: InterviewAnswers): Prompt {
     case "address":
       return { id: step, text: "Where are you located? Street address is best; it goes on your booking page.", input: "text", placeholder: "123 Example Street, Detroit, MI" };
     case "hours":
-      return { id: step, text: `When are you open${name}?`, input: "chips", chips: [...(Object.keys(HOURS_PRESETS) as Array<keyof typeof HOURS_PRESETS>).map(v => ({ label: HOURS_PRESETS[v].label, value: v })), { label: "Something else", value: "custom" }] };
+      return { id: step, text: `What are your business hours${name}? These are the times customers can book; when I answer the phone is a separate setting.`, input: "chips", chips: [...(Object.keys(HOURS_PRESETS) as Array<keyof typeof HOURS_PRESETS>).map(v => ({ label: HOURS_PRESETS[v].label, value: v })), { label: "Something else", value: "custom" }] };
     case "minutes":
-      return { id: step, text: "How long is a typical appointment?", input: "chips", chips: [30, 45, 60, 90].map(n => ({ label: `${n} minutes`, value: String(n) })) };
+      return { id: step, text: "How long should I book each appointment for? I’ll space bookings out by this.", input: "chips", chips: [30, 45, 60, 90].map(n => ({ label: `${n} minutes`, value: String(n) })) };
     case "answering":
-      return { id: step, text: "Last one. When a customer calls, when should I pick up?", input: "chips", chips: ANSWERING_CHIPS };
+      return { id: step, text: "Last one. When should I answer the phone? This can be any time, whatever your business hours are.", input: "chips", chips: ANSWERING_CHIPS };
     case "done":
       return { id: step, text: `That’s everything I need${name}. It’s all under What Bubs knows; change anything there and I’ll keep up.`, input: "none" };
   }

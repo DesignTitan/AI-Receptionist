@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PHONE_PROVIDERS, type PhoneProvider } from "@/lib/platform/phone-provider";
 import { nextStep, type InterviewAnswers } from "@/lib/platform/setup-interview";
 import { bookingSlug, forwardingSteps, greetingScript, openingsPreview } from "@/lib/platform/setup-journey";
@@ -26,10 +26,15 @@ const readHash = (): StepKey => {
  * answers, saved in this browser) drives every screen. Steps 3 and 4 show the
  * real derived output; the parts that need voice or provisioning say so.
  */
+const LEAVE_MS = 150;
+
 export function SetupJourney() {
   const [step, setStep] = useState<StepKey>("welcome");
+  const [leaving, setLeaving] = useState(false);
   const [answers, setAnswers] = useState<InterviewAnswers>({});
   const [provider, setProvider] = useState<PhoneProvider>("unknown");
+  const stepper = useRef<HTMLElement>(null);
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const done = nextStep(answers) === "done";
 
   useEffect(() => {
@@ -37,20 +42,36 @@ export function SetupJourney() {
     setStep(readHash());
     const onHash = () => setStep(readHash());
     window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
+    return () => { window.removeEventListener("hashchange", onHash); clearTimeout(timer.current); };
   }, []);
 
+  /**
+   * One transition, in order: the current step fades out, then the next one
+   * slides in under the stepper, which never moves. The window only scrolls
+   * if the reader was below the stepper, and then it snaps rather than glides,
+   * so the eye has exactly one thing to follow.
+   */
   function go(next: StepKey) {
-    history.replaceState(null, "", `#${next}`);
-    setStep(next);
-    window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+    if (next === step || leaving) return;
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const swap = () => {
+      history.replaceState(null, "", `#${next}`);
+      const top = stepper.current?.getBoundingClientRect().top ?? 0;
+      const offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--workspace-top-offset")) || 0;
+      if (top < offset) window.scrollBy({ top: top - offset - 12, behavior: "instant" });
+      setStep(next);
+      setLeaving(false);
+    };
+    if (reduced) { swap(); return; }
+    setLeaving(true);
+    timer.current = setTimeout(swap, LEAVE_MS);
   }
 
   const index = STEPS.findIndex(s => s.id === step);
   const unlocked = (i: number) => i <= 1 || done;
 
   return <div className={styles.journey}>
-    <nav className={styles.stepper} aria-label="Setup steps">
+    <nav ref={stepper} className={styles.stepper} aria-label="Setup steps">
       <ol>
         {STEPS.map((s, i) => <li key={s.id} data-state={i < index ? "done" : i === index ? "current" : "todo"}>
           <button type="button" disabled={!unlocked(i)} aria-current={i === index ? "step" : undefined} onClick={() => go(s.id)}><span>{i + 1}</span>{s.label}</button>
@@ -58,11 +79,14 @@ export function SetupJourney() {
       </ol>
       <Link href="/account?preview=confirmation" className={styles.compare}>Compare with current setup</Link>
     </nav>
+    <p className={styles.srOnly} aria-live="polite">Step {index + 1} of {STEPS.length}: {STEPS[index].label}</p>
 
-    {step === "welcome" && <Welcome onStart={() => go("talk")} />}
-    {step === "talk" && <SetupConversation onChange={setAnswers} onDone={() => go("hear")} />}
-    {step === "hear" && <Hear answers={answers} onBack={() => go("talk")} onNext={() => go("live")} />}
-    {step === "live" && <Live answers={answers} provider={provider} onProvider={setProvider} onBack={() => go("hear")} />}
+    <div key={step} className={styles.stagePane} data-leaving={leaving || undefined}>
+      {step === "welcome" && <Welcome onStart={() => go("talk")} />}
+      {step === "talk" && <SetupConversation onChange={setAnswers} onDone={() => go("hear")} />}
+      {step === "hear" && <Hear answers={answers} onBack={() => go("talk")} onNext={() => go("live")} />}
+      {step === "live" && <Live answers={answers} provider={provider} onProvider={setProvider} onBack={() => go("hear")} />}
+    </div>
   </div>;
 }
 

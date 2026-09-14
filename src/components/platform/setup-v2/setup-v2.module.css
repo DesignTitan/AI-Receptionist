@@ -1,4 +1,4 @@
-.layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:24px;align-items:start;opacity:0;transition:opacity .2s ease}
+.layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:24px;align-items:start;opacity:0}
 .layout[data-loaded=true]{opacity:1}
 
 /* Conversation */
@@ -71,7 +71,7 @@
 
 /* Journey chrome */
 .journey{display:grid;gap:28px}
-.stepper{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:14px 20px;border:1px solid var(--brand-line);border-radius:999px;background:#f8f8f8}
+.stepper{position:sticky;top:calc(var(--workspace-top-offset,0px) + 12px);z-index:5;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:14px 20px;border:1px solid var(--brand-line);border-radius:999px;background:#f8f8f8f2;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .stepper ol{display:flex;gap:20px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
 .stepper li{display:flex;align-items:center}
 .stepper li:not(:last-child)::after{content:"";width:28px;height:1px;background:var(--brand-line);margin-left:20px}
@@ -128,3 +128,11 @@
   .stepper ol{gap:10px}
   .stepper button{font-size:12px}
 }
+
+/* Step transitions: fade the old step out, slide the new one in. The stepper never moves. */
+.stagePane{animation:v2enter .25s ease-out both}
+.stagePane[data-leaving]{animation:v2leave .15s ease-in both;pointer-events:none}
+@keyframes v2enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes v2leave{from{opacity:1}to{opacity:0}}
+.srOnly{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:-1px;padding:0;border:0}
+@media(prefers-reduced-motion:reduce){.stagePane,.stagePane[data-leaving]{animation:none}}

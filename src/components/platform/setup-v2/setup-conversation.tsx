@@ -62,7 +62,9 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
     return () => clearTimeout(saveTimer.current);
   }, [answers, lines, loaded]);
 
-  useEffect(() => { log.current?.scrollTo({ top: log.current.scrollHeight, behavior: "smooth" }); }, [lines, busy]);
+  // First paint lands at the latest message without motion; only later messages glide.
+  const painted = useRef(false);
+  useEffect(() => { log.current?.scrollTo({ top: log.current.scrollHeight, behavior: painted.current ? "smooth" : "instant" }); painted.current = true; }, [lines, busy]);
   useEffect(() => { if (loaded) onChange?.(answers); }, [answers, loaded, onChange]);
 
   /** Focus only moves to the chat when the answer came from the chat; card edits keep the user's cursor where it is. */
@@ -71,7 +73,7 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
     const p = promptFor(step, a);
     setPrompt(p);
     setLines(l => [...l, ...extra, line("bubs", p.text)]);
-    if (focus) setTimeout(() => input.current?.focus(), 0);
+    if (focus) setTimeout(() => input.current?.focus({ preventScroll: true }), 0);
   }
 
   async function answer(raw: string, label = raw) {

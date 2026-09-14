@@ -12,7 +12,7 @@ const headers = { "Cache-Control": "no-store" };
 const localHosts = new Set(["localhost", "127.0.0.1", "[::1]"]);
 let attempts: number[] = [];
 
-const Body = z.object({ known: z.string().max(600).default("nothing yet"), missing: z.string().max(400).default("") });
+const Body = z.object({ known: z.string().max(600).default("nothing yet"), missing: z.string().max(400).default(""), firstQuestion: z.string().max(300).default("") });
 
 function host(request: Request) { return (request.headers.get("host") ?? new URL(request.url).host).split(":")[0]?.toLowerCase() ?? ""; }
 function ready(request: Request) {
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     const r = await fetch("https://backend.omnidim.io/api/v1/sessions/create", {
       method: "POST", cache: "no-store", signal: AbortSignal.timeout(12_000),
       headers: { Authorization: `Bearer ${process.env.OMNIDIMENSION_API_KEY}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ agent_id: Number(process.env.OMNIDIMENSION_SETUP_AGENT_ID), type: "voice", custom_variables: { known: body.known || "nothing yet", missing: body.missing || "nothing" }, metadata: { source: "setup_v2_local" } }),
+      body: JSON.stringify({ agent_id: Number(process.env.OMNIDIMENSION_SETUP_AGENT_ID), type: "voice", custom_variables: { known: body.known || "nothing yet", missing: body.missing || "nothing", first_question: body.firstQuestion || "Is there anything you’d like to change?" }, metadata: { source: "setup_v2_local" } }),
     });
     const data = await r.json().catch(() => ({})) as { ws_url?: string; error?: string };
     if (!r.ok) {

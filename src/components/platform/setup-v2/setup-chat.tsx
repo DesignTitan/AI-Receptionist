@@ -192,12 +192,16 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
       const knownBits = [a.phone && `phone ${a.phone}`, a.businessName && `name ${a.businessName}`, a.trade && `type ${a.trade === "other" ? a.customTrade ?? "other" : TRADE_LABELS[a.trade]}`, a.address && `address ${a.address}`, a.weeklyHours?.some(d => d.enabled) && `hours ${spokenHours(a.weeklyHours)}`, a.minutes && `appointments ${a.minutes} minutes`, a.answering && `answering ${a.answering}`].filter(Boolean) as string[];
       const known = knownBits.length ? knownBits.join("; ") : "nothing yet";
       const missing = missingFields(a).join(", ") || "nothing";
-      const r = await fetch("/api/setup/voice-session", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ known, missing }), signal: AbortSignal.timeout(15_000) });
+      const step = nextStep(a);
+      const spoken: Record<string, string> = { phone: "What’s your business phone number, the one customers already call?", answering: "When should I answer the phone: every call, only after hours, when your team can’t pick up, or let callers choose?" };
+      const firstQuestion = step === "done" ? "Everything’s on the card already. Is there anything you’d like to change?" : spoken[step] ?? promptFor(step, a).text.replace(/^Last one\.\s*/, "");
+      const r = await fetch("/api/setup/voice-session", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ known, missing, firstQuestion }), signal: AbortSignal.timeout(15_000) });
       const data = await r.json();
       if (!r.ok) throw new Error(typeof data.error === "string" ? data.error : "Voice couldn’t connect.");
       // Only now touch the microphone: the session is ours, so a mic problem is the only thing left that can fail.
-      engine = new VoiceAudio(); audio.current = engine;
+      engine = new VoiceAudio(micId || undefined); audio.current = engine;
       await engine.ready;
+      void listMics();
       const { WebSession: Session } = await import("@omnidim-ai/client");
       current = new Session({ audioEngine: engine }); session.current = current;
       current.on("status", value => {
@@ -224,14 +228,27 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
   function toggleMute() { const m = !muted; session.current?.mute(m); setMuted(m); }
 
   const [micTest, setMicTest] = useState<{ state: "idle" | "testing" | "ok" | "silent" | "blocked" | "none"; device?: string }>({ state: "idle" });
+  const MIC_KEY = "receptionist-setup-mic";
+  const [mics, setMics] = useState<Array<{ id: string; label: string }>>([]);
+  const [micId, setMicId] = useState<string>(() => { try { return localStorage.getItem(MIC_KEY) ?? ""; } catch { return ""; } });
+  function chooseMic(id: string) { setMicId(id); try { if (id) localStorage.setItem(MIC_KEY, id); else localStorage.removeItem(MIC_KEY); } catch {} }
+  async function listMics() {
+    try {
+      const all = await navigator.mediaDevices.enumerateDevices();
+      const inputs = all.filter(d => d.kind === "audioinput" && d.label && !/^Default -|Virtual/.test(d.label)).map(d => ({ id: d.deviceId, label: d.label }));
+      setMics(inputs);
+      if (micId && !inputs.some(m => m.id === micId)) chooseMic("");
+    } catch {}
+  }
   /** Proves the microphone alone: which device Chrome chose and whether it hears anything in three seconds. No session, no cost. */
   async function testMic() {
     setMicTest({ state: "testing" });
     let stream: MediaStream | null = null;
     try {
       if (!navigator.mediaDevices?.getUserMedia) { setMicTest({ state: "none" }); return; }
-      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream = await navigator.mediaDevices.getUserMedia({ audio: micId ? { deviceId: { exact: micId } } : true });
       const device = stream.getAudioTracks()[0]?.label || "Default microphone";
+      void listMics();
       const ctx = new AudioContext();
       const src = ctx.createMediaStreamSource(stream);
       const analyser = ctx.createAnalyser(); analyser.fftSize = 512;
@@ -252,7 +269,7 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
     } finally { stream?.getTracks().forEach(t => t.stop()); }
   }
 
-  return { lines, prompt, draft, setDraft, busy, submit, edit, restart, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute, micTest, testMic };
+  return { lines, prompt, draft, setDraft, busy, submit, edit, restart, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute, micTest, testMic, mics, micId, chooseMic };
 }
 
 export type SetupChat = ReturnType<typeof useSetupChat>;
@@ -262,7 +279,7 @@ function previewIntro(a: InterviewAnswers): string {
 }
 
 export function ChatPanel({ chat }: { chat: SetupChat }) {
-  const { lines, prompt, draft, setDraft, busy, submit, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute, micTest, testMic } = chat;
+  const { lines, prompt, draft, setDraft, busy, submit, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute, micTest, testMic, mics, micId, chooseMic } = chat;
   const micText = { idle: "", testing: "Listening for three seconds… say something.", ok: `Microphone works: ${micTest.device}.`, silent: `Chrome is using “${micTest.device}” but heard nothing. Check it’s the right device in Chrome → Site settings → Microphone.`, blocked: "Chrome blocked the microphone for this site. Click the lock icon in the address bar → Microphone → Allow.", none: "No microphone found by the browser." }[micTest.state];
   const talking = voice === "connecting" || voice === "active";
   const interviewing = stage === "talk" && prompt?.id !== "done";
@@ -284,6 +301,7 @@ export function ChatPanel({ chat }: { chat: SetupChat }) {
       </> : <>
         <button type="button" className={styles.primary} onClick={startVoice} disabled={voice === "unavailable"}>{voice === "ended" ? "Talk to Bubs™ again" : "Talk to Bubs™"}</button>
         <button type="button" className={styles.secondary} onClick={testMic} disabled={micTest.state === "testing"}>Test microphone</button>
+        {mics.length > 1 && <select className={styles.micPick} aria-label="Microphone" value={micId} onChange={e => chooseMic(e.target.value)}><option value="">Default microphone</option>{mics.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}</select>}
         <span className={styles.voiceStatus}>{micText || (voice === "unavailable" ? "Voice isn’t connected in this build; typing works." : "Say your answers out loud; the card fills in as you talk.")}</span>
       </>}
     </div>

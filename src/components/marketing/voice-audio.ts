@@ -8,12 +8,13 @@ export class VoiceAudio {
   private stopped = false;
   readonly ready: Promise<void>;
 
-  constructor() {
+  /** `deviceId` picks a specific microphone; omitted, the browser's default input is used. */
+  constructor(deviceId?: string) {
     if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia)
       throw new Error("Microphone access requires HTTPS. Open this page using its secure website address.");
     this.context = new AudioContext({ sampleRate: 16000 });
     const resume = this.context.resume(); // Must happen inside the user's tap.
-    const microphone = navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } });
+    const microphone = navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true, ...(deviceId ? { deviceId: { exact: deviceId } } : {}) } });
     this.ready = Promise.all([resume, microphone.then(stream => {
       if (this.stopped) stream.getTracks().forEach(track => track.stop());
       else this.stream = stream;

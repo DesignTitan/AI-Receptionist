@@ -217,3 +217,4 @@
 .voiceNote{margin:0;padding:8px 24px 12px;font-size:12px;color:#923d2c;background:#fff}
 .caption{opacity:.6;font-style:italic}
 @media(prefers-reduced-motion:reduce){.voiceDot{animation:none}}
+.micPick{max-width:220px;min-height:36px!important;padding:6px 28px 6px 10px!important;border-radius:10px!important;font-size:12px!important;border:1px solid #cddfd3!important;background-color:#fff}

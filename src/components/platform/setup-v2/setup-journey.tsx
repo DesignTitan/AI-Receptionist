@@ -112,7 +112,6 @@ function Welcome({ answers, complete, onContinue }: { answers: InterviewAnswers;
         </ol>
         <button type="button" className={styles.primary} onClick={onContinue}>Continue</button>
       </>}
-      <p className={styles.fine}>Busy plan · change it any time from your account.</p>
     </div>
     <Image src="/marketing/happy-mascot-pointed.png" alt="" width={260} height={260} className={styles.welcomeMascot} priority />
   </section>;

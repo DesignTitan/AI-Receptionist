@@ -91,7 +91,6 @@
 .lede,.stageHead p{margin:0 0 20px;font-size:16px;line-height:1.6;color:var(--brand-muted);max-width:560px}
 .plan{margin:0 0 28px;padding:0 0 0 20px;display:grid;gap:10px;font-size:15px;line-height:1.55;color:var(--brand-muted)}
 .plan strong{color:var(--brand-ink)}
-.fine{margin:14px 0 0;font-size:12px;color:var(--brand-muted)}
 .welcomeMascot{width:100%;height:auto;justify-self:center;mix-blend-mode:multiply}
 
 /* Steps 3 and 4 */

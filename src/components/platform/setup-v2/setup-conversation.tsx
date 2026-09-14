@@ -148,17 +148,16 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
       <SelectField label="Appointment length" value={answers.minutes ? String(answers.minutes) : ""} onChange={v => edit({ minutes: v ? Number(v) : undefined })} options={[["", "Not answered yet"], ...[15, 30, 45, 60, 90, 120].map(n => [String(n), `${n} minutes`] as [string, string])]} />
       <SelectField label="When Bubs™ answers the phone" value={answers.answering ?? ""} onChange={v => edit({ answering: (v || undefined) as AnsweringPreference | undefined })} options={[["", "Not answered yet"], ...ANSWERING_CHIPS.map(c => [c.value, c.label] as [string, string]), ...(Object.keys(ANSWERING_PREFERENCES) as AnsweringPreference[]).filter(k => k !== "undecided" && !ANSWERING_CHIPS.some(c => c.value === k)).map(k => [k, ANSWERING_PREFERENCES[k].label] as [string, string])]} hint={answeringHint(answers.answering) ?? (answers.answering ? ANSWERING_PREFERENCES[answers.answering]?.description : undefined)} />
 
+      {done && prompt && <footer className={styles.cardFoot} role="status">
+        <p><Image src="/marketing/happy-mascot-pointed.png" alt="" width={28} height={28} className={styles.avatar} />{prompt.text}</p>
+        <div className={styles.doneActions}>
+          {onDone ? <button type="button" className={styles.primary} onClick={onDone}>Continue: Preview your front desk →</button> : <Link className={styles.primary} href="/account?preview=confirmation">Compare with the current setup →</Link>}
+          <button type="button" className={styles.secondary} onClick={restart}>Start over</button>
+        </div>
+      </footer>}
       {answers.lookup?.website && <p className={styles.note}>Listing website: <a href={answers.lookup.website} target="_blank" rel="noreferrer">{answers.lookup.website.replace(/^https?:\/\//, "")}</a></p>}
       {answers.lookup === null && answers.phone && <p className={styles.note}>No Google listing matched this number, so Bubs™ asked instead.</p>}
     </aside>
-    {done && prompt && <div className={styles.doneBar} role="status">
-      <Image src="/marketing/happy-mascot-pointed.png" alt="" width={36} height={36} className={styles.avatar} />
-      <p>{prompt.text}</p>
-      <div className={styles.doneActions}>
-        {onDone ? <button type="button" className={styles.primary} onClick={onDone}>Continue: Preview your front desk →</button> : <Link className={styles.primary} href="/account?preview=confirmation">Compare with the current setup →</Link>}
-        <button type="button" className={styles.secondary} onClick={restart}>Start over</button>
-      </div>
-    </div>}
     {!done && <div className={styles.chatWrap}><section className={styles.chat} aria-label="Setup conversation with Bubs">
       <div ref={log} className={styles.log} role="log" aria-live="polite">
         {lines.map(l => <div key={l.id} className={styles.line} data-who={l.who}>

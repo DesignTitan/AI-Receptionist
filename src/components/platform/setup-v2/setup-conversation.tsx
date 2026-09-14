@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ANSWERING_PREFERENCES, type AnsweringPreference } from "@/lib/platform/answering-preference";
-import { applyAnswer, interviewProgress, nextStep, promptFor, TRADE_LABELS, type BusinessLookup, type InterviewAnswers, type Prompt, type StepId, type Trade } from "@/lib/platform/setup-interview";
+import { applyAnswer, interviewProgress, nextStep, normalizePhone, promptFor, TRADE_LABELS, type BusinessLookup, type InterviewAnswers, type Prompt, type StepId, type Trade } from "@/lib/platform/setup-interview";
 import { DAY_NAMES, type DayHours } from "@/lib/platform/weekly-hours";
 import styles from "./setup-v2.module.css";
 
@@ -21,7 +21,7 @@ const line = (who: Line["who"], text: string): Line => ({ id: ++lineId, who, tex
  * Everything Bubs learns is editable on the card, so the conversation is a
  * faster way in, never a gate.
  */
-export function SetupConversation() {
+export function SetupConversation({ onChange, onDone }: { onChange?: (a: InterviewAnswers) => void; onDone?: () => void } = {}) {
   const [answers, setAnswers] = useState<InterviewAnswers>({});
   const [lines, setLines] = useState<Line[]>([]);
   const [prompt, setPrompt] = useState<Prompt | null>(null);
@@ -63,13 +63,15 @@ export function SetupConversation() {
   }, [answers, lines, loaded]);
 
   useEffect(() => { log.current?.scrollTo({ top: log.current.scrollHeight, behavior: "smooth" }); }, [lines, busy]);
+  useEffect(() => { if (loaded) onChange?.(answers); }, [answers, loaded, onChange]);
 
-  function ask(a: InterviewAnswers, extra: Line[] = []) {
+  /** Focus only moves to the chat when the answer came from the chat; card edits keep the user's cursor where it is. */
+  function ask(a: InterviewAnswers, extra: Line[] = [], focus = true) {
     const step = nextStep(a);
     const p = promptFor(step, a);
     setPrompt(p);
     setLines(l => [...l, ...extra, line("bubs", p.text)]);
-    setTimeout(() => input.current?.focus(), 0);
+    if (focus) setTimeout(() => input.current?.focus(), 0);
   }
 
   async function answer(raw: string, label = raw) {
@@ -94,12 +96,13 @@ export function SetupConversation() {
     ask(next, replies);
   }
 
-  /** Edits on the card update the answers and, if it changes what to ask next, the conversation follows. */
+  /** Edits on the card update the answers and, if it changes what to ask next, the conversation follows without taking focus. */
   function edit(patch: Partial<InterviewAnswers>) {
     const next = { ...answers, ...patch };
+    if (typeof next.phone === "string" && next.phone) next.phone = normalizePhone(next.phone) ?? next.phone;
     setAnswers(next);
     const step = nextStep(next);
-    if (prompt && step !== prompt.id) ask(next, [line("you", "(updated on the card)")]);
+    if (prompt && step !== prompt.id) ask(next, [line("you", "(updated on the card)")], false);
   }
 
   function restart() {
@@ -132,9 +135,9 @@ export function SetupConversation() {
         </div>}
       </form>}
       {done && <div className={styles.done}>
-        <p><strong>Front desk ready to test.</strong> Next in this version: hear Bubs greet a caller, then play the customer and book yourself in. Voice is switched off in this build, so that part isn’t wired yet — nothing here pretends to be a call.</p>
+        <p><strong>That’s the whole interview.</strong> Next: hear what callers will get, see your booking page, then go live.</p>
         <div className={styles.doneActions}>
-          <Link className={styles.primary} href="/account?preview=confirmation">Compare with the current setup →</Link>
+          {onDone ? <button type="button" className={styles.primary} onClick={onDone}>Next: Hear how Bubs answers →</button> : <Link className={styles.primary} href="/account?preview=confirmation">Compare with the current setup →</Link>}
           <button type="button" className={styles.secondary} onClick={restart}>Start over</button>
         </div>
       </div>}
@@ -172,8 +175,14 @@ async function lookup(phone: string): Promise<BusinessLookup | null> {
   } catch { return null; }
 }
 
+/** Text fields buffer locally and commit on blur or Enter, so a half-typed value never re-routes the conversation mid-keystroke. */
 function Field({ label, value, placeholder, onChange }: { label: string; value: string; placeholder?: string; onChange: (v: string) => void }) {
-  return <label className={styles.fieldbox}><span>{label}</span><input value={value} placeholder={placeholder} onChange={e => onChange(e.target.value)} /></label>;
+  const [draft, setDraft] = useState(value);
+  const dirty = useRef(false);
+  useEffect(() => { setDraft(value); dirty.current = false; }, [value]);
+  // Only a value the user typed here may overwrite what Bubs recorded; a blur with no typing is a no-op.
+  const commit = () => { if (dirty.current && draft !== value) onChange(draft); dirty.current = false; };
+  return <label className={styles.fieldbox}><span>{label}</span><input value={draft} placeholder={placeholder} onChange={e => { dirty.current = true; setDraft(e.target.value); }} onBlur={commit} onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); commit(); } }} /></label>;
 }
 
 function SelectField({ label, value, options, onChange }: { label: string; value: string; options: [string, string][]; onChange: (v: string) => void }) {

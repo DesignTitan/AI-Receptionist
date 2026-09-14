@@ -132,14 +132,6 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
   const showText = prompt && (prompt.input === "text" || prompt.input === "phone" || prompt.allowText);
 
   return <div className={styles.layout} data-loaded={loaded} data-done={done || undefined}>
-    {done && prompt && <div className={styles.doneBar} role="status">
-      <Image src="/marketing/happy-mascot-pointed.png" alt="" width={36} height={36} className={styles.avatar} />
-      <p>{prompt.text}</p>
-      <div className={styles.doneActions}>
-        {onDone ? <button type="button" className={styles.primary} onClick={onDone}>Continue: Preview your front desk →</button> : <Link className={styles.primary} href="/account?preview=confirmation">Compare with the current setup →</Link>}
-        <button type="button" className={styles.secondary} onClick={restart}>Start over</button>
-      </div>
-    </div>}
     <aside className={styles.card} aria-label="What Bubs knows">
       <header className={styles.cardHead}>
         <div><h2>What Bubs™ knows</h2><p>Fills in as you talk. Change anything here. <button type="button" className={styles.linkish} onClick={restart}>Start over</button></p></div>
@@ -159,6 +151,14 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
       {answers.lookup?.website && <p className={styles.note}>Listing website: <a href={answers.lookup.website} target="_blank" rel="noreferrer">{answers.lookup.website.replace(/^https?:\/\//, "")}</a></p>}
       {answers.lookup === null && answers.phone && <p className={styles.note}>No Google listing matched this number, so Bubs™ asked instead.</p>}
     </aside>
+    {done && prompt && <div className={styles.doneBar} role="status">
+      <Image src="/marketing/happy-mascot-pointed.png" alt="" width={36} height={36} className={styles.avatar} />
+      <p>{prompt.text}</p>
+      <div className={styles.doneActions}>
+        {onDone ? <button type="button" className={styles.primary} onClick={onDone}>Continue: Preview your front desk →</button> : <Link className={styles.primary} href="/account?preview=confirmation">Compare with the current setup →</Link>}
+        <button type="button" className={styles.secondary} onClick={restart}>Start over</button>
+      </div>
+    </div>}
     {!done && <div className={styles.chatWrap}><section className={styles.chat} aria-label="Setup conversation with Bubs">
       <div ref={log} className={styles.log} role="log" aria-live="polite">
         {lines.map(l => <div key={l.id} className={styles.line} data-who={l.who}>

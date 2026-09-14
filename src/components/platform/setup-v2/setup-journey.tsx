@@ -125,32 +125,32 @@ function Hear({ answers, onEdit, onBack, onNext }: { answers: InterviewAnswers; 
   const business = { name: answers.businessName ?? "", trade: answers.trade ? (answers.trade === "other" ? answers.customTrade : TRADE_LABELS[answers.trade]) : undefined, hours: answers.weeklyHours ? spokenHours(answers.weeklyHours) : undefined, minutes: answers.minutes };
   return <section className={styles.stage} aria-labelledby="v2-hear">
     <header className={styles.stageHead}><h2 id="v2-hear">Preview your front desk.</h2><p>This is what your callers and customers will get, built from what you told us. Change the wording here, or go back and change your answers.</p></header>
-    <div className={styles.cards}>
-      <article className={styles.stageCard}>
-        <h3>When a customer calls you</h3>
+    <ol className={styles.liveSteps}>
+      <li>
+        <h3>1. When a customer calls you</h3>
         <p>The first thing callers hear. Bubs™ takes it from there: booking, questions, messages.</p>
         <ScriptEditor kind="incoming" label="Greeting" generated={greetingScript(answers)} custom={answers.greeting} business={business} onChange={greeting => onEdit({ greeting })} />
-        <button type="button" className={styles.secondary} disabled aria-describedby="v2-voice-note">▶ Play greeting</button>
+        <div className={styles.scriptActions}><button type="button" className={styles.secondary} disabled aria-describedby="v2-voice-note">▶ Play greeting</button></div>
         <p id="v2-voice-note" className={styles.note}>Voice is switched off in this build, so there’s no audio yet. When it’s on, this plays in Bubs™’s voice; nothing is pre-recorded.</p>
-      </article>
-      <article className={styles.stageCard}>
-        <h3>When Bubs™ calls a customer</h3>
+      </li>
+      <li>
+        <h3>2. When Bubs™ calls a customer</h3>
         <p>Appointment confirmations. Bubs™ rings the customer the day before and fills in their name, day and time.</p>
         <ScriptEditor kind="outgoing" label="Confirmation call" generated={confirmationScript(answers)} custom={answers.confirmation} business={business} onChange={confirmation => onEdit({ confirmation })} />
         <p className={styles.note}>Keep {"{customer}"}, {"{day}"} and {"{time}"} in the script; Bubs™ swaps in the real details on each call.</p>
-      </article>
-      <article className={styles.stageCard}>
-        <h3>Your booking page</h3>
+      </li>
+      <li>
+        <h3>3. Your booking page</h3>
         <p className={styles.url}>bubs.ai/b/<strong>{slug}</strong></p>
         {openings.length ? <ul className={styles.openings}>{openings.map(o => <li key={o.label}><span>{o.label}</span><span>{o.slots} openings</span></li>)}</ul> : <p className={styles.note}>Set your hours and appointment length to see openings.</p>}
         <p className={styles.note}>Callers who book by phone land here too, so you see everything in one place.</p>
-      </article>
-      <article className={styles.stageCard}>
-        <h3>You be the caller</h3>
+      </li>
+      <li>
+        <h3>4. You be the caller</h3>
         <p>This is the part that makes it real: you ring Bubs™, ask for an appointment, and watch it appear on your booking page. It needs voice, which isn’t on in this build.</p>
-        <button type="button" className={styles.secondary} disabled>Call me now</button>
-      </article>
-    </div>
+        <div className={styles.scriptActions}><button type="button" className={styles.secondary} disabled>Call me now</button></div>
+      </li>
+    </ol>
     <div className={styles.stageActions}>
       <button type="button" className={styles.secondary} onClick={onBack}>← Back: Tell us about your business</button>
       <button type="button" className={styles.primary} onClick={onNext}>Continue: Go live →</button>

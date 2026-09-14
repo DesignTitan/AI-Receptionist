@@ -187,3 +187,23 @@
 .cardFoot{display:grid;gap:14px;margin-top:8px;padding-top:18px;border-top:1px solid var(--brand-line)}
 .cardFoot p{display:flex;align-items:flex-start;gap:10px;margin:0;font-size:14px;line-height:1.5;color:var(--brand-ink);text-wrap:pretty}
 .cardFoot .avatar{width:28px;height:28px}
+
+/* After Go live: the front desk, day to day */
+.home{display:grid;gap:24px}
+.homeHead{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:28px 32px;border:1px solid var(--brand-line);border-radius:24px;background:linear-gradient(135deg,#1e3a34,#3b5c52);color:#f4faf6}
+.homeHead h2{margin:0 0 8px;font-family:var(--brand-display);font-weight:700;font-size:clamp(28px,3.2vw,38px);letter-spacing:-.035em;line-height:1.1;color:#fff}
+.homeHead .lede{margin:0;color:#c9dcd2}
+.homeHead .badge{background:#d4ece0;color:#173b31}
+.homeMascot{width:120px;height:120px;flex-shrink:0;border-radius:24px}
+.homeGrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.homeCard{display:grid;gap:12px;align-content:start;padding:24px;border:1px solid var(--brand-line);border-radius:24px;background:#f8f8f8}
+.homeCard h3{margin:0;font-family:var(--brand-display);font-weight:700;font-size:20px;letter-spacing:-.02em;color:var(--brand-ink)}
+.homeCard p{margin:0;font-size:14px;line-height:1.6;color:var(--brand-ink);text-wrap:pretty}
+.homeWide{grid-column:1 / -1}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stats div{display:grid;gap:2px;padding:14px 16px;background:#fff;border:1px solid var(--brand-line);border-radius:14px}
+.stats strong{font-family:var(--brand-display);font-size:32px;line-height:1;letter-spacing:-.03em;color:var(--brand-ink)}
+.stats span{font-size:12px;color:var(--brand-muted)}
+.bigNumber{font-family:var(--brand-display);font-size:26px;letter-spacing:-.02em;color:var(--brand-ink);font-variant-numeric:tabular-nums}
+.quote{margin:0;padding:12px 14px;background:#fff;border-left:3px solid var(--brand-mint);border-radius:0 12px 12px 0;font-size:14px;line-height:1.55;color:var(--brand-ink);text-wrap:pretty}
+@media(max-width:900px){.homeGrid{grid-template-columns:1fr}.homeHead{flex-direction:column;align-items:flex-start}.stats{grid-template-columns:1fr}}

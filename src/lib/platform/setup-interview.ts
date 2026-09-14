@@ -37,6 +37,8 @@ export type InterviewAnswers = {
   /** Custom wording for incoming and outgoing calls; empty means "use the generated script". */
   greeting?: string;
   confirmation?: string;
+  /** Set when the owner presses Go live (preview only until provisioning exists). */
+  liveAt?: string;
 };
 
 export type StepId = "phone" | "confirm" | "name" | "trade" | "customTrade" | "address" | "hours" | "minutes" | "answering" | "done";

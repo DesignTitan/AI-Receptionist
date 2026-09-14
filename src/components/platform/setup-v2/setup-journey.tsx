@@ -3,8 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { PHONE_PROVIDERS, type PhoneProvider } from "@/lib/platform/phone-provider";
-import { nextStep, type InterviewAnswers } from "@/lib/platform/setup-interview";
-import { TRADE_LABELS } from "@/lib/platform/setup-interview";
+import { ANSWERING_CHIPS, nextStep, TRADE_LABELS, type InterviewAnswers } from "@/lib/platform/setup-interview";
 import { bookingSlug, confirmationScript, forwardingSteps, greetingScript, openingsPreview, spokenHours } from "@/lib/platform/setup-journey";
 import { ScriptEditor } from "./script-editor";
 import { SetupCard } from "./setup-card";
@@ -17,11 +16,11 @@ const STEPS = [
   { id: "hear", label: "Preview your front desk" },
   { id: "live", label: "Go live" },
 ] as const;
-type StepKey = "welcome" | (typeof STEPS)[number]["id"];
+type StepKey = "welcome" | "home" | (typeof STEPS)[number]["id"];
 
 const readHash = (): StepKey => {
   const h = typeof location !== "undefined" ? location.hash.slice(1) : "";
-  return (STEPS.some(s => s.id === h) ? h : "welcome") as StepKey;
+  return (STEPS.some(s => s.id === h) || h === "home" ? h : "welcome") as StepKey;
 };
 
 /**
@@ -91,7 +90,7 @@ export function SetupJourney() {
   const unlocked = (i: number) => i === 0 || done;
 
   return <div className={styles.journey}>
-    {step !== "welcome" && <nav ref={stepper} className={styles.stepper} aria-label="Setup steps">
+    {step !== "welcome" && step !== "home" && <nav ref={stepper} className={styles.stepper} aria-label="Setup steps">
       <ol>
         {STEPS.map((s, i) => <li key={s.id} data-state={i < index ? "done" : i === index ? "current" : "todo"}>
           <button type="button" disabled={!unlocked(i)} aria-current={i === index ? "step" : undefined} onClick={() => go(s.id)}><span>{i + 1}</span>{s.label}</button>
@@ -105,7 +104,8 @@ export function SetupJourney() {
       {step === "welcome" && <Welcome answers={answers} complete={done} onContinue={() => go("talk")} />}
       {step === "talk" && <div className={styles.layout} data-loaded={loaded}><ChatPanel chat={chat} /><SetupCard answers={answers} prompt={chat.prompt} status={status} onEdit={chat.edit} onRestart={chat.restart} onDone={() => go("hear")} /></div>}
       {step === "hear" && <div className={styles.layout} data-loaded={loaded} data-stage="hear"><ChatPanel chat={chat} /><Hear answers={answers} onEdit={chat.edit} onBack={() => go("talk")} onNext={() => go("live")} /></div>}
-      {step === "live" && <Live answers={answers} provider={provider} onProvider={setProvider} onBack={() => go("hear")} />}
+      {step === "live" && <Live answers={answers} provider={provider} onProvider={setProvider} onBack={() => go("hear")} onGoLive={() => { setAnswers({ ...answers, liveAt: new Date().toISOString() }); go("home"); }} />}
+      {step === "home" && <Home answers={answers} provider={provider} onEdit={s => go(s)} />}
     </div>
   </div>;
 }
@@ -171,7 +171,7 @@ function Hear({ answers, onEdit, onBack, onNext }: { answers: InterviewAnswers; 
   </section>;
 }
 
-function Live({ answers, provider, onProvider, onBack }: { answers: InterviewAnswers; provider: PhoneProvider; onProvider: (p: PhoneProvider) => void; onBack: () => void }) {
+function Live({ answers, provider, onProvider, onBack, onGoLive }: { answers: InterviewAnswers; provider: PhoneProvider; onProvider: (p: PhoneProvider) => void; onBack: () => void; onGoLive: () => void }) {
   const area = answers.phone?.replace(/\D/g, "").slice(0, 3) ?? "";
   const fwd = forwardingSteps(provider, area ? `your (${area}) Bubs™ number` : undefined);
   return <section className={styles.stage} aria-labelledby="v2-live">
@@ -202,8 +202,77 @@ function Live({ answers, provider, onProvider, onBack }: { answers: InterviewAns
     </ol>
     <div className={styles.stageActions}>
       <button type="button" className={styles.secondary} onClick={onBack}>← Back: Preview your front desk</button>
-      <button type="button" className={styles.primary} disabled title="Preview only">Go live</button>
-      <p className={styles.note}>Preview: nothing here is activated or sent.</p>
+      <button type="button" className={styles.primary} onClick={onGoLive}>Go live →</button>
+      <p className={styles.note}>Preview: nothing is provisioned, forwarded or charged. This shows the screen you land on next.</p>
+    </div>
+  </section>;
+}
+
+/**
+ * The screen after Go live: the owner's front desk, day to day. Real numbers
+ * would come from calls and bookings; in this preview every count is zero and
+ * says so, and the parts that need provisioning say they aren't wired.
+ */
+function Home({ answers, provider, onEdit }: { answers: InterviewAnswers; provider: PhoneProvider; onEdit: (step: "talk" | "hear" | "live") => void }) {
+  const name = answers.businessName || "Your business";
+  const area = answers.phone?.replace(/\D/g, "").slice(0, 3) ?? "";
+  const slug = bookingSlug(answers.businessName);
+  const openings = openingsPreview(answers.weeklyHours, answers.minutes);
+  const answering = ANSWERING_CHIPS.find(c => c.value === answers.answering);
+  const since = answers.liveAt ? new Date(answers.liveAt).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "";
+  return <section className={styles.home} aria-labelledby="v2-home">
+    <header className={styles.homeHead}>
+      <div>
+        <span className={styles.badge}><span aria-hidden="true">●</span> Live{since ? ` since ${since}` : ""}</span>
+        <h2 id="v2-home">{name} is open.</h2>
+        <p className={styles.lede}>Bubs™ is answering{answering ? ` (${answering.label.replace("Bubs™ ", "").toLowerCase()})` : ""}. Calls, bookings and messages land here.</p>
+      </div>
+      <Image src="/marketing/happy-mascot-pointed.png" alt="" width={120} height={120} className={styles.homeMascot} />
+    </header>
+
+    <div className={styles.homeGrid}>
+      <article className={`${styles.homeCard} ${styles.homeWide}`}>
+        <h3>Today</h3>
+        <div className={styles.stats}>
+          <div><strong>0</strong><span>calls answered</span></div>
+          <div><strong>0</strong><span>appointments booked</span></div>
+          <div><strong>0</strong><span>messages taken</span></div>
+        </div>
+        <p className={styles.note}>Nothing yet. The first call shows up here the moment it ends, with what the caller wanted and what Bubs™ did.</p>
+      </article>
+
+      <article className={styles.homeCard}>
+        <h3>Your Bubs™ number</h3>
+        <p className={styles.bigNumber}>({area || "___"}) ___-____</p>
+        <p>Forwarding: <strong>not verified</strong>{provider !== "unknown" ? ` · ${PHONE_PROVIDERS[provider]}` : ""}</p>
+        <div className={styles.scriptActions}><button type="button" className={styles.secondary} disabled>Test forwarding</button><button type="button" className={styles.secondary} onClick={() => onEdit("live")}>Forwarding steps</button></div>
+        <p className={styles.note}>Number provisioning and the test call aren’t wired in this build; this is where they appear.</p>
+      </article>
+
+      <article className={styles.homeCard}>
+        <h3>Your booking page</h3>
+        <p className={styles.url}>bubs.ai/b/<strong>{slug}</strong></p>
+        {openings.length ? <ul className={styles.openings}>{openings.map(o => <li key={o.label}><span>{o.label}</span><span>{o.slots} openings</span></li>)}</ul> : <p className={styles.note}>Set hours and appointment length to see openings.</p>}
+        <div className={styles.scriptActions}><button type="button" className={styles.secondary} disabled>Copy link</button><button type="button" className={styles.secondary} disabled>Open ↗</button></div>
+      </article>
+
+      <article className={`${styles.homeCard} ${styles.homeWide}`}>
+        <h3>Recent calls</h3>
+        <p className={styles.note}>No calls yet. Each one will show who called, when, what they wanted, and a transcript.</p>
+      </article>
+
+      <article className={styles.homeCard}>
+        <h3>How Bubs™ answers</h3>
+        <p><strong>{answering?.label ?? "Not set"}.</strong> {answering?.hint ?? ""}</p>
+        <blockquote className={styles.quote}>{greetingScript(answers) === (answers.greeting ?? greetingScript(answers)) ? greetingScript(answers) : answers.greeting}</blockquote>
+        <div className={styles.scriptActions}><button type="button" className={styles.secondary} onClick={() => onEdit("hear")}>Change the greeting</button><button type="button" className={styles.secondary} onClick={() => onEdit("talk")}>Change hours or details</button></div>
+      </article>
+
+      <article className={styles.homeCard}>
+        <h3>Ask Bubs™</h3>
+        <p>“Close on Friday.” “Move my appointments to an hour.” “Who called this morning?”</p>
+        <p className={styles.note}>The same Bubs™ from setup lives here. Not wired into this preview yet.</p>
+      </article>
     </div>
   </section>;
 }

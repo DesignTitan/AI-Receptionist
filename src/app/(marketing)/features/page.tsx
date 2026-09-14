@@ -4,11 +4,12 @@ import { CoreFeatures } from "@/components/marketing/core-features";
 import { RoadmapBoard } from "@/components/marketing/roadmap-board";
 import { ROADMAP } from "@/lib/roadmap/catalogue";
 import { PLANS, SETUP_OFFER, SETUP_SCOPE } from "@/lib/platform/pricing";
+import { FEATURE_GROUPS, PILLARS, STATUS_LABEL } from "@/lib/marketing/feature-inventory";
 import "./features.css";
 
 export const metadata: Metadata = {
   title: "Features and benefits",
-  description: "Explore online booking, AI confirmation calls, appointment follow-up and spending controls, plus the incoming-call pilot for businesses that run on appointments.",
+  description: "Everything bubs does for a business that runs on appointments: online booking, AI confirmation calls, records and follow-up, usage controls, and the incoming-call pilot. Each feature marked as included, pilot or coming soon.",
 };
 
 const CHAPTERS = [
@@ -27,28 +28,63 @@ export default function FeaturesPage() {
 
       <main id="main">
         <section className="features-hero" aria-labelledby="features-title">
-          <p className="features-eyebrow">The features / The time you get back</p>
-          <h1 id="features-title">More time with clients.<br /><span>Less time chasing details.</span></h1>
+          <p className="features-eyebrow">Features</p>
+          <h1 id="features-title">Every booking taken.<br /><span>Every visit confirmed.</span></h1>
           <div className="features-hero__bottom">
-            <p>An online booking page, AI confirmation calls and a clear view of what needs your attention. Built for businesses that run on appointments.</p>
+            <p>An online booking page, an AI receptionist that calls to confirm, and one place to see what needs you. Here is everything it does, and what is still on the way.</p>
             <div className="features-actions">
-              <Link href="/#terms" className="features-button">View plans <span aria-hidden="true">↗</span></Link>
+              <Link href="/start" className="features-button">Set up my business <span aria-hidden="true">↗</span></Link>
               <Link href="/demos" className="features-button features-button--outline">Try online booking</Link>
             </div>
           </div>
         </section>
 
-        <nav className="features-chapters" aria-label="Explore features">
-          {CHAPTERS.map((chapter, index) => (
-            <Link href={`/features#${chapter.id}`} key={chapter.id}>
-              <span className="features-chapters__number">0{index + 1}</span>
-              <span>{chapter.name}{chapter.pilot && <small>Pilot</small>}</span>
-              <span aria-hidden="true">↓</span>
-            </Link>
+        <section className="features-pillars" aria-label="What it does">
+          {PILLARS.map((pillar, index) => (
+            <a href={pillar.href} key={pillar.id} className="features-pillar">
+              <span className="features-pillar__number">0{index + 1}</span>
+              <span className="features-pillar__title">{pillar.title}</span>
+              <span className="features-pillar__detail">{pillar.detail}</span>
+              <span className="features-pillar__go" aria-hidden="true">↓</span>
+            </a>
           ))}
-        </nav>
+        </section>
 
         <CoreFeatures />
+
+        <section className="features-inventory" id="everything" aria-labelledby="features-inventory-title">
+          <div className="features-section-heading">
+            <p className="features-eyebrow">Everything included</p>
+            <h2 id="features-inventory-title">The whole list,<br />in one place.</h2>
+            <p className="features-body">Every feature, grouped by the job it does. <strong>Included</strong> is on every plan today. <strong>Pilot</strong> means your phone line is reviewed and tested with you first. <strong>Coming soon</strong> links to the public roadmap, where you can vote.</p>
+          </div>
+          <div className="features-inventory__grid">
+            {FEATURE_GROUPS.map(group => (
+              <section className="features-group" key={group.id} aria-labelledby={`group-${group.id}`}>
+                <header className="features-group__head">
+                  <p className="features-eyebrow">{group.number}</p>
+                  <h3 id={`group-${group.id}`}>{group.title}</h3>
+                  <p className="features-group__summary">{group.summary}</p>
+                  {group.storyId && <a className="features-group__story" href={`#${group.storyId}`}>Read the story <span aria-hidden="true">↑</span></a>}
+                </header>
+                <ul className="features-items">
+                  {group.items.map(item => (
+                    <li className="features-item" key={item.name} data-status={item.status}>
+                      <span className="features-item__mark" aria-hidden="true">{item.status === "included" ? "✓" : item.status === "pilot" ? "◐" : "○"}</span>
+                      <span className="features-item__text">
+                        <span className="features-item__name">{item.name}</span>
+                        <span className="features-item__detail">{item.detail}</span>
+                      </span>
+                      {item.status === "soon"
+                        ? <a className="features-status" href="#coming-soon">{STATUS_LABEL[item.status]}</a>
+                        : <span className="features-status">{STATUS_LABEL[item.status]}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+        </section>
 
         <section className="features-plans" aria-labelledby="features-plans-title">
           <div className="features-section-heading">
@@ -115,8 +151,8 @@ export default function FeaturesPage() {
           <h2 id="features-close-title">Your next appointment.<br /><span>A little less to do.</span></h2>
           <p>See how it feels to give customers a simpler way to book, and your team a clearer way to follow up.</p>
           <div className="features-actions">
-            <Link href="/#terms" className="features-button">View plans <span aria-hidden="true">↗</span></Link>
-            <Link href="/demos" className="features-button features-button--outline">Try online booking</Link>
+            <Link href="/start" className="features-button">Set up my business <span aria-hidden="true">↗</span></Link>
+            <Link href="/#terms" className="features-button features-button--outline">See plans and pricing</Link>
           </div>
         </section>
         <RoadmapBoard seeds={ROADMAP} />

@@ -1,3 +1,13 @@
+## Features page rebuilt (13 September 2026)
+
+- /features now opens with three outcome pillars (Get booked, Confirm every visit, Stay in
+  control), keeps the six spotlight stories, and ends with "Everything included": the whole
+  feature inventory, 42 items in six groups, each marked Included, Pilot or Coming soon (the
+  last links to the roadmap board). Data lives in src/lib/marketing/feature-inventory.ts; keep
+  it truthful and keep roadmap ids matching src/lib/roadmap/catalogue.ts. Hero and close now
+  lead with "Set up my business" → /start. Pattern follows what Calendly, Acuity, Jobber, Fresha,
+  Notion and Linear do: pillars first, spotlights, depth at the bottom, one repeated CTA.
+
 # NOW
 
 Updated 12 September 2026. Read this first at the start of a work session.

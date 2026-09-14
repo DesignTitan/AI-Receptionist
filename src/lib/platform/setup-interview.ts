@@ -34,6 +34,9 @@ export type InterviewAnswers = {
   weeklyHours?: DayHours[];
   minutes?: number;
   answering?: AnsweringPreference;
+  /** Custom wording for incoming and outgoing calls; empty means "use the generated script". */
+  greeting?: string;
+  confirmation?: string;
 };
 
 export type StepId = "phone" | "confirm" | "name" | "trade" | "customTrade" | "address" | "hours" | "minutes" | "answering" | "done";

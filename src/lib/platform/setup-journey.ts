@@ -37,6 +37,19 @@ export function spokenHours(hours: DayHours[]): string {
   return allDay ? `24 hours, ${spokenDays(hours)}` : `${spokenDays(hours)}, ${spokenTime(open.opens)} to ${spokenTime(open.closes)}`;
 }
 
+/**
+ * What Bubs says when it rings a customer to confirm an appointment. Plain
+ * text; {customer}, {day} and {time} are filled in per call.
+ */
+export function confirmationScript(a: InterviewAnswers): string {
+  const name = a.businessName?.trim() || "the front desk";
+  return `Hi {customer}, this is Bubs calling from ${name}. I’m confirming your appointment on {day} at {time}. Does that still work for you? If not, I can find another time.`;
+}
+
+/** The customer's own wording wins; otherwise the script built from their answers. */
+export const effectiveGreeting = (a: InterviewAnswers) => a.greeting?.trim() || greetingScript(a);
+export const effectiveConfirmation = (a: InterviewAnswers) => a.confirmation?.trim() || confirmationScript(a);
+
 /** The first thing a caller hears. Plain text; the voice agent reads it. */
 export function greetingScript(a: InterviewAnswers): string {
   const name = a.businessName?.trim() || "the front desk";

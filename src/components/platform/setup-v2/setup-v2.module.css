@@ -102,10 +102,9 @@
 .stageHead{max-width:640px}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .stageCard{display:grid;gap:12px;align-content:start;padding:24px;border:1px solid var(--brand-line);border-radius:24px;background:#f8f8f8}
-.stageCardWide{grid-column:1 / -1}
 .stageCard h3,.liveSteps h3{margin:0;font-family:var(--brand-display);font-weight:700;font-size:20px;letter-spacing:-.02em;color:var(--brand-ink)}
 .stageCard p{margin:0;font-size:14px;line-height:1.6;color:var(--brand-ink)}
-.script{margin:0;padding:16px 18px;border-left:3px solid var(--brand-mint);background:#fff;border-radius:0 14px 14px 0;font-size:16px;line-height:1.6;color:var(--brand-ink)}
+
 .url{font-size:15px;color:var(--brand-muted)}
 .url strong{color:var(--brand-ink)}
 .openings{list-style:none;margin:0;padding:0;display:grid;gap:6px}
@@ -170,3 +169,19 @@
 .doneBar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 18px;border:1px solid var(--brand-line);border-radius:18px;background:#fff}
 .doneBar p{flex:1 1 280px;margin:0;font-size:15px;line-height:1.5;color:var(--brand-ink);text-wrap:pretty}
 .doneBar .doneActions{margin-left:auto}
+
+/* Call script editor */
+.script{display:grid;gap:8px}
+.scriptLabel{display:grid;gap:6px;font-size:12px;color:var(--brand-muted)}
+.scriptLabel textarea{width:100%;min-height:72px;resize:none;padding:12px 14px;border:1px solid #bfcfc5;border-radius:12px;background:#fff;font:inherit;font-size:16px;line-height:1.55;color:var(--brand-ink);overflow:hidden}
+.scriptLabel textarea:focus-visible{outline:none;border-color:#527a6b}
+.scriptMeta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--brand-muted)}
+.scriptActions{display:flex;gap:8px;flex-wrap:wrap}
+.suggestions{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.suggestions li{display:grid;gap:8px;padding:12px 14px;border:1px solid var(--brand-line);border-radius:12px;background:#fff}
+.suggestions li p{margin:0;font-size:15px;line-height:1.55;color:var(--brand-ink);text-wrap:pretty}
+.suggestions .chip{justify-self:start}
+.suggestionsFoot{border:0!important;background:none!important;padding:0!important}
+.review{display:grid;gap:10px;padding:14px 16px;border:1px solid #cddfd3;border-radius:12px;background:var(--brand-mint,#d5eee3)}
+.review p{margin:0;font-size:14px;line-height:1.55;color:var(--brand-ink);text-wrap:pretty}
+.review blockquote{margin:0;padding:12px 14px;background:#fff;border-radius:10px;font-size:15px;line-height:1.55;color:var(--brand-ink);text-wrap:pretty}

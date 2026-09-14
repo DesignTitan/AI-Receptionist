@@ -19,11 +19,13 @@
     "dev:workspace:stop": "node scripts/dev-workspace.mjs stop"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.125.0",
     "@omnidim-ai/client": "^0.1.0",
     "@supabase/supabase-js": "2.112.4",
     "next": "16.3.4",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",

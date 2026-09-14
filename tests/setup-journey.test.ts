@@ -49,3 +49,13 @@ test("resume message proves Bubs remembers instead of replaying the chat", async
   assert.equal(full, "Welcome back. I still have everything for Willow Studio: 123 Example Street, Detroit, MI; Tuesday to Saturday, 9 am to 6 pm; 45-minute appointments. Change anything under What Bubs™ knows, or carry on.");
   assert.equal(resumeMessage({ phone: "(313) 555-0142", businessName: "Willow Studio" }, false), "Welcome back. So far I have your phone number, your business name. Let’s carry on.");
 });
+
+test("confirmation script keeps its placeholders and custom wording wins over generated", async () => {
+  const { confirmationScript, effectiveGreeting, effectiveConfirmation } = await import("../src/lib/platform/setup-journey.ts");
+  const c = confirmationScript({ businessName: "Willow Studio" });
+  assert.match(c, /Willow Studio/);
+  for (const ph of ["{customer}", "{day}", "{time}"]) assert.ok(c.includes(ph), ph);
+  assert.equal(effectiveGreeting({ businessName: "Willow Studio", greeting: "Hey, Willow here!" }), "Hey, Willow here!");
+  assert.match(effectiveGreeting({ businessName: "Willow Studio", greeting: "   " }), /^Thanks for calling Willow Studio/);
+  assert.equal(effectiveConfirmation({ confirmation: "Custom" }), "Custom");
+});

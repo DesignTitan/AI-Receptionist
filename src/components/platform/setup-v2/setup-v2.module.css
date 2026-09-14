@@ -145,3 +145,7 @@
 .timeOption{padding:8px 10px;border-radius:8px;font-size:14px;color:var(--brand-ink);cursor:pointer;font-variant-numeric:tabular-nums;white-space:nowrap}
 .timeOption[aria-selected=true]{background:var(--brand-mint,#d5eee3)}
 .timeError{color:#923d2c;font-size:11px}
+
+/* No widows: body text never ends on a lone word; headings balance their lines. */
+.lede,.plan li,.stageHead p,.stageCard p,.liveSteps p,.done p,.bubble,.script,.note,.cardHead p,.fwd li{text-wrap:pretty}
+.welcome h2,.stageHead h2,.stageCard h3,.liveSteps h3,.cardHead h2{text-wrap:balance}

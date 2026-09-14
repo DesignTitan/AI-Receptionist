@@ -70,3 +70,5 @@
 .form :global(.platform-fieldbox) small{margin-top:6px}
 .form :global(.platform-fieldbox)+small{margin-top:8px}
 .customTrade{margin-top:12px}
+.heading p,.card p,.first fieldset>p,.first :global(.platform-note),.first small,.actions p,.next li p{text-wrap:pretty}
+.heading h1,.card h2,.first legend,.sectionTitle{text-wrap:balance}

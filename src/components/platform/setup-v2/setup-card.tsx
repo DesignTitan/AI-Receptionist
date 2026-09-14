@@ -1,140 +1,20 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { ANSWERING_PREFERENCES, type AnsweringPreference } from "@/lib/platform/answering-preference";
-import { ANSWERING_CHIPS, answeringHint, applyAnswer, interviewProgress, nextStep, normalizePhone, promptFor, TRADE_LABELS, type BusinessLookup, type InterviewAnswers, type Prompt, type StepId, type Trade } from "@/lib/platform/setup-interview";
-import { resumeMessage } from "@/lib/platform/setup-journey";
+import { ANSWERING_CHIPS, answeringHint, interviewProgress, TRADE_LABELS, type InterviewAnswers, type Prompt, type Trade } from "@/lib/platform/setup-interview";
 import { formatTime, parseTimeText, timeOptions } from "@/lib/platform/time-text";
 import { DAY_NAMES, minuteTime, timeMinutes, type DayHours } from "@/lib/platform/weekly-hours";
 import styles from "./setup-v2.module.css";
 
-export const V2_DRAFT_KEY = "receptionist-setup-v2-draft";
-
-type Line = { id: number; who: "bubs" | "you"; text: string };
-type Saved = { answers: InterviewAnswers };
-
-/* Ids are per mounted conversation (a ref), so React StrictMode's double effects and step remounts can't hand two lines the same key. */
-
-/**
- * Version 2 setup: Bubs interviews the owner and the front-desk card fills
- * itself. Text only for now; the voice session plugs into the same script.
- * Everything Bubs learns is editable on the card, so the conversation is a
- * faster way in, never a gate.
- */
-export function SetupConversation({ onChange, onDone }: { onChange?: (a: InterviewAnswers) => void; onDone?: () => void } = {}) {
-  const [answers, setAnswers] = useState<InterviewAnswers>({});
-  const [lines, setLines] = useState<Line[]>([]);
-  const [prompt, setPrompt] = useState<Prompt | null>(null);
-  const [draft, setDraft] = useState("");
-  const [busy, setBusy] = useState<"" | "lookup">("");
-  const [status, setStatus] = useState("");
-  const [loaded, setLoaded] = useState(false);
-  const log = useRef<HTMLDivElement>(null);
-  const input = useRef<HTMLInputElement>(null);
-  const saveTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const nextId = useRef(0);
-  const line = (who: Line["who"], text: string): Line => ({ id: ++nextId.current, who, text });
-
-  // Answers persist; the transcript doesn't. Someone coming back gets one line
-  // that proves Bubs remembers them, then the next question (or the way on).
-  useEffect(() => {
-    let saved: Saved | undefined;
-    try { const raw = localStorage.getItem(V2_DRAFT_KEY); if (raw) saved = JSON.parse(raw) as Saved; } catch {}
-    const a = saved?.answers ?? {};
-    const step = nextStep(a);
-    nextId.current = 0;
-    if (Object.keys(a).length) {
-      setAnswers(a);
-      const p = promptFor(step, a);
-      setPrompt(p);
-      setLines(step === "done" ? [line("bubs", resumeMessage(a, true))] : [line("bubs", resumeMessage(a, false)), line("bubs", p.text)]);
-    } else {
-      const first = promptFor("phone", {});
-      setLines([line("bubs", first.text)]);
-      setPrompt(first);
-    }
-    setLoaded(true);
-  }, []);
-
-  // Autosave with the same "Saving…" feel as the current form.
-  useEffect(() => {
-    if (!loaded) return;
-    setStatus("Saving…");
-    clearTimeout(saveTimer.current);
-    saveTimer.current = setTimeout(() => {
-      try { localStorage.setItem(V2_DRAFT_KEY, JSON.stringify({ answers } satisfies Saved)); setStatus("Saved on this device"); }
-      catch { setStatus("Not saved — this browser blocks storage"); }
-    }, 500);
-    return () => clearTimeout(saveTimer.current);
-  }, [answers, loaded]);
-
-  // First paint lands at the latest message without motion; only later messages glide.
-  const painted = useRef(false);
-  useEffect(() => {
-    const el = log.current;
-    if (!el || !loaded) return;
-    // Wait a frame so the panel has its final height (it takes it from the card) before measuring scrollHeight.
-    const frame = requestAnimationFrame(() => { el.scrollTo({ top: el.scrollHeight, behavior: painted.current ? "smooth" : "instant" }); painted.current = true; });
-    return () => cancelAnimationFrame(frame);
-  }, [lines, busy, loaded]);
-  useEffect(() => { if (loaded) onChange?.(answers); }, [answers, loaded, onChange]);
-
-  /** Focus only moves to the chat when the answer came from the chat; card edits keep the user's cursor where it is. */
-  function ask(a: InterviewAnswers, extra: Line[] = [], focus = true) {
-    const step = nextStep(a);
-    const p = promptFor(step, a);
-    setPrompt(p);
-    setLines(l => [...l, ...extra, line("bubs", p.text)]);
-    if (focus) setTimeout(() => input.current?.focus({ preventScroll: true }), 0);
-  }
-
-  async function answer(raw: string, label = raw) {
-    if (!prompt || busy) return;
-    const result = applyAnswer(prompt.id, raw, answers);
-    const spoken = line("you", label);
-    if (result.error) { setLines(l => [...l, spoken, line("bubs", result.error!)]); setDraft(""); return; }
-    setDraft("");
-    let next = result.answers;
-    setAnswers(next);
-    const replies = result.reply ? [line("bubs", result.reply)] : [];
-    if (prompt.id === "phone") {
-      setLines(l => [...l, spoken]);
-      setBusy("lookup");
-      next = { ...next, lookup: await lookup(next.phone!) };
-      setBusy("");
-      setAnswers(next);
-      ask(next, replies);
-      return;
-    }
-    setLines(l => [...l, spoken]);
-    ask(next, replies);
-  }
-
-  /** Edits on the card update the answers and, if it changes what to ask next, the conversation follows without taking focus. */
-  function edit(patch: Partial<InterviewAnswers>) {
-    const next = { ...answers, ...patch };
-    if (typeof next.phone === "string" && next.phone) next.phone = normalizePhone(next.phone) ?? next.phone;
-    setAnswers(next);
-    const step = nextStep(next);
-    if (prompt && step !== prompt.id) ask(next, [line("you", "(updated on the card)")], false);
-  }
-
-  function restart() {
-    try { localStorage.removeItem(V2_DRAFT_KEY); } catch {}
-    nextId.current = 0;
-    const first = promptFor("phone", {});
-    setAnswers({}); setLines([line("bubs", first.text)]); setPrompt(first); setDraft("");
-  }
-
+/** What Bubs knows: every answer, editable, with the way on at the bottom once it's complete. */
+export function SetupCard({ answers, prompt, status, onEdit, onRestart, onDone }: { answers: InterviewAnswers; prompt: Prompt | null; status: string; onEdit: (patch: Partial<InterviewAnswers>) => void; onRestart: () => void; onDone: () => void }) {
   const progress = interviewProgress(answers);
   const done = prompt?.id === "done";
-  const showText = prompt && (prompt.input === "text" || prompt.input === "phone" || prompt.allowText);
-
-  return <div className={styles.layout} data-loaded={loaded} data-done={done || undefined}>
-    <aside className={styles.card} aria-label="What Bubs knows">
+  const edit = onEdit;
+  return <aside className={styles.card} aria-label="What Bubs knows">
       <header className={styles.cardHead}>
-        <div><h2>What Bubs™ knows</h2><p>Fills in as you talk. Change anything here. <button type="button" className={styles.linkish} onClick={restart}>Start over</button></p></div>
+        <div><h2>What Bubs™ knows</h2><p>Fills in as you talk. Change anything here. <button type="button" className={styles.linkish} onClick={onRestart}>Start over</button></p></div>
         <div className={styles.meter} role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress * 100)} aria-label="Setup progress" style={{ "--p": progress } as React.CSSProperties}><span>{Math.round(progress * 100)}%</span></div>
       </header>
       <p className={styles.status} role="status">{status === "Saving…" && <span className={styles.spinner} aria-hidden="true" />}{status}</p>
@@ -151,42 +31,13 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
       {done && prompt && <footer className={styles.cardFoot} role="status">
         <p><Image src="/marketing/happy-mascot-pointed.png" alt="" width={28} height={28} className={styles.avatar} />{prompt.text}</p>
         <div className={styles.doneActions}>
-          {onDone ? <button type="button" className={styles.primary} onClick={onDone}>Continue: Preview your front desk →</button> : <Link className={styles.primary} href="/account?preview=confirmation">Compare with the current setup →</Link>}
-          <button type="button" className={styles.secondary} onClick={restart}>Start over</button>
+          <button type="button" className={styles.primary} onClick={onDone}>Continue: Preview your front desk →</button>
+          <button type="button" className={styles.secondary} onClick={onRestart}>Start over</button>
         </div>
       </footer>}
       {answers.lookup?.website && <p className={styles.note}>Listing website: <a href={answers.lookup.website} target="_blank" rel="noreferrer">{answers.lookup.website.replace(/^https?:\/\//, "")}</a></p>}
       {answers.lookup === null && answers.phone && <p className={styles.note}>No Google listing matched this number, so Bubs™ asked instead.</p>}
-    </aside>
-    {!done && <div className={styles.chatWrap}><section className={styles.chat} aria-label="Setup conversation with Bubs">
-      <div ref={log} className={styles.log} role="log" aria-live="polite">
-        {lines.map(l => <div key={l.id} className={styles.line} data-who={l.who}>
-          {l.who === "bubs" && <Image src="/marketing/happy-mascot-pointed.png" alt="" width={36} height={36} className={styles.avatar} />}
-          <p className={styles.bubble}>{l.text}</p>
-        </div>)}
-        {busy === "lookup" && <div className={styles.line} data-who="bubs"><Image src="/marketing/happy-mascot-pointed.png" alt="" width={36} height={36} className={styles.avatar} /><p className={`${styles.bubble} ${styles.thinking}`}><span className={styles.spinner} aria-hidden="true" />Checking that number for a listing…</p></div>}
-      </div>
-      {prompt && !done && <form className={styles.composer} onSubmit={e => { e.preventDefault(); if (draft.trim()) void answer(draft); }}>
-        {prompt.input === "chips" && <div className={prompt.chips!.some(c => c.hint) ? styles.optionList : styles.chips} role="group" aria-label="Quick answers">
-          {prompt.chips!.map(c => <button key={c.value} type="button" className={c.hint ? styles.optionCard : styles.chip} disabled={Boolean(busy)} onClick={() => void answer(c.value, c.label)}>{c.hint ? <><strong>{c.label}</strong><span>{c.hint}</span></> : c.label}</button>)}
-        </div>}
-        {(showText || prompt.input === "chips") && <div className={styles.inputRow}>
-          <input ref={input} value={draft} onChange={e => setDraft(e.target.value)} disabled={Boolean(busy)} inputMode={prompt.input === "phone" ? "tel" : undefined} autoComplete="off" placeholder={prompt.placeholder ?? (prompt.input === "chips" ? "Or type your answer" : "Type your answer")} aria-label="Your answer" />
-          <button type="submit" className={styles.send} disabled={Boolean(busy) || !draft.trim()}>Send</button>
-        </div>}
-      </form>}
-    </section></div>}
-
-  </div>;
-}
-
-async function lookup(phone: string): Promise<BusinessLookup | null> {
-  try {
-    const r = await fetch("/api/setup/lookup", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ phone }) });
-    if (!r.ok) return null;
-    const data = (await r.json()) as { found?: boolean; lookup?: BusinessLookup | null };
-    return data.found && data.lookup ? data.lookup : null;
-  } catch { return null; }
+    </aside>;
 }
 
 /** Text fields buffer locally and commit on blur or Enter, so a half-typed value never re-routes the conversation mid-keystroke. */
@@ -268,4 +119,3 @@ function TimeCombo({ label, value, min, max, assumePm = false, onChange }: { lab
   </label>;
 }
 
-export type { StepId };

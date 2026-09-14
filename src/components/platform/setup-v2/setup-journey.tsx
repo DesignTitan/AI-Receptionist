@@ -7,7 +7,8 @@ import { nextStep, type InterviewAnswers } from "@/lib/platform/setup-interview"
 import { TRADE_LABELS } from "@/lib/platform/setup-interview";
 import { bookingSlug, confirmationScript, forwardingSteps, greetingScript, openingsPreview, spokenHours } from "@/lib/platform/setup-journey";
 import { ScriptEditor } from "./script-editor";
-import { SetupConversation, V2_DRAFT_KEY } from "./setup-conversation";
+import { SetupCard } from "./setup-card";
+import { ChatPanel, useSetupChat, V2_DRAFT_KEY } from "./setup-chat";
 import styles from "./setup-v2.module.css";
 
 /** The numbered steps. Welcome sits before them: payment confirmed, one button, no stepper. */
@@ -35,17 +36,34 @@ export function SetupJourney() {
   const [leaving, setLeaving] = useState(false);
   const [answers, setAnswers] = useState<InterviewAnswers>({});
   const [provider, setProvider] = useState<PhoneProvider>("unknown");
+  const [loaded, setLoaded] = useState(false);
+  const [status, setStatus] = useState("");
   const stepper = useRef<HTMLElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const done = nextStep(answers) === "done";
+  const chat = useSetupChat(answers, setAnswers, step === "hear" ? "hear" : "talk", loaded);
 
   useEffect(() => {
     try { const raw = localStorage.getItem(V2_DRAFT_KEY); if (raw) setAnswers(JSON.parse(raw).answers ?? {}); } catch {}
     setStep(readHash());
+    setLoaded(true);
     const onHash = () => setStep(readHash());
     window.addEventListener("hashchange", onHash);
     return () => { window.removeEventListener("hashchange", onHash); clearTimeout(timer.current); };
   }, []);
+
+  // Autosave the answers (never the transcript) to this browser.
+  useEffect(() => {
+    if (!loaded) return;
+    setStatus("Saving…");
+    clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => {
+      try { localStorage.setItem(V2_DRAFT_KEY, JSON.stringify({ answers })); setStatus("Saved on this device"); }
+      catch { setStatus("Not saved — this browser blocks storage"); }
+    }, 500);
+    return () => clearTimeout(saveTimer.current);
+  }, [answers, loaded]);
 
   /**
    * One transition, in order: the current step fades out, then the next one
@@ -85,8 +103,8 @@ export function SetupJourney() {
 
     <div key={step} className={styles.stagePane} data-leaving={leaving || undefined}>
       {step === "welcome" && <Welcome answers={answers} complete={done} onContinue={() => go("talk")} />}
-      {step === "talk" && <SetupConversation onChange={setAnswers} onDone={() => go("hear")} />}
-      {step === "hear" && <Hear answers={answers} onEdit={patch => { const next = { ...answers, ...patch }; setAnswers(next); try { localStorage.setItem(V2_DRAFT_KEY, JSON.stringify({ answers: next })); } catch {} }} onBack={() => go("talk")} onNext={() => go("live")} />}
+      {step === "talk" && <div className={styles.layout} data-loaded={loaded}><ChatPanel chat={chat} /><SetupCard answers={answers} prompt={chat.prompt} status={status} onEdit={chat.edit} onRestart={chat.restart} onDone={() => go("hear")} /></div>}
+      {step === "hear" && <div className={styles.layout} data-loaded={loaded} data-stage="hear"><ChatPanel chat={chat} /><Hear answers={answers} onEdit={chat.edit} onBack={() => go("talk")} onNext={() => go("live")} /></div>}
       {step === "live" && <Live answers={answers} provider={provider} onProvider={setProvider} onBack={() => go("hear")} />}
     </div>
   </div>;

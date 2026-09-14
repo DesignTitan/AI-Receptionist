@@ -1,6 +1,9 @@
-.layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;align-items:stretch;opacity:0}
+.layout{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:24px;align-items:stretch;opacity:0}
 /* The card sets the row height; the chat is taken out of flow so it fills that height exactly and scrolls inside. */
 .chatWrap{position:relative;min-height:560px}
+/* On the preview step the right column is tall; the chat sticks and stays a screen high. */
+.layout[data-stage=hear] .chatWrap{position:sticky;top:calc(var(--workspace-top-offset,0px) + 88px);align-self:start;height:min(720px,calc(100dvh - var(--workspace-top-offset,0px) - 112px));min-height:420px}
+.layout[data-stage=hear] .stage{min-width:0}
 .layout[data-loaded=true]{opacity:1}
 
 /* Conversation */
@@ -164,8 +167,6 @@
 .selectWrap{display:grid;gap:6px}
 .fieldHint{font-size:12px;line-height:1.45;color:var(--brand-muted);padding:0 2px;text-wrap:pretty}
 
-/* Once the card is complete the conversation steps aside: one line from Bubs and the way on, card at full width. */
-.layout[data-done]{grid-template-columns:minmax(0,720px);justify-content:start}
 
 /* Call script editor */
 .script{display:grid;gap:8px}

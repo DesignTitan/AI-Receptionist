@@ -98,13 +98,10 @@ function Welcome({ answers, complete, onStart, onContinue }: { answers: Intervie
       <h2 id="v2-welcome">{started ? "Welcome back, Bubs." : "Welcome, Bubs."}</h2>
       {complete ? <>
         <p className={styles.lede}>You’ve told us about {answers.businessName ?? "your business"}. Next, preview your front desk, then go live.</p>
-        <div className={styles.doneActions}>
-          <button type="button" className={styles.primary} onClick={onContinue}>Continue: Preview your front desk →</button>
-          <button type="button" className={styles.secondary} onClick={onStart}>Change my answers</button>
-        </div>
+        <button type="button" className={styles.primary} onClick={onContinue}>Continue</button>
       </> : started ? <>
         <p className={styles.lede}>You’d started telling us about your business. Your answers are saved; carry on from where you stopped.</p>
-        <button type="button" className={styles.primary} onClick={onStart}>Continue: Tell us about your business →</button>
+        <button type="button" className={styles.primary} onClick={onStart}>Continue</button>
       </> : <>
         <p className={styles.lede}>Setting up takes about two minutes. Bubs asks a few questions, you answer, and everything stays on screen for you to change.</p>
         <ol className={styles.plan}>
@@ -112,7 +109,7 @@ function Welcome({ answers, complete, onStart, onContinue }: { answers: Intervie
           <li><strong>Preview your front desk.</strong> Your greeting, your booking page, your hours.</li>
           <li><strong>Go live.</strong> Get your Bubs number, forward your line, and Bubs confirms it works.</li>
         </ol>
-        <button type="button" className={styles.primary} onClick={onStart}>Continue: Tell us about your business →</button>
+        <button type="button" className={styles.primary} onClick={onStart}>Continue</button>
       </>}
       <p className={styles.fine}>Busy plan · change it any time from your account.</p>
     </div>

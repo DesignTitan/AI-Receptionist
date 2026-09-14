@@ -164,3 +164,9 @@
 .optionCard:disabled{opacity:.5;cursor:default}
 .selectWrap{display:grid;gap:6px}
 .fieldHint{font-size:12px;line-height:1.45;color:var(--brand-muted);padding:0 2px;text-wrap:pretty}
+
+/* Once the card is complete the conversation steps aside: one line from Bubs and the way on, card at full width. */
+.layout[data-done]{grid-template-columns:minmax(0,720px);justify-content:start}
+.doneBar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 18px;border:1px solid var(--brand-line);border-radius:18px;background:#fff}
+.doneBar p{flex:1 1 280px;margin:0;font-size:15px;line-height:1.5;color:var(--brand-ink);text-wrap:pretty}
+.doneBar .doneActions{margin-left:auto}

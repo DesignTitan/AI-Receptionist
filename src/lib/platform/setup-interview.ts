@@ -112,7 +112,7 @@ export function promptFor(step: StepId, a: InterviewAnswers): Prompt {
     case "answering":
       return { id: step, text: "Last one. When should I answer the phone? This can be any time, whatever your business hours are.", input: "chips", chips: ANSWERING_CHIPS };
     case "done":
-      return { id: step, text: `That’s everything I need${name}. It’s all under What Bubs™ knows; change anything there and I’ll keep up.`, input: "none" };
+      return { id: step, text: `That’s everything I need${name}. Change anything under What Bubs™ knows and I’ll keep up.`, input: "none" };
   }
 }
 

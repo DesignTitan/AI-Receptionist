@@ -80,3 +80,19 @@ export function forwardingSteps(provider: PhoneProvider | undefined, bubsNumber 
       return { title: "We’ll find your carrier", steps: ["When you go live, Bubs checks which carrier your number is on and shows the exact steps."], note: "You can also pick your carrier above to see the steps now." };
   }
 }
+
+/**
+ * What Bubs says to someone coming back. One sentence that proves it
+ * remembers, instead of replaying the old conversation at them.
+ */
+export function resumeMessage(a: InterviewAnswers, complete: boolean): string {
+  const facts: string[] = [];
+  if (a.address) facts.push(a.address);
+  const open = a.weeklyHours?.find(d => d.enabled);
+  if (a.weeklyHours && open) facts.push(`${spokenDays(a.weeklyHours)}, ${spokenTime(open.opens)} to ${spokenTime(open.closes)}`);
+  if (a.minutes) facts.push(`${a.minutes}-minute appointments`);
+  const name = a.businessName ? ` for ${a.businessName}` : "";
+  if (complete) return `Welcome back. I still have everything${name}${facts.length ? `: ${facts.join("; ")}` : ""}. Change anything on the right, or carry on.`;
+  const have = [a.phone && "your phone number", a.businessName && "your business name", a.trade && "what you do", a.address && "your address", a.weeklyHours && "your hours", a.minutes && "your appointment length"].filter(Boolean) as string[];
+  return `Welcome back. So far I have ${have.length ? have.join(", ") : "nothing yet"}. Let’s carry on.`;
+}

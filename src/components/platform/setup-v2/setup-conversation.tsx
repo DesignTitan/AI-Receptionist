@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ANSWERING_PREFERENCES, type AnsweringPreference } from "@/lib/platform/answering-preference";
 import { applyAnswer, interviewProgress, nextStep, normalizePhone, promptFor, TRADE_LABELS, type BusinessLookup, type InterviewAnswers, type Prompt, type StepId, type Trade } from "@/lib/platform/setup-interview";
+import { resumeMessage } from "@/lib/platform/setup-journey";
 import { DAY_NAMES, type DayHours } from "@/lib/platform/weekly-hours";
 import styles from "./setup-v2.module.css";
 
 export const V2_DRAFT_KEY = "receptionist-setup-v2-draft";
 
 type Line = { id: number; who: "bubs" | "you"; text: string };
-type Saved = { answers: InterviewAnswers; lines: Line[] };
+type Saved = { answers: InterviewAnswers };
 
 let lineId = 0;
 const line = (who: Line["who"], text: string): Line => ({ id: ++lineId, who, text });
@@ -33,15 +34,19 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
   const input = useRef<HTMLInputElement>(null);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
-  // Restore, or open with Bubs's first question.
+  // Answers persist; the transcript doesn't. Someone coming back gets one line
+  // that proves Bubs remembers them, then the next question (or the way on).
   useEffect(() => {
     let saved: Saved | undefined;
     try { const raw = localStorage.getItem(V2_DRAFT_KEY); if (raw) saved = JSON.parse(raw) as Saved; } catch {}
-    if (saved?.lines?.length) {
-      lineId = Math.max(...saved.lines.map(l => l.id));
-      setAnswers(saved.answers ?? {});
-      setLines(saved.lines);
-      setPrompt(promptFor(nextStep(saved.answers ?? {}), saved.answers ?? {}));
+    const a = saved?.answers ?? {};
+    const step = nextStep(a);
+    lineId = 0;
+    if (Object.keys(a).length) {
+      setAnswers(a);
+      const p = promptFor(step, a);
+      setPrompt(p);
+      setLines(step === "done" ? [line("bubs", resumeMessage(a, true))] : [line("bubs", resumeMessage(a, false)), line("bubs", p.text)]);
     } else {
       const first = promptFor("phone", {});
       setLines([line("bubs", first.text)]);
@@ -56,11 +61,11 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
     setStatus("Saving…");
     clearTimeout(saveTimer.current);
     saveTimer.current = setTimeout(() => {
-      try { localStorage.setItem(V2_DRAFT_KEY, JSON.stringify({ answers, lines } satisfies Saved)); setStatus("Saved on this device"); }
+      try { localStorage.setItem(V2_DRAFT_KEY, JSON.stringify({ answers } satisfies Saved)); setStatus("Saved on this device"); }
       catch { setStatus("Not saved — this browser blocks storage"); }
     }, 500);
     return () => clearTimeout(saveTimer.current);
-  }, [answers, lines, loaded]);
+  }, [answers, loaded]);
 
   // First paint lands at the latest message without motion; only later messages glide.
   const painted = useRef(false);
@@ -143,18 +148,17 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
         </div>}
       </form>}
       {done && <div className={styles.done}>
-        <p><strong>That’s the whole interview.</strong> Next: hear what callers will get, see your booking page, then go live.</p>
+        <p><strong>Bubs has what it needs.</strong> Next: hear what callers will get, see your booking page, then go live.</p>
         <div className={styles.doneActions}>
           {onDone ? <button type="button" className={styles.primary} onClick={onDone}>Next: Hear how Bubs answers →</button> : <Link className={styles.primary} href="/account?preview=confirmation">Compare with the current setup →</Link>}
           <button type="button" className={styles.secondary} onClick={restart}>Start over</button>
         </div>
       </div>}
-      <p className={styles.foot}>Bubs types for now. Voice comes next, using the same questions. <button type="button" className={styles.linkish} onClick={restart}>Start over</button></p>
     </section></div>
 
     <aside className={styles.card} aria-label="What Bubs knows">
       <header className={styles.cardHead}>
-        <div><h2>What Bubs knows</h2><p>Fills in as you talk. Change anything here.</p></div>
+        <div><h2>What Bubs knows</h2><p>Fills in as you talk. Change anything here. <button type="button" className={styles.linkish} onClick={restart}>Start over</button></p></div>
         <div className={styles.meter} role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress * 100)} aria-label="Setup progress" style={{ "--p": progress } as React.CSSProperties}><span>{Math.round(progress * 100)}%</span></div>
       </header>
       <p className={styles.status} role="status">{status === "Saving…" && <span className={styles.spinner} aria-hidden="true" />}{status}</p>

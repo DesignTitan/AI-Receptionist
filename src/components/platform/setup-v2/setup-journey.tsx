@@ -82,7 +82,7 @@ export function SetupJourney() {
     <p className={styles.srOnly} aria-live="polite">Step {index + 1} of {STEPS.length}: {STEPS[index].label}</p>
 
     <div key={step} className={styles.stagePane} data-leaving={leaving || undefined}>
-      {step === "welcome" && <Welcome onStart={() => go("talk")} />}
+      {step === "welcome" && <Welcome answers={answers} complete={done} onStart={() => go("talk")} onContinue={() => go("hear")} />}
       {step === "talk" && <SetupConversation onChange={setAnswers} onDone={() => go("hear")} />}
       {step === "hear" && <Hear answers={answers} onBack={() => go("talk")} onNext={() => go("live")} />}
       {step === "live" && <Live answers={answers} provider={provider} onProvider={setProvider} onBack={() => go("hear")} />}
@@ -90,18 +90,30 @@ export function SetupJourney() {
   </div>;
 }
 
-function Welcome({ onStart }: { onStart: () => void }) {
+function Welcome({ answers, complete, onStart, onContinue }: { answers: InterviewAnswers; complete: boolean; onStart: () => void; onContinue: () => void }) {
+  const started = Object.keys(answers).length > 0;
   return <section className={styles.welcome} aria-labelledby="v2-welcome">
     <div>
       <span className={styles.badge}><span aria-hidden="true">✓</span> Payment confirmed</span>
-      <h2 id="v2-welcome">Welcome, Bubs.</h2>
-      <p className={styles.lede}>Your front desk is about two minutes away. No forms to fill in; Bubs asks, you answer, and everything it learns stays on screen for you to change.</p>
-      <ol className={styles.plan}>
-        <li><strong>Tell Bubs about your business.</strong> Start with your phone number; Bubs finds the rest where it can.</li>
-        <li><strong>Hear how Bubs answers.</strong> Your greeting, your booking page, your hours.</li>
-        <li><strong>Go live.</strong> Get your Bubs number, forward your line, and Bubs proves it rang through.</li>
-      </ol>
-      <button type="button" className={styles.primary} onClick={onStart}>Start with Bubs →</button>
+      <h2 id="v2-welcome">{started ? "Welcome back, Bubs." : "Welcome, Bubs."}</h2>
+      {complete ? <>
+        <p className={styles.lede}>Bubs has everything it needs{answers.businessName ? ` for ${answers.businessName}` : ""}. Next, hear how it answers callers, then go live.</p>
+        <div className={styles.doneActions}>
+          <button type="button" className={styles.primary} onClick={onContinue}>Continue: Hear how Bubs answers →</button>
+          <button type="button" className={styles.secondary} onClick={onStart}>Review with Bubs</button>
+        </div>
+      </> : started ? <>
+        <p className={styles.lede}>You’d started telling Bubs about your business. It remembers where you got to; pick up from there.</p>
+        <button type="button" className={styles.primary} onClick={onStart}>Pick up where you left off →</button>
+      </> : <>
+        <p className={styles.lede}>Your front desk is about two minutes away. No forms to fill in; Bubs asks, you answer, and everything it learns stays on screen for you to change.</p>
+        <ol className={styles.plan}>
+          <li><strong>Tell Bubs about your business.</strong> Start with your phone number; Bubs finds the rest where it can.</li>
+          <li><strong>Hear how Bubs answers.</strong> Your greeting, your booking page, your hours.</li>
+          <li><strong>Go live.</strong> Get your Bubs number, forward your line, and Bubs proves it rang through.</li>
+        </ol>
+        <button type="button" className={styles.primary} onClick={onStart}>Start with Bubs →</button>
+      </>}
       <p className={styles.fine}>Busy plan · change it any time from your account.</p>
     </div>
     <Image src="/marketing/happy-mascot-pointed.png" alt="" width={260} height={260} className={styles.welcomeMascot} priority />

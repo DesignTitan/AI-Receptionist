@@ -10,7 +10,13 @@ async function checkDirectory(directory) {
     const file = path.join(directory, entry.name);
     if (entry.isDirectory()) await checkDirectory(file);
     else if (/\.(?:js|json|html|css|rsc|map)$/.test(entry.name)) {
-      const content = await readFile(file, "utf8");
+      let content = await readFile(file, "utf8");
+      // A source map embeds the original source text, including dev-only code that the
+      // build already stripped behind NODE_ENV guards. Check what the map points at, not
+      // that text: shipped code is caught by scanning the .js next to it.
+      if (entry.name.endsWith(".map")) {
+        try { const map = JSON.parse(content); delete map.sourcesContent; content = JSON.stringify(map); } catch {}
+      }
       if (markers.some((marker) => content.includes(marker))) {
         throw new Error(`Development toolbar leaked into production: ${path.relative(root, file)}`);
       }

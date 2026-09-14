@@ -195,7 +195,7 @@ function Field({ label, value, placeholder, onChange }: { label: string; value: 
   useEffect(() => { setDraft(value); dirty.current = false; }, [value]);
   // Only a value the user typed here may overwrite what Bubs recorded; a blur with no typing is a no-op.
   const commit = () => { if (dirty.current && draft !== value) onChange(draft); dirty.current = false; };
-  return <label className={styles.fieldbox}><span>{label}</span><input value={draft} placeholder={placeholder} onChange={e => { dirty.current = true; setDraft(e.target.value); }} onBlur={commit} onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); commit(); } }} /></label>;
+  return <label className={styles.fieldbox}><span>{label}</span><input value={draft} placeholder={placeholder ?? " "} onChange={e => { dirty.current = true; setDraft(e.target.value); }} onBlur={commit} onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); commit(); } }} /></label>;
 }
 
 function SelectField({ label, value, options, onChange }: { label: string; value: string; options: [string, string][]; onChange: (v: string) => void }) {

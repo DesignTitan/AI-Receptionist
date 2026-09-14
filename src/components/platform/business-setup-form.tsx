@@ -74,6 +74,7 @@ function SetupFields({customer,preview=false,initialStep=1,embedded=false,draft}
             <span>Legal business name</span>
             <input
               name="business_name"
+              placeholder=" "
               required
               maxLength={120}
               defaultValue={draft?.details.business_name??(preview?details.business_name:customer?.config.setupPending ? "" : customer?.business_name)}
@@ -94,7 +95,7 @@ function SetupFields({customer,preview=false,initialStep=1,embedded=false,draft}
           <div>
           <label className="platform-fieldbox">
             <span>Business or contact phone number</span>
-            <input name="phone" type="tel" required defaultValue={c?.phone??details.phone} aria-describedby="phone-purpose"/>
+            <input name="phone" type="tel" required placeholder=" " defaultValue={c?.phone??details.phone} aria-describedby="phone-purpose"/>
           </label>
           <small id="phone-purpose">Use a number customers can reach you on, including a mobile if you don’t have a business line. It appears on your booking page.</small>
           </div>

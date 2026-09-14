@@ -60,9 +60,6 @@
 .day{border:1px solid #cddfd3;background:#f4f8f5;color:var(--brand-ink);border-radius:8px;padding:6px 0;width:calc((100% - 36px) / 7);min-width:38px;font:inherit;font-size:12px;font-weight:500;cursor:pointer}
 .day[aria-pressed=true]{background:var(--brand-mint);border-color:var(--brand-mint)}
 .day:focus-visible{outline:2px solid #527a6b;outline-offset:2px}
-.times{display:flex;gap:12px}
-.times label{display:grid;gap:4px;font-size:11px;color:var(--brand-muted)}
-.times input{min-height:0;padding:4px 0;font-size:15px;color:var(--brand-ink);border:0;background:transparent}
 
 @media(max-width:900px){
   .layout{grid-template-columns:1fr}
@@ -138,3 +135,14 @@
 @keyframes v2leave{from{opacity:1}to{opacity:0}}
 .srOnly{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:-1px;padding:0;border:0}
 @media(prefers-reduced-motion:reduce){.stagePane,.stagePane[data-leaving]{animation:none}}
+
+/* Typed time with a suggestion list; no icon, no native picker. */
+.times{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.timeCombo{position:relative;display:grid;gap:4px;font-size:11px;color:var(--brand-muted)}
+.timeCombo input{width:100%;min-height:36px;padding:6px 10px;border:1px solid #cddfd3;border-radius:8px;background:#fff;font:inherit;font-size:15px;color:var(--brand-ink);font-variant-numeric:tabular-nums}
+.timeCombo input:focus-visible{outline:2px solid #527a6b;outline-offset:1px}
+.timeCombo input[aria-invalid]{border-color:#b9553f}
+.timeList{position:absolute;z-index:20;top:calc(100% + 4px);left:0;min-width:100%;margin:0;padding:6px;list-style:none;background:#fff;border:1px solid #bfcfc5;border-radius:12px;box-shadow:0 12px 32px -12px rgba(23,59,49,.35),0 2px 6px rgba(23,59,49,.08);max-height:220px;overflow-y:auto;overscroll-behavior:contain}
+.timeOption{padding:8px 10px;border-radius:8px;font-size:14px;color:var(--brand-ink);cursor:pointer;font-variant-numeric:tabular-nums;white-space:nowrap}
+.timeOption[aria-selected=true]{background:var(--brand-mint,#d5eee3)}
+.timeError{color:#923d2c;font-size:11px}

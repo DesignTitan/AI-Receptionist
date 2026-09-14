@@ -1,11 +1,12 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { ANSWERING_PREFERENCES, type AnsweringPreference } from "@/lib/platform/answering-preference";
 import { applyAnswer, interviewProgress, nextStep, normalizePhone, promptFor, TRADE_LABELS, type BusinessLookup, type InterviewAnswers, type Prompt, type StepId, type Trade } from "@/lib/platform/setup-interview";
 import { resumeMessage } from "@/lib/platform/setup-journey";
-import { DAY_NAMES, type DayHours } from "@/lib/platform/weekly-hours";
+import { formatTime, parseTimeText, timeOptions } from "@/lib/platform/time-text";
+import { DAY_NAMES, minuteTime, timeMinutes, type DayHours } from "@/lib/platform/weekly-hours";
 import styles from "./setup-v2.module.css";
 
 export const V2_DRAFT_KEY = "receptionist-setup-v2-draft";
@@ -211,11 +212,59 @@ function HoursField({ value, onChange }: { value?: DayHours[]; onChange: (v: Day
       {hours.map(d => <button key={d.day} type="button" className={styles.day} aria-pressed={d.enabled} onClick={() => set(x => x.day === d.day ? { ...x, enabled: !x.enabled } : x)}>{DAY_NAMES[d.day].slice(0, 3)}</button>)}
     </div>
     <div className={styles.times}>
-      <label>Opens<input type="time" step={900} value={open?.opens ?? "09:00"} onChange={e => set(x => ({ ...x, opens: e.target.value }))} /></label>
-      <label>Closes<input type="time" step={900} value={open?.closes ?? "17:00"} onChange={e => set(x => ({ ...x, closes: e.target.value }))} /></label>
+      <TimeCombo label="Opens" value={open?.opens ?? "09:00"} min={0} max={timeMinutes(open?.closes ?? "17:00") - 15} onChange={t => set(x => ({ ...x, opens: t }))} />
+      <TimeCombo label="Closes" value={open?.closes ?? "17:00"} min={timeMinutes(open?.opens ?? "09:00") + 15} max={1440} assumePm onChange={t => set(x => ({ ...x, closes: t }))} />
     </div>
     {!value && <small>Not answered yet</small>}
   </div>;
+}
+
+/**
+ * A time you can type ("9", "9:30", "5 pm") or pick. Plain text field, no
+ * icon: the list opens when the field has focus and narrows as you type.
+ */
+function TimeCombo({ label, value, min, max, assumePm = false, onChange }: { label: string; value: string; min: number; max: number; assumePm?: boolean; onChange: (time: string) => void }) {
+  const id = useId();
+  const current = timeMinutes(value);
+  const [text, setText] = useState(formatTime(current));
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<number | null>(null);
+  const [error, setError] = useState("");
+  const dirty = useRef(false);
+  const list = useRef<HTMLUListElement>(null);
+  useEffect(() => { setText(formatTime(current)); dirty.current = false; setError(""); }, [current]);
+  const digits = text.replace(/[^0-9]/g, "");
+  // While typing, prefer whole-hour matches ("10" → 10:00, 10:15…, never 1:00); only if no hour starts with the digits fall back to h+mm ("93" → 9:30).
+  const all = timeOptions(min, max);
+  const hourOf = (n: number) => String(Math.floor(n / 60) % 12 || 12);
+  const byHour = digits ? all.filter(n => hourOf(n).startsWith(digits)) : all;
+  const options = !dirty.current || !digits ? all : byHour.length ? byHour : all.filter(n => (hourOf(n) + String(n % 60).padStart(2, "0")).startsWith(digits));
+  function pick(n: number) { onChange(minuteTime(n)); setText(formatTime(n)); setError(""); setOpen(false); setActive(null); dirty.current = false; }
+  function commit() {
+    if (!dirty.current) { setOpen(false); return; }
+    const n = parseTimeText(text, assumePm);
+    if (n === null || n < min || n > max) { setError(`Use a time between ${formatTime(min)} and ${formatTime(max)}.`); return; }
+    pick(Math.round(n / 15) * 15);
+  }
+  function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Escape") { setOpen(false); return; }
+    if (e.key === "Enter") { e.preventDefault(); if (open && active !== null) pick(active); else commit(); return; }
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault(); setOpen(true);
+      const i = active === null ? options.indexOf(current) : options.indexOf(active);
+      const next = options[Math.max(0, Math.min(options.length - 1, (i < 0 ? 0 : i) + (e.key === "ArrowDown" ? 1 : -1)))];
+      if (next !== undefined) { setActive(next); list.current?.querySelector(`[data-n="${next}"]`)?.scrollIntoView({ block: "nearest" }); }
+    }
+  }
+  useEffect(() => { if (open) requestAnimationFrame(() => list.current?.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: "nearest" })); }, [open]);
+  return <label className={styles.timeCombo}>{label}
+    <input id={id} value={text} role="combobox" aria-expanded={open} aria-controls={`${id}-list`} aria-autocomplete="list" aria-activedescendant={open && active !== null ? `${id}-${active}` : undefined} aria-invalid={Boolean(error) || undefined} aria-describedby={error ? `${id}-err` : undefined} autoComplete="off" spellCheck={false} inputMode="numeric"
+      onFocus={e => { e.currentTarget.select(); setOpen(true); }} onChange={e => { dirty.current = true; setText(e.target.value); setActive(null); setError(""); setOpen(true); }} onBlur={() => { setTimeout(() => { setOpen(false); commit(); }, 120); }} onKeyDown={onKeyDown} />
+    <ul id={`${id}-list`} ref={list} role="listbox" aria-label={`${label} times`} className={styles.timeList} hidden={!open || !options.length}>
+      {options.map(n => <li key={n} id={`${id}-${n}`} data-n={n} role="option" aria-selected={n === (active ?? current)} className={styles.timeOption} onPointerDown={e => e.preventDefault()} onClick={() => pick(n)} onPointerMove={() => setActive(n)}>{formatTime(n)}</li>)}
+    </ul>
+    {error && <small id={`${id}-err`} className={styles.timeError}>{error}</small>}
+  </label>;
 }
 
 export type { StepId };

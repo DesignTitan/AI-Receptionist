@@ -9,5 +9,5 @@ export function useSetupAutosave(draft:SetupDraft,preview:boolean,enabled:boolea
  useEffect(()=>{if(!enabled)return;const flush=()=>{if(!Object.keys(current.current.details).length||JSON.stringify(current.current)===last.current)return;if(preview){clearTimeout(timer.current);try{localStorage.setItem(PREVIEW_DRAFT_KEY,JSON.stringify(current.current));}catch{}}else void saveRef.current().catch(()=>{});};const hidden=()=>{if(document.visibilityState==="hidden")flush();};window.addEventListener("pagehide",flush);document.addEventListener("visibilitychange",hidden);return()=>{window.removeEventListener("pagehide",flush);document.removeEventListener("visibilitychange",hidden);};},[enabled,preview]);
  const serialized=JSON.stringify(draft);
  useEffect(()=>{if(!enabled||!Object.keys(draft.details).length||serialized===last.current)return;setStatus('Saving…');timer.current=setTimeout(()=>{void save().catch(()=>{});},650);return()=>clearTimeout(timer.current);},[serialized,enabled]);
- return {status,flush:save};
+ return {status,saving:status==='Saving…',flush:save};
 }

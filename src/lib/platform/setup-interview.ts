@@ -110,7 +110,7 @@ export function promptFor(step: StepId, a: InterviewAnswers): Prompt {
     case "answering":
       return { id: step, text: "Last one. When a customer calls, when should I pick up?", input: "chips", chips: ANSWERING_CHIPS };
     case "done":
-      return { id: step, text: `That’s everything I need${name}. Your front desk card is on the right; change anything there and I’ll keep up.`, input: "none" };
+      return { id: step, text: `That’s everything I need${name}. It’s all under What Bubs knows; change anything there and I’ll keep up.`, input: "none" };
   }
 }
 

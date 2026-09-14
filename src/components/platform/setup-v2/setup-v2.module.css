@@ -1,4 +1,4 @@
-.layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:24px;align-items:stretch;opacity:0}
+.layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;align-items:stretch;opacity:0}
 /* The card sets the row height; the chat is taken out of flow so it fills that height exactly and scrolls inside. */
 .chatWrap{position:relative;min-height:560px}
 .layout[data-loaded=true]{opacity:1}
@@ -8,6 +8,7 @@
 .log{overflow-y:auto;padding:24px;display:grid;gap:14px;align-content:start}
 .line{display:flex;gap:10px;align-items:flex-end;max-width:min(560px,92%)}
 .line[data-who=you]{margin-left:auto;flex-direction:row-reverse}
+.card p .linkish{margin-left:4px}
 .avatar{width:36px;height:36px;border-radius:50%;background:#e2eee7;object-fit:cover;flex-shrink:0}
 .bubble{margin:0;padding:12px 16px;border-radius:18px;font-size:15px;line-height:1.5;background:#fff;color:var(--brand-ink);border:1px solid var(--brand-line);border-bottom-left-radius:6px}
 .line[data-who=you] .bubble{background:var(--brand-mint);border-color:transparent;border-bottom-left-radius:18px;border-bottom-right-radius:6px}

@@ -43,6 +43,6 @@ test("forwarding steps are carrier specific and honest about the unknown case", 
 test("resume message proves Bubs remembers instead of replaying the chat", async () => {
   const { resumeMessage } = await import("../src/lib/platform/setup-journey.ts");
   const full = resumeMessage({ businessName: "Willow Studio", address: "123 Example Street, Detroit, MI", weeklyHours: weeklyHoursForPreset("tue_sat"), minutes: 45 }, true);
-  assert.equal(full, "Welcome back. I still have everything for Willow Studio: 123 Example Street, Detroit, MI; Tuesday to Saturday, 9 am to 6 pm; 45-minute appointments. Change anything on the right, or carry on.");
+  assert.equal(full, "Welcome back. I still have everything for Willow Studio: 123 Example Street, Detroit, MI; Tuesday to Saturday, 9 am to 6 pm; 45-minute appointments. Change anything under What Bubs knows, or carry on.");
   assert.equal(resumeMessage({ phone: "(313) 555-0142", businessName: "Willow Studio" }, false), "Welcome back. So far I have your phone number, your business name. Let’s carry on.");
 });

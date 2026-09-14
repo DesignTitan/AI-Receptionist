@@ -10,8 +10,8 @@ import styles from "./setup-v2.module.css";
 
 const STEPS = [
   { id: "welcome", label: "Welcome" },
-  { id: "talk", label: "Tell Bubs about your business" },
-  { id: "hear", label: "Hear how Bubs answers" },
+  { id: "talk", label: "Tell us about your business" },
+  { id: "hear", label: "Preview your front desk" },
   { id: "live", label: "Go live" },
 ] as const;
 type StepKey = (typeof STEPS)[number]["id"];
@@ -97,22 +97,22 @@ function Welcome({ answers, complete, onStart, onContinue }: { answers: Intervie
       <span className={styles.badge}><span aria-hidden="true">✓</span> Payment confirmed</span>
       <h2 id="v2-welcome">{started ? "Welcome back, Bubs." : "Welcome, Bubs."}</h2>
       {complete ? <>
-        <p className={styles.lede}>Bubs has everything it needs{answers.businessName ? ` for ${answers.businessName}` : ""}. Next, hear how it answers callers, then go live.</p>
+        <p className={styles.lede}>You’ve told us about {answers.businessName ?? "your business"}. Next, preview your front desk, then go live.</p>
         <div className={styles.doneActions}>
-          <button type="button" className={styles.primary} onClick={onContinue}>Continue: Hear how Bubs answers →</button>
-          <button type="button" className={styles.secondary} onClick={onStart}>Review with Bubs</button>
+          <button type="button" className={styles.primary} onClick={onContinue}>Continue: Preview your front desk →</button>
+          <button type="button" className={styles.secondary} onClick={onStart}>Change my answers</button>
         </div>
       </> : started ? <>
-        <p className={styles.lede}>You’d started telling Bubs about your business. It remembers where you got to; pick up from there.</p>
-        <button type="button" className={styles.primary} onClick={onStart}>Pick up where you left off →</button>
+        <p className={styles.lede}>You’d started telling us about your business. Your answers are saved; carry on from where you stopped.</p>
+        <button type="button" className={styles.primary} onClick={onStart}>Continue: Tell us about your business →</button>
       </> : <>
-        <p className={styles.lede}>Your front desk is about two minutes away. No forms to fill in; Bubs asks, you answer, and everything it learns stays on screen for you to change.</p>
+        <p className={styles.lede}>Setting up takes about two minutes. Bubs asks a few questions, you answer, and everything stays on screen for you to change.</p>
         <ol className={styles.plan}>
-          <li><strong>Tell Bubs about your business.</strong> Start with your phone number; Bubs finds the rest where it can.</li>
-          <li><strong>Hear how Bubs answers.</strong> Your greeting, your booking page, your hours.</li>
-          <li><strong>Go live.</strong> Get your Bubs number, forward your line, and Bubs proves it rang through.</li>
+          <li><strong>Tell us about your business.</strong> Start with your phone number; Bubs fills in what it can find.</li>
+          <li><strong>Preview your front desk.</strong> Your greeting, your booking page, your hours.</li>
+          <li><strong>Go live.</strong> Get your Bubs number, forward your line, and Bubs confirms it works.</li>
         </ol>
-        <button type="button" className={styles.primary} onClick={onStart}>Start with Bubs →</button>
+        <button type="button" className={styles.primary} onClick={onStart}>Continue: Tell us about your business →</button>
       </>}
       <p className={styles.fine}>Busy plan · change it any time from your account.</p>
     </div>
@@ -124,7 +124,7 @@ function Hear({ answers, onBack, onNext }: { answers: InterviewAnswers; onBack: 
   const openings = openingsPreview(answers.weeklyHours, answers.minutes);
   const slug = bookingSlug(answers.businessName);
   return <section className={styles.stage} aria-labelledby="v2-hear">
-    <header className={styles.stageHead}><h2 id="v2-hear">Hear how Bubs answers.</h2><p>Everything below comes from what you just told Bubs. Change anything in the previous step and it updates.</p></header>
+    <header className={styles.stageHead}><h2 id="v2-hear">Preview your front desk.</h2><p>This is what your callers and customers will get, built from what you told us. Change anything in the previous step and it updates here.</p></header>
     <div className={styles.cards}>
       <article className={styles.stageCard}>
         <h3>What callers hear first</h3>
@@ -145,8 +145,8 @@ function Hear({ answers, onBack, onNext }: { answers: InterviewAnswers; onBack: 
       </article>
     </div>
     <div className={styles.stageActions}>
-      <button type="button" className={styles.secondary} onClick={onBack}>← Back to Bubs</button>
-      <button type="button" className={styles.primary} onClick={onNext}>Next: Go live →</button>
+      <button type="button" className={styles.secondary} onClick={onBack}>← Back: Tell us about your business</button>
+      <button type="button" className={styles.primary} onClick={onNext}>Continue: Go live →</button>
     </div>
   </section>;
 }
@@ -181,7 +181,7 @@ function Live({ answers, provider, onProvider, onBack }: { answers: InterviewAns
       </li>
     </ol>
     <div className={styles.stageActions}>
-      <button type="button" className={styles.secondary} onClick={onBack}>← Back</button>
+      <button type="button" className={styles.secondary} onClick={onBack}>← Back: Preview your front desk</button>
       <button type="button" className={styles.primary} disabled title="Preview only">Go live</button>
       <p className={styles.note}>Preview: nothing here is activated or sent.</p>
     </div>

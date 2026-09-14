@@ -130,32 +130,6 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
   const showText = prompt && (prompt.input === "text" || prompt.input === "phone" || prompt.allowText);
 
   return <div className={styles.layout} data-loaded={loaded}>
-    <div className={styles.chatWrap}><section className={styles.chat} aria-label="Setup conversation with Bubs">
-      <div ref={log} className={styles.log} role="log" aria-live="polite">
-        {lines.map(l => <div key={l.id} className={styles.line} data-who={l.who}>
-          {l.who === "bubs" && <Image src="/marketing/happy-mascot-pointed.png" alt="" width={36} height={36} className={styles.avatar} />}
-          <p className={styles.bubble}>{l.text}</p>
-        </div>)}
-        {busy === "lookup" && <div className={styles.line} data-who="bubs"><Image src="/marketing/happy-mascot-pointed.png" alt="" width={36} height={36} className={styles.avatar} /><p className={`${styles.bubble} ${styles.thinking}`}><span className={styles.spinner} aria-hidden="true" />Checking that number for a listing…</p></div>}
-      </div>
-      {prompt && !done && <form className={styles.composer} onSubmit={e => { e.preventDefault(); if (draft.trim()) void answer(draft); }}>
-        {prompt.input === "chips" && <div className={styles.chips} role="group" aria-label="Quick answers">
-          {prompt.chips!.map(c => <button key={c.value} type="button" className={styles.chip} disabled={Boolean(busy)} onClick={() => void answer(c.value, c.label)}>{c.label}</button>)}
-        </div>}
-        {(showText || prompt.input === "chips") && <div className={styles.inputRow}>
-          <input ref={input} value={draft} onChange={e => setDraft(e.target.value)} disabled={Boolean(busy)} inputMode={prompt.input === "phone" ? "tel" : undefined} autoComplete="off" placeholder={prompt.placeholder ?? (prompt.input === "chips" ? "Or type your answer" : "Type your answer")} aria-label="Your answer" />
-          <button type="submit" className={styles.send} disabled={Boolean(busy) || !draft.trim()}>Send</button>
-        </div>}
-      </form>}
-      {done && <div className={styles.done}>
-        <p><strong>Bubs has what it needs.</strong> Next: hear what callers will get, see your booking page, then go live.</p>
-        <div className={styles.doneActions}>
-          {onDone ? <button type="button" className={styles.primary} onClick={onDone}>Next: Hear how Bubs answers →</button> : <Link className={styles.primary} href="/account?preview=confirmation">Compare with the current setup →</Link>}
-          <button type="button" className={styles.secondary} onClick={restart}>Start over</button>
-        </div>
-      </div>}
-    </section></div>
-
     <aside className={styles.card} aria-label="What Bubs knows">
       <header className={styles.cardHead}>
         <div><h2>What Bubs knows</h2><p>Fills in as you talk. Change anything here. <button type="button" className={styles.linkish} onClick={restart}>Start over</button></p></div>
@@ -175,6 +149,32 @@ export function SetupConversation({ onChange, onDone }: { onChange?: (a: Intervi
       {answers.lookup?.website && <p className={styles.note}>Listing website: <a href={answers.lookup.website} target="_blank" rel="noreferrer">{answers.lookup.website.replace(/^https?:\/\//, "")}</a></p>}
       {answers.lookup === null && answers.phone && <p className={styles.note}>No Google listing matched this number, so Bubs asked instead.</p>}
     </aside>
+    <div className={styles.chatWrap}><section className={styles.chat} aria-label="Setup conversation with Bubs">
+      <div ref={log} className={styles.log} role="log" aria-live="polite">
+        {lines.map(l => <div key={l.id} className={styles.line} data-who={l.who}>
+          {l.who === "bubs" && <Image src="/marketing/happy-mascot-pointed.png" alt="" width={36} height={36} className={styles.avatar} />}
+          <p className={styles.bubble}>{l.text}</p>
+        </div>)}
+        {busy === "lookup" && <div className={styles.line} data-who="bubs"><Image src="/marketing/happy-mascot-pointed.png" alt="" width={36} height={36} className={styles.avatar} /><p className={`${styles.bubble} ${styles.thinking}`}><span className={styles.spinner} aria-hidden="true" />Checking that number for a listing…</p></div>}
+      </div>
+      {prompt && !done && <form className={styles.composer} onSubmit={e => { e.preventDefault(); if (draft.trim()) void answer(draft); }}>
+        {prompt.input === "chips" && <div className={styles.chips} role="group" aria-label="Quick answers">
+          {prompt.chips!.map(c => <button key={c.value} type="button" className={styles.chip} disabled={Boolean(busy)} onClick={() => void answer(c.value, c.label)}>{c.label}</button>)}
+        </div>}
+        {(showText || prompt.input === "chips") && <div className={styles.inputRow}>
+          <input ref={input} value={draft} onChange={e => setDraft(e.target.value)} disabled={Boolean(busy)} inputMode={prompt.input === "phone" ? "tel" : undefined} autoComplete="off" placeholder={prompt.placeholder ?? (prompt.input === "chips" ? "Or type your answer" : "Type your answer")} aria-label="Your answer" />
+          <button type="submit" className={styles.send} disabled={Boolean(busy) || !draft.trim()}>Send</button>
+        </div>}
+      </form>}
+      {done && <div className={styles.done}>
+        <p><strong>That’s everything.</strong> Next, preview your front desk: your greeting, your booking page, your hours.</p>
+        <div className={styles.doneActions}>
+          {onDone ? <button type="button" className={styles.primary} onClick={onDone}>Continue: Preview your front desk →</button> : <Link className={styles.primary} href="/account?preview=confirmation">Compare with the current setup →</Link>}
+          <button type="button" className={styles.secondary} onClick={restart}>Start over</button>
+        </div>
+      </div>}
+    </section></div>
+
   </div>;
 }
 

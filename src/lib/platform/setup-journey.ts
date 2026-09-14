@@ -92,7 +92,7 @@ export function resumeMessage(a: InterviewAnswers, complete: boolean): string {
   if (a.weeklyHours && open) facts.push(`${spokenDays(a.weeklyHours)}, ${spokenTime(open.opens)} to ${spokenTime(open.closes)}`);
   if (a.minutes) facts.push(`${a.minutes}-minute appointments`);
   const name = a.businessName ? ` for ${a.businessName}` : "";
-  if (complete) return `Welcome back. I still have everything${name}${facts.length ? `: ${facts.join("; ")}` : ""}. Change anything on the right, or carry on.`;
+  if (complete) return `Welcome back. I still have everything${name}${facts.length ? `: ${facts.join("; ")}` : ""}. Change anything under What Bubs knows, or carry on.`;
   const have = [a.phone && "your phone number", a.businessName && "your business name", a.trade && "what you do", a.address && "your address", a.weeklyHours && "your hours", a.minutes && "your appointment length"].filter(Boolean) as string[];
   return `Welcome back. So far I have ${have.length ? have.join(", ") : "nothing yet"}. Let’s carry on.`;
 }

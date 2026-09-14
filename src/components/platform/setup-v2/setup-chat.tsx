@@ -306,13 +306,14 @@ export function ChatPanel({ chat }: { chat: SetupChat }) {
         <button type="button" className={styles.secondary} onClick={toggleMute} disabled={voice !== "active"} aria-pressed={muted}>{muted ? "Unmute" : "Mute"}</button>
         <button type="button" className={styles.secondary} onClick={() => stopVoice("ended")}>End voice</button>
       </> : <>
-        <div className={styles.micPill} data-state={micTest.state}>
-          <button type="button" onClick={testMic} disabled={micTest.state === "testing"}>{micTest.state === "ok" ? "✓ Microphone ready" : micTest.state === "testing" ? "Listening…" : "Test microphone"}</button>
-          {mics.length > 0 && <label className={styles.micChoice}><span aria-hidden="true">·</span><span className={styles.micName}>{currentMicLabel}</span><span aria-hidden="true">▾</span>
-            <select aria-label="Microphone" value={micId} onChange={e => chooseMic(e.target.value)}><option value="">Default microphone</option>{mics.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}</select>
-          </label>}
+        <button type="button" className={styles.micTestBtn} data-state={micTest.state} onClick={testMic} disabled={micTest.state === "testing"}>
+          {micTest.state === "ok" ? "✓ Microphone ready" : micTest.state === "testing" ? "Listening…" : "Test microphone"}
           {micTest.state === "testing" && <span className={styles.level} aria-hidden="true"><i style={{ transform: `scaleX(${level})` }} /></span>}
-        </div>
+        </button>
+        {mics.length > 0 && <label className={styles.micPick} title="Change microphone">
+          <span className={styles.micName}>{currentMicLabel}</span><span aria-hidden="true">▾</span>
+          <select aria-label="Microphone" value={micId} onChange={e => chooseMic(e.target.value)}><option value="">Default microphone</option>{mics.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}</select>
+        </label>}
         <button type="button" className={styles.primary} onClick={startVoice} disabled={voice === "unavailable" || micTest.state !== "ok"} title={micTest.state !== "ok" ? "Test your microphone first" : undefined}>{voice === "ended" ? "Talk to Bubs™ again" : "Talk to Bubs™"}</button>
         <span className={styles.voiceStatus} role="status">{micText || (voice === "unavailable" ? "Voice isn’t connected in this build; typing works." : "Test your microphone, then talk to Bubs™. Or just type below.")}</span>
       </>}

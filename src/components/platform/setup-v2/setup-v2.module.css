@@ -218,14 +218,14 @@
 .caption{opacity:.6;font-style:italic}
 @media(prefers-reduced-motion:reduce){.voiceDot{animation:none}}
 
-/* One pill: test the mic, and see (or change) which mic, in the same place. */
-.micPill{position:relative;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px 0 0;border:1px solid #b8cfc2;border-radius:999px;background:#fff;color:var(--brand-ink);font-size:14px;font-weight:600;overflow:hidden}
-.micPill>button{border:0;background:none;padding:10px 0 10px 16px;font:inherit;color:inherit;cursor:pointer}
-.micPill>button:disabled{cursor:default}
-.micPill[data-state=ok]{border-color:#2f8f5b;background:#eef8f2}
-.micPill[data-state=silent],.micPill[data-state=blocked],.micPill[data-state=none]{border-color:#c98a7a}
-.micChoice{position:relative;display:inline-flex;align-items:center;gap:6px;font-weight:400;color:var(--brand-muted);cursor:pointer;max-width:220px}
+/* Two pills: test the microphone; next to it, the microphone in use (click to change). */
+.micTestBtn{position:relative;overflow:hidden;min-height:44px;padding:10px 18px;border:1px solid #b8cfc2;border-radius:999px;background:#fff;color:var(--brand-ink);font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.micTestBtn:disabled{cursor:default}
+.micTestBtn[data-state=ok]{border-color:#2f8f5b;background:#eef8f2}
+.micTestBtn[data-state=silent],.micTestBtn[data-state=blocked],.micTestBtn[data-state=none]{border-color:#c98a7a}
+.micPick{position:relative;display:inline-flex;align-items:center;gap:8px;min-height:44px;max-width:240px;padding:10px 14px;border:1px solid #b8cfc2;border-radius:999px;background:#fff;color:var(--brand-ink);font-size:14px;cursor:pointer}
+.micPick:hover{background:var(--brand-mint)}
 .micName{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.micChoice select{position:absolute;inset:0;width:100%;opacity:0;cursor:pointer;min-height:0!important;padding:0!important;border:0!important}
+.micPick select{position:absolute;inset:0;width:100%;opacity:0;cursor:pointer;min-height:0!important;padding:0!important;border:0!important}
 .level{position:absolute;left:0;right:0;bottom:0;height:3px;background:#e2eee7}
 .level i{display:block;height:100%;background:#2f8f5b;transform-origin:left;transition:transform .06s linear}

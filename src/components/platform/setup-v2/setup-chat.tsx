@@ -188,8 +188,6 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
     setVoiceNote(""); setVoice("connecting");
     let current: WebSession | null = null; let engine: VoiceAudio | null = null;
     try {
-      engine = new VoiceAudio(); audio.current = engine;
-      await engine.ready;
       const a = answersRef.current;
       const knownBits = [a.phone && `phone ${a.phone}`, a.businessName && `name ${a.businessName}`, a.trade && `type ${a.trade === "other" ? a.customTrade ?? "other" : TRADE_LABELS[a.trade]}`, a.address && `address ${a.address}`, a.weeklyHours?.some(d => d.enabled) && `hours ${spokenHours(a.weeklyHours)}`, a.minutes && `appointments ${a.minutes} minutes`, a.answering && `answering ${a.answering}`].filter(Boolean) as string[];
       const known = knownBits.length ? knownBits.join("; ") : "nothing yet";
@@ -197,6 +195,9 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
       const r = await fetch("/api/setup/voice-session", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ known, missing }), signal: AbortSignal.timeout(15_000) });
       const data = await r.json();
       if (!r.ok) throw new Error(typeof data.error === "string" ? data.error : "Voice couldn’t connect.");
+      // Only now touch the microphone: the session is ours, so a mic problem is the only thing left that can fail.
+      engine = new VoiceAudio(); audio.current = engine;
+      await engine.ready;
       const { WebSession: Session } = await import("@omnidim-ai/client");
       current = new Session({ audioEngine: engine }); session.current = current;
       current.on("status", value => {
@@ -222,7 +223,36 @@ export function useSetupChat(answers: InterviewAnswers, setAnswers: (a: Intervie
 
   function toggleMute() { const m = !muted; session.current?.mute(m); setMuted(m); }
 
-  return { lines, prompt, draft, setDraft, busy, submit, edit, restart, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute };
+  const [micTest, setMicTest] = useState<{ state: "idle" | "testing" | "ok" | "silent" | "blocked" | "none"; device?: string }>({ state: "idle" });
+  /** Proves the microphone alone: which device Chrome chose and whether it hears anything in three seconds. No session, no cost. */
+  async function testMic() {
+    setMicTest({ state: "testing" });
+    let stream: MediaStream | null = null;
+    try {
+      if (!navigator.mediaDevices?.getUserMedia) { setMicTest({ state: "none" }); return; }
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const device = stream.getAudioTracks()[0]?.label || "Default microphone";
+      const ctx = new AudioContext();
+      const src = ctx.createMediaStreamSource(stream);
+      const analyser = ctx.createAnalyser(); analyser.fftSize = 512;
+      src.connect(analyser);
+      const buf = new Uint8Array(analyser.fftSize);
+      let peak = 0;
+      const until = Date.now() + 3000;
+      while (Date.now() < until) {
+        analyser.getByteTimeDomainData(buf);
+        for (const v of buf) peak = Math.max(peak, Math.abs(v - 128));
+        await new Promise(r => setTimeout(r, 100));
+      }
+      await ctx.close();
+      setMicTest({ state: peak > 6 ? "ok" : "silent", device });
+    } catch (e) {
+      const name = e instanceof Error ? e.name : "";
+      setMicTest({ state: name === "NotAllowedError" || name === "SecurityError" ? "blocked" : name === "NotFoundError" ? "none" : "blocked" });
+    } finally { stream?.getTracks().forEach(t => t.stop()); }
+  }
+
+  return { lines, prompt, draft, setDraft, busy, submit, edit, restart, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute, micTest, testMic };
 }
 
 export type SetupChat = ReturnType<typeof useSetupChat>;
@@ -232,7 +262,8 @@ function previewIntro(a: InterviewAnswers): string {
 }
 
 export function ChatPanel({ chat }: { chat: SetupChat }) {
-  const { lines, prompt, draft, setDraft, busy, submit, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute } = chat;
+  const { lines, prompt, draft, setDraft, busy, submit, log, input, stage, voice, voiceNote, caption, muted, startVoice, stopVoice, toggleMute, micTest, testMic } = chat;
+  const micText = { idle: "", testing: "Listening for three seconds… say something.", ok: `Microphone works: ${micTest.device}.`, silent: `Chrome is using “${micTest.device}” but heard nothing. Check it’s the right device in Chrome → Site settings → Microphone.`, blocked: "Chrome blocked the microphone for this site. Click the lock icon in the address bar → Microphone → Allow.", none: "No microphone found by the browser." }[micTest.state];
   const talking = voice === "connecting" || voice === "active";
   const interviewing = stage === "talk" && prompt?.id !== "done";
   const placeholder = !interviewing ? (stage === "hear" ? "Ask about the greeting, the confirmation call or the booking page" : "Ask about any field on the card") : prompt?.placeholder ?? (prompt?.input === "chips" ? "Or type your answer, or ask a question" : "Type your answer, or ask a question");
@@ -252,7 +283,8 @@ export function ChatPanel({ chat }: { chat: SetupChat }) {
         <button type="button" className={styles.secondary} onClick={() => stopVoice("ended")}>End voice</button>
       </> : <>
         <button type="button" className={styles.primary} onClick={startVoice} disabled={voice === "unavailable"}>{voice === "ended" ? "Talk to Bubs™ again" : "Talk to Bubs™"}</button>
-        <span className={styles.voiceStatus}>{voice === "unavailable" ? "Voice isn’t connected in this build; typing works." : "Say your answers out loud; the card fills in as you talk."}</span>
+        <button type="button" className={styles.secondary} onClick={testMic} disabled={micTest.state === "testing"}>Test microphone</button>
+        <span className={styles.voiceStatus}>{micText || (voice === "unavailable" ? "Voice isn’t connected in this build; typing works." : "Say your answers out loud; the card fills in as you talk.")}</span>
       </>}
     </div>
     {voiceNote && <p className={styles.voiceNote} role="alert">{voiceNote}</p>}

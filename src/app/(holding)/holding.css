@@ -76,6 +76,8 @@
 .hold-field input:focus { outline: none; border-color: #1e3a34; box-shadow: 0 0 0 3px rgba(30, 58, 52, .14); }
 .hold-consent { display: grid; grid-template-columns: 18px 1fr; gap: 10px; align-items: start; font-size: 12px; line-height: 1.55; color: #526b63; }
 .hold-consent input { margin: 2px 0 0; width: 16px; height: 16px; accent-color: #1e3a34; }
+.hold-human { min-height: 0; }
+.hold-human iframe { max-width: 100%; }
 .hold-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .hold-form__error { margin: 0; color: #a8321f; font-size: 13px; }
 .hold-form__note { margin: 0; color: #8a9a93; font-size: 12px; line-height: 1.6; }

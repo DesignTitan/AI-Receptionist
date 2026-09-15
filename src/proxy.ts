@@ -49,7 +49,8 @@ export async function proxy(request: NextRequest) {
   // homepage is at /home, so work on the real site can carry on.
   // A rewrite of /home to "/" comes back through here; the header marks it so it is not
   // turned into the hero a second time.
-  const fullHome = request.headers.get("x-bubs-full-home") === "1";
+  // Only trusted alongside a valid owner cookie: a visitor sending the header by hand gets nothing.
+  const fullHome = unlocked && request.headers.get("x-bubs-full-home") === "1";
   if (comingSoon && !fullHome) {
     if (pathname === "/" || pathname === "/coming-soon") {
       return pathname === "/" ? NextResponse.rewrite(new URL("/coming-soon", request.url)) : NextResponse.next();

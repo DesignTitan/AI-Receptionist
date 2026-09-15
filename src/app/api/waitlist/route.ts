@@ -78,23 +78,23 @@ export async function POST(request: Request) {
     if (!(await acceptsMail(domain))) return NextResponse.json({ error: "That email domain doesn't receive mail. Check the spelling." }, { status: 422 });
   }
 
-  // Bot checks, two layers. Vercel BotID classifies the request from signals its script collected
-  // in the page, so a script that never ran the page is a bot. Cloudflare Turnstile is verified
-  // whenever the widget produced a token; when the widget could not load, BotID stands alone.
+  // Bot checks, two layers, weighed rather than stacked. Vercel BotID reads signals its script
+  // collected in the page; Cloudflare Turnstile is verified whenever its widget produced a token.
+  // A forged or failed Turnstile token blocks. BotID alone never blocks a signup outright: it has
+  // called real people on phones bots, and a lost lead is worse than a tagged one. Such signups
+  // are saved with bot_check: "flagged" so they can be reviewed in Klaviyo, and the obvious fakes
+  // were already refused above (throwaway domains, domains with no mail, made-up numbers).
   const bot = await checkBotId();
-  if (bot.isBot && !bot.isVerifiedBot) {
-    console.warn("waitlist: BotID rejected the request");
-    return NextResponse.json({ error: "We couldn't confirm you're a person. Refresh the page and try again." }, { status: 403 });
-  }
+  let botCheck: "passed" | "flagged" = bot.isBot && !bot.isVerifiedBot ? "flagged" : "passed";
   if (body.turnstileToken) {
     const human = await verifyHuman(body.turnstileToken, ip);
     if (!human.ok) {
       console.warn("waitlist: Turnstile rejected the token", human.reason);
       return NextResponse.json({ error: "We couldn't confirm you're a person. Refresh the page and try again." }, { status: 403 });
     }
-  } else {
-    console.warn("waitlist: no Turnstile token (widget unavailable); BotID only");
+    botCheck = "passed";
   }
+  if (botCheck === "flagged") console.warn("waitlist: BotID called this a bot; saving it flagged", { email: !!email, phone: !!phone });
 
   const key = process.env.KLAVIYO_PRIVATE_API_KEY;
   const list = process.env.KLAVIYO_LIST_ID;
@@ -127,6 +127,7 @@ export async function POST(request: Request) {
             source: "coming-soon",
             ...(business ? { business } : {}),
             ...(phone ? { sms_consent: smsConsent } : {}),
+            bot_check: botCheck,
             signed_up_at: new Date().toISOString(),
           },
         },

@@ -10,8 +10,10 @@
 - Vercel project renamed ai-receptionist → bubs-ai. Still named after the old product: the
   default domain ai-receptionist-two-azure.vercel.app (swap needs the owner: add bubs-ai.vercel.app,
   remove the old one under Settings → Domains) and the GitHub repo DesignTitan/AI-Receptionist.
-- Next for Klaviyo: a welcome email flow on "Added to list: Founding rate", a launch-day campaign,
-  and app events (signup, first call) once the platform exists.
+- Klaviyo account (other session, 14 Sep late): welcome flow "Founding rate welcome" is live on
+  "Added to list: Founding rate"; segment "SMS consent (pre-setup)" exists; test profiles removed
+  from the list. Owner still to do: SMS toll-free number (needs EIN), footer org name in
+  Settings → General, bubs.ai sending domain. Next: launch-day campaign, app events later.
 ## Holding site (14 September 2026, not deployed)
 
 - A hero-only "coming soon" homepage lives at /coming-soon: the same copy, photo and logo, a

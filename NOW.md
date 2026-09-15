@@ -14,6 +14,9 @@
   bot_check: flagged instead of blocking; only typos, throwaway/non-mail domains and fictional
   numbers get a "check the spelling" message. Owner: add bubs.ai to the Turnstile widget's
   hostnames in Cloudflare; review the bot_check = flagged segment now and then.
+- Accessibility pass 15 Sep: axe-core clean (WCAG 2.2 AA rules) on hero and modal; every text line
+  over the photo measured per pixel at 375, 1080 and 1440 wide, all ≥4.5:1 (title ≥3:1); greys in
+  the modal at 5:1; hero no longer clips at 200% zoom; visible focus rings; Escape returns focus.
 - Vercel project renamed ai-receptionist → bubs-ai. Still named after the old product: the
   default domain ai-receptionist-two-azure.vercel.app (swap needs the owner: add bubs-ai.vercel.app,
   remove the old one under Settings → Domains) and the GitHub repo DesignTitan/AI-Receptionist.

@@ -40,14 +40,22 @@ function e164(raw: string): string | null {
   return `+1${digits}`;
 }
 
-/** The domain must accept mail: an MX record, or at least an A/AAAA record as the RFC fallback. */
+/**
+ * The domain must accept mail: an MX record, or an A/AAAA record as the RFC fallback. Only a
+ * definite "no such domain / no records" answer rejects; a slow or failing resolver lets the
+ * signup through rather than turning a DNS hiccup into a lost lead.
+ */
 async function acceptsMail(domain: string): Promise<boolean> {
-  try {
-    const mx = await dns.resolveMx(domain);
-    if (mx.length > 0) return true;
-  } catch { /* no MX; fall through */ }
-  try { return (await dns.resolve4(domain)).length > 0; } catch { /* no A */ }
-  try { return (await dns.resolve6(domain)).length > 0; } catch { return false; }
+  const definiteNo = (e: unknown) => ["ENOTFOUND", "ENODATA", "NXDOMAIN"].includes((e as { code?: string })?.code ?? "");
+  const lookup = async (fn: () => Promise<unknown[]>) => {
+    try { return (await fn()).length > 0 ? "yes" : "no"; } catch (e) { return definiteNo(e) ? "no" : "unknown"; }
+  };
+  const mx = await lookup(() => dns.resolveMx(domain));
+  if (mx !== "no") return true;
+  const a = await lookup(() => dns.resolve4(domain));
+  if (a !== "no") return true;
+  const aaaa = await lookup(() => dns.resolve6(domain));
+  return aaaa !== "no";
 }
 
 export async function POST(request: Request) {
@@ -58,7 +66,7 @@ export async function POST(request: Request) {
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
   const now = Date.now();
   const recent = (attempts.get(ip) ?? []).filter(t => now - t < 3_600_000);
-  if (recent.length >= 5) return NextResponse.json({ error: "Too many tries from this connection. Try again in an hour." }, { status: 429 });
+  if (recent.length >= 20) return NextResponse.json({ error: "Too many tries from this connection. Try again in an hour." }, { status: 429 });
   attempts.set(ip, [...recent, now]);
 
   let body: Record<string, string> = {};

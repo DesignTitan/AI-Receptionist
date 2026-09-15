@@ -29,7 +29,8 @@ The offer is hidden until both env vars exist, so the page never shows a button 
 - Segment **SMS consent (pre-setup)**: `sms_consent is true`. Everyone who ticked the text box
   before SMS was switched on; use it for the first text once a sending number exists.
 - Test profiles were removed from the list on 14 Sep; they still exist under Audience → Profiles.
-  `bubs@manifeststudios.com` is the only member and its old suppression was lifted.
+  `bubs@manifeststudios.com` is the only member. It carried a manual email suppression dated
+  29 August 2026 (unrelated to the waitlist); that was lifted on 14 Sep.
 
 ## Things to know
 
@@ -48,9 +49,10 @@ The offer is hidden until both env vars exist, so the page never shows a button 
   is worth setting up before the launch campaign.
 - **Rate limit.** Five signups per hour per IP address, in memory, reset on every deploy.
 
-- **Bot protection.** Klaviyo suppressed one of the test signups ("Manually Suppressed from Email
-  Marketing, method: BOT_PROTECTION") after seven signups in twenty minutes from one server with
-  plus-addressed test emails. A suppressed profile is still on the list but will not receive
+- **Bot protection.** Klaviyo suppressed the seventh test signup (`bubs+waitlist-test7`, event
+  "Manually Suppressed from Email Marketing, method: BOT_PROTECTION") after seven signups in
+  twenty minutes from one server with plus-addressed test emails. This is a different event from
+  the 29 August suppression on the owner's address. A suppressed profile is still on the list but will not receive
   email. If a real signup ever shows this, open the profile and click "Remove global suppression".
 - Test profiles `bubs+waitlist-test…@manifeststudios.com` were left in the account; delete them
   from Audience → Profiles when convenient.

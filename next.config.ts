@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
 import path from "node:path";
+import { withBotId } from "botid/next/config";
 
-export default function nextConfig(phase: string): NextConfig {
+function nextConfig(phase: string): NextConfig {
   // npm run dev owns this loopback server. No preview routes or toolbar module
   // are included in build/start, even if this environment variable is present.
   const previewPort = Number(process.env.DEV_PREVIEW_PORT);
@@ -39,3 +40,6 @@ export default function nextConfig(phase: string): NextConfig {
     } : {}),
   };
 }
+
+// Vercel BotID: proxies its client script through this deployment so ad blockers cannot strip it.
+export default withBotId(nextConfig);

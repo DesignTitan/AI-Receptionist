@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { promises as dns } from "node:dns";
+import { checkBotId } from "botid/server";
 import { verifyHuman } from "@/lib/turnstile";
 
 /**
@@ -77,13 +78,22 @@ export async function POST(request: Request) {
     if (!(await acceptsMail(domain))) return NextResponse.json({ error: "That email domain doesn't receive mail. Check the spelling." }, { status: 422 });
   }
 
-  // Human check. Fails closed in production: no Turnstile secret means no signups, never open season.
-  if (process.env.NODE_ENV === "production" || process.env.TURNSTILE_SECRET_KEY) {
+  // Bot checks, two layers. Vercel BotID classifies the request from signals its script collected
+  // in the page, so a script that never ran the page is a bot. Cloudflare Turnstile is verified
+  // whenever the widget produced a token; when the widget could not load, BotID stands alone.
+  const bot = await checkBotId();
+  if (bot.isBot && !bot.isVerifiedBot) {
+    console.warn("waitlist: BotID rejected the request");
+    return NextResponse.json({ error: "We couldn't confirm you're a person. Refresh the page and try again." }, { status: 403 });
+  }
+  if (body.turnstileToken) {
     const human = await verifyHuman(body.turnstileToken, ip);
     if (!human.ok) {
-      console.warn("waitlist: human check failed", human.reason);
+      console.warn("waitlist: Turnstile rejected the token", human.reason);
       return NextResponse.json({ error: "We couldn't confirm you're a person. Refresh the page and try again." }, { status: 403 });
     }
+  } else {
+    console.warn("waitlist: no Turnstile token (widget unavailable); BotID only");
   }
 
   const key = process.env.KLAVIYO_PRIVATE_API_KEY;

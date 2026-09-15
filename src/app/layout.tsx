@@ -1,3 +1,4 @@
+import { BotIdClient } from "botid/client";
 import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Sans, Instrument_Serif, Playfair_Display, Space_Grotesk } from "next/font/google";
 import { env } from "@/lib/env";
@@ -81,6 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${editorial.variable} ${fashion.variable} ${technical.variable} ${marketing.variable}`}
     >
       <head>
+        <BotIdClient protect={[{ path: "/api/waitlist", method: "POST" }]} />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="antialiased">

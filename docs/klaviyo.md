@@ -24,7 +24,7 @@ The offer is hidden until both env vars exist, so the page never shows a button 
 - `KLAVIYO_LIST_ID=X7k8uZ` on Vercel (production). The list is single opt-in.
 - Vercel project renamed from `ai-receptionist` to `bubs-ai` the same evening.
 - Flow **Founding rate welcome**: trigger "Added to list: Founding rate", no re-entry, one email
-  from bubs <bubs@manifeststudios.com>, subject "Your spot is saved. The founding rate is yours."
+  from bubs <hello@bubs.ai> (reply-to the same; the owner's personal address is not shown), subject "Your spot is saved. The founding rate is yours."
   It promises nothing else before launch, so keep it that way. The email is a custom HTML template
   (source: `docs/email/founding-rate-welcome.html`): bubs logo from
   https://bubs.ai/brand/bubs-lockup-ink.png, the copy, and an unsubscribe link. **No postal
@@ -76,7 +76,9 @@ form quietly submits without it. Owner fix: Cloudflare dashboard → Turnstile �
 - **Email footer.** Klaviyo's required footer prints the organisation from Settings → General,
   currently "Conjuring, 5343 Prairie Home Dr, Grand Rapids". Change it to bubs / Manifest Studios
   before the welcome flow reaches a real signup.
-- **Sending domain.** Mail goes out from manifeststudios.com. A bubs.ai sending domain with DKIM
+- **hello@bubs.ai has no mailbox yet.** Replies bounce until the owner adds a forward at GoDaddy
+  (Email Forwarding, free with the domain) from hello@bubs.ai to an inbox they read.
+- **Sending domain.** Mail goes out with a bubs.ai From address over Klaviyo's shared domain. A bubs.ai sending domain with DKIM
   is worth setting up before the launch campaign.
 - **Rate limit.** Five signups per hour per IP address, in memory, reset on every deploy.
 

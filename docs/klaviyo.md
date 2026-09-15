@@ -32,6 +32,21 @@ The offer is hidden until both env vars exist, so the page never shows a button 
   `bubs@manifeststudios.com` is the only member. It carried a manual email suppression dated
   29 August 2026 (unrelated to the waitlist); that was lifted on 14 Sep.
 
+## Bot and fake-signup defences (15 Sep 2026)
+
+In order, every submission passes: same-origin check; five per hour per IP; honeypot field;
+strict email syntax; a blocklist of throwaway inbox providers; a DNS check that the email domain
+actually receives mail (MX, else A/AAAA); a real North American number (area code and exchange
+2-9, no N11, no 555, no repeated or 1234567 digits); **Vercel BotID** (`checkBotId`, script
+proxied via `withBotId` in next.config, `<BotIdClient>` in the root layout) which rejects any
+request whose page never ran the client script; and **Cloudflare Turnstile** when the widget
+produced a token. Verified: curl with browser headers and valid-looking data gets 403; a real
+browser on a phone-sized screen gets through and lands in the list.
+
+Turnstile currently fails to load on bubs.ai (the site key was made for the old domain), so the
+form quietly submits without it and BotID stands alone. Owner fix: Cloudflare dashboard →
+Turnstile → the widget → add `bubs.ai` to its hostnames. Nothing in the code needs to change.
+
 ## Things to know
 
 - **SMS consent is not recorded yet.** Klaviyo answers "Phone number is valid but is not in a

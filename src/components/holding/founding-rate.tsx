@@ -67,6 +67,8 @@ export function FoundingRate({ turnstileSiteKey }: { turnstileSiteKey: string | 
   const [state, setState] = useState<State>("idle");
   const [error, setError] = useState<string | null>(null);
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [invalid, setInvalid] = useState<{ email?: boolean; phone?: boolean }>({});
 
   function open() { setOpened(true); dialog.current?.showModal(); setTimeout(() => dialog.current?.querySelector<HTMLInputElement>("input[name=email]")?.focus(), 30); }
   function close() { dialog.current?.close(); }
@@ -80,6 +82,23 @@ export function FoundingRate({ turnstileSiteKey }: { turnstileSiteKey: string | 
     e.preventDefault();
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+    const emailValue = (data.email ?? "").trim();
+    const phoneDigits = (data.phone ?? "").replace(/\D/g, "");
+    const emailOk = emailValue === "" || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailValue);
+    const phoneOk = phoneDigits === "" || phoneDigits.length === 10 || (phoneDigits.length === 11 && phoneDigits.startsWith("1"));
+    if (!emailValue && !phoneDigits) {
+      setInvalid({ email: true, phone: true });
+      setError("Leave an email or a mobile number so we can reach you."); setState("error");
+      form.querySelector<HTMLInputElement>("input[name=email]")?.focus();
+      return;
+    }
+    if (!emailOk || !phoneOk) {
+      setInvalid({ email: !emailOk, phone: !phoneOk });
+      setError(!emailOk ? "That email doesn't look right." : "Use a real US or Canadian mobile number."); setState("error");
+      form.querySelector<HTMLInputElement>(!emailOk ? "input[name=email]" : "input[name=phone]")?.focus();
+      return;
+    }
+    setInvalid({});
     if (turnstileSiteKey && !widgetBroken.current) {
       const token = window.turnstile?.getResponse(widgetId.current ?? undefined) ?? "";
       if (!token) { setError("One moment while we check you're a person, then try again."); setState("error"); return; }
@@ -89,7 +108,13 @@ export function FoundingRate({ turnstileSiteKey }: { turnstileSiteKey: string | 
     try {
       const r = await fetch("/api/waitlist", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
       const body = await r.json().catch(() => ({}));
-      if (!r.ok) { setError(body.error ?? "That didn't go through. Try again in a moment."); setState("error"); if (widgetId.current) window.turnstile?.reset(widgetId.current); return; }
+      if (!r.ok) {
+        const message: string = body.error ?? "That didn't go through. Try again in a moment.";
+        setInvalid({ email: /email/i.test(message), phone: /mobile|number/i.test(message) });
+        setError(message); setState("error");
+        if (widgetId.current) window.turnstile?.reset(widgetId.current);
+        return;
+      }
       setState("done");
     } catch { setError("Couldn't reach the server. Try again in a moment."); setState("error"); }
   }
@@ -110,12 +135,12 @@ export function FoundingRate({ turnstileSiteKey }: { turnstileSiteKey: string | 
               <button type="button" className="hold-button" onClick={close}>Done</button>
             </div>
           ) : (
-            <form className="hold-form" onSubmit={submit}>
+            <form className="hold-form" onSubmit={submit} noValidate>
               <p className="hold-pill"><span aria-hidden="true" />Founding rate</p>
               <h2 id="founding-title">Be first through the door.</h2>
               <p className="hold-form__lede">Leave an email or a mobile number. When bubs launches you'll hear first, with the founding rate locked for your first six months.</p>
-              <label className="hold-field"><span>Email</span><input name="email" type="email" inputMode="email" autoComplete="email" placeholder="you@yourbusiness.com" maxLength={120} /></label>
-              <label className="hold-field"><span>Mobile number <em>optional</em></span><input name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="(415) 555 0142" maxLength={24} value={phone} onChange={e => setPhone(e.target.value)} /></label>
+              <label className="hold-field"><span>Email</span><input name="email" type="email" inputMode="email" autoComplete="email" placeholder="you@yourbusiness.com" maxLength={120} value={email} aria-invalid={invalid.email || undefined} onChange={e => { setEmail(e.target.value); if (invalid.email) setInvalid(v => ({ ...v, email: false })); }} /></label>
+              <label className="hold-field"><span>Mobile number <em>optional</em></span><input name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="(415) 555 0142" maxLength={24} value={phone} aria-invalid={invalid.phone || undefined} onChange={e => { setPhone(e.target.value); if (invalid.phone) setInvalid(v => ({ ...v, phone: false })); }} /></label>
               <label className="hold-field"><span>Your business <em>optional</em></span><input name="business" type="text" placeholder="Solstice Salon" maxLength={80} /></label>
               {phone.trim() && (
                 <label className="hold-consent"><input name="sms_consent" type="checkbox" value="yes" /><span>Text me about the launch and the founding rate. Message and data rates may apply; reply STOP to opt out.</span></label>

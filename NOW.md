@@ -3,8 +3,10 @@
   opens a modal (email, optional mobile with SMS consent, business). It posts to /api/waitlist.
 - Klaviyo is connected and verified on production (14 Sep, late): the route upserts the profile
   with founding_rate: true, adds it to the Founding rate list (X7k8uZ) synchronously, then records
-  consent through a subscribe job. Key "bubs.ai website waitlist v2" lives only on Vercel. The
-  older exposed key was deleted. Details and gotchas (bot protection, test profiles): docs/klaviyo.md.
+  consent through a subscribe job. Verified in a real browser and on every endpoint path (email,
+  mobile only, mobile with SMS, bad input, spam trap, foreign origin). SMS consent needs a Klaviyo
+  sending number first; the intent is kept as a profile property. Key "bubs.ai website waitlist
+  v2" lives only on Vercel. The older exposed key was deleted. Details and gotchas (bot protection, test profiles): docs/klaviyo.md.
 - Vercel project renamed ai-receptionist → bubs-ai. Still named after the old product: the
   default domain ai-receptionist-two-azure.vercel.app (swap needs the owner: add bubs-ai.vercel.app,
   remove the old one under Settings → Domains) and the GitHub repo DesignTitan/AI-Receptionist.

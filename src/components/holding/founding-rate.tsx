@@ -97,7 +97,7 @@ export function FoundingRate({ turnstileSiteKey }: { turnstileSiteKey: string | 
   return (
     <div className="hold-offer">
       <button type="button" className="hold-button" onClick={open}>I want in</button>
-      <p className="hold-offer__line">Sign up before launch and keep the founding rate for as long as you stay with us.</p>
+      <p className="hold-offer__line">Sign up before launch and lock in the founding rate for your first six months. Terms at launch.</p>
 
       <dialog ref={dialog} className="hold-dialog" aria-labelledby="founding-title">
         <div className="hold-dialog__panel">
@@ -106,14 +106,14 @@ export function FoundingRate({ turnstileSiteKey }: { turnstileSiteKey: string | 
             <div className="hold-dialog__done">
               <p className="hold-pill"><span aria-hidden="true" />You're on the list</p>
               <h2 id="founding-title">Founding rate, saved for you.</h2>
-              <p>We'll message you the moment bubs opens, with the rate you were promised. Nothing else until then.</p>
+              <p>We'll message you the moment bubs opens, with your founding rate for the first six months. Nothing else until then.</p>
               <button type="button" className="hold-button" onClick={close}>Done</button>
             </div>
           ) : (
             <form className="hold-form" onSubmit={submit}>
               <p className="hold-pill"><span aria-hidden="true" />Founding rate</p>
               <h2 id="founding-title">Be first through the door.</h2>
-              <p className="hold-form__lede">Leave an email or a mobile number. When bubs launches you'll hear first, and the founding rate is yours to keep.</p>
+              <p className="hold-form__lede">Leave an email or a mobile number. When bubs launches you'll hear first, with the founding rate locked for your first six months.</p>
               <label className="hold-field"><span>Email</span><input name="email" type="email" inputMode="email" autoComplete="email" placeholder="you@yourbusiness.com" maxLength={120} /></label>
               <label className="hold-field"><span>Mobile number <em>optional</em></span><input name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="(415) 555 0142" maxLength={24} value={phone} onChange={e => setPhone(e.target.value)} /></label>
               <label className="hold-field"><span>Your business <em>optional</em></span><input name="business" type="text" placeholder="Solstice Salon" maxLength={80} /></label>

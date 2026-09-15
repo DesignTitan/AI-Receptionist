@@ -62,6 +62,8 @@ export async function proxy(request: NextRequest) {
     if (!unlocked) {
       if (pathname === "/login") return NextResponse.next();
       if (pathname.startsWith("/api/")) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      // the hero's own photo, fonts, icons and other files must still load
+      if (/\.[a-z0-9]+$/i.test(pathname)) return NextResponse.next();
       return NextResponse.redirect(new URL("/", request.url));
     }
   }

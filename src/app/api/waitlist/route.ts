@@ -10,7 +10,8 @@ export const runtime = "nodejs";
 
 const KLAVIYO = "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs";
 const KLAVIYO_IMPORT = "https://a.klaviyo.com/api/profile-import";
-const REVISION = "2024-10-15";
+const REVISION = "2026-07-15";
+const KLAVIYO_LISTS = "https://a.klaviyo.com/api/lists";
 const attempts = new Map<string, number[]>();
 
 function e164(raw: string): string | null {
@@ -71,12 +72,30 @@ export async function POST(request: Request) {
     }),
     signal: AbortSignal.timeout(10_000),
   }).catch(() => null);
+  let profileId: string | undefined;
   if (!imported || !imported.ok) {
     const detail = imported ? await imported.text().catch(() => "") : "no response";
     console.error("waitlist: Klaviyo profile import failed (continuing to subscribe)", imported?.status, detail.slice(0, 300));
+  } else {
+    const created = (await imported.json().catch(() => null)) as { data?: { id?: string } } | null;
+    profileId = created?.data?.id;
   }
 
-  // 2. Subscribe the profile to the founding-rate list with explicit consent.
+  // 2. Put the profile on the founding-rate list right away (synchronous, so the list is never silently empty).
+  if (profileId) {
+    const added = await fetch(`${KLAVIYO_LISTS}/${list}/relationships/profiles`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ data: [{ type: "profile", id: profileId }] }),
+      signal: AbortSignal.timeout(10_000),
+    }).catch(() => null);
+    if (!added || !added.ok) {
+      const detail = added ? await added.text().catch(() => "") : "no response";
+      console.error("waitlist: Klaviyo add-to-list failed", added?.status, detail.slice(0, 300));
+    }
+  }
+
+  // 3. Record marketing consent for the list (Klaviyo processes this asynchronously).
   const r = await fetch(KLAVIYO, {
     method: "POST",
     headers,
@@ -100,28 +119,15 @@ export async function POST(request: Request) {
   console.log("waitlist: Klaviyo subscribe accepted", r.status, raw.slice(0, 600) || "(empty body)");
   let job: { data?: { id?: string } } | null = null;
   try { job = raw ? JSON.parse(raw) : null; } catch { job = null; }
-  let jobId = job?.data?.id;
-  if (!jobId) {
-    // The endpoint answers 202 with no body; look the newest job up instead.
-    await new Promise((resolve) => setTimeout(resolve, 2500));
-    const recent = (await fetch(`${KLAVIYO}?sort=-created_at`, { headers, signal: AbortSignal.timeout(8_000) })
-      .then((res) => res.json())
-      .catch(() => null)) as { data?: Array<{ id?: string; attributes?: Record<string, unknown> }> } | null;
-    jobId = recent?.data?.[0]?.id;
-    console.log("waitlist: Klaviyo recent subscribe jobs", JSON.stringify(recent?.data?.slice(0, 2) ?? recent).slice(0, 900));
-  }
+  const jobId = job?.data?.id;
   if (jobId) {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     const status = await fetch(`${KLAVIYO}/${jobId}`, { headers, signal: AbortSignal.timeout(8_000) })
       .then((res) => res.json())
-      .catch(() => null) as { data?: { attributes?: { status?: string; failed_count?: number; completed_count?: number } } } | null;
+      .catch(() => null) as { data?: { attributes?: { status?: string; failed_count?: number } } } | null;
     const a = status?.data?.attributes;
-    console.log("waitlist: Klaviyo subscribe job", jobId, JSON.stringify(status?.data ?? status).slice(0, 600));
     if (!a || a.status !== "complete" || (a.failed_count ?? 0) > 0) {
-      const errors = await fetch(`${KLAVIYO}/${jobId}/import-errors`, { headers, signal: AbortSignal.timeout(8_000) })
-        .then((res) => res.text())
-        .catch(() => "");
-      console.error("waitlist: Klaviyo subscribe job did not complete cleanly", jobId, JSON.stringify(a), errors.slice(0, 500));
+      console.error("waitlist: Klaviyo subscribe job did not complete cleanly", jobId, JSON.stringify(a));
     }
   }
   return NextResponse.json({ ok: true });

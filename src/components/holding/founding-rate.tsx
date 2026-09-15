@@ -60,7 +60,10 @@ function HumanCheck({ siteKey, widgetId, onError }: { siteKey: string; widgetId:
 export function FoundingRate({ turnstileSiteKey }: { turnstileSiteKey: string | null }) {
   const dialog = useRef<HTMLDialogElement | null>(null);
   const widgetId = useRef<string | null>(null);
+  const widgetBroken = useRef(false);
   const [opened, setOpened] = useState(false);
+  // The widget failing to load is not the visitor's problem: the server has a second bot check.
+  const onHumanError = () => { widgetBroken.current = true; };
   const [state, setState] = useState<State>("idle");
   const [error, setError] = useState<string | null>(null);
   const [phone, setPhone] = useState("");
@@ -77,7 +80,7 @@ export function FoundingRate({ turnstileSiteKey }: { turnstileSiteKey: string | 
     e.preventDefault();
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
-    if (turnstileSiteKey) {
+    if (turnstileSiteKey && !widgetBroken.current) {
       const token = window.turnstile?.getResponse(widgetId.current ?? undefined) ?? "";
       if (!token) { setError("One moment while we check you're a person, then try again."); setState("error"); return; }
       data.turnstileToken = token;
@@ -118,7 +121,7 @@ export function FoundingRate({ turnstileSiteKey }: { turnstileSiteKey: string | 
                 <label className="hold-consent"><input name="sms_consent" type="checkbox" value="yes" /><span>Text me about the launch and the founding rate. Message and data rates may apply; reply STOP to opt out.</span></label>
               )}
               <input type="text" name="company_website" tabIndex={-1} autoComplete="off" className="hold-hp" aria-hidden="true" />
-              {turnstileSiteKey && opened && <HumanCheck siteKey={turnstileSiteKey} widgetId={widgetId} onError={setError} />}
+              {turnstileSiteKey && opened && <HumanCheck siteKey={turnstileSiteKey} widgetId={widgetId} onError={onHumanError} />}
               <button type="submit" className="hold-button hold-button--wide" disabled={state === "sending"}>{state === "sending" ? "Saving your spot" : "Save my spot"}</button>
               {error && <p className="hold-form__error" role="alert">{error}</p>}
               <p className="hold-form__note">One email or text when we open. No newsletters, no sharing your details.</p>

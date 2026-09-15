@@ -83,7 +83,7 @@
 .hold-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .hold-form__error { margin: 0; color: #a8321f; font-size: 13px; }
 .hold-form__note { margin: 0; color: #8a9a93; font-size: 12px; line-height: 1.6; }
-.hold-form__legal { margin: 0; color: #a3b0aa; font-size: 10px; line-height: 1.55; }
+.hold-form__legal { margin: 0; color: #8a9a93; font-size: 10px; line-height: 1.55; }
 .hold-dialog__done { display: grid; gap: 14px; justify-items: start; }
 .hold-dialog__done p:not(.hold-pill) { margin: 0; color: #526b63; font-size: 15px; line-height: 1.6; }
 @media (max-width: 760px) {

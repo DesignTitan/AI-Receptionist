@@ -23,15 +23,29 @@ The offer is hidden until both env vars exist, so the page never shows a button 
   Access (created 14 Sep 2026). Stored on Vercel as `KLAVIYO_PRIVATE_API_KEY` (production).
 - `KLAVIYO_LIST_ID=X7k8uZ` on Vercel (production). The list is single opt-in.
 - Vercel project renamed from `ai-receptionist` to `bubs-ai` the same evening.
+- Flow **Founding rate welcome** (live): trigger "Added to list: Founding rate", no re-entry, one
+  plain-text email from bubs <bubs@manifeststudios.com>, subject "Your spot is saved. The founding
+  rate is yours." It promises nothing else before launch, so keep it that way.
+- Segment **SMS consent (pre-setup)**: `sms_consent is true`. Everyone who ticked the text box
+  before SMS was switched on; use it for the first text once a sending number exists.
+- Test profiles were removed from the list on 14 Sep; they still exist under Audience → Profiles.
+  `bubs@manifeststudios.com` is the only member and its old suppression was lifted.
 
 ## Things to know
 
 - **SMS consent is not recorded yet.** Klaviyo answers "Phone number is valid but is not in a
   supported region for this account. Please configure a sending number for this region." until
-  the account has an SMS sending number (Klaviyo → Settings → SMS). Until then the mobile number
+  the account has an SMS sending number. Owner task: Settings → Text message → Set up texting →
+  United States → enter the EIN and registered address → toll-free number. Verification takes a
+  few business days. The wizard already created an empty "Text Messaging List"; ignore it. Until then the mobile number
   and an `sms_consent: true` property are saved on the profile, and email consent is still
   recorded, so nothing is lost; once SMS is set up, a segment on `sms_consent` finds everyone
   who opted in.
+- **Email footer.** Klaviyo's required footer prints the organisation from Settings → General,
+  currently "Conjuring, 5343 Prairie Home Dr, Grand Rapids". Change it to bubs / Manifest Studios
+  before the welcome flow reaches a real signup.
+- **Sending domain.** Mail goes out from manifeststudios.com. A bubs.ai sending domain with DKIM
+  is worth setting up before the launch campaign.
 - **Rate limit.** Five signups per hour per IP address, in memory, reset on every deploy.
 
 - **Bot protection.** Klaviyo suppressed one of the test signups ("Manually Suppressed from Email

@@ -66,7 +66,7 @@
 .hold-dialog__panel { position: relative; padding: 28px 28px 24px; background: #fff; border-radius: 24px; box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .6); }
 .hold-dialog__close { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: #526b63; font-size: 26px; line-height: 1; cursor: pointer; }
 .hold-dialog__close:hover { background: #ebf0ec; color: #1e3a34; }
-.hold-dialog .hold-pill { background: #d5eee3; border-color: #c3e6d6; color: #1e3a34; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.hold-dialog .hold-pill { justify-self: start; width: max-content; max-width: calc(100% - 44px); margin-bottom: 4px; background: #d5eee3; border-color: #c3e6d6; color: #1e3a34; -webkit-backdrop-filter: none; backdrop-filter: none; }
 .hold-dialog .hold-pill span { background: #1e3a34; box-shadow: 0 0 0 4px rgba(30, 58, 52, .15); }
 .hold-dialog h2 { margin: 0; font-family: var(--font-display-marketing), "Apfel Grotezk", var(--font-inter), sans-serif; font-weight: 500; font-size: clamp(26px, 3vw, 32px); line-height: 1.1; letter-spacing: -.04em; }
 .hold-form { display: grid; gap: 14px; }

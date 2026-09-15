@@ -9,6 +9,7 @@ import { NextResponse } from "next/server";
 export const runtime = "nodejs";
 
 const KLAVIYO = "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs";
+const KLAVIYO_IMPORT = "https://a.klaviyo.com/api/profile-import";
 const REVISION = "2024-10-15";
 const attempts = new Map<string, number[]>();
 
@@ -52,20 +53,37 @@ export async function POST(request: Request) {
   const subscriptions: Record<string, unknown> = {};
   if (email) subscriptions.email = { marketing: { consent: "SUBSCRIBED" } };
   if (phone && smsConsent) subscriptions.sms = { marketing: { consent: "SUBSCRIBED" } };
-  const attributes: Record<string, unknown> = {
-    ...(email ? { email } : {}),
-    ...(phone ? { phone_number: phone } : {}),
-    properties: { founding_rate: true, source: "coming-soon", ...(business ? { business } : {}), signed_up_at: new Date().toISOString() },
-    subscriptions,
-  };
+  const identity = { ...(email ? { email } : {}), ...(phone ? { phone_number: phone } : {}) };
+  const headers = { Authorization: `Klaviyo-API-Key ${key}`, revision: REVISION, "Content-Type": "application/vnd.api+json", Accept: "application/vnd.api+json" };
 
+  // 1. Upsert the profile with the founding-rate properties (the subscribe job below rejects `properties`).
+  const imported = await fetch(KLAVIYO_IMPORT, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      data: {
+        type: "profile",
+        attributes: {
+          ...identity,
+          properties: { founding_rate: true, source: "coming-soon", ...(business ? { business } : {}), signed_up_at: new Date().toISOString() },
+        },
+      },
+    }),
+    signal: AbortSignal.timeout(10_000),
+  }).catch(() => null);
+  if (!imported || !imported.ok) {
+    const detail = imported ? await imported.text().catch(() => "") : "no response";
+    console.error("waitlist: Klaviyo profile import failed (continuing to subscribe)", imported?.status, detail.slice(0, 300));
+  }
+
+  // 2. Subscribe the profile to the founding-rate list with explicit consent.
   const r = await fetch(KLAVIYO, {
     method: "POST",
-    headers: { Authorization: `Klaviyo-API-Key ${key}`, revision: REVISION, "Content-Type": "application/vnd.api+json", Accept: "application/vnd.api+json" },
+    headers,
     body: JSON.stringify({
       data: {
         type: "profile-subscription-bulk-create-job",
-        attributes: { custom_source: "bubs.ai coming soon", historical_import: false, profiles: { data: [{ type: "profile", attributes }] } },
+        attributes: { custom_source: "bubs.ai coming soon", historical_import: false, profiles: { data: [{ type: "profile", attributes: { ...identity, subscriptions } }] } },
         relationships: { list: { data: { type: "list", id: list } } },
       },
     }),

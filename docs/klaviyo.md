@@ -11,7 +11,9 @@ Klaviyo account "Conjuring":
    endpoint. This is synchronous, so the person is on the list the moment the form says so.
 3. Fires a subscription job that records email marketing consent (SMS consent only when the box
    was ticked). Klaviyo runs this in the background and it can take a few minutes to show on the
-   profile; the list membership does not wait for it.
+   profile; the list membership does not wait for it. A mobile-only signup with the SMS box
+   unticked skips this step (there is nothing to consent to). The form only reports failure
+   when nothing at all was saved.
 
 The offer is hidden until both env vars exist, so the page never shows a button that cannot save.
 
@@ -23,6 +25,14 @@ The offer is hidden until both env vars exist, so the page never shows a button 
 - Vercel project renamed from `ai-receptionist` to `bubs-ai` the same evening.
 
 ## Things to know
+
+- **SMS consent is not recorded yet.** Klaviyo answers "Phone number is valid but is not in a
+  supported region for this account. Please configure a sending number for this region." until
+  the account has an SMS sending number (Klaviyo → Settings → SMS). Until then the mobile number
+  and an `sms_consent: true` property are saved on the profile, and email consent is still
+  recorded, so nothing is lost; once SMS is set up, a segment on `sms_consent` finds everyone
+  who opted in.
+- **Rate limit.** Five signups per hour per IP address, in memory, reset on every deploy.
 
 - **Bot protection.** Klaviyo suppressed one of the test signups ("Manually Suppressed from Email
   Marketing, method: BOT_PROTECTION") after seven signups in twenty minutes from one server with

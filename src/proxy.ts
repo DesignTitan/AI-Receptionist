@@ -24,7 +24,7 @@ import { TENANT_SLUG } from "@/verticals/slugs";
  * Next.js 16 renamed `middleware.ts` to `proxy.ts` and allows exactly one such
  * file per project, so both gates live here.
  */
-const ALWAYS_OPEN = ["/api/webhooks/"];
+const ALWAYS_OPEN = ["/api/webhooks/", "/api/waitlist"];
 const STAFF_ONLY = ["/admin", "/api/admin"];
 
 export async function proxy(request: NextRequest) {

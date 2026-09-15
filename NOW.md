@@ -1,3 +1,9 @@
+- Holding page, 14 Sep evening: logo centred at the top with a smaller ™, bottom caption gone,
+  and a founding-rate offer ("Sign up before launch and keep the founding rate") whose button
+  opens a modal (email, optional mobile with SMS consent, business). It posts to /api/waitlist,
+  which subscribes the person to a Klaviyo list with founding_rate: true. The offer only renders
+  when KLAVIYO_PRIVATE_API_KEY and KLAVIYO_LIST_ID are set; production does not have them yet,
+  so bubs.ai shows the hero without the offer until the owner adds them (docs/klaviyo.md).
 ## Holding site (14 September 2026, not deployed)
 
 - A hero-only "coming soon" homepage lives at /coming-soon: the same copy, photo and logo, a

@@ -23,9 +23,14 @@ The offer is hidden until both env vars exist, so the page never shows a button 
   Access (created 14 Sep 2026). Stored on Vercel as `KLAVIYO_PRIVATE_API_KEY` (production).
 - `KLAVIYO_LIST_ID=X7k8uZ` on Vercel (production). The list is single opt-in.
 - Vercel project renamed from `ai-receptionist` to `bubs-ai` the same evening.
-- Flow **Founding rate welcome** (live): trigger "Added to list: Founding rate", no re-entry, one
-  plain-text email from bubs <bubs@manifeststudios.com>, subject "Your spot is saved. The founding
-  rate is yours." It promises nothing else before launch, so keep it that way.
+- Flow **Founding rate welcome**: trigger "Added to list: Founding rate", no re-entry, one email
+  from bubs <bubs@manifeststudios.com>, subject "Your spot is saved. The founding rate is yours."
+  It promises nothing else before launch, so keep it that way. The email is a custom HTML template
+  (source: `docs/email/founding-rate-welcome.html`): bubs logo from
+  https://bubs.ai/brand/bubs-lockup-ink.png, the copy, and an unsubscribe link. **No postal
+  address, no contact details.** The owner's home address must never appear in a send; the
+  Klaviyo organisation address (Settings → General) should be a business or PO Box address before
+  any campaign goes out, because CAN-SPAM expects one and Klaviyo's default footers print it.
 - Segment **SMS consent (pre-setup)**: `sms_consent is true`. Everyone who ticked the text box
   before SMS was switched on; use it for the first text once a sending number exists.
 - Test profiles were removed from the list on 14 Sep; they still exist under Audience → Profiles.

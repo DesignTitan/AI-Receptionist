@@ -47,11 +47,18 @@ export async function proxy(request: NextRequest) {
   // not, and a visitor can reach nothing else: every other page sends them back to "/". The
   // owner, once through the password gate, can still open the other pages, and the full
   // homepage is at /home, so work on the real site can carry on.
-  if (comingSoon) {
+  // A rewrite of /home to "/" comes back through here; the header marks it so it is not
+  // turned into the hero a second time.
+  const fullHome = request.headers.get("x-bubs-full-home") === "1";
+  if (comingSoon && !fullHome) {
     if (pathname === "/" || pathname === "/coming-soon") {
       return pathname === "/" ? NextResponse.rewrite(new URL("/coming-soon", request.url)) : NextResponse.next();
     }
-    if (unlocked && pathname === "/home") return NextResponse.rewrite(new URL("/", request.url));
+    if (unlocked && pathname === "/home") {
+      const headers = new Headers(request.headers);
+      headers.set("x-bubs-full-home", "1");
+      return NextResponse.rewrite(new URL("/", request.url), { request: { headers } });
+    }
     if (!unlocked) {
       if (pathname === "/login") return NextResponse.next();
       if (pathname.startsWith("/api/")) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

@@ -95,5 +95,21 @@ export async function POST(request: Request) {
     console.error("waitlist: Klaviyo rejected the signup", r?.status, detail.slice(0, 300));
     return NextResponse.json({ error: "That didn't go through. Try again in a moment." }, { status: 502 });
   }
+  // The subscribe job runs asynchronously; check it once so a silent failure shows up in the logs.
+  const job = (await r.json().catch(() => null)) as { data?: { id?: string } } | null;
+  const jobId = job?.data?.id;
+  if (jobId) {
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    const status = await fetch(`${KLAVIYO}/${jobId}`, { headers, signal: AbortSignal.timeout(8_000) })
+      .then((res) => res.json())
+      .catch(() => null) as { data?: { attributes?: { status?: string; failed_count?: number; completed_count?: number } } } | null;
+    const a = status?.data?.attributes;
+    if (!a || a.status !== "complete" || (a.failed_count ?? 0) > 0) {
+      const errors = await fetch(`${KLAVIYO}/${jobId}/import-errors`, { headers, signal: AbortSignal.timeout(8_000) })
+        .then((res) => res.text())
+        .catch(() => "");
+      console.error("waitlist: Klaviyo subscribe job did not complete cleanly", jobId, JSON.stringify(a), errors.slice(0, 500));
+    }
+  }
   return NextResponse.json({ ok: true });
 }

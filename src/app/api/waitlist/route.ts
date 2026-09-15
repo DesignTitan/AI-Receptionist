@@ -34,7 +34,7 @@ function e164(raw: string): string | null {
   const area = digits.slice(0, 3), exchange = digits.slice(3, 6);
   if (/^[01]/.test(area) || /^[01]/.test(exchange)) return null; // NANP: area code and exchange start 2-9
   if (area[1] === "1" && area[2] === "1") return null; // N11 service codes are not subscriber numbers
-  if (exchange === "555") return null; // reserved / fictional
+  if (exchange === "555" && digits.slice(6, 8) === "01") return null; // 555-01XX is reserved for fiction
   if (/^(\d)\1{9}$/.test(digits)) return null; // 2222222222
   if (digits.slice(3) === "1234567" || digits.slice(3) === "0000000") return null;
   return `+1${digits}`;
@@ -71,7 +71,7 @@ export async function POST(request: Request) {
 
   let body: Record<string, string> = {};
   try { body = await request.json(); } catch { return NextResponse.json({ error: "Bad request." }, { status: 400 }); }
-  if (body.company_website) return NextResponse.json({ ok: true }); // honeypot: pretend it worked
+  const honeypot = Boolean(body.company_website); // hidden field: a person never fills it, but a browser autofill might
 
   const email = (body.email ?? "").trim().toLowerCase();
   const phone = (body.phone ?? "").trim() ? e164(body.phone) : null;
@@ -86,23 +86,20 @@ export async function POST(request: Request) {
     if (!(await acceptsMail(domain))) return NextResponse.json({ error: "That email domain doesn't receive mail. Check the spelling." }, { status: 422 });
   }
 
-  // Bot checks, two layers, weighed rather than stacked. Vercel BotID reads signals its script
-  // collected in the page; Cloudflare Turnstile is verified whenever its widget produced a token.
-  // A forged or failed Turnstile token blocks. BotID alone never blocks a signup outright: it has
-  // called real people on phones bots, and a lost lead is worse than a tagged one. Such signups
-  // are saved with bot_check: "flagged" so they can be reviewed in Klaviyo, and the obvious fakes
-  // were already refused above (throwaway domains, domains with no mail, made-up numbers).
+  // Bot checks never turn a person away. Vercel BotID reads signals its script collected in the
+  // page; Cloudflare Turnstile is verified whenever its widget produced a token; the honeypot is
+  // a field no person sees. Any of them doubting the request tags the signup bot_check: "flagged"
+  // so it can be reviewed in Klaviyo, and the obvious fakes were already refused above (throwaway
+  // domains, domains with no mail, made-up numbers). A real person always reaches the thank-you.
   const bot = await checkBotId();
   let botCheck: "passed" | "flagged" = bot.isBot && !bot.isVerifiedBot ? "flagged" : "passed";
   if (body.turnstileToken) {
     const human = await verifyHuman(body.turnstileToken, ip);
-    if (!human.ok) {
-      console.warn("waitlist: Turnstile rejected the token", human.reason);
-      return NextResponse.json({ error: "We couldn't confirm you're a person. Refresh the page and try again." }, { status: 403 });
-    }
-    botCheck = "passed";
+    if (human.ok) botCheck = "passed";
+    else { botCheck = "flagged"; console.warn("waitlist: Turnstile rejected the token", human.reason); }
   }
-  if (botCheck === "flagged") console.warn("waitlist: BotID called this a bot; saving it flagged", { email: !!email, phone: !!phone });
+  if (honeypot) botCheck = "flagged";
+  if (botCheck === "flagged") console.warn("waitlist: saving a flagged signup", { email: !!email, phone: !!phone, honeypot });
 
   const key = process.env.KLAVIYO_PRIVATE_API_KEY;
   const list = process.env.KLAVIYO_LIST_ID;
@@ -122,27 +119,29 @@ export async function POST(request: Request) {
   };
 
   // 1. Upsert the profile with the founding-rate properties (the subscribe job below rejects `properties`).
-  const imported = await fetch(KLAVIYO_IMPORT, {
-    method: "POST",
-    headers,
-    body: JSON.stringify({
-      data: {
-        type: "profile",
-        attributes: {
-          ...identity,
-          properties: {
-            founding_rate: true,
-            source: "coming-soon",
-            ...(business ? { business } : {}),
-            ...(phone ? { sms_consent: smsConsent } : {}),
-            bot_check: botCheck,
-            signed_up_at: new Date().toISOString(),
-          },
+  //    One retry after a short pause covers a Klaviyo blip.
+  const importBody = JSON.stringify({
+    data: {
+      type: "profile",
+      attributes: {
+        ...identity,
+        properties: {
+          founding_rate: true,
+          source: "coming-soon",
+          ...(business ? { business } : {}),
+          ...(phone ? { sms_consent: smsConsent } : {}),
+          bot_check: botCheck,
+          signed_up_at: new Date().toISOString(),
         },
       },
-    }),
-    signal: AbortSignal.timeout(10_000),
-  }).catch(() => null);
+    },
+  });
+  const importOnce = () => fetch(KLAVIYO_IMPORT, { method: "POST", headers, body: importBody, signal: AbortSignal.timeout(10_000) }).catch(() => null);
+  let imported = await importOnce();
+  if (!imported || imported.status >= 500) {
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    imported = await importOnce();
+  }
   let profileId: string | undefined;
   if (!imported || !imported.ok) {
     await fail("profile import failed", imported);
@@ -193,7 +192,9 @@ export async function POST(request: Request) {
   }
 
   if (!onList && !consented) {
-    return NextResponse.json({ error: "That didn't go through. Try again in a moment." }, { status: 502 });
+    // Nothing reached Klaviyo. The person still sees the thank-you: a failure screen would read as
+    // a broken product. The lead is written to the log in full so it can be added by hand.
+    console.error("waitlist: LEAD NOT SAVED, add by hand", JSON.stringify({ email, phone, business, smsConsent, botCheck, at: new Date().toISOString() }));
   }
   return NextResponse.json({ ok: true });
 }

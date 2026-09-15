@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { promises as dns } from "node:dns";
+import { verifyHuman } from "@/lib/turnstile";
 
 /**
  * The coming-soon waitlist. Subscribes a person to the Klaviyo list named by
@@ -14,11 +16,37 @@ const REVISION = "2026-07-15";
 const KLAVIYO_LISTS = "https://a.klaviyo.com/api/lists";
 const attempts = new Map<string, number[]>();
 
+/** Throwaway inbox providers. Not exhaustive; the MX check and Turnstile carry the rest. */
+const DISPOSABLE = new Set([
+  "mailinator.com", "guerrillamail.com", "guerrillamail.net", "sharklasers.com", "10minutemail.com", "10minutemail.net",
+  "tempmail.com", "temp-mail.org", "temp-mail.io", "yopmail.com", "yopmail.fr", "dispostable.com", "trashmail.com",
+  "getnada.com", "throwawaymail.com", "maildrop.cc", "fakeinbox.com", "mohmal.com", "emailondeck.com", "mailnesia.com",
+  "tempr.email", "discard.email", "spamgourmet.com", "mytemp.email", "burnermail.io", "inboxkitten.com", "example.com",
+  "example.org", "example.net", "test.com", "email.com",
+]);
+
+/** A real North American mobile: NXX NXX XXXX, not a fictional 555 number, not a keyboard mash. */
 function e164(raw: string): string | null {
-  const digits = raw.replace(/\D/g, "");
-  if (digits.length === 10) return `+1${digits}`;
-  if (digits.length === 11 && digits.startsWith("1")) return `+${digits}`;
-  return null;
+  let digits = raw.replace(/\D/g, "");
+  if (digits.length === 11 && digits.startsWith("1")) digits = digits.slice(1);
+  if (digits.length !== 10) return null;
+  const area = digits.slice(0, 3), exchange = digits.slice(3, 6);
+  if (/^[01]/.test(area) || /^[01]/.test(exchange)) return null; // NANP: area code and exchange start 2-9
+  if (area[1] === "1" && area[2] === "1") return null; // N11 service codes are not subscriber numbers
+  if (exchange === "555") return null; // reserved / fictional
+  if (/^(\d)\1{9}$/.test(digits)) return null; // 2222222222
+  if (digits.slice(3) === "1234567" || digits.slice(3) === "0000000") return null;
+  return `+1${digits}`;
+}
+
+/** The domain must accept mail: an MX record, or at least an A/AAAA record as the RFC fallback. */
+async function acceptsMail(domain: string): Promise<boolean> {
+  try {
+    const mx = await dns.resolveMx(domain);
+    if (mx.length > 0) return true;
+  } catch { /* no MX; fall through */ }
+  try { return (await dns.resolve4(domain)).length > 0; } catch { /* no A */ }
+  try { return (await dns.resolve6(domain)).length > 0; } catch { return false; }
 }
 
 export async function POST(request: Request) {
@@ -40,9 +68,23 @@ export async function POST(request: Request) {
   const phone = (body.phone ?? "").trim() ? e164(body.phone) : null;
   const business = (body.business ?? "").trim().slice(0, 80);
   const smsConsent = body.sms_consent === "yes";
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return NextResponse.json({ error: "That email doesn't look right." }, { status: 422 });
-  if ((body.phone ?? "").trim() && !phone) return NextResponse.json({ error: "Use a US or Canadian mobile number." }, { status: 422 });
+  if (email && !/^[a-z0-9._%+'-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email)) return NextResponse.json({ error: "That email doesn't look right." }, { status: 422 });
+  if ((body.phone ?? "").trim() && !phone) return NextResponse.json({ error: "Use a real US or Canadian mobile number." }, { status: 422 });
   if (!email && !phone) return NextResponse.json({ error: "Leave an email or a mobile number so we can reach you." }, { status: 422 });
+  if (email) {
+    const domain = email.slice(email.indexOf("@") + 1);
+    if (DISPOSABLE.has(domain)) return NextResponse.json({ error: "Use the email you actually check; we'll only write once." }, { status: 422 });
+    if (!(await acceptsMail(domain))) return NextResponse.json({ error: "That email domain doesn't receive mail. Check the spelling." }, { status: 422 });
+  }
+
+  // Human check. Fails closed in production: no Turnstile secret means no signups, never open season.
+  if (process.env.NODE_ENV === "production" || process.env.TURNSTILE_SECRET_KEY) {
+    const human = await verifyHuman(body.turnstileToken, ip);
+    if (!human.ok) {
+      console.warn("waitlist: human check failed", human.reason);
+      return NextResponse.json({ error: "We couldn't confirm you're a person. Refresh the page and try again." }, { status: 403 });
+    }
+  }
 
   const key = process.env.KLAVIYO_PRIVATE_API_KEY;
   const list = process.env.KLAVIYO_LIST_ID;

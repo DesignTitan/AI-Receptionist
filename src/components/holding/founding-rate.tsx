@@ -4,18 +4,68 @@ import { useEffect, useRef, useState } from "react";
 
 type State = "idle" | "sending" | "done" | "error";
 
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (el: HTMLElement, opts: Record<string, unknown>) => string;
+      reset: (id?: string) => void;
+      remove: (id: string) => void;
+      getResponse: (id?: string) => string | undefined;
+    };
+  }
+}
+
+const TURNSTILE_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+
+/**
+ * Cloudflare Turnstile in "interaction-only" mode: invisible for a real person, a small
+ * checkbox when Cloudflare is unsure, a wall for scripts. The token means nothing until
+ * /api/waitlist verifies it with Cloudflare.
+ */
+function HumanCheck({ siteKey, widgetId, onError }: { siteKey: string; widgetId: React.MutableRefObject<string | null>; onError: (message: string) => void }) {
+  const host = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    function render() {
+      if (cancelled || !host.current || !window.turnstile || widgetId.current) return;
+      widgetId.current = window.turnstile.render(host.current, {
+        sitekey: siteKey, size: "flexible", appearance: "interaction-only", theme: "light",
+        "error-callback": () => { onError("The security check couldn't load. Refresh the page or try another browser."); return true; },
+        "expired-callback": () => { if (widgetId.current) window.turnstile?.reset(widgetId.current); },
+      });
+    }
+    const loadError = () => onError("The security check couldn't load. Check your connection and try again.");
+    let script: HTMLScriptElement | null = null;
+    if (window.turnstile) render();
+    else {
+      script = document.querySelector<HTMLScriptElement>(`script[src="${TURNSTILE_SRC}"]`);
+      if (!script) { script = document.createElement("script"); script.src = TURNSTILE_SRC; script.async = true; document.head.appendChild(script); }
+      script.addEventListener("load", render); script.addEventListener("error", loadError);
+    }
+    return () => {
+      cancelled = true;
+      script?.removeEventListener("load", render); script?.removeEventListener("error", loadError);
+      if (widgetId.current && window.turnstile) { try { window.turnstile.remove(widgetId.current); } catch { /* gone */ } }
+      widgetId.current = null;
+    };
+  }, [siteKey, widgetId, onError]);
+  return <div ref={host} className="hold-human" />;
+}
+
 /**
  * The one action on the holding page: join the list, keep the founding rate.
  * A button opens a dialog with an email and an optional mobile number; the
  * form posts to /api/waitlist, which subscribes the person in Klaviyo.
  */
-export function FoundingRate() {
+export function FoundingRate({ turnstileSiteKey }: { turnstileSiteKey: string | null }) {
   const dialog = useRef<HTMLDialogElement | null>(null);
+  const widgetId = useRef<string | null>(null);
+  const [opened, setOpened] = useState(false);
   const [state, setState] = useState<State>("idle");
   const [error, setError] = useState<string | null>(null);
   const [phone, setPhone] = useState("");
 
-  function open() { dialog.current?.showModal(); setTimeout(() => dialog.current?.querySelector<HTMLInputElement>("input[name=email]")?.focus(), 30); }
+  function open() { setOpened(true); dialog.current?.showModal(); setTimeout(() => dialog.current?.querySelector<HTMLInputElement>("input[name=email]")?.focus(), 30); }
   function close() { dialog.current?.close(); }
   useEffect(() => {
     const d = dialog.current; if (!d) return;
@@ -27,11 +77,16 @@ export function FoundingRate() {
     e.preventDefault();
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+    if (turnstileSiteKey) {
+      const token = window.turnstile?.getResponse(widgetId.current ?? undefined) ?? "";
+      if (!token) { setError("One moment while we check you're a person, then try again."); setState("error"); return; }
+      data.turnstileToken = token;
+    }
     setState("sending"); setError(null);
     try {
       const r = await fetch("/api/waitlist", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
       const body = await r.json().catch(() => ({}));
-      if (!r.ok) { setError(body.error ?? "That didn't go through. Try again in a moment."); setState("error"); return; }
+      if (!r.ok) { setError(body.error ?? "That didn't go through. Try again in a moment."); setState("error"); if (widgetId.current) window.turnstile?.reset(widgetId.current); return; }
       setState("done");
     } catch { setError("Couldn't reach the server. Try again in a moment."); setState("error"); }
   }
@@ -63,6 +118,7 @@ export function FoundingRate() {
                 <label className="hold-consent"><input name="sms_consent" type="checkbox" value="yes" /><span>Text me about the launch and the founding rate. Message and data rates may apply; reply STOP to opt out.</span></label>
               )}
               <input type="text" name="company_website" tabIndex={-1} autoComplete="off" className="hold-hp" aria-hidden="true" />
+              {turnstileSiteKey && opened && <HumanCheck siteKey={turnstileSiteKey} widgetId={widgetId} onError={setError} />}
               <button type="submit" className="hold-button hold-button--wide" disabled={state === "sending"}>{state === "sending" ? "Saving your spot" : "Save my spot"}</button>
               {error && <p className="hold-form__error" role="alert">{error}</p>}
               <p className="hold-form__note">One email or text when we open. No newsletters, no sharing your details.</p>

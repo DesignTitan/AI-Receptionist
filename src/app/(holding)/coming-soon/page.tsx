@@ -18,7 +18,7 @@ export default function ComingSoonPage() {
         <p className="hold-kicker">For businesses that run on appointments</p>
         <h1 id="hero-title">Your AI receptionist.<br />Your day back.</h1>
         <p className="hold-lede">Let customers book online. Let AI make the confirmation calls. See what needs your attention, so you can get back to the people and work that matter.</p>
-        {waitlistReady && <FoundingRate />}
+        {waitlistReady && <FoundingRate turnstileSiteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? null} />}
       </div>
     </main>
   );

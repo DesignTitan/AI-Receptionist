@@ -100,7 +100,16 @@ export async function POST(request: Request) {
   console.log("waitlist: Klaviyo subscribe accepted", r.status, raw.slice(0, 600) || "(empty body)");
   let job: { data?: { id?: string } } | null = null;
   try { job = raw ? JSON.parse(raw) : null; } catch { job = null; }
-  const jobId = job?.data?.id;
+  let jobId = job?.data?.id;
+  if (!jobId) {
+    // The endpoint answers 202 with no body; look the newest job up instead.
+    await new Promise((resolve) => setTimeout(resolve, 2500));
+    const recent = (await fetch(`${KLAVIYO}?sort=-created_at`, { headers, signal: AbortSignal.timeout(8_000) })
+      .then((res) => res.json())
+      .catch(() => null)) as { data?: Array<{ id?: string; attributes?: Record<string, unknown> }> } | null;
+    jobId = recent?.data?.[0]?.id;
+    console.log("waitlist: Klaviyo recent subscribe jobs", JSON.stringify(recent?.data?.slice(0, 2) ?? recent).slice(0, 900));
+  }
   if (jobId) {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     const status = await fetch(`${KLAVIYO}/${jobId}`, { headers, signal: AbortSignal.timeout(8_000) })

@@ -104,6 +104,7 @@ export async function POST(request: Request) {
       .then((res) => res.json())
       .catch(() => null) as { data?: { attributes?: { status?: string; failed_count?: number; completed_count?: number } } } | null;
     const a = status?.data?.attributes;
+    console.log("waitlist: Klaviyo subscribe job", jobId, JSON.stringify(status?.data ?? status).slice(0, 600));
     if (!a || a.status !== "complete" || (a.failed_count ?? 0) > 0) {
       const errors = await fetch(`${KLAVIYO}/${jobId}/import-errors`, { headers, signal: AbortSignal.timeout(8_000) })
         .then((res) => res.text())

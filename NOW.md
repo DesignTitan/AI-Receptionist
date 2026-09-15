@@ -7,6 +7,11 @@
   mobile only, mobile with SMS, bad input, spam trap, foreign origin). SMS consent needs a Klaviyo
   sending number first; the intent is kept as a profile property. Key "bubs.ai website waitlist
   v2" lives only on Vercel. The older exposed key was deleted. Details and gotchas (bot protection, test profiles): docs/klaviyo.md.
+- Hardened 15 Sep: the /home marker header only counts with a valid owner cookie; SITE_PASSWORD
+  is now a random value on Vercel (Production and Preview; the code default is dead), COMING_SOON
+  and SITE_GATE are set for Preview too, and Vercel Authentication protects preview deployments.
+  Waitlist rejects scripts (Vercel BotID + Turnstile when it loads), throwaway and non-mail
+  domains, and fake numbers. Owner: add bubs.ai to the Turnstile widget's hostnames in Cloudflare.
 - Vercel project renamed ai-receptionist → bubs-ai. Still named after the old product: the
   default domain ai-receptionist-two-azure.vercel.app (swap needs the owner: add bubs-ai.vercel.app,
   remove the old one under Settings → Domains) and the GitHub repo DesignTitan/AI-Receptionist.

@@ -1,9 +1,15 @@
 - Holding page, 14 Sep evening: logo centred at the top with a smaller ™, bottom caption gone,
   and a founding-rate offer ("Sign up before launch and keep the founding rate") whose button
-  opens a modal (email, optional mobile with SMS consent, business). It posts to /api/waitlist,
-  which subscribes the person to a Klaviyo list with founding_rate: true. The offer only renders
-  when KLAVIYO_PRIVATE_API_KEY and KLAVIYO_LIST_ID are set; production does not have them yet,
-  so bubs.ai shows the hero without the offer until the owner adds them (docs/klaviyo.md).
+  opens a modal (email, optional mobile with SMS consent, business). It posts to /api/waitlist.
+- Klaviyo is connected and verified on production (14 Sep, late): the route upserts the profile
+  with founding_rate: true, adds it to the Founding rate list (X7k8uZ) synchronously, then records
+  consent through a subscribe job. Key "bubs.ai website waitlist v2" lives only on Vercel. The
+  older exposed key was deleted. Details and gotchas (bot protection, test profiles): docs/klaviyo.md.
+- Vercel project renamed ai-receptionist → bubs-ai. Still named after the old product: the
+  default domain ai-receptionist-two-azure.vercel.app (swap needs the owner: add bubs-ai.vercel.app,
+  remove the old one under Settings → Domains) and the GitHub repo DesignTitan/AI-Receptionist.
+- Next for Klaviyo: a welcome email flow on "Added to list: Founding rate", a launch-day campaign,
+  and app events (signup, first call) once the platform exists.
 ## Holding site (14 September 2026, not deployed)
 
 - A hero-only "coming soon" homepage lives at /coming-soon: the same copy, photo and logo, a

@@ -1,30 +1,53 @@
 # Klaviyo: the coming-soon waitlist
 
-The holding page at bubs.ai offers the founding rate to people who sign up before launch. The
-form posts to `/api/waitlist`, which subscribes the person to one Klaviyo list with a
-`founding_rate: true` profile property, `source: coming-soon`, and their business name if given.
-Email consent is recorded as SUBSCRIBED; SMS consent only when the person ticked the text box.
+Connected on 14 September 2026. The holding page at bubs.ai offers the founding rate to people
+who sign up before launch. The form posts to `/api/waitlist`, which does three things in the
+Klaviyo account "Conjuring":
 
-The offer is hidden until both keys exist, so the page never shows a button that cannot save.
+1. Upserts the profile through `profile-import` with `founding_rate: true`, `source: coming-soon`,
+   `signed_up_at`, and the business name if given. (The subscribe job rejects `properties`, so
+   they have to go in here.)
+2. Adds the profile to the **Founding rate** list (`X7k8uZ`) through the list relationship
+   endpoint. This is synchronous, so the person is on the list the moment the form says so.
+3. Fires a subscription job that records email marketing consent (SMS consent only when the box
+   was ticked). Klaviyo runs this in the background and it can take a few minutes to show on the
+   profile; the list membership does not wait for it.
 
-## Connect it (owner, about five minutes)
+The offer is hidden until both env vars exist, so the page never shows a button that cannot save.
 
-1. Klaviyo → Settings → API keys → **Create Private API Key**. Scopes: `lists:read`,
-   `profiles:write`, `subscriptions:write`. Copy the key (it starts with `pk_`).
-2. Klaviyo → Audience → Lists & segments → create a list called **Founding rate** (or pick one).
-   Open it; the list id is the six-character code in the URL, e.g. `.../list/AbC123`.
-3. Put both on Vercel and redeploy:
+## What is set up
+
+- Private API key **bubs.ai website waitlist v2** with List, Profiles and Subscriptions on Full
+  Access (created 14 Sep 2026). Stored on Vercel as `KLAVIYO_PRIVATE_API_KEY` (production).
+- `KLAVIYO_LIST_ID=X7k8uZ` on Vercel (production). The list is single opt-in.
+- Vercel project renamed from `ai-receptionist` to `bubs-ai` the same evening.
+
+## Things to know
+
+- **Bot protection.** Klaviyo suppressed one of the test signups ("Manually Suppressed from Email
+  Marketing, method: BOT_PROTECTION") after seven signups in twenty minutes from one server with
+  plus-addressed test emails. A suppressed profile is still on the list but will not receive
+  email. If a real signup ever shows this, open the profile and click "Remove global suppression".
+- Test profiles `bubs+waitlist-test…@manifeststudios.com` were left in the account; delete them
+  from Audience → Profiles when convenient.
+- Runtime logs: Vercel → bubs-ai → Logs, search `waitlist`. Every rejected Klaviyo call is logged
+  with its status and the first 300 characters of the error.
+
+## Re-connect from scratch (if the key is ever rotated)
+
+1. Klaviyo → Settings → API keys → **Create Private API Key** → Custom Key. Set **List**,
+   **Profiles** and **Subscriptions** to Full Access. Scopes cannot be edited afterwards, so a
+   wrong key has to be replaced, not fixed.
+2. Vercel → bubs-ai → Settings → Environment Variables → edit `KLAVIYO_PRIVATE_API_KEY`, paste,
+   save, then redeploy:
 
 ```bash
 cd "/Users/bubs2/Code/✅ - bubs.ai"
-npx vercel env add KLAVIYO_PRIVATE_API_KEY production
-npx vercel env add KLAVIYO_LIST_ID production
 npx vercel --prod
 ```
 
-4. Sign up once from bubs.ai with your own email and confirm the profile appears in the list
-   with `founding_rate` set. SMS sending also needs a Klaviyo SMS sender number and the list's
-   double-opt-in setting reviewed; the form already carries the consent line.
+3. Sign up once from bubs.ai and confirm the profile is in the Founding rate list with
+   `founding_rate` set.
 
 Locally, the same two names in `.env.local` show the offer; a placeholder key makes the form
 fail politely at Klaviyo, which is enough to check the layout.

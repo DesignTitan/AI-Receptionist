@@ -10,8 +10,10 @@
 - Hardened 15 Sep: the /home marker header only counts with a valid owner cookie; SITE_PASSWORD
   is now a random value on Vercel (Production and Preview; the code default is dead), COMING_SOON
   and SITE_GATE are set for Preview too, and Vercel Authentication protects preview deployments.
-  Waitlist rejects scripts (Vercel BotID + Turnstile when it loads), throwaway and non-mail
-  domains, and fake numbers. Owner: add bubs.ai to the Turnstile widget's hostnames in Cloudflare.
+  Waitlist rule: a real person is never refused. Bot checks (BotID, Turnstile, honeypot) tag
+  bot_check: flagged instead of blocking; only typos, throwaway/non-mail domains and fictional
+  numbers get a "check the spelling" message. Owner: add bubs.ai to the Turnstile widget's
+  hostnames in Cloudflare; review the bot_check = flagged segment now and then.
 - Vercel project renamed ai-receptionist → bubs-ai. Still named after the old product: the
   default domain ai-receptionist-two-azure.vercel.app (swap needs the owner: add bubs-ai.vercel.app,
   remove the old one under Settings → Domains) and the GitHub repo DesignTitan/AI-Receptionist.

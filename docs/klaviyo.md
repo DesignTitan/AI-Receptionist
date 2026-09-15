@@ -34,18 +34,29 @@ The offer is hidden until both env vars exist, so the page never shows a button 
 
 ## Bot and fake-signup defences (15 Sep 2026)
 
-In order, every submission passes: same-origin check; five per hour per IP; honeypot field;
-strict email syntax; a blocklist of throwaway inbox providers; a DNS check that the email domain
-actually receives mail (MX, else A/AAAA); a real North American number (area code and exchange
-2-9, no N11, no 555, no repeated or 1234567 digits); **Vercel BotID** (`checkBotId`, script
-proxied via `withBotId` in next.config, `<BotIdClient>` in the root layout) which rejects any
-request whose page never ran the client script; and **Cloudflare Turnstile** when the widget
-produced a token. Verified: curl with browser headers and valid-looking data gets 403; a real
-browser on a phone-sized screen gets through and lands in the list.
+Rule one: a real person always reaches the thank-you screen. A visible failure reads as a broken
+product, so nothing in the bot layer refuses anyone. It tags instead.
+
+In order, every submission passes: same-origin check (scripts from elsewhere get 403); twenty
+per hour per IP; strict email syntax; a blocklist of throwaway inbox providers; a DNS check that
+the email domain receives mail (only a definite "no such domain" rejects; a slow resolver lets
+the signup through); a real North American number (area code and exchange 2-9, no N11, no
+555-01XX, no repeated or 1234567 digits). Those refusals show a plain "check the spelling" style
+message, the kind a person expects after a typo.
+
+Then the bot layer, which only tags. **Vercel BotID** (`checkBotId`, script proxied via
+`withBotId` in next.config, `<BotIdClient>` in the root layout), **Cloudflare Turnstile** when
+its widget produced a token, and the hidden honeypot field each set `bot_check: "flagged"` on
+the profile when they doubt the request; otherwise `bot_check: "passed"`. A Klaviyo segment on
+`bot_check equals flagged` is the review queue. BotID had refused a real person on a phone,
+which is why it no longer decides.
+
+If Klaviyo itself fails (one retry first), the person still sees the thank-you and the lead is
+written in full to the Vercel log as `waitlist: LEAD NOT SAVED, add by hand`.
 
 Turnstile currently fails to load on bubs.ai (the site key was made for the old domain), so the
-form quietly submits without it and BotID stands alone. Owner fix: Cloudflare dashboard →
-Turnstile → the widget → add `bubs.ai` to its hostnames. Nothing in the code needs to change.
+form quietly submits without it. Owner fix: Cloudflare dashboard → Turnstile → the widget → add
+`bubs.ai` to its hostnames. Nothing in the code needs to change.
 
 ## Things to know
 

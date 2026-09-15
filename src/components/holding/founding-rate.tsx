@@ -38,8 +38,8 @@ export function FoundingRate() {
 
   return (
     <div className="hold-offer">
-      <p className="hold-offer__line"><strong>Sign up before launch and keep the founding rate</strong> for as long as you stay with us.</p>
-      <button type="button" className="hold-button" onClick={open}>Keep the founding rate <span aria-hidden="true">↗</span></button>
+      <button type="button" className="hold-button" onClick={open}>I want in</button>
+      <p className="hold-offer__line">Sign up before launch and keep the founding rate for as long as you stay with us.</p>
 
       <dialog ref={dialog} className="hold-dialog" aria-labelledby="founding-title">
         <div className="hold-dialog__panel">

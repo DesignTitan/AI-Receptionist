@@ -51,10 +51,9 @@
 }
 
 /* ── the founding-rate offer and its dialog ── */
-.hold-offer { margin-top: clamp(24px, 4vh, 36px); display: grid; gap: 14px; justify-items: start; }
-.hold-offer__line { margin: 0; max-width: 46ch; font-size: clamp(14px, 1.15vw, 16px); line-height: 1.6; color: #ecf0f3; }
-.hold-offer__line strong { color: #fff; font-weight: 600; }
-.hold-button { display: inline-flex; align-items: center; gap: 22px; min-height: 48px; padding: 13px 22px; border: 1px solid #fff; border-radius: 0; background: #fff; color: #1e3a34; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; transition: background .18s; }
+.hold-offer { margin-top: clamp(24px, 4vh, 36px); display: grid; gap: 10px; justify-items: start; }
+.hold-offer__line { margin: 0; max-width: 46ch; font-size: 11px; line-height: 1.5; letter-spacing: .01em; color: rgba(236, 240, 243, .72); }
+.hold-button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 13px 28px; border: 1px solid #fff; border-radius: 0; background: #fff; color: #1e3a34; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; transition: background .18s; }
 .hold-button:hover { background: #c3e6d6; }
 .hold-button:disabled { opacity: .6; cursor: default; }
 .hold-button--wide { width: 100%; justify-content: center; }
@@ -83,8 +82,8 @@
 .hold-dialog__done { display: grid; gap: 14px; justify-items: start; }
 .hold-dialog__done p:not(.hold-pill) { margin: 0; color: #526b63; font-size: 15px; line-height: 1.6; }
 @media (max-width: 760px) {
-  .hold-offer { margin-top: 22px; gap: 12px; }
-  .hold-offer__line { font-size: 14px; }
-  .hold-button { width: 100%; justify-content: space-between; }
+  .hold-offer { margin-top: 22px; gap: 10px; }
+  .hold-offer__line { font-size: 11px; }
+  .hold-button { width: 100%; }
   .hold-dialog__panel { padding: 22px 20px 20px; border-radius: 20px; }
 }

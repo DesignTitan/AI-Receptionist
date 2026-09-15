@@ -125,6 +125,7 @@ export function FoundingRate({ turnstileSiteKey }: { turnstileSiteKey: string | 
               <button type="submit" className="hold-button hold-button--wide" disabled={state === "sending"}>{state === "sending" ? "Saving your spot" : "Save my spot"}</button>
               {error && <p className="hold-form__error" role="alert">{error}</p>}
               <p className="hold-form__note">One email or text when we open. No newsletters, no sharing your details.</p>
+              <p className="hold-form__legal">By saving your spot you agree to receive one launch message from bubs and to the founding-rate terms, which will be published at launch and apply for your first six months on the plan you choose. Your details are stored securely and never sold. Unsubscribe any time. bubs is a product of Manifest Studios and Conjure.ai.</p>
             </form>
           )}
         </div>

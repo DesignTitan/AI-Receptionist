@@ -96,7 +96,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "That didn't go through. Try again in a moment." }, { status: 502 });
   }
   // The subscribe job runs asynchronously; check it once so a silent failure shows up in the logs.
-  const job = (await r.json().catch(() => null)) as { data?: { id?: string } } | null;
+  const raw = await r.text().catch(() => "");
+  console.log("waitlist: Klaviyo subscribe accepted", r.status, raw.slice(0, 600) || "(empty body)");
+  let job: { data?: { id?: string } } | null = null;
+  try { job = raw ? JSON.parse(raw) : null; } catch { job = null; }
   const jobId = job?.data?.id;
   if (jobId) {
     await new Promise((resolve) => setTimeout(resolve, 1500));

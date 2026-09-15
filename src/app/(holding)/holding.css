@@ -74,6 +74,8 @@
 .hold-field em { font-style: normal; text-transform: none; letter-spacing: 0; color: #8a9a93; margin-left: 6px; }
 .hold-field input { width: 100%; font: inherit; font-size: 16px; padding: 11px 13px; border-radius: 12px; border: 1px solid #d8e2dd; background: #f6f8f7; color: #1e3a34; }
 .hold-field input:focus { outline: none; border-color: #1e3a34; box-shadow: 0 0 0 3px rgba(30, 58, 52, .14); }
+.hold-field input[aria-invalid="true"] { border-color: #a8321f; background: #fdf6f4; }
+.hold-field input[aria-invalid="true"]:focus { border-color: #a8321f; box-shadow: 0 0 0 3px rgba(168, 50, 31, .16); }
 .hold-consent { display: grid; grid-template-columns: 18px 1fr; gap: 10px; align-items: start; font-size: 12px; line-height: 1.55; color: #526b63; }
 .hold-consent input { margin: 2px 0 0; width: 16px; height: 16px; accent-color: #1e3a34; }
 .hold-human { min-height: 0; }

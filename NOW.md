@@ -1,3 +1,11 @@
+## Laya follow-up — 21 September 2026
+
+- Ran the requested local Laya assessment; exact results are in docs/laya-front-desk-assessment.md.
+- Laya selected deferring unproven card promises, verifying the existing flow first, and exploring bounded intake later.
+- Choice confidence was very low; treat this as a weak second opinion, not validation.
+- No product changes, spend, outbound calls or launch performed.
+- Next: acceptance evidence for the existing customer flow, retaining owner approval for paid or outbound steps.
+
 ## AI Front Desk reference review — 21 September 2026
 
 - Reviewed the supplied Angus Sewell PDF against pricing, Features inventory, inbound routing, voice configuration and roadmap; findings are in docs/research-ai-front-desk.md.

@@ -1,3 +1,9 @@
+## Local marketing preview recovered
+
+- The managed preview service was stopped; restarted it from the relocated bubs.ai repository.
+- Verified `/home` returns HTTP 200 and renders the marketing heading and overview in a real browser. Requested it in the Codex browser panel.
+- Recovery complete; the service lasts until stopped or logout. If the preview is unavailable, check `npm run dev:workspace:status` before sharing its link. Hosted sites were not changed.
+
 ## Marketing page-index order — 21 September 2026
 
 - Placed Coming soon / splash page directly above Marketing homepage in the Marketing Site column.

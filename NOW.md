@@ -1,3 +1,9 @@
+## Marketing page-index order — 21 September 2026
+
+- Placed Coming soon / splash page directly above Marketing homepage in the Marketing Site column.
+- Both remain separate entries with their own destinations; completion marks retain their existing IDs.
+- Next: continue the separate pending product work below.
+
 ## Marketing and splash links separated — 21 September 2026
 
 - Page index, toolbar and roadmap marketing-home links now open `/home`; splash has its own `/coming-soon` card.

@@ -1,3 +1,11 @@
+## AI Front Desk reference review — 21 September 2026
+
+- Reviewed the supplied Angus Sewell PDF against pricing, Features inventory, inbound routing, voice configuration and roadmap; findings are in docs/research-ai-front-desk.md.
+- Recommendation: keep new memory/triage/warm-transfer promises off plan cards; retain current-stack confirmation and human-follow-up positioning.
+- Identified premature transfer-success reporting, insufficient per-call consent handling and missing business scoping in the reference guide.
+- No implementation, spend, outbound calls, provider changes, routing changes or public launch performed.
+- Next: acceptance evidence for the existing booking → confirmation → owner-follow-up flow, with owner approval before any paid or outbound step.
+
 - Holding page, 14 Sep evening: logo centred at the top with a smaller ™, bottom caption gone,
   and a founding-rate offer ("Sign up before launch and keep the founding rate") whose button
   opens a modal (email, optional mobile with SMS consent, business). It posts to /api/waitlist.

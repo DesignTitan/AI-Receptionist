@@ -1,3 +1,9 @@
+## Local preview restored — 21 September 2026
+
+- Started the managed local preview from the relocated repository at `~/Code/✅ - bubs.ai`; http://127.0.0.1:3101/ returns HTTP 200 with the homepage heading.
+- Requested the local preview in the Codex browser panel; hosted staging and production were not changed.
+- Restore task complete. Existing product/voice work and unrelated working-tree changes remain separate; continue from their handoffs below.
+
 ## Laya follow-up — 21 September 2026
 
 - Ran the requested local Laya assessment; exact results are in docs/laya-front-desk-assessment.md.

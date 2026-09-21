@@ -1,3 +1,9 @@
+## Jev routing verified — 21 September 2026
+
+- Ran an actual jev-codex prompt with no project details; Jev routed it to gpt-5.6-luna and returned READY successfully.
+- This verified the separate CLI session; it did not change the model running this desktop conversation or modify the site.
+- Security assessment remains pending explicit sharing approval; next product work remains below.
+
 ## Private tester site deployed — 21 September 2026
 
 - Published the public splash and password-protected full site to bubs.ai; tester entry is https://bubs.ai/login?next=%2Fhome. Password is stored in environment settings, not this note.

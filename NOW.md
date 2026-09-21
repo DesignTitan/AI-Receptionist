@@ -1,3 +1,10 @@
+## Marketing and splash links separated — 21 September 2026
+
+- Page index, toolbar and roadmap marketing-home links now open `/home`; splash has its own `/coming-soon` card.
+- Added a full-home route alias for previews without coming-soon mode; existing access gates remain intact.
+- Typecheck and four page-index tests passed. Browser clicks verified the full homepage and splash are separate destinations; local catalogue reloaded.
+- Task complete locally; no hosted deployment changed. Other pending work remains below.
+
 ## Local preview restored — 21 September 2026
 
 - Started the managed local preview from the relocated repository at `~/Code/✅ - bubs.ai`; http://127.0.0.1:3101/ returns HTTP 200 with the homepage heading.

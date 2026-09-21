@@ -280,7 +280,7 @@ function renderRoadmap() {
       ["scope", "Separate available features from future ideas", "Check that the site reflects what customers can use today.", "/features"],
       ["voice", "Agree on brand voice and visual direction", "Review the logo, character, typography and colours.", "/__dev/design-system"]]],
     ["Pages & content", "Build a complete, consistent marketing experience.", [
-      ["home", "Review the marketing homepage", "Check the story, hero imagery and calls to action.", "/"],
+      ["home", "Review the marketing homepage", "Check the story, hero imagery and calls to action.", "/home"],
       ["features", "Review features and product explanations", "Use clear examples and avoid repeated content.", "/features"],
       ["demos", "Review the demo experience", "Make it easy to understand and try the product.", "/demos"],
       ["responsive", "Check layouts on mobile and desktop", "Review spacing, navigation, images and readable text."]]],

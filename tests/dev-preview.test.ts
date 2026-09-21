@@ -146,6 +146,8 @@ test("development preview exposes only allowed files and injects the navigation"
 
 test("page catalogue contains canonical routes for ordinary and tenant previews", () => {
   const pages = getPages();
+  assert.equal(pages.find(entry => entry.id === "marketing")?.href, "/home");
+  assert.equal(pages.find(entry => entry.id === "splash")?.href, "/coming-soon");
   const mascot = pages.find(entry => entry.id === "mascot-studio");
   assert.equal(mascot?.href, "/__dev/design/mascot-3d/index.html");
   assert.equal(mascot?.access, "development");

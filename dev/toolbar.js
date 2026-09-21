@@ -34,7 +34,7 @@
         </style>
         <nav class="bar" aria-label="Development navigation">
           <div class="badge">Internal tools</div>
-          <a class="index" href="/">Marketing homepage <span aria-hidden="true">↗</span></a>
+          <a class="index" href="/home">Marketing homepage <span aria-hidden="true">↗</span></a>
           <div class="tool-links">
             <a href="/__dev/ops">Internal Ops</a><a href="/__dev/pages">Page index</a><a href="${STAGING_PREVIEW_URL}" target="_blank" rel="noopener noreferrer">Staging ↗</a><a href="/account?preview=confirmation">Application</a><a href="/account/setup-v2">Setup v2</a><a href="/__dev/design-system">Visual design system</a><a href="/__dev/design/campaign-v4/">Images & videos</a><details class="menu"><summary>Roadmap <span aria-hidden="true">▾</span></summary><div class="menu-list"><a href="/__dev/pages?view=roadmap">Marketing roadmap</a><a href="https://claude.ai/code/artifact/0a4ee2ad-e2b2-4998-9a5d-796e3097cd1a" target="_blank" rel="noopener noreferrer">Receptionist Launch Roadmap ↗</a><a href="https://claude.ai/code/artifact/631ce6b1-a6d1-46aa-a3dd-f00f83425a49" target="_blank" rel="noopener noreferrer">Receptionist Runbook ↗</a><a href="https://claude.ai/code/artifact/2d6057be-84b8-4ae8-8239-cc29a19859e3" target="_blank" rel="noopener noreferrer">Receptionist Unit Economics ↗</a></div></details><a href="/__dev/journey">User journey</a>
           </div>

@@ -6,6 +6,7 @@ import { withBotId } from "botid/next/config";
 function nextConfig(phase: string): NextConfig {
   // npm run dev owns this loopback server. No preview routes or toolbar module
   // are included in build/start, even if this environment variable is present.
+  const privatePreview = process.env.COMING_SOON === "true" || process.env.SITE_GATE?.toLowerCase() === "locked";
   const previewPort = Number(process.env.DEV_PREVIEW_PORT);
   const development = phase === PHASE_DEVELOPMENT_SERVER
     && Number.isInteger(previewPort) && previewPort > 0 && previewPort <= 65535;
@@ -22,7 +23,10 @@ function nextConfig(phase: string): NextConfig {
     ]})),
     outputFileTracingIncludes: { "/api/jobs": ["./public/marketing/happy-pillow-mascot.png"] },
     images: {
-      remotePatterns: [
+      // Private images load through the password gate, not the public optimizer.
+      unoptimized: privatePreview,
+      ...(privatePreview ? { localPatterns: [{ pathname: "/marketing/coastal-owner.png", search: "" }] } : {}),
+      remotePatterns: privatePreview ? [] : [
         { protocol: "https", hostname: "images.unsplash.com" },
         { protocol: "https", hostname: "**.supabase.co" },
       ],

@@ -24,10 +24,27 @@ import { TENANT_SLUG } from "@/verticals/slugs";
  * Next.js 16 renamed `middleware.ts` to `proxy.ts` and allows exactly one such
  * file per project, so both gates live here.
  */
-const ALWAYS_OPEN = ["/api/webhooks/", "/api/waitlist"];
+const ALWAYS_OPEN = ["/api/webhooks/"];
+const BOTID_PREFIX = "/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/";
+const PUBLIC_ASSETS = new Set(["/marketing/coastal-owner.png", "/favicon.ico", "/icon.svg"]);
+function publicAsset(path: string) {
+  return PUBLIC_ASSETS.has(path) || /^\/fonts\/(open-runde|apfel-grotezk)\/[A-Za-z-]+\.woff2$/.test(path) || path.startsWith(BOTID_PREFIX);
+}
 const STAFF_ONLY = ["/admin", "/api/admin"];
 
 export async function proxy(request: NextRequest) {
+  const response = await routeRequest(request);
+  const path = request.nextUrl.pathname;
+  if (process.env.COMING_SOON === "true" || env.siteGate === "locked") {
+    response.headers.set("Cache-Control", "private, no-store");
+    if (path !== "/" && path !== "/coming-soon") {
+      response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+    }
+  }
+  return response;
+}
+
+async function routeRequest(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
   // Only static developer tools use this namespace. Actual app routes still
@@ -36,36 +53,35 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  if (pathname === "/api/jobs" || ALWAYS_OPEN.some((prefix) => pathname.startsWith(prefix))) {
+  if (pathname === "/api/jobs" || pathname === "/api/waitlist" || ALWAYS_OPEN.some((prefix) => pathname.startsWith(prefix))) {
     return NextResponse.next();
   }
 
   const comingSoon = process.env.COMING_SOON === "true";
-  const unlocked = env.siteGate === "locked" ? await verifySiteToken(request.cookies.get(SITE_COOKIE)?.value) : true;
+  const unlocked = (comingSoon || env.siteGate === "locked") ? await verifySiteToken(request.cookies.get(SITE_COOKIE)?.value) : true;
 
   // The holding site. With COMING_SOON=true "/" is the hero alone for everyone, unlocked or
-  // not, and a visitor can reach nothing else: every other page sends them back to "/". The
+  // not, and other pages require the private preview password. The
   // owner, once through the password gate, can still open the other pages, and the full
   // homepage is at /home, so work on the real site can carry on.
-  // A rewrite of /home to "/" comes back through here; the header marks it so it is not
-  // turned into the hero a second time.
-  // Only trusted alongside a valid owner cookie: a visitor sending the header by hand gets nothing.
-  const fullHome = unlocked && request.headers.get("x-bubs-full-home") === "1";
-  if (comingSoon && !fullHome) {
+  // /home is a real route; never rewrite it back through the public splash.
+  if (comingSoon) {
     if (pathname === "/" || pathname === "/coming-soon") {
       return pathname === "/" ? NextResponse.rewrite(new URL("/coming-soon", request.url)) : NextResponse.next();
-    }
-    if (unlocked && pathname === "/home") {
-      const headers = new Headers(request.headers);
-      headers.set("x-bubs-full-home", "1");
-      return NextResponse.rewrite(new URL("/", request.url), { request: { headers } });
     }
     if (!unlocked) {
       if (pathname === "/login") return NextResponse.next();
       if (pathname.startsWith("/api/")) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
       // the hero's own photo, fonts, icons and other files must still load
-      if (/\.[a-z0-9]+$/i.test(pathname)) return NextResponse.next();
-      return NextResponse.redirect(new URL("/", request.url));
+      if (publicAsset(pathname)) return NextResponse.next();
+      if (pathname === "/_next/image") {
+        const source = request.nextUrl.searchParams.get("url") ?? "";
+        if (PUBLIC_ASSETS.has(source)) return NextResponse.next();
+        return new NextResponse(null, { status: 401 });
+      }
+      const gate = new URL("/login", request.url);
+      gate.searchParams.set("next", pathname + search);
+      return NextResponse.redirect(gate);
     }
   }
 
@@ -154,5 +170,5 @@ function tenantRoute(tenant: string, pathname: string, search: string, base: str
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)"],
+  matcher: ["/((?!_next/static|favicon.ico|robots.txt).*)"],
 };

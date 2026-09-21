@@ -39,7 +39,7 @@ export default async function LoginPage({
         </div>
 
         <form action={unlock} className="card space-y-4 p-6">
-          <input type="hidden" name="next" value={safeNext(next)} />
+          <input type="hidden" name="next" value={safeNext(next ?? "/home")} />
 
           <label className="block">
             <span className="mb-1.5 block text-[13.5px] font-medium text-ink">Password</span>

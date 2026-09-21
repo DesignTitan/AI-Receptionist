@@ -17,12 +17,12 @@ export const SITE_COOKIE = "ai_receptionist_site";
 export const SITE_TTL_SECONDS = 60 * 60 * 24 * 7;
 
 export const checkSitePassword = (candidate: string) =>
-  constantTimeEquals(candidate, env.sitePassword);
+  (process.env.NODE_ENV !== "production" || Boolean(process.env.SITE_PASSWORD)) && constantTimeEquals(candidate, env.sitePassword);
 
 export const createSiteToken = () => createToken(env.sitePassword, SITE_TTL_SECONDS);
 
 export const verifySiteToken = (token: string | undefined) =>
-  verifyToken(token, env.sitePassword);
+  (process.env.NODE_ENV === "production" && !process.env.SITE_PASSWORD) ? Promise.resolve(false) : verifyToken(token, env.sitePassword);
 
 /**
  * Keeps `?next=` pointed at this site: a single leading slash, never a

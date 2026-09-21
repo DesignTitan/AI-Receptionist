@@ -1,3 +1,11 @@
+## Private tester site deployed — 21 September 2026
+
+- Published the public splash and password-protected full site to bubs.ai; tester entry is https://bubs.ai/login?next=%2Fhome. Password is stored in environment settings, not this note.
+- Tightened private page/image access, crawler rules and caching; corrected authenticated /home routing and marketing navigation. Staff/customer sign-ins remain separate.
+- Typecheck and 126 tests passed. Final live browser checks passed for public splash, anonymous denial, image protection, invalid/valid password, no-index headers and separate staff login. Deployment: bubs-deraunf9s.
+- Production and Preview settings use the owner-selected shared password; production was redeployed. Local preview uses the same password. Existing hosted Preview deployments need rebuilding to consume changed settings.
+- jev-codex launcher verified; external security assessment was blocked by automatic approval review pending explicit sharing approval. No security details sent. See docs/PRIVATE-TESTER-ACCESS.md; account/voice activation work remains separate.
+
 ## Local marketing preview recovered
 
 - The managed preview service was stopped; restarted it from the relocated bubs.ai repository.

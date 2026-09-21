@@ -8,9 +8,9 @@ import profileIcon from "@/components/marketing/profile-icon.json";
 import { TryCallPlate } from "@/components/marketing/try-call-plate";
 
 const LINKS = [
-  { href: "/#turn", label: "How it works" },
-  { href: "/#industries", label: "Industries" },
-  { href: "/#terms", label: "Pricing" },
+  { href: "/home#turn", label: "How it works" },
+  { href: "/home#industries", label: "Industries" },
+  { href: "/home#terms", label: "Pricing" },
 ];
 
 const STAFF_PAGES = [
@@ -120,7 +120,7 @@ export function SiteNav({ cta, simulated, turnstileSiteKey, showCall = true, sho
             </button>
             <div id="rc-account-options" className="rc-nav__account-options" hidden={!accountOpen}>
               {accountOptions ?? <><a href="/account/login">Log In <span aria-hidden="true">↗</span></a>
-              <a href="/#terms">View plans <span aria-hidden="true">↗</span></a></>}
+              <a href="/home#terms">View plans <span aria-hidden="true">↗</span></a></>}
             </div>
           </div>
         </div>

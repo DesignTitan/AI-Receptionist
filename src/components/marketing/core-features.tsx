@@ -116,7 +116,7 @@ export function CoreFeatures() {
             <li>Notices near your extra-spend limit and when AI calling pauses.</li>
             <li>Online booking stays available if your call budget runs out.</li>
           </ul>
-          <Link className="features-text-link" href="/#terms">Compare plans and pricing <span aria-hidden="true">↗</span></Link>
+          <Link className="features-text-link" href="/home#terms">Compare plans and pricing <span aria-hidden="true">↗</span></Link>
         </div>
         <div className="features-budget">
           <p className="features-eyebrow">Additional minutes</p>

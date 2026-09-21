@@ -103,7 +103,7 @@ export default function FeaturesPage() {
           </ul>
           <div className="features-plan-footer">
             <p className="features-small">Each plan covers one business location. {SETUP_OFFER}</p>
-            <Link className="features-text-link" href="/#terms">See plans and full pricing <span aria-hidden="true">↗</span></Link>
+            <Link className="features-text-link" href="/home#terms">See plans and full pricing <span aria-hidden="true">↗</span></Link>
           </div>
         </section>
 
@@ -152,7 +152,7 @@ export default function FeaturesPage() {
           <p>See how it feels to give customers a simpler way to book, and your team a clearer way to follow up.</p>
           <div className="features-actions">
             <Link href="/start" className="features-button">Set up my business <span aria-hidden="true">↗</span></Link>
-            <Link href="/#terms" className="features-button features-button--outline">See plans and pricing</Link>
+            <Link href="/home#terms" className="features-button features-button--outline">See plans and pricing</Link>
           </div>
         </section>
         <RoadmapBoard seeds={ROADMAP} />

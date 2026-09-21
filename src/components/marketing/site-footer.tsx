@@ -7,12 +7,12 @@ export function SiteFooter() {
         <footer id="colophon" className="rc-footer">
           <div className="rc-footer__top">
             <div><p className="rc-footer__eyebrow">A little less busy. A little more you.</p><h2>Good things start<br />with a conversation.</h2></div>
-            <a className="rc-footer__hello" href="/#hear">Let’s talk <span aria-hidden="true">↗</span></a>
+            <a className="rc-footer__hello" href="/home#hear">Let’s talk <span aria-hidden="true">↗</span></a>
           </div>
           <div className="rc-footer__middle">
             <div className="rc-footer__brand"><NavMascot /><span>A booking page and an AI front desk.<br />More time for the work you love.</span></div>
-            <nav aria-label="Footer explore"><h3>Explore</h3><a href="/features">Features</a><a href="/#industries">Industries</a><a href="/#terms">Pricing</a><a href="/demos">Try a demo</a></nav>
-            <nav aria-label="Footer account"><h3>Your next step</h3><a href="/#hear">Ask for a call</a><a href="/#terms">View plans</a><a href="/account/login">Log in</a><a href="/features#coming-soon">What’s coming</a></nav>
+            <nav aria-label="Footer explore"><h3>Explore</h3><a href="/features">Features</a><a href="/home#industries">Industries</a><a href="/home#terms">Pricing</a><a href="/demos">Try a demo</a></nav>
+            <nav aria-label="Footer account"><h3>Your next step</h3><a href="/home#hear">Ask for a call</a><a href="/home#terms">View plans</a><a href="/account/login">Log in</a><a href="/features#coming-soon">What’s coming</a></nav>
           </div>
           <div className="rc-footer__trust">
             <div className="rc-footer__trust-heading"><h3>Legal, privacy &amp; trust</h3><span>Temporary placeholders · pending legal review</span></div>

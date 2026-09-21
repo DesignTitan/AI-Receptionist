@@ -8,7 +8,7 @@ export const PRODUCT_NAME = "bubs™";
 
 export function ProductLogo() {
   return (
-    <Link href="/" className="group flex min-w-0 items-center gap-2.5">
+    <Link href="/home" className="group flex min-w-0 items-center gap-2.5">
       <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-primary text-on-primary shadow-sm transition group-hover:scale-105">
         <PhoneRinging width={19} height={19} strokeWidth={2} />
       </span>
@@ -26,10 +26,10 @@ export function ProductLogo() {
 
 const NAV = [
   { label: "Features", href: "/features" },
-  { label: "How it works", href: "/#how-it-works" },
-  { label: "Industries", href: "/#industries" },
+  { label: "How it works", href: "/home#how-it-works" },
+  { label: "Industries", href: "/home#industries" },
   { label: "Demos", href: "/demos" },
-  { label: "Pricing", href: "/#terms" },
+  { label: "Pricing", href: "/home#terms" },
 ];
 
 export function ProductHeader() {

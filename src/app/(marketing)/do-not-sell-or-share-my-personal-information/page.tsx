@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyOptOutPage() {
   return <main className={styles.page}>
-    <a className={styles.back} href="/#colophon">← Back to the website</a>
+    <a className={styles.back} href="/home#colophon">← Back to the website</a>
     <header>
       <span className={styles.badge}>Temporary · pending legal review</span>
       <h1>Do not sell or share my personal information.</h1>

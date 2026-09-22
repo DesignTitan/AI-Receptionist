@@ -9,6 +9,8 @@ function startErrorMessage(reason: unknown) {
     if (reason.name === "NotAllowedError") {
       return "Microphone access is off. Allow it in your browser to talk, then try again.";
     }
+    if (reason.name === "NotFoundError") return "No microphone was found. Connect a microphone or headset, then try again.";
+    if (reason.name === "NotReadableError") return "Your microphone couldn’t start. Check that it’s connected and isn’t being used by another app, then try again.";
     if (reason.message.startsWith("Microphone access requires HTTPS")) return reason.message;
     if (reason.message.trim()) return reason.message;
   }
@@ -34,7 +36,9 @@ export function VoiceExample() {
   const deadline = useRef(0);
   const [available, setAvailable] = useState<boolean | null>(null);
   const [status, setStatus] = useState<"idle" | "connecting" | "active" | "ended">("idle");
-  const [seconds, setSeconds] = useState(90);
+  const [seconds, setSeconds] = useState(30);
+  const [askingPermission, setAskingPermission] = useState(false);
+  const [quietMic, setQuietMic] = useState(false);
   const [muted, setMuted] = useState(false);
   const [error, setError] = useState("");
   const [captions, setCaptions] = useState({ user: "", agent: "" });
@@ -46,6 +50,7 @@ export function VoiceExample() {
     session.current = null;
     audio.current?.stop(); audio.current = null;
     setStatus("ended");
+    setAskingPermission(false); setQuietMic(false);
     setMuted(false);
   }
   useEffect(() => {
@@ -56,12 +61,17 @@ export function VoiceExample() {
   useEffect(() => {
     if (!busy) return;
     const timer = window.setInterval(() => {
+      if (!deadline.current) return;
+      if (status === "active") {
+        const startedAt = deadline.current - 30_000;
+        setQuietMic(!muted && Date.now() - Math.max(startedAt, audio.current?.lastInputAt ?? 0) > 8000);
+      }
       const remaining = Math.max(0, Math.ceil((deadline.current - Date.now()) / 1000));
       setSeconds(remaining);
       if (!remaining) stop();
     }, 250);
     return () => clearInterval(timer);
-  }, [busy]);
+  }, [busy, status, muted]);
   useEffect(() => {
     const onOpen = (event: Event) => {
       trigger.current = (event as CustomEvent<HTMLButtonElement>).detail;
@@ -86,7 +96,8 @@ export function VoiceExample() {
   async function start() {
     if (busy || !available) return;
     setError(""); setCaptions({ user: "", agent: "" }); setMuted(false);
-    setStatus("connecting"); setSeconds(90); deadline.current = Date.now() + 90_000;
+    setStatus("connecting"); setSeconds(30); deadline.current = 0;
+    setAskingPermission(true); setQuietMic(false);
     const run = ++generation.current;
     let current: WebSession | null = null;
     let engine: VoiceAudio | null = null;
@@ -94,6 +105,7 @@ export function VoiceExample() {
       engine = new VoiceAudio(); audio.current = engine;
       await engine.ready;
       if (run !== generation.current) return;
+      setAskingPermission(false);
       const response = await fetch("/api/voice-demo/session", { method: "POST", signal: AbortSignal.timeout(15_000) });
       const data = await response.json();
       if (run !== generation.current) return;
@@ -104,7 +116,10 @@ export function VoiceExample() {
       current.on("status", value => {
         if (run !== generation.current) { if (value === "active") current?.stop(); return; }
         if (typeof value === "object") { setStatus("ended"); setMuted(false); }
-        else setStatus(value);
+        else {
+          if (value === "active" && !deadline.current) deadline.current = Date.now() + 30_000;
+          setStatus(value);
+        }
       });
       current.on("transcript", value => {
         if (run === generation.current) setCaptions(previous => ({ ...previous, [value.role]: value.text }));
@@ -118,6 +133,7 @@ export function VoiceExample() {
       current?.stop(); engine?.stop();
       if (run !== generation.current) return;
       setStatus("ended");
+      setAskingPermission(false);
       setError(startErrorMessage(reason));
     }
   }
@@ -156,10 +172,10 @@ export function VoiceExample() {
                 <button className="rc-voice-primary rc-voice-end" onClick={stop}><VoiceIcon kind="end" /><span>End call</span></button>
               </> : <button className="rc-voice-primary rc-voice-start" disabled={!available} onClick={start}><VoiceIcon kind="mic" /><span>{available === null ? "Checking connection…" : available ? status === "ended" ? "Talk again" : "Let’s talk" : "Currently unavailable"}</span></button>}
             </div>
-            {error ? <p className="rc-voice-help" role="alert">{error}{error.includes("OmniDimension") ? <> <a href="https://www.omnidim.io" target="_blank" rel="noopener noreferrer">Open OmniDimension Billing ↗</a></> : null}</p> : <p className="rc-voice-help">{available === false ? "The live connection is unavailable. Please try again later." : busy ? "AI responds live. No real appointment is made." : status === "ended" ? "No real appointment was made. Ready for another hello?" : "Turn up your volume · Allow your microphone"}</p>}
+            {error ? <p className="rc-voice-help" role="alert">{error}{error.includes("OmniDimension") ? <> <a href="https://www.omnidim.io" target="_blank" rel="noopener noreferrer">Open OmniDimension Billing ↗</a></> : null}</p> : <p className="rc-voice-help" role="status" aria-live="polite">{askingPermission ? "Allow your microphone in the browser prompt. If you don’t see it, open the site permissions beside the address bar." : muted ? "Your microphone is muted. Tap Unmute so bubs can hear you." : status === "active" && quietMic ? "No microphone sound detected. Try speaking, or check that your microphone is connected, turned on and selected in your browser." : status === "connecting" ? "Microphone allowed. Connecting you to bubs…" : available === false ? "The live connection is unavailable. Please try again later." : busy ? "AI responds live. No real appointment is made." : status === "ended" ? "No real appointment was made. Ready for another hello?" : "You’ll need a microphone. If your browser asks, choose Allow. Turn up your volume to hear bubs."}</p>}
           </section>
         </div>
-        <footer className="rc-voice-footer"><p>90-second live demo · No signup<span> · Practice bookings only</span></p><small>Audio is processed by our voice provider. Please use fictional details.</small></footer>
+        <footer className="rc-voice-footer"><p>30-second live demo · No signup<span> · Practice bookings only</span></p><small>Audio is processed by our voice provider. Please use fictional details.</small></footer>
       </div>
     </dialog>
   </>;

@@ -7,6 +7,7 @@ export class VoiceAudio {
   private playhead = 0;
   private stopped = false;
   readonly ready: Promise<void>;
+  lastInputAt = 0;
 
   /** `deviceId` picks a specific microphone; omitted, the browser's default input is used. */
   constructor(deviceId?: string) {
@@ -37,6 +38,8 @@ export class VoiceAudio {
     this.node = new AudioWorkletNode(this.context, "bubs-capture");
     this.node.port.onmessage = (event: MessageEvent<Float32Array>) => {
       if (this.stopped) return;
+      const rms = Math.sqrt(event.data.reduce((sum, value) => sum + value * value, 0) / event.data.length);
+      if (rms > 0.008) this.lastInputAt = Date.now();
       const bytes = new Uint8Array(event.data.length * 2), view = new DataView(bytes.buffer);
       event.data.forEach((value, i) => { const sample = Math.max(-1, Math.min(1, value)); view.setInt16(i * 2, sample * (sample < 0 ? 32768 : 32767), true); });
       onChunk(btoa(String.fromCharCode(...bytes)));

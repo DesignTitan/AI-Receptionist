@@ -1,3 +1,11 @@
+## Shorter demo and microphone guidance live — 21 September 2026
+
+- Reduced marketing voice practice to 30 seconds in the browser and OmniDimension agent; provider setting read back as 30. Live at bubs.ai (deployment bubs-7k954enbz).
+- Added permission-pending, denied, missing-device and unavailable-device instructions. Eight seconds without microphone input prompts the visitor to speak or check their selected microphone; mute has its own guidance.
+- Waiting for microphone permission creates no provider session and does not consume demo time; countdown begins when connected.
+- Typecheck and production build passed. Live browser checks passed for pending/denied/missing input, silent-input reminder, mute/unmute, provider audio frames and automatic end.
+- Work complete and ready for tester feedback. Existing shared-password and usage limits remain in place; unrelated setup/account work remains below.
+
 ## Hosted tester voice connected — 21 September 2026
 
 - Enabled the password-protected marketing voice demo on bubs.ai using a dedicated verified demo credential; other provider credentials are unchanged.

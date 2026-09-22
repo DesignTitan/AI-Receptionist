@@ -1,3 +1,10 @@
+## Callback security check diagnosis — 22 September 2026
+
+- Reproduced the callback form security-check failure on https://bubs.ai/home before any submission; no call placed or lead sent.
+- Existing docs/klaviyo.md records the Turnstile widget using the old domain and bubs.ai needing hostname authorization; this is the leading configuration cause, not freshly verified in Cloudflare.
+- Cloudflare dashboard currently requires sign-in; no widget configuration was changed and verification remains enforced.
+- Next: sign in to Cloudflare, inspect the deployed widget, add bubs.ai if missing, and verify the widget succeeds without placing a call.
+
 ## Embedded microphone permission live — 21 September 2026
 
 - Added a prominent microphone step to the marketing demo; supported browsers use their native embedded audio-only control, others use the standard Talk prompt. Saved permission connects directly.

@@ -1,3 +1,10 @@
+## Hosted tester voice connected — 21 September 2026
+
+- Enabled the password-protected marketing voice demo on bubs.ai using a dedicated verified demo credential; other provider credentials are unchanged.
+- Added atomic Supabase limits: five starts per signed tester session per hour, 100 globally per UTC day, and fail-closed behavior if counters are unavailable.
+- Provider creates sessions successfully; credits are available. Typecheck, route tests, production build and database limit checks passed. Owner confirmed the deployed voice works.
+- Next: owner requested reducing the 90-second demo to 30 seconds and clearer microphone permission/silence guidance; implementing now.
+
 ## Jev routing verified — 21 September 2026
 
 - Ran an actual jev-codex prompt with no project details; Jev routed it to gpt-5.6-luna and returned READY successfully.

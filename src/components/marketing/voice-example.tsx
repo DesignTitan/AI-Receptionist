@@ -4,6 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import { VoiceAudio } from "./voice-audio";
 import type { WebSession } from "@omnidim-ai/client";
 
+function startErrorMessage(reason: unknown) {
+  if (reason instanceof Error) {
+    if (reason.name === "NotAllowedError") {
+      return "Microphone access is off. Allow it in your browser to talk, then try again.";
+    }
+    if (reason.message.startsWith("Microphone access requires HTTPS")) return reason.message;
+    if (reason.message.trim()) return reason.message;
+  }
+  return "We couldn’t start the conversation. Check your microphone and connection, then try again.";
+}
+
 function VoiceIcon({ kind }: { kind: "mic" | "muted" | "end" }) {
   return <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     {kind === "end" ? <path d="M3 15v-4c5-5 13-5 18 0v4l-5-1v-3a13 13 0 0 0-8 0v3z" /> : <><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 10v1a7 7 0 0 0 14 0v-1M12 18v4M8 22h8" />{kind === "muted" && <path d="m3 3 18 18" />}</>}
@@ -86,7 +97,7 @@ export function VoiceExample() {
       const response = await fetch("/api/voice-demo/session", { method: "POST", signal: AbortSignal.timeout(15_000) });
       const data = await response.json();
       if (run !== generation.current) return;
-      if (!response.ok) throw new Error(data.error);
+      if (!response.ok) throw new Error(typeof data.error === "string" ? data.error : "The live demo couldn’t connect.");
       const { WebSession } = await import("@omnidim-ai/client");
       if (run !== generation.current) return;
       current = new WebSession({ audioEngine: engine }); session.current = current;
@@ -107,10 +118,7 @@ export function VoiceExample() {
       current?.stop(); engine?.stop();
       if (run !== generation.current) return;
       setStatus("ended");
-      setError(reason instanceof Error && reason.name === "NotAllowedError"
-        ? "Microphone access is off. Allow it in your browser to talk, then try again."
-        : reason instanceof Error && reason.message.startsWith("Microphone access requires HTTPS") ? reason.message
-        : "We couldn’t start the conversation. Check your microphone and connection, then try again.");
+      setError(startErrorMessage(reason));
     }
   }
   return <>
@@ -148,7 +156,7 @@ export function VoiceExample() {
                 <button className="rc-voice-primary rc-voice-end" onClick={stop}><VoiceIcon kind="end" /><span>End call</span></button>
               </> : <button className="rc-voice-primary rc-voice-start" disabled={!available} onClick={start}><VoiceIcon kind="mic" /><span>{available === null ? "Checking connection…" : available ? status === "ended" ? "Talk again" : "Let’s talk" : "Currently unavailable"}</span></button>}
             </div>
-            {error ? <p className="rc-voice-help" role="alert">{error}</p> : <p className="rc-voice-help">{available === false ? "The live connection is unavailable. Please try again later." : busy ? "AI responds live. No real appointment is made." : status === "ended" ? "No real appointment was made. Ready for another hello?" : "Turn up your volume · Allow your microphone"}</p>}
+            {error ? <p className="rc-voice-help" role="alert">{error}{error.includes("OmniDimension") ? <> <a href="https://www.omnidim.io" target="_blank" rel="noopener noreferrer">Open OmniDimension Billing ↗</a></> : null}</p> : <p className="rc-voice-help">{available === false ? "The live connection is unavailable. Please try again later." : busy ? "AI responds live. No real appointment is made." : status === "ended" ? "No real appointment was made. Ready for another hello?" : "Turn up your volume · Allow your microphone"}</p>}
           </section>
         </div>
         <footer className="rc-voice-footer"><p>90-second live demo · No signup<span> · Practice bookings only</span></p><small>Audio is processed by our voice provider. Please use fictional details.</small></footer>

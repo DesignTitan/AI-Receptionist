@@ -1,6 +1,7 @@
+import { createHmac } from "node:crypto";
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { GET, POST } from '../src/app/api/voice-demo/session/route.ts';
+import { GET, POST, __resetVoiceDemoStateForTests } from '../src/lib/voice-demo-session.ts';
 
 test('voice practice is gated and never accepts caller-supplied agent configuration', async () => {
   const before = { ...process.env };
@@ -38,9 +39,39 @@ test('voice practice is gated and never accepts caller-supplied agent configurat
     await POST(request()); await POST(request());
     assert.equal((await POST(request())).status, 429);
     assert.equal(calls, 1);
+    __resetVoiceDemoStateForTests();
+    globalThis.fetch = async () => Response.json({ error: 'insufficient_balance' }, { status: 402 });
+    const balance = await POST(request());
+    assert.equal(balance.status, 503);
+    assert.match(String((await balance.json()).error), /out of credits/i);
+    assert.deepEqual(await (await GET(new Request(url))).json(), { available: true });
   } finally {
+    __resetVoiceDemoStateForTests();
     globalThis.fetch = originalFetch;
     for (const name of Object.keys(process.env)) if (!(name in before)) delete process.env[name];
     Object.assign(process.env, before);
   }
+});
+
+
+test('hosted tester voice requires a signed password cookie and durable reservation', async () => {
+ const before = {...process.env}; const originalFetch = globalThis.fetch;
+ try {
+  Object.assign(process.env, {NODE_ENV:'production', VOICE_DEMO_ENABLED:'true', SITE_GATE:'locked', SITE_PASSWORD:'test-secret', OMNIDIMENSION_API_KEY:'test-key', OMNIDIMENSION_DEMO_AGENT_ID:'456', OMNIDIMENSION_AGENT_ID:'123', NEXT_PUBLIC_SUPABASE_URL:'https://db.example', SUPABASE_SERVICE_ROLE_KEY:'test-db'});
+  const url='https://bubs.ai/api/voice-demo/session';
+  const expiry=String(Date.now()+60000);
+  const cookie='ai_receptionist_site='+expiry+'.'+createHmac('sha256','test-secret').update(expiry).digest('hex');
+  const req=(value=cookie)=>new Request(url,{method:'POST',headers:{origin:'https://bubs.ai',cookie:value}});
+  assert.deepEqual(await (await GET(new Request(url))).json(),{available:false});
+  assert.equal((await POST(req('ai_receptionist_site=forged'))).status,503);
+  assert.deepEqual(await (await GET(req())).json(),{available:true});
+  let providerCalls=0;
+  globalThis.fetch=async(input)=>{ if(String(input).includes('/rpc/'))return Response.json(false);providerCalls++;return Response.json({}); };
+  assert.equal((await POST(req())).status,429);assert.equal(providerCalls,0);
+  globalThis.fetch=async()=>Response.json({}, {status:500});
+  assert.equal((await POST(req())).status,503);
+  globalThis.fetch=async(input)=>{if(String(input).includes('/rpc/'))return Response.json(true);providerCalls++;return Response.json({ws_url:'wss://live.omnidim.io/test'});};
+  assert.equal((await POST(req())).status,200);assert.equal(providerCalls,1);
+  process.env.SITE_GATE='public';assert.deepEqual(await (await GET(req())).json(),{available:false});
+ } finally {globalThis.fetch=originalFetch;for(const name of Object.keys(process.env))if(!(name in before))delete process.env[name];Object.assign(process.env,before);}
 });

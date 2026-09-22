@@ -8,7 +8,13 @@ Bubs rejected prerecorded samples: the modal is now live conversation only. Omni
 
 The assistant adapts to the visitor’s chosen appointment business, answers naturally and demonstrates fictional availability. It does not collect real contact or payment details. Voice and English (American) language configuration were completed in the provider editor.
 
-Local session creation allows development on loopback hosts, same-origin POSTs and five attempts per hour per process. Production always returns unavailable. Before public activation add durable per-visitor and global daily reservations, human verification and a provider budget. No deployment was made.
+Hosted private testing is enabled with `VOICE_DEMO_ENABLED=true`, `SITE_GATE=locked`, a valid signed site-password cookie, `OMNIDIMENSION_DEMO_AGENT_ID` and a dedicated encrypted `OMNIDIMENSION_DEMO_API_KEY`. The general provider key remains unchanged for other calling features. Anonymous hosted voice remains disabled.
+
+Production reserves each attempt through `reserve_voice_demo` in Supabase before contacting the provider: five starts per signed tester session per hour and 100 starts globally per UTC day. Both counters are atomic across server instances; database failures deny new starts. Failed provider attempts conservatively consume a reservation. The shared password is the tester access control; this is not an anonymous public demo. The agent and browser each cap calls at 90 seconds.
+
+Local development still allows loopback requests with five attempts per hour per process. Production requires same-origin POSTs and keeps session URLs out of logs. Configure the Supabase URL and service key, apply `20260921_voice_demo_limits.sql`, and redeploy after changing provider settings.
+
+If OmniDimension returns **insufficient_balance**, the modal stays retryable and asks you to add a plan or top up [OmniDimension Billing](https://www.omnidim.io). The app does not fall back to fake audio. A 30-minute in-process pause is not used, so credits take effect on the next attempt.
 
 ## Client behavior and acceptance
 

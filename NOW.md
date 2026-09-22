@@ -1,3 +1,11 @@
+## Embedded microphone permission live — 21 September 2026
+
+- Added a prominent microphone step to the marketing demo; supported browsers use their native embedded audio-only control, others use the standard Talk prompt. Saved permission connects directly.
+- Reuse the granted stream, start automatically after approval, and provide standard-prompt retry after native dismissal. Close/cancel cleans up late microphone grants.
+- Deployed bubs-ax7iwzcby to bubs.ai. Typecheck/build and deployed permission regression checks passed; live audio, mute/silence guidance and 30-second automatic ending passed.
+- Native success is covered by a browser fixture; actual Chrome native render/dismissal was checked, but native prompt approval needs a manual browser check because headless Chrome dismisses it.
+- Next: tester feedback on the permission prompt. Existing tester password and usage protections remain in place.
+
 ## Shorter demo and microphone guidance live — 21 September 2026
 
 - Reduced marketing voice practice to 30 seconds in the browser and OmniDimension agent; provider setting read back as 30. Live at bubs.ai (deployment bubs-7k954enbz).

@@ -30,3 +30,10 @@ References: https://docs.omnidim.io/docs/sdks/web ; https://docs.omnidim.io/docs
 The modal explains the browser permission prompt before starting and keeps an explicit “Allow your microphone” message visible while permission is pending. Denied access, missing input devices and devices that cannot start have separate instructions. After eight seconds without an input signal, the active call shows a reminder to speak or check the connected/selected microphone; input resuming clears it. This is a signal-level check, not a claim that silence means a broken microphone. Muting shows its own Unmute instruction. No sound or microphone samples are stored by this check.
 
 21 September hosted acceptance: pending, denied and missing microphone paths made no session request; silent input reminder, mute/unmute, live provider audio frames and automatic stop passed on bubs.ai.
+
+
+## Embedded permission step — 21 September
+
+The demo prominently asks visitors to use their microphone. Where `HTMLUserMediaElement` and `setConstraints` are supported, a browser-owned audio-only control requests permission. Saved permission skips that step. Other browsers use the Talk button and standard `getUserMedia` prompt. The granted stream is passed into `VoiceAudio` without requesting it again, and the session starts automatically. A dismissed/blocked native request offers a standard-prompt retry. Close/cancel stops streams even when permission arrives late.
+
+Validation: `tests/voice-permission-browser.mjs` uses mocked session responses for pending, denied, missing, allowed, native handoff, dismissal and late approval; native-success events are a deterministic fixture. Real Chrome 153 renders the native control and dismisses its prompt in headless mode, so approving the native browser UI itself remains a manual-browser check. Deployed real audio, mute/silence guidance and automatic 30-second ending passed with saved microphone permission. No change to server access or usage limits.

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { MicrophonePermission, supportsEmbeddedMicrophone } from "./microphone-permission";
 import { VoiceAudio } from "./voice-audio";
 import type { WebSession } from "@omnidim-ai/client";
 
@@ -34,6 +35,19 @@ export function VoiceExample() {
   const generation = useRef(0);
   const audio = useRef<VoiceAudio | null>(null);
   const deadline = useRef(0);
+  const [permissionAttempt, setPermissionAttempt] = useState(0);
+  const [embeddedMicrophone, setEmbeddedMicrophone] = useState(false);
+  useEffect(() => {
+    let mounted = true;
+    if (!supportsEmbeddedMicrophone()) return;
+    // A saved grant needs no consent step: the Talk button can connect directly.
+    void (async () => {
+      let granted = false;
+      try { granted = (await navigator.permissions.query({ name: "microphone" as PermissionName })).state === "granted"; } catch { /* Browser may not expose microphone permission state. */ }
+      if (mounted) setEmbeddedMicrophone(!granted);
+    })();
+    return () => { mounted = false; };
+  }, []);
   const [available, setAvailable] = useState<boolean | null>(null);
   const [status, setStatus] = useState<"idle" | "connecting" | "active" | "ended">("idle");
   const [seconds, setSeconds] = useState(30);
@@ -45,6 +59,7 @@ export function VoiceExample() {
   const busy = status === "connecting" || status === "active";
 
   function stop() {
+    setPermissionAttempt(value => value + 1);
     generation.current++;
     session.current?.stop();
     session.current = null;
@@ -93,7 +108,7 @@ export function VoiceExample() {
     stop();
     dialog.current?.close(); trigger.current?.focus();
   }
-  async function start() {
+  async function start(grantedStream?: Promise<MediaStream>) {
     if (busy || !available) return;
     setError(""); setCaptions({ user: "", agent: "" }); setMuted(false);
     setStatus("connecting"); setSeconds(30); deadline.current = 0;
@@ -102,7 +117,7 @@ export function VoiceExample() {
     let current: WebSession | null = null;
     let engine: VoiceAudio | null = null;
     try {
-      engine = new VoiceAudio(); audio.current = engine;
+      engine = new VoiceAudio(undefined, grantedStream); audio.current = engine;
       await engine.ready;
       if (run !== generation.current) return;
       setAskingPermission(false);
@@ -139,7 +154,7 @@ export function VoiceExample() {
   }
   return <>
     <VoiceDemoTrigger />
-    <dialog ref={dialog} className="rc-voice-dialog" aria-labelledby="voice-example-title" onCancel={event => { event.preventDefault(); close(); }} onClick={event => { if (event.target === dialog.current) close(); }}>
+    <dialog ref={dialog} className="rc-voice-dialog" aria-labelledby="voice-example-title" onCancel={event => { if (event.target === event.currentTarget) { event.preventDefault(); close(); } }} onClick={event => { if (event.target === dialog.current) close(); }}>
       <div className="rc-voice-dialog__content">
         <button className="rc-voice-close" aria-label="Close voice example" onClick={close}>×</button>
         <header className="rc-voice-heading">
@@ -160,18 +175,20 @@ export function VoiceExample() {
           <section className="rc-voice-conversation" aria-label="Live conversation">
             <p className="rc-voice-eyebrow rc-voice-live-label"><i data-live={status === "active"} aria-hidden="true" />{status === "active" ? "Live conversation" : status === "ended" ? "Your conversation" : "Try a live conversation"}</p>
             <div className="rc-voice-captions" aria-label="Live captions" tabIndex={0}>
-              {!captions.user && !captions.agent ? <div className="rc-voice-empty"><h3>{status === "connecting" ? "Getting ready to listen." : status === "active" ? "You’re connected." : "What would you like to ask?"}</h3><p>{status === "active" ? "Your live conversation will appear here." : "Try booking an appointment, or ask how it could help your business."}</p></div> : <>
+              {!captions.user && !captions.agent ? <div className="rc-voice-empty"><h3>{askingPermission ? "Allow your microphone to continue" : status === "connecting" ? "Getting ready to listen." : status === "active" ? "You’re connected." : "Use your microphone to talk to bubs"}</h3><p>{askingPermission ? "Choose Allow in your browser’s microphone prompt. Your conversation starts automatically once you allow access." : status === "active" ? "Your live conversation will appear here." : "Allow microphone access to start your 30-second conversation. We’ll connect you automatically."}</p></div> : <>
                 {captions.user && <div className="rc-voice-message rc-voice-message--user"><span>You</span><p>{captions.user}</p></div>}
                 {captions.agent && <div className="rc-voice-message rc-voice-message--agent"><img src="/marketing/happy-pillow-mascot.png" width={38} height={38} alt="" /><div><span>AI receptionist</span><p>{captions.agent}</p></div></div>}
               </>}
             </div>
+            {embeddedMicrophone && available && (!busy || askingPermission) && <MicrophonePermission onUnsupported={() => setEmbeddedMicrophone(false)} key={permissionAttempt} onStart={stream => void start(stream)} />}
             <div className="rc-voice-dock">
               {busy ? <>
                 <button className="rc-voice-mute" disabled={status !== "active"} onClick={() => { session.current?.mute(!muted); setMuted(!muted); }} aria-pressed={muted}><VoiceIcon kind={muted ? "muted" : "mic"} /><span>{muted ? "Unmute" : "Mute"}</span></button>
                 <span className="rc-voice-timer" aria-label="Time remaining">{String(Math.floor(seconds / 60)).padStart(2, "0")}:{String(seconds % 60).padStart(2, "0")}</span>
-                <button className="rc-voice-primary rc-voice-end" onClick={stop}><VoiceIcon kind="end" /><span>End call</span></button>
-              </> : <button className="rc-voice-primary rc-voice-start" disabled={!available} onClick={start}><VoiceIcon kind="mic" /><span>{available === null ? "Checking connection…" : available ? status === "ended" ? "Talk again" : "Let’s talk" : "Currently unavailable"}</span></button>}
+                <button className="rc-voice-primary rc-voice-end" onClick={stop}><VoiceIcon kind="end" /><span>{askingPermission ? "Cancel" : "End call"}</span></button>
+              </> : embeddedMicrophone && available ? <span className="rc-voice-permission-note">Use the microphone control above to begin.</span> : <button className="rc-voice-primary rc-voice-start" disabled={!available} onClick={() => void start()}><VoiceIcon kind="mic" /><span>{available === null ? "Checking connection…" : available ? status === "ended" ? "Talk again" : "Let’s talk" : "Currently unavailable"}</span></button>}
             </div>
+            {error && embeddedMicrophone && !busy && <button className="rc-voice-standard-permission" onClick={() => { setEmbeddedMicrophone(false); void start(); }}>Try the standard microphone prompt</button>}
             {error ? <p className="rc-voice-help" role="alert">{error}{error.includes("OmniDimension") ? <> <a href="https://www.omnidim.io" target="_blank" rel="noopener noreferrer">Open OmniDimension Billing ↗</a></> : null}</p> : <p className="rc-voice-help" role="status" aria-live="polite">{askingPermission ? "Allow your microphone in the browser prompt. If you don’t see it, open the site permissions beside the address bar." : muted ? "Your microphone is muted. Tap Unmute so bubs can hear you." : status === "active" && quietMic ? "No microphone sound detected. Try speaking, or check that your microphone is connected, turned on and selected in your browser." : status === "connecting" ? "Microphone allowed. Connecting you to bubs…" : available === false ? "The live connection is unavailable. Please try again later." : busy ? "AI responds live. No real appointment is made." : status === "ended" ? "No real appointment was made. Ready for another hello?" : "You’ll need a microphone. If your browser asks, choose Allow. Turn up your volume to hear bubs."}</p>}
           </section>
         </div>

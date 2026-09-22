@@ -976,3 +976,10 @@
 
 .rc-footer__brand .rc-nav-mascot { margin-bottom: 12px; }
 .rc-home-hero { border-radius: 0 0 clamp(24px, 3vw, 44px) clamp(24px, 3vw, 44px); overflow: hidden; }
+
+/* Browser-owned permission controls must remain opaque, legible and unobscured. */
+.rc-voice-native-mic { display:flex; justify-content:center; padding:12px 0; }
+.rc-voice-native-mic usermedia { color:#1e3a34; background-color:#fff; font-size:16px; opacity:1; }
+.rc-voice-permission-note { display:flex; align-items:center; justify-content:center; min-height:52px; box-sizing:border-box; width:100%; text-align:center; color:#577269; font-size:14px; padding:8px; }
+
+.rc-voice-standard-permission { border:0; background:transparent; color:#1e3a34; text-decoration:underline; padding:10px; font:inherit; cursor:pointer; }
